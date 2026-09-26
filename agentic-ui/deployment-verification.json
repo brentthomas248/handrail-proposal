@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0",
   "url": "https://brentthomas248.github.io/handrail-proposal/",
-  "checkedAt": "2026-09-26T21:54:45.790255+00:00",
+  "checkedAt": "2026-09-26T22:29:05.018240+00:00",
   "passed": true,
-  "sourceCommit": "e3339c9737566dd71a16770a276f553d815ad879",
-  "staticCommit": "c0f5dc73edfe1d7103659461036ff854ce711ddd",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36274389010",
+  "sourceCommit": "25e5680315dac0a1db9059893314bd640bab8e9e",
+  "staticCommit": "54cb926ddb14cf03263b10d7ba244e9a635367ed",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36276285064",
   "publishingSource": {
     "branch": "gh-pages",
     "path": "/",
@@ -13,30 +13,31 @@
     "httpsEnforced": true
   },
   "browserSuite": {
-    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm test:e2e",
-    "passed": 29,
+    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test --output=qa-artifacts/mobile-context/hosted-playwright",
+    "passed": 32,
     "failed": 0,
-    "durationSeconds": 32.9
+    "durationSeconds": 31.4
   },
   "checks": [
-    "Wider paper and phone column framing; high-DPR paper layer/edge budgets through chapters and reverse input",
-    "Persistent explicit reading URL, notes navigation and user-selected return to tour",
-    "Keyboard restoration of culled content, reduced motion, no-JavaScript and normal reading",
-    "Continuous scroll/reversal, cancellation, resize, delayed/failed initialization",
-    "Eight hosted assets match dist exactly; downloaded PDF matches complete canonical content"
+    "Exactly eight complete phone reading groups plus opening; associated copy stays together",
+    "All text lines clear measured fixed controls by 24px across four phone sizes at DPR3",
+    "Height shrink and restore preserve chapter/scroll/navigation, keeping the final scene reachable",
+    "Active-group accessibility, inert peripheral previews and normal-reading/keyboard restoration",
+    "DPR3 rendering budgets, scroll/reversal, reduced motion, no-JavaScript, recovery and initialization paths",
+    "Eight published assets match dist byte-for-byte; downloaded PDF matches all canonical content"
   ],
   "staticAssetChecks": [
     {
       "path": "index.html",
       "http": 200,
-      "bytes": 45503,
-      "sha256": "98e521ec349deb0f23f3c9af26de3920b3cedfdeafc19f83a7e1bcc677b75999"
+      "bytes": 52804,
+      "sha256": "26d5c23fcf1a845ff21871f4961c46f600883b53f5610fda26e03f80987ea30b"
     },
     {
       "path": "agreement/index.html",
       "http": 200,
-      "bytes": 45466,
-      "sha256": "9b669461ea56772411b8a53428ca01f5e17878242e356961710121bd9019db98"
+      "bytes": 53047,
+      "sha256": "68f11734c23d8878de5a6ff2b97aa1273a5fa36cccf3d73c39de01613b72e019"
     },
     {
       "path": "handrail-proposed-agreement.pdf",
@@ -63,16 +64,16 @@
       "sha256": "f1ad2a836254dd1e1bda3de717abb7c3de39007361741e634977267450cc774b"
     },
     {
+      "path": "_astro/index.astro_astro_type_script_index_0_lang.Byp8DVzT.js",
+      "http": 200,
+      "bytes": 82641,
+      "sha256": "4d0bd0bdc8e4807c7383f30d12868bf3d09c0d16fe538592028d14a9b542d7a7"
+    },
+    {
       "path": "_astro/client.CCxN9xF8.js",
       "http": 200,
       "bytes": 220825,
       "sha256": "4907db89a5bc4160920b577b51facb283e0e376ee1b4d5acab82c2e4d5654811"
-    },
-    {
-      "path": "_astro/index.astro_astro_type_script_index_0_lang.BpnkeAts.js",
-      "http": 200,
-      "bytes": 81877,
-      "sha256": "8aed46c22245de38ae86830b6f3e5c3aaae6983e83a6058035e66bc497d6360b"
     }
   ],
   "pdfCanonicalCheck": {
@@ -84,19 +85,26 @@
   "profileChanged": false,
   "errors": [],
   "failedRequests": [],
-  "edition": "wide-z-fold-mobile-rendering-remediation",
-  "isCurrentRevision": false,
+  "edition": "mobile-contextual-framing",
+  "isCurrentRevision": true,
   "supplementaryWebKitEvidence": "agentic-ui/webkit-verification.json",
   "physicalIOSVerified": false,
   "visualEvidence": {
-    "path": "qa-artifacts/wide-paper-final/capture.json",
+    "path": "qa-artifacts/mobile-context/final-capture/capture.json",
     "scope": "Local rendered pages; published assets verified byte-for-byte",
-    "chapterImages": 38,
-    "foldSamples": 15,
-    "journeyVideos": 3,
+    "chapterImages": 42,
+    "foldSamples": 25,
+    "journeyVideos": 5,
     "browserErrors": [],
-    "failedRequests": []
+    "failedRequests": [],
+    "transitionImages": 32,
+    "minimumPrimaryTextPx": 14.0374,
+    "headingCorrection": "Eight affected rates captures refreshed; independent critic re-rendered corrected word spacing"
   },
   "renderingEvidence": "agentic-ui/iphone-rendering-verification.json",
-  "nextCandidate": "Verified mobile contextual framing; publication pending"
+  "independentDesignReview": {
+    "verdict": "accepted",
+    "path": "docs/mobile-context-adversarial-review.md",
+    "scope": "Mobile composition and hierarchy, after baseline and candidate-1 rejection"
+  }
 }

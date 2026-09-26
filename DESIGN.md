@@ -76,9 +76,9 @@ components:
 
 The approved Telescope, Igloo, Exat and Stripe Press references and Handrail brand direction remain. The user reviewed the published trifold, found its motion choppy or stuck, and requested a true Z-fold plus realistic paper texture and lighting. This is a redesign of 3D geometry, choreography and material treatment; the business proposal and identity are unchanged.
 
-The replacement motion and material implementation is complete and verified locally. The current 27-test browser suite exercises the whole scroll journey and its lifecycle, in addition to chapter endpoints. Final capture includes 24 chapter images, 15 opening samples, three full-journey videos and 1,143 frame records, with no console/network issues and a 13.48px minimum measured reading-text size. Independent rendered review and root’s native-window review support local closure of the selected findings. Supplementary WebKit geometry and native desktop review pass. The revision is published and all 27 hosted browser tests pass, including cold-load safeguards. The user’s visual acceptance remains separate. The durable plan, baseline findings and acceptance ledger are in [motion remediation](docs/motion-remediation.md).
+Current implementation and publication evidence is recorded in [IMPLEMENTATION.md](IMPLEMENTATION.md). The latest mobile revision uses eight complete reading scenes, restrained camera scale, secondary peripheral ink and viewport-height adaptation. The [independent adversarial review](docs/mobile-context-adversarial-review.md) accepted the rendered composition after rejecting the first candidate. User acceptance and actual iPhone stability remain distinct from local review.
 
-The independent baseline found extended unchanged scene poses despite advancing progress, with a maximum stationary interval of 716.6ms, approximately 60fps and no long tasks. The revised probe measured a 50ms maximum and reduced same-pose samples during advancing rendered progress from 147/527 to 2/560. A baseline 390×844 to 390×780 resize rebuilt the journey and rebased scrollY from 3514 to 3232 while preserving the chapter; this was not evidence of a chapter change. The new six-height probe preserved scrollY at 2640 with zero rebuilds. These measurements isolate choreography and viewport-state handling from rendering throughput. Source approval, functional checks, rendered review and user acceptance remain separate claims.
+Earlier choreography measurements are retained in [motion remediation](docs/motion-remediation.md). They established smoother continuous scene movement, but the earlier frozen-stage treatment of mobile height changes was superseded after it hid primary text behind fixed controls. Do not reuse historical test counts, native-window observations or throughput measurements as evidence for the current mobile composition.
 
 ## A true Z-fold
 
@@ -86,7 +86,7 @@ The actual proposal stays in semantic HTML with a center panel and two independe
 
 The camera moves around the folded structure to face the reading panel. A reader sees an actual fold, a thin paper edge and correctly oriented text. Do not flatten the whole structure just to hide incorrect hinge geometry or show a mirrored back face. The selected panel faces the camera at exact chapter positions; neighboring geometry may retain its fold if it does not obscure the content.
 
-Artboard measurements follow the panel content. They are not fixed viewport dimensions. The scene must frame relevant text between the header and controls at desktop and mobile widths. Narrow views can split the compensation paths and supporting copy into closer reading targets.
+Artboard measurements follow the panel content. They are not fixed viewport dimensions. The scene must frame relevant text between the header and controls at desktop and mobile widths. Narrow views may separate the two compensation paths, but each reading group must retain its associated explanation and complete idea.
 
 Ordinary reading removes perspective and hinges and puts the same essential content into responsive document flow. Decorative backs remain excluded from accessible content. No proposal term may be available only during a transition, in an image or on a decorative back face.
 
@@ -98,7 +98,7 @@ The document responds throughout sustained scroll. Remove fixed blocks of dead s
 
 After about 650ms of inactivity between reading regions, the scene may settle smoothly toward a readable position by animating native scroll. Wheel, touch or keyboard input immediately cancels that settling. It must never compete with sustained input or pull the reader back after they reverse direction. Verify pause, resume, rapid flick and cancellation through the whole journey.
 
-Mobile address-bar height changes do not rebuild the journey or rebase the user's position; the stage keeps its initial stable height. Width/orientation changes remeasure the scene and preserve the same stop, falling back to its containing section across the mobile/desktop breakpoint. Both `touchend` and `touchcancel` release touch ownership, allowing settling and deferred resizing to resume. Height-only, breakpoint and canceled-touch scenarios have explicit browser regressions.
+Mobile address-bar height changes refit the scene after input settles while preserving native scroll position, travel range, navigation nodes and the current chapter. The stage adopts the visible height, and journey height changes keep the final scene reachable. Width/orientation changes remeasure the scene and preserve the same stop, falling back to its containing section across the mobile/desktop breakpoint. Both `touchend` and `touchcancel` release touch ownership, allowing settling and deferred resizing to resume. Height-only, breakpoint and canceled-touch scenarios have explicit browser regressions.
 
 ## Paper and light
 
@@ -136,7 +136,7 @@ The selected reading face must be correctly oriented, framed and legible. A chap
 
 ## Verification boundary
 
-The [remediation batch](docs/motion-remediation.md) defines the current findings and exact closeout expectations. Capture continuous wheel and touch-like input, rapid flicks, immediate reversal, pause/resume, idle-settle cancellation and resize sequences. Measure actual scene movement throughout active scrolling, both wing angles and logical progress before/after viewport changes.
+The [mobile remediation batch](docs/mobile-framing-remediation.md) defines current findings and closeout expectations; the [motion record](docs/motion-remediation.md) preserves the earlier choreography work. Capture continuous wheel and touch-like input, rapid flicks, immediate reversal, pause/resume, idle-settle cancellation and resize sequences. Measure actual scene movement throughout active scrolling, both wing angles and logical progress before/after viewport changes.
 
 Inspect material closeups and content-distinct transition frames or a video/replay, along with the whole forward/reverse journey. Verify Z geometry, correctly oriented faces, matte directional light, crease/edge depth, projected shadows and sharp text at normal reading distance. The independent browser reviewer must review current rendered motion; screenshots made only by an implementer or a passing endpoint suite do not settle these findings.
 

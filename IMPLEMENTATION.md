@@ -30,7 +30,9 @@ The 64 MiB estimated-paper and 4096-device-pixel edge budgets remain enforced. T
 
 ## Publication checkpoint
 
-The current mobile-framing candidate is verified locally and ready for the already-authorized GitHub Pages publication. The previous release is still live until the new source/static commit and hosted checks are recorded here. Deployment evidence and current application source are tracked in [the receipt](agentic-ui/deployment-verification.json).
+The [updated public proposal](https://brentthomas248.github.io/handrail-proposal/?v=25e5680) is published from source `25e5680315dac0a1db9059893314bd640bab8e9e` as static commit `54cb926ddb14cf03263b10d7ba244e9a635367ed`. [Pages run 36276285064](https://github.com/brentthomas248/handrail-proposal/actions/runs/36276285064) succeeded. All 32 hosted browser checks passed in 31.4 seconds, including every complete mobile group, viewport-height adaptation, accessible focus and the DPR3 paper budget. Eight public assets match the reviewed build byte-for-byte; the downloaded PDF matches the introduction, seven sections, 15 paragraphs and discussion status.
+
+The [ordinary reading link](https://brentthomas248.github.io/handrail-proposal/?view=read&v=25e5680) remains available. Finished-design acceptance belongs to the user, and physical iPhone stability remains outside desktop verification. Source implementation and publication are complete; the subsequent documentation checkpoint reconciles these receipts without changing the deployed application. See [the deployment receipt](agentic-ui/deployment-verification.json).
 
 ## Evidence and boundaries
 

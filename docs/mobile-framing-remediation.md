@@ -40,3 +40,7 @@ The [independent adversarial review](mobile-context-adversarial-review.md) accep
 Before implementation, the new framing checks failed against the prior release: the cover occupied 83.02% of phone width and the receipt lost about 106 pixels behind controls after a viewport-height reduction. Final coverage checks every text-node line, complete semantic groups, real control boundaries, a maximum 78% group width, primary text size, and viewport shrink/restore without losing the last chapter. Active/inactive accessibility semantics, keyboard restoration and the existing high-density rendering budgets are included.
 
 Final capture contains 42 chapter images, 25 fold samples, 32 intermediate frames and five journey videos. Minimum captured primary text is 14.0374 pixels, with no browser errors, warnings or failed requests. Supplementary WebKit checks 37 reading positions at five sizes, with a 14.0792-pixel minimum and five font-preload warnings. Evidence remains local under `qa-artifacts/mobile-context/`; checked-in summaries and the current deployment receipt link the results to publication.
+
+## Published checkpoint
+
+Source `25e5680` is published as static `54cb926`; Pages run `36276285064` succeeded. All 32 hosted browser checks passed in 31.4 seconds. Eight public assets match the reviewed build byte-for-byte and the downloaded PDF passes complete canonical comparison. MF-01 and MF-02 are implemented and verified within the documented browser scope. User visual acceptance and the separate physical iPhone crash verification remain outside that closure.
