@@ -1,6 +1,6 @@
 # GitHub showcase handoff
 
-Updated September 26, 2026. The [public source repository](https://github.com/brentthomas248/handrail-proposal) and [existing public URL](https://brentthomas248.github.io/handrail-proposal/) are available. The user rejected the first published edition and approved a redesigned camera journey across the actual proposal flyer. **Publication of the redesign is pending.** Profile README and pin changes remain unapplied.
+Updated September 26, 2026. The [public source repository](https://github.com/brentthomas248/handrail-proposal) and [existing public URL](https://brentthomas248.github.io/handrail-proposal/) are available. The user rejected the first published edition and approved a redesigned camera journey across the actual proposal flyer. **The redesign is published and passed 19 hosted browser tests.** Profile README and pin changes remain unapplied.
 
 The repository README documents the current working architecture and commands, with publication status explicitly separated. The public-profile observations below are the original September 26 audit snapshot, not a new profile audit. HTTP availability is separate from browser QA.
 
@@ -42,7 +42,7 @@ Leave the sixth pin empty until another project offers equally clear evidence. T
 
 Suggested repository description: **A scroll-driven camera journey through a Handrail business proposal, with readable HTML, accessible controls and matching PDF notes.**
 
-The repository README documents the actual HTML flyer, GSAP camera, two compensation paths, local commands and pending deployment. It no longer displays the obsolete screenshot of the rejected paper sculpture. Add a new optimized screenshot only after rendered review of the current design.
+The repository README documents the actual HTML flyer, GSAP camera, two compensation paths, local commands and verified deployment. Its opening screenshot shows the current branded flyer and was rendered and reviewed before inclusion.
 
 Handrail branding uses the official PNG wordmark, warm paper/rust palette and locally served Inter and Playfair Display. No Three.js, React Three Fiber or Lenis remains. Do not link directly to ignored `qa-artifacts/` or `test-results/` paths. Review the current source and regenerated PDF for private information before publishing.
 

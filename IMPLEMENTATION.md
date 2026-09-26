@@ -2,7 +2,7 @@
 
 ## Current state, September 26, 2026
 
-The approved redesign is implemented and locally verified. Publication of this revision is pending. The earlier paper-sculpture release was rejected by the user; its historical receipts remain in the workflow feed and Git history and are not evidence for this redesign.
+The approved redesign is implemented, published and verified against GitHub Pages. The earlier paper-sculpture release was rejected by the user; its historical receipts remain in the workflow feed and Git history and are not evidence for this redesign.
 
 The user approved Telescope, Igloo, Exat and Stripe Press as references, then requested the shared Handrail identity across its careers page, sample MOU, one-pager and pricing sheet. See DESIGN.md and docs/brand-sources.md. Acceptance of the finished visual result still belongs to the user.
 
@@ -42,7 +42,9 @@ The first redesign QA pass caught 320px overflow, low-contrast cash text, small 
 
 ## Publication checkpoint
 
-The authorized public destination is https://brentthomas248.github.io/handrail-proposal/. Push the reviewed source to main and the verified dist tree as a normal descendant of gh-pages; wait for GitHub's Pages deployment, then run the same browser suite with PROPOSAL_BASE_URL set to the public URL. Download the hosted PDF and verify its content independently. Update agentic-ui/deployment-verification.json and this checkpoint with actual commits/run/results.
+Published https://brentthomas248.github.io/handrail-proposal/ from source ad6fa8b and static commit 05eaf7dc6478f6203c554bd40335c2602de4c793. GitHub Pages [run 36268461522](https://github.com/brentthomas248/handrail-proposal/actions/runs/36268461522) succeeded. The gh-pages commit is a normal descendant of the previous release and includes .nojekyll.
+
+The same 19 browser tests passed against the public URL in 6.2 seconds. Hosted homepage HTML, proposal notes, PDF, logo and social image match the verified build byte-for-byte. The downloaded PDF independently passed the complete 7-section/15-paragraph comparison. See agentic-ui/deployment-verification.json. User review of the finished visual treatment remains pending.
 
 Optional Actions templates remain inactive under docs/github-actions/. The existing OAuth credential lacks workflow-write permission. GitHub's Pages job proves deployment, not remote execution of project tests. GitHub profile README and pins remain unchanged.
 

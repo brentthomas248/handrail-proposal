@@ -1,6 +1,6 @@
 # Agentic UI workflow feed
 
-Current delivery: an actual HTML flyer camera and seven negotiable proposal sections, using the approved references and Handrail brand. The prior sculpture edition was rejected. The redesign is locally verified and publication is pending. Historical entries below describe their named editions, not current visual acceptance.
+Current delivery: an actual HTML flyer camera and seven negotiable proposal sections, using the approved references and Handrail brand. The prior sculpture edition was rejected. The redesign is published and passed the same browser suite on GitHub Pages. Historical entries below describe their named editions, not current visual acceptance.
 
 Current evidence: local-verification.json, component-state-matrix.json, accessibility-evidence.json, performance-evidence.json and visual-baseline-governance.json. Strict certification limitations remain in blockers.json, token-drift.json and the scorecard. No signing or private business disclosure occurs through the page. The user subsequently authorized GitHub Pages publication; see deployment-verification.json.
 
@@ -36,3 +36,8 @@ Published https://brentthomas248.github.io/handrail-proposal/ from gh-pages comm
 ## 2026-09-26 — approved flyer redesign verified locally
 
 User approved the reference direction and requested the shared identity across all Handrail materials. Implemented actual-flyer zoom/pan with GSAP; removed sculpture, clip, WebGL and legal boilerplate. Local evidence:19 app browser checks,4 content tests,3 component checks,22 chapter captures,7-section/15-paragraph PDF comparison and both rendered PDF pages. Small-screen type, contrast, overflow and initial layout shift were fixed after observed failures. Local Lighthouse scores100 across all categories on both devices; script transfer45,870bytes meets the unchanged250KB budget. The actual deliverable awaits user visual review; publication and hosted checks are next.
+
+
+## 2026-09-26T20:10:01.595Z — flyer redesign published and verified
+
+Source ad6fa8b, static 05eaf7dc6478f6203c554bd40335c2602de4c793, GitHub Pages run 36268461522 succeeded. All 19 browser tests passed against the public site. Hosted HTML, notes, PDF, logo and social image match the verified output byte-for-byte; the downloaded PDF passes complete independent canonical-text comparison. Profile README and pins remain unchanged. Reference direction was approved; user acceptance of the finished visuals remains a separate review.

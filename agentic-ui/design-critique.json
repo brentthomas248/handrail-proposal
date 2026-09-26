@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T20:07:07.642202+00:00",
+  "generatedAt": "2026-09-26T20:10:01.595Z",
   "surface": "Handrail HTML flyer camera and proposal notes",
-  "scope": "Current local redesign; publication pending; no full global certification.",
+  "scope": "Current redesign, published and browser-verified; no full global certification or user visual acceptance claim.",
   "sources": [
     "DESIGN.md",
     "src/pages/index.astro",

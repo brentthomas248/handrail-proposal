@@ -10,7 +10,7 @@ Astro static output with a React rate component, strict TypeScript, pnpm 11 and 
 
 The user rejected the first published visual treatment, approved the Telescope/Igloo/Exat/Stripe Press reference direction, and requested Handrail's actual logo, colors and existing-sheet influence. The redesign uses the official PNG wordmark, warm paper/rust palette, Inter and Playfair Display. It leads with no base salary and commissions paid from collected customer revenue.
 
-The [existing public site](https://brentthomas248.github.io/handrail-proposal/) is served from the `gh-pages` branch of the [public source repository](https://github.com/brentthomas248/handrail-proposal). **Publication of this redesign is pending.** Prior edition deployment and QA do not establish that the redesign has been deployed or passed its current checks. Follow IMPLEMENTATION.md for the active checkpoint. Profile README and pin changes remain unapplied.
+The [existing public site](https://brentthomas248.github.io/handrail-proposal/) is served from the `gh-pages` branch of the [public source repository](https://github.com/brentthomas248/handrail-proposal). The redesign is published from source ad6fa8b and static commit 05eaf7d. The same 19 browser tests passed against the live site, and hosted assets match the verified build. Follow IMPLEMENTATION.md for the evidence checkpoint. Profile README and pin changes remain unapplied.
 
 The current OAuth credential lacks workflow-write permission. Optional Actions templates under `docs/github-actions/` are inactive; release validation runs locally before the static branch is published. GitHub's built-in Pages job is deployment evidence, not evidence of remotely executed project tests.
 

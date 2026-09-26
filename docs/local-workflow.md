@@ -19,7 +19,7 @@ Required evidence is proportionate to that implementation: a production build, t
 
 ## Current redesign evidence
 
-The active verification and release state is recorded in IMPLEMENTATION.md and the lifecycle artifacts. **Redesign publication is pending.** Previous screenshots, performance values and the old deployment receipt belong to the rejected edition and must not be used as evidence that this redesign has passed or shipped.
+The active verification and release state is recorded in IMPLEMENTATION.md and the lifecycle artifacts. **The redesign is published and hosted verification passed.** The current deployment receipt records source ad6fa8b, static commit 05eaf7d, 19 passing public browser tests and exact hosted asset comparison. Historical sculpture results do not establish the redesign’s behavior.
 
 The current source provides a real scroll camera over the flyer, chapter navigation, a persisted ordinary-reading option, system reduced-motion support and no-JavaScript reading. Browser checks must exercise those behaviors, mobile framing, all canonical proposal sections, download availability and keyboard/accessibility paths against the current build.
 
@@ -33,10 +33,10 @@ Generated reports and screenshots stay under ignored `qa-artifacts/` and `test-r
 
 The previous global static-app policy mismatch and literal design-token scanner limitations remain separate from product checks. This app has no database or business mutation endpoints; do not fabricate cleanup or mutation evidence to satisfy a generic full-stack validator. Do not describe a local release as a fully certified cloud lifecycle run.
 
-The previous edition's Lighthouse scores and transferred-byte values are historical. Re-measure the current design before making a new performance claim. Automated checks do not establish physical-device coverage, manual assistive-technology certification, field Core Web Vitals or cloud-adapter readiness.
+Current local Lighthouse measurements are in performance-evidence.json: all four categories scored 100 on mobile and desktop, with 45,870 script-transfer bytes. Field metrics remain unmeasured. Automated checks do not establish physical-device coverage, manual assistive-technology certification, field Core Web Vitals or cloud-adapter readiness.
 
 ## Publication
 
-The existing [public URL](https://brentthomas248.github.io/handrail-proposal/) serves the previous edition until the verified redesign is published. The [source repository](https://github.com/brentthomas248/handrail-proposal) and branch-based Pages configuration already exist.
+The [public URL](https://brentthomas248.github.io/handrail-proposal/) serves the verified flyer redesign. The [source repository](https://github.com/brentthomas248/handrail-proposal) and branch-based Pages configuration already exist.
 
-Optional workflows in `docs/github-actions/` remain inactive because the current OAuth credential lacks workflow-write permission. Local checks precede a publishing push. GitHub's own Pages job confirms deployment, not remote execution of project tests. After publishing the redesign, perform fresh hosted scroll, navigation, mobile and PDF checks before updating the release status. Profile README and pin changes remain unapplied.
+Optional workflows in `docs/github-actions/` remain inactive because the current OAuth credential lacks workflow-write permission. Local checks precede a publishing push. GitHub's own Pages job confirms deployment, not remote execution of project tests. The same 19 browser tests passed with PROPOSAL_BASE_URL set to the public URL, and the hosted PDF passed independent full-text comparison. Branch publication includes a .nojekyll marker so Astro assets are served. Profile README and pin changes remain unapplied.

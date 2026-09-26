@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
   "surface": "Handrail growth partnership flyer and negotiable proposal notes",
-  "generatedAt": "2026-09-26T20:03:48.417Z",
+  "generatedAt": "2026-09-26T20:10:01.595Z",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -96,7 +96,7 @@
   ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
-    "Current local verification is recorded separately; publication pending.",
+    "Redesign published and verified: 19 live browser tests pass. See deployment-verification.json. User visual acceptance remains pending.",
     "No WebGL, external assets at runtime, calculator, forms or signatures.",
     "Full global certification remains unclaimed; token-policy and manual-review limitations remain explicit."
   ],

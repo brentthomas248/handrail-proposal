@@ -1,32 +1,78 @@
 {
-  "url": "https://brentthomas248.github.io/handrail-proposal/",
-  "checkedAt": "2026-09-26T19:19:29.538Z",
-  "passed": true,
-  "checks": [
-    "Public home and WebGL paper scene load",
-    "Real scroll advances the paper animation",
-    "Navigation, rate cards and expandable timing details work",
-    "All 18 deployed clauses match canonical content; PDF downloads",
-    "390px mobile layout, direct agreement link and persisted motion toggle work",
-    "System reduced-motion remains static"
-  ],
-  "errors": [],
-  "failedRequests": [],
   "schemaVersion": "1.0",
-  "sourceCommit": "2028557",
-  "staticCommit": "94c25d09c26ffd3bad98205926764623a2a585d4",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36265530452",
+  "url": "https://brentthomas248.github.io/handrail-proposal/",
+  "checkedAt": "2026-09-26T20:10:01.595Z",
+  "passed": true,
+  "sourceCommit": "ad6fa8b",
+  "staticCommit": "05eaf7dc6478f6203c554bd40335c2602de4c793",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36268461522",
   "publishingSource": {
     "branch": "gh-pages",
     "path": "/",
     "buildType": "legacy",
     "httpsEnforced": true
   },
+  "browserSuite": {
+    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm test:e2e",
+    "passed": 19,
+    "failed": 0,
+    "durationSeconds": 6.2
+  },
+  "checks": [
+    "Real wheel input zooms and pans the actual flyer; reversing restores overview",
+    "Every camera chapter is framed on desktop, 390px and 320px; framed body text at least 12px",
+    "Touch emulation, keyboard chapter navigation and focus reveal",
+    "Reading preference, reduced motion, JavaScript-disabled rendering and browser Back navigation",
+    "Canonical proposal notes, PDF availability and both route axe scans",
+    "Hosted HTML, notes, PDF, logo and social image match verified local output byte-for-byte"
+  ],
+  "staticAssetChecks": [
+    {
+      "path": "index.html",
+      "http": 200,
+      "bytes": 34735,
+      "sha256": "3747ded74bb580089dcc00e0ac2f5e93136a72b2f3b6c5718104ea036987237d"
+    },
+    {
+      "path": "agreement/index.html",
+      "http": 200,
+      "bytes": 36879,
+      "sha256": "4048fb20073cf5dd1e880849347aa8c6203e0eb3121ff6bad47d467e029156cd"
+    },
+    {
+      "path": "handrail-proposed-agreement.pdf",
+      "http": 200,
+      "bytes": 184445,
+      "sha256": "f803ccea862f28293a440a971260c0839d48d437b07a51096935fc8394dd7b3e"
+    },
+    {
+      "path": "handrail-logo.png",
+      "http": 200,
+      "bytes": 18224,
+      "sha256": "1e024d51ef5f28a6bcedfa90ff58c5f0481a81db81cbcd5efede50594766bb3a"
+    },
+    {
+      "path": "social.png",
+      "http": 200,
+      "bytes": 73296,
+      "sha256": "06117fee470c6d3e50195a146cea3b00f41f4c6b8db101f23b11f779621867db"
+    }
+  ],
   "pdfCanonicalCheck": {
     "passed": true,
-    "sections": 18,
-    "paragraphs": 29
+    "sections": 7,
+    "paragraphs": 15
   },
-  "mobileEvidence": "Chromium touch emulation at 390 by 844 pixels; not physical-device certification",
-  "profileChanged": false
+  "mobileEvidence": "Chromium touch emulation; not physical-device certification",
+  "profileChanged": false,
+  "errors": [],
+  "failedRequests": [],
+  "hostedCapture": {
+    "capturedAt": "2026-09-26T20:09:41.108Z",
+    "chapterImages": 22,
+    "evidencePath": "qa-artifacts/flyer-camera-hosted/capture.json",
+    "errors": [],
+    "failedRequests": [],
+    "minimumRenderedTextPx": 12.174000707165948
+  }
 }

@@ -2,7 +2,7 @@
 
 An interactive business proposal from Brent Showalter to Handrail. One HTML flyer becomes the scene: scrolling zooms into its headline, moves through the cash-flow example and compares two ways to begin working together.
 
-**Redesign publication is pending.** The [public URL](https://brentthomas248.github.io/handrail-proposal/) currently serves the previous edition. The working implementation replaces that edition; consult [IMPLEMENTATION.md](IMPLEMENTATION.md) for current verification and publication status.
+**[Explore the live proposal](https://brentthomas248.github.io/handrail-proposal/).** Scroll through the flyer or choose a chapter. The redesigned site is published and passed all 19 browser checks on GitHub Pages; see [IMPLEMENTATION.md](IMPLEMENTATION.md) for evidence and limits.
 
 ![The Handrail flyer at the opening camera view](docs/media/proposal-desktop.png)
 
