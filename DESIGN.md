@@ -143,3 +143,13 @@ Inspect material closeups and content-distinct transition frames or a video/repl
 Re-run appropriate type/unit/build checks, canonical PDF consistency, current browser regressions, keyboard/accessibility paths and performance measurements. Preserve the documented WebKit screenshot-protocol limitation and use native-window evidence when that defect affects backface capture. No physical-device, manual VoiceOver or field-INP certification is inferred.
 
 The user-approved local workflow remains in force. Credentialed Stagehand/Browserbase services stay omitted; do not fabricate semantic service receipts or claim full global certification. Record actual local evidence, independent review, unresolved concerns and current publication status before describing this revision as complete.
+
+## Mobile contextual framing
+
+The phone tour should present complete editorial ideas at a restrained reading distance. Keep related labels, bodies, qualifications and examples together; use at most eight reading scenes plus the folded overview for this proposal. Do not turn short paragraphs into separate full-screen macro shots. The full 90-day sequence and the partnership contribution story each form a coherent reading group.
+
+The active group has breathing room inside the measured header/control boundaries. Neighboring print may remain visible around it, but spacing, quieter secondary typography and the camera composition must make the primary idea unambiguous. Peripheral cropping is acceptable only outside the active reading group. Avoid adding filters or opacity layers to simulate focus.
+
+Refit the camera after available mobile viewport height changes while preserving native scroll and the current chapter. Reaching the final scene must remain possible after the viewport grows again. A selected rectangle fitting inside a nominal viewport does not prove all of its text lines or related content are readable.
+
+Current evidence and the independent adversarial review belong in [the mobile framing remediation](docs/mobile-framing-remediation.md). Earlier screenshot and test-count approvals are historical, not substitutes for current visual judgment.

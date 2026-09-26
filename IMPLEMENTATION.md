@@ -1,42 +1,43 @@
-# Implementation checkpoint — wider paper and iPhone crash remediation
+# Implementation checkpoint — mobile contextual framing
 
 ## Current state, September 26, 2026
 
-The user reported a physical iPhone browser-process crash after several scrolls and asked for the wider, shorter proportions of the first proposal. The new paper is authored at 1200×1700 per panel, approximately 0.71 width/height, matching the original paperclip edition's geometry without restoring the clip. Columns use the added width; 15 phone reading targets keep each block readable.
+The phone camera now frames eight complete reading scenes plus the opening view. Related headings, both rate explanations, all three window steps and the full partnership story stay together. A restrained optical zoom cap and revised column spacing leave surrounding paper visible. Inactive ink recedes during reading holds; the active text stays at full contrast. No new composited opacity or filter layers were added.
 
-The rendering path now paints texture, shade and crease into existing faces. Twelve promoted overlays and live SVG filters are removed. Unseen opposite faces are released using the actual perspective viewpoint; teardown restores them for measurement and normal reading. Paper coordinates halve at high pixel density, while header, navigation and reading typography retain their own sizes. Three radial-gradient shadow pads follow the fold. Light values are cached to avoid redundant paint changes.
+The camera measures the actual header and controls with a 24-pixel inset. Mobile browser-height changes refit the scene after input settles while preserving native scroll position, chapter identity and navigation nodes. The final scene remains reachable after viewport expansion. Secondary groups are inert and hidden from the accessibility tree only during a focused hold; ordinary reading restores everything.
 
-The proposal remains semantic HTML with the same Handrail brand and canonical business terms. The 90-day window, 15/5 and 20/5 paths, all future credited sales, collections-first payments, benefits request and broader partnership framing are unchanged. The PDF is unchanged and verified. `?view=read` bypasses the camera and preserves reading mode through notes navigation; Take the tour remains an explicit option.
+The wide 1200 × 1700 authored paper, alternating Z-fold, texture and light are preserved. High-density intrinsic surfaces remain 600 × 850. Canonical terms, brand and PDF are unchanged: 15/5 and 20/5, all future credited sales, no base, collections-first payments, requested benefits, the 90-day window and the beginning of a broader partnership. The `?view=read` recovery path remains available.
+
+## Adversarial design review
+
+An independent reviewer rejected the baseline and the first candidate. The final rendered composition was accepted after correcting a joined-word heading. Review covered every phone scene at 320 × 740, 390 × 844 and 390 × 664, plus forward/reverse transitions. Root also inspected complete groups and moving frames. See [the independent review](docs/mobile-context-adversarial-review.md) and [the remediation record](docs/mobile-framing-remediation.md). This gate is now required by AGENTS.md for future mobile camera/layout changes.
 
 ## Verification
 
-- `pnpm check`: 24 files, zero errors/warnings/hints.
+- `pnpm check`: 24 files, zero errors, warnings or hints.
 - `pnpm test`: 11 unit checks passed.
-- `pnpm build`: two static routes built.
-- `pnpm test:e2e`: 29 Chromium checks passed in 31.6s. Includes DPR3 paper budget, all phone targets, sustained input/reversal, viewport changes, keyboard restoration, initialization failure, persistent recovery, reduced motion and no-JavaScript.
-- `pnpm build-storybook && pnpm test:components`: workshop built ; 3 checks passed, zero axe violations. Workshop-only bundle-size warning remains outside the published page.
-- `pnpm contract:check && pnpm pdf:check`: canonical Markdown and complete PDF match.
+- `pnpm build`: two static routes; a formatting-only rebuild was byte-identical.
+- Chromium: all 32 checks passed in 30.1 seconds. Includes complete text lines, measured control clearances, four DPR3 phone viewports, live height changes, last-scene reachability, semantic focus, keyboard restoration, sustained scroll/reversal and the existing rendering budget.
+- `pnpm test:components`: three checks passed with zero axe violations or browser errors after starting the local workshop.
+- `pnpm contract:check && pnpm pdf:check`: canonical Markdown and unchanged complete PDF match.
 - `pnpm format:check`: passed.
-- Final capture: 38 chapter images, 15 fold samples, 3 journey videos; no browser errors/warnings/failed requests. Minimum captured target text 12.251px. Root reviewed desktop and phone rendering.
-- Supplementary WebKit: 35 reading targets across 1440/390/320px; phones at DPR3; minimum 12.2495px. Zero errors/failed requests ; 3 unused-font-preload warnings. Current native iPhone rendering is not verified.
+- Capture: 42 chapter images, 25 fold samples, 32 intermediate frames and five videos. No errors, warnings or failed requests; minimum primary text 14.0374 pixels. Eight rate images were refreshed after the heading correction.
+- Supplementary WebKit: 37 reading positions at five sizes, minimum primary text 14.0792 pixels, zero errors/failed requests and five font-preload warnings. Known screenshot/native-viewport limitations remain explicit.
 
-At 390×844/DPR3 the mapped compositor sample fell from 31 layers/24 drawn to 17/9. Paper uses three drawn faces and no promoted overlays. Its area-derived RGBA estimate fell from 912.062MiB to 52.652MiB; the maximum measured paper edge fell from 7401 to 2556 device pixels. These are theoretical full-surface estimates, not actual iPhone memory measurements. The 64MiB/4096px project budget passes across chapters and reversals.
+The original new geometry regressions failed against the previous release: over-close framing and approximately 106 pixels of receipt text behind controls after height reduction. The initial final-suite attempt also caught a test waiting for geometry before semantic focus had settled; a bounded state poll corrected the timing, then all 32 passed.
 
-Independent stress covered 12 forward/reverse cycles, 336 wheel inputs and 714 layer observations, with no desktop errors. Physical iPhone termination was not reproduced on the desktop. A real-device retry is required before calling IC-01 resolved.
+The 64 MiB estimated-paper and 4096-device-pixel edge budgets remain enforced. The prior 52.65 MiB paper estimate is a theoretical area calculation, not physical iPhone memory. Desktop Chromium and supplementary WebKit do not certify the user's earlier physical iPhone process crash as resolved.
 
 ## Publication checkpoint
 
-The [public proposal](https://brentthomas248.github.io/handrail-proposal/?v=e3339c9) is published from source `e3339c9737566dd71a16770a276f553d815ad879` as static commit `c0f5dc73edfe1d7103659461036ff854ce711ddd`. [Pages run 36274389010](https://github.com/brentthomas248/handrail-proposal/actions/runs/36274389010) succeeded. The final hosted suite passed all 29 browser checks in 32.9s, including the DPR3 rendering budget and persistent recovery URL. Eight public assets match the build byte-for-byte; the downloaded PDF matches all seven sections and 15 complete paragraphs.
+The current mobile-framing candidate is verified locally and ready for the already-authorized GitHub Pages publication. The previous release is still live until the new source/static commit and hosted checks are recorded here. Deployment evidence and current application source are tracked in [the receipt](agentic-ui/deployment-verification.json).
 
-The direct [reading fallback](https://brentthomas248.github.io/handrail-proposal/?view=read&v=e3339c9) is available. Actual iPhone retry and user approval of the revised proportions remain pending. The final named-listener CDP cleanup also passed a focused regression and strict typecheck after the complete local run. This closes implementation and publication; it does not certify the reported device crash as resolved.
+## Evidence and boundaries
 
-## Durable evidence and boundaries
-
-- [Crash/proportion remediation](docs/iphone-crash-remediation.md)
-- [Rendering measurements](agentic-ui/iphone-rendering-verification.json)
+- [Independent design review](docs/mobile-context-adversarial-review.md)
+- [Mobile framing remediation](docs/mobile-framing-remediation.md)
+- [Prior device-rendering remediation](docs/iphone-crash-remediation.md)
 - [Local verification](agentic-ui/local-verification.json)
-- [WebKit scope and limits](agentic-ui/webkit-verification.json)
-- [Publication receipt](agentic-ui/deployment-verification.json)
-- [Prior motion remediation](docs/motion-remediation.md)
+- [WebKit evidence and limits](agentic-ui/webkit-verification.json)
 
-The approved local workflow remains in force. Cloud semantic QA, Browserbase replay, manual VoiceOver, full global certification and field-performance claims are not included. Previous native-window and Lighthouse receipts are historical; they do not prove current physical iPhone stability. Raw captures/traces stay ignored under qa-artifacts and test-results. Private business material remains outside the public repository. GitHub profile and pins remain unchanged.
+The approved local workflow remains in force. Physical-device stability, manual VoiceOver, field performance, cloud semantic QA and full global certification are not claimed. Raw captures/traces remain ignored. Private business material stays outside this repository. GitHub profile and pins remain unchanged.

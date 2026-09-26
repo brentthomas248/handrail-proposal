@@ -85,7 +85,7 @@
   "errors": [],
   "failedRequests": [],
   "edition": "wide-z-fold-mobile-rendering-remediation",
-  "isCurrentRevision": true,
+  "isCurrentRevision": false,
   "supplementaryWebKitEvidence": "agentic-ui/webkit-verification.json",
   "physicalIOSVerified": false,
   "visualEvidence": {
@@ -97,5 +97,6 @@
     "browserErrors": [],
     "failedRequests": []
   },
-  "renderingEvidence": "agentic-ui/iphone-rendering-verification.json"
+  "renderingEvidence": "agentic-ui/iphone-rendering-verification.json",
+  "nextCandidate": "Verified mobile contextual framing; publication pending"
 }

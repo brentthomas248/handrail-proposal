@@ -35,8 +35,10 @@ try {
     { width: 1440, height: 1000 },
     { width: 390, height: 844 },
     { width: 320, height: 740 },
+    { width: 430, height: 932 },
+    { width: 390, height: 664 },
   ]) {
-    const name = String(viewport.width);
+    const name = `${viewport.width}x${viewport.height}`;
     const page = await browser.newPage({
       viewport,
       deviceScaleFactor: viewport.width < 700 ? 3 : 1,
@@ -170,10 +172,10 @@ try {
                 .querySelector('.tour-controls')
                 .getBoundingClientRect().top;
             return (
-              b.left >= 8 &&
-              b.right <= innerWidth - 8 &&
-              b.top >= header + 2 &&
-              b.bottom <= controls - 2
+              b.left >= 24 &&
+              b.right <= innerWidth - 24 &&
+              b.top >= header + 24 &&
+              b.bottom <= controls - 24
             );
           }),
         )
@@ -197,14 +199,47 @@ try {
             );
         return points;
       });
-      const minText = await target.evaluate((e) => {
+      const textFrame = await target.evaluate((e) => {
         const scale = e.getBoundingClientRect().width / e.offsetWidth;
-        return Math.min(
-          ...[e, ...e.querySelectorAll('p,h1,h2,h3')]
-            .filter((text) => text.matches('p,h1,h2,h3'))
-            .map((t) => parseFloat(getComputedStyle(t).fontSize) * scale),
-        );
+        const top =
+          document.querySelector('.site-header').getBoundingClientRect()
+            .bottom + 24;
+        const bottom =
+          document.querySelector('.tour-controls').getBoundingClientRect().top -
+          24;
+        const walker = document.createTreeWalker(e, NodeFilter.SHOW_TEXT);
+        const text = [];
+        let node;
+        while ((node = walker.nextNode())) {
+          if (!node.textContent.trim() || !node.parentElement) continue;
+          const style = getComputedStyle(node.parentElement);
+          if (style.display === 'none' || style.visibility === 'hidden')
+            continue;
+          const range = document.createRange();
+          range.selectNodeContents(node);
+          const lines = [...range.getClientRects()];
+          if (!lines.length) continue;
+          text.push({
+            text: node.textContent.trim(),
+            font: parseFloat(style.fontSize) * scale,
+            clipped: lines.some(
+              (line) =>
+                line.left < 24 ||
+                line.right > innerWidth - 24 ||
+                line.top < top ||
+                line.bottom > bottom,
+            ),
+          });
+        }
+        return {
+          minimum: Math.min(...text.map((part) => part.font)),
+          clipped: text.filter((part) => part.clipped).map((part) => part.text),
+          count: text.length,
+        };
       });
+      const minText = textFrame.minimum;
+      expect(textFrame.count).toBeGreaterThan(0);
+      expect(textFrame.clipped).toEqual([]);
       expect(minText).toBeGreaterThanOrEqual(12);
       holds.push({
         label,
@@ -273,6 +308,7 @@ try {
         screenshotIssue: 'https://github.com/microsoft/playwright/issues/21620',
         views: views.map((v) => ({
           width: v.viewport.width,
+          height: v.viewport.height,
           readingHolds: v.holds.length,
           minText: Math.min(...v.holds.map((h) => h.minText)),
         })),

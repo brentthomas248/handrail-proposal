@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
-  "surface": "Wide Z-fold with bounded paper rendering and persistent reading recovery",
-  "generatedAt": "2026-09-26T21:54:45.790255+00:00",
+  "surface": "Wide Z-fold with complete mobile reading scenes, secondary peripheral ink and adaptive viewport framing",
+  "generatedAt": "2026-09-26T22:25:31.003773+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -10,16 +10,18 @@
     "agentic-ui/design-critique.json"
   ],
   "acceptedDecisions": [
-    "Restore the first proposal proportions, approximately0.71 width/height per panel, without restoring the paperclip. Reflow copy into columns and frame individual phone reading blocks.",
+    "Preserve the wider 1200 × 1700 paper proportions without restoring the clip. Frame eight complete phone reading groups plus the opening view, with restrained zoom and surrounding context.",
     "True Z-fold, continuous camera movement, opposite-depth wings, fine paper texture, crease shading and soft projected light.",
     "Telescope scale changes, Igloo camera continuity, Exat typography and Stripe Press document presentation remain approved references.",
     "Preserve the official Handrail wordmark, warm paper/rust palette and locally served Inter/Playfair typography.",
     "Remove decorative Unicode arrows, emojis and ornamental symbols; no paperclip or separate decorative sculpture.",
-    "Lead with the beginning of a partnership and growing Handrail; new business is a starting point and Brent\u2019s contribution can grow with company needs.",
+    "Lead with the beginning of a partnership and growing Handrail; new business is a starting point and Brent’s contribution can grow with company needs.",
     "Keep no base salary and commission paid after customer collections, with matching installments.",
     "Keep 15/5 if hired first and 20/5 if the qualifying client comes first, including that client and all future credited sales.",
     "Keep the 90-day proposal and benefits request. Handrail writes the final contract; no named future roles or private financial problems appear.",
-    "Continue the approved local design, Storybook and Playwright workflow."
+    "Continue the approved local design, Storybook and Playwright workflow.",
+    "Use mobile ink hierarchy rather than extra opacity/filter layers; active text stays full strength.",
+    "Require an independent adversarial design critic for mobile camera/layout changes; record and resolve blockers before publication."
   ],
   "rejectedDecisions": [
     "Neon/glow design direction",
@@ -30,14 +32,17 @@
     "The published flat flyer improved the direction but did not provide enough dynamic motion; replace it with a real hinged trifold."
   ],
   "implementation": {
-    "routes": ["/handrail-proposal/", "/handrail-proposal/agreement/"],
-    "components": ["DealPath"],
+    "routes": [
+      "/handrail-proposal/",
+      "/handrail-proposal/agreement/"
+    ],
+    "components": [
+      "DealPath"
+    ],
     "filesChanged": [
       "src/pages/index.astro",
-      "src/layouts/Page.astro",
       "src/scripts/motion.ts",
       "src/styles/global.css",
-      "public/paper-grain.svg",
       "tests/e2e/proposal.spec.ts",
       "scripts/capture.mjs",
       "scripts/verify-webkit.mjs"
@@ -57,7 +62,9 @@
   },
   "componentCoverage": {
     "matrixPath": "agentic-ui/component-state-matrix.json",
-    "components": ["DealPath"],
+    "components": [
+      "DealPath"
+    ],
     "missingCoverage": [],
     "status": "verified-current-local"
   },
@@ -68,9 +75,14 @@
       "Use perspective while traveling and flat, framed, legible targets during reading holds.",
       "Remove decorative symbols and preserve the official Handrail brand.",
       "Present a practical beginning to a broader partnership without limiting Brent to sales forever or promising a specific future position.",
-      "Preserve the original economic terms and proposal-not-contract framing."
+      "Preserve the original economic terms and proposal-not-contract framing.",
+      "Pull the phone camera back and keep associated headings and explanations together.",
+      "Reserve actual header/control clearances and refit after height changes while preserving place.",
+      "Subdue surrounding print so the active reading group remains the focal point."
     ],
-    "rejectedCritiques": []
+    "rejectedCritiques": [],
+    "independentReviewPath": "docs/mobile-context-adversarial-review.md",
+    "verdict": "accepted-mobile-composition"
   },
   "userAssumptions": [
     "Names and proposed compensation may be public; private financial research remains outside the repository.",
@@ -79,7 +91,7 @@
   "taskModel": {
     "targetUsers": [
       "Josh and Handrail decision makers",
-      "Engineering reviewers visiting Brent\u2019s GitHub"
+      "Engineering reviewers visiting Brent’s GitHub"
     ],
     "jobs": [
       "Understand and discuss the beginning of the proposed partnership",
@@ -98,21 +110,21 @@
   ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
-    "29 local Chromium checks,11 unit checks,3 component checks and24-file typecheck pass.",
-    "Removed redundant material layers and unseen opposite faces;64MiB estimated-paper/4096px-edge regression budgets pass atDPR3.",
-    "38 chapter images,15 fold samples and3 journey recordings were captured; actual iPhone retry is pending.",
+    "32 local Chromium checks, 11 unit checks, 3 component checks and 24-file typecheck pass.",
+    "42 chapter images, 25 fold samples, 32 intermediate frames and five recordings captured; affected heading captures refreshed.",
+    "Minimum primary text across recorded phone scenes is 14.0374px; paper rendering budget remains bounded.",
     "No business copy, PDF terms or private business facts changed.",
-    "Current publication status is in agentic-ui/deployment-verification.json."
+    "Current publication status is recorded in agentic-ui/deployment-verification.json."
   ],
   "userReview": {
     "date": "2026-09-26",
-    "status": "iphone-crash-remediation-and-wide-proportions-review-pending",
+    "status": "mobile-context-framing-review-pending",
     "researchPath": "docs/redesign-research.md",
     "implementationPaused": false,
-    "reason": "User reported a physical iPhone crash after several scrolls and asked for wider, shorter paper like the first proposal."
+    "reason": "User reports the mobile tour is too close; requests surrounding secondary text, spacing and an adversarial critic."
   },
   "publication": {
-    "status": "published-and-hosted-verified-physical-iphone-retry-pending",
+    "status": "previous-release-live-current-candidate-verified-awaiting-publication",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "sourceCommit": "e3339c9737566dd71a16770a276f553d815ad879",
     "staticCommit": "c0f5dc73edfe1d7103659461036ff854ce711ddd",

@@ -55,6 +55,8 @@ function mountTour(
   const current = document.querySelector<HTMLElement>('#current-stop');
   const total = document.querySelector<HTMLElement>('#total-stops');
   const progressMark = document.querySelector<HTMLElement>('.scroll-line');
+  const header = document.querySelector<HTMLElement>('.site-header');
+  const controls = document.querySelector<HTMLElement>('.tour-controls');
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
   const perspective = 2400;
   const readingRadius = 0.24;
@@ -73,6 +75,7 @@ function mountTour(
   let velocity = 0;
   let lastIndex = -1;
   let lastCaption = '';
+  let lastReadingFocus = -1;
   let lastWidth = 0;
   let lastHeight = 0;
   let ticking = false;
@@ -190,10 +193,14 @@ function mountTour(
       focusY: center.y,
       focusZ: center.z,
       scale:
-        Math.min(
-          (width - (width < 760 ? 38 : 160)) / box.width,
-          availableHeight / box.height,
-        ) * 0.92,
+        width < 760
+          ? Math.min(
+              (width * 0.76) / box.width,
+              (availableHeight * 0.86) / box.height,
+              0.43 / (panelWidth / 1200),
+            )
+          : Math.min((width - 160) / box.width, availableHeight / box.height) *
+            0.92,
       left: fold,
       right: fold,
       pitch: 0,
@@ -353,6 +360,24 @@ function mountTour(
     let index = 0;
     for (let i = 1; i < stops.length; i += 1)
       if (time >= stops[i].at - readingRadius - 0.04) index = i;
+    const readingFocus =
+      width < 760 && index > 0 && Math.abs(time - stops[index].at) <= 0.55
+        ? index
+        : 0;
+    if (readingFocus !== lastReadingFocus) {
+      lastReadingFocus = readingFocus;
+      sheet.toggleAttribute('data-reading-focus', readingFocus > 0);
+      stops.forEach((stop, stopIndex) => {
+        if (!stop.element) return;
+        const secondary = readingFocus > 0 && stopIndex !== readingFocus;
+        stop.element.toggleAttribute('data-reading-secondary', secondary);
+        // The peripheral print is a preview of other chapters. The active
+        // chapter and Read normally provide their complete accessible content.
+        stop.element.inert = secondary;
+        if (secondary) stop.element.setAttribute('aria-hidden', 'true');
+        else stop.element.removeAttribute('aria-hidden');
+      });
+    }
     if (index !== lastIndex) {
       lastIndex = index;
       nav
@@ -462,6 +487,14 @@ function mountTour(
     ticking = false;
     path = undefined;
     velocity = 0;
+    lastReadingFocus = -1;
+    sheet.removeAttribute('data-reading-focus');
+    stops.forEach((stop) => {
+      if (!stop.element) return;
+      stop.element.removeAttribute('data-reading-secondary');
+      stop.element.removeAttribute('aria-hidden');
+      stop.element.inert = false;
+    });
     sheet.style.removeProperty('transform');
     sheet.style.removeProperty('transform-origin');
     sheet.style.removeProperty('--panel-height');
@@ -482,15 +515,17 @@ function mountTour(
     root.classList.remove('camera-ready');
   }
 
-  function buildTour(preserve = false) {
+  function buildTour(preserve = false, preserveScroll = false) {
     if (root.dataset.presentation !== 'tour') return;
     const oldTime = path ? target * path.duration : 0;
     const oldStop = stops[Math.max(0, lastIndex)];
     const oldFraction = oldStop ? oldTime - oldStop.at : 0;
     const previousProgress = target;
+    const previousScroll = window.scrollY;
+    const previousRange = range;
     destroyTour();
     width = stage.clientWidth;
-    height = Math.min(stage.clientHeight, innerHeight);
+    height = innerHeight;
     stage.style.setProperty('--stage-height', `${height}px`);
     lastWidth = innerWidth;
     lastHeight = innerHeight;
@@ -501,8 +536,12 @@ function mountTour(
     paperHeight = Math.max(sheet.offsetHeight, ...faceHeights);
     sheet.style.setProperty('--panel-height', `${paperHeight}px`);
     sheet.style.transformOrigin = '0 0';
-    const top = width < 760 ? 105 : 112;
-    const bottom = width < 760 ? 128 : 115;
+    const top =
+      width < 760 ? (header?.getBoundingClientRect().bottom ?? 80) + 24 : 112;
+    const bottom =
+      width < 760
+        ? (controls?.getBoundingClientRect().height ?? 116) + 24
+        : 115;
     availableHeight = Math.max(100, height - top - bottom);
     cameraY = top + availableHeight / 2;
     corners = [0, 1, 2].map((i) => [
@@ -550,8 +589,10 @@ function mountTour(
       cursor += 1.7;
     }
     path = createPath(frames);
-    range = Math.max(540, height * 0.74) * (stops.length + 1);
-    journey.style.height = `${range + height}px`;
+    range = preserveScroll
+      ? previousRange
+      : Math.max(540, height * 0.74) * (stops.length + 1);
+    journey.style.height = `${range + innerHeight}px`;
     offset = journey.getBoundingClientRect().top + window.scrollY;
     rebuildNavigation();
     if (preserve) {
@@ -572,7 +613,10 @@ function mountTour(
             : previousProgress,
         ),
       );
-      window.scrollTo({ top: offset + range * target, behavior: 'instant' });
+      window.scrollTo({
+        top: preserveScroll ? previousScroll : offset + range * target,
+        behavior: 'instant',
+      });
     } else target = Math.max(0, Math.min(1, (window.scrollY - offset) / range));
     visual = target;
     velocity = 0;
@@ -672,7 +716,7 @@ function mountTour(
   window.addEventListener('resize', () => {
     const widthChanged = Math.abs(innerWidth - lastWidth) > 2;
     const heightChanged = Math.abs(innerHeight - lastHeight) > 2;
-    if (!widthChanged && (!heightChanged || innerWidth < 760)) return;
+    if (!widthChanged && !heightChanged) return;
     resizePending = true;
     clearTimeout(resizeTimer);
     const apply = () => {
@@ -681,7 +725,7 @@ function mountTour(
         return;
       }
       resizePending = false;
-      buildTour(true);
+      buildTour(true, !widthChanged && innerWidth < 760);
     };
     resizeTimer = setTimeout(apply, 180);
   });

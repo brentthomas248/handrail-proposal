@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T21:54:45.790255+00:00",
-  "scope": "Wider Z-fold and physical-iPhone crash remediation; approved local workflow",
+  "generatedAt": "2026-09-26T22:25:31.003773+00:00",
+  "scope": "Mobile contextual camera framing, complete editorial groups and viewport-height adaptation; approved local workflow",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": true,
+  "deployed": false,
   "checks": [
     {
       "command": "pnpm check",
@@ -18,7 +18,7 @@
     },
     {
       "command": "pnpm build",
-      "result": "Two static routes built",
+      "result": "Two static routes built; formatting-only source rebuild byte-identical",
       "exitCode": 0
     },
     {
@@ -27,18 +27,18 @@
       "exitCode": 0
     },
     {
-      "command": "pnpm test:e2e",
-      "result": "29 Chromium checks passed in 31.6s, including DPR3 compositing budget, recovery navigation and keyboard restoration",
+      "command": "pnpm exec playwright test --output=qa-artifacts/mobile-context/final-playwright-confirmed",
+      "result": "32 Chromium checks passed in 30.1s, including complete text-line framing, viewport shrink/restore, semantic focus, keyboard restoration and DPR3 rendering budget",
       "exitCode": 0
     },
     {
-      "command": "CAPTURE_OUTPUT=qa-artifacts/wide-paper-final pnpm capture",
-      "result": "38 chapter images,15 fold samples,3 journey videos; no browser errors, warnings or failed requests; minimum captured text12.251px",
+      "command": "CAPTURE_OUTPUT=qa-artifacts/mobile-context/final-capture pnpm capture",
+      "result": "42 chapter images, 25 fold samples, 32 intermediate frames, 5 journey videos; no browser errors, warnings or failed requests; minimum primary text 14.0374px; eight affected rate captures refreshed after heading fix",
       "exitCode": 0
     },
     {
-      "command": "pnpm build-storybook && pnpm test:components",
-      "result": "Workshop built;3 component checks,zero axe violations; workshop-only bundle-size warning",
+      "command": "pnpm test:components",
+      "result": "3 component checks passed, zero axe violations or errors; local Storybook service started before successful retry",
       "exitCode": 0
     },
     {
@@ -47,23 +47,17 @@
       "exitCode": 0
     },
     {
-      "command": "WEBKIT_OUTPUT=qa-artifacts/iphone-compositing/webkit node scripts/verify-webkit.mjs",
-      "result": "35 supplementary reading positions pass; mobile DPR3; minimum12.2495px; zero errors/failed requests;3 preload warnings",
-      "exitCode": 0
-    },
-    {
-      "command": "pnpm exec playwright test --grep high-density --output=qa-artifacts/iphone-compositing/final-cleanup-test",
-      "result": "Named CDP listener cleanup passes strict typecheck and focused regression in15.7s",
+      "command": "WEBKIT_OUTPUT=qa-artifacts/mobile-context/webkit node scripts/verify-webkit.mjs",
+      "result": "37 supplementary reading positions pass across five viewports; phones DPR3; minimum 14.0792px; zero errors or failed requests; five preload warnings",
       "exitCode": 0
     }
   ],
   "evidenceNotes": [
-    "Physical iPhone browser process crash was reported after several scrolls; actual-device retry remains pending.",
-    "Layer-budget estimates and sustained-input measurements are recorded in agentic-ui/iphone-rendering-verification.json. They are not measured iPhone memory.",
-    "Full current source/verification details are in docs/iphone-crash-remediation.md.",
-    "Desktop Chromium and supplementary WebKit do not establish physical iOS stability.",
-    "Page-load Lighthouse measurements from the previous revision are historical and were not rerun for this rendering fix.",
-    "Final hosted29-check suite passed in32.9s. Eight public assets match dist; downloaded PDF matches canonical content."
+    "Independent design critic rejected the baseline and first candidate; accepted the final composition after a heading-spacing correction. See docs/mobile-context-adversarial-review.md.",
+    "Complete active reading groups fit with at least 24px clearance from measured header and controls; inactive previews restore in ordinary reading.",
+    "Final browser suite had an initial timing failure in the new active-focus test: it checked during camera approach. A bounded state poll fixed the test; all 32 then passed.",
+    "Paper dimensions and 64MiB/4096-device-pixel project budgets remain unchanged; theoretical area estimates are not actual iPhone memory.",
+    "Physical iPhone stability, manual VoiceOver and field performance remain unverified. Historical Lighthouse and native-window evidence do not certify this revision."
   ],
   "limitations": [
     "agentic-ui/blockers.json",

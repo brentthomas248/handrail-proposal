@@ -6,39 +6,29 @@ The user approved implementing and verifying this Handrail proposal locally afte
 
 Stitch and Magic generation, Stagehand semantic QA and Browserbase hosted replay are omitted with user authorization. Their credentials and live tool calls remain unverified. No retry of 1Password authorization, secret recovery or credential workaround belongs to this delivery.
 
-The current implementation uses Astro, GSAP ScrollTrigger and native browser scrolling. The semantic HTML trifold is the animated scene: three hinged panels, front/back faces, sequential opening, perspective travel and flat readable holds. Handrail's actual wordmark, warm paper/rust palette, Inter and Playfair Display replace the rejected paper sculpture and cool navy styling. Three.js, React Three Fiber and Lenis have been removed.
+Astro renders the semantic HTML trifold. Native browser scrolling drives a continuous camera path through one critically damped GSAP core ticker, with alternating hinged panels, perspective travel and camera-facing reading holds. There is no ScrollTrigger, Three.js, React Three Fiber or Lenis dependency in the current runtime. Handrail's actual wordmark, warm paper/rust palette, Inter and Playfair Display remain the design foundation.
 
-Required evidence is proportionate to that implementation: a production build, type checking, canonical-document consistency, complete PDF text verification, Storybook rate-component checks, deterministic Playwright interactions, rendered screenshots and accessibility checks. Product QA, design review and deployment are separate outcomes.
+Required evidence is proportionate to that implementation: production build, type checks, canonical-document consistency, complete PDF text verification, Storybook rate-component checks, deterministic Playwright interactions, rendered screenshots and accessibility checks. An independent adversarial reviewer must inspect mobile camera/layout changes before publication. Product QA, design review and deployment are separate outcomes.
 
 ## Local services
 
-- App: `pnpm dev`, bound to `127.0.0.1:4321`, route `/handrail-proposal/`.
+- App: `pnpm dev`, or build then `pnpm preview`, bound to `127.0.0.1:4321`, route `/handrail-proposal/`. Preview serves `dist` and requires a rebuild after source edits.
 - Storybook: `pnpm storybook`, bound to `127.0.0.1:6006`; MCP endpoint `http://127.0.0.1:6006/mcp`.
-- Static output: no backend, databases, signatures, external message delivery or business mutations.
-- Browser checks use isolated local contexts; no personal browser profile or credentialed service access is required.
+- Static output: no backend, database, signatures, external message delivery or business mutations.
+- Browser checks use isolated contexts; no personal browser profile or credentialed service access is required. Concurrent test processes must use separate output directories.
 
-## Current redesign evidence
+## Current evidence
 
-The active verification and release state is recorded in IMPLEMENTATION.md and the lifecycle artifacts. **The current trifold is published and hosted verification passed.** Source `a7fc658` and static commit `9297502` are the current release. Finished-design acceptance remains with the user. Source `ad6fa8b` and static commit `05eaf7d` describe the previous flat-flyer edition; its receipts remain historical.
+[IMPLEMENTATION.md](../IMPLEMENTATION.md) is the current source, verification and release checkpoint. [The deployment receipt](../agentic-ui/deployment-verification.json) records the source/static commits, Pages run and hosted checks. Do not infer current readiness from historical receipts.
 
-Current checks must verify independent wing rotations under real scrolling, reversible opening, front/back faces, perspective transitions and flat holds with legible text. Root-sheet translation alone is insufficient evidence. Also check chapter navigation, persisted ordinary reading, reduced motion, no-JavaScript content, mobile framing, canonical notes, PDF downloads, keyboard focus and browser-back restoration.
+Browser coverage must exercise actual unfolding/reversal, front/back faces, complete reading groups and context, navigation, persistent normal reading, reduced motion, no-JavaScript, canonical notes/PDF, keyboard restoration, initialization failure and mobile height changes. Preserve the high-DPR paper budget. Target bounding boxes alone do not establish a complete or good composition.
 
-The workshop now documents the DealPath component and its two compensation paths. Removed PaperScene, PaperFallback, SceneHost and MotionToggle stories are historical implementation details, not current workshop surfaces. App-level camera controls require app-level verification.
+The workshop documents DealPath's two compensation paths. App camera controls require app-level verification. The PDF is generated from `/agreement/`, visibly titled “Proposal notes.” `pnpm pdf:check` compares the introduction, seven ordered sections, complete paragraphs and endnote with the canonical source. Stable route and filename do not make the proposal a final agreement.
 
-Supplementary WebKit 26.6 verification covers 21 reading holds across 1440px, 390px and 320px, with no errors or failed requests and three font-preload warnings. Native-window inspection established correct front/back rendering; WebKit protocol screenshots have a separately reproduced hidden-backface capture defect. No app CSS workaround was needed. This is not the full Chromium suite running in WebKit or a physical iOS review. See `agentic-ui/webkit-verification.json`.
+Supplementary WebKit geometry is separate from the Chromium suite. Protocol backface capture and native headful viewport limitations are documented in [the WebKit receipt](../agentic-ui/webkit-verification.json). Neither desktop engine establishes physical iPhone stability. Manual VoiceOver and field performance remain unmeasured; historical Lighthouse scores are not scroll-performance or device-stability proof.
 
-The PDF is generated from `/agreement/`, now visibly titled “Proposal notes.” `pnpm pdf:check` compares the introduction, seven ordered sections, complete paragraphs and endnote with the canonical source. The stable route and filename preserve existing links; they do not make the document a final agreement.
+## Publication and boundaries
 
-## Evidence boundaries
+The [public proposal](https://brentthomas248.github.io/handrail-proposal/) is served from `gh-pages` in the [source repository](https://github.com/brentthomas248/handrail-proposal). Local checks precede publication. GitHub's Pages job confirms deployment; hosted browser tests and byte-for-byte asset/PDF checks are recorded separately. The static branch includes `.nojekyll` for Astro assets.
 
-Generated reports and screenshots stay under ignored `qa-artifacts/` and `test-results/`. Configuration and stories are preparation, not completed interaction evidence. Record command output and actual screenshots before marking checks passed.
-
-The previous global static-app policy mismatch and literal design-token scanner limitations remain separate from product checks. This app has no database or business mutation endpoints; do not fabricate cleanup or mutation evidence to satisfy a generic full-stack validator. Do not describe a local release as a fully certified cloud lifecycle run.
-
-Current trifold Lighthouse measurements are recorded in `agentic-ui/performance-evidence.json`: all four categories scored 100 on mobile and desktop. These are local laboratory measurements; field metrics remain unmeasured. Automated checks do not establish physical-device coverage, manual assistive-technology certification, field Core Web Vitals or cloud-adapter readiness.
-
-## Publication
-
-The [public URL](https://brentthomas248.github.io/handrail-proposal/) now serves the hinged trifold. Pages run 36270588222 succeeded for source `a7fc658` and static commit `9297502`. All 19 hosted browser checks passed in 8.7 seconds. Homepage, notes, PDF, logo and social image matched the build; the downloaded PDF passed complete canonical text comparison. Fresh hosted capture produced 24 chapters and 15 fold samples with no errors, warnings or failed requests and a 14.05px minimum sampled reading-target text size. The [source repository](https://github.com/brentthomas248/handrail-proposal) and branch-based Pages configuration already exist.
-
-Optional workflows in `docs/github-actions/` remain inactive because the current OAuth credential lacks workflow-write permission. Local checks precede a publishing push. GitHub's own Pages job confirms deployment, not remote execution of project tests. The current trifold browser checks used PROPOSAL_BASE_URL set to the public URL. Their hosted result and independent PDF comparison are recorded separately from deployment success. Branch publication includes a .nojekyll marker so Astro assets are served. Profile README and pin changes remain unapplied.
+Optional workflows in `docs/github-actions/` remain inactive because the current OAuth credential lacks workflow-write permission. Full global/cloud lifecycle certification is not claimed. Do not invent database cleanup or business-mutation evidence for this static app. Generated screenshots, traces and reports remain ignored under `qa-artifacts/` and `test-results/`. Private research stays outside the public repository. GitHub profile and pin changes remain unapplied.

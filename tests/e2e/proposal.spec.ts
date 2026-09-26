@@ -1,4 +1,4 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, expect, type Locator, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {
   agreementSections,
@@ -28,6 +28,151 @@ async function cameraTarget(page: Page, label: string | null) {
     (await mobilePart.count())
     ? mobilePart
     : page.locator(`[data-camera-stop=${JSON.stringify(label)}]`);
+}
+
+async function readingFrame(target: Locator) {
+  return target.evaluate((element) => {
+    const box = element.getBoundingClientRect();
+    const stage = document
+      .querySelector('.flyer-stage')!
+      .getBoundingClientRect();
+    const header = document
+      .querySelector('.site-header')!
+      .getBoundingClientRect();
+    const controls = document
+      .querySelector('.tour-controls')!
+      .getBoundingClientRect();
+    const viewport = window.visualViewport;
+    const safe = {
+      left: Math.max(stage.left, viewport?.offsetLeft ?? 0) + 24,
+      right:
+        Math.min(
+          stage.right,
+          (viewport?.offsetLeft ?? 0) + (viewport?.width ?? innerWidth),
+        ) - 24,
+      top: Math.max(stage.top, header.bottom, viewport?.offsetTop ?? 0) + 24,
+      bottom:
+        Math.min(
+          stage.bottom,
+          controls.top,
+          (viewport?.offsetTop ?? 0) + (viewport?.height ?? innerHeight),
+        ) - 24,
+    };
+    const scale = box.width / (element as HTMLElement).offsetWidth;
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+    const text: { content: string; fontPx: number; cut: boolean }[] = [];
+    let node: Node | null;
+    while ((node = walker.nextNode())) {
+      if (!node.textContent?.trim() || !node.parentElement) continue;
+      const style = getComputedStyle(node.parentElement);
+      if (style.display === 'none' || style.visibility === 'hidden') continue;
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      const lines = [...range.getClientRects()];
+      if (!lines.length) continue;
+      text.push({
+        content: node.textContent.trim(),
+        fontPx: Number.parseFloat(style.fontSize) * scale,
+        cut: lines.some(
+          (line) =>
+            line.left < safe.left ||
+            line.right > safe.right ||
+            line.top < safe.top ||
+            line.bottom > safe.bottom,
+        ),
+      });
+    }
+    return {
+      safe,
+      widthFraction: box.width / innerWidth,
+      minimumTextPx: Math.min(...text.map((part) => part.fontPx)),
+      textCount: text.length,
+      clippedText: text.filter((part) => part.cut).map((part) => part.content),
+      boxFits:
+        box.left >= safe.left &&
+        box.right <= safe.right &&
+        box.top >= safe.top &&
+        box.bottom <= safe.bottom,
+    };
+  });
+}
+
+async function expectReadingFrame(
+  target: Locator,
+  label: string | null,
+  mobile = false,
+) {
+  await expect
+    .poll(async () => (await readingFrame(target)).clippedText, {
+      message: `${label}: every text line must clear the actual header and controls by 24px`,
+    })
+    .toEqual([]);
+  await expect
+    .poll(async () => (await readingFrame(target)).boxFits, {
+      message: `${label}: the complete reading group needs space on all four sides`,
+    })
+    .toBeTruthy();
+  const frame = await readingFrame(target);
+  expect(frame.textCount, `${label} must contain real text`).toBeGreaterThan(0);
+  await expect
+    .poll(async () => (await readingFrame(target)).minimumTextPx, {
+      message: `${label}: all text, including links and labels, must remain readable`,
+    })
+    .toBeGreaterThanOrEqual(12);
+  if (mobile)
+    expect(
+      frame.widthFraction,
+      `${label}: preserve peripheral context rather than a screen-filling crop`,
+    ).toBeLessThanOrEqual(0.78);
+}
+
+async function expectMobileReadingGroup(target: Locator, label: string | null) {
+  const required: Record<string, [string, number][]> = {
+    'The beginning': [
+      ['h1', 1],
+      ['.cover-statement', 1],
+      ['.cover-description', 1],
+    ],
+    'Revenue first': [
+      ['h2', 1],
+      ['.cash-intro', 1],
+    ],
+    'As money arrives': [
+      ['.cash-receipt', 1],
+      ['.installments', 1],
+      ['.cash-closing', 1],
+    ],
+    'Hire me first': [
+      ['.deal-path', 1],
+      ['.rate-scope', 1],
+    ],
+    'Client first': [
+      ['.deal-path', 1],
+      ['.rate-reason', 1],
+    ],
+    'The window': [
+      ['.window-title', 1],
+      ['.window-steps li', 3],
+    ],
+    'Grow together': [
+      ['.partnership-lead', 1],
+      ['.partnership-details h3', 2],
+      ['.partnership-details p', 2],
+    ],
+    'A proposal to discuss': [
+      ['.proposal-note', 1],
+      ['.proposal-link', 1],
+    ],
+  };
+  expect(
+    required[label ?? ''],
+    `${label} must be a complete editorial scene`,
+  ).toBeDefined();
+  for (const [selector, count] of required[label ?? ''])
+    await expect(
+      target.locator(selector),
+      `${label} must include its related ${selector}`,
+    ).toHaveCount(count);
 }
 
 async function enterReadingMode(page: Page) {
@@ -353,21 +498,7 @@ test('high-density mobile paper stays within its compositing budget through zoom
     const target = await cameraTarget(page, label);
     await expect(target).toBeInViewport({ ratio: 0.98 });
     await expect
-      .poll(() =>
-        target.evaluate((element) => {
-          const scale =
-            element.getBoundingClientRect().width /
-            (element as HTMLElement).offsetWidth;
-          return Math.min(
-            ...[element, ...element.querySelectorAll('p,h1,h2,h3')]
-              .filter((text) => text.matches('p,h1,h2,h3'))
-              .map(
-                (text) =>
-                  Number.parseFloat(getComputedStyle(text).fontSize) * scale,
-              ),
-          );
-        }),
-      )
+      .poll(async () => (await readingFrame(target)).minimumTextPx)
       .toBeGreaterThanOrEqual(12);
   }
   const travel = await page.evaluate(
@@ -653,7 +784,7 @@ test('pausing between chapters settles into readable content and fresh input can
   await expect(cash).toHaveAttribute('aria-current', 'step');
 });
 
-test('phone browser-height changes preserve the camera and navigation nodes', async ({
+test('phone browser-height changes retain the chapter and scroll while keeping its complete text clear of controls', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
@@ -663,41 +794,31 @@ test('phone browser-height changes preserve the camera and navigation nodes', as
     name: 'As money arrives',
     exact: true,
   });
+  const target = await cameraTarget(page, 'As money arrives');
   await chapter.click();
   await page.waitForTimeout(1400);
   const chapterNode = await chapter.elementHandle();
-  const before = await page.evaluate(() => ({
-    y: scrollY,
-    camera:
-      document.querySelector<HTMLElement>('.proposal-sheet')!.style.transform,
-    height: document
-      .querySelector<HTMLElement>('.flyer-stage')!
-      .style.getPropertyValue('--stage-height'),
-  }));
-  for (const height of [800, 760, 810, 844, 770, 844]) {
+  const originalScroll = await page.evaluate(() => scrollY);
+  for (const height of [800, 760, 664, 810, 844, 770, 844]) {
     await page.setViewportSize({ width: 390, height });
-    await page.waitForTimeout(230);
+    await expectReadingFrame(target, 'As money arrives');
     expect(
       await chapterNode!.evaluate((node) => node.isConnected),
     ).toBeTruthy();
-    expect(await page.evaluate(() => scrollY)).toBe(before.y);
     expect(
-      await page
-        .locator('.proposal-sheet')
-        .evaluate((sheet) => (sheet as HTMLElement).style.transform),
-    ).toBe(before.camera);
-    expect(
-      await page
-        .locator('.flyer-stage')
-        .evaluate((stage) =>
-          (stage as HTMLElement).style.getPropertyValue('--stage-height'),
-        ),
-    ).toBe(before.height);
+      Math.abs((await page.evaluate(() => scrollY)) - originalScroll),
+    ).toBeLessThanOrEqual(2);
     await expect(chapter).toHaveAttribute('aria-current', 'step');
   }
-  await expect(
-    page.locator('[data-camera-mobile="As money arrives"]'),
-  ).toBeInViewport({ ratio: 0.98 });
+  await expect(target).toBeInViewport({ ratio: 0.98 });
+  await page.keyboard.press('End');
+  const lastChapter = page.locator('.chapter-nav button[data-go-to]').last();
+  await expect(lastChapter).toHaveAttribute('aria-current', 'step');
+  await expectReadingFrame(
+    await cameraTarget(page, await lastChapter.getAttribute('aria-label')),
+    'Last chapter after viewport expansion',
+    true,
+  );
 });
 
 test('a phone chapter remains its parent chapter after changing to a wide viewport', async ({
@@ -769,20 +890,30 @@ for (const viewport of [
   { width: 1440, height: 1000 },
   { width: 390, height: 844 },
   { width: 320, height: 740 },
+  { width: 430, height: 932 },
+  { width: 390, height: 664 },
 ])
-  test(`every camera chapter frames its content at ${viewport.width}px`, async ({
-    page,
+  test(`every camera chapter frames its complete reading group at ${viewport.width}x${viewport.height}`, async ({
+    browser,
   }) => {
-    await page.setViewportSize(viewport);
-    await page.goto('./');
+    const mobile = viewport.width < 760;
+    const context = await browser.newContext({
+      viewport,
+      deviceScaleFactor: mobile ? 3 : 1,
+      isMobile: mobile,
+      hasTouch: mobile,
+    });
+    const page = await context.newPage();
+    await page.goto(baseURL);
     await expect(page.locator('html')).toHaveClass(/camera-ready/);
     const chapters = page.locator('.chapter-nav button[data-go-to]');
     let readingHolds = 0;
-    for (let index = 0; index < (await chapters.count()); index += 1) {
+    for (let index = 1; index < (await chapters.count()); index += 1) {
       const chapter = chapters.nth(index);
       const label = await chapter.getAttribute('aria-label');
       const target = await cameraTarget(page, label);
-      if (!(await target.count())) continue;
+      await expect(target, `${label} needs a reading group`).toHaveCount(1);
+      if (mobile) await expectMobileReadingGroup(target, label);
       readingHolds += 1;
       await chapter.click();
       await expect(chapter).toHaveAttribute('aria-current', 'step');
@@ -808,47 +939,56 @@ for (const viewport of [
         )
         .toBeGreaterThan(0.995);
       await expect(target).toBeInViewport({ ratio: 0.98 });
-      await expect
-        .poll(
-          async () => {
-            const box = await target.boundingBox();
-            return (
-              !!box &&
-              box.x >= 8 &&
-              box.x + box.width <= viewport.width - 8 &&
-              box.y >= 80 &&
-              box.y + box.height <= viewport.height - 75
-            );
-          },
-          {
-            message: `${label} should fit between the header and tour controls`,
-          },
-        )
-        .toBeTruthy();
-      await expect
-        .poll(
-          () =>
-            target.evaluate((element) => {
-              const scale =
-                element.getBoundingClientRect().width /
-                (element as HTMLElement).offsetWidth;
-              return Math.min(
-                ...[element, ...element.querySelectorAll('p, h1, h2, h3')]
-                  .filter((text) => text.matches('p, h1, h2, h3'))
-                  .map(
-                    (text) =>
-                      Number.parseFloat(getComputedStyle(text).fontSize) *
-                      scale,
-                  ),
-              );
-            }),
-          {
-            message: `${label} text should remain at least 12 rendered pixels`,
-          },
-        )
-        .toBeGreaterThanOrEqual(12);
+      await expectReadingFrame(target, label, mobile);
+      if (mobile) {
+        if (label === 'Hire me first')
+          expect(await page.locator('.rates-heading h2').innerText()).toMatch(
+            /commitment\s+sets/,
+          );
+        await expect.poll(() => target.getAttribute('aria-hidden')).toBeNull();
+        expect(
+          await target.evaluate((element) => (element as HTMLElement).inert),
+        ).toBe(false);
+        expect(
+          await target.evaluate((element) =>
+            element.closest('[aria-hidden="true"], [inert]'),
+          ),
+        ).toBeNull();
+        for (let other = 1; other < (await chapters.count()); other += 1) {
+          if (other === index) continue;
+          const secondary = await cameraTarget(
+            page,
+            await chapters.nth(other).getAttribute('aria-label'),
+          );
+          await expect(secondary).toHaveAttribute('aria-hidden', 'true');
+          expect(
+            await secondary.evaluate(
+              (element) => (element as HTMLElement).inert,
+            ),
+          ).toBe(true);
+        }
+      }
     }
-    expect(readingHolds).toBeGreaterThanOrEqual(5);
+    expect(readingHolds).toBe(mobile ? 8 : 5);
+    if (mobile) {
+      await enterReadingMode(page);
+      for (let index = 1; index < (await chapters.count()); index += 1) {
+        const target = await cameraTarget(
+          page,
+          await chapters.nth(index).getAttribute('aria-label'),
+        );
+        expect(await target.getAttribute('aria-hidden')).toBeNull();
+        expect(
+          await target.evaluate((element) => (element as HTMLElement).inert),
+        ).toBe(false);
+        expect(
+          await target.evaluate((element) =>
+            element.closest('[aria-hidden="true"], [inert]'),
+          ),
+        ).toBeNull();
+      }
+    }
+    await context.close();
   });
 
 test('reading mode exposes both rates, cash-flow explanation and proposal notes', async ({
@@ -1022,6 +1162,49 @@ for (const route of ['./', 'agreement/'])
       .analyze();
     expect(result.violations).toEqual([]);
   });
+
+test('mobile reading focus keeps inactive groups inaccessible and restores them in normal reading', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('./');
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  await page.getByRole('button', { name: 'Client first', exact: true }).click();
+  await expectReadingFrame(
+    await cameraTarget(page, 'Client first'),
+    'Client first',
+    true,
+  );
+  const hiddenLink = page.locator('.proposal-link');
+  await expect
+    .poll(async () => {
+      const active = await cameraTarget(page, 'Client first');
+      return (
+        (await active.getAttribute('aria-hidden')) === null &&
+        (await hiddenLink.evaluate(
+          (element) => element.closest('[inert]') !== null,
+        ))
+      );
+    })
+    .toBe(true);
+  const result = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
+    .analyze();
+  expect(result.violations).toEqual([]);
+  await page.locator('#reading-mode').focus();
+  await page.keyboard.press('Tab');
+  await expect(page.locator('html')).toHaveAttribute(
+    'data-presentation',
+    'read',
+  );
+  await expect(hiddenLink).toBeFocused();
+  await expect(hiddenLink).toBeInViewport({ ratio: 1 });
+  expect(
+    await hiddenLink.evaluate((element) =>
+      element.closest('[aria-hidden="true"], [inert]'),
+    ),
+  ).toBeNull();
+});
 
 test('skip link sends keyboard users to the proposal content', async ({
   page,

@@ -12,6 +12,7 @@ const failedRequests = [];
 const captures = [];
 const foldSamples = [];
 const journeys = [];
+const transitions = [];
 
 async function hinges(page) {
   return page.locator('.fold-panel').evaluateAll((panels) =>
@@ -37,7 +38,7 @@ async function hinges(page) {
 async function captureViewport(name, viewport, mobile = false) {
   const page = await browser.newPage({
     viewport,
-    deviceScaleFactor: 1,
+    deviceScaleFactor: mobile ? 3 : 1,
     isMobile: mobile,
     hasTouch: mobile,
     recordVideo: { dir: `${output}/videos`, size: viewport },
@@ -140,6 +141,7 @@ async function captureViewport(name, viewport, mobile = false) {
   }
   const stops = page.locator('.chapter-nav button[data-go-to]');
   const count = await stops.count();
+  const readingPositions = [];
   if (count < 4)
     throw new Error(
       `Expected at least four camera chapters; received ${count}`,
@@ -180,20 +182,79 @@ async function captureViewport(name, viewport, mobile = false) {
         const normal = new DOMPoint(0, 0, 1, 0).matrixTransform(
           camera.multiply(hinge),
         );
+        const stage = document
+          .querySelector('.flyer-stage')
+          .getBoundingClientRect();
+        const header = document
+          .querySelector('.site-header')
+          .getBoundingClientRect();
+        const controls = document
+          .querySelector('.tour-controls')
+          .getBoundingClientRect();
+        const viewport = window.visualViewport;
+        const safe = {
+          left: Math.max(stage.left, viewport?.offsetLeft ?? 0) + 24,
+          right:
+            Math.min(
+              stage.right,
+              (viewport?.offsetLeft ?? 0) + (viewport?.width ?? innerWidth),
+            ) - 24,
+          top:
+            Math.max(stage.top, header.bottom, viewport?.offsetTop ?? 0) + 24,
+          bottom:
+            Math.min(
+              stage.bottom,
+              controls.top,
+              (viewport?.offsetTop ?? 0) + (viewport?.height ?? innerHeight),
+            ) - 24,
+        };
+        const text = [];
+        const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+        let node;
+        while ((node = walker.nextNode())) {
+          if (!node.textContent.trim() || !node.parentElement) continue;
+          const style = getComputedStyle(node.parentElement);
+          if (style.display === 'none' || style.visibility === 'hidden')
+            continue;
+          const range = document.createRange();
+          range.selectNodeContents(node);
+          const lines = [...range.getClientRects()];
+          if (!lines.length) continue;
+          text.push({
+            text: node.textContent.trim(),
+            renderedFontPx: Number.parseFloat(style.fontSize) * scale,
+            clipped: lines.some(
+              (line) =>
+                line.left < safe.left ||
+                line.right > safe.right ||
+                line.top < safe.top ||
+                line.bottom > safe.bottom,
+            ),
+          });
+        }
         return {
           left: box.left,
           top: box.top,
           right: box.right,
           bottom: box.bottom,
           frontNormalZ: normal.z / Math.hypot(normal.x, normal.y, normal.z),
-          text: [element, ...element.querySelectorAll('p, h1, h2, h3')]
-            .filter((text) => text.matches('p, h1, h2, h3'))
-            .map((text) => ({
-              text: text.textContent.slice(0, 90),
-              renderedFontPx:
-                Number.parseFloat(getComputedStyle(text).fontSize) * scale,
-            })),
+          widthFraction: box.width / innerWidth,
+          safe,
+          text,
         };
+      });
+      expect(framing.text.length).toBeGreaterThan(0);
+      expect(
+        framing.text.filter((text) => text.clipped),
+        `${name}: ${label} text lines must clear chrome by24px`,
+      ).toEqual([]);
+      expect(
+        Math.min(...framing.text.map((text) => text.renderedFontPx)),
+      ).toBeGreaterThanOrEqual(12);
+      if (mobile) expect(framing.widthFraction).toBeLessThanOrEqual(0.78);
+      readingPositions.push({
+        label,
+        scroll: await page.evaluate(() => scrollY),
       });
     }
     const path = `${output}/${name}-${String(index).padStart(2, '0')}.png`;
@@ -205,6 +266,21 @@ async function captureViewport(name, viewport, mobile = false) {
       transform,
       hinges: await hinges(page),
       framing,
+      path,
+    });
+  }
+  for (let index = 1; index < readingPositions.length; index += 1) {
+    const before = readingPositions[index - 1];
+    const after = readingPositions[index];
+    const midpoint = (before.scroll + after.scroll) / 2;
+    await page.mouse.wheel(0, midpoint - (await page.evaluate(() => scrollY)));
+    await page.waitForTimeout(450);
+    const path = `${output}/${name}-between-${index}.png`;
+    await page.screenshot({ path });
+    transitions.push({
+      viewport: name,
+      from: before.label,
+      to: after.label,
       path,
     });
   }
@@ -236,6 +312,8 @@ try {
   await captureViewport('desktop', { width: 1440, height: 1000 });
   await captureViewport('mobile', { width: 390, height: 844 }, true);
   await captureViewport('small-mobile', { width: 320, height: 740 }, true);
+  await captureViewport('wide-mobile', { width: 430, height: 932 }, true);
+  await captureViewport('short-mobile', { width: 390, height: 664 }, true);
   const result = {
     base,
     capturedAt: new Date().toISOString(),
@@ -245,6 +323,7 @@ try {
     captures,
     foldSamples,
     journeys,
+    transitions,
   };
   await writeFile(
     `${output}/capture.json`,

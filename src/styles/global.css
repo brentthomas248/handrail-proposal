@@ -652,6 +652,18 @@ main {
   font-size: var(--detail);
   color: var(--muted);
 }
+.proposal-followup .proposal-note {
+  margin-top: calc(26 * var(--paper-unit));
+  font-size: var(--detail);
+  line-height: 1.3;
+  color: var(--muted);
+}
+.rate-group > .rate-reason,
+.rate-group > .rate-scope {
+  margin-top: calc(24 * var(--paper-unit));
+  padding-top: calc(22 * var(--paper-unit));
+  border-top: calc(1 * var(--paper-unit)) solid var(--line);
+}
 .proposal-link {
   display: block;
   width: fit-content;
@@ -715,6 +727,11 @@ html[data-presentation='tour'] .partnership-details .proposal-link {
 html[data-presentation='tour'] .proposal-followup {
   grid-column: 1 / -1;
   max-width: calc(650 * var(--paper-unit));
+  margin-top: calc(26 * var(--paper-unit));
+}
+html[data-presentation='tour'] .proposal-followup .proposal-note {
+  margin-top: 0;
+  font-size: var(--body);
 }
 html[data-presentation='tour'] .proposal-followup .proposal-link {
   margin-top: calc(26 * var(--paper-unit));
@@ -1340,8 +1357,8 @@ html[data-presentation='read'] .partnership-details {
   }
   .chapter-nav button {
     width: 32px;
-    min-width: 32px;
-    flex: 0 0 32px;
+    min-width: 28px;
+    flex: 1 1 0;
     min-height: 34px;
     padding: 0;
     border-radius: 50%;
@@ -1565,6 +1582,282 @@ html[data-presentation='read'] .partnership-details {
     font-size: calc(94 * var(--paper-unit));
   }
 }
+/* Phone scenes retain a complete reading group with neighboring paper in view. */
+@media (max-width: 759px) {
+  html[data-presentation='tour'] .proposal-sheet {
+    --body: calc(40 * var(--paper-unit));
+    --detail: calc(36 * var(--paper-unit));
+    --minor: calc(42 * var(--paper-unit));
+    --rate: calc(124 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .panel-face {
+    padding: calc(28 * var(--paper-unit)) calc(32 * var(--paper-unit))
+      calc(24 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .panel-masthead {
+    font-size: calc(24 * var(--paper-unit));
+    padding-bottom: calc(14 * var(--paper-unit));
+    margin-bottom: calc(20 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .panel-colophon {
+    padding-top: calc(20 * var(--paper-unit));
+    font-size: calc(22 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .fold-panel[data-panel='left'] > .panel-face {
+    display: grid;
+    grid-template-columns: calc(540 * var(--paper-unit)) minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto;
+    column-gap: calc(72 * var(--paper-unit));
+    align-content: start;
+  }
+  html[data-presentation='tour'] .fold-panel[data-panel='left'] .panel-masthead,
+  html[data-presentation='tour']
+    .fold-panel[data-panel='left']
+    .panel-colophon {
+    grid-column: 1 / -1;
+  }
+  html[data-presentation='tour']
+    .fold-panel[data-panel='left']
+    .panel-colophon {
+    grid-row: 4;
+    align-self: end;
+  }
+  html[data-presentation='tour'] .flyer-cover {
+    grid-column: 1;
+    grid-row: 2;
+    width: auto;
+    max-width: none;
+  }
+  html[data-presentation='tour'] .cover-intro {
+    font-size: calc(38 * var(--paper-unit));
+    line-height: 1.2;
+    margin-bottom: calc(24 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .cover-description {
+    font-size: var(--body);
+    line-height: 1.25;
+  }
+  html[data-presentation='tour'] .flyer-partnership {
+    display: contents;
+  }
+  html[data-presentation='tour'] .partnership-story {
+    grid-column: 2;
+    grid-row: 2 / 4;
+    align-self: start;
+  }
+  html[data-presentation='tour'] .partnership-lead > p {
+    font-size: calc(40 * var(--paper-unit));
+    line-height: 1.2;
+    margin-bottom: calc(20 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .partnership-lead h2 {
+    font-size: calc(64 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .partnership-details {
+    display: block;
+    margin-top: calc(28 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .partnership-details > div + div {
+    margin-top: calc(32 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .partnership-details h3 {
+    font-size: calc(44 * var(--paper-unit));
+    line-height: 1.12;
+  }
+  html[data-presentation='tour'] .partnership-details p {
+    font-size: calc(44 * var(--paper-unit));
+    line-height: 1.22;
+  }
+  html[data-presentation='tour'] .proposal-followup {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: start;
+    max-width: none;
+    margin-top: calc(72 * var(--paper-unit));
+    padding-top: calc(28 * var(--paper-unit));
+    border-top: calc(1 * var(--paper-unit)) solid var(--line);
+  }
+  html[data-presentation='tour'] .proposal-followup .proposal-note {
+    font-size: var(--body);
+    line-height: 1.22;
+  }
+  html[data-presentation='tour'] .proposal-followup .proposal-link {
+    font-size: calc(38 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .flyer-cash {
+    gap: calc(72 * var(--paper-unit));
+    align-items: start;
+  }
+  html[data-presentation='tour'] .cash-intro,
+  html[data-presentation='tour'] .receipt-row span,
+  html[data-presentation='tour'] .cash-receipt > p,
+  html[data-presentation='tour'] .installments p,
+  html[data-presentation='tour'] .cash-closing {
+    font-size: var(--body);
+    line-height: 1.22;
+  }
+  html[data-presentation='tour'] .receipt-track {
+    height: calc(68 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .cash-receipt > p {
+    margin-top: calc(16 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .installments {
+    margin-top: calc(30 * var(--paper-unit));
+    padding-top: calc(22 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .installment-bars {
+    height: calc(44 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .cash-closing {
+    margin-top: calc(32 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .receipt-row span {
+    max-width: calc(260 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .receipt-balance {
+    font-size: var(--body);
+  }
+  html[data-presentation='tour'] .rates-heading {
+    margin-bottom: calc(12 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .rates-heading h2 {
+    font-size: calc(54 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .rates-heading br {
+    display: none;
+  }
+  html[data-presentation='tour'] .deal-paths {
+    gap: calc(72 * var(--paper-unit));
+    align-items: start;
+  }
+  html[data-presentation='tour'] .deal-path {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: calc(24 * var(--paper-unit));
+    align-items: start;
+  }
+  html[data-presentation='tour'] .deal-path-label,
+  html[data-presentation='tour'] .deal-description,
+  html[data-presentation='tour'] .deal-path-note {
+    grid-column: 1 / -1;
+  }
+  html[data-presentation='tour'] .deal-rate {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  html[data-presentation='tour'] .deal-rate-label {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  html[data-presentation='tour'] .deal-path-label {
+    font-size: calc(42 * var(--paper-unit));
+    margin-bottom: calc(14 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .deal-rate-label,
+  html[data-presentation='tour'] .deal-recurring span,
+  html[data-presentation='tour'] .deal-path-note {
+    font-size: var(--detail);
+    line-height: 1.2;
+  }
+  html[data-presentation='tour'] .deal-rate-label,
+  html[data-presentation='tour'] .deal-description,
+  html[data-presentation='tour'] .deal-path-note {
+    margin-top: calc(12 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .deal-description {
+    font-size: var(--body);
+    line-height: 1.2;
+  }
+  html[data-presentation='tour'] .deal-recurring {
+    grid-column: 2;
+    grid-row: 2 / 4;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  html[data-presentation='tour'] .deal-recurring strong {
+    display: block;
+    font-size: calc(68 * var(--paper-unit));
+    line-height: 1;
+  }
+  html[data-presentation='tour'] .deal-recurring span {
+    display: block;
+    margin-top: calc(16 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .rate-group > .rate-reason,
+  html[data-presentation='tour'] .rate-group > .rate-scope {
+    margin-top: calc(12 * var(--paper-unit));
+    padding-top: calc(12 * var(--paper-unit));
+    font-size: var(--body);
+    line-height: 1.2;
+  }
+  html[data-presentation='tour'] .flyer-window {
+    width: calc(690 * var(--paper-unit));
+    margin-top: calc(72 * var(--paper-unit));
+    margin-bottom: 0;
+    padding-top: calc(14 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .window-title > strong {
+    font-size: calc(96 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .window-title h2 {
+    font-size: calc(44 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .window-steps {
+    display: block;
+    margin-top: calc(18 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .window-steps li + li {
+    margin-top: calc(18 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .window-steps li {
+    font-size: var(--body);
+  }
+  html[data-presentation='tour'] .window-steps strong {
+    font-size: var(--body);
+    line-height: 1.16;
+  }
+  html[data-presentation='tour'] .window-steps p {
+    font-size: var(--body);
+    line-height: 1.16;
+    margin-top: calc(6 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .panel-face {
+    --secondary-ink: color-mix(in srgb, var(--ink) 30%, var(--paper));
+  }
+  html[data-presentation='tour'] .cash-face {
+    --secondary-ink: color-mix(in srgb, white 30%, var(--accent));
+  }
+  html[data-presentation='tour']
+    .proposal-sheet[data-reading-focus]
+    :is(
+      [data-reading-secondary],
+      .panel-masthead,
+      .panel-colophon,
+      .rates-heading
+    ),
+  html[data-presentation='tour']
+    .proposal-sheet[data-reading-focus]
+    :is(
+      [data-reading-secondary],
+      .panel-masthead,
+      .panel-colophon,
+      .rates-heading
+    )
+    :is(h1, h2, h3, p, a, strong, span) {
+    color: var(--secondary-ink);
+  }
+  html[data-presentation='tour']
+    .proposal-sheet[data-reading-focus]
+    [data-reading-secondary]
+    :is(.receipt-track span, .receipt-track i, .installment-bars i) {
+    background: var(--secondary-ink);
+    border-color: var(--secondary-ink);
+  }
+}
+
 /* Smaller intrinsic surfaces keep high-density displays within the paper raster budget. */
 @media (min-resolution: 2dppx) {
   html[data-presentation='tour'] .proposal-sheet {

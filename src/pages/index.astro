@@ -64,36 +64,36 @@ const base = import.meta.env.BASE_URL;
                 data-camera-order="5"
               >
                 <div
-                  class="partnership-lead"
+                  class="partnership-story"
                   data-camera-mobile="Grow together"
                 >
-                  <p>{flyerCopy.closing.eyebrow}</p>
-                  <h2>
-                    {flyerCopy.closing.headlineLines.map((line) => (
-                      <span>{line}</span>
-                    ))}
-                  </h2>
+                  <div class="partnership-lead">
+                    <p>{flyerCopy.closing.eyebrow}</p>
+                    <h2>
+                      {flyerCopy.closing.headlineLines.map((line) => (
+                        <span>{line}</span>
+                      ))}
+                    </h2>
+                  </div>
+                  <div class="partnership-details">
+                    <div>
+                      <h3>{flyerCopy.closing.startingPointTitle}</h3>
+                      <p>{flyerCopy.closing.startingPointBody}</p>
+                    </div>
+                    <div>
+                      <h3>{flyerCopy.closing.partnershipTitle}</h3>
+                      <p>{flyerCopy.closing.partnershipBody}</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="partnership-details">
-                  <div data-camera-mobile="The starting point">
-                    <h3>{flyerCopy.closing.startingPointTitle}</h3>
-                    <p>{flyerCopy.closing.startingPointBody}</p>
-                  </div>
-                  <div data-camera-mobile="Room to contribute">
-                    <h3>{flyerCopy.closing.partnershipTitle}</h3>
-                    <p>{flyerCopy.closing.partnershipBody}</p>
-                  </div>
-                  <div
-                    class="proposal-followup"
-                    data-camera-mobile="A proposal to discuss"
-                  >
-                    <p class="proposal-note">
-                      {flyerCopy.closing.proposalNote}
-                    </p>
-                    <a class="proposal-link" href={`${base}agreement/`}>
-                      Read the proposal notes
-                    </a>
-                  </div>
+                <div
+                  class="proposal-followup"
+                  data-camera-mobile="A proposal to discuss"
+                >
+                  <p class="proposal-note">{flyerCopy.closing.proposalNote}</p>
+                  <a class="proposal-link" href={`${base}agreement/`}>
+                    Read the proposal notes
+                  </a>
                 </div>
               </section>
               <div class="panel-colophon">
@@ -238,36 +238,27 @@ const base = import.meta.env.BASE_URL;
               >
                 <div class="rates-heading">
                   <h2>
-                    The commitment
-                    <br />
+                    The commitment <br />
                     sets the rate.
                   </h2>
                 </div>
                 <div class="deal-paths">
-                  <div data-camera-mobile="Hire me first">
+                  <div class="rate-group" data-camera-mobile="Hire me first">
                     <DealPath variant="employment" />
+                    <p class="rate-scope">
+                      The selected rate applies to all my future credited sales.
+                      Both paths: no base salary, with an employment benefits
+                      package.
+                    </p>
                   </div>
-                  <div data-camera-mobile="Client first">
+                  <div class="rate-group" data-camera-mobile="Client first">
                     <DealPath variant="client" />
+                    <p class="rate-reason">
+                      If I bring the client that makes hiring possible, the
+                      higher rate reflects the business I created and the risk I
+                      took to create it.
+                    </p>
                   </div>
-                </div>
-                <div class="rate-rationale">
-                  <p
-                    class="rate-reason"
-                    data-camera-mobile="Why the difference"
-                  >
-                    If I bring the client that makes hiring possible, the higher
-                    rate reflects the business I created and the risk I took to
-                    create it.
-                  </p>
-                  <p
-                    class="rate-scope"
-                    data-camera-mobile="The ongoing structure"
-                  >
-                    The selected rate applies to all my future credited sales.
-                    Both paths: no base salary, with an employment benefits
-                    package.
-                  </p>
                 </div>
               </section>
               <section
@@ -276,7 +267,7 @@ const base = import.meta.env.BASE_URL;
                 data-camera-stop="The window"
                 data-camera-order="4"
               >
-                <div class="window-title" data-camera-mobile="The window">
+                <div class="window-title">
                   <strong>{proposal.activationDays}</strong>
                   <h2>
                     days
@@ -285,21 +276,21 @@ const base = import.meta.env.BASE_URL;
                   </h2>
                 </div>
                 <ol class="window-steps">
-                  <li data-camera-mobile="Agree on the start">
+                  <li>
                     <strong>Align on the starting point.</strong>
                     <p>
                       Agree on the structure and what qualifies as the first
                       client.
                     </p>
                   </li>
-                  <li data-camera-mobile="Either path can start">
+                  <li>
                     <strong>Either path can start.</strong>
                     <p>
                       Handrail can bring me on during the window, or I can bring
                       the paying client first.
                     </p>
                   </li>
-                  <li data-camera-mobile="A clear stopping point">
+                  <li>
                     <strong>A clear stopping point.</strong>
                     <p>
                       If there is no client and no hire within 90 days, the
