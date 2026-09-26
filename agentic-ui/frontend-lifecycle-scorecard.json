@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T20:47:48.590070+00:00",
+  "generatedAt": "2026-09-26T21:49:10.878656+00:00",
   "mode": "full-lifecycle",
   "sections": [
     {
@@ -53,7 +53,7 @@
       "status": "in-progress",
       "evidence": ["agentic-ui/accessibility-evidence.json"],
       "notes": [
-        "19 browser tests include two passing route-level axe scans and keyboard/reduced-motion paths. Manual VoiceOver and physical-device review remain unverified."
+        "29 current browser checks include route-level axe, keyboard restoration, reduced motion and recovery navigation. Manual VoiceOver and physical-device stability remain unverified."
       ]
     },
     {
@@ -61,10 +61,10 @@
       "status": "pass",
       "evidence": [
         "tests/e2e/proposal.spec.ts",
-        "qa-artifacts/trifold/capture.json"
+        "qa-artifacts/wide-paper-final/capture.json"
       ],
       "notes": [
-        "19 browser checks passed. All 24 chapter views and 15 actual-scroll samples were captured; implementation and browser reviewers inspected desktop/mobile states. Both wings visibly move and reverse; reading faces are flat, framed and at least 14.05px in the recorded text samples."
+        "38 current chapter views and15 fold samples captured across1440/390/320px; broader paper preserves readable phone subregions. Recorded minimum text12.251px. Physical iPhone crash remediation still needs actual-device retry."
       ]
     },
     {

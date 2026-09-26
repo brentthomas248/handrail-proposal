@@ -103,7 +103,14 @@ async function captureViewport(name, viewport, mobile = false) {
   });
   await page.mouse.wheel(0, -travel * 2);
   await page.waitForTimeout(1400);
-  for (const progress of [0, 0.04, 0.08, 0.13, 0.2]) {
+  const navigation = page.locator('.chapter-nav button[data-go-to]');
+  await navigation.nth(1).click();
+  await page.waitForTimeout(1400);
+  const firstReadingProgress = (await page.evaluate(() => scrollY)) / travel;
+  await navigation.nth(0).click();
+  await page.waitForTimeout(1400);
+  for (const fraction of [0, 0.18, 0.34, 0.5, 0.6]) {
+    const progress = firstReadingProgress * fraction;
     if (progress) {
       const currentY = await page.evaluate(() => scrollY);
       await page.mouse.wheel(0, Math.round(travel * progress - currentY));
@@ -153,9 +160,13 @@ async function captureViewport(name, viewport, mobile = false) {
       });
     const label = await stops.nth(index).getAttribute('aria-label');
     let framing = null;
-    const target = page.locator(
-      `[data-camera-stop=${JSON.stringify(label)}], [data-camera-mobile=${JSON.stringify(label)}]`,
+    const mobilePart = page.locator(
+      `[data-camera-mobile=${JSON.stringify(label)}]`,
     );
+    const target =
+      viewport.width < 760 && (await mobilePart.count())
+        ? mobilePart
+        : page.locator(`[data-camera-stop=${JSON.stringify(label)}]`);
     if (await target.count()) {
       await expect(target).toBeInViewport({ ratio: 0.98 });
       framing = await target.evaluate((element) => {
@@ -175,11 +186,13 @@ async function captureViewport(name, viewport, mobile = false) {
           right: box.right,
           bottom: box.bottom,
           frontNormalZ: normal.z / Math.hypot(normal.x, normal.y, normal.z),
-          text: [...element.querySelectorAll('p, h1, h2, h3')].map((text) => ({
-            text: text.textContent.slice(0, 90),
-            renderedFontPx:
-              Number.parseFloat(getComputedStyle(text).fontSize) * scale,
-          })),
+          text: [element, ...element.querySelectorAll('p, h1, h2, h3')]
+            .filter((text) => text.matches('p, h1, h2, h3'))
+            .map((text) => ({
+              text: text.textContent.slice(0, 90),
+              renderedFontPx:
+                Number.parseFloat(getComputedStyle(text).fontSize) * scale,
+            })),
         };
       });
     }

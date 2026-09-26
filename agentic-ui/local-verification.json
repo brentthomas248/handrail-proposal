@@ -1,19 +1,19 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T21:27:25.346338+00:00",
-  "scope": "Continuous Z-fold, tactile paper and stable input/lifecycle; approved local workflow",
+  "generatedAt": "2026-09-26T21:49:10.878656+00:00",
+  "scope": "Wider Z-fold and physical-iPhone crash remediation; approved local workflow",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": true,
+  "deployed": false,
   "checks": [
     {
       "command": "pnpm check",
-      "result": "24 files, zero errors/warnings/hints",
+      "result": "24 files; zero errors, warnings or hints",
       "exitCode": 0
     },
     {
       "command": "pnpm test",
-      "result": "11 content/geometry/interpolation/damping checks passed",
+      "result": "11 content, geometry and motion unit checks passed",
       "exitCode": 0
     },
     {
@@ -23,48 +23,37 @@
     },
     {
       "command": "pnpm contract:check && pnpm pdf:check",
-      "result": "Markdown and unchanged seven-section/15-paragraph PDF match canonical content",
+      "result": "Canonical Markdown and unchanged complete PDF match",
       "exitCode": 0
     },
     {
       "command": "pnpm test:e2e",
-      "result": "27 Chromium checks passed in 20.8s; gesture, resize, cancellation and delayed/failed initialization",
+      "result": "29 Chromium checks passed in 31.6s, including DPR3 compositing budget, recovery navigation and keyboard restoration",
       "exitCode": 0
     },
     {
-      "command": "CAPTURE_OUTPUT=qa-artifacts/z-fold-final pnpm capture",
-      "result": "24 chapter images,15 fold samples,three continuous/reversal journey recordings; no browser errors/warnings/failed requests",
+      "command": "CAPTURE_OUTPUT=qa-artifacts/wide-paper-final pnpm capture",
+      "result": "38 chapter images,15 fold samples,3 journey videos; no browser errors, warnings or failed requests; minimum captured text12.251px",
       "exitCode": 0
     },
     {
       "command": "pnpm build-storybook && pnpm test:components",
-      "result": "Workshop built, three checks passed,zero axe violations; workshop-only chunk warning",
-      "exitCode": 0
-    },
-    {
-      "command": "pnpm performance",
-      "result": "Mobile performance 99,desktop 100; other categories 100; script transfer 31,601 bytes",
+      "result": "Workshop built;3 component checks,zero axe violations; workshop-only bundle-size warning",
       "exitCode": 0
     },
     {
       "command": "pnpm format:check",
-      "result": "All checked files conform",
-      "exitCode": 0
-    },
-    {
-      "command": "WEBKIT_OUTPUT=qa-artifacts/z-fold-webkit node scripts/verify-webkit.mjs",
-      "result": "21 reading positions pass geometry/readability; native desktop paint reviewed; diagnostic limitations explicitly retained",
+      "result": "Passed",
       "exitCode": 0
     }
   ],
   "evidenceNotes": [
-    "Independent continuous-input and cold-load evidence is in docs/motion-remediation.md.",
-    "Root and independent reviewers inspected actual paper, shadow, folds and text; three full-journey recordings remain local.",
-    "27 Chromium checks pass locally and against the final deployed release (21.7s hosted).",
-    "WebKit supplementary geometry and native desktop review pass; native mobile/physical iOS remain unverified.",
-    "No PDF regeneration needed; source content and notes layout are unchanged. Downloaded public PDF matches all seven sections and 15 paragraphs.",
-    "Eight public HTML/assets including motion code and paper texture match dist byte-for-byte.",
-    "Raw screenshots, frame records and videos remain ignored under qa-artifacts/."
+    "Physical iPhone browser process crash was reported after several scrolls; actual-device retry remains pending.",
+    "Layer-budget estimates and sustained-input measurements are recorded in agentic-ui/iphone-rendering-verification.json. They are not measured iPhone memory.",
+    "Full current source/verification details are in docs/iphone-crash-remediation.md.",
+    "Desktop Chromium and supplementary WebKit do not establish physical iOS stability.",
+    "Current publication proof is recorded separately after deployment.",
+    "Page-load Lighthouse measurements from the previous revision are historical and were not rerun for this rendering fix."
   ],
   "limitations": [
     "agentic-ui/blockers.json",

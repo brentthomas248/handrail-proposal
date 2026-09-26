@@ -47,7 +47,12 @@ const base = import.meta.env.BASE_URL;
     <title>{title}</title>
     {!document && <script is:inline>
       try {
+        const requestedRead =
+          new URLSearchParams(location.search).get('view') === 'read';
+        if (requestedRead)
+          localStorage.setItem('proposal-presentation', 'read');
         if (
+          !requestedRead &&
           !matchMedia('(prefers-reduced-motion: reduce)').matches &&
           localStorage.getItem('proposal-presentation') !== 'read'
         ) {

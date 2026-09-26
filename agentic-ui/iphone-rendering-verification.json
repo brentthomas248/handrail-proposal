@@ -1,0 +1,138 @@
+{
+  "checkedAt": "2026-09-26T21:48:47.606275+00:00",
+  "status": "Desktop-emulated regression verified; physical iPhone confirmation pending",
+  "trigger": "User reported a repeated browser-page crash after several scrolls on a physical iPhone.",
+  "hypothesis": "Large composited paper surfaces and separately promoted shading layers plausibly contributed to rendering pressure. The physical crash cause has not been proven.",
+  "measurement": {
+    "engine": "Playwright Chromium153, software compositing on the verification host",
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 3
+    },
+    "formula": "layer width \u00d7 layer height \u00d7 DPR\u00b2 \u00d74 / 1048576",
+    "units": "MiB of theoretical full-resolution RGBA surface area, not measured resident GPU memory",
+    "mappedPoses": [
+      "Closed",
+      "Opening",
+      "The beginning",
+      "As money arrives",
+      "Client first",
+      "Grow together"
+    ]
+  },
+  "baseline": {
+    "compositedLayers": 31,
+    "drawnLayers": 24,
+    "drawnPaperFaces": 6,
+    "promotedPaperOverlays": 12,
+    "compositedFaceDimensionsCssPx": [760, 2467],
+    "largestPaperDeviceEdgePx": 7401,
+    "paperFaceEstimateMiB": 386.222,
+    "paperOverlayEstimateMiB": 525.841,
+    "paperAndOverlayEstimateMiB": 912.062,
+    "allLayerEstimateMiBIncludingScrollRoot": 1022.567
+  },
+  "candidate": {
+    "compositedLayers": 17,
+    "drawnLayers": 9,
+    "drawnPaperFaces": 3,
+    "promotedPaperOverlays": 0,
+    "compositedFaceDimensionsCssPx": [600, 852],
+    "largestPaperDeviceEdgePx": 2556,
+    "paperFaceEstimateMiB": 52.652,
+    "paperOverlayEstimateMiB": 0,
+    "paperAndOverlayEstimateMiB": 52.652,
+    "allLayerEstimateMiBIncludingScrollRoot": 220.892
+  },
+  "projectBudgets": {
+    "maximumDrawnPaperFaces": 4,
+    "maximumPromotedPaperOverlays": 0,
+    "maximumPaperEstimateMiB": 64,
+    "maximumPaperDeviceEdgePx": 4096,
+    "minimumReadingTextCssPx": 12,
+    "qualification": "Conservative project regression budgets; not universal Safari or iOS safety limits."
+  },
+  "regression": {
+    "test": "tests/e2e/proposal.spec.ts: high-density mobile paper stays within its compositing budget through zooms and reversals",
+    "baseline": "Fails: six drawn paper faces exceed the project budget.",
+    "candidate": "All budget assertions passed; includes every mobile reading target and repeated reversals.",
+    "recovery": "Explicit ?view=read overrides a saved tour preference and preserves normal reading through notes navigation."
+  },
+  "repeatedScroll": {
+    "cycles": 12,
+    "wheelInputs": 336,
+    "layerObservations": 714,
+    "baselinePeakLayers": 31,
+    "candidatePeakLayers": 17,
+    "candidatePeakDrawnLayers": 9,
+    "browserErrors": [],
+    "heapBeforeMiB": 2.317,
+    "heapAfterMiB": 3.194,
+    "desktopRafTiming": {
+      "count": 774,
+      "p95Ms": 16.799999999999272,
+      "maxMs": 16.80000000000109,
+      "over50Ms": 0
+    }
+  },
+  "webkitGeometry": {
+    "passed": true,
+    "viewports": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "dpr": 1,
+        "readingPositions": 5,
+        "minimumReadingTextCssPx": 22.051
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "dpr": 3,
+        "readingPositions": 15,
+        "minimumReadingTextCssPx": 15.29
+      },
+      {
+        "width": 320,
+        "height": 740,
+        "dpr": 3,
+        "readingPositions": 15,
+        "minimumReadingTextCssPx": 12.249
+      }
+    ],
+    "browserErrors": [],
+    "failedRequests": [],
+    "unusedFontPreloadWarnings": 3
+  },
+  "limitations": [
+    "The desktop emulation did not reproduce the physical iPhone browser crash.",
+    "Layer dimensions and surface-area estimates do not measure actual allocation, tiling, cache residency or peak iOS memory.",
+    "Desktop RAF timing does not prove that every frame was painted or predict iPhone frame rate.",
+    "WebKit screenshot, IntersectionObserver, transparent-ancestor hit-testing and headful viewport limitations remain documented in webkit-verification.json."
+  ],
+  "officialSources": [
+    {
+      "title": "WebKit: Layers Tab",
+      "url": "https://webkit.org/web-inspector/layers-tab/",
+      "relevance": "Explains the rendering-performance versus memory trade-off of composited layers."
+    },
+    {
+      "title": "WebKit: Memory Debugging with Web Inspector",
+      "url": "https://webkit.org/blog/6425/memory-debugging-with-web-inspector/",
+      "relevance": "Distinguishes graphics-layer memory from JavaScript heap memory."
+    },
+    {
+      "title": "Chrome DevTools Protocol: LayerTree",
+      "url": "https://chromedevtools.github.io/devtools-protocol/tot/LayerTree/",
+      "relevance": "Defines layer dimensions, drawsContent and compositing reasons used by the probe."
+    }
+  ],
+  "localEvidence": [
+    "qa-artifacts/iphone-compositing/baseline.json",
+    "qa-artifacts/iphone-compositing/candidate.json",
+    "qa-artifacts/iphone-compositing/reverse-baseline.json",
+    "qa-artifacts/iphone-compositing/reverse-candidate.json",
+    "qa-artifacts/iphone-compositing/webkit/verification.json"
+  ]
+}

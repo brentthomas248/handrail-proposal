@@ -41,9 +41,14 @@ function mountTour(
   if (!left || !right) return;
   const wings = { left, right };
   const panels = [...sheet.querySelectorAll<HTMLElement>('.fold-panel')];
-  const polygons = [
-    ...stage.querySelectorAll<SVGPolygonElement>('.paper-shadow polygon'),
+  const shadowPads = [
+    ...stage.querySelectorAll<SVGEllipseElement>('.paper-shadow ellipse'),
   ];
+  const faces = panels.map((panel) => ({
+    front: panel.querySelector<HTMLElement>('.panel-face')!,
+    back: panel.querySelector<HTMLElement>('.panel-back')!,
+  }));
+  const lighting = panels.map(() => new Map<string, string>());
   const shadow = stage.querySelector<SVGSVGElement>('.paper-shadow');
   const nav = document.querySelector<HTMLElement>('.chapter-nav');
   const caption = document.querySelector<HTMLElement>('#tour-caption');
@@ -273,47 +278,77 @@ function mountTour(
         pose,
       );
       const incidence = normal.x * -0.38 + normal.y * -0.48 + normal.z * 0.79;
-      panels[i].style.setProperty(
-        '--front-shade',
-        (0.035 + 0.2 * (1 - Math.max(0, incidence))).toFixed(3),
-      );
-      panels[i].style.setProperty(
-        '--back-shade',
-        (0.035 + 0.2 * (1 - Math.max(0, -incidence))).toFixed(3),
-      );
-      panels[i].style.setProperty(
-        '--crease-opacity',
-        (
+      // Lighting is baked into the paper paint, so avoid invalidating it for
+      // imperceptible changes or stationary camera frames.
+      const shades: Record<string, number> = {
+        '--front-shade': 0.035 + 0.2 * (1 - Math.max(0, incidence)),
+        '--back-shade': 0.035 + 0.2 * (1 - Math.max(0, -incidence)),
+        '--crease-opacity':
           0.06 +
-          0.15 * Math.sin((Math.min(90, Math.abs(angle)) * Math.PI) / 180)
-        ).toFixed(3),
+          0.15 * Math.sin((Math.min(90, Math.abs(angle)) * Math.PI) / 180),
+      };
+      for (const [property, value] of Object.entries(shades)) {
+        const paintedValue = value.toFixed(2);
+        if (lighting[i].get(property) !== paintedValue) {
+          panels[i].style.setProperty(property, paintedValue);
+          lighting[i].set(property, paintedValue);
+        }
+      }
+      // Release the opposite backing texture. Use the actual perspective
+      // viewpoint, since a screen-space normal alone can cull too early.
+      const panel = i === 0 ? 'left' : i === 2 ? 'right' : 'center';
+      const center = viewPoint(
+        foldPoint(
+          {
+            x: (i + 0.5) * panelWidth,
+            y: paperHeight / 2,
+            z: 0,
+          },
+          panel,
+          panelWidth,
+          angle,
+        ),
+        pose,
       );
+      const facing =
+        normal.x * -center.x +
+        normal.y * (height / 2 - cameraY - center.y) +
+        normal.z * (perspective - center.z);
+      const frontDisplay = facing < -1 ? 'none' : '';
+      const backDisplay = facing > 1 ? 'none' : '';
+      if (faces[i].front.style.display !== frontDisplay)
+        faces[i].front.style.display = frontDisplay;
+      if (faces[i].back.style.display !== backDisplay)
+        faces[i].back.style.display = backDisplay;
     }
     if (shadow) {
       const shadowFaces = foldedCorners(pose);
       const backingDepth =
-        Math.min(...shadowFaces.flat().map((point) => point.z)) - 120;
-      polygons.forEach((polygon, i) => {
-        polygon.setAttribute(
-          'points',
-          shadowFaces[i]
-            .map((point) => {
-              // Parallel rays from an upper-left soft source reach a backing plane.
-              const distance = point.z - backingDepth;
-              const screen = project(
-                {
-                  x: point.x + distance * 0.22,
-                  y: point.y + distance * 0.28,
-                  z: backingDepth,
-                },
-                pose,
-              );
-              return `${screen.x.toFixed(1)},${screen.y.toFixed(1)}`;
-            })
-            .join(' '),
-        );
+        Math.min(...shadowFaces.flat().map((point) => point.z)) - 60;
+      shadowPads.forEach((pad, i) => {
+        const points = shadowFaces[i].map((point) => {
+          const distance = point.z - backingDepth;
+          return project(
+            {
+              x: point.x + distance * 0.22,
+              y: point.y + distance * 0.28,
+              z: backingDepth,
+            },
+            pose,
+          );
+        });
+        const xs = points.map((point) => point.x);
+        const ys = points.map((point) => point.y);
+        const minX = Math.min(...xs),
+          maxX = Math.max(...xs);
+        const minY = Math.min(...ys),
+          maxY = Math.max(...ys);
+        pad.setAttribute('cx', String((minX + maxX) / 2));
+        pad.setAttribute('cy', String((minY + maxY) / 2 + 12));
+        pad.setAttribute('rx', String((maxX - minX) * 0.67));
+        pad.setAttribute('ry', String((maxY - minY) * 0.62));
       });
-      shadow.style.opacity = String(Math.max(0.025, 0.15 - pose.scale * 0.08));
+      shadow.style.opacity = String(Math.max(0.025, 0.2 - pose.scale * 0.08));
     }
     let index = 0;
     for (let i = 1; i < stops.length; i += 1)
@@ -323,9 +358,18 @@ function mountTour(
       nav
         ?.querySelectorAll<HTMLButtonElement>('[data-go-to]')
         .forEach((button) => {
-          if (Number(button.dataset.goTo) === index)
+          if (Number(button.dataset.goTo) === index) {
             button.setAttribute('aria-current', 'step');
-          else button.removeAttribute('aria-current');
+            if (nav && nav.scrollWidth > nav.clientWidth)
+              nav.scrollTo({
+                left:
+                  nav.scrollLeft +
+                  button.getBoundingClientRect().left -
+                  nav.getBoundingClientRect().left -
+                  (nav.clientWidth - button.offsetWidth) / 2,
+                behavior: 'smooth',
+              });
+          } else button.removeAttribute('aria-current');
         });
       if (current) current.textContent = String(index).padStart(2, '0');
     }
@@ -422,7 +466,10 @@ function mountTour(
     sheet.style.removeProperty('transform-origin');
     sheet.style.removeProperty('--panel-height');
     stage.style.removeProperty('--stage-height');
-    panels.forEach((panel) => {
+    panels.forEach((panel, i) => {
+      faces[i].front.style.removeProperty('display');
+      faces[i].back.style.removeProperty('display');
+      lighting[i].clear();
       panel.style.removeProperty('transform');
       for (const property of [
         '--front-shade',
@@ -601,6 +648,14 @@ function mountTour(
   window.addEventListener('touchend', releaseTouch, { passive: true });
   window.addEventListener('touchcancel', releaseTouch, { passive: true });
   window.addEventListener('keydown', (event) => {
+    // Restore culled paper content before native tab traversal enters it.
+    if (
+      event.key === 'Tab' &&
+      root.dataset.presentation === 'tour' &&
+      ((!event.shiftKey && document.activeElement === mode) ||
+        (event.shiftKey && document.activeElement === nav?.firstElementChild))
+    )
+      setMode(true, false);
     if (
       [
         'ArrowDown',
@@ -629,6 +684,9 @@ function mountTour(
       buildTour(true);
     };
     resizeTimer = setTimeout(apply, 180);
+  });
+  matchMedia('(min-resolution: 2dppx)').addEventListener('change', () => {
+    buildTour(true);
   });
   window.addEventListener('pageshow', (event) => {
     if (event.persisted && root.dataset.presentation === 'tour')

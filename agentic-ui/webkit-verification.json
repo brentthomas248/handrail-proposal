@@ -1,6 +1,6 @@
 {
-  "checkedAt": "2026-09-26T21:19:04.486Z",
-  "scope": "Supplementary Z-fold WebKit geometry and native desktop rendering verification",
+  "checkedAt": "2026-09-26T21:46:53.719Z",
+  "scope": "Supplementary geometry/readability atDPR3 for wider paper; not physical iOS stability verification",
   "engine": {
     "name": "Playwright WebKit",
     "version": "26.6",
@@ -9,7 +9,7 @@
   "behavior": {
     "passed": true,
     "viewports": ["1440x1000", "390x844", "320x740"],
-    "readingHoldsVerified": 21,
+    "readingHoldsVerified": 35,
     "checks": [
       "Both hinges change with scrolling, reverse, and place their free edges on opposite sides of the center panel",
       "Introductory folding stays inside the visible stage",
@@ -18,8 +18,12 @@
     ],
     "mobileInput": "Programmatic document scrolling; Playwright does not support mouse-wheel input in mobile WebKit",
     "script": "scripts/verify-webkit.mjs",
-    "receipt": "qa-artifacts/z-fold-webkit/verification.json",
-    "minimumRenderedTextPx": 13.480924571644175
+    "receipt": "qa-artifacts/iphone-compositing/webkit/verification.json",
+    "minimumRenderedTextPx": 12.2495,
+    "deviceScaleFactors": {
+      "desktop": 1,
+      "phone": 3
+    }
   },
   "nativeWindow": {
     "passed": true,
@@ -29,7 +33,8 @@
       "Opened Z-fold: alternating hinges, normally oriented faces and matte texture",
       "The two paths: both complete rate columns, rationale, benefits and future-sales copy"
     ],
-    "scope": "Actual desktop native window; headful viewport emulation did not produce a phone layout"
+    "scope": "Historical native desktop rendering evidence for previous release; not rerun for the wider-paper revision.",
+    "currentRevision": false
   },
   "protocolScreenshots": {
     "reliableForBackfaceVisualAcceptance": false,
@@ -49,7 +54,7 @@
   "browserErrors": [],
   "failedRequests": [],
   "physicalIOSVerified": false,
-  "relationshipToChromium": "Separate supplementary evidence; this does not represent the complete 25-test Chromium suite running in WebKit.",
+  "relationshipToChromium": "35 supplementary reading positions at three sizes; separately from the29 current Chromium browser checks.",
   "intersectionObserver": {
     "reliableForNested3DFraming": false,
     "finding": "Nested 3D IntersectionObserver reported 0.593 for a fully framed cover. Verified by matching Chromium/WebKit bounds and a native-window screenshot. This run uses full bounds and composed face normals; Chromium keeps IntersectionObserver assertions.",
@@ -60,5 +65,9 @@
     "finding": "Right-wing targets can return the transparent ARTICLE.proposal-sheet ancestor from elementFromPoint in both Chromium and WebKit. Grid counts are diagnostics, not an occlusion or clickability pass; native-window review is required for actual paint."
   },
   "nativeMobileVerified": false,
-  "headfulViewportLimitation": "Headful WebKit retained desktop layout despite a reported 390px configured viewport. Headless mobile geometry is covered separately; native mobile and physical iOS remain unverified."
+  "headfulViewportLimitation": "Headful WebKit retained desktop layout despite a reported 390px configured viewport. Headless mobile geometry is covered separately; native mobile and physical iOS remain unverified.",
+  "notes": [
+    "The reported physical iPhone crash requires actual-device retry.",
+    "Updated material/culling is checked through rendered Chromium captures and supplementary WebKit geometry. Previous native-window review remains historical."
+  ]
 }

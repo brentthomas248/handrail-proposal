@@ -20,6 +20,16 @@ async function sheetTransform(page: Page) {
   });
 }
 
+async function cameraTarget(page: Page, label: string | null) {
+  const mobilePart = page.locator(
+    `[data-camera-mobile=${JSON.stringify(label)}]`,
+  );
+  return (page.viewportSize()?.width ?? 1440) < 760 &&
+    (await mobilePart.count())
+    ? mobilePart
+    : page.locator(`[data-camera-stop=${JSON.stringify(label)}]`);
+}
+
 async function enterReadingMode(page: Page) {
   if ((await page.locator('html').getAttribute('data-presentation')) !== 'read')
     await page.locator('#reading-mode').click();
@@ -100,6 +110,21 @@ interface MotionFrame {
   camera: string;
   left: string;
   right: string;
+}
+
+interface CompositingLayer {
+  layerId: string;
+  backendNodeId?: number;
+  width: number;
+  height: number;
+  drawsContent: boolean;
+}
+
+interface CompositingNode {
+  backendNodeId: number;
+  attributes?: string[];
+  children?: CompositingNode[];
+  pseudoElements?: CompositingNode[];
 }
 
 function collectMotion(page: Page, duration: number): Promise<MotionFrame[]> {
@@ -214,6 +239,178 @@ test('a failed camera script reveals normal reading within five seconds', async 
   expect(aborted).toBeTruthy();
 });
 
+test('the explicit reading URL bypasses the tour even with a saved tour preference', async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    if (localStorage.getItem('proposal-presentation') === null)
+      localStorage.setItem('proposal-presentation', 'tour');
+  });
+  await page.goto('./?view=read');
+  await expect(page.locator('html')).toHaveAttribute(
+    'data-presentation',
+    'read',
+  );
+  await expect(page.locator('html')).not.toHaveClass(/camera-ready/);
+  await expect(page.locator('.proposal-sheet')).toHaveCSS('transform', 'none');
+  await expect(page.locator('.proposal-sheet h1')).toBeVisible();
+  await expect(page.locator('.proposal-sheet')).toContainText('20%');
+  await expectNoOverflow(page);
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute(
+    'data-presentation',
+    'read',
+  );
+  await page.locator('.site-header a[href$="/agreement/"]').click();
+  await page.getByRole('link', { name: 'Back to the flyer' }).click();
+  await expect(page.locator('html')).toHaveAttribute(
+    'data-presentation',
+    'read',
+  );
+  await page.getByRole('button', { name: 'Take the tour' }).click();
+  await expect(page.locator('html')).toHaveAttribute(
+    'data-presentation',
+    'tour',
+  );
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+});
+
+test('high-density mobile paper stays within its compositing budget through zooms and reversals', async ({
+  browser,
+}, testInfo) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    deviceScaleFactor: 3,
+    isMobile: true,
+    hasTouch: true,
+  });
+  const page = await context.newPage();
+  const errors: string[] = [];
+  page.on('crash', () => errors.push('page crash'));
+  page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto(baseURL);
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  const session = await context.newCDPSession(page);
+  const paperIds = new Set<number>();
+  const decorationIds = new Set<number>();
+  const samples: {
+    faces: number;
+    decorations: number;
+    paperMiB: number;
+    largestDeviceEdge: number;
+  }[] = [];
+  const { root: documentNode }: { root: CompositingNode } = await session.send(
+    'DOM.getDocument',
+    { depth: -1, pierce: true },
+  );
+  function identifyPaper(node: CompositingNode) {
+    const classIndex = node.attributes?.indexOf('class') ?? -1;
+    const classes =
+      classIndex >= 0 ? node.attributes![classIndex + 1].split(/\s+/) : [];
+    if (classes.includes('panel-face') || classes.includes('panel-back')) {
+      paperIds.add(node.backendNodeId);
+      for (const pseudo of node.pseudoElements || [])
+        decorationIds.add(pseudo.backendNodeId);
+    }
+    for (const child of node.children || []) identifyPaper(child);
+  }
+  identifyPaper(documentNode);
+  expect(paperIds.size).toBe(6);
+  const recordLayers = ({ layers = [] }: { layers?: CompositingLayer[] }) => {
+    const drawn = layers.filter((layer) => layer.drawsContent);
+    const paper = drawn.filter((layer) =>
+      paperIds.has(layer.backendNodeId ?? -1),
+    );
+    const decorations = drawn.filter((layer) =>
+      decorationIds.has(layer.backendNodeId ?? -1),
+    );
+    if (!paper.length) return;
+    samples.push({
+      faces: paper.length,
+      decorations: decorations.length,
+      paperMiB:
+        paper.reduce(
+          (total, layer) => total + layer.width * layer.height * 3 * 3 * 4,
+          0,
+        ) /
+        1024 /
+        1024,
+      largestDeviceEdge: Math.max(
+        ...paper.map((layer) => Math.max(layer.width, layer.height) * 3),
+      ),
+    });
+  };
+  session.on('LayerTree.layerTreeDidChange', recordLayers);
+  await session.send('LayerTree.enable');
+  await page.screenshot();
+  await expect.poll(() => samples.length).toBeGreaterThan(0);
+  const chapters = page.locator('.chapter-nav button[data-go-to]');
+  for (let index = 1; index < (await chapters.count()); index += 1) {
+    const chapter = chapters.nth(index);
+    const label = await chapter.getAttribute('aria-label');
+    await chapter.click();
+    await expect(chapter).toHaveAttribute('aria-current', 'step');
+    const target = await cameraTarget(page, label);
+    await expect(target).toBeInViewport({ ratio: 0.98 });
+    await expect
+      .poll(() =>
+        target.evaluate((element) => {
+          const scale =
+            element.getBoundingClientRect().width /
+            (element as HTMLElement).offsetWidth;
+          return Math.min(
+            ...[element, ...element.querySelectorAll('p,h1,h2,h3')]
+              .filter((text) => text.matches('p,h1,h2,h3'))
+              .map(
+                (text) =>
+                  Number.parseFloat(getComputedStyle(text).fontSize) * scale,
+              ),
+          );
+        }),
+      )
+      .toBeGreaterThanOrEqual(12);
+  }
+  const travel = await page.evaluate(
+    () => document.documentElement.scrollHeight - innerHeight,
+  );
+  for (let cycle = 0; cycle < 3; cycle += 1)
+    for (const direction of [-1, 1])
+      for (let step = 0; step < 6; step += 1) {
+        await page.mouse.wheel(0, (direction * travel * 0.85) / 6);
+        await page.waitForTimeout(16);
+      }
+  await testInfo.attach('high-density-paper-budget', {
+    body: Buffer.from(
+      JSON.stringify(
+        {
+          note: 'Project surface-area budget, not measured GPU memory or physical iOS stability proof. Retained drawn layers are counted even if invisible.',
+          viewport: { width: 390, height: 844, deviceScaleFactor: 3 },
+          samples,
+        },
+        null,
+        2,
+      ),
+    ),
+    contentType: 'application/json',
+  });
+  expect(samples.length).toBeGreaterThan(20);
+  expect(
+    Math.max(...samples.map((sample) => sample.faces)),
+  ).toBeLessThanOrEqual(4);
+  expect(Math.max(...samples.map((sample) => sample.decorations))).toBe(0);
+  expect(
+    Math.max(...samples.map((sample) => sample.paperMiB)),
+  ).toBeLessThanOrEqual(64);
+  expect(
+    Math.max(...samples.map((sample) => sample.largestDeviceEdge)),
+  ).toBeLessThanOrEqual(4096);
+  expect(errors).toEqual([]);
+  session.removeListener('LayerTree.layerTreeDidChange', recordLayers);
+  await session.send('LayerTree.disable');
+  await session.detach();
+  await context.close();
+});
+
 test('real scrolling unfolds both hinges, moves the camera and reverses to the folded packet', async ({
   page,
 }, testInfo) => {
@@ -251,11 +448,13 @@ test('real scrolling unfolds both hinges, moves the camera and reverses to the f
   }[] = [];
   for (const progress of [0.04, 0.08, 0.13, 0.2, 0.28, 0.5, 0.8]) {
     const currentY = await page.evaluate(() => scrollY);
+    const nativeMovement = collectMotion(page, 450);
     await page.mouse.wheel(0, Math.round(travel * progress - currentY));
-    await expect
-      .poll(() => page.evaluate(() => scrollY))
-      .toBeGreaterThan(travel * progress - 20);
-    await page.waitForTimeout(400);
+    const frames = await nativeMovement;
+    expect(
+      Math.max(...frames.map((frame) => frame.scroll)),
+      'Native scrolling must reach the requested area before any idle settling',
+    ).toBeGreaterThanOrEqual(travel * progress - 20);
     if (progress <= 0.2) await expectFoldFitsStage(page);
     samples.push({
       progress,
@@ -582,9 +781,7 @@ for (const viewport of [
     for (let index = 0; index < (await chapters.count()); index += 1) {
       const chapter = chapters.nth(index);
       const label = await chapter.getAttribute('aria-label');
-      const target = page.locator(
-        `[data-camera-stop=${JSON.stringify(label)}], [data-camera-mobile=${JSON.stringify(label)}]`,
-      );
+      const target = await cameraTarget(page, label);
       if (!(await target.count())) continue;
       readingHolds += 1;
       await chapter.click();
@@ -636,10 +833,13 @@ for (const viewport of [
                 element.getBoundingClientRect().width /
                 (element as HTMLElement).offsetWidth;
               return Math.min(
-                ...[...element.querySelectorAll('p, h1, h2, h3')].map(
-                  (text) =>
-                    Number.parseFloat(getComputedStyle(text).fontSize) * scale,
-                ),
+                ...[element, ...element.querySelectorAll('p, h1, h2, h3')]
+                  .filter((text) => text.matches('p, h1, h2, h3'))
+                  .map(
+                    (text) =>
+                      Number.parseFloat(getComputedStyle(text).fontSize) *
+                      scale,
+                  ),
               );
             }),
           {

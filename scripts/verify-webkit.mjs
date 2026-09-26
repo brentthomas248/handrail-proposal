@@ -39,6 +39,7 @@ try {
     const name = String(viewport.width);
     const page = await browser.newPage({
       viewport,
+      deviceScaleFactor: viewport.width < 700 ? 3 : 1,
       isMobile: viewport.width < 700,
       hasTouch: viewport.width < 700,
     });
@@ -57,7 +58,14 @@ try {
     const travel = await page.evaluate(
       () => document.documentElement.scrollHeight - innerHeight,
     );
-    for (const progress of [0, 0.04, 0.08, 0.13]) {
+    const navigation = page.locator('.chapter-nav button[data-go-to]');
+    await navigation.nth(1).click();
+    await page.waitForTimeout(1400);
+    const firstReadingProgress = (await page.evaluate(() => scrollY)) / travel;
+    await navigation.nth(0).click();
+    await page.waitForTimeout(1400);
+    for (const fraction of [0, 0.18, 0.34, 0.5, 0.6]) {
+      const progress = firstReadingProgress * fraction;
       if (progress) {
         const currentY = await page.evaluate(() => scrollY);
         const delta = Math.round(travel * progress - currentY);
@@ -125,9 +133,13 @@ try {
     for (let index = 0; index < (await chapters.count()); index++) {
       const button = chapters.nth(index),
         label = await button.getAttribute('aria-label');
-      const target = page.locator(
-        `[data-camera-stop=${JSON.stringify(label)}],[data-camera-mobile=${JSON.stringify(label)}]`,
+      const mobilePart = page.locator(
+        `[data-camera-mobile=${JSON.stringify(label)}]`,
       );
+      const target =
+        viewport.width < 760 && (await mobilePart.count())
+          ? mobilePart
+          : page.locator(`[data-camera-stop=${JSON.stringify(label)}]`);
       if (!(await target.count())) continue;
       await button.click();
       await expect(button).toHaveAttribute('aria-current', 'step');
@@ -188,9 +200,9 @@ try {
       const minText = await target.evaluate((e) => {
         const scale = e.getBoundingClientRect().width / e.offsetWidth;
         return Math.min(
-          ...[...e.querySelectorAll('p,h1,h2,h3')].map(
-            (t) => parseFloat(getComputedStyle(t).fontSize) * scale,
-          ),
+          ...[e, ...e.querySelectorAll('p,h1,h2,h3')]
+            .filter((text) => text.matches('p,h1,h2,h3'))
+            .map((t) => parseFloat(getComputedStyle(t).fontSize) * scale),
         );
       });
       expect(minText).toBeGreaterThanOrEqual(12);
@@ -214,6 +226,7 @@ try {
     ).toBeTruthy();
     views.push({
       viewport,
+      deviceScaleFactor: viewport.width < 700 ? 3 : 1,
       inputMethod:
         viewport.width < 700
           ? 'window.scrollBy (mobile WebKit rejects wheel automation)'

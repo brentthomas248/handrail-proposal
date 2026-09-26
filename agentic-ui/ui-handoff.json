@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
-  "surface": "Continuous Z-fold with matte paper and beginning-of-partnership proposal",
-  "generatedAt": "2026-09-26T21:27:25.346338+00:00",
+  "surface": "Wide Z-fold with bounded paper rendering and persistent reading recovery",
+  "generatedAt": "2026-09-26T21:49:10.878656+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -10,6 +10,7 @@
     "agentic-ui/design-critique.json"
   ],
   "acceptedDecisions": [
+    "Restore the first proposal proportions, approximately0.71 width/height per panel, without restoring the paperclip. Reflow copy into columns and frame individual phone reading blocks.",
     "True Z-fold, continuous camera movement, opposite-depth wings, fine paper texture, crease shading and soft projected light.",
     "Telescope scale changes, Igloo camera continuity, Exat typography and Stripe Press document presentation remain approved references.",
     "Preserve the official Handrail wordmark, warm paper/rust palette and locally served Inter/Playfair typography.",
@@ -33,10 +34,13 @@
     "components": ["DealPath"],
     "filesChanged": [
       "src/pages/index.astro",
+      "src/layouts/Page.astro",
       "src/scripts/motion.ts",
-      "src/scripts/tour-path.ts",
       "src/styles/global.css",
-      "public/paper-grain.svg"
+      "public/paper-grain.svg",
+      "tests/e2e/proposal.spec.ts",
+      "scripts/capture.mjs",
+      "scripts/verify-webkit.mjs"
     ],
     "reviewedFiles": [
       "DESIGN.md",
@@ -94,20 +98,21 @@
   ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
-    "Z-fold and startup refinement published; final hosted 27-test suite passed in 21.7s.",
-    "27 local Chromium checks, 11 unit tests, three component checks and 24-file typecheck pass; WebKit 21 reading positions and native desktop reviewed.",
-    "Original business terms, semantic HTML, no-JavaScript and reduced-motion paths preserved.",
-    "Local workflow only; no full global certification, physical-iOS, native-phone or field-performance claim."
+    "29 local Chromium checks,11 unit checks,3 component checks and24-file typecheck pass.",
+    "Removed redundant material layers and unseen opposite faces;64MiB estimated-paper/4096px-edge regression budgets pass atDPR3.",
+    "38 chapter images,15 fold samples and3 journey recordings were captured; actual iPhone retry is pending.",
+    "No business copy, PDF terms or private business facts changed.",
+    "Current publication status is in agentic-ui/deployment-verification.json."
   ],
   "userReview": {
     "date": "2026-09-26",
-    "status": "z-fold-and-paper-revision-review-pending",
+    "status": "iphone-crash-remediation-and-wide-proportions-review-pending",
     "researchPath": "docs/redesign-research.md",
     "implementationPaused": false,
-    "reason": "User rejected choppy inward-folding motion and digital-looking paper; requested true Z geometry and realistic texture/light."
+    "reason": "User reported a physical iPhone crash after several scrolls and asked for wider, shorter paper like the first proposal."
   },
   "publication": {
-    "status": "published-and-hosted-verified",
+    "status": "previous-release-live-remediation-awaiting-publication",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "sourceCommit": "0dfbaaaa065adeeabf0d7c64da106dca8917de88",
     "staticCommit": "4013024ba8464a5e4158c0199a45952999cd7af5",

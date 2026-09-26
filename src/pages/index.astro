@@ -10,9 +10,16 @@ const base = import.meta.env.BASE_URL;
     <div class="flyer-journey">
       <div class="flyer-stage">
         <svg class="paper-shadow" aria-hidden="true" focusable="false">
-          <polygon />
-          <polygon />
-          <polygon />
+          <defs>
+            <radialGradient id="paper-shadow-falloff">
+              <stop offset="0" stop-color="#443320" stop-opacity="0.7" />
+              <stop offset="0.55" stop-color="#443320" stop-opacity="0.32" />
+              <stop offset="1" stop-color="#443320" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <ellipse fill="url(#paper-shadow-falloff)" />
+          <ellipse fill="url(#paper-shadow-falloff)" />
+          <ellipse fill="url(#paper-shadow-falloff)" />
         </svg>
         <article
           class="proposal-sheet"
@@ -56,7 +63,10 @@ const base = import.meta.env.BASE_URL;
                 data-camera-stop="Grow together"
                 data-camera-order="5"
               >
-                <div class="partnership-lead">
+                <div
+                  class="partnership-lead"
+                  data-camera-mobile="Grow together"
+                >
                   <p>{flyerCopy.closing.eyebrow}</p>
                   <h2>
                     {flyerCopy.closing.headlineLines.map((line) => (
@@ -65,18 +75,25 @@ const base = import.meta.env.BASE_URL;
                   </h2>
                 </div>
                 <div class="partnership-details">
-                  <div>
+                  <div data-camera-mobile="The starting point">
                     <h3>{flyerCopy.closing.startingPointTitle}</h3>
                     <p>{flyerCopy.closing.startingPointBody}</p>
                   </div>
-                  <div>
+                  <div data-camera-mobile="Room to contribute">
                     <h3>{flyerCopy.closing.partnershipTitle}</h3>
                     <p>{flyerCopy.closing.partnershipBody}</p>
                   </div>
-                  <p class="proposal-note">{flyerCopy.closing.proposalNote}</p>
-                  <a class="proposal-link" href={`${base}agreement/`}>
-                    Read the proposal notes
-                  </a>
+                  <div
+                    class="proposal-followup"
+                    data-camera-mobile="A proposal to discuss"
+                  >
+                    <p class="proposal-note">
+                      {flyerCopy.closing.proposalNote}
+                    </p>
+                    <a class="proposal-link" href={`${base}agreement/`}>
+                      Read the proposal notes
+                    </a>
+                  </div>
                 </div>
               </section>
               <div class="panel-colophon">
@@ -234,16 +251,19 @@ const base = import.meta.env.BASE_URL;
                     <DealPath variant="client" />
                   </div>
                 </div>
-                <div
-                  class="rate-rationale"
-                  data-camera-mobile="Why the difference"
-                >
-                  <p class="rate-reason">
+                <div class="rate-rationale">
+                  <p
+                    class="rate-reason"
+                    data-camera-mobile="Why the difference"
+                  >
                     If I bring the client that makes hiring possible, the higher
                     rate reflects the business I created and the risk I took to
                     create it.
                   </p>
-                  <p class="rate-scope">
+                  <p
+                    class="rate-scope"
+                    data-camera-mobile="The ongoing structure"
+                  >
                     The selected rate applies to all my future credited sales.
                     Both paths: no base salary, with an employment benefits
                     package.
@@ -256,7 +276,7 @@ const base = import.meta.env.BASE_URL;
                 data-camera-stop="The window"
                 data-camera-order="4"
               >
-                <div class="window-title">
+                <div class="window-title" data-camera-mobile="The window">
                   <strong>{proposal.activationDays}</strong>
                   <h2>
                     days
@@ -265,21 +285,21 @@ const base = import.meta.env.BASE_URL;
                   </h2>
                 </div>
                 <ol class="window-steps">
-                  <li>
+                  <li data-camera-mobile="Agree on the start">
                     <strong>Align on the starting point.</strong>
                     <p>
                       Agree on the structure and what qualifies as the first
                       client.
                     </p>
                   </li>
-                  <li>
+                  <li data-camera-mobile="Either path can start">
                     <strong>Either path can start.</strong>
                     <p>
                       Handrail can bring me on during the window, or I can bring
                       the paying client first.
                     </p>
                   </li>
-                  <li>
+                  <li data-camera-mobile="A clear stopping point">
                     <strong>A clear stopping point.</strong>
                     <p>
                       If there is no client and no hire within 90 days, the
