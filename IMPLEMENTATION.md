@@ -26,7 +26,9 @@ Independent stress covered 12 forward/reverse cycles, 336 wheel inputs and 714 l
 
 ## Publication checkpoint
 
-Remediation source is verified locally and ready for the already-authorized GitHub Pages publication. The preceding release is source 0dfbaaaa065adeeabf0d7c64da106dca8917de88 / static 4013024ba8464a5e4158c0199a45952999cd7af5. Replace this checkpoint with the actual source/static hashes, Pages run and hosted verification after publication.
+The [public proposal](https://brentthomas248.github.io/handrail-proposal/?v=e3339c9) is published from source `e3339c9737566dd71a16770a276f553d815ad879` as static commit `c0f5dc73edfe1d7103659461036ff854ce711ddd`. [Pages run 36274389010](https://github.com/brentthomas248/handrail-proposal/actions/runs/36274389010) succeeded. The final hosted suite passed all 29 browser checks in 32.9s, including the DPR3 rendering budget and persistent recovery URL. Eight public assets match the build byte-for-byte; the downloaded PDF matches all seven sections and 15 complete paragraphs.
+
+The direct [reading fallback](https://brentthomas248.github.io/handrail-proposal/?view=read&v=e3339c9) is available. Actual iPhone retry and user approval of the revised proportions remain pending. The final named-listener CDP cleanup also passed a focused regression and strict typecheck after the complete local run. This closes implementation and publication; it does not certify the reported device crash as resolved.
 
 ## Durable evidence and boundaries
 

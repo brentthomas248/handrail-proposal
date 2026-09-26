@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0",
   "url": "https://brentthomas248.github.io/handrail-proposal/",
-  "checkedAt": "2026-09-26T21:27:25.346338+00:00",
+  "checkedAt": "2026-09-26T21:54:45.790255+00:00",
   "passed": true,
-  "sourceCommit": "0dfbaaaa065adeeabf0d7c64da106dca8917de88",
-  "staticCommit": "4013024ba8464a5e4158c0199a45952999cd7af5",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36272824422",
+  "sourceCommit": "e3339c9737566dd71a16770a276f553d815ad879",
+  "staticCommit": "c0f5dc73edfe1d7103659461036ff854ce711ddd",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36274389010",
   "publishingSource": {
     "branch": "gh-pages",
     "path": "/",
@@ -14,29 +14,29 @@
   },
   "browserSuite": {
     "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm test:e2e",
-    "passed": 27,
+    "passed": 29,
     "failed": 0,
-    "durationSeconds": 21.7
+    "durationSeconds": 32.9
   },
   "checks": [
-    "True accordion depth, continuous wheel movement, early reversal and input-cancelled idle settlement",
-    "Stable mobile height changes, parent-chapter breakpoint preservation and touchCancel release",
-    "Delayed camera initialization stays hidden; failed initialization falls back to reading",
-    "Keyboard, reduced motion, no-JavaScript and normal reading paths",
-    "Eight hosted assets match final build; downloaded PDF completely matches canonical content"
+    "Wider paper and phone column framing; high-DPR paper layer/edge budgets through chapters and reverse input",
+    "Persistent explicit reading URL, notes navigation and user-selected return to tour",
+    "Keyboard restoration of culled content, reduced motion, no-JavaScript and normal reading",
+    "Continuous scroll/reversal, cancellation, resize, delayed/failed initialization",
+    "Eight hosted assets match dist exactly; downloaded PDF matches complete canonical content"
   ],
   "staticAssetChecks": [
     {
       "path": "index.html",
       "http": 200,
-      "bytes": 36732,
-      "sha256": "dcaa21202ff00d397c8d36e5ebf450718154eb0c0fdf3e6faa2eada30b6eb440"
+      "bytes": 45503,
+      "sha256": "98e521ec349deb0f23f3c9af26de3920b3cedfdeafc19f83a7e1bcc677b75999"
     },
     {
       "path": "agreement/index.html",
       "http": 200,
-      "bytes": 37681,
-      "sha256": "a223abf86fe6a140f7da85b52490dd688886dd8bbeea385905e8cc81a9861c0d"
+      "bytes": 45466,
+      "sha256": "9b669461ea56772411b8a53428ca01f5e17878242e356961710121bd9019db98"
     },
     {
       "path": "handrail-proposed-agreement.pdf",
@@ -59,20 +59,20 @@
     {
       "path": "paper-grain.svg",
       "http": 200,
-      "bytes": 1062,
-      "sha256": "7d64a2251e5479a45be557f4a8847e3b0591b29fa7c6a00bdc1d5be645a953d0"
-    },
-    {
-      "path": "_astro/index.astro_astro_type_script_index_0_lang.jeu0j9ga.js",
-      "http": 200,
-      "bytes": 80781,
-      "sha256": "ad52b71c41f08cd9a6f8c870b4dbfe425366087de5e406c9b997d681c399096a"
+      "bytes": 56694,
+      "sha256": "f1ad2a836254dd1e1bda3de717abb7c3de39007361741e634977267450cc774b"
     },
     {
       "path": "_astro/client.CCxN9xF8.js",
       "http": 200,
       "bytes": 220825,
       "sha256": "4907db89a5bc4160920b577b51facb283e0e376ee1b4d5acab82c2e4d5654811"
+    },
+    {
+      "path": "_astro/index.astro_astro_type_script_index_0_lang.BpnkeAts.js",
+      "http": 200,
+      "bytes": 81877,
+      "sha256": "8aed46c22245de38ae86830b6f3e5c3aaae6983e83a6058035e66bc497d6360b"
     }
   ],
   "pdfCanonicalCheck": {
@@ -80,19 +80,22 @@
     "sections": 7,
     "paragraphs": 15
   },
-  "mobileEvidence": "Chromium touch emulation; not physical-device certification",
+  "mobileEvidence": "Chromium DPR3 and touch emulation; physical iPhone crash retry still pending",
   "profileChanged": false,
   "errors": [],
   "failedRequests": [],
-  "hostedCapture": {
-    "capturedAt": "2026-09-26T21:21:12Z",
-    "evidencePath": "qa-artifacts/z-fold-hosted/capture.json",
-    "scope": "Current motion/material scene before startup-only refinement; current cold load additionally reviewed natively",
-    "viewports": [1440, 390, 320],
-    "errors": [],
+  "edition": "wide-z-fold-mobile-rendering-remediation",
+  "isCurrentRevision": true,
+  "supplementaryWebKitEvidence": "agentic-ui/webkit-verification.json",
+  "physicalIOSVerified": false,
+  "visualEvidence": {
+    "path": "qa-artifacts/wide-paper-final/capture.json",
+    "scope": "Local rendered pages; published assets verified byte-for-byte",
+    "chapterImages": 38,
+    "foldSamples": 15,
+    "journeyVideos": 3,
+    "browserErrors": [],
     "failedRequests": []
   },
-  "edition": "continuous-z-fold-matte-paper",
-  "isCurrentRevision": true,
-  "supplementaryWebKitEvidence": "agentic-ui/webkit-verification.json"
+  "renderingEvidence": "agentic-ui/iphone-rendering-verification.json"
 }

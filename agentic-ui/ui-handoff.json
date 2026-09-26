@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
   "surface": "Wide Z-fold with bounded paper rendering and persistent reading recovery",
-  "generatedAt": "2026-09-26T21:49:10.878656+00:00",
+  "generatedAt": "2026-09-26T21:54:45.790255+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -112,10 +112,10 @@
     "reason": "User reported a physical iPhone crash after several scrolls and asked for wider, shorter paper like the first proposal."
   },
   "publication": {
-    "status": "previous-release-live-remediation-awaiting-publication",
+    "status": "published-and-hosted-verified-physical-iphone-retry-pending",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "sourceCommit": "0dfbaaaa065adeeabf0d7c64da106dca8917de88",
-    "staticCommit": "4013024ba8464a5e4158c0199a45952999cd7af5",
+    "sourceCommit": "e3339c9737566dd71a16770a276f553d815ad879",
+    "staticCommit": "c0f5dc73edfe1d7103659461036ff854ce711ddd",
     "evidencePath": "agentic-ui/deployment-verification.json"
   }
 }

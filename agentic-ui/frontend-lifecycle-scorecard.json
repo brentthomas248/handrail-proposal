@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T21:49:10.878656+00:00",
+  "generatedAt": "2026-09-26T21:54:45.790255+00:00",
   "mode": "full-lifecycle",
   "sections": [
     {
@@ -107,14 +107,12 @@
       "id": "qa-proof",
       "status": "pass",
       "evidence": [
-        "tests/agreement.test.ts",
-        "tests/e2e/proposal.spec.ts",
-        ".storybook/verify-components.mjs",
-        "scripts/verify-pdf.ts",
-        "qa-artifacts/trifold/capture.json"
+        "agentic-ui/local-verification.json",
+        "agentic-ui/deployment-verification.json",
+        "qa-artifacts/wide-paper-final/capture.json"
       ],
       "notes": [
-        "Current local check: 22 files, zero issues. Four unit, 19 browser and three component checks passed. Captures contain 24 chapter views and 15 scroll samples, with zero browser errors, warnings or failed requests. The same 19 browser checks passed hosted; full global certification remains unclaimed."
+        "Current local check:24 files,zero issues;11 unit,29 browser and3 component checks passed. Current capture contains38 chapter views and15 fold samples. The29 hosted browser checks pass in32.9s. Physical iPhone stability and full global certification remain unverified."
       ]
     },
     {
