@@ -1,8 +1,8 @@
 # GitHub showcase handoff
 
-Prepared September 26, 2026. This document records a read-only public-profile audit and a proposed publication sequence. No profile, pin, remote repository or deployment has been changed.
+Updated September 26, 2026. The user authorized publishing the proposal. The [public source repository](https://github.com/brentthomas248/handrail-proposal) and [live proposal](https://brentthomas248.github.io/handrail-proposal/) are available. The homepage returned HTTP 200 with the expected proposal heading. Profile README and pin changes remain unapplied.
 
-The local proposal is now implemented. The repository README documents its current architecture and commands; its status remains local preview with publication pending. The public-profile observations below are the audit snapshot from the same date, not proof of a later deployment.
+The repository README documents the shipped architecture, local commands and live reading routes. The public-profile observations below retain the original audit snapshot from the same date; the proposal repository row reflects its later publication. HTTP availability is separate from browser QA.
 
 ## Current public evidence
 
@@ -10,7 +10,7 @@ The local proposal is now implemented. The repository README documents its curre
 | --- | --- | --- |
 | [Profile](https://github.com/brentthomas248) | Display name Brent Showalter; bio describes AI-native software engineering, Python/FastAPI and deterministic evaluation. Twelve public repositories, nine of them forks. | Lead with a few inspectable examples rather than repository count. |
 | Profile repository | `brentthomas248/brentthomas248` returned HTTP 404 through authenticated GitHub API. | The profile README draft is a new artifact, not an update to an existing README. |
-| Proposal repository | `brentthomas248/handrail-proposal` returned HTTP 404 through authenticated GitHub API. | Do not present a repository or Pages URL as live until publication is verified. |
+| [Proposal repository](https://github.com/brentthomas248/handrail-proposal) | Published after explicit user authorization. The [live proposal](https://brentthomas248.github.io/handrail-proposal/) returned HTTP 200 with the expected heading. | The source and proposal links can now be used. Hosted browser findings are recorded separately. |
 | [DFB Brand Studio](https://github.com/brentthomas248/dfb-brand) | Owned public repository; README describes interactive color and typography exploration. The [live page](https://brentthomas248.github.io/dfb-brand/) returned HTTP 200. | Strong visual example to place directly below the new proposal. HTTP availability does not establish browser QA. |
 | [Demand forecasting](https://github.com/brentthomas248/shotgun-demand-forecasting) | Owned public repository with author attribution, source directories, reproducible setup and evaluation limitations. | Demonstrates analytical depth; retain its academic context. Do not claim production deployment. |
 | [BOXMEOUT-STELLA #44](https://github.com/GruftNet/BOXMEOUT-STELLA/pull/44) | Authored by `brentthomas248`, merged July 16, 2026. Files and description cover property tests, CI and accounting corrections. | Credit the precise contribution; do not present the complete platform as an independently authored product. |
@@ -22,15 +22,15 @@ Current pins, verified through GitHub GraphQL: demand forecasting, `GruftNet/BOX
 
 [github-profile-draft.md](github-profile-draft.md) is the proposed README body. It contains only currently inspectable public examples and accurate contribution attribution. It deliberately has no speculative proposal link or performance claim.
 
-After the proposal passes release checks and both public URLs resolve, add this as the first selected-work entry, replacing the two URL placeholders with the verified destinations:
+For a separately authorized profile update, use this as the first selected-work entry:
 
-> **Handrail proposal** — An interactive agreement built around an unfolding paper scene. Read the commercial terms in semantic HTML, switch off motion or download the matching PDF. The source includes the contract content model, accessibility fallbacks and browser tests. **View proposal · Source**
+> **Handrail proposal** — An interactive agreement built around an unfolding paper scene. Read the commercial terms in semantic HTML, switch off motion or download the matching PDF. The source includes the contract content model, accessibility fallbacks and browser tests. [View proposal](https://brentthomas248.github.io/handrail-proposal/) · [Source](https://github.com/brentthomas248/handrail-proposal)
 
 Only retain capabilities in that paragraph that actually ship and pass verification. Use a single optimized screenshot linked to the live proposal above the selected-work list; provide descriptive alt text. Do not add status badges, visitor counters, skill-logo grids, animated typing banners or unsupported impact metrics.
 
 ## Proposed pin order
 
-1. `brentthomas248/handrail-proposal` — after public release and verification.
+1. `brentthomas248/handrail-proposal` — the published interactive proposal and source.
 2. `brentthomas248/dfb-brand` — immediate visual proof from an existing project.
 3. `brentthomas248/shotgun-demand-forecasting` — analytical engineering and documented evaluation.
 4. `GruftNet/BOXMEOUT-STELLA` — keep the existing team-project pin; scope authorship in the README.
@@ -42,22 +42,22 @@ Leave the sixth pin empty until another project offers equally clear evidence. T
 
 Suggested repository description: **A scroll-driven contract proposal with an unfolding paper scene, readable agreement and accessible motion controls.**
 
-The current repository README uses the inspected `docs/media/proposal-desktop.png` browser capture. It documents the two compensation paths, architecture, local commands, reading paths and tool attribution. It contains no broken screenshot links or unverified live-site claim.
+The current repository README uses the inspected `docs/media/proposal-desktop.png` browser capture. It documents the two compensation paths, architecture, local commands, live reading routes and tool attribution.
 
-The desktop screenshot has been added after local visual review. Do not link directly to ignored `qa-artifacts/` or `test-results/` paths. Inspect the screenshot for draft/debug UI and private data before publication. Add the live link and set the repository homepage only after the deployed URL resolves and the published workflow passes.
+The desktop screenshot was added after local visual review. Do not link directly to ignored `qa-artifacts/` or `test-results/` paths. The public-content review covered tracked source and the PDF and found no private company finances, client identifiers, credentials or private research.
 
-The intended GitHub Pages route is `/handrail-proposal/`, matching `astro.config.mjs`. The prepared manual `docs/github-actions/pages.yml` builds the static site and current PDF, verifies content and browser flows, uploads `dist/`, and deploys through GitHub Pages. `docs/github-actions/verify.yml` runs verification on pushes and pull requests. These workflows have not yet run on GitHub. Use the checked-in workflow's actual trigger and permissions when publishing; do not assume that creating a repository automatically enables Pages. Repository creation, Pages configuration, Actions deployment and profile/pin updates are separate external mutations.
+The live GitHub Pages route is `/handrail-proposal/`, matching `astro.config.mjs`. Pages serves the root of the gh-pages branch over HTTPS. Initial publication used source commit 2028557 and static commit 94c25d09c26ffd3bad98205926764623a2a585d4; GitHub's built-in Pages job is [run 36265530452](https://github.com/brentthomas248/handrail-proposal/actions/runs/36265530452).
+
+The current OAuth credential lacks workflow-write permission. The optional project workflows are therefore inactive templates under `docs/github-actions/`. The pages template would build and verify the site and PDF before deployment; the verify template would run checks on pushes and pull requests. Neither template ran remotely. The published output was validated locally, and GitHub's own Pages job handles branch deployment. Do not describe that deployment job as a remote project-test pass.
 
 Describe AI assistance accurately: Brent supplied the business intent and negotiated proposal; AI tools assisted design, implementation and review. List completed validation separately from planned validation. Do not describe an installed tool, generated scaffold or an unexecuted workflow as successful end-to-end evidence.
 
-## Publication sequence and remaining verification
+## Publication and remaining work
 
-1. Complete final validation and reconcile the implementation record, generated agreement/PDF and README with observed behavior. Add measured results only after the corresponding checks pass.
-2. Inspect the complete public diff and deployment workflow, including screenshots, PDF metadata and repository documents. Exclude private research, internal finances, client details, correspondence, personal local paths, credentials and raw service receipts.
-3. Obtain the workspace-required publication approval, then publish the proposal repository and enable the tested Pages workflow.
-4. Verify the deployed home page, direct contract links, PDF download, assets and reduced-motion behavior at the final base path. Check mobile and desktop screenshots.
-5. Create the profile repository using the reviewed README. Add the verified proposal entry and screenshot, then apply the proposed pin order.
-6. Inspect the rendered public profile and repository as a visitor. Confirm each project link and contribution link resolves and that no public text implies ownership of the team projects.
+1. Completed: local release validation, public-content review, explicit user authorization, public source push and gh-pages configuration. The homepage returns HTTP 200 with the expected heading.
+2. Completed: hosted browser smoke checks at 2026-09-26T19:19:29.538Z verified actual wheel-driven paper animation, rate cards and disclosures, all 18 canonical agreement sections, the independently verified PDF, a 390px mobile layout without overflow, direct navigation, persisted motion preference and system reduced motion. Zero page errors or failed requests were observed. GitHub's built-in Pages run 36265530452 succeeded. These are live checks, separate from local tests and inactive workflow templates.
+3. Pending separate profile work: create the profile repository using the reviewed README, add the proposal entry and screenshot, and apply the proposed pin order. No profile or pin mutation was included in this site publication.
+4. After a profile update, inspect the rendered public profile as a visitor. Confirm project and contribution links resolve and that no text implies ownership of the team projects.
 
 The DFB live page's visual quality and the current public portfolio link need a browser review before any recommendation to change the profile's website field. No change to that field is proposed here.
 

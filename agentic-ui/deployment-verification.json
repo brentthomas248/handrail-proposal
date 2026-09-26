@@ -1,0 +1,32 @@
+{
+  "url": "https://brentthomas248.github.io/handrail-proposal/",
+  "checkedAt": "2026-09-26T19:19:29.538Z",
+  "passed": true,
+  "checks": [
+    "Public home and WebGL paper scene load",
+    "Real scroll advances the paper animation",
+    "Navigation, rate cards and expandable timing details work",
+    "All 18 deployed clauses match canonical content; PDF downloads",
+    "390px mobile layout, direct agreement link and persisted motion toggle work",
+    "System reduced-motion remains static"
+  ],
+  "errors": [],
+  "failedRequests": [],
+  "schemaVersion": "1.0",
+  "sourceCommit": "2028557",
+  "staticCommit": "94c25d09c26ffd3bad98205926764623a2a585d4",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36265530452",
+  "publishingSource": {
+    "branch": "gh-pages",
+    "path": "/",
+    "buildType": "legacy",
+    "httpsEnforced": true
+  },
+  "pdfCanonicalCheck": {
+    "passed": true,
+    "sections": 18,
+    "paragraphs": 29
+  },
+  "mobileEvidence": "Chromium touch emulation at 390 by 844 pixels; not physical-device certification",
+  "profileChanged": false
+}

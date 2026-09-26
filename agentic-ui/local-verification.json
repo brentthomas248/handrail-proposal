@@ -4,7 +4,7 @@
   "scope": "User-approved local implementation and deterministic QA",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": false,
+  "deployed": true,
   "checks": [
     {
       "command": "pnpm check",
@@ -102,5 +102,6 @@
     "agentic-ui/blockers.json",
     "agentic-ui/performance-evidence.json",
     "agentic-ui/accessibility-evidence.json"
-  ]
+  ],
+  "deploymentEvidencePath": "agentic-ui/deployment-verification.json"
 }

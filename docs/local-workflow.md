@@ -19,7 +19,7 @@ Local design and implementation follow DESIGN.md and the frontend-design skill. 
 
 The lifecycle ledger and workflow feed record actual checks. Configuration and stories are preparation, not evidence of passed component interactions or product quality. Build output, live endpoint validation, interaction/accessibility results and screenshots must exist before their corresponding phases are marked passed.
 
-Publication remains subject to the review and approval boundary recorded in PROJECT.md. Manual assistive-technology certification and hosted replay must not be represented as completed by automated local tests.
+The user separately authorized site publication, and the [proposal is live on GitHub Pages](https://brentthomas248.github.io/handrail-proposal/). Publication does not change the local tool scope. Manual assistive-technology certification and hosted replay must not be represented as completed by automated local tests.
 
 ## Verified component workshop
 
@@ -51,4 +51,12 @@ Component receipts now live under ignored qa-artifacts/storybook/ so the app tes
 
 ## Final local verification
 
-The final sequenced app/check/build/PDF/browser/component pipeline completed with exit 0: 30 files checked without issues, 31 scenario tests, two built static routes, a three-page PDF with all 18 sections and 29 canonical paragraphs independently checked, 13 browser tests and seven component scenarios. The app suite covers exact clause text, four viewport widths, keyboard/motion behavior, no-JavaScript, WebGL failure, PDF availability and zero axe violations on both routes. See agentic-ui/local-verification.json. The local scope is complete; strict certification, deployment and agreement execution remain separate.
+The final sequenced app/check/build/PDF/browser/component pipeline completed with exit 0: 30 files checked without issues, 31 scenario tests, two built static routes, a three-page PDF with all 18 sections and 29 canonical paragraphs independently checked, 13 browser tests and seven component scenarios. The app suite covers exact clause text, four viewport widths, keyboard/motion behavior, no-JavaScript, WebGL failure, PDF availability and zero axe violations on both routes. See agentic-ui/local-verification.json. The local scope is complete; strict certification and agreement execution remain separate.
+
+## Authorized publication
+
+On September 26, 2026, the user authorized publishing the proposal on GitHub. The public homepage returned HTTP 200 with the expected proposal heading. Source is available in [brentthomas248/handrail-proposal](https://github.com/brentthomas248/handrail-proposal); Pages serves the tested static output from gh-pages.
+
+The OAuth credential lacks workflow-write permission, so the prepared project workflows remain inactive templates in docs/github-actions/. Local checks precede the publishing push. GitHub's own Pages deployment job is not a remote run of those project tests. Profile README and pin changes remain unapplied.
+
+Hosted browser smoke verification at 2026-09-26T19:19:29.538Z passed: the live WebGL scene responds to actual wheel input, both rate cards and disclosures work, 18 agreement sections match canonical content, and the served PDF's 29 paragraphs pass independent verification. The 390px mobile view has no overflow; direct agreement navigation, persisted motion preference and system reduced motion work. No page errors or failed requests were observed. GitHub Pages run 36265530452 succeeded. These hosted checks do not add cloud-adapter, physical-device, manual assistive-technology or field-performance certification.

@@ -4,7 +4,9 @@ An interactive agreement for Brent Showalter and Handrail. A folded paper sculpt
 
 ![Rendered desktop proposal with an unfolding paper agreement.](docs/media/proposal-desktop.png)
 
-**Implemented for local preview. Public deployment is pending.** This is an unsigned proposal; reading, interacting with or downloading it does not accept its terms.
+**[Open the live proposal](https://brentthomas248.github.io/handrail-proposal/)** · [Read the agreement](https://brentthomas248.github.io/handrail-proposal/agreement/) · [Download the PDF](https://brentthomas248.github.io/handrail-proposal/handrail-proposed-agreement.pdf)
+
+Published on GitHub Pages with the user's authorization. This is an unsigned proposal; reading, interacting with or downloading it does not accept its terms.
 
 ## The experience
 
@@ -79,4 +81,4 @@ Brent supplied the business intent and proposal decisions. AI tools assisted des
 
 [DESIGN.md](DESIGN.md) records the visual direction and references. The geometry and page composition were created for this project. Lusion informed the approach to materials and dimensional craft; Exat informed typographic scale and pacing. No assets from those sites are included.
 
-GitHub Pages publication uses the tested static build on the `gh-pages` branch. The optional Actions templates are preserved under `docs/github-actions/`; the current GitHub credential has no workflow-write permission, so those templates are inactive. Validation runs locally before a publishing push. The [GitHub showcase handoff](docs/github-showcase.md) covers the profile README, project pins and post-publication checks. No live production URL is claimed here.
+GitHub Pages serves the tested static build from the `gh-pages` branch. Live browser checks on September 26, 2026 verified scroll-driven animation, agreement content, the PDF, mobile layout and motion preferences with no page errors or failed requests. The optional Actions templates are preserved under `docs/github-actions/`; the current OAuth credential has no workflow-write permission, so those templates are inactive. Validation runs locally before a publishing push. GitHub's own Pages deployment job publishes the branch; it does not establish that the inactive verification templates ran remotely. The [GitHub showcase handoff](docs/github-showcase.md) records publication and the still-unapplied profile README and pin changes.

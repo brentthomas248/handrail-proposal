@@ -2,7 +2,7 @@
 
 The current delivery is a static Handrail proposal, full unsigned agreement and PDF. The approved visual direction is sculptural paper, graphite typography and navy. The user approved local implementation and deterministic QA after the credential boundary; remote generation/semantic QA/hosted replay were omitted.
 
-Current evidence: local-verification.json, component-state-matrix.json, accessibility-evidence.json, performance-evidence.json and visual-baseline-governance.json. Strict certification limitations remain in blockers.json, token-drift.json and the scorecard. No signing, private business disclosure or publication occurs through this flow.
+Current evidence: local-verification.json, component-state-matrix.json, accessibility-evidence.json, performance-evidence.json and visual-baseline-governance.json. Strict certification limitations remain in blockers.json, token-drift.json and the scorecard. No signing or private business disclosure occurs through the page. The user subsequently authorized GitHub Pages publication; see deployment-verification.json.
 
 ## 2026-09-26T18:33:26.736013+00:00 — preparation stopped at credential boundary
 
@@ -27,3 +27,7 @@ Final pipeline exit 0: 30 checked files with zero issues; 31 scenario tests; two
 Rendered desktop hero, mobile hero, path comparison and agreement were inspected. The static fallback crossfade settles before capture. Mobile direct agreement access is visible. Local Lighthouse records performance 99 mobile and 100 desktop (optimized mobile runs varied 93–99); both score 100 in accessibility, best practices and SEO. The original 250 KB JavaScript budget remains exceeded and field INP is unmeasured.
 
 The final approved local scope is complete. Strict global generation/professional certification remains incomplete: static read-only policy compatibility, hardcoded visual-value findings, manual assistive-technology/physical-device coverage and JavaScript budget are retained. Publication and contract completion remain separate review steps.
+
+## 2026-09-26T19:21:11.611306+00:00 — public site verified
+
+Published https://brentthomas248.github.io/handrail-proposal/ from gh-pages commit94c25d0, corresponding to source2028557. GitHub Pages run36265530452 succeeded with HTTPS enforced. Deterministic public-browser checks passed for live WebGL rendering, scroll progress, navigation, both rates, agreement paragraphs, PDF download, mobile layout, persisted motion and system reduced motion. No browser errors or failed asset responses were observed. The downloaded PDF independently matched18sections and29paragraphs. GitHub profile and pins were unchanged.
