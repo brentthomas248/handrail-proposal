@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0",
+  "coreWebVitals": {
+    "maxLcpMs": 2500,
+    "maxInpMs": 200,
+    "maxCls": 0.1
+  },
+  "routeBudgets": [
+    {
+      "route": "/handrail-proposal/",
+      "maxJsKb": 250,
+      "observedTransferBytes": 365963,
+      "status": "exceeded",
+      "evidence": "agentic-ui/performance-evidence.json"
+    }
+  ],
+  "routeJsBudgetKb": 250,
+  "runtimeErrorBudget": 0,
+  "hydrationErrorBudget": 0,
+  "slowInteractionBudgetMs": 200,
+  "evidencePath": "agentic-ui/performance-evidence.json"
+}

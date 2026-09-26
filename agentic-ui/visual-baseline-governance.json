@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-26T19:07:28.091621+00:00",
+  "baselineRoot": "qa-artifacts",
+  "matrix": {
+    "viewports": [
+      "desktop-1440x1000",
+      "mobile-390x844"
+    ],
+    "themes": [
+      "default"
+    ],
+    "browsers": [
+      "chromium"
+    ]
+  },
+  "dynamicMasks": [],
+  "baselines": [
+    {
+      "id": "desktop-hero",
+      "route": "/handrail-proposal/",
+      "viewport": "desktop-1440x1000",
+      "theme": "default",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/desktop-hero.png",
+        "sizeBytes": 169716,
+        "sha256": "54816e0f2525ba2699e50aba5a59ccdacc96dd300e9e2f88311bb8e4088d352e"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T19:07:28.091621+00:00"
+    },
+    {
+      "id": "mobile-hero",
+      "route": "/handrail-proposal/",
+      "viewport": "mobile-390x844",
+      "theme": "default",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/mobile-hero.png",
+        "sizeBytes": 66544,
+        "sha256": "2b633c8f23fcc0e54b5f2d660c7a24d0df021e990e7e32497aae7d17f3526cfb"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T19:07:28.091621+00:00"
+    },
+    {
+      "id": "desktop-structure",
+      "route": "/handrail-proposal/#structure",
+      "viewport": "desktop-1440x1000",
+      "theme": "default",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/desktop-structure.png",
+        "sizeBytes": 127429,
+        "sha256": "fd5b2c230400f70617b82cdd6dc84254e0b6a25011fd1d7626ca1f0fe420b147"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T19:07:28.091621+00:00"
+    },
+    {
+      "id": "contract",
+      "route": "/handrail-proposal/agreement/",
+      "viewport": "desktop-1440x1000",
+      "theme": "default",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/contract.png",
+        "sizeBytes": 149449,
+        "sha256": "b4084554ad79016cd9ead72aa09bd260e89a9d49e4524342ee9d21377231d22f"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T19:07:28.091621+00:00"
+    }
+  ],
+  "diffs": [],
+  "strictEnforce": {
+    "reviewedBaselinesRequired": true,
+    "rejectedDiffsBlock": true,
+    "artifactHashesRequired": true
+  },
+  "notes": [
+    "Initial local visual baseline candidates were rendered and inspected; no previous baseline or automated image-diff claim.",
+    "Artifacts are ignored local evidence; rerun pnpm capture to regenerate after source changes."
+  ]
+}

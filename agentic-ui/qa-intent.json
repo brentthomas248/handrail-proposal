@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "1.0",
+  "reviewMode": "deterministic-local",
+  "routes": [
+    "/handrail-proposal/",
+    "/handrail-proposal/agreement/"
+  ],
+  "flows": [
+    "Read both compensation paths",
+    "Navigate directly to the agreement and clauses",
+    "Toggle motion preference",
+    "Read payment-grace details",
+    "Download the proposed agreement PDF"
+  ],
+  "visualStates": [
+    "desktop",
+    "mobile",
+    "reduced-motion",
+    "webgl-unavailable",
+    "javascript-disabled",
+    "keyboard-focus",
+    "timeline-details-open",
+    "timeline-details-closed"
+  ],
+  "componentStateMatrix": "agentic-ui/component-state-matrix.json",
+  "dataRequirements": {
+    "representativeDataRequired": false,
+    "dataStateReadinessPath": "agentic-ui/data-state-readiness.json",
+    "emptyStateOnly": false,
+    "seedEvidencePath": "agentic-ui/data-fixture-evidence.json"
+  },
+  "safety": {
+    "destructiveActionsAllowed": false,
+    "formSubmitsAllowed": false,
+    "nonMutatingOnly": true,
+    "sandboxMutationsRequireApproval": true
+  },
+  "fixtures": [],
+  "accessibility": {
+    "target": "WCAG 2.2 AA",
+    "manualEvidencePath": "agentic-ui/accessibility-evidence.json",
+    "keyboardTraversal": true,
+    "visibleFocus": true,
+    "voiceOver": true,
+    "zoomReflow": true,
+    "textResize": true,
+    "reducedMotion": true,
+    "forcedColors": true,
+    "targetSize": true,
+    "draggingAlternative": true,
+    "redundantEntry": true,
+    "consistentHelp": true,
+    "accessibleAuthentication": true
+  },
+  "performance": {
+    "budgetPath": "agentic-ui/performance-budget.json",
+    "collectRouteTiming": true,
+    "collectRuntimeErrors": true,
+    "collectSlowInteractions": true
+  },
+  "agentReliability": {
+    "enabled": false,
+    "runs": 3,
+    "nonMutatingOnly": true,
+    "artifactPath": "qa-report/agent-reliability.json",
+    "reason": "Stagehand semantic QA omitted under the user-approved local workflow; deterministic Playwright behaviors remain required."
+  },
+  "acceptanceCriteria": [
+    "Every included route renders without console errors, failed critical network requests, or broken navigation.",
+    "Every included route has stable landmarks, headings, accessible names, visible focus, and readable responsive layout evidence.",
+    "Primary actions, empty states, loading states, error states, success states, and disabled states are visually clear and have tight product copy.",
+    "Reusable components listed in agentic-ui/component-state-matrix.json have matching state coverage evidence.",
+    "No POST, PUT, PATCH, DELETE, upload, approval, submission, billing, auth, or destructive action runs during non-mutating QA."
+  ],
+  "knownTradeoffs": [
+    "Parameterized routes require explicit seed data or safe-flow definitions before QA can exercise them.",
+    "Mutating workflows require approved sandbox mutation mode and are not covered by non-mutating broad audit.",
+    "Stitch, Magic, Stagehand and Browserbase are omitted under docs/local-workflow.md; no hosted or semantic certification claim."
+  ]
+}

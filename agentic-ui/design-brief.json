@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-26T18:28:20.217Z",
+  "productSurface": "marketing-page",
+  "rubricProfile": "marketing-page",
+  "audience": [
+    "Josh and Handrail decision-makers",
+    "Engineering reviewers visiting Brent Showalter on GitHub"
+  ],
+  "primaryJobs": [
+    "Understand the conditional employment and commission proposal",
+    "Compare the two activation paths",
+    "Read and download the full unsigned contract",
+    "Inspect the engineering showcase"
+  ],
+  "evidenceLevel": "assumption",
+  "constraints": [
+    "Public names and proposed terms only; exclude private company/customer information",
+    "Sculptural paper with graphite, silver, deep navy and cool white; no neon",
+    "Original 3D fold narrative, accessible semantic contract, native touch/reduced-motion reading",
+    "Astro static output, React islands, strict TypeScript, GitHub Pages"
+  ],
+  "frontendDesign": {
+    "used": true,
+    "reason": "User selected sculptural agreement following reference research and rejected neon."
+  },
+  "sources": [
+    "DESIGN.md",
+    "PROJECT.md",
+    "IMPLEMENTATION.md"
+  ],
+  "openQuestions": [
+    "Employment/benefits/legal completion schedule remains unsigned"
+  ]
+}

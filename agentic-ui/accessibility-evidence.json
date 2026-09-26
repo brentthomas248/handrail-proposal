@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-26T19:09:16.338283+00:00",
+  "target": "WCAG 2.2 AA",
+  "scope": "Local automated evidence; not a conformance certification.",
+  "checks": [
+    {
+      "id": "component-axe",
+      "status": "pass",
+      "evidence": ".storybook/verify-components.mjs; docs/local-workflow.md",
+      "notes": [
+        "Seven live scenarios; zero axe violations (WCAG 2 A/AA and 2.1 AA tags)."
+      ],
+      "evidenceRefs": [
+        ".storybook/verify-components.mjs",
+        "docs/local-workflow.md"
+      ]
+    },
+    {
+      "id": "component-keyboard-and-reduced-motion",
+      "status": "pass",
+      "evidence": "src/components/MotionToggle.stories.tsx; .storybook/verify-components.mjs",
+      "notes": [
+        "Space/Enter toggle, persistent state, system reduced-motion override and disabled control verified."
+      ],
+      "evidenceRefs": [
+        "src/components/MotionToggle.stories.tsx",
+        ".storybook/verify-components.mjs"
+      ]
+    },
+    {
+      "id": "app-axe-and-keyboard",
+      "status": "pass",
+      "evidence": "tests/e2e/proposal.spec.ts; agentic-ui/local-verification.json",
+      "notes": [
+        "Final 13 browser tests passed, including both routes scanned with WCAG 2.2 AA tags, keyboard skip link, motion toggle, no-JS and WebGL failure reading paths."
+      ],
+      "evidenceRefs": [
+        "tests/e2e/proposal.spec.ts",
+        "agentic-ui/local-verification.json"
+      ]
+    },
+    {
+      "id": "manual-voiceover",
+      "status": "blocked",
+      "gatingScope": "release-certification",
+      "evidence": "docs/local-workflow.md",
+      "notes": [
+        "VoiceOver was not performed. Automated axe, keyboard checks and semantic HTML are not represented as screen-reader-equivalent manual proof."
+      ],
+      "evidenceRefs": [
+        "docs/local-workflow.md"
+      ]
+    },
+    {
+      "id": "responsive-reading",
+      "status": "pass",
+      "evidence": "tests/e2e/proposal.spec.ts; agentic-ui/visual-baseline-governance.json",
+      "notes": [
+        "Both routes tested without overflow at 320, 390, 768 and 1440 pixels. Desktop/mobile rendered images inspected."
+      ],
+      "evidenceRefs": [
+        "tests/e2e/proposal.spec.ts",
+        "agentic-ui/visual-baseline-governance.json"
+      ]
+    }
+  ]
+}

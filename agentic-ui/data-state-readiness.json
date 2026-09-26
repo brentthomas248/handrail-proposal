@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-26T18:57:09.626078+00:00",
+  "status": "not-required",
+  "dataDependent": false,
+  "auditScope": "static-or-no-data",
+  "representativeData": {
+    "required": false,
+    "loaded": false,
+    "seedPath": "",
+    "apiCounts": {},
+    "fixtureSet": []
+  },
+  "evidence": [
+    "src/content/proposal.ts",
+    "src/pages/index.astro",
+    "src/pages/agreement.astro",
+    "PROJECT.md"
+  ],
+  "emptyStateOnly": {
+    "approved": false,
+    "reason": ""
+  },
+  "safeFlowGaps": [],
+  "notes": [
+    "Static proposed terms supply all content. No API/entity fixtures or database exist."
+  ]
+}

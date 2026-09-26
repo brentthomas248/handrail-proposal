@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-26T19:05:36.892396+00:00",
+  "surface": "Handrail proposal and full agreement",
+  "sources": [
+    "DESIGN.md",
+    "docs/local-workflow.md",
+    "src/pages/index.astro",
+    "src/pages/agreement.astro"
+  ],
+  "checks": [
+    {
+      "id": "product-intent",
+      "status": "pass",
+      "evidence": [
+        "PROJECT.md",
+        "src/content/proposal.ts"
+      ],
+      "notes": [
+        "The narrative explains the two unsigned activation paths and preserves collection-based compensation."
+      ]
+    },
+    {
+      "id": "visibility-of-system-status",
+      "status": "pass",
+      "evidence": [
+        "src/components/MotionToggle.tsx",
+        "src/components/SceneHost.tsx",
+        ".storybook/verify-components.mjs"
+      ],
+      "notes": [
+        "Motion state is visible; the fallback persists until renderer readiness."
+      ]
+    },
+    {
+      "id": "match-real-world",
+      "status": "pass",
+      "evidence": [
+        "src/content/proposal.ts",
+        "qa-artifacts/desktop-structure.png"
+      ],
+      "notes": [
+        "Rates, collections, employment timing and 90-day window use contract language rather than system jargon."
+      ]
+    },
+    {
+      "id": "user-control-and-freedom",
+      "status": "pass",
+      "evidence": [
+        "src/components/MotionToggle.tsx",
+        "src/pages/agreement.astro"
+      ],
+      "notes": [
+        "Motion can be disabled and the complete agreement is directly reachable."
+      ]
+    },
+    {
+      "id": "consistency-and-standards",
+      "status": "pass",
+      "evidence": [
+        "src/styles/global.css",
+        "src/components/DealPath.tsx"
+      ],
+      "notes": [
+        "Shared typography, path component, link treatment and focus outline are consistent."
+      ]
+    },
+    {
+      "id": "error-prevention",
+      "status": "pass",
+      "evidence": [
+        "src/content/proposal.ts",
+        "tests/agreement.test.ts"
+      ],
+      "notes": [
+        "No signing or acceptance mechanism; unsigned status and missing completion details remain explicit."
+      ]
+    },
+    {
+      "id": "recognition-not-recall",
+      "status": "pass",
+      "evidence": [
+        "qa-artifacts/desktop-structure.png",
+        "src/pages/agreement.astro"
+      ],
+      "notes": [
+        "Both paths are visible together and contract sections have a table of contents."
+      ]
+    },
+    {
+      "id": "flexibility-and-efficiency",
+      "status": "pass",
+      "evidence": [
+        "src/pages/index.astro",
+        "src/pages/agreement.astro"
+      ],
+      "notes": [
+        "Direct agreement and PDF links support readers who skip the animated narrative."
+      ]
+    },
+    {
+      "id": "aesthetic-minimalist-design",
+      "status": "pass",
+      "evidence": [
+        "qa-artifacts/desktop-hero.png",
+        "qa-artifacts/mobile-hero.png",
+        "DESIGN.md"
+      ],
+      "notes": [
+        "Rendered review: graphite typography, restrained navy and one paper sculpture; no neon or calculator."
+      ]
+    },
+    {
+      "id": "error-recovery",
+      "status": "pass",
+      "evidence": [
+        "src/components/SceneHost.tsx",
+        ".storybook/verify-components.mjs"
+      ],
+      "notes": [
+        "Scene loading and unavailable states retain a static visual and semantic reading path; final WebGL failure app check is recorded separately."
+      ]
+    },
+    {
+      "id": "help-and-documentation",
+      "status": "pass",
+      "evidence": [
+        "src/content/proposal.ts",
+        "docs/proposed-agreement.md"
+      ],
+      "notes": [
+        "Full agreement provides definitions, credit rules and completion details."
+      ]
+    },
+    {
+      "id": "visual-hierarchy",
+      "status": "pass",
+      "evidence": [
+        "qa-artifacts/desktop-hero.png",
+        "qa-artifacts/desktop-structure.png"
+      ],
+      "notes": [
+        "Headline, primary action and two build rates have clear visual priority."
+      ]
+    },
+    {
+      "id": "responsive-layout",
+      "status": "pass",
+      "evidence": [
+        "qa-artifacts/mobile-hero.png",
+        "qa-artifacts/desktop-structure.png"
+      ],
+      "notes": [
+        "Reviewed desktop and mobile hierarchy; full viewport overflow tests recorded separately."
+      ]
+    },
+    {
+      "id": "accessibility",
+      "status": "needs-work",
+      "evidence": [
+        "agentic-ui/accessibility-evidence.json"
+      ],
+      "notes": [
+        "Component checks pass; manual assistive-technology certification remains unperformed."
+      ]
+    },
+    {
+      "id": "ux-writing-feedback",
+      "status": "pass",
+      "evidence": [
+        "src/content/proposal.ts",
+        "src/components/MotionToggle.tsx"
+      ],
+      "notes": [
+        "Action labels and proposed/nonbinding status are clear; motion label matches visible text."
+      ]
+    },
+    {
+      "id": "performance",
+      "status": "needs-work",
+      "evidence": [
+        "agentic-ui/performance-evidence.json"
+      ],
+      "notes": [
+        "Local scores 99 mobile/100 desktop (optimized mobile runs varied 93–99) and LCP/CLS meet targets; JS exceeds 250 KB and field INP is unmeasured."
+      ]
+    },
+    {
+      "id": "form-autocomplete",
+      "status": "not-affected",
+      "evidence": [
+        "src/pages/index.astro",
+        "src/pages/agreement.astro"
+      ],
+      "notes": [
+        "No forms."
+      ]
+    },
+    {
+      "id": "paste-behavior",
+      "status": "not-affected",
+      "evidence": [
+        "src/pages/index.astro",
+        "src/pages/agreement.astro"
+      ],
+      "notes": [
+        "No text input or paste interception."
+      ]
+    },
+    {
+      "id": "focus-obscured",
+      "status": "not-assessed",
+      "evidence": [
+        "tests/e2e/proposal.spec.ts",
+        "src/styles/global.css"
+      ],
+      "notes": [
+        "Visible focus styling and skip link exist; exhaustive focus-obscuration review is not claimed."
+      ]
+    },
+    {
+      "id": "safe-area",
+      "status": "not-assessed",
+      "evidence": [
+        "src/styles/global.css"
+      ],
+      "notes": [
+        "Mobile viewport is reviewed; physical notched-device verification was not performed."
+      ]
+    },
+    {
+      "id": "reduced-motion",
+      "status": "pass",
+      "evidence": [
+        "src/components/MotionToggle.stories.tsx",
+        ".storybook/verify-components.mjs"
+      ],
+      "notes": [
+        "System reduced-motion overrides saved preference; static rendering verified."
+      ]
+    },
+    {
+      "id": "transition-specificity",
+      "status": "pass",
+      "evidence": [
+        "src/styles/global.css",
+        "src/scripts/motion.ts"
+      ],
+      "notes": [
+        "Transitions name properties; page movement is gated by motion preference."
+      ]
+    },
+    {
+      "id": "heading-wrap",
+      "status": "pass",
+      "evidence": [
+        "qa-artifacts/desktop-hero.png",
+        "qa-artifacts/mobile-hero.png"
+      ],
+      "notes": [
+        "Current desktop/mobile headline wraps reviewed without clipping."
+      ]
+    },
+    {
+      "id": "date-number-formatting",
+      "status": "pass",
+      "evidence": [
+        "src/content/proposal.ts",
+        "tests/agreement.test.ts"
+      ],
+      "notes": [
+        "Rates and calendar-day terms are explicit and stable static content."
+      ]
+    },
+    {
+      "id": "hydration-date-rendering",
+      "status": "not-affected",
+      "evidence": [
+        "src/content/proposal.ts"
+      ],
+      "notes": [
+        "No live date or locale-sensitive client rendering."
+      ]
+    },
+    {
+      "id": "touch-behavior",
+      "status": "not-assessed",
+      "evidence": [
+        "tests/e2e/proposal.spec.ts"
+      ],
+      "notes": [
+        "Viewport behavior is tested; physical touch-device interaction review is not claimed."
+      ]
+    },
+    {
+      "id": "long-text-handling",
+      "status": "pass",
+      "evidence": [
+        "src/pages/agreement.astro",
+        "qa-artifacts/contract.png"
+      ],
+      "notes": [
+        "Full contract remains ordinary flowing HTML and reviewed readable columns."
+      ]
+    },
+    {
+      "id": "numeric-typography",
+      "status": "pass",
+      "evidence": [
+        "qa-artifacts/desktop-structure.png",
+        "src/styles/global.css"
+      ],
+      "notes": [
+        "Rates are legible and percent signs remain associated with numbers."
+      ]
+    },
+    {
+      "id": "agent-compatible-semantics",
+      "status": "pass",
+      "evidence": [
+        "src/layouts/Page.astro",
+        "src/pages/agreement.astro",
+        "tests/e2e/proposal.spec.ts"
+      ],
+      "notes": [
+        "Native links, button, summary/details, headings, named navigation and landmarks carry the behavior."
+      ]
+    },
+    {
+      "id": "full-stack-states",
+      "status": "not-affected",
+      "evidence": [
+        "agentic-ui/data-state-readiness.json"
+      ],
+      "notes": [
+        "Static app has no API, database or authenticated data states."
+      ]
+    }
+  ]
+}

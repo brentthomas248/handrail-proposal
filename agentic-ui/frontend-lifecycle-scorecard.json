@@ -1,0 +1,300 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-26T19:09:16.338283+00:00",
+  "mode": "full-lifecycle",
+  "sections": [
+    {
+      "id": "product-design-intent",
+      "status": "pass",
+      "evidence": [
+        "PROJECT.md",
+        "DESIGN.md",
+        "src/content/proposal.ts"
+      ],
+      "notes": [
+        "Explicit approved local implementation and unsigned proposal intent."
+      ]
+    },
+    {
+      "id": "information-architecture-flows",
+      "status": "pass",
+      "evidence": [
+        "src/pages/index.astro",
+        "src/pages/agreement.astro"
+      ],
+      "notes": [
+        "Narrative, direct agreement and PDF routes implemented; app QA receipt tracked separately."
+      ]
+    },
+    {
+      "id": "visual-system-tokens",
+      "status": "in-progress",
+      "evidence": [
+        "DESIGN.md",
+        "agentic-ui/tokens.dtcg.json",
+        "agentic-ui/token-drift.json"
+      ],
+      "notes": [
+        "Pinned design.md lint/export passed; strict literal scanner findings remain open."
+      ]
+    },
+    {
+      "id": "component-states-storybook",
+      "status": "pass",
+      "evidence": [
+        ".storybook/verify-components.mjs",
+        "agentic-ui/component-state-coverage.json",
+        "docs/local-workflow.md"
+      ],
+      "notes": [
+        "Final scene: seven live checks passed, zero axe violations and uncaught errors; build and live MCP endpoint passed."
+      ]
+    },
+    {
+      "id": "accessibility",
+      "status": "in-progress",
+      "evidence": [
+        "agentic-ui/accessibility-evidence.json"
+      ],
+      "notes": [
+        "Automated evidence is bounded; manual VoiceOver certification remains unperformed."
+      ]
+    },
+    {
+      "id": "responsive-layout",
+      "status": "pass",
+      "evidence": [
+        "tests/e2e/proposal.spec.ts",
+        "agentic-ui/local-verification.json",
+        "agentic-ui/visual-baseline-governance.json"
+      ],
+      "notes": [
+        "Final tests passed at 320/390/768/1440 pixels; desktop and mobile captures reviewed."
+      ]
+    },
+    {
+      "id": "ux-writing-feedback-errors",
+      "status": "pass",
+      "evidence": [
+        "src/content/proposal.ts",
+        "agentic-ui/design-critique.json"
+      ],
+      "notes": [
+        "Unsigned contract, motion feedback and static fallback communicate status."
+      ]
+    },
+    {
+      "id": "performance",
+      "status": "in-progress",
+      "evidence": [
+        "agentic-ui/performance-evidence.json"
+      ],
+      "notes": [
+        "LCP and CLS pass in local lab; 250 KB JS budget exceeded and field INP unmeasured."
+      ]
+    },
+    {
+      "id": "agent-compatible-semantics",
+      "status": "pass",
+      "evidence": [
+        "src/layouts/Page.astro",
+        "src/pages/agreement.astro"
+      ],
+      "notes": [
+        "Native semantic controls and complete HTML contract."
+      ]
+    },
+    {
+      "id": "qa-proof",
+      "status": "pass",
+      "evidence": [
+        "agentic-ui/local-verification.json",
+        "tests/e2e/proposal.spec.ts",
+        ".storybook/verify-components.mjs"
+      ],
+      "notes": [
+        "Approved local scope: 31 scenario, 13 browser and seven component checks passed. Cloud and manual certification explicitly excluded."
+      ]
+    },
+    {
+      "id": "remediation-learning",
+      "status": "pass",
+      "evidence": [
+        "agentic-ui/mistake-ledger.jsonl",
+        "agentic-ui/workflow-feed.md"
+      ],
+      "notes": [
+        "Corrected motion label, scene startup/rendering costs, PDF completeness and independent evidence paths; final focused pipeline passed."
+      ]
+    },
+    {
+      "id": "full-stack-data-states",
+      "status": "not-affected",
+      "evidence": [
+        "PROJECT.md",
+        "agentic-ui/data-state-readiness.json"
+      ],
+      "notes": [
+        "No backend or database; static data and local fallback states only."
+      ]
+    }
+  ],
+  "changedSurfaces": [
+    {
+      "path": "src/pages/index.astro",
+      "affectedSections": [
+        "product-design-intent",
+        "visual-system-tokens",
+        "component-states-storybook",
+        "accessibility",
+        "responsive-layout"
+      ],
+      "evidence": [
+        "DESIGN.md",
+        "agentic-ui/ui-handoff.json"
+      ]
+    },
+    {
+      "path": "src/pages/agreement.astro",
+      "affectedSections": [
+        "product-design-intent",
+        "visual-system-tokens",
+        "component-states-storybook",
+        "accessibility",
+        "responsive-layout"
+      ],
+      "evidence": [
+        "DESIGN.md",
+        "agentic-ui/ui-handoff.json"
+      ]
+    },
+    {
+      "path": "src/layouts/Page.astro",
+      "affectedSections": [
+        "product-design-intent",
+        "visual-system-tokens",
+        "component-states-storybook",
+        "accessibility",
+        "responsive-layout"
+      ],
+      "evidence": [
+        "DESIGN.md",
+        "agentic-ui/ui-handoff.json"
+      ]
+    },
+    {
+      "path": "src/styles/global.css",
+      "affectedSections": [
+        "product-design-intent",
+        "visual-system-tokens",
+        "component-states-storybook",
+        "accessibility",
+        "responsive-layout"
+      ],
+      "evidence": [
+        "DESIGN.md",
+        "agentic-ui/ui-handoff.json"
+      ]
+    },
+    {
+      "path": "src/scripts/motion.ts",
+      "affectedSections": [
+        "product-design-intent",
+        "visual-system-tokens",
+        "component-states-storybook",
+        "accessibility",
+        "responsive-layout"
+      ],
+      "evidence": [
+        "DESIGN.md",
+        "agentic-ui/ui-handoff.json"
+      ]
+    },
+    {
+      "path": "src/components/DealPath.tsx",
+      "affectedSections": [
+        "product-design-intent",
+        "visual-system-tokens",
+        "component-states-storybook",
+        "accessibility",
+        "responsive-layout"
+      ],
+      "evidence": [
+        "DESIGN.md",
+        "agentic-ui/ui-handoff.json"
+      ]
+    },
+    {
+      "path": "src/components/MotionToggle.tsx",
+      "affectedSections": [
+        "product-design-intent",
+        "visual-system-tokens",
+        "component-states-storybook",
+        "accessibility",
+        "responsive-layout"
+      ],
+      "evidence": [
+        "DESIGN.md",
+        "agentic-ui/ui-handoff.json"
+      ]
+    },
+    {
+      "path": "src/components/PaperFallback.tsx",
+      "affectedSections": [
+        "product-design-intent",
+        "visual-system-tokens",
+        "component-states-storybook",
+        "accessibility",
+        "responsive-layout"
+      ],
+      "evidence": [
+        "DESIGN.md",
+        "agentic-ui/ui-handoff.json"
+      ]
+    },
+    {
+      "path": "src/components/PaperScene.tsx",
+      "affectedSections": [
+        "product-design-intent",
+        "visual-system-tokens",
+        "component-states-storybook",
+        "accessibility",
+        "responsive-layout"
+      ],
+      "evidence": [
+        "DESIGN.md",
+        "agentic-ui/ui-handoff.json"
+      ]
+    },
+    {
+      "path": "src/components/SceneHost.tsx",
+      "affectedSections": [
+        "product-design-intent",
+        "visual-system-tokens",
+        "component-states-storybook",
+        "accessibility",
+        "responsive-layout"
+      ],
+      "evidence": [
+        "DESIGN.md",
+        "agentic-ui/ui-handoff.json"
+      ]
+    }
+  ],
+  "fullStackStateAssumptions": {
+    "apiContracts": [
+      "No API or backend contract."
+    ],
+    "coveredDataStates": [
+      "Static content; scene fallback and renderer-ready states."
+    ],
+    "authRoleStates": [
+      "No authentication or authorization roles. The word role in contract prose is not an auth implementation."
+    ],
+    "mutationSafety": [
+      "No backend mutation; isolated browser preference storage only."
+    ]
+  },
+  "localScopeStatus": "verified",
+  "fullLifecycleCertified": false
+}

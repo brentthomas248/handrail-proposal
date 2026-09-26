@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-26T19:09:50.890799+00:00",
+  "scope": "Local production-preview Lighthouse lab measurements; no field data.",
+  "command": "pnpm performance",
+  "lighthouseVersion": "13.5.0",
+  "route": "/handrail-proposal/",
+  "measurements": [
+    {
+      "device": "mobile",
+      "source": "qa-artifacts/lighthouse-mobile.json",
+      "measuredAt": "2026-09-26T19:07:22.278Z",
+      "scores": {
+        "performance": 99.0,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lcpMs": 1961.6947,
+      "tbtMs": 44,
+      "cls": 4.2027264284825696e-05,
+      "scriptTransferBytes": 365963,
+      "scriptResourceBytes": 1278396
+    },
+    {
+      "device": "desktop",
+      "source": "qa-artifacts/lighthouse-desktop.json",
+      "measuredAt": "2026-09-26T19:07:32.401Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "lcpMs": 445.55539999999996,
+      "tbtMs": 0,
+      "cls": 1.1331100604150252e-05,
+      "scriptTransferBytes": 365963,
+      "scriptResourceBytes": 1278396
+    }
+  ],
+  "fieldInp": {
+    "status": "not-measured",
+    "valueMs": null,
+    "notes": [
+      "Lighthouse TBT is a laboratory measurement and does not establish field INP."
+    ]
+  },
+  "budgets": {
+    "lcp": "pass",
+    "cls": "pass",
+    "routeJs": "exceeded",
+    "inp": "not-measured"
+  },
+  "notes": [
+    "The 250 KB route JavaScript target remains unchanged. The interactive Three.js scene contributes most of the payload; this is explicit performance debt.",
+    "Static HTML, fallback illustration and agreement remain usable without JavaScript. No hosted-device or production field certification is claimed.",
+    "Optimized mobile runs varied from 93 to 99. The latest 99 is not attributed solely to the last cleanup; laboratory scores vary between runs."
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-26T18:57:09.626078+00:00",
+  "mode": "read-only",
+  "runtime": {
+    "requireApprovedRuntimeSafety": true,
+    "safeCommandSource": "agentic-ui/runtime-safety.json"
+  },
+  "sandbox": {
+    "requiresTestDatabase": false,
+    "testDatabaseEvidence": [],
+    "cleanupCommand": "",
+    "maxMutations": 0
+  },
+  "allowedSandboxActionClasses": [],
+  "hardDeniedActionClasses": [
+    "production-data",
+    "destructive-delete",
+    "billing",
+    "auth",
+    "external-send",
+    "irreversible"
+  ],
+  "evidenceRequirements": [
+    "runtime-safety",
+    "screenshots",
+    "success-assertions"
+  ],
+  "releaseOnlyChecks": [
+    "manual-voiceover"
+  ],
+  "authorization": {
+    "status": "policy-authorized",
+    "authorizedBy": "Brent Showalter \u2014 explicit implementation and local-workflow authorization",
+    "authorizedAt": "2026-09-26T18:57:09.626078+00:00",
+    "scope": "local non-mutating UI verification only"
+  },
+  "notes": [
+    "Static frontend with no backend or database. No sandbox/business mutations are authorized.",
+    "Motion preferences may change only in isolated test browser storage; closing the context discards test state.",
+    "The global schema permits read-only mode and zero mutations. Current global validator implementations hardcode broad-sandbox; their incompatibility must remain visible, not be satisfied with fictitious database evidence.",
+    "Publication, external messages, billing, credentials and production mutation remain outside this authorization."
+  ]
+}

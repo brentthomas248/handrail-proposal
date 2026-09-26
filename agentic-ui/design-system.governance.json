@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0",
+  "sourceDesign": "DESIGN.md",
+  "tokenExports": {
+    "dtcg": "agentic-ui/tokens.dtcg.json"
+  },
+  "tokenPolicy": {
+    "owner": "project",
+    "changeLog": "agentic-ui/design-decisions.jsonl",
+    "allowHardcodedValues": false,
+    "approvedHardcodedPatterns": []
+  },
+  "componentPolicy": {
+    "mapGeneratedUiToExistingComponents": true,
+    "newComponentDecisionRequired": true,
+    "componentStateMatrix": "agentic-ui/component-state-matrix.json"
+  },
+  "enforcement": {
+    "lintDesignMd": true,
+    "exportDtcg": true,
+    "scanHardcodedVisualValues": true,
+    "detectTokenDrift": true
+  }
+}

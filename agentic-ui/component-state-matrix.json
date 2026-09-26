@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-26T19:09:16.338283+00:00",
+  "componentWorkshop": {
+    "mode": "storybook-react",
+    "evidence": [
+      ".storybook/main.ts",
+      ".storybook/preview.ts",
+      "docs/local-workflow.md",
+      ".storybook/verify-components.mjs"
+    ],
+    "notes": [
+      "Final component build/live MCP endpoint verified. Seven component behavior checks passed with zero axe violations and errors. App-level failure and responsive checks passed independently."
+    ]
+  },
+  "components": [
+    {
+      "name": "DealPath",
+      "category": "other",
+      "sourceFiles": [
+        "src/components/DealPath.tsx"
+      ],
+      "requiredStates": [
+        "default",
+        "employment-first",
+        "client-first",
+        "narrow-layout"
+      ],
+      "coveredStates": [
+        "default",
+        "employment-first",
+        "client-first",
+        "narrow-layout"
+      ],
+      "coverageArtifacts": [
+        "src/components/DealPath.stories.tsx",
+        ".storybook/verify-components.mjs",
+        "docs/local-workflow.md"
+      ],
+      "notes": [
+        "Presentational article: no selectable, disabled, loading, or empty API. Both supported variants and mobile layout are exercised."
+      ]
+    },
+    {
+      "name": "MotionToggle",
+      "category": "other",
+      "sourceFiles": [
+        "src/components/MotionToggle.tsx"
+      ],
+      "requiredStates": [
+        "default",
+        "saved-motion-off",
+        "motion-on",
+        "keyboard-space",
+        "keyboard-enter",
+        "focus-visible",
+        "system-reduced-motion-disabled"
+      ],
+      "coveredStates": [
+        "default",
+        "saved-motion-off",
+        "motion-on",
+        "keyboard-space",
+        "keyboard-enter",
+        "focus-visible",
+        "system-reduced-motion-disabled"
+      ],
+      "coverageArtifacts": [
+        "src/components/MotionToggle.stories.tsx",
+        ".storybook/verify-components.mjs",
+        "docs/local-workflow.md"
+      ],
+      "notes": [
+        "Preference toggle with disabled state controlled by system reduced-motion. Live keyboard and persistence behavior and disabled-system preference are verified; no loading API."
+      ]
+    },
+    {
+      "name": "PaperFallback",
+      "category": "other",
+      "sourceFiles": [
+        "src/components/PaperFallback.tsx"
+      ],
+      "requiredStates": [
+        "default",
+        "static-decorative"
+      ],
+      "coveredStates": [
+        "default",
+        "static-decorative"
+      ],
+      "coverageArtifacts": [
+        "src/components/PaperFallback.stories.tsx",
+        ".storybook/verify-components.mjs",
+        "docs/local-workflow.md"
+      ],
+      "notes": [
+        "SVG is deliberately hidden from accessibility APIs; the proposal is semantic HTML."
+      ]
+    },
+    {
+      "name": "PaperScene",
+      "category": "other",
+      "sourceFiles": [
+        "src/components/PaperScene.tsx"
+      ],
+      "requiredStates": [
+        "default",
+        "folded",
+        "unfolded"
+      ],
+      "coveredStates": [
+        "default",
+        "folded",
+        "unfolded"
+      ],
+      "coverageArtifacts": [
+        "src/components/PaperScene.stories.tsx",
+        ".storybook/verify-components.mjs",
+        "docs/local-workflow.md",
+        "tests/e2e/proposal.spec.ts"
+      ],
+      "notes": [
+        "Opening and reduced-motion stories exist; final product reduced-motion and WebGL-failure tests also pass.",
+        "Live Chromium rendered both endpoint geometries; screenshots reviewed."
+      ]
+    },
+    {
+      "name": "FoldingPaper",
+      "category": "other",
+      "sourceFiles": [
+        "src/components/PaperScene.tsx"
+      ],
+      "requiredStates": [
+        "default"
+      ],
+      "coveredStates": [
+        "default"
+      ],
+      "coverageArtifacts": [
+        "src/components/PaperScene.stories.tsx",
+        ".storybook/verify-components.mjs",
+        "docs/local-workflow.md"
+      ],
+      "notes": [
+        "Internal implementation component verified through the public PaperScene rendered stories; it is not a separate design-system API."
+      ]
+    },
+    {
+      "name": "ResponsiveCamera",
+      "category": "other",
+      "sourceFiles": [
+        "src/components/PaperScene.tsx"
+      ],
+      "requiredStates": [
+        "default"
+      ],
+      "coveredStates": [
+        "default"
+      ],
+      "coverageArtifacts": [
+        "src/components/PaperScene.stories.tsx",
+        ".storybook/verify-components.mjs",
+        "docs/local-workflow.md"
+      ],
+      "notes": [
+        "Internal implementation component verified through the public PaperScene rendered stories; it is not a separate design-system API."
+      ]
+    },
+    {
+      "name": "SceneLifecycle",
+      "category": "other",
+      "sourceFiles": [
+        "src/components/PaperScene.tsx"
+      ],
+      "requiredStates": [
+        "default"
+      ],
+      "coveredStates": [
+        "default"
+      ],
+      "coverageArtifacts": [
+        "src/components/PaperScene.stories.tsx",
+        ".storybook/verify-components.mjs",
+        "docs/local-workflow.md"
+      ],
+      "notes": [
+        "Internal implementation component verified through the public PaperScene rendered stories; it is not a separate design-system API."
+      ]
+    },
+    {
+      "name": "SceneHost",
+      "category": "other",
+      "sourceFiles": [
+        "src/components/SceneHost.tsx"
+      ],
+      "requiredStates": [
+        "default",
+        "motion-disabled",
+        "renderer-ready",
+        "webgl-unavailable"
+      ],
+      "coveredStates": [
+        "default",
+        "motion-disabled",
+        "renderer-ready",
+        "webgl-unavailable"
+      ],
+      "coverageArtifacts": [
+        "src/components/SceneHost.stories.tsx",
+        ".storybook/verify-components.mjs",
+        "docs/local-workflow.md",
+        "tests/e2e/proposal.spec.ts"
+      ],
+      "notes": [
+        "Static fallback and promotion to live canvas verified. Final app test confirms the WebGL-unavailable path retains visible fallback and the complete agreement remains reachable."
+      ]
+    }
+  ]
+}

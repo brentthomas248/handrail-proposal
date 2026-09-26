@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-26T19:07:28.091621+00:00",
+  "blockers": [
+    {
+      "id": "external-tool-blocker:agentic-ui-credentials",
+      "type": "external-tool-blocker",
+      "status": "superseded",
+      "owner": "agentic-ui-tooling-setup",
+      "phase": "tool-readiness",
+      "failedSurface": {
+        "kind": "tool",
+        "value": "1Password MCP authenticate: Authorization denied by user; agentic-ui-env --check exits 1"
+      },
+      "unsafeToContinue": "Required Stitch and Magic generation and credentialed semantic/hosted QA cannot run. Do not retry authorization after denial or substitute a manual generation path.",
+      "resolutionMode": "release-certification",
+      "gatingScope": "release-certification",
+      "nextStep": {
+        "kind": "decision",
+        "value": "Revisit normal credential authorization only if the user later requests full credentialed or hosted certification."
+      },
+      "resolution": "User explicitly approved a local implementation and QA workflow; no further authentication attempts are authorized or required for this scope.",
+      "resolutionEvidence": "docs/local-workflow.md"
+    },
+    {
+      "id": "static-autonomy-validator",
+      "type": "stack-blocker",
+      "status": "open",
+      "owner": "agentic-ui-tooling-setup",
+      "failedSurface": {
+        "kind": "validator",
+        "value": "validate-autonomy-policy / validate-professional-ui-readiness hardcode broad-sandbox despite read-only schema support."
+      },
+      "unsafeToContinue": "Do not claim a passing global certification or fabricate database and mutation evidence.",
+      "resolutionMode": "release-certification",
+      "gatingScope": "release-certification",
+      "nextStep": {
+        "kind": "decision",
+        "value": "Review the global validator compatibility issue in a separately scoped tooling task."
+      },
+      "scopeNotes": "Does not reopen the explicitly approved local implementation scope; retained certification/debt limitation."
+    },
+    {
+      "id": "visual-literal-scan",
+      "type": "target-project-blocker",
+      "status": "open",
+      "owner": "agentic-ui-generation",
+      "failedSurface": {
+        "kind": "artifact",
+        "value": "agentic-ui/token-drift.json: four literal-color/dimension findings."
+      },
+      "unsafeToContinue": "Strict design governance is not green; local visual review does not satisfy the strict literal scan.",
+      "resolutionMode": "release-certification",
+      "gatingScope": "release-certification",
+      "nextStep": {
+        "kind": "decision",
+        "value": "Refactor the reusable visual values or resolve the global approved-pattern handling under a separate reviewed change."
+      },
+      "scopeNotes": "Does not reopen the explicitly approved local implementation scope; retained certification/debt limitation."
+    },
+    {
+      "id": "manual-assistive-technology",
+      "type": "target-project-blocker",
+      "status": "open",
+      "owner": "agentic-ui-qa",
+      "failedSurface": {
+        "kind": "artifact",
+        "value": "agentic-ui/accessibility-evidence.json: VoiceOver and physical-device review not performed."
+      },
+      "unsafeToContinue": "Automated checks must not be described as manual assistive-technology certification.",
+      "resolutionMode": "release-certification",
+      "gatingScope": "release-certification",
+      "nextStep": {
+        "kind": "decision",
+        "value": "Perform a manual VoiceOver and physical-device review before claiming that certification."
+      },
+      "scopeNotes": "Does not reopen the explicitly approved local implementation scope; retained certification/debt limitation."
+    },
+    {
+      "id": "route-js-budget",
+      "type": "target-project-blocker",
+      "status": "open",
+      "owner": "agentic-ui-generation",
+      "failedSurface": {
+        "kind": "artifact",
+        "value": "agentic-ui/performance-evidence.json: 365963 transferred script bytes exceeds 250 KB budget."
+      },
+      "unsafeToContinue": "Do not claim the route meets every performance budget or field Core Web Vitals.",
+      "resolutionMode": "release-certification",
+      "gatingScope": "release-certification",
+      "nextStep": {
+        "kind": "decision",
+        "value": "Reduce the interactive scene payload or explicitly approve a measured route-specific budget; collect production field data after publication."
+      },
+      "scopeNotes": "Does not reopen the explicitly approved local implementation scope; retained certification/debt limitation."
+    }
+  ]
+}

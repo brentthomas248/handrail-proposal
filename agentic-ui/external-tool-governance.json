@@ -1,0 +1,267 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-26T18:57:09.626078+00:00",
+  "tools": [
+    {
+      "id": "storybook-mcp",
+      "adoptionClass": "first-class-required-gate",
+      "lifecyclePhases": [
+        "component-workshop"
+      ],
+      "configurationScope": "target-project",
+      "requiredEvidence": [
+        "storybook-readiness",
+        "storybook-endpoint"
+      ],
+      "securityBoundary": "Target-project component metadata and Storybook tools; no personal browser session.",
+      "promotionStatus": "accepted",
+      "defaultAllowed": true,
+      "available": true,
+      "requiredForCurrentTask": true,
+      "evidenceRef": "docs/local-workflow.md"
+    },
+    {
+      "id": "design-md",
+      "adoptionClass": "first-class-required-gate",
+      "lifecyclePhases": [
+        "design-intent",
+        "generation-gate"
+      ],
+      "configurationScope": "global-plus-target-project",
+      "requiredEvidence": [
+        "design-md-lint",
+        "dtcg-export",
+        "token-drift"
+      ],
+      "securityBoundary": "Local design contract and generated token artifacts.",
+      "promotionStatus": "accepted",
+      "defaultAllowed": true
+    },
+    {
+      "id": "stitch",
+      "adoptionClass": "optional-adapter",
+      "lifecyclePhases": [
+        "design-intent",
+        "generate-or-implement"
+      ],
+      "configurationScope": "global-mcp-plus-sourced-env",
+      "requiredEvidence": [
+        "design-brief",
+        "design-md",
+        "rendered-qa"
+      ],
+      "securityBoundary": "Credential-backed remote generation; never stores secret values.",
+      "promotionStatus": "candidate",
+      "defaultAllowed": false,
+      "requiredForCurrentTask": false,
+      "available": false,
+      "omissionReason": "User approved the local workflow after credential authorization was denied; no remote generation or credential readiness is claimed.",
+      "scopeDecisionRef": "docs/local-workflow.md"
+    },
+    {
+      "id": "magic",
+      "adoptionClass": "optional-adapter",
+      "lifecyclePhases": [
+        "generate-or-implement"
+      ],
+      "configurationScope": "global-mcp-plus-sourced-env",
+      "requiredEvidence": [
+        "design-brief",
+        "design-md",
+        "component-state",
+        "accessibility",
+        "rendered-qa"
+      ],
+      "securityBoundary": "Credential-backed component generation; generated code must pass Agentic UI gates.",
+      "promotionStatus": "candidate",
+      "defaultAllowed": false,
+      "requiredForCurrentTask": false,
+      "available": false,
+      "omissionReason": "User approved the local workflow after credential authorization was denied; no remote generation or credential readiness is claimed.",
+      "scopeDecisionRef": "docs/local-workflow.md"
+    },
+    {
+      "id": "shadcn-mcp",
+      "adoptionClass": "target-project-only",
+      "lifecyclePhases": [
+        "generate-or-implement",
+        "component-workshop"
+      ],
+      "configurationScope": "target-project-only",
+      "requiredEvidence": [
+        "components-json",
+        "package-manager",
+        "design-brief",
+        "design-md",
+        "component-state",
+        "accessibility",
+        "rendered-qa"
+      ],
+      "securityBoundary": "Filesystem-writing component installer; requires explicit target-project context.",
+      "promotionStatus": "pilot",
+      "defaultAllowed": false,
+      "requiredForCurrentTask": false,
+      "explicitApproval": {
+        "approved": false,
+        "scope": ""
+      }
+    },
+    {
+      "id": "vercel-web-interface-guidelines",
+      "adoptionClass": "first-class-required-gate",
+      "lifecyclePhases": [
+        "generation-gate",
+        "product-qa"
+      ],
+      "configurationScope": "local-standards",
+      "requiredEvidence": [
+        "design-critique",
+        "production-readiness"
+      ],
+      "securityBoundary": "Source-backed checklist; no runtime dependency.",
+      "promotionStatus": "accepted",
+      "defaultAllowed": true
+    },
+    {
+      "id": "frontend-design",
+      "adoptionClass": "optional-adapter",
+      "lifecyclePhases": [
+        "design-intent",
+        "generate-or-implement"
+      ],
+      "configurationScope": "installed-skill",
+      "requiredEvidence": [
+        "design-brief",
+        "product-surface-rubric",
+        "design-md",
+        "rendered-qa"
+      ],
+      "securityBoundary": "Creative lens only; cannot override project standards or QA proof.",
+      "promotionStatus": "accepted",
+      "defaultAllowed": true,
+      "requiredForCurrentTask": true,
+      "available": true,
+      "evidenceRef": "DESIGN.md",
+      "notes": [
+        "Installed frontend-design skill was read and applied in this task."
+      ]
+    },
+    {
+      "id": "chrome-devtools-mcp",
+      "adoptionClass": "research-candidate",
+      "lifecyclePhases": [
+        "product-qa",
+        "debugging",
+        "performance"
+      ],
+      "configurationScope": "isolated-global-or-target-project",
+      "requiredEvidence": [
+        "explicit-devtools-task",
+        "headless",
+        "isolated",
+        "no-autoconnect"
+      ],
+      "securityBoundary": "Browser/session inspection; default profile attachment is forbidden.",
+      "promotionStatus": "pilot",
+      "defaultAllowed": false,
+      "requiredForCurrentTask": false,
+      "explicitApproval": {
+        "approved": false,
+        "scope": ""
+      },
+      "browserSessionPolicy": {
+        "headless": true,
+        "isolated": true,
+        "autoConnect": false
+      }
+    },
+    {
+      "id": "figma-mcp-code-connect",
+      "adoptionClass": "optional-adapter",
+      "lifecyclePhases": [
+        "design-intent",
+        "component-workshop"
+      ],
+      "configurationScope": "target-design-source",
+      "requiredEvidence": [
+        "figma-canonical-source",
+        "read-write-policy",
+        "code-connect-mappings"
+      ],
+      "securityBoundary": "Design-file access; write-to-canvas requires explicit policy.",
+      "promotionStatus": "candidate",
+      "defaultAllowed": false,
+      "requiredForCurrentTask": false
+    },
+    {
+      "id": "web-vitals-lighthouse",
+      "adoptionClass": "first-class-required-gate",
+      "lifecyclePhases": [
+        "product-qa",
+        "production-readiness"
+      ],
+      "configurationScope": "target-project",
+      "requiredEvidence": [
+        "performance-budget",
+        "performance-evidence"
+      ],
+      "securityBoundary": "Local browser/runtime reports; does not replace Playwright proof.",
+      "promotionStatus": "accepted",
+      "defaultAllowed": true
+    },
+    {
+      "id": "chromatic",
+      "adoptionClass": "research-candidate",
+      "lifecyclePhases": [
+        "component-workshop",
+        "visual-regression"
+      ],
+      "configurationScope": "target-project-service",
+      "requiredEvidence": [
+        "storybook-coverage",
+        "reviewed-baselines",
+        "service-token-policy"
+      ],
+      "securityBoundary": "Hosted visual regression; requires reviewed baselines and token policy.",
+      "promotionStatus": "candidate",
+      "defaultAllowed": false,
+      "requiredForCurrentTask": false
+    },
+    {
+      "id": "stagehand",
+      "adoptionClass": "optional-adapter",
+      "lifecyclePhases": [
+        "product-qa"
+      ],
+      "configurationScope": "global-mcp-plus-sourced-env",
+      "requiredEvidence": [
+        "semantic-model-observations"
+      ],
+      "securityBoundary": "Credential-backed remote service remains unused in this local workflow.",
+      "promotionStatus": "candidate",
+      "defaultAllowed": false,
+      "available": false,
+      "requiredForCurrentTask": false,
+      "omissionReason": "Explicit user-approved local workflow; use local deterministic browser evidence without claiming full cloud certification.",
+      "scopeDecisionRef": "docs/local-workflow.md"
+    },
+    {
+      "id": "browserbase",
+      "adoptionClass": "optional-adapter",
+      "lifecyclePhases": [
+        "product-qa"
+      ],
+      "configurationScope": "global-mcp-plus-sourced-env",
+      "requiredEvidence": [
+        "hosted-session-replay"
+      ],
+      "securityBoundary": "Credential-backed remote service remains unused in this local workflow.",
+      "promotionStatus": "candidate",
+      "defaultAllowed": false,
+      "available": false,
+      "requiredForCurrentTask": false,
+      "omissionReason": "Explicit user-approved local workflow; use local deterministic browser evidence without claiming full cloud certification.",
+      "scopeDecisionRef": "docs/local-workflow.md"
+    }
+  ]
+}

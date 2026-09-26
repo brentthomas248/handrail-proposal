@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0",
+  "generatedAt": "2026-09-26T19:09:16.338283+00:00",
+  "ok": false,
+  "status": "local-release-verified-not-published",
+  "localRelease": {
+    "passed": true,
+    "evidence": [
+      "agentic-ui/local-verification.json",
+      "IMPLEMENTATION.md",
+      "docs/local-workflow.md"
+    ]
+  },
+  "publication": {
+    "deployed": false,
+    "hostedSmokeTestPassed": false,
+    "notes": [
+      "GitHub Pages and GitHub profile publication are separate pending review steps."
+    ]
+  },
+  "strictCertification": {
+    "passed": false,
+    "evidence": [
+      "agentic-ui/blockers.json",
+      "agentic-ui/token-drift.json",
+      "agentic-ui/accessibility-evidence.json",
+      "agentic-ui/performance-evidence.json"
+    ],
+    "notes": [
+      "Schema-supported read-only policy is incompatible with the current broad-sandbox-only global validator.",
+      "Manual assistive technology, physical-device checks and field INP remain unmeasured.",
+      "The original JS payload budget is exceeded and strict token scanning retains findings."
+    ]
+  }
+}

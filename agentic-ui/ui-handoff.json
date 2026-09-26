@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0",
+  "handoffKind": "new-ui-implementation",
+  "surface": "Handrail interactive proposal and full unsigned contract",
+  "generatedAt": "2026-09-26T19:09:16.338283+00:00",
+  "designSources": [
+    "DESIGN.md",
+    "agentic-ui/ui-inventory.json",
+    "agentic-ui/frontend-lifecycle-scorecard.json",
+    "agentic-ui/design-critique.json"
+  ],
+  "acceptedDecisions": [
+    "Original paper sculpture and restrained navy/graphite/white art direction.",
+    "15/5 employment-first and 20/5 client-first paths, with collection-based payouts.",
+    "Typed proposal content powers website and generated agreement/PDF.",
+    "Explicitly approved local design/Storybook/Playwright lifecycle; no credentialed remote-generation claim."
+  ],
+  "rejectedDecisions": [
+    "Neon/glow design direction",
+    "Calculator or speculative sales forecast",
+    "Electronic signature or acceptance flow"
+  ],
+  "implementation": {
+    "routes": [
+      "/handrail-proposal/",
+      "/handrail-proposal/agreement/"
+    ],
+    "components": [
+      "DealPath",
+      "MotionToggle",
+      "PaperFallback",
+      "PaperScene",
+      "SceneHost"
+    ],
+    "filesChanged": [
+      "src/pages/index.astro",
+      "src/pages/agreement.astro",
+      "src/layouts/Page.astro",
+      "src/styles/global.css",
+      "src/scripts/motion.ts",
+      "src/components/DealPath.tsx",
+      "src/components/MotionToggle.tsx",
+      "src/components/PaperFallback.tsx",
+      "src/components/PaperScene.tsx",
+      "src/components/SceneHost.tsx"
+    ],
+    "reviewedFiles": [
+      "DESIGN.md",
+      "src/content/proposal.ts",
+      "agentic-ui/component-state-matrix.json",
+      "docs/local-workflow.md"
+    ]
+  },
+  "tokenExports": {
+    "dtcg": "agentic-ui/tokens.dtcg.json",
+    "driftReport": "agentic-ui/token-drift.json"
+  },
+  "componentCoverage": {
+    "matrixPath": "agentic-ui/component-state-matrix.json",
+    "components": [
+      "DealPath",
+      "MotionToggle",
+      "PaperFallback",
+      "PaperScene",
+      "SceneHost"
+    ],
+    "missingCoverage": []
+  },
+  "designReview": {
+    "critiqueLogPath": "agentic-ui/critique-log.jsonl",
+    "acceptedCritiques": [
+      "Match motion accessible name with its visible label.",
+      "Keep the full agreement readable without JavaScript and when WebGL fails.",
+      "Reduce scene material and rendering cost after measuring mobile startup.",
+      "Keep mobile direct agreement navigation available."
+    ],
+    "rejectedCritiques": []
+  },
+  "userAssumptions": [
+    "Names and proposed compensation may be public; private business information stays outside this repository.",
+    "Employment entity, benefits and work-state terms are completion items before signing."
+  ],
+  "taskModel": {
+    "targetUsers": [
+      "Josh and Handrail decision makers",
+      "Engineering reviewers visiting Brent\u2019s GitHub"
+    ],
+    "jobs": [
+      "Understand and negotiate the proposed relationship",
+      "Inspect engineering work and readable contract terms"
+    ],
+    "primaryTasks": [
+      "Compare paths",
+      "Understand timing and collection-based compensation",
+      "Read clauses or download PDF"
+    ]
+  },
+  "openDesignQuestions": [],
+  "qaIntentPath": "agentic-ui/qa-intent.json",
+  "notes": [
+    "Approved local implementation and deterministic verification completed; see local-verification.json.",
+    "Full global certification and publication are not claimed; the retained gaps are listed in blockers.json."
+  ]
+}
