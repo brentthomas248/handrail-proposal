@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T20:36:42.602124+00:00",
+  "generatedAt": "2026-09-26T20:47:48.590070+00:00",
   "mode": "full-lifecycle",
   "sections": [
     {
@@ -114,7 +114,7 @@
         "qa-artifacts/trifold/capture.json"
       ],
       "notes": [
-        "Current local check: 22 files, zero issues. Four unit, 19 browser and three component checks passed. Captures contain 24 chapter views and 15 scroll samples, with zero browser errors, warnings or failed requests. Current publication is pending; this is not hosted or global certification."
+        "Current local check: 22 files, zero issues. Four unit, 19 browser and three component checks passed. Captures contain 24 chapter views and 15 scroll samples, with zero browser errors, warnings or failed requests. The same 19 browser checks passed hosted; full global certification remains unclaimed."
       ]
     },
     {
@@ -219,5 +219,5 @@
   "localScopeStatus": "verified",
   "fullLifecycleCertified": false,
   "scope": "User-approved local trifold redesign; reference approval does not establish final visual acceptance or full global lifecycle certification.",
-  "publicationStatus": "pending-current-revision"
+  "publicationStatus": "published-and-hosted-verified"
 }

@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T20:35:15.113809+00:00",
+  "generatedAt": "2026-09-26T20:47:48.590070+00:00",
   "scope": "Current hinged HTML trifold and broader beginning-of-partnership proposal; approved local workflow",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": false,
+  "deployed": true,
   "checks": [
     {
       "command": "pnpm check",
@@ -73,7 +73,8 @@
     "Raw reports and screenshots remain ignored under qa-artifacts/ and test-results/.",
     "Lighthouse measures the current release build; physical-device and field measurements are not claimed.",
     "PDF rendering emitted a Poppler Type3 bounding-box warning; both rendered pages and complete canonical text comparison passed.",
-    "Hosted verification is pending publication of this revision."
+    "The same 19 browser checks pass against GitHub Pages. Hosted assets match the release build, and the downloaded PDF independently matches complete canonical content.",
+    "Supplementary WebKit checks cover 21 reading holds and three native-window states; protocol screenshots have a separately reproduced capture limitation. See webkit-verification.json."
   ],
   "limitations": [
     "agentic-ui/blockers.json",

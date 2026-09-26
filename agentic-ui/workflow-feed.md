@@ -46,3 +46,8 @@ Source ad6fa8b, static 05eaf7dc6478f6203c554bd40335c2602de4c793, GitHub Pages ru
 ## 2026-09-26T20:36:18.948973+00:00 — actual trifold verified locally
 
 The user requested independent folds, stronger scroll motion, no decorative symbols and the beginning of a broader partnership. The three HTML panels now open sequentially and move through perspective transitions before flat reading holds. Both hinge angles and reverse scrolling are exercised by real wheel input. A camera-depth defect found in rendered review was corrected with uniform numeric scale3d; 320px cash content was split into two framed stops. Current evidence: 19 browser tests, four content tests, three component checks, 24 chapter images and 15 fold samples. Current Lighthouse scores are 100 across all four categories on desktop and mobile, with 46,763 script-transfer bytes. Both PDF pages were rendered and checked. Publishing and hosted verification are next; user visual acceptance remains separate.
+
+
+## 2026-09-26T20:47:48.590070+00:00 — trifold published and verified
+
+Published source a7fc658 as static 92975026a1d4ae002716349bd1663e2335c3fdc1. Pages run 36270588222 succeeded. All 19 Chromium browser checks pass at the public URL; 24 chapter images and 15 fold samples have no errors, warnings or failed requests. Public assets match local output and the downloaded PDF matches seven sections and 15 paragraphs. Supplementary WebKit behavior and actual native-window rendering passed; its screenshot API has an independently reproduced hidden-backface defect, documented in webkit-verification.json. No CSS workaround was applied. User visual acceptance remains separate.

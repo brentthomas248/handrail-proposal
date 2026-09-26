@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
   "surface": "Handrail hinged HTML trifold and beginning-of-partnership proposal",
-  "generatedAt": "2026-09-26T20:35:15.113809+00:00",
+  "generatedAt": "2026-09-26T20:47:48.590070+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -95,8 +95,8 @@
   ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
-    "This trifold revision is not yet published. The live flat-flyer source ad6fa8b and static commit 05eaf7d are historical references.",
-    "Current local checks passed: 19 browser flows, 4 unit tests, 3 component checks, 22-file typecheck, readable two-page PDF and local Lighthouse 100 in all categories. Current hosted checks pending.",
+    "The current hinged HTML trifold is published. Source a7fc658 and static commit 9297502 replace the preceding flat-flyer edition.",
+    "Current verification passed: 19 browser checks locally and hosted, four unit tests, three component checks, 22-file typecheck, readable two-page PDF and local Lighthouse 100 in all categories. Supplementary WebKit evidence is recorded separately.",
     "No WebGL, calculator, forms or signatures. Essential content remains semantic HTML; decorative back faces do not duplicate accessible content.",
     "Full global certification remains unclaimed; manual review, physical devices and field-performance limits remain explicit."
   ],
@@ -108,10 +108,10 @@
     "reason": "The user found the flat version better but requested an actual dynamic trifold, removal of decorative symbols and a broader beginning-of-partnership message."
   },
   "publication": {
-    "status": "pending-current-revision",
+    "status": "published-and-hosted-verified",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "previousEditionSource": "ad6fa8b",
-    "previousEditionStatic": "05eaf7d",
-    "previousEditionEvidenceIsCurrent": false
+    "sourceCommit": "a7fc658ce169e4dae1927a7fd3eae95f8c14f6c7",
+    "staticCommit": "92975026a1d4ae002716349bd1663e2335c3fdc1",
+    "evidencePath": "agentic-ui/deployment-verification.json"
   }
 }

@@ -2,7 +2,7 @@
 
 An interactive business proposal from Brent Showalter to Handrail. A real HTML trifold becomes the scene: its wings unfold in sequence, then a scroll-driven camera moves across the printed proposal and settles into flat reading views.
 
-**Trifold revision publication is pending.** The [existing public URL](https://brentthomas248.github.io/handrail-proposal/) serves the preceding flat-flyer edition from source `ad6fa8b`. Its verification does not establish readiness of this revision. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for current evidence and limits.
+**[Explore the live trifold](https://brentthomas248.github.io/handrail-proposal/).** The current revision is published from source `a7fc658` and verified on GitHub Pages: all 19 browser checks passed, hosted assets match the build, and the downloaded PDF matches the complete proposal notes. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for current evidence and limits. Finished-design acceptance remains with the user.
 
 ## The proposal
 
@@ -62,6 +62,8 @@ pnpm build-storybook
 pnpm exec playwright install chromium
 pnpm test:e2e
 ```
+
+Supplementary WebKit behavior checks run with `node scripts/verify-webkit.mjs`. The [WebKit verification record](agentic-ui/webkit-verification.json) distinguishes native-window rendering from a reproduced protocol-screenshot backface defect and records the remaining physical-device limits.
 
 The PDF verifier requires Poppler (`brew install poppler` on macOS, `poppler-utils` on Ubuntu). It independently compares extracted PDF text with the complete canonical proposal content.
 

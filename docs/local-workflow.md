@@ -19,11 +19,13 @@ Required evidence is proportionate to that implementation: a production build, t
 
 ## Current redesign evidence
 
-The active verification and release state is recorded in IMPLEMENTATION.md and the lifecycle artifacts. **Current trifold publication and finished-design review are pending.** Source `ad6fa8b`, static commit `05eaf7d` and 19 hosted browser passes describe the preceding flat-flyer edition. They do not establish this revision’s hinge behavior, reading quality or readiness.
+The active verification and release state is recorded in IMPLEMENTATION.md and the lifecycle artifacts. **The current trifold is published and hosted verification passed.** Source `a7fc658` and static commit `9297502` are the current release. Finished-design acceptance remains with the user. Source `ad6fa8b` and static commit `05eaf7d` describe the previous flat-flyer edition; its receipts remain historical.
 
 Current checks must verify independent wing rotations under real scrolling, reversible opening, front/back faces, perspective transitions and flat holds with legible text. Root-sheet translation alone is insufficient evidence. Also check chapter navigation, persisted ordinary reading, reduced motion, no-JavaScript content, mobile framing, canonical notes, PDF downloads, keyboard focus and browser-back restoration.
 
 The workshop now documents the DealPath component and its two compensation paths. Removed PaperScene, PaperFallback, SceneHost and MotionToggle stories are historical implementation details, not current workshop surfaces. App-level camera controls require app-level verification.
+
+Supplementary WebKit 26.6 verification covers 21 reading holds across 1440px, 390px and 320px, with no errors or failed requests and three font-preload warnings. Native-window inspection established correct front/back rendering; WebKit protocol screenshots have a separately reproduced hidden-backface capture defect. No app CSS workaround was needed. This is not the full Chromium suite running in WebKit or a physical iOS review. See `agentic-ui/webkit-verification.json`.
 
 The PDF is generated from `/agreement/`, now visibly titled “Proposal notes.” `pnpm pdf:check` compares the introduction, seven ordered sections, complete paragraphs and endnote with the canonical source. The stable route and filename preserve existing links; they do not make the document a final agreement.
 
@@ -33,10 +35,10 @@ Generated reports and screenshots stay under ignored `qa-artifacts/` and `test-r
 
 The previous global static-app policy mismatch and literal design-token scanner limitations remain separate from product checks. This app has no database or business mutation endpoints; do not fabricate cleanup or mutation evidence to satisfy a generic full-stack validator. Do not describe a local release as a fully certified cloud lifecycle run.
 
-Earlier local Lighthouse measurements in performance-evidence.json belong to the preceding flat-flyer edition until explicitly replaced with a trifold measurement. Do not carry its scores or script-byte totals forward. Field metrics remain unmeasured. Automated checks do not establish physical-device coverage, manual assistive-technology certification, field Core Web Vitals or cloud-adapter readiness.
+Current trifold Lighthouse measurements are recorded in `agentic-ui/performance-evidence.json`: all four categories scored 100 on mobile and desktop. These are local laboratory measurements; field metrics remain unmeasured. Automated checks do not establish physical-device coverage, manual assistive-technology certification, field Core Web Vitals or cloud-adapter readiness.
 
 ## Publication
 
-The [public URL](https://brentthomas248.github.io/handrail-proposal/) serves the preceding flat-flyer edition until this revision is validated and published. The [source repository](https://github.com/brentthomas248/handrail-proposal) and branch-based Pages configuration already exist.
+The [public URL](https://brentthomas248.github.io/handrail-proposal/) now serves the hinged trifold. Pages run 36270588222 succeeded for source `a7fc658` and static commit `9297502`. All 19 hosted browser checks passed in 8.7 seconds. Homepage, notes, PDF, logo and social image matched the build; the downloaded PDF passed complete canonical text comparison. Fresh hosted capture produced 24 chapters and 15 fold samples with no errors, warnings or failed requests and a 14.05px minimum sampled reading-target text size. The [source repository](https://github.com/brentthomas248/handrail-proposal) and branch-based Pages configuration already exist.
 
-Optional workflows in `docs/github-actions/` remain inactive because the current OAuth credential lacks workflow-write permission. Local checks precede a publishing push. GitHub's own Pages job confirms deployment, not remote execution of project tests. After publication, run the current trifold browser checks with PROPOSAL_BASE_URL set to the public URL and independently compare the hosted PDF with the current canonical proposal. Branch publication includes a .nojekyll marker so Astro assets are served. Profile README and pin changes remain unapplied.
+Optional workflows in `docs/github-actions/` remain inactive because the current OAuth credential lacks workflow-write permission. Local checks precede a publishing push. GitHub's own Pages job confirms deployment, not remote execution of project tests. The current trifold browser checks used PROPOSAL_BASE_URL set to the public URL. Their hosted result and independent PDF comparison are recorded separately from deployment success. Branch publication includes a .nojekyll marker so Astro assets are served. Profile README and pin changes remain unapplied.

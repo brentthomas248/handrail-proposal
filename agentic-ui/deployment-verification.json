@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0",
   "url": "https://brentthomas248.github.io/handrail-proposal/",
-  "checkedAt": "2026-09-26T20:10:01.595Z",
+  "checkedAt": "2026-09-26T20:47:48.590070+00:00",
   "passed": true,
-  "sourceCommit": "ad6fa8b",
-  "staticCommit": "05eaf7dc6478f6203c554bd40335c2602de4c793",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36268461522",
+  "sourceCommit": "a7fc658ce169e4dae1927a7fd3eae95f8c14f6c7",
+  "staticCommit": "92975026a1d4ae002716349bd1663e2335c3fdc1",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36270588222",
   "publishingSource": {
     "branch": "gh-pages",
     "path": "/",
@@ -16,34 +16,34 @@
     "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm test:e2e",
     "passed": 19,
     "failed": 0,
-    "durationSeconds": 6.2
+    "durationSeconds": 8.7
   },
   "checks": [
-    "Real wheel input zooms and pans the actual flyer; reversing restores overview",
-    "Every camera chapter is framed on desktop, 390px and 320px; framed body text at least 12px",
-    "Touch emulation, keyboard chapter navigation and focus reveal",
-    "Reading preference, reduced motion, JavaScript-disabled rendering and browser Back navigation",
+    "Real wheel input unfolds both independent hinges, moves the camera and reverses to the folded packet",
+    "Intro wings fit between header and controls; active reading faces are flat and framed on desktop, 390px and 320px",
+    "Mobile touch emulation, keyboard chapter navigation and focus reveal",
+    "Reading preference, reduced motion, JavaScript-disabled content and browser Back navigation",
     "Canonical proposal notes, PDF availability and both route axe scans",
-    "Hosted HTML, notes, PDF, logo and social image match verified local output byte-for-byte"
+    "Hosted homepage, notes, PDF, logo and social image match the release build byte-for-byte"
   ],
   "staticAssetChecks": [
     {
       "path": "index.html",
       "http": 200,
-      "bytes": 34735,
-      "sha256": "3747ded74bb580089dcc00e0ac2f5e93136a72b2f3b6c5718104ea036987237d"
+      "bytes": 34089,
+      "sha256": "a8fc9d80413554fcc4b23976fcb2f6945f0adb000b644a448dace1c9b9646b77"
     },
     {
       "path": "agreement/index.html",
       "http": 200,
-      "bytes": 36879,
-      "sha256": "4048fb20073cf5dd1e880849347aa8c6203e0eb3121ff6bad47d467e029156cd"
+      "bytes": 35469,
+      "sha256": "80912b98cf2271a05f533a988f230fc9b1b6d6f18f20dc7e0e1920a91e73af3a"
     },
     {
       "path": "handrail-proposed-agreement.pdf",
       "http": 200,
-      "bytes": 184445,
-      "sha256": "f803ccea862f28293a440a971260c0839d48d437b07a51096935fc8394dd7b3e"
+      "bytes": 184675,
+      "sha256": "4c8977a28976f760f9b20c23584e8b04769bd561a15ed1c459bbbeadc963200d"
     },
     {
       "path": "handrail-logo.png",
@@ -54,8 +54,8 @@
     {
       "path": "social.png",
       "http": 200,
-      "bytes": 73296,
-      "sha256": "06117fee470c6d3e50195a146cea3b00f41f4c6b8db101f23b11f779621867db"
+      "bytes": 72589,
+      "sha256": "f5cd97ea07cba230f692b3613127166200a1bc37f8fae34e0266cd779a6495d7"
     }
   ],
   "pdfCanonicalCheck": {
@@ -68,13 +68,16 @@
   "errors": [],
   "failedRequests": [],
   "hostedCapture": {
-    "capturedAt": "2026-09-26T20:09:41.108Z",
-    "chapterImages": 22,
-    "evidencePath": "qa-artifacts/flyer-camera-hosted/capture.json",
+    "capturedAt": "2026-09-26T20:46:38.085Z",
+    "chapterImages": 24,
+    "foldSamples": 15,
+    "evidencePath": "qa-artifacts/trifold-hosted/capture.json",
     "errors": [],
+    "warnings": [],
     "failedRequests": [],
-    "minimumRenderedTextPx": 12.174000707165948
+    "minimumRenderedTextPx": 14.05005548650568
   },
-  "edition": "historical-flat-flyer",
-  "isCurrentRevision": false
+  "edition": "hinged-html-trifold",
+  "isCurrentRevision": true,
+  "supplementaryWebKitEvidence": "agentic-ui/webkit-verification.json"
 }

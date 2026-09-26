@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T20:36:42.602124+00:00",
+  "generatedAt": "2026-09-26T20:47:48.590070+00:00",
   "surface": "Handrail hinged HTML trifold and partnership proposal notes",
-  "scope": "Current trifold revision verified locally; publication and final user visual acceptance pending. No full global certification is claimed.",
+  "scope": "Current trifold verified locally and hosted; final user visual acceptance remains pending. Full global certification is not claimed.",
   "sources": [
     "DESIGN.md",
     "src/pages/index.astro",

@@ -93,11 +93,11 @@
   "knownTradeoffs": [
     "Stitch, Magic, Stagehand and Browserbase are omitted under docs/local-workflow.md; no cloud or full global lifecycle certification is claimed.",
     "Physical-device, manual VoiceOver and field INP evidence remain unavailable.",
-    "Publication is pending and requires fresh hosted smoke checks of this trifold revision, notes and PDF.",
+    "This trifold, notes and PDF are published and have fresh hosted checks; user visual acceptance remains separate.",
     "Current Lighthouse scores describe a local production-preview lab run, not physical-device or field performance."
   ],
-  "generatedAt": "2026-09-26T20:36:42.602124+00:00",
-  "scope": "Current hinged HTML trifold and broader partnership proposal; deterministic local verification completed, publication pending.",
+  "generatedAt": "2026-09-26T20:47:48.590070+00:00",
+  "scope": "Current hinged HTML trifold and broader partnership proposal; local and hosted verification completed.",
   "localEvidence": {
     "browserChecks": 19,
     "unitChecks": 4,
