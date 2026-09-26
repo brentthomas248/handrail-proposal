@@ -1,24 +1,29 @@
 {
   "schemaVersion": "1.0",
-  "handoffKind": "new-ui-implementation",
-  "surface": "Handrail interactive proposal and full unsigned contract",
-  "generatedAt": "2026-09-26T19:21:11.611306+00:00",
+  "handoffKind": "ui-redesign",
+  "surface": "Handrail growth partnership flyer and negotiable proposal notes",
+  "generatedAt": "2026-09-26T20:03:48.417Z",
   "designSources": [
     "DESIGN.md",
-    "agentic-ui/ui-inventory.json",
-    "agentic-ui/frontend-lifecycle-scorecard.json",
+    "docs/redesign-research.md",
+    "docs/brand-sources.md",
     "agentic-ui/design-critique.json"
   ],
   "acceptedDecisions": [
-    "Original paper sculpture and restrained navy/graphite/white art direction.",
-    "15/5 employment-first and 20/5 client-first paths, with collection-based payouts.",
-    "Typed proposal content powers website and generated agreement/PDF.",
-    "Explicitly approved local design/Storybook/Playwright lifecycle; no credentialed remote-generation claim."
+    "One actual HTML flyer, zoomed and panned with native scrolling and GSAP ScrollTrigger.",
+    "Telescope scale changes, Igloo continuity, Exat typography and Stripe Press reading quality: references explicitly approved.",
+    "Blend Handrail careers, sample MOU and supplied pricing/one-pager materials; official wordmark, Inter/Playfair, warm paper and rust.",
+    "No base salary; commission paid after customer collections and in matching installments.",
+    "15/5 if hired first; 20/5 if the qualifying client comes first, applying to that client and future credited sales.",
+    "A 90-day proposal, benefits request, roles and next discussion; Handrail writes the final contract.",
+    "Approved local design, Storybook and Playwright workflow."
   ],
   "rejectedDecisions": [
     "Neon/glow design direction",
     "Calculator or speculative sales forecast",
-    "Electronic signature or acceptance flow"
+    "Electronic signature or acceptance flow",
+    "Published paper sculpture and clip treatment rejected by user after live review.",
+    "Full contract framing and legal boilerplate; replacement must be a negotiable business proposal."
   ],
   "implementation": {
     "routes": [
@@ -26,11 +31,7 @@
       "/handrail-proposal/agreement/"
     ],
     "components": [
-      "DealPath",
-      "MotionToggle",
-      "PaperFallback",
-      "PaperScene",
-      "SceneHost"
+      "DealPath"
     ],
     "filesChanged": [
       "src/pages/index.astro",
@@ -38,17 +39,15 @@
       "src/layouts/Page.astro",
       "src/styles/global.css",
       "src/scripts/motion.ts",
-      "src/components/DealPath.tsx",
-      "src/components/MotionToggle.tsx",
-      "src/components/PaperFallback.tsx",
-      "src/components/PaperScene.tsx",
-      "src/components/SceneHost.tsx"
+      "src/content/proposal.ts",
+      "src/components/DealPath.tsx"
     ],
     "reviewedFiles": [
       "DESIGN.md",
       "src/content/proposal.ts",
+      "docs/brand-sources.md",
       "agentic-ui/component-state-matrix.json",
-      "docs/local-workflow.md"
+      "tests/e2e/proposal.spec.ts"
     ]
   },
   "tokenExports": {
@@ -58,48 +57,54 @@
   "componentCoverage": {
     "matrixPath": "agentic-ui/component-state-matrix.json",
     "components": [
-      "DealPath",
-      "MotionToggle",
-      "PaperFallback",
-      "PaperScene",
-      "SceneHost"
+      "DealPath"
     ],
     "missingCoverage": []
   },
   "designReview": {
     "critiqueLogPath": "agentic-ui/critique-log.jsonl",
     "acceptedCritiques": [
-      "Match motion accessible name with its visible label.",
-      "Keep the full agreement readable without JavaScript and when WebGL fails.",
-      "Reduce scene material and rendering cost after measuring mobile startup.",
-      "Keep mobile direct agreement navigation available."
+      "Remove sculpture and clip; make the actual flyer the camera subject.",
+      "Replace full contract framing and invented clauses with seven business-proposal sections.",
+      "Enlarge phone detail text; keep every target between persistent header and navigation.",
+      "Correct narrow reading overflow, text contrast and initial camera layout shift."
     ],
     "rejectedCritiques": []
   },
   "userAssumptions": [
-    "Names and proposed compensation may be public; private business information stays outside this repository.",
-    "Employment entity, benefits and work-state terms are completion items before signing."
+    "Names and proposed compensation may be public; private financial research remains outside the repository.",
+    "Handrail will prepare final terms after discussion; proposed benefits and qualification criteria require alignment."
   ],
   "taskModel": {
     "targetUsers": [
       "Josh and Handrail decision makers",
-      "Engineering reviewers visiting Brent\u2019s GitHub"
+      "Engineering reviewers visiting Brent’s GitHub"
     ],
     "jobs": [
-      "Understand and negotiate the proposed relationship",
-      "Inspect engineering work and readable contract terms"
+      "Understand and discuss the proposed relationship",
+      "Inspect the scroll camera and public source"
     ],
     "primaryTasks": [
-      "Compare paths",
-      "Understand timing and collection-based compensation",
-      "Read clauses or download PDF"
+      "See the collections-first model",
+      "Compare rates and commitment order",
+      "Review scope and the 90-day window",
+      "Read or download proposal notes"
     ]
   },
-  "openDesignQuestions": [],
+  "openDesignQuestions": [
+    "User review of the finished redesign remains pending; reference approval is not final visual acceptance."
+  ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
-    "Approved local implementation and deterministic verification completed; see local-verification.json.",
-    "User-authorized GitHub Pages publication is live at https://brentthomas248.github.io/handrail-proposal/; deployed browser checks and PDF comparison passed. See deployment-verification.json.",
-    "Full global certification remains unclaimed; retained limitations are listed in blockers.json. GitHub profile changes remain a separate pending step."
-  ]
+    "Current local verification is recorded separately; publication pending.",
+    "No WebGL, external assets at runtime, calculator, forms or signatures.",
+    "Full global certification remains unclaimed; token-policy and manual-review limitations remain explicit."
+  ],
+  "userReview": {
+    "date": "2026-09-26",
+    "status": "references-and-brand-direction-approved-deliverable-review-pending",
+    "researchPath": "docs/redesign-research.md",
+    "implementationPaused": false,
+    "reason": "User approved the reference direction and requested the shared Handrail vibe across all supplied materials."
+  }
 }

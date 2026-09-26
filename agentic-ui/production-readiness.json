@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T19:21:11.611306+00:00",
+  "generatedAt": "2026-09-26T20:03:48.417Z",
   "ok": false,
-  "status": "published-and-smoke-verified",
+  "status": "redesign-locally-verified-publication-pending",
   "localRelease": {
     "passed": true,
     "evidence": [
@@ -12,8 +12,8 @@
     ]
   },
   "publication": {
-    "deployed": true,
-    "hostedSmokeTestPassed": true,
+    "deployed": false,
+    "hostedSmokeTestPassed": false,
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidence": "agentic-ui/deployment-verification.json",
     "notes": [
@@ -30,9 +30,9 @@
       "agentic-ui/performance-evidence.json"
     ],
     "notes": [
-      "Schema-supported read-only policy is incompatible with the current broad-sandbox-only global validator.",
-      "Manual assistive technology, physical-device checks and field INP remain unmeasured.",
-      "The original JS payload budget is exceeded and strict token scanning retains findings."
+      "The global static-app policy validator still expects database/mutation evidence that does not apply to this read-only static proposal.",
+      "Manual assistive-technology, physical-device and field INP review remain unperformed.",
+      "The route script budget passes; current global.css literal-value scan findings remain explicit."
     ]
   }
 }

@@ -1,35 +1,49 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T18:28:20.217Z",
-  "productSurface": "marketing-page",
+  "generatedAt": "2026-09-26T20:01:44.547158+00:00",
+  "productSurface": "interactive-business-proposal",
   "rubricProfile": "marketing-page",
   "audience": [
     "Josh and Handrail decision-makers",
     "Engineering reviewers visiting Brent Showalter on GitHub"
   ],
   "primaryJobs": [
-    "Understand the conditional employment and commission proposal",
-    "Compare the two activation paths",
-    "Read and download the full unsigned contract",
-    "Inspect the engineering showcase"
+    "Understand how no base salary and commission following customer collections reduce upfront sales compensation pressure",
+    "Compare 15/5 hire-first and 20/5 client-first terms, including all future credited sales",
+    "Understand why originating the enabling client earns the higher rate",
+    "Review and refine the proposed business structure before Handrail drafts the final contract",
+    "Move through the actual flyer by scrolling, with direct reading and downloadable notes available"
   ],
-  "evidenceLevel": "assumption",
+  "evidenceLevel": "production-feedback",
   "constraints": [
-    "Public names and proposed terms only; exclude private company/customer information",
-    "Sculptural paper with graphite, silver, deep navy and cool white; no neon",
-    "Original 3D fold narrative, accessible semantic contract, native touch/reduced-motion reading",
-    "Astro static output, React islands, strict TypeScript, GitHub Pages"
+    "The user rejected the earlier public design and approved Telescope, Igloo, Exat and Stripe Press as references before rebuilding",
+    "Align with official Handrail careers, sample MOU and user-supplied pricing material using cream, near-black ink, rust and the unchanged official logo",
+    "Use locally served Inter Variable with Playfair Display italic for the introduction",
+    "Animate scale and translation of the semantic HTML flyer itself; preserve native scroll, reduced motion, no-JavaScript and ordinary reading paths",
+    "Present a negotiable business proposal, not a final contract, legal review, signature or acceptance flow",
+    "Exclude private company finances, customer information and research from public content",
+    "Astro static output, GSAP ScrollTrigger, strict TypeScript and GitHub Pages; no backend or required cloud generation tools"
   ],
   "frontendDesign": {
     "used": true,
-    "reason": "User selected sculptural agreement following reference research and rejected neon."
+    "reason": "The user approved the motion references and requested Handrail brand alignment after rejecting the earlier public treatment."
   },
   "sources": [
     "DESIGN.md",
-    "PROJECT.md",
-    "IMPLEMENTATION.md"
+    "docs/redesign-research.md",
+    "docs/brand-sources.md",
+    "src/pages/index.astro",
+    "src/layouts/Page.astro",
+    "src/styles/global.css",
+    "src/scripts/motion.ts"
   ],
   "openQuestions": [
-    "Employment/benefits/legal completion schedule remains unsigned"
-  ]
+    "User visual acceptance of the rebuilt page remains pending.",
+    "Business terms remain proposed and open to adjustment; Handrail prepares the final contract."
+  ],
+  "acceptanceStatus": {
+    "references": "approved",
+    "implementation": "pending-user-review",
+    "functionalEvidence": "Maintained separately in product QA receipts; not aesthetic approval"
+  }
 }

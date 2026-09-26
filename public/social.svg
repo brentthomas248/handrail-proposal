@@ -1,1 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#edf0f2"/><text x="70" y="92" fill="#21364b" font-family="Arial,sans-serif" font-size="24">Brent Showalter / Handrail</text><text x="70" y="230" fill="#20272d" font-family="Arial,sans-serif" font-size="80">A commitment</text><text x="70" y="322" fill="#20272d" font-family="Arial,sans-serif" font-size="80">built around</text><text x="70" y="414" fill="#20272d" font-family="Arial,sans-serif" font-size="80">results.</text><path d="m820 130 90 80 110-95-30 330-103 85-80-93Z" fill="#fff" stroke="#bcc7ce"/><path d="m910 210 110-95-30 330-103 85Z" fill="#d4dde3"/><path d="m1020 115 110 65-30 320-110-55Z" fill="#21364b"/><text x="70" y="558" fill="#53606b" font-family="Arial,sans-serif" font-size="22">An agreement brought to life. Unsigned proposal.</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#ebe4d8"/>
+  <rect x="32" y="26" width="1136" height="580" fill="#fbfaf7"/>
+  <image href="./handrail-logo.png" x="70" y="52" width="204" height="58"/>
+  <g font-family="Inter,Arial,sans-serif" fill="#1a1816">
+    <text x="1128" y="86" text-anchor="end" font-size="19">A proposal by Brent Showalter</text>
+    <path d="M70 132H1128" stroke="#1a1816"/>
+    <text x="66" y="263" font-size="112" letter-spacing="-7" font-weight="700">No base</text>
+    <text x="66" y="368" font-size="112" letter-spacing="-7" font-weight="700">salary.</text>
+    <text x="72" y="441" font-size="32" letter-spacing="-1">Commission paid from</text>
+    <text x="72" y="481" font-size="32" letter-spacing="-1">collected revenue.</text>
+    <text x="72" y="561" font-size="18">Growth partnership · For discussion</text>
+  </g>
+  <rect x="676" y="161" width="452" height="410" fill="#c8502a"/>
+  <g font-family="Inter,Arial,sans-serif" fill="white">
+    <text x="710" y="215" font-size="22">Revenue first.</text>
+    <text x="710" y="245" font-size="22">Commission follows.</text>
+    <path d="M710 285H1094" stroke="white" opacity=".6"/>
+    <text x="710" y="328" font-size="18">HIRE FIRST</text>
+    <text x="710" y="397" font-size="66" letter-spacing="-4">15% + 5%</text>
+    <text x="710" y="450" font-size="18">CLIENT FIRST</text>
+    <text x="710" y="520" font-size="66" letter-spacing="-4">20% + 5%</text>
+    <text x="1094" y="551" text-anchor="end" font-size="16">Build + recurring</text>
+  </g>
+</svg>

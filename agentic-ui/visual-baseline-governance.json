@@ -1,14 +1,15 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T19:07:28.091621+00:00",
-  "baselineRoot": "qa-artifacts",
+  "generatedAt": "2026-09-26T20:07:09.871Z",
+  "baselineRoot": "qa-artifacts/flyer-camera",
   "matrix": {
     "viewports": [
       "desktop-1440x1000",
-      "mobile-390x844"
+      "mobile-390x844",
+      "small-mobile-320x740"
     ],
     "themes": [
-      "default"
+      "Handrail warm paper and rust"
     ],
     "browsers": [
       "chromium"
@@ -17,64 +18,229 @@
   "dynamicMasks": [],
   "baselines": [
     {
-      "id": "desktop-hero",
+      "id": "desktop-0",
       "route": "/handrail-proposal/",
-      "viewport": "desktop-1440x1000",
-      "theme": "default",
+      "viewport": "desktop",
+      "theme": "Handrail warm paper and rust",
       "browser": "chromium",
       "status": "reviewed",
       "artifact": {
-        "path": "qa-artifacts/desktop-hero.png",
-        "sizeBytes": 169716,
-        "sha256": "54816e0f2525ba2699e50aba5a59ccdacc96dd300e9e2f88311bb8e4088d352e"
+        "path": "qa-artifacts/flyer-camera/desktop-00.png",
+        "sizeBytes": 203019,
+        "sha256": "85952b7f913d179576c9fed4b36578253dd63dc20ababa7b796b6ccf28690167"
       },
       "reviewedBy": "Codex rendered-image review",
-      "reviewedAt": "2026-09-26T19:07:28.091621+00:00"
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
     },
     {
-      "id": "mobile-hero",
+      "id": "desktop-1",
       "route": "/handrail-proposal/",
-      "viewport": "mobile-390x844",
-      "theme": "default",
+      "viewport": "desktop",
+      "theme": "Handrail warm paper and rust",
       "browser": "chromium",
       "status": "reviewed",
       "artifact": {
-        "path": "qa-artifacts/mobile-hero.png",
-        "sizeBytes": 66544,
-        "sha256": "2b633c8f23fcc0e54b5f2d660c7a24d0df021e990e7e32497aae7d17f3526cfb"
+        "path": "qa-artifacts/flyer-camera/desktop-01.png",
+        "sizeBytes": 164634,
+        "sha256": "7d8351ded6b6470df28cf696ab975bef950f4d1aa60517346117cf59932846b9"
       },
       "reviewedBy": "Codex rendered-image review",
-      "reviewedAt": "2026-09-26T19:07:28.091621+00:00"
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
     },
     {
-      "id": "desktop-structure",
-      "route": "/handrail-proposal/#structure",
-      "viewport": "desktop-1440x1000",
-      "theme": "default",
+      "id": "desktop-2",
+      "route": "/handrail-proposal/",
+      "viewport": "desktop",
+      "theme": "Handrail warm paper and rust",
       "browser": "chromium",
       "status": "reviewed",
       "artifact": {
-        "path": "qa-artifacts/desktop-structure.png",
-        "sizeBytes": 127429,
-        "sha256": "fd5b2c230400f70617b82cdd6dc84254e0b6a25011fd1d7626ca1f0fe420b147"
+        "path": "qa-artifacts/flyer-camera/desktop-02.png",
+        "sizeBytes": 136995,
+        "sha256": "d0838367c2f95f953a42e23602b7215b6048a880df937422f058e7cd6229af0f"
       },
       "reviewedBy": "Codex rendered-image review",
-      "reviewedAt": "2026-09-26T19:07:28.091621+00:00"
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
     },
     {
-      "id": "contract",
-      "route": "/handrail-proposal/agreement/",
-      "viewport": "desktop-1440x1000",
-      "theme": "default",
+      "id": "desktop-3",
+      "route": "/handrail-proposal/",
+      "viewport": "desktop",
+      "theme": "Handrail warm paper and rust",
       "browser": "chromium",
       "status": "reviewed",
       "artifact": {
-        "path": "qa-artifacts/contract.png",
-        "sizeBytes": 149449,
-        "sha256": "b4084554ad79016cd9ead72aa09bd260e89a9d49e4524342ee9d21377231d22f"
+        "path": "qa-artifacts/flyer-camera/desktop-03.png",
+        "sizeBytes": 259740,
+        "sha256": "2dbe8ddb5dbe8d0cbec8ef2aa7ea93409001d6b439fe0d035c5877a877fcd6cb"
       },
       "reviewedBy": "Codex rendered-image review",
-      "reviewedAt": "2026-09-26T19:07:28.091621+00:00"
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
+    },
+    {
+      "id": "desktop-4",
+      "route": "/handrail-proposal/",
+      "viewport": "desktop",
+      "theme": "Handrail warm paper and rust",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/flyer-camera/desktop-04.png",
+        "sizeBytes": 306899,
+        "sha256": "78c6bd9165f2746fb333de5c86d8b98bc449584771293dc6db1baca2eaeb1a63"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
+    },
+    {
+      "id": "desktop-5",
+      "route": "/handrail-proposal/",
+      "viewport": "desktop",
+      "theme": "Handrail warm paper and rust",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/flyer-camera/desktop-05.png",
+        "sizeBytes": 236002,
+        "sha256": "36a24161283f7826a1242035c6e2b4efca7bcf3167dd6dd426ee6fe79ec02d1c"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
+    },
+    {
+      "id": "mobile-0",
+      "route": "/handrail-proposal/",
+      "viewport": "mobile",
+      "theme": "Handrail warm paper and rust",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/flyer-camera/mobile-00.png",
+        "sizeBytes": 77348,
+        "sha256": "5ad8937feca3c9450192db3f2cd8814157e82696a17a3495763dbeeab114f173"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
+    },
+    {
+      "id": "mobile-1",
+      "route": "/handrail-proposal/",
+      "viewport": "mobile",
+      "theme": "Handrail warm paper and rust",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/flyer-camera/mobile-01.png",
+        "sizeBytes": 65973,
+        "sha256": "c3fa96ca48d2dd1a3afbc4ef990089b706362c6948efa76a5f2c7add949b65b9"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
+    },
+    {
+      "id": "mobile-2",
+      "route": "/handrail-proposal/",
+      "viewport": "mobile",
+      "theme": "Handrail warm paper and rust",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/flyer-camera/mobile-02.png",
+        "sizeBytes": 72290,
+        "sha256": "c15a3dd9f25bdea6ea72c95b644226fb8cbef63b8b89163f9d91e58bcf4e3127"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
+    },
+    {
+      "id": "mobile-3",
+      "route": "/handrail-proposal/",
+      "viewport": "mobile",
+      "theme": "Handrail warm paper and rust",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/flyer-camera/mobile-03.png",
+        "sizeBytes": 54944,
+        "sha256": "28bc4c3a163756df0c6eda9dcbbb2d5c63627f4098a7ad3d109423c16d5a2b38"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
+    },
+    {
+      "id": "mobile-5",
+      "route": "/handrail-proposal/",
+      "viewport": "mobile",
+      "theme": "Handrail warm paper and rust",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/flyer-camera/mobile-05.png",
+        "sizeBytes": 83116,
+        "sha256": "b41643c2e792c1e7b0ab51011a1e5f3a8cea200b5f8eeabb3c2d34fa8e135b07"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
+    },
+    {
+      "id": "mobile-7",
+      "route": "/handrail-proposal/",
+      "viewport": "mobile",
+      "theme": "Handrail warm paper and rust",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/flyer-camera/mobile-07.png",
+        "sizeBytes": 92662,
+        "sha256": "651fc53e5be0ae3039a7316d0e5942b66b0281de67cbc17d7b2c5efca42d76d4"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
+    },
+    {
+      "id": "small-mobile-2",
+      "route": "/handrail-proposal/",
+      "viewport": "small-mobile",
+      "theme": "Handrail warm paper and rust",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/flyer-camera/small-mobile-02.png",
+        "sizeBytes": 51496,
+        "sha256": "67a5e727fd513c2989c89ba71a21c459c4849c9354ef58090943bf2577b14663"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
+    },
+    {
+      "id": "small-mobile-4",
+      "route": "/handrail-proposal/",
+      "viewport": "small-mobile",
+      "theme": "Handrail warm paper and rust",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/flyer-camera/small-mobile-04.png",
+        "sizeBytes": 64184,
+        "sha256": "cd1e938d07bc015abd743d936d42ee310e9a58937a01d9f8c0448d76d31cf923"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
+    },
+    {
+      "id": "small-mobile-7",
+      "route": "/handrail-proposal/",
+      "viewport": "small-mobile",
+      "theme": "Handrail warm paper and rust",
+      "browser": "chromium",
+      "status": "reviewed",
+      "artifact": {
+        "path": "qa-artifacts/flyer-camera/small-mobile-07.png",
+        "sizeBytes": 67679,
+        "sha256": "7a8080ecc193a23afb212734d6529903cac87ebeefb398e3a3afa7406b0b78d0"
+      },
+      "reviewedBy": "Codex rendered-image review",
+      "reviewedAt": "2026-09-26T20:07:09.871Z"
     }
   ],
   "diffs": [],
@@ -84,7 +250,9 @@
     "artifactHashesRequired": true
   },
   "notes": [
-    "Initial local visual baseline candidates were rendered and inspected; no previous baseline or automated image-diff claim.",
-    "Artifacts are ignored local evidence; rerun pnpm capture to regenerate after source changes."
+    "Replaces the rejected sculpture edition; not an automated image-diff claim.",
+    "All 22 camera frames were captured and checked for framing. Listed images were visually inspected.",
+    "User reference approval is separate from acceptance of this finished redesign.",
+    "PDF pages and social image were also visually inspected; browser screenshots are local ignored artifacts."
   ]
 }

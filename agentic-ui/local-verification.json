@@ -1,107 +1,88 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T19:09:16.338283+00:00",
-  "scope": "User-approved local implementation and deterministic QA",
+  "generatedAt": "2026-09-26T20:07:09.871Z",
+  "scope": "Approved local Handrail flyer redesign; product evidence separated from full global certification",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": true,
+  "deployed": false,
   "checks": [
     {
       "command": "pnpm check",
-      "exitCode": 0,
-      "result": "30 files; zero errors, warnings and hints"
+      "result": "22 files; zero errors, warnings and hints",
+      "exitCode": 0
     },
     {
       "command": "pnpm test",
-      "exitCode": 0,
-      "result": "31 contract scenario tests passed"
+      "result": "4 content/consistency tests passed",
+      "exitCode": 0
     },
     {
       "command": "pnpm build:release",
-      "exitCode": 0,
-      "result": "Two static routes built and current three-page PDF generated"
+      "result": "Two static routes and current two-page proposal PDF",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm contract:check",
+      "result": "Generated Markdown matches typed source",
+      "exitCode": 0
     },
     {
       "command": "pnpm pdf:check",
-      "exitCode": 0,
-      "result": "Introduction, 18 sections, 29 paragraphs and unsigned status match canonical source in order"
+      "result": "Introduction, 7 sections, 15 paragraphs and endnote match completely and in order",
+      "exitCode": 0
     },
     {
       "command": "pnpm test:e2e",
-      "exitCode": 0,
-      "result": "13 browser tests passed in 5.2 seconds"
+      "result": "19 browser tests passed, including real scrolling and touch, framing and readable type at each stop, keyboard, reading preferences, Back navigation, no-JS, notes/PDF and both axe scans",
+      "exitCode": 0
     },
     {
-      "command": "pnpm test:components",
-      "exitCode": 0,
-      "result": "Seven behavior checks; zero axe violations and zero uncaught errors"
+      "command": "pnpm capture",
+      "result": "22 chapter images plus reading/notes screenshots; zero browser or failed-request errors",
+      "exitCode": 0
     },
     {
       "command": "pnpm build-storybook",
-      "exitCode": 0,
-      "result": "Production Storybook build passed; large-chunk warning retained"
+      "result": "Production workshop build passed; workshop-only large-chunk warning",
+      "exitCode": 0
     },
     {
-      "command": "Storybook MCP initialize, tools/list and docs-list",
-      "exitCode": 0,
-      "result": "Live @storybook/addon-mcp 10.6.0, seven callable tools and five documented components"
+      "command": "pnpm test:components",
+      "result": "3 checks; zero axe violations and uncaught errors",
+      "exitCode": 0
     },
     {
-      "command": "validate-component-state.mjs --target . --write --json",
-      "exitCode": 0,
-      "result": "No issues or warnings"
+      "command": "Storybook MCP readiness and component-state validation",
+      "result": "Live endpoint and current DealPath state coverage passed",
+      "exitCode": 0
     },
     {
-      "command": "validate-storybook-readiness.mjs --target . --required --require-endpoint --url http://127.0.0.1:6006/mcp --json",
-      "exitCode": 0,
-      "result": "Required live endpoint ready"
+      "command": "pnpm format:check",
+      "result": "All checked files conform",
+      "exitCode": 0
     },
     {
       "command": "pnpm performance",
-      "exitCode": 0,
-      "result": "Local Lighthouse mobile 99 and desktop 100 performance (optimized mobile runs varied 93\u201399); both 100 accessibility/best-practices/SEO; JS budget exceeded"
+      "result": "Local Lighthouse 100 in all four categories on mobile and desktop; 45870 script-transfer bytes under unchanged 250 KB budget",
+      "exitCode": 0
     },
     {
-      "command": "npx --yes @google/design.md@0.4.0 lint DESIGN.md",
-      "exitCode": 0,
-      "result": "No errors, five unused-token warnings"
-    },
-    {
-      "command": "npx --yes @google/design.md@0.4.0 export --format dtcg DESIGN.md",
-      "exitCode": 0,
-      "result": "DTCG token export generated"
-    },
-    {
-      "command": "validate-design-governance.mjs --target . --skip-design-md-cli --json",
-      "exitCode": 1,
-      "result": "Four retained hardcoded color/dimension findings; story export names also reported as warnings"
-    },
-    {
-      "command": "validate-professional-ui-readiness.mjs --target . --scope full-overhaul --json",
-      "exitCode": 1,
-      "result": "Strict global certification fails for explicitly retained scorecard/manual-coverage/production-readiness/static-policy gaps. No missing-artifact claims are suppressed.",
-      "issueCodes": [
-        "accessibility-check-not-passing",
-        "design-critique-check-not-complete",
-        "invalid-max-mutations",
-        "missing-autonomy-evidence-requirement",
-        "missing-cleanup-command",
-        "missing-test-database-evidence",
-        "production-readiness-not-passing",
-        "scorecard-section-not-complete",
-        "unsupported-autonomy-mode"
-      ]
+      "command": "DESIGN.md lint, DTCG export and design-brief validation",
+      "result": "Zero lint errors, two unused-token warnings, token export and brief validation passed",
+      "exitCode": 0
     }
   ],
   "evidenceNotes": [
-    "Final app/check/unit/build/PDF/browser/component pipeline completed with exit 0 at 2026-09-26 14:06:28 America/Chicago.",
-    "Raw local browser and Lighthouse artifacts are ignored under qa-artifacts/ and test-results/; no cloud or manual assistive-technology proof is inferred.",
-    "Parent later reran check/build/PDF and all 13 browser tests at 14:09 after disabling the motion button until hydration; all passed."
+    "Rendered desktop/mobile flyer captures and both PDF pages were inspected.",
+    "Runtime verification uses the current HTML flyer. Earlier sculpture test counts are historical and superseded.",
+    "Raw artifacts are ignored under qa-artifacts/ and test-results/.",
+    "Lighthouse measurement preceded the final keyboard/back-navigation cleanup; physical-device and field measurements are not claimed.",
+    "PDF rendering emitted a Poppler Type3 bounding-box warning; visual review and full text comparison passed."
   ],
   "limitations": [
     "agentic-ui/blockers.json",
-    "agentic-ui/performance-evidence.json",
-    "agentic-ui/accessibility-evidence.json"
+    "agentic-ui/accessibility-evidence.json",
+    "agentic-ui/token-drift.json"
   ],
   "deploymentEvidencePath": "agentic-ui/deployment-verification.json"
 }

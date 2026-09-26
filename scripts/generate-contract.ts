@@ -11,11 +11,11 @@ if (process.argv.includes('--check')) {
   const saved = await readFile(path, 'utf8');
   if (saved !== content) {
     console.error(
-      'Proposed agreement is stale. Regenerate it from src/content/proposal.ts.',
+      'Proposal notes are stale. Regenerate it from src/content/proposal.ts.',
     );
     process.exitCode = 1;
   } else {
-    console.log('Contract Markdown matches the canonical typed content.');
+    console.log('Proposal Markdown matches the canonical typed content.');
   }
 } else {
   await writeFile(path, content, 'utf8');

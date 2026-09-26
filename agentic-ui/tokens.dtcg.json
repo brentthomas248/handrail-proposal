@@ -1,149 +1,69 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
-  "$description": "A sculptural, readable proposal whose folded paper becomes its deal structure.",
+  "$description": "A scroll-directed tour through a real proposal flyer, using Handrail's warm editorial identity.",
   "color": {
     "$type": "color",
     "primary": {
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.129,
-          0.212,
-          0.294
-        ],
-        "hex": "#21364b"
+        "components": [0.784, 0.314, 0.165],
+        "hex": "#c8502a"
       }
     },
     "secondary": {
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.384,
-          0.482,
-          0.553
-        ],
-        "hex": "#627b8d"
-      }
-    },
-    "tertiary": {
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.635,
-          0.678,
-          0.714
-        ],
-        "hex": "#a2adb6"
+        "components": [0.42, 0.384, 0.345],
+        "hex": "#6b6258"
       }
     },
     "neutral": {
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.929,
-          0.941,
-          0.949
-        ],
-        "hex": "#edf0f2"
+        "components": [0.922, 0.894, 0.847],
+        "hex": "#ebe4d8"
       }
     },
     "surface": {
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          1,
-          1,
-          1
-        ],
-        "hex": "#ffffff"
-      }
-    },
-    "surface-muted": {
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.89,
-          0.91,
-          0.925
-        ],
-        "hex": "#e3e8ec"
+        "components": [0.984, 0.98, 0.969],
+        "hex": "#fbfaf7"
       }
     },
     "on-surface": {
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.125,
-          0.153,
-          0.176
-        ],
-        "hex": "#20272d"
+        "components": [0.102, 0.094, 0.086],
+        "hex": "#1a1816"
+      }
+    },
+    "on-primary": {
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [1, 1, 1],
+        "hex": "#ffffff"
       }
     },
     "on-muted": {
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.325,
-          0.376,
-          0.42
-        ],
-        "hex": "#53606b"
+        "components": [0.42, 0.384, 0.345],
+        "hex": "#6b6258"
       }
     },
     "border": {
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.78,
-          0.808,
-          0.831
-        ],
-        "hex": "#c7ced4"
+        "components": [0.714, 0.667, 0.6],
+        "hex": "#b6aa99"
       }
     },
     "focus": {
       "$value": {
         "colorSpace": "srgb",
-        "components": [
-          0.129,
-          0.337,
-          0.549
-        ],
-        "hex": "#21568c"
-      }
-    },
-    "success": {
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.188,
-          0.365,
-          0.294
-        ],
-        "hex": "#305d4b"
-      }
-    },
-    "warning": {
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.475,
-          0.337,
-          0.051
-        ],
-        "hex": "#79560d"
-      }
-    },
-    "error": {
-      "$value": {
-        "colorSpace": "srgb",
-        "components": [
-          0.647,
-          0.192,
-          0.192
-        ],
-        "hex": "#a53131"
+        "components": [0.102, 0.094, 0.086],
+        "hex": "#1a1816"
       }
     }
   },
@@ -151,58 +71,52 @@
     "$type": "dimension",
     "xs": {
       "$value": {
-        "value": 4,
+        "value": 8,
         "unit": "px"
       }
     },
     "sm": {
       "$value": {
-        "value": 8,
+        "value": 16,
         "unit": "px"
       }
     },
     "md": {
       "$value": {
-        "value": 16,
+        "value": 24,
         "unit": "px"
       }
     },
     "lg": {
       "$value": {
-        "value": 24,
+        "value": 48,
         "unit": "px"
       }
     },
     "xl": {
       "$value": {
-        "value": 48,
+        "value": 64,
         "unit": "px"
       }
     },
     "page": {
       "$value": {
-        "value": 64,
+        "value": 90,
         "unit": "px"
       }
     }
   },
   "rounded": {
     "$type": "dimension",
-    "sm": {
+    "none": {
       "$value": {
-        "value": 2,
+        "value": 0,
         "unit": "px"
       }
     },
-    "md": {
+    "control": {
       "$value": {
-        "value": 4,
-        "unit": "px"
-      }
-    },
-    "lg": {
-      "$value": {
-        "value": 8,
+        "value": 30,
         "unit": "px"
       }
     },
@@ -217,14 +131,14 @@
     "headline-lg": {
       "$type": "typography",
       "$value": {
-        "fontFamily": "IBM Plex Sans",
+        "fontFamily": "Inter Variable",
         "fontSize": {
-          "value": 104,
+          "value": 190,
           "unit": "px"
         },
-        "fontWeight": 400,
+        "fontWeight": 760,
         "letterSpacing": {
-          "value": -3,
+          "value": -14.25,
           "unit": "px"
         }
       }
@@ -232,14 +146,14 @@
     "headline-md": {
       "$type": "typography",
       "$value": {
-        "fontFamily": "IBM Plex Sans",
+        "fontFamily": "Inter Variable",
         "fontSize": {
-          "value": 56,
+          "value": 64,
           "unit": "px"
         },
-        "fontWeight": 400,
+        "fontWeight": 550,
         "letterSpacing": {
-          "value": -1,
+          "value": -3.328,
           "unit": "px"
         }
       }
@@ -247,9 +161,24 @@
     "body-md": {
       "$type": "typography",
       "$value": {
-        "fontFamily": "IBM Plex Sans",
+        "fontFamily": "Inter Variable",
         "fontSize": {
-          "value": 18,
+          "value": 31,
+          "unit": "px"
+        },
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": -0.682,
+          "unit": "px"
+        }
+      }
+    },
+    "label-md": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "Inter Variable",
+        "fontSize": {
+          "value": 23,
           "unit": "px"
         },
         "fontWeight": 400,
@@ -259,15 +188,15 @@
         }
       }
     },
-    "label-md": {
+    "introduction": {
       "$type": "typography",
       "$value": {
-        "fontFamily": "IBM Plex Sans",
+        "fontFamily": "Playfair Display",
         "fontSize": {
-          "value": 14,
+          "value": 31,
           "unit": "px"
         },
-        "fontWeight": 500,
+        "fontWeight": 400,
         "letterSpacing": {
           "value": 0,
           "unit": "px"

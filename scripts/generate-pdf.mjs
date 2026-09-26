@@ -2,6 +2,7 @@ import { chromium } from '@playwright/test';
 import { resolve } from 'node:path';
 import { mkdir, copyFile } from 'node:fs/promises';
 import { startPreview } from './serve.mjs';
+import { agreementSections, proposal } from '../src/content/proposal.ts';
 const preview = process.env.PROPOSAL_BASE_URL ? null : await startPreview();
 const base = process.env.PROPOSAL_BASE_URL || preview.url;
 const browser = await chromium.launch({ headless: true });
@@ -11,10 +12,13 @@ try {
     waitUntil: 'networkidle',
   });
   if (!response?.ok())
-    throw new Error(`Contract route failed: ${response?.status()}`);
+    throw new Error(`Proposal notes route failed: ${response?.status()}`);
   await page.evaluate(() => document.fonts.ready);
-  const clauses = await page.locator('.contract-clause').count();
-  if (clauses !== 18) throw new Error(`Expected 18 clauses, found ${clauses}`);
+  const sections = await page.locator('.document-section').count();
+  if (sections !== agreementSections.length)
+    throw new Error(
+      `Expected ${agreementSections.length} proposal sections, found ${sections}`,
+    );
   await mkdir('public', { recursive: true });
   await page.pdf({
     path: resolve('public/handrail-proposed-agreement.pdf'),
@@ -26,14 +30,14 @@ try {
     displayHeaderFooter: true,
     headerTemplate: '<span></span>',
     footerTemplate:
-      '<div style="font-family:Arial,sans-serif;font-size:8px;color:#62717d;width:100%;margin:0 18mm;display:flex;justify-content:space-between"><span>Handrail / Brent Showalter — Unsigned proposal</span><span><span class="pageNumber"></span> / <span class="totalPages"></span></span></div>',
+      '<div style="font-family:Arial,sans-serif;font-size:8px;color:#62717d;width:100%;margin:0 18mm;display:flex;justify-content:space-between"><span>Handrail / Brent Showalter — For discussion</span><span><span class="pageNumber"></span> / <span class="totalPages"></span></span></div>',
   });
   await copyFile(
     'public/handrail-proposed-agreement.pdf',
     'dist/handrail-proposed-agreement.pdf',
   );
   console.log(
-    'Generated public/handrail-proposed-agreement.pdf from 18 canonical HTML clauses.',
+    `Generated public/${proposal.paths.pdf} from ${agreementSections.length} canonical proposal sections.`,
   );
 } finally {
   await browser.close();

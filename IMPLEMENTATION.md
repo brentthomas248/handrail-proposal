@@ -1,61 +1,53 @@
-# Implementation checkpoint — published on GitHub Pages
+# Implementation checkpoint — Handrail flyer redesign
 
-## Objective and state
+## Current state, September 26, 2026
 
-The sculptural Handrail proposal is [published on GitHub Pages](https://brentthomas248.github.io/handrail-proposal/): procedural folded paper, restrained graphite/navy typography, scroll-linked animation, both commission paths, timeline, collection example and the complete unsigned agreement. No neon, calculator, accounts or signature flow. The user expressly authorized site publication; GitHub profile README and pin changes remain unapplied.
+The approved redesign is implemented and locally verified. Publication of this revision is pending. The earlier paper-sculpture release was rejected by the user; its historical receipts remain in the workflow feed and Git history and are not evidence for this redesign.
 
-The user explicitly approved a local workflow after the credentialed tools were unavailable. No later credential request was made. Cloud generation, semantic QA and hosted replay remain omitted; see docs/local-workflow.md for the exact scope and known global-validator limitations.
+The user approved Telescope, Igloo, Exat and Stripe Press as references, then requested the shared Handrail identity across its careers page, sample MOU, one-pager and pricing sheet. See DESIGN.md and docs/brand-sources.md. Acceptance of the finished visual result still belongs to the user.
 
 ## Delivered
 
-- Astro static pages at `/handrail-proposal/` and `/handrail-proposal/agreement/`.
-- Original continuous paper geometry and local printed texture, with a silver clip. Scroll progress changes the folds; demand rendering stops idle work. Simple diffuse paper lighting and a CSS shadow replace expensive realtime shadow passes.
-- Semantic HTML and an SVG fallback; persisted motion preference, system reduced motion, keyboard navigation, native touch scrolling and responsive layouts.
-- Canonical proposed terms in src/content/proposal.ts. HTML, generated Markdown and PDF follow that source. Neither route accepts or signs the proposal.
-- Three-page PDF, rendered and visually inspected. An independent Poppler text check compares its complete ordered content with the canonical source.
-- Storybook documentation/states and live MCP access, plus deterministic local QA.
-- Read-only GitHub profile audit, reviewed profile draft, repository README and inspected desktop screenshot. The proposal repository and Pages are published; the profile and pins are unchanged.
-- Optional verification and manual Pages workflow templates under docs/github-actions/. They are inactive because the current OAuth credential lacks workflow-write permission. No remote project-test pass is claimed.
-- Public source on main and tested static output on gh-pages. GitHub's built-in Pages job handles branch deployment.
+- One semantic HTML flyer. Native scroll drives a reversible GSAP timeline that zooms and pans across the actual text and payment diagram. Desktop has six stops; mobile has eight, with separate rate and rationale views.
+- Handrail's unchanged official wordmark, warm paper, rust accent, Inter and Playfair Display. No paper clip, decorative 3D scene, neon or calculator.
+- No base salary; payment after customer collections; matching installments; 15/5 hire-first and 20/5 client-first on the triggering and future credited sales; 90-day opportunity; benefits and support request. Seven negotiable business sections replace the legal draft. Handrail prepares the final contract.
+- Same-DOM ordinary reading, stored reading preference, reduced-motion override, keyboard chapter navigation, visible keyboard focus and no-JavaScript reading. Links and downloads remain native HTML.
+- Canonical notes in src/content/proposal.ts power HTML, generated Markdown and a two-page PDF. The existing agreement/ route and PDF filename retain link compatibility.
+- Reusable DealPath component with three Storybook states and live MCP readiness. Camera behavior is verified at the app level.
+- Matching social image, public engineering README and local scripts. Three.js, React Three Fiber and Lenis are removed.
 
-## Verification, September 26, 2026
+## Current verification
 
 | Check | Observed result |
 | --- | --- |
-| `pnpm check` | 30 files, zero errors, warnings or hints |
-| `pnpm test` | 31 contract scenario tests passed |
-| `pnpm build:release` | Two static routes built; current PDF generated into public and dist |
-| `pnpm contract:check` | Markdown matches canonical source |
-| `pnpm pdf:check` | Introduction, 18 sections, 29 paragraphs and unsigned status match in order |
-| `pnpm test:e2e` | 13 browser tests passed; 320/390/768/1440 layouts, navigation/download, exact clauses, keyboard, motion, no-JS and WebGL failure |
-| `pnpm build-storybook` | Successful production component workshop build |
-| `pnpm test:components` | Seven behavior checks, zero axe violations and zero uncaught browser errors |
-| Live Storybook MCP | Endpoint and initialize/tools/docs/preview calls verified |
-| `pnpm capture` | Desktop scene ready, no console/page errors, no mobile overflow; final screenshots inspected |
-| `pnpm peers check` | No peer dependency issues |
-| `pnpm performance` | Local mobile: performance99/accessibility100/best-practices100/SEO100; desktop100 in all four |
+| pnpm check | 22 files, zero errors, warnings or hints |
+| pnpm test | 4 content/consistency tests passed |
+| pnpm build:release | Two static routes and current two-page PDF |
+| pnpm contract:check | Generated Markdown matches canonical source |
+| pnpm pdf:check | Introduction, 7 sections, 15 paragraphs and discussion endnote match in order |
+| PDF visual review | Both rendered pages inspected; readable content and balanced page breaks |
+| pnpm test:e2e | 19 browser tests passed: actual wheel zoom/pan/reverse, all camera targets, touch emulation, keyboard, Back navigation, persistent reading, reduced motion, no JS, content/download and two axe scans |
+| Responsive coverage | Read-mode reflow at 320/390/768/1440px; every tour target framed at 320/390/1440px; framed paragraph text at least 12px |
+| pnpm capture | 22 chapter captures plus reading/notes images; zero console/page/request errors; desktop/mobile images reviewed |
+| pnpm build-storybook | Production workshop built; workshop-only large chunk warning |
+| pnpm test:components | 3 checks, zero axe violations or uncaught browser errors |
+| Storybook MCP and component coverage | Live endpoint/readiness and component-state validation passed |
+| pnpm format:check | Passed |
+| pnpm performance | Latest local Lighthouse:100 performance/accessibility/best-practices/SEO on desktop and mobile |
+| Design lint/export | Zero lint errors; DTCG regenerated; current literal-token scan findings retained |
 
-Mobile lab LCP was 1962ms, TBT44ms and CLS0.000042; desktop LCP445ms, TBT0ms and CLS0.000011. Optimized mobile runs varied from93 to99; this table records the latest run. These are local Lighthouse measurements, not field Core Web Vitals. INP and deployed performance remain unmeasured. Initial mobile performance59 revealed shader startup cost; the final measurements follow rendering simplification, font preloading and critical CSS inlining.
+The local Lighthouse run measured mobile LCP 1717ms, TBT 11ms, CLS 0.00290; desktop LCP 377ms, TBT 0ms, CLS 0.00485. Script transfer was 45,870 bytes, below the unchanged 250KB budget. The measured run preceded a final keyboard/back-navigation cleanup. These are laboratory results, not field Core Web Vitals or physical-device measurements.
 
-Raw browser, PDF-render and Lighthouse artifacts are in ignored qa-artifacts/ and test-results/. Durable project records summarize their results. Automated accessibility passes are not manual assistive-technology certification.
+The first redesign QA pass caught 320px overflow, low-contrast cash text, small phone detail type and a layout shift during camera initialization. These were corrected and the relevant browser/capture/performance checks rerun. The final PDF render emits a Poppler Type 3 bounding-box warning; both pages visually render correctly and complete independent text comparison passes.
 
-## Publication, September 26, 2026
+## Publication checkpoint
 
-The [homepage](https://brentthomas248.github.io/handrail-proposal/) returned HTTP 200 with the expected heading, “A commitment built around results.” GitHub Pages is configured for HTTPS and the root of the gh-pages branch. Initial publication used source commit 2028557 and static commit 94c25d09c26ffd3bad98205926764623a2a585d4. The GitHub Pages deployment run is [36265530452](https://github.com/brentthomas248/handrail-proposal/actions/runs/36265530452).
+The authorized public destination is https://brentthomas248.github.io/handrail-proposal/. Push the reviewed source to main and the verified dist tree as a normal descendant of gh-pages; wait for GitHub's Pages deployment, then run the same browser suite with PROPOSAL_BASE_URL set to the public URL. Download the hosted PDF and verify its content independently. Update agentic-ui/deployment-verification.json and this checkpoint with actual commits/run/results.
 
-Live browser smoke verification completed at 2026-09-26T19:19:29.538Z: WebGL reached ready state; actual wheel input advanced the paper's scroll progress; both rate cards and disclosure details worked; all 18 agreement sections matched canonical content; the PDF returned HTTP 200 and its 29 paragraphs passed the independent verifier. A 390px mobile viewport had no horizontal overflow, direct agreement navigation worked, motion preference persisted, and system reduced motion kept the scene static. There were zero page errors and zero failed requests. Pages run 36265530452 succeeded and its status is built. These hosted checks are separate from the local test table; deployed performance and field metrics remain unmeasured.
+Optional Actions templates remain inactive under docs/github-actions/. The existing OAuth credential lacks workflow-write permission. GitHub's Pages job proves deployment, not remote execution of project tests. GitHub profile README and pins remain unchanged.
 
-## Remaining boundaries
+## Evidence boundaries
 
-- The lazy Three.js chunk still produces the bundler's 500KB uncompressed warning. The general lifecycle JavaScript budget and strict global validators have explicit recorded limitations; do not call this a full cloud-certified lifecycle run.
-- Complete the employer/entity, legal name, work state, pre-employment status/pay, benefits, expenses and other Section18 details before signing. The website is an unsigned proposed agreement.
-- The proposal and Pages publication are authorized and complete. Creating the profile README and changing pins remain separate, unapplied work.
-- Hosted browser smoke checks passed as recorded above. Physical-device and manual assistive-technology review remain unverified; inactive Actions templates provide no remote project-test evidence.
+The user explicitly approved a local workflow after credentialed tools were unavailable. No new credential request is needed. Cloud generation, semantic QA and hosted replay remain omitted. Full global lifecycle certification is not claimed: the static-app policy validator, CSS literal-value scanner and unperformed manual assistive-technology/physical-device checks remain separately recorded. The previous route-JavaScript budget issue is resolved.
 
-## Local continuation
-
-`pnpm build:release` regenerates HTML and PDF. `pnpm preview --port 4321` serves the built proposal; the current preview runs on that port. `pnpm storybook` serves the workshop on port6006. `pnpm test:e2e` starts a static server when none exists. Install Playwright Chromium and Poppler before PDF/browser checks. Preserve private research outside this repository.
-
-## Knowledge reconciliation
-
-Brain2 already records the proportionate delivery and UI QA evidence standards applied here. No duplicate memory note was required. Current source, tests and records control readiness.
+Raw reports and screenshots remain ignored under qa-artifacts/ and test-results/; compact receipts are public. Private company finances, correspondence and source research remain outside this repository. Brain2 already records the proportionate verification and rendered-evidence standards used here; no duplicate knowledge write was needed.

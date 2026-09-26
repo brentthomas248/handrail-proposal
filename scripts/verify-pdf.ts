@@ -1,6 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import {
+  agreementEndnote,
   agreementIntro,
   agreementSections,
   proposal,
@@ -67,9 +68,7 @@ if (
   !document.includes(normalize(proposal.title)) ||
   !document.includes(proposal.status)
 ) {
-  throw new Error(
-    'PDF is missing the canonical title or unsigned-proposal status.',
-  );
+  throw new Error('PDF is missing the canonical title or discussion status.');
 }
 
 let cursor = document.indexOf(normalize(agreementIntro));
@@ -97,16 +96,14 @@ for (const chunk of chunks) {
   cursor += expected.length;
 }
 
-const expectedEndnote = normalize(
-  'End of unsigned proposal. Prepared for discussion; not an acceptance, signature or representation of agreed employment terms.',
-);
+const expectedEndnote = normalize(agreementEndnote);
 const remainder = document.slice(cursor).trim();
-if (remainder !== '' && remainder !== expectedEndnote) {
+if (remainder !== expectedEndnote) {
   throw new Error(
-    'PDF contains unexpected content after the canonical agreement.',
+    'PDF contains missing or unexpected content after the canonical proposal.',
   );
 }
 
 console.log(
-  `PDF verified: introduction, ${agreementSections.length} ordered sections, ${chunks.length - agreementSections.length - 1} complete paragraphs and unsigned status match canonical content.`,
+  `PDF verified: introduction, ${agreementSections.length} ordered sections, ${chunks.length - agreementSections.length - 1} complete paragraphs and discussion status match canonical content.`,
 );

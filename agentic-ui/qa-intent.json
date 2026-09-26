@@ -6,21 +6,24 @@
     "/handrail-proposal/agreement/"
   ],
   "flows": [
-    "Read both compensation paths",
-    "Navigate directly to the agreement and clauses",
-    "Toggle motion preference",
-    "Read payment-grace details",
-    "Download the proposed agreement PDF"
+    "Scroll forward and backward through the zoom/pan camera",
+    "Choose a chapter with the keyboard",
+    "Read both compensation paths and collection timing",
+    "Switch to ordinary reading and retain that preference after reload",
+    "Honor system reduced-motion and no-JavaScript reading",
+    "Navigate directly to all seven proposal-note sections",
+    "Download and independently verify the two-page proposal PDF"
   ],
   "visualStates": [
-    "desktop",
-    "mobile",
+    "desktop-six-camera-stops",
+    "mobile-camera-stops",
+    "320px-typography-review",
+    "normal-reading",
     "reduced-motion",
-    "webgl-unavailable",
     "javascript-disabled",
     "keyboard-focus",
-    "timeline-details-open",
-    "timeline-details-closed"
+    "proposal-notes",
+    "two-page-pdf"
   ],
   "componentStateMatrix": "agentic-ui/component-state-matrix.json",
   "dataRequirements": {
@@ -41,22 +44,29 @@
     "manualEvidencePath": "agentic-ui/accessibility-evidence.json",
     "keyboardTraversal": true,
     "visibleFocus": true,
-    "voiceOver": true,
-    "zoomReflow": true,
-    "textResize": true,
+    "voiceOver": false,
+    "zoomReflow": false,
+    "textResize": false,
     "reducedMotion": true,
-    "forcedColors": true,
+    "forcedColors": false,
     "targetSize": true,
-    "draggingAlternative": true,
-    "redundantEntry": true,
+    "draggingAlternative": false,
+    "redundantEntry": false,
     "consistentHelp": true,
-    "accessibleAuthentication": true
+    "accessibleAuthentication": false,
+    "coverageNotes": [
+      "Viewport reflow, keyboard controls, reduced motion and automated axe scans are in local scope.",
+      "Manual VoiceOver, physical-device behavior, browser zoom and forced colors remain unverified.",
+      "There are no drag-only controls, forms, redundant-entry flows or authentication surfaces."
+    ]
   },
   "performance": {
     "budgetPath": "agentic-ui/performance-budget.json",
     "collectRouteTiming": true,
     "collectRuntimeErrors": true,
-    "collectSlowInteractions": true
+    "collectSlowInteractions": true,
+    "evidencePath": "agentic-ui/performance-evidence.json",
+    "status": "measured-local-before-final-keyboard-cleanup"
   },
   "agentReliability": {
     "enabled": false,
@@ -66,15 +76,20 @@
     "reason": "Stagehand semantic QA omitted under the user-approved local workflow; deterministic Playwright behaviors remain required."
   },
   "acceptanceCriteria": [
-    "Every included route renders without console errors, failed critical network requests, or broken navigation.",
-    "Every included route has stable landmarks, headings, accessible names, visible focus, and readable responsive layout evidence.",
-    "Primary actions, empty states, loading states, error states, success states, and disabled states are visually clear and have tight product copy.",
-    "Reusable components listed in agentic-ui/component-state-matrix.json have matching state coverage evidence.",
-    "No POST, PUT, PATCH, DELETE, upload, approval, submission, billing, auth, or destructive action runs during non-mutating QA."
+    "The same semantic HTML flyer visibly scales and translates under actual scrolling and chapter navigation.",
+    "No base salary, commission after collections, 15/5 versus 20/5, future credited sales and the 90-day proposal remain clear.",
+    "The flyer and notes remain readable through normal flow, reduced motion and disabled JavaScript.",
+    "Camera frames fit supported viewports and rendered review checks actual text legibility, including 320px.",
+    "All seven note sections and the complete PDF match the canonical proposal source.",
+    "No uncaught page errors, failed critical requests, broken navigation or axe violations occur in the checked local flows.",
+    "No form submission, billing, authentication or destructive operation occurs during QA."
   ],
   "knownTradeoffs": [
-    "Parameterized routes require explicit seed data or safe-flow definitions before QA can exercise them.",
-    "Mutating workflows require approved sandbox mutation mode and are not covered by non-mutating broad audit.",
-    "Stitch, Magic, Stagehand and Browserbase are omitted under docs/local-workflow.md; no hosted or semantic certification claim."
-  ]
+    "Stitch, Magic, Stagehand and Browserbase are omitted under docs/local-workflow.md; no cloud lifecycle certification is claimed.",
+    "Physical-device, manual VoiceOver and field INP evidence are unavailable.",
+    "Publication requires a fresh hosted smoke check of the rebuilt flyer, notes and PDF.",
+    "Current local Lighthouse measurements precede the final keyboard-focus/back-navigation cleanup; field INP and physical-device performance remain unmeasured."
+  ],
+  "generatedAt": "2026-09-26T20:07:07.642202+00:00",
+  "scope": "Current HTML flyer redesign; deterministic local QA and pending hosted verification."
 }

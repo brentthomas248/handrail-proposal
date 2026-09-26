@@ -1,12 +1,14 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T19:05:36.892396+00:00",
-  "surface": "Handrail proposal and full agreement",
+  "generatedAt": "2026-09-26T20:07:07.642202+00:00",
+  "surface": "Handrail HTML flyer camera and proposal notes",
+  "scope": "Current local redesign; publication pending; no full global certification.",
   "sources": [
     "DESIGN.md",
-    "docs/local-workflow.md",
     "src/pages/index.astro",
-    "src/pages/agreement.astro"
+    "src/pages/agreement.astro",
+    "src/scripts/motion.ts",
+    "qa-artifacts/flyer-camera/capture.json"
   ],
   "checks": [
     {
@@ -17,19 +19,19 @@
         "src/content/proposal.ts"
       ],
       "notes": [
-        "The narrative explains the two unsigned activation paths and preserves collection-based compensation."
+        "No base salary, collection-based commissions,15/5 versus 20/5 and the 90-day proposal window match the business intent. Handrail prepares the final contract."
       ]
     },
     {
       "id": "visibility-of-system-status",
       "status": "pass",
       "evidence": [
-        "src/components/MotionToggle.tsx",
-        "src/components/SceneHost.tsx",
-        ".storybook/verify-components.mjs"
+        "src/scripts/motion.ts",
+        "src/layouts/Page.astro",
+        "tests/e2e/proposal.spec.ts"
       ],
       "notes": [
-        "Motion state is visible; the fallback persists until renderer readiness."
+        "Current chapter, camera progress and Read normally / Take the tour labels expose the active presentation state."
       ]
     },
     {
@@ -37,21 +39,21 @@
       "status": "pass",
       "evidence": [
         "src/content/proposal.ts",
-        "qa-artifacts/desktop-structure.png"
+        "src/pages/index.astro"
       ],
       "notes": [
-        "Rates, collections, employment timing and 90-day window use contract language rather than system jargon."
+        "The cash receipt explains money received before commission; retained funds explicitly exclude delivery, benefits and other costs."
       ]
     },
     {
       "id": "user-control-and-freedom",
       "status": "pass",
       "evidence": [
-        "src/components/MotionToggle.tsx",
-        "src/pages/agreement.astro"
+        "src/scripts/motion.ts",
+        "tests/e2e/proposal.spec.ts"
       ],
       "notes": [
-        "Motion can be disabled and the complete agreement is directly reachable."
+        "Chapter buttons, a persisted reading preference, direct proposal notes and a matching PDF let readers bypass the camera journey."
       ]
     },
     {
@@ -59,10 +61,11 @@
       "status": "pass",
       "evidence": [
         "src/styles/global.css",
-        "src/components/DealPath.tsx"
+        "src/components/DealPath.tsx",
+        "public/handrail-logo.png"
       ],
       "notes": [
-        "Shared typography, path component, link treatment and focus outline are consistent."
+        "The actual Handrail wordmark, warm paper/rust palette and locally served Inter/Playfair typography establish a coherent brand treatment."
       ]
     },
     {
@@ -73,18 +76,18 @@
         "tests/agreement.test.ts"
       ],
       "notes": [
-        "No signing or acceptance mechanism; unsigned status and missing completion details remain explicit."
+        "Content is explicitly a proposal for discussion. No signature or acceptance mechanism exists; unagreed qualifying-client and benefits details remain discussion points."
       ]
     },
     {
       "id": "recognition-not-recall",
       "status": "pass",
       "evidence": [
-        "qa-artifacts/desktop-structure.png",
+        "src/components/DealPath.tsx",
         "src/pages/agreement.astro"
       ],
       "notes": [
-        "Both paths are visible together and contract sections have a table of contents."
+        "Rates have explicit collected-fee labels; notes provide a linked seven-section table of contents."
       ]
     },
     {
@@ -92,33 +95,35 @@
       "status": "pass",
       "evidence": [
         "src/pages/index.astro",
-        "src/pages/agreement.astro"
+        "src/pages/agreement.astro",
+        "src/scripts/motion.ts"
       ],
       "notes": [
-        "Direct agreement and PDF links support readers who skip the animated narrative."
+        "Readers can select chapters, use ordinary scrolling or open the notes and PDF directly."
       ]
     },
     {
       "id": "aesthetic-minimalist-design",
       "status": "pass",
       "evidence": [
-        "qa-artifacts/desktop-hero.png",
-        "qa-artifacts/mobile-hero.png",
-        "DESIGN.md"
+        "DESIGN.md",
+        "qa-artifacts/flyer-camera/desktop-00.png",
+        "qa-artifacts/flyer-camera/desktop-01.png"
       ],
       "notes": [
-        "Rendered review: graphite typography, restrained navy and one paper sculpture; no neon or calculator."
+        "Root rendered review covered all six desktop stops. The actual branded flyer is the scene; the paperclip and separate 3D sculpture are removed."
       ]
     },
     {
       "id": "error-recovery",
       "status": "pass",
       "evidence": [
-        "src/components/SceneHost.tsx",
-        ".storybook/verify-components.mjs"
+        "src/layouts/Page.astro",
+        "src/scripts/motion.ts",
+        "tests/e2e/proposal.spec.ts"
       ],
       "notes": [
-        "Scene loading and unavailable states retain a static visual and semantic reading path; final WebGL failure app check is recorded separately."
+        "No-JavaScript and system reduced-motion paths retain the complete proposal in ordinary document flow. No renderer or WebGL dependency remains."
       ]
     },
     {
@@ -129,29 +134,30 @@
         "docs/proposed-agreement.md"
       ],
       "notes": [
-        "Full agreement provides definitions, credit rules and completion details."
+        "Concise proposal notes explain the commercial structure, requested support and discussion points without legal boilerplate."
       ]
     },
     {
       "id": "visual-hierarchy",
       "status": "pass",
       "evidence": [
-        "qa-artifacts/desktop-hero.png",
-        "qa-artifacts/desktop-structure.png"
+        "qa-artifacts/flyer-camera/desktop-01.png",
+        "qa-artifacts/flyer-camera/desktop-02.png",
+        "qa-artifacts/flyer-camera/desktop-03.png"
       ],
       "notes": [
-        "Headline, primary action and two build rates have clear visual priority."
+        "Reviewed desktop stops emphasize no base salary, collection timing and the two build rates."
       ]
     },
     {
       "id": "responsive-layout",
       "status": "pass",
       "evidence": [
-        "qa-artifacts/mobile-hero.png",
-        "qa-artifacts/desktop-structure.png"
+        "tests/e2e/proposal.spec.ts",
+        "qa-artifacts/flyer-camera/capture.json"
       ],
       "notes": [
-        "Reviewed desktop and mobile hierarchy; full viewport overflow tests recorded separately."
+        "19 browser tests passed. Camera framing checks at 320/390/1440 now assert rendered body text of at least 12px; ordinary reading reflows at 320/390/768/1440. Final cash-flow body text measured 12.2px at 320 and 14.9px at 390. Root reviewed the desktop/mobile captures."
       ]
     },
     {
@@ -161,7 +167,7 @@
         "agentic-ui/accessibility-evidence.json"
       ],
       "notes": [
-        "Component checks pass; manual assistive-technology certification remains unperformed."
+        "Automated app and three component checks have zero axe violations. Manual VoiceOver and physical-device review remain unperformed."
       ]
     },
     {
@@ -169,10 +175,10 @@
       "status": "pass",
       "evidence": [
         "src/content/proposal.ts",
-        "src/components/MotionToggle.tsx"
+        "src/scripts/motion.ts"
       ],
       "notes": [
-        "Action labels and proposed/nonbinding status are clear; motion label matches visible text."
+        "Proposed status, commission timing, benefits cost and visible presentation controls are stated plainly."
       ]
     },
     {
@@ -182,7 +188,7 @@
         "agentic-ui/performance-evidence.json"
       ],
       "notes": [
-        "Local scores 99 mobile/100 desktop (optimized mobile runs varied 93–99) and LCP/CLS meet targets; JS exceeds 250 KB and field INP is unmeasured."
+        "Current local Lighthouse evidence records 100 in all categories on mobile/desktop and passing LCP, CLS and 250KB route-script budgets. It precedes the final keyboard/back-navigation cleanup; field INP and physical-device performance remain unmeasured."
       ]
     },
     {
@@ -200,11 +206,10 @@
       "id": "paste-behavior",
       "status": "not-affected",
       "evidence": [
-        "src/pages/index.astro",
-        "src/pages/agreement.astro"
+        "src/pages/index.astro"
       ],
       "notes": [
-        "No text input or paste interception."
+        "No text inputs or paste interception."
       ]
     },
     {
@@ -215,7 +220,7 @@
         "src/styles/global.css"
       ],
       "notes": [
-        "Visible focus styling and skip link exist; exhaustive focus-obscuration review is not claimed."
+        "Keyboard chapter navigation, mode switching and skip-link activation are tested; an exhaustive focus-obscuration review is not claimed."
       ]
     },
     {
@@ -225,40 +230,39 @@
         "src/styles/global.css"
       ],
       "notes": [
-        "Mobile viewport is reviewed; physical notched-device verification was not performed."
+        "Emulated viewports do not establish physical notched-device coverage."
       ]
     },
     {
       "id": "reduced-motion",
       "status": "pass",
       "evidence": [
-        "src/components/MotionToggle.stories.tsx",
-        ".storybook/verify-components.mjs"
+        "src/scripts/motion.ts",
+        "tests/e2e/proposal.spec.ts"
       ],
       "notes": [
-        "System reduced-motion overrides saved preference; static rendering verified."
+        "System reduced motion selects ordinary reading with no camera transform. A saved reading preference survives reload and motion-preference changes."
       ]
     },
     {
       "id": "transition-specificity",
       "status": "pass",
       "evidence": [
-        "src/styles/global.css",
-        "src/scripts/motion.ts"
+        "src/scripts/motion.ts",
+        "src/styles/global.css"
       ],
       "notes": [
-        "Transitions name properties; page movement is gated by motion preference."
+        "GSAP coordinates explicit translate, scale and rotation properties; reading mode removes the camera transform."
       ]
     },
     {
       "id": "heading-wrap",
       "status": "pass",
       "evidence": [
-        "qa-artifacts/desktop-hero.png",
-        "qa-artifacts/mobile-hero.png"
+        "qa-artifacts/flyer-camera/capture.json"
       ],
       "notes": [
-        "Current desktop/mobile headline wraps reviewed without clipping."
+        "Desktop and mobile rendered review includes the final 320px typography polish; automated chapter checks verify framing and a 12px minimum rendered body size."
       ]
     },
     {
@@ -269,7 +273,7 @@
         "tests/agreement.test.ts"
       ],
       "notes": [
-        "Rates and calendar-day terms are explicit and stable static content."
+        "Rates and the illustrative payment arithmetic are checked; the 90-day window is a proposal term, not a live countdown."
       ]
     },
     {
@@ -289,7 +293,7 @@
         "tests/e2e/proposal.spec.ts"
       ],
       "notes": [
-        "Viewport behavior is tested; physical touch-device interaction review is not claimed."
+        "An emulated 390px touch gesture moves the flyer in browser QA. Physical-device interaction is unverified."
       ]
     },
     {
@@ -297,21 +301,23 @@
       "status": "pass",
       "evidence": [
         "src/pages/agreement.astro",
-        "qa-artifacts/contract.png"
+        "qa-artifacts/redesign/proposal-notes-1.png",
+        "qa-artifacts/redesign/proposal-notes-2.png",
+        "scripts/verify-pdf.ts"
       ],
       "notes": [
-        "Full contract remains ordinary flowing HTML and reviewed readable columns."
+        "Both proposal PDF pages were visually reviewed with a balanced page break and white background. Independent text verification matched the introduction, seven sections, 15 paragraphs and endnote."
       ]
     },
     {
       "id": "numeric-typography",
       "status": "pass",
       "evidence": [
-        "qa-artifacts/desktop-structure.png",
-        "src/styles/global.css"
+        "src/components/DealPath.tsx",
+        "qa-artifacts/flyer-camera/desktop-03.png"
       ],
       "notes": [
-        "Rates are legible and percent signs remain associated with numbers."
+        "Rendered rate numerals retain associated percentage and collected-fee labels."
       ]
     },
     {
@@ -319,21 +325,22 @@
       "status": "pass",
       "evidence": [
         "src/layouts/Page.astro",
+        "src/pages/index.astro",
         "src/pages/agreement.astro",
         "tests/e2e/proposal.spec.ts"
       ],
       "notes": [
-        "Native links, button, summary/details, headings, named navigation and landmarks carry the behavior."
+        "Native buttons and links, named navigation, headings and landmarks expose the camera and reading paths through the DOM."
       ]
     },
     {
       "id": "full-stack-states",
       "status": "not-affected",
       "evidence": [
-        "agentic-ui/data-state-readiness.json"
+        "PROJECT.md"
       ],
       "notes": [
-        "Static app has no API, database or authenticated data states."
+        "Static app; no API, database, authentication or business mutation states."
       ]
     }
   ]

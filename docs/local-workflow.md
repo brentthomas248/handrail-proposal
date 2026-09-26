@@ -1,62 +1,42 @@
 # Approved local workflow
 
-The user explicitly approved continuing this Handrail implementation locally after the supported 1Password authorization request was denied. This decision is limited to this repository and this delivery. Global Agentic UI defaults and credential boundaries remain unchanged.
+The user approved implementing and verifying this Handrail proposal locally after credentialed services were unavailable. This scope is limited to this repository and delivery. Global Agentic UI defaults and credential boundaries remain unchanged.
 
 ## Tool scope
 
-Stitch and Magic generation, Stagehand semantic QA, and Browserbase hosted replay are omitted with user authorization. Their credentials and live tool calls remain unverified; this project must not claim full credentialed or cloud lifecycle certification. No retry of 1Password authentication, direct secret recovery, or static credential workaround is part of this scope.
+Stitch and Magic generation, Stagehand semantic QA and Browserbase hosted replay are omitted with user authorization. Their credentials and live tool calls remain unverified. No retry of 1Password authorization, secret recovery or credential workaround belongs to this delivery.
 
-Local design and implementation follow DESIGN.md and the frontend-design skill. Required evidence is local Storybook component/API/state proof, the Storybook MCP endpoint, deterministic Playwright browser interactions and screenshots, axe accessibility checks, type checking, a production build, contract scenario tests, and local performance measurement. Product QA and publication are separate: local tests do not imply the site has been published or the contract accepted.
+The current implementation uses Astro, GSAP ScrollTrigger and native browser scrolling. The semantic HTML flyer is the animated scene. Handrail's actual wordmark, warm paper/rust palette, Inter and Playfair Display replace the rejected paper sculpture and cool navy styling. Three.js, React Three Fiber and Lenis have been removed.
+
+Required evidence is proportionate to that implementation: a production build, type checking, canonical-document consistency, complete PDF text verification, Storybook rate-component checks, deterministic Playwright interactions, rendered screenshots and accessibility checks. Product QA, design review and deployment are separate outcomes.
 
 ## Local services
 
 - App: `pnpm dev`, bound to `127.0.0.1:4321`, route `/handrail-proposal/`.
 - Storybook: `pnpm storybook`, bound to `127.0.0.1:6006`; MCP endpoint `http://127.0.0.1:6006/mcp`.
-- Static output: no backend, databases, accounts, signatures, external message delivery, or remote data mutation.
-- Isolated local browser contexts only. No personal browser profile or credentialed service access is needed.
+- Static output: no backend, databases, signatures, external message delivery or business mutations.
+- Browser checks use isolated local contexts; no personal browser profile or credentialed service access is required.
 
-## Evidence status
+## Current redesign evidence
 
-The lifecycle ledger and workflow feed record actual checks. Configuration and stories are preparation, not evidence of passed component interactions or product quality. Build output, live endpoint validation, interaction/accessibility results and screenshots must exist before their corresponding phases are marked passed.
+The active verification and release state is recorded in IMPLEMENTATION.md and the lifecycle artifacts. **Redesign publication is pending.** Previous screenshots, performance values and the old deployment receipt belong to the rejected edition and must not be used as evidence that this redesign has passed or shipped.
 
-The user separately authorized site publication, and the [proposal is live on GitHub Pages](https://brentthomas248.github.io/handrail-proposal/). Publication does not change the local tool scope. Manual assistive-technology certification and hosted replay must not be represented as completed by automated local tests.
+The current source provides a real scroll camera over the flyer, chapter navigation, a persisted ordinary-reading option, system reduced-motion support and no-JavaScript reading. Browser checks must exercise those behaviors, mobile framing, all canonical proposal sections, download availability and keyboard/accessibility paths against the current build.
 
-## Verified component workshop
+The workshop now documents the DealPath component and its two compensation paths. Removed PaperScene, PaperFallback, SceneHost and MotionToggle stories are historical implementation details, not current workshop surfaces. App-level camera controls require app-level verification.
 
-`pnpm build-storybook` completed successfully with the normal large-chunk warning for Storybook/Three.js tooling. The required live endpoint validator passed at `http://127.0.0.1:6006/mcp`. Real MCP initialize and tools/list returned `@storybook/addon-mcp` 10.6.0; docs-list, docs-show, stories-changed and stories-preview calls succeeded.
+The PDF is generated from `/agreement/`, now visibly titled “Proposal notes.” `pnpm pdf:check` compares the introduction, seven ordered sections, complete paragraphs and endnote with the canonical source. The stable route and filename preserve existing links; they do not make the document a final agreement.
 
-`node .storybook/verify-components.mjs` passed seven behavior scenarios with zero axe violations and zero uncaught browser errors: employment-first terms; mobile client-first terms and no overflow; keyboard/persisted motion preference; static fallback without canvas; folded and unfolded scene rendering; SceneHost promotion after renderer readiness; and system reduced-motion overriding an enabled saved preference. Rendered desktop/mobile/folded/unfolded screenshots were inspected. Generated receipts and images remain under ignored `qa-artifacts/storybook/`.
+## Evidence boundaries
 
-Storybook contains documentation and stories for DealPath, MotionToggle, PaperFallback, PaperScene and SceneHost. Internal Three.js components are covered through PaperScene rather than artificial public props. These checks do not replace app-level no-JavaScript, WebGL failure, responsive, download and accessibility testing.
+Generated reports and screenshots stay under ignored `qa-artifacts/` and `test-results/`. Configuration and stories are preparation, not completed interaction evidence. Record command output and actual screenshots before marking checks passed.
 
-Local review links while Storybook is running:
+The previous global static-app policy mismatch and literal design-token scanner limitations remain separate from product checks. This app has no database or business mutation endpoints; do not fabricate cleanup or mutation evidence to satisfy a generic full-stack validator. Do not describe a local release as a fully certified cloud lifecycle run.
 
-- [Changed stories](http://localhost:6006/?statuses=affected;modified;new)
-- [Folded scene](http://localhost:6006/?path=/story/proposal-folding-paper-scene--folded)
-- [Keyboard motion control](http://localhost:6006/?path=/story/proposal-motion-preference--keyboard-toggle)
+The previous edition's Lighthouse scores and transferred-byte values are historical. Re-measure the current design before making a new performance claim. Automated checks do not establish physical-device coverage, manual assistive-technology certification, field Core Web Vitals or cloud-adapter readiness.
 
-## Static-app policy and validator limits
+## Publication
 
-This app has no database or business mutation endpoints. Its project policy uses the schema-supported `read-only` mode with zero allowed mutations. The current global autonomy and professional-readiness scripts nevertheless hardcode `broad-sandbox` and require database/cleanup evidence. Their failures are retained as a validator compatibility limitation; no database, mutation authorization, or cleanup proof is fabricated.
+The existing [public URL](https://brentthomas248.github.io/handrail-proposal/) serves the previous edition until the verified redesign is published. The [source repository](https://github.com/brentthomas248/handrail-proposal) and branch-based Pages configuration already exist.
 
-The global design-governance scan also checks literal CSS dimensions and decorative graphics colors without applying its configured approved-pattern fields. The project records real design lint/export and rendered evidence, while any outstanding literal-scan findings remain visible. This is not a claim of a passing unmodified full-stack certification.
-
-## Local performance and remaining certification gaps
-
-Lighthouse 13.5.0 measured the built local homepage at 99 performance on mobile (optimized mobile runs varied 93–99) and 100 on desktop; accessibility, best practices and SEO scored 100 for both. Mobile LCP was 1962 ms and CLS 0.000042; desktop LCP was 445 ms and CLS 0.000011. TBT was 44 ms on mobile and zero on desktop. These are lab measurements, not field INP. See agentic-ui/performance-evidence.json for exact values.
-
-The original 250 KB route JavaScript budget remains unmet: Lighthouse observed 365,963 transferred script bytes, including the lazy 3D scene. The design literal scan also retains four findings. Manual VoiceOver, physical touch-device review, deployed performance and cloud adapters remain unverified. These limitations are recorded openly in blockers.json and the scorecard; a working local release is not full global lifecycle certification.
-
-Component receipts now live under ignored qa-artifacts/storybook/ so the app test runner cannot erase them when it resets test-results/.
-
-## Final local verification
-
-The final sequenced app/check/build/PDF/browser/component pipeline completed with exit 0: 30 files checked without issues, 31 scenario tests, two built static routes, a three-page PDF with all 18 sections and 29 canonical paragraphs independently checked, 13 browser tests and seven component scenarios. The app suite covers exact clause text, four viewport widths, keyboard/motion behavior, no-JavaScript, WebGL failure, PDF availability and zero axe violations on both routes. See agentic-ui/local-verification.json. The local scope is complete; strict certification and agreement execution remain separate.
-
-## Authorized publication
-
-On September 26, 2026, the user authorized publishing the proposal on GitHub. The public homepage returned HTTP 200 with the expected proposal heading. Source is available in [brentthomas248/handrail-proposal](https://github.com/brentthomas248/handrail-proposal); Pages serves the tested static output from gh-pages.
-
-The OAuth credential lacks workflow-write permission, so the prepared project workflows remain inactive templates in docs/github-actions/. Local checks precede the publishing push. GitHub's own Pages deployment job is not a remote run of those project tests. Profile README and pin changes remain unapplied.
-
-Hosted browser smoke verification at 2026-09-26T19:19:29.538Z passed: the live WebGL scene responds to actual wheel input, both rate cards and disclosures work, 18 agreement sections match canonical content, and the served PDF's 29 paragraphs pass independent verification. The 390px mobile view has no overflow; direct agreement navigation, persisted motion preference and system reduced motion work. No page errors or failed requests were observed. GitHub Pages run 36265530452 succeeded. These hosted checks do not add cloud-adapter, physical-device, manual assistive-technology or field-performance certification.
+Optional workflows in `docs/github-actions/` remain inactive because the current OAuth credential lacks workflow-write permission. Local checks precede a publishing push. GitHub's own Pages job confirms deployment, not remote execution of project tests. After publishing the redesign, perform fresh hosted scroll, navigation, mobile and PDF checks before updating the release status. Profile README and pin changes remain unapplied.

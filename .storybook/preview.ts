@@ -1,7 +1,5 @@
 import type { Preview } from '@storybook/react-vite';
-import '@fontsource/ibm-plex-sans/400.css';
-import '@fontsource/ibm-plex-sans/500.css';
-import '@fontsource/ibm-plex-sans/600.css';
+import '@fontsource-variable/inter';
 import '../src/styles/global.css';
 
 const preview: Preview = {
@@ -11,8 +9,8 @@ const preview: Preview = {
     a11y: { test: 'error' },
     backgrounds: {
       options: {
-        paper: { name: 'Paper environment', value: '#EDF0F2' },
-        white: { name: 'White paper', value: '#FFFFFF' },
+        paper: { name: 'Paper environment', value: '#ebe4d8' },
+        white: { name: 'White paper', value: '#fbfaf7' },
       },
     },
   },

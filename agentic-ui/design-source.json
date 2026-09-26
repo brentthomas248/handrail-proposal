@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T18:28:20.217Z",
+  "generatedAt": "2026-09-26T20:01:44.547158+00:00",
   "canonical": {
     "sourceType": "design-md",
     "path": "DESIGN.md",
@@ -18,6 +18,66 @@
       "type": "design-md",
       "path": "DESIGN.md",
       "role": "canonical"
+    },
+    {
+      "type": "existing-ui",
+      "path": "src/styles/global.css",
+      "role": "reference",
+      "purpose": "Implemented palette, typography, artboard and reading-mode dimensions"
+    },
+    {
+      "type": "existing-ui",
+      "path": "docs/brand-sources.md",
+      "role": "reference",
+      "purpose": "Official Handrail references and supplied document provenance"
+    },
+    {
+      "type": "existing-ui",
+      "path": "https://handrail-daas.com/careers",
+      "role": "reference",
+      "purpose": "Official Handrail editorial identity"
+    },
+    {
+      "type": "existing-ui",
+      "path": "https://handrail-daas.com/careerladder",
+      "role": "reference",
+      "purpose": "Related official career presentation"
+    },
+    {
+      "type": "existing-ui",
+      "path": "https://handrail-daas.com/careers/sample-mou.html",
+      "role": "reference",
+      "purpose": "Warm document palette and readable serif material"
+    },
+    {
+      "type": "existing-ui",
+      "path": "https://telescope.fyi/",
+      "role": "reference",
+      "purpose": "Approved overview-to-detail zoom transitions"
+    },
+    {
+      "type": "existing-ui",
+      "path": "https://www.igloo.inc/",
+      "role": "reference",
+      "purpose": "Approved continuous camera journey"
+    },
+    {
+      "type": "existing-ui",
+      "path": "https://exat.hottype.co/",
+      "role": "reference",
+      "purpose": "Approved typographic scale and composition"
+    },
+    {
+      "type": "existing-ui",
+      "path": "https://press.stripe.com/",
+      "role": "reference",
+      "purpose": "Approved document material and reading transition"
     }
-  ]
+  ],
+  "approval": {
+    "referenceDirection": "user-approved",
+    "brandAlignment": "user-requested",
+    "implementationVisualAcceptance": "pending-user-review",
+    "note": "Reference approval and behavior verification do not establish acceptance of the implemented visual result."
+  }
 }

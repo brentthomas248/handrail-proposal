@@ -1,67 +1,111 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T19:09:16.338283+00:00",
+  "generatedAt": "2026-09-26T20:07:07.642202+00:00",
   "target": "WCAG 2.2 AA",
-  "scope": "Local automated evidence; not a conformance certification.",
+  "scope": "Current redesign, local automated evidence only; not a conformance certification. Publication pending.",
   "checks": [
     {
       "id": "component-axe",
       "status": "pass",
-      "evidence": ".storybook/verify-components.mjs; docs/local-workflow.md",
-      "notes": [
-        "Seven live scenarios; zero axe violations (WCAG 2 A/AA and 2.1 AA tags)."
-      ],
+      "evidence": ".storybook/verify-components.mjs; src/components/DealPath.stories.tsx; qa-artifacts/storybook/verification.json",
       "evidenceRefs": [
         ".storybook/verify-components.mjs",
-        "docs/local-workflow.md"
+        "src/components/DealPath.stories.tsx",
+        "qa-artifacts/storybook/verification.json"
+      ],
+      "notes": [
+        "Three DealPath scenarios passed with zero axe violations and zero uncaught errors: hire-first, client-first and 320px printed terms."
       ]
     },
     {
-      "id": "component-keyboard-and-reduced-motion",
+      "id": "app-keyboard-and-reduced-motion",
       "status": "pass",
-      "evidence": "src/components/MotionToggle.stories.tsx; .storybook/verify-components.mjs",
-      "notes": [
-        "Space/Enter toggle, persistent state, system reduced-motion override and disabled control verified."
-      ],
+      "evidence": "src/scripts/motion.ts; src/layouts/Page.astro; tests/e2e/proposal.spec.ts",
       "evidenceRefs": [
-        "src/components/MotionToggle.stories.tsx",
-        ".storybook/verify-components.mjs"
+        "src/scripts/motion.ts",
+        "src/layouts/Page.astro",
+        "tests/e2e/proposal.spec.ts"
+      ],
+      "notes": [
+        "The 19 passing browser tests cover keyboard chapter navigation, Space/Enter presentation switching, persisted reading preference, skip link, system reduced motion, keyboard focus entering normal reading and notes-to-browser-back restoration of the tour."
       ]
     },
     {
-      "id": "app-axe-and-keyboard",
+      "id": "app-axe",
       "status": "pass",
-      "evidence": "tests/e2e/proposal.spec.ts; agentic-ui/local-verification.json",
-      "notes": [
-        "Final 13 browser tests passed, including both routes scanned with WCAG 2.2 AA tags, keyboard skip link, motion toggle, no-JS and WebGL failure reading paths."
-      ],
+      "evidence": "tests/e2e/proposal.spec.ts",
       "evidenceRefs": [
-        "tests/e2e/proposal.spec.ts",
-        "agentic-ui/local-verification.json"
+        "tests/e2e/proposal.spec.ts"
+      ],
+      "notes": [
+        "Both routes pass axe scans with WCAG 2 A/AA, 2.1 AA and 2.2 AA tags in ordinary reading mode. Automated scans are not a complete conformance assessment."
       ]
     },
     {
-      "id": "manual-voiceover",
-      "status": "blocked",
-      "gatingScope": "release-certification",
-      "evidence": "docs/local-workflow.md",
-      "notes": [
-        "VoiceOver was not performed. Automated axe, keyboard checks and semantic HTML are not represented as screen-reader-equivalent manual proof."
-      ],
+      "id": "javascript-disabled-reading",
+      "status": "pass",
+      "evidence": "src/pages/index.astro; tests/e2e/proposal.spec.ts",
       "evidenceRefs": [
-        "docs/local-workflow.md"
+        "src/pages/index.astro",
+        "tests/e2e/proposal.spec.ts"
+      ],
+      "notes": [
+        "The complete flyer and linked proposal notes remain readable without JavaScript; no canvas fallback is needed."
       ]
     },
     {
       "id": "responsive-reading",
       "status": "pass",
-      "evidence": "tests/e2e/proposal.spec.ts; agentic-ui/visual-baseline-governance.json",
-      "notes": [
-        "Both routes tested without overflow at 320, 390, 768 and 1440 pixels. Desktop/mobile rendered images inspected."
-      ],
+      "evidence": "tests/e2e/proposal.spec.ts",
       "evidenceRefs": [
-        "tests/e2e/proposal.spec.ts",
-        "agentic-ui/visual-baseline-governance.json"
+        "tests/e2e/proposal.spec.ts"
+      ],
+      "notes": [
+        "Ordinary reading and notes have no horizontal overflow at 320, 390, 768 and 1440px. Camera targets fit at 320, 390 and 1440px in automated framing checks."
+      ]
+    },
+    {
+      "id": "responsive-visual-polish",
+      "status": "pass",
+      "evidence": "qa-artifacts/flyer-camera/capture.json",
+      "evidenceRefs": [
+        "qa-artifacts/flyer-camera/capture.json"
+      ],
+      "notes": [
+        "Final desktop/mobile review includes 320px typography. Automated framing checks assert at least 12px rendered body text; the cash-flow body measures 12.2px at 320 and 14.9px at 390. Physical-device readability is still unverified."
+      ]
+    },
+    {
+      "id": "manual-voiceover",
+      "status": "not-assessed",
+      "evidence": "docs/local-workflow.md",
+      "evidenceRefs": [
+        "docs/local-workflow.md"
+      ],
+      "notes": [
+        "VoiceOver review was not performed. Semantic HTML, axe and keyboard checks are not screen-reader-equivalent manual proof."
+      ]
+    },
+    {
+      "id": "physical-device",
+      "status": "not-assessed",
+      "evidence": "tests/e2e/proposal.spec.ts",
+      "evidenceRefs": [
+        "tests/e2e/proposal.spec.ts"
+      ],
+      "notes": [
+        "A browser-emulated touch gesture is tested; physical iOS/Android devices and notched-screen behavior are unverified."
+      ]
+    },
+    {
+      "id": "zoom-and-forced-colors",
+      "status": "not-assessed",
+      "evidence": "src/styles/global.css",
+      "evidenceRefs": [
+        "src/styles/global.css"
+      ],
+      "notes": [
+        "Viewport reflow is tested. Manual text resizing, browser zoom and forced-colors coverage are not claimed."
       ]
     }
   ]

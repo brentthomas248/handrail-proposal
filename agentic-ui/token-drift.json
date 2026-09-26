@@ -1,50 +1,22 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T19:05:54.472Z",
+  "generatedAt": "2026-09-26T20:02:05.630Z",
   "status": "failed",
   "issues": [
     {
       "code": "hardcoded-color",
-      "path": "src/components/PaperFallback.tsx",
-      "examples": [
-        "#fff",
-        "#d7dfe4",
-        "#f9fbfc",
-        "#f0f3f5",
-        "#aab8c1"
-      ]
-    },
-    {
-      "code": "hardcoded-color",
-      "path": "src/components/PaperScene.tsx",
-      "examples": [
-        "#f9fbfc",
-        "#f0f3f5",
-        "#21364b",
-        "#c7d2dc",
-        "#34495a"
-      ]
-    },
-    {
-      "code": "hardcoded-color",
       "path": "src/styles/global.css",
-      "examples": [
-        "#fff",
-        "#edf0f2",
-        "#20272d",
-        "#21364b",
-        "#53606b"
-      ]
+      "examples": ["#1a1816", "#fbfaf7", "#c8502a", "#ebe4d8", "#6b6258"]
     },
     {
       "code": "hardcoded-px",
       "path": "src/styles/global.css",
       "examples": [
-        "padding: 15px",
-        "height: 3px",
-        "height: 104px",
-        "gap: 17px",
-        "font-size: 15px"
+        "padding: 16px",
+        "height: 90px",
+        "padding: 0 38px",
+        "gap: 24px",
+        "font-size: 14px"
       ]
     }
   ],
@@ -63,56 +35,6 @@
       "code": "component-not-in-state-matrix",
       "component": "NarrowLayout",
       "path": "src/components/DealPath.stories.tsx"
-    },
-    {
-      "code": "component-not-in-state-matrix",
-      "component": "SavedMotionOff",
-      "path": "src/components/MotionToggle.stories.tsx"
-    },
-    {
-      "code": "component-not-in-state-matrix",
-      "component": "KeyboardToggle",
-      "path": "src/components/MotionToggle.stories.tsx"
-    },
-    {
-      "code": "component-not-in-state-matrix",
-      "component": "SystemReducedMotion",
-      "path": "src/components/MotionToggle.stories.tsx"
-    },
-    {
-      "code": "component-not-in-state-matrix",
-      "component": "StaticFallback",
-      "path": "src/components/PaperFallback.stories.tsx"
-    },
-    {
-      "code": "component-not-in-state-matrix",
-      "component": "Folded",
-      "path": "src/components/PaperScene.stories.tsx"
-    },
-    {
-      "code": "component-not-in-state-matrix",
-      "component": "Opening",
-      "path": "src/components/PaperScene.stories.tsx"
-    },
-    {
-      "code": "component-not-in-state-matrix",
-      "component": "Unfolded",
-      "path": "src/components/PaperScene.stories.tsx"
-    },
-    {
-      "code": "component-not-in-state-matrix",
-      "component": "ReducedMotion",
-      "path": "src/components/PaperScene.stories.tsx"
-    },
-    {
-      "code": "component-not-in-state-matrix",
-      "component": "MotionDisabled",
-      "path": "src/components/SceneHost.stories.tsx"
-    },
-    {
-      "code": "component-not-in-state-matrix",
-      "component": "MotionEnabled",
-      "path": "src/components/SceneHost.stories.tsx"
     }
   ]
 }

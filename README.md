@@ -1,34 +1,35 @@
 # Handrail proposal
 
-An interactive agreement for Brent Showalter and Handrail. A folded paper sculpture opens as the reader explores two ways to begin a working relationship, then gives way to the complete proposed contract.
+An interactive business proposal from Brent Showalter to Handrail. One HTML flyer becomes the scene: scrolling zooms into its headline, moves through the cash-flow example and compares two ways to begin working together.
 
-![Rendered desktop proposal with an unfolding paper agreement.](docs/media/proposal-desktop.png)
+**Redesign publication is pending.** The [public URL](https://brentthomas248.github.io/handrail-proposal/) currently serves the previous edition. The working implementation replaces that edition; consult [IMPLEMENTATION.md](IMPLEMENTATION.md) for current verification and publication status.
 
-**[Open the live proposal](https://brentthomas248.github.io/handrail-proposal/)** · [Read the agreement](https://brentthomas248.github.io/handrail-proposal/agreement/) · [Download the PDF](https://brentthomas248.github.io/handrail-proposal/handrail-proposed-agreement.pdf)
+![The Handrail flyer at the opening camera view](docs/media/proposal-desktop.png)
 
-Published on GitHub Pages with the user's authorization. This is an unsigned proposal; reading, interacting with or downloading it does not accept its terms.
+## The proposal
+
+No base salary. Commission is paid as customer revenue is collected, with customer installments producing matching commission installments. Hiring first proposes **15% of collected build fees plus 5% recurring**. Bringing the qualifying client first proposes **20% plus 5% recurring**, applying to that client and all future credited sales under the relationship.
+
+The higher rate rewards originating the business that makes hiring possible. Benefits are requested separately, and the cash illustration explicitly leaves delivery, benefits and other costs to be covered. This is a negotiable business proposal; Handrail prepares the final contract after the parties align.
 
 ## The experience
 
-The proposal compares employment first at **15% of collected build fees plus 5% recurring**, with a qualifying client first at **20% plus 5% recurring**. It explains the activation window, collection-based payments, responsibilities and outstanding details before presenting the agreement in full.
+The flyer uses Handrail's actual wordmark, warm paper, near-black text and rust accents. Locally served Inter and Playfair Display connect the typography to Handrail's published materials. Large type, thin rules and a receipt-like payment example form one continuous composition.
 
-The visual system comes from the document itself: cool white paper, graphite type, deep navy and the light across a physical crease. The original 3D sheet uses continuous procedural geometry, printed linework and a modeled silver paperclip. Scroll progress unfolds the same object; the scene does not run a continuous idle animation.
-
-Readers can go directly to the agreement, disable animation or download the PDF. The essential content is semantic HTML. A static paper illustration preserves the composition without JavaScript or WebGL, and reduced-motion preferences are respected.
+GSAP ScrollTrigger moves the actual HTML document with coordinated translation, rotation and scale. The reader can select chapters or switch to ordinary reading. Mobile has closer views of each compensation path. Reduced motion and JavaScript-disabled viewing keep the complete proposal in normal document flow.
 
 ## Engineering
 
-| Responsibility | Implementation |
-| --- | --- |
-| Pages and content | Astro static output with strict TypeScript and React islands. No backend, accounts, analytics or electronic signing. |
-| Agreement source | `src/content/proposal.ts` defines the public terms and clauses. HTML, generated Markdown and the PDF follow this source. |
-| Contract behavior | `src/lib/agreement.ts` models activation and timing rules for scenario tests. It does not execute a contract or process customer records. |
-| Paper scene | React Three Fiber and Three.js. Existing geometry buffers update with progress; rendering runs on demand, with a capped pixel ratio and visibility-aware updates. No external 3D assets or environment requests. |
-| Scroll coordination | GSAP ScrollTrigger connects the scene, timeline and payment explanation. Lenis runs on desktop with a fine pointer; touch devices retain native scrolling. |
-| Typography | Locally served IBM Plex Sans. |
-| Components and verification | Storybook stories, Vitest contract scenarios, Playwright browser flows and axe accessibility checks. |
+| Responsibility | Implementation                                                                                                                              |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pages          | Astro static output, strict TypeScript and a reusable React rate component. No backend, accounts, analytics or electronic signing.          |
+| Business terms | `src/content/proposal.ts` supplies rates, path copy and seven sections of proposal notes. HTML, generated Markdown and PDF use that source. |
+| Scroll camera  | `src/scripts/motion.ts` measures the semantic flyer and builds one GSAP timeline. Native scrolling drives the tour.                         |
+| Reading paths  | The same HTML remains selectable and accessible in tour and normal reading modes. No canvas or WebGL dependency.                            |
+| Brand assets   | The official Handrail PNG wordmark, locally served Inter and Playfair Display.                                                              |
+| Verification   | Vitest document checks, Playwright browser flows, axe accessibility checks and Storybook component states.                                  |
 
-The PDF is printed from the agreement route rather than maintained as an independent copy. Regenerate it after editing the canonical content; a previously generated PDF does not update itself.
+The PDF is printed from the proposal-notes route. Regenerate it when the content changes; a previously generated PDF does not update itself. The existing `agreement/` URL and PDF filename are retained for link compatibility, while the visible content is proposal notes.
 
 ## Run locally
 
@@ -39,16 +40,16 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open [the local proposal](http://127.0.0.1:4321/handrail-proposal/) or [the agreement](http://127.0.0.1:4321/handrail-proposal/agreement/).
+Open [the local flyer](http://127.0.0.1:4321/handrail-proposal/) or [proposal notes](http://127.0.0.1:4321/handrail-proposal/agreement/).
 
-To inspect a production build, stop any process already using the preview port, then run:
+To inspect a production build, use an available preview port:
 
 ```sh
 pnpm build:release
 pnpm preview --port 4321
 ```
 
-The `/handrail-proposal/` base path is intentional. Keep it when checking direct links, assets and downloads.
+The `/handrail-proposal/` base path is intentional. Preserve it when checking direct links, assets and downloads.
 
 ## Verify
 
@@ -58,27 +59,18 @@ pnpm test
 pnpm build:release
 pnpm pdf:check
 pnpm build-storybook
-```
-
-Install Chromium once, then run browser tests (the test runner starts a static preview when needed):
-
-```sh
 pnpm exec playwright install chromium
 pnpm test:e2e
 ```
 
-The PDF verifier requires Poppler (`brew install poppler` on macOS, `poppler-utils` on Ubuntu). `pnpm build:release` builds HTML and generates the PDF together; `pnpm pdf:check` independently compares extracted PDF text with the canonical clauses.
+The PDF verifier requires Poppler (`brew install poppler` on macOS, `poppler-utils` on Ubuntu). It independently compares extracted PDF text with the complete canonical proposal content.
 
-Use `pnpm storybook` for the component workshop at [localhost:6006](http://127.0.0.1:6006/). Browser scenarios cover the agreement and download, canonical clause content, responsive layouts, keyboard navigation, persisted motion preferences, reduced motion, JavaScript-disabled reading, WebGL fallback and accessibility scans.
-
-With Storybook running, `pnpm test:components` exercises the component states. `pnpm capture` and `pnpm performance` use the app preview on port 4321.
-
-Generated reports and screenshots stay in ignored artifact directories. The image above is a browser capture from the verified local build. Consult the [implementation record](IMPLEMENTATION.md) and [local workflow evidence](docs/local-workflow.md) for completed checks and remaining work.
+Use `pnpm storybook` for the component workshop at [localhost:6006](http://127.0.0.1:6006/), then `pnpm test:components` to exercise its states. `pnpm capture` and `pnpm performance` use the app preview on port 4321. These commands are verification entry points; completed checks and remaining work are recorded in [IMPLEMENTATION.md](IMPLEMENTATION.md) and [the local workflow](docs/local-workflow.md).
 
 ## Design and authorship
 
-Brent supplied the business intent and proposal decisions. AI tools assisted design, implementation and review. Verification is recorded separately from generation; using a tool does not itself establish a successful result.
+Brent supplied the business intent, proposal decisions and approved reference direction. AI tools assisted design, implementation and review. Generation and verification are recorded separately.
 
-[DESIGN.md](DESIGN.md) records the visual direction and references. The geometry and page composition were created for this project. Lusion informed the approach to materials and dimensional craft; Exat informed typographic scale and pacing. No assets from those sites are included.
+[DESIGN.md](DESIGN.md) records the direction. Telescope informed changes in scale, Igloo informed camera continuity, Exat informed typographic confidence, and Stripe Press informed document presentation. No assets from those reference sites are included. Handrail's official wordmark and published color/font choices are used for this proposal.
 
-GitHub Pages serves the tested static build from the `gh-pages` branch. Live browser checks on September 26, 2026 verified scroll-driven animation, agreement content, the PDF, mobile layout and motion preferences with no page errors or failed requests. The optional Actions templates are preserved under `docs/github-actions/`; the current OAuth credential has no workflow-write permission, so those templates are inactive. Validation runs locally before a publishing push. GitHub's own Pages deployment job publishes the branch; it does not establish that the inactive verification templates ran remotely. The [GitHub showcase handoff](docs/github-showcase.md) records publication and the still-unapplied profile README and pin changes.
+GitHub Pages serves tested static output from the `gh-pages` branch. Optional Actions templates under `docs/github-actions/` remain inactive; validation runs locally before a publishing push. GitHub's own Pages deployment job establishes deployment, not a remote project-test pass. Profile README and pin changes remain separate, unapplied work; see [the showcase handoff](docs/github-showcase.md).

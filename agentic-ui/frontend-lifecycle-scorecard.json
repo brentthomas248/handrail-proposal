@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T19:09:16.338283+00:00",
+  "generatedAt": "2026-09-26T20:07:07.642202+00:00",
   "mode": "full-lifecycle",
   "sections": [
     {
@@ -12,7 +12,7 @@
         "src/content/proposal.ts"
       ],
       "notes": [
-        "Explicit approved local implementation and unsigned proposal intent."
+        "Approved flyer-camera direction and negotiable business-proposal framing with actual Handrail branding."
       ]
     },
     {
@@ -20,10 +20,11 @@
       "status": "pass",
       "evidence": [
         "src/pages/index.astro",
-        "src/pages/agreement.astro"
+        "src/pages/agreement.astro",
+        "src/scripts/motion.ts"
       ],
       "notes": [
-        "Narrative, direct agreement and PDF routes implemented; app QA receipt tracked separately."
+        "One HTML flyer, chapter navigation, ordinary reading, proposal notes and matching PDF."
       ]
     },
     {
@@ -31,23 +32,24 @@
       "status": "in-progress",
       "evidence": [
         "DESIGN.md",
-        "agentic-ui/tokens.dtcg.json",
-        "agentic-ui/token-drift.json"
+        "src/styles/global.css",
+        "public/handrail-logo.png"
       ],
       "notes": [
-        "Pinned design.md lint/export passed; strict literal scanner findings remain open."
+        "Rendered brand treatment uses official logo, warm paper/rust and Inter/Playfair. Global design-token certification has not been established for this redesign."
       ]
     },
     {
       "id": "component-states-storybook",
       "status": "pass",
       "evidence": [
+        "src/components/DealPath.tsx",
+        "src/components/DealPath.stories.tsx",
         ".storybook/verify-components.mjs",
-        "agentic-ui/component-state-coverage.json",
-        "docs/local-workflow.md"
+        "qa-artifacts/storybook/verification.json"
       ],
       "notes": [
-        "Final scene: seven live checks passed, zero axe violations and uncaught errors; build and live MCP endpoint passed."
+        "Three current DealPath checks passed with zero axe violations and zero uncaught errors. Deleted 3D components are excluded."
       ]
     },
     {
@@ -57,7 +59,7 @@
         "agentic-ui/accessibility-evidence.json"
       ],
       "notes": [
-        "Automated evidence is bounded; manual VoiceOver certification remains unperformed."
+        "19 browser tests include two passing route-level axe scans and keyboard/reduced-motion paths. Manual VoiceOver and physical-device review remain unverified."
       ]
     },
     {
@@ -65,11 +67,10 @@
       "status": "pass",
       "evidence": [
         "tests/e2e/proposal.spec.ts",
-        "agentic-ui/local-verification.json",
-        "agentic-ui/visual-baseline-governance.json"
+        "qa-artifacts/flyer-camera/capture.json"
       ],
       "notes": [
-        "Final tests passed at 320/390/768/1440 pixels; desktop and mobile captures reviewed."
+        "Final 19 browser checks passed, including camera framing with at least 12px rendered body text and reading reflow. Desktop/mobile images were reviewed after the 320px typography polish."
       ]
     },
     {
@@ -80,7 +81,7 @@
         "agentic-ui/design-critique.json"
       ],
       "notes": [
-        "Unsigned contract, motion feedback and static fallback communicate status."
+        "Copy emphasizes collected cash before commission, requested benefits as a cost and Handrail preparing the final contract."
       ]
     },
     {
@@ -90,7 +91,7 @@
         "agentic-ui/performance-evidence.json"
       ],
       "notes": [
-        "LCP and CLS pass in local lab; 250 KB JS budget exceeded and field INP unmeasured."
+        "Local Lighthouse records 100 in all categories on mobile/desktop, 45,870 transferred script bytes and passing LCP/CLS/250KB route-script budgets. Measurements precede final keyboard/back-navigation cleanup. Field INP and physical-device performance remain unverified."
       ]
     },
     {
@@ -98,44 +99,46 @@
       "status": "pass",
       "evidence": [
         "src/layouts/Page.astro",
+        "src/pages/index.astro",
         "src/pages/agreement.astro"
       ],
       "notes": [
-        "Native semantic controls and complete HTML contract."
+        "Native controls and semantic HTML provide both animated and ordinary reading paths without a canvas."
       ]
     },
     {
       "id": "qa-proof",
       "status": "pass",
       "evidence": [
-        "agentic-ui/local-verification.json",
+        "tests/agreement.test.ts",
         "tests/e2e/proposal.spec.ts",
-        ".storybook/verify-components.mjs"
+        ".storybook/verify-components.mjs",
+        "scripts/verify-pdf.ts"
       ],
       "notes": [
-        "Approved local scope: 31 scenario, 13 browser and seven component checks passed. Cloud and manual certification explicitly excluded."
+        "Local check: 22 files, zero issues. Four unit, 19 browser and three component checks passed. Two routes built; two-page PDF rendered and independently matched seven sections/15 paragraphs. This is local evidence, not hosted or global certification."
       ]
     },
     {
       "id": "remediation-learning",
       "status": "pass",
       "evidence": [
-        "agentic-ui/mistake-ledger.jsonl",
-        "agentic-ui/workflow-feed.md"
+        "docs/redesign-research.md",
+        "DESIGN.md",
+        "src/scripts/motion.ts"
       ],
       "notes": [
-        "Corrected motion label, scene startup/rendering costs, PDF completeness and independent evidence paths; final focused pipeline passed."
+        "The redesign replaces decorative 3D folding with zoom/pan on the actual flyer and removes final-contract legal boilerplate. Final focused checks cover small-screen typography, keyboard focus and browser-back camera restoration."
       ]
     },
     {
       "id": "full-stack-data-states",
       "status": "not-affected",
       "evidence": [
-        "PROJECT.md",
-        "agentic-ui/data-state-readiness.json"
+        "PROJECT.md"
       ],
       "notes": [
-        "No backend or database; static data and local fallback states only."
+        "No API, database or authentication. Local presentation-preference storage is the only retained UI state."
       ]
     }
   ],
@@ -223,62 +226,6 @@
         "DESIGN.md",
         "agentic-ui/ui-handoff.json"
       ]
-    },
-    {
-      "path": "src/components/MotionToggle.tsx",
-      "affectedSections": [
-        "product-design-intent",
-        "visual-system-tokens",
-        "component-states-storybook",
-        "accessibility",
-        "responsive-layout"
-      ],
-      "evidence": [
-        "DESIGN.md",
-        "agentic-ui/ui-handoff.json"
-      ]
-    },
-    {
-      "path": "src/components/PaperFallback.tsx",
-      "affectedSections": [
-        "product-design-intent",
-        "visual-system-tokens",
-        "component-states-storybook",
-        "accessibility",
-        "responsive-layout"
-      ],
-      "evidence": [
-        "DESIGN.md",
-        "agentic-ui/ui-handoff.json"
-      ]
-    },
-    {
-      "path": "src/components/PaperScene.tsx",
-      "affectedSections": [
-        "product-design-intent",
-        "visual-system-tokens",
-        "component-states-storybook",
-        "accessibility",
-        "responsive-layout"
-      ],
-      "evidence": [
-        "DESIGN.md",
-        "agentic-ui/ui-handoff.json"
-      ]
-    },
-    {
-      "path": "src/components/SceneHost.tsx",
-      "affectedSections": [
-        "product-design-intent",
-        "visual-system-tokens",
-        "component-states-storybook",
-        "accessibility",
-        "responsive-layout"
-      ],
-      "evidence": [
-        "DESIGN.md",
-        "agentic-ui/ui-handoff.json"
-      ]
     }
   ],
   "fullStackStateAssumptions": {
@@ -286,15 +233,17 @@
       "No API or backend contract."
     ],
     "coveredDataStates": [
-      "Static content; scene fallback and renderer-ready states."
+      "Static proposal content; tour and normal reading; system reduced motion and JavaScript-disabled flow."
     ],
     "authRoleStates": [
-      "No authentication or authorization roles. The word role in contract prose is not an auth implementation."
+      "No authentication or authorization roles."
     ],
     "mutationSafety": [
-      "No backend mutation; isolated browser preference storage only."
+      "No business mutations; isolated browser preference storage only."
     ]
   },
   "localScopeStatus": "verified",
-  "fullLifecycleCertified": false
+  "fullLifecycleCertified": false,
+  "scope": "User-approved local redesign; full lifecycle certification is not claimed.",
+  "publicationStatus": "pending"
 }

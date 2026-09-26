@@ -9,8 +9,8 @@
     {
       "route": "/handrail-proposal/",
       "maxJsKb": 250,
-      "observedTransferBytes": 365963,
-      "status": "exceeded",
+      "observedTransferBytes": 45870,
+      "status": "pass",
       "evidence": "agentic-ui/performance-evidence.json"
     }
   ],

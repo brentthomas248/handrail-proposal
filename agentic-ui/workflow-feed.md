@@ -1,6 +1,6 @@
 # Agentic UI workflow feed
 
-The current delivery is a static Handrail proposal, full unsigned agreement and PDF. The approved visual direction is sculptural paper, graphite typography and navy. The user approved local implementation and deterministic QA after the credential boundary; remote generation/semantic QA/hosted replay were omitted.
+Current delivery: an actual HTML flyer camera and seven negotiable proposal sections, using the approved references and Handrail brand. The prior sculpture edition was rejected. The redesign is locally verified and publication is pending. Historical entries below describe their named editions, not current visual acceptance.
 
 Current evidence: local-verification.json, component-state-matrix.json, accessibility-evidence.json, performance-evidence.json and visual-baseline-governance.json. Strict certification limitations remain in blockers.json, token-drift.json and the scorecard. No signing or private business disclosure occurs through the page. The user subsequently authorized GitHub Pages publication; see deployment-verification.json.
 
@@ -31,3 +31,8 @@ The final approved local scope is complete. Strict global generation/professiona
 ## 2026-09-26T19:21:11.611306+00:00 — public site verified
 
 Published https://brentthomas248.github.io/handrail-proposal/ from gh-pages commit94c25d0, corresponding to source2028557. GitHub Pages run36265530452 succeeded with HTTPS enforced. Deterministic public-browser checks passed for live WebGL rendering, scroll progress, navigation, both rates, agreement paragraphs, PDF download, mobile layout, persisted motion and system reduced motion. No browser errors or failed asset responses were observed. The downloaded PDF independently matched18sections and29paragraphs. GitHub profile and pins were unchanged.
+
+
+## 2026-09-26 — approved flyer redesign verified locally
+
+User approved the reference direction and requested the shared identity across all Handrail materials. Implemented actual-flyer zoom/pan with GSAP; removed sculpture, clip, WebGL and legal boilerplate. Local evidence:19 app browser checks,4 content tests,3 component checks,22 chapter captures,7-section/15-paragraph PDF comparison and both rendered PDF pages. Small-screen type, contrast, overflow and initial layout shift were fixed after observed failures. Local Lighthouse scores100 across all categories on both devices; script transfer45,870bytes meets the unchanged250KB budget. The actual deliverable awaits user visual review; publication and hosted checks are next.

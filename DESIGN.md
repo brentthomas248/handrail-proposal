@@ -1,122 +1,117 @@
 ---
 version: alpha
-name: Handrail — An agreement brought to life
-description: A sculptural, readable proposal whose folded paper becomes its deal structure.
+name: Handrail — Revenue first
+description: A scroll-directed tour through a real proposal flyer, using Handrail's warm editorial identity.
 colors:
-  primary: "#21364B"
-  secondary: "#627B8D"
-  tertiary: "#A2ADB6"
-  neutral: "#EDF0F2"
-  surface: "#FFFFFF"
-  surface-muted: "#E3E8EC"
-  on-surface: "#20272D"
-  on-muted: "#53606B"
-  border: "#C7CED4"
-  focus: "#21568C"
-  success: "#305D4B"
-  warning: "#79560D"
-  error: "#A53131"
+  primary: '#C8502A'
+  secondary: '#6B6258'
+  neutral: '#EBE4D8'
+  surface: '#FBFAF7'
+  on-surface: '#1A1816'
+  on-primary: '#FFFFFF'
+  on-muted: '#6B6258'
+  border: '#B6AA99'
+  focus: '#1A1816'
 typography:
   headline-lg:
-    fontFamily: IBM Plex Sans
-    fontSize: 104px
-    fontWeight: 400
-    lineHeight: 1.02
-    letterSpacing: -3px
+    fontFamily: Inter Variable
+    fontSize: 190px
+    fontWeight: 760
+    lineHeight: 0.84
+    letterSpacing: -14.25px
   headline-md:
-    fontFamily: IBM Plex Sans
-    fontSize: 56px
-    fontWeight: 400
-    lineHeight: 1.08
-    letterSpacing: -1px
+    fontFamily: Inter Variable
+    fontSize: 64px
+    fontWeight: 550
+    lineHeight: 1.02
+    letterSpacing: -3.328px
   body-md:
-    fontFamily: IBM Plex Sans
-    fontSize: 18px
+    fontFamily: Inter Variable
+    fontSize: 31px
     fontWeight: 400
-    lineHeight: 1.6
-    letterSpacing: 0px
+    lineHeight: 1.3
+    letterSpacing: -0.682px
   label-md:
-    fontFamily: IBM Plex Sans
-    fontSize: 14px
-    fontWeight: 500
-    lineHeight: 1.4
+    fontFamily: Inter Variable
+    fontSize: 23px
+    fontWeight: 400
+    lineHeight: 1.3
+    letterSpacing: 0px
+  introduction:
+    fontFamily: Playfair Display
+    fontSize: 31px
+    fontWeight: 400
+    lineHeight: 1.3
     letterSpacing: 0px
 spacing:
-  xs: 4px
-  sm: 8px
-  md: 16px
-  lg: 24px
-  xl: 48px
-  page: 64px
+  xs: 8px
+  sm: 16px
+  md: 24px
+  lg: 48px
+  xl: 64px
+  page: 90px
 rounded:
-  sm: 2px
-  md: 4px
-  lg: 8px
+  none: 0px
+  control: 30px
   full: 9999px
 components:
-  button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.surface}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.md}"
-    padding: 16px
-  button-secondary:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.md}"
-    padding: 16px
   page-background:
-    backgroundColor: "{colors.neutral}"
-    textColor: "{colors.on-surface}"
+    backgroundColor: '{colors.neutral}'
+    textColor: '{colors.on-surface}'
+  proposal-sheet:
+    backgroundColor: '{colors.surface}'
+    textColor: '{colors.on-surface}'
+    rounded: '{rounded.none}'
+  cash-flow-panel:
+    backgroundColor: '{colors.primary}'
+    textColor: '{colors.on-primary}'
   focus-ring:
-    backgroundColor: "{colors.focus}"
-    textColor: "{colors.surface}"
+    backgroundColor: '{colors.focus}'
+    textColor: '{colors.surface}'
 ---
 
-# An agreement brought to life
+# Revenue first
 
-## Subject and audience
+## Direction and acceptance
 
-This is Brent Showalter's unsigned Handrail compensation and employment proposal. Josh should understand the structure in a minute and be able to inspect every clause immediately. Engineering reviewers should see an original, well-tested implementation. No claim of acceptance, actual employment, or proven business results is implied.
+On September 26, 2026, the user approved Telescope's zoom transitions, Igloo's continuous camera journey, Exat's typographic confidence and Stripe Press's document/reading quality. The user then requested the visual identity shared by Handrail's careers page, sample MOU and supplied pricing material. These are approvals of the references and direction. The implementation still requires the user's visual acceptance; functional tests do not supply it.
 
-## Concept
+This specification replaces the rejected paper sculpture and clip, and the interim cobalt/Archivo treatment. They are historical work, not current design sources. Source provenance is recorded in [brand sources](docs/brand-sources.md) and [redesign research](docs/redesign-research.md).
 
-One folded paper object supplies the entire visual language. Its three creases create natural areas of light and shadow; their changing angles express commitment and conditionality. It opens into the two compensation paths, stretches into the activation timeline and settles into the readable contract. The object is purpose-built procedural geometry, not a borrowed hero asset or animated background decoration.
+## One document, multiple viewpoints
 
-## Composition
+The flyer itself is the scene. Every headline, rate and diagram is HTML or CSS in one semantic document. Native scrolling drives a reversible GSAP ScrollTrigger timeline that changes the sheet's scale, translation and slight opening rotation. A measured fit-to-content camera gives each section a reading hold. There is no WebGL sculpture or separate decorative animated object.
 
-Desktop opens with left-aligned display typography occupying roughly half the viewport and a large folded paper sculpture balanced at the right. The object can cross the invisible column boundary but never obscure essential text or controls. A quiet header names Brent and Handrail; a persistent direct contract link remains available. Under the opening, compare the two pathways at equal visual weight. Use broad full-width sections with generous breathing room, not a repeated card grid.
+The desktop composition is a 2200px landscape sheet with a twelve-column grid: headline at upper left, customer-payment diagram at upper right, two rate columns below, then the 90-day window and shared responsibilities. Hairline rules, one subtle fold and a restrained shadow provide the physical treatment. The opening presents the whole composition, then moves into the idea, cash flow, rate comparison, window and partnership.
 
-Mobile stacks headline, a shorter sculptural stage, then immediate deal summary. Core facts are fully rendered before animation loads. No horizontal scroll section. No forced wait or loader before reading.
+Below 760px, the same content becomes a 760px-wide vertical sheet. Mobile camera stops separate the two rates and their rationale to make each stop legible. The native sheet sizes are artboard dimensions, not fixed viewport widths: the camera scales the document to fit. Reading mode restores natural page flow and responsive text instead of preserving the camera artboard.
 
-## Material and color
+## Handrail identity
 
-Cool white paper (#FFFFFF), cool gray environment (#EDF0F2), graphite text (#20272D), deep navy (#21364B), brushed-silver reference (#A2ADB6) and muted blue-gray (#627B8D). Natural light supplies depth. No emissive/bloom material, neon, rainbow chromatic effects or generic gradients. Brushed silver appears sparingly in the physical scene, not as decoration on every control.
+Use warm cream `#fbfaf7`, near-black ink `#1a1816`, rust `#c8502a`, warm ground `#ebe4d8` and muted brown `#6b6258`. The rust field highlights the customer-payment sequence and the client-first rate. These are implementation values adapted from the supplied materials and official site, not a claim that Handrail publishes this exact token set as a formal brand standard.
 
-## Typography
+The official Handrail logo is the unchanged PNG in `public/handrail-logo.png`. Preserve its proportions, artwork and tagline; scale it using CSS. Use it in the header, flyer masthead and proposal notes. Do not redraw it as text or add a fabricated brand symbol.
 
-IBM Plex Sans is locally hosted. Headings use regular weight and carefully chosen line breaks; body text stays within 68 characters. Display tracking is a project-specific exception to the global default, justified by the oversized composition. Contract text is 17–18px with 1.65 leading and clear numbered clauses for reference. No decorative all-caps eyebrows, fake technical metadata or gratuitous monospace labels.
+Inter Variable provides the strong sans-serif headline and readable body. Playfair Display regular italic appears in the short introduction, echoing the serif/sans-serif contrast in the supplied one-pager. Both fonts are served locally from installed OFL packages. The frontmatter typography tokens describe the native desktop artboard, while `src/styles/global.css` owns responsive and reading-mode sizes. They are documentation/export values; the runtime does not import the DTCG file.
 
-## Motion storyboard
+Avoid neon, glow, ornamental particles, generic cards, invented technical labels and dramatic effects unrelated to the proposal. Visual interest comes from typography, composition and movement across the actual content.
 
-- Opening: a single short settle after content paints. No continuous idle spin or floating loop.
-- Scroll 0–1: camera and folds respond to scroll position; paper opens from a compact zigzag into two readable planes. Path labels stay in HTML.
-- Path comparison: 15/5 and 20/5 are present simultaneously. Hover may select emphasis, but does not hide contract differences.
-- Timeline: the same folds flatten into a horizontal visual measurement on desktop; mobile uses a vertical timeline. Milestones are relative to execution, never a ticking expiry date.
-- Collections: an understated flow shows payment received, applicable percentage and commission paid within 30 days. Examples are explicitly illustrative.
-- Contract: the scene yields to normal document reading. No pinning inside the full agreement.
+## Commercial story
 
-Use GSAP for one coordinated scene timeline and Lenis on desktop only. Native touch and reduced-motion scrolling remain available. Reduced-motion starts static, removes pinning and provides the exact same content. Provide a persistent motion toggle and static fallback if WebGL is unavailable. Pause rendering while offscreen or hidden, cap pixel ratio and avoid postprocessing.
+Lead with **No base salary. Commission paid from collected revenue.** Handrail receives customer money before the corresponding commission is paid. If the customer pays over twelve months, commission follows those installments. Benefits are requested and remain a separate company cost.
 
-## Accessibility and performance
+Hire first proposes 15% of collected build fees plus 5% recurring. Client first proposes 20% plus 5%, rewarding the business that makes hiring possible and applying to the triggering client and all future credited sales. The higher rate must not read as a one-client bonus. The 90-day window limits the proposed hiring commitment, and the responsibilities section explains the support needed to make the arrangement work.
 
-Semantic headings, landmarks, ordered clause references, native anchors and real links. Essential information is never canvas-only. Focus visible, minimum 44px primary controls, text contrast AA, reflow at 320px and 200% zoom, high-contrast support, no hover-only behavior. JavaScript-disabled pages retain the entire proposal and agreement. Lazy-load the scene without shifting layout.
+The $10,000 / $2,000 / $8,000 collection example is an illustration. The retained balance is before delivery costs, benefits and other expenses, not profit or guaranteed positive cash flow. Public copy excludes private company finances, pipeline figures and client names.
 
-## Sources and originality
+This is a starting point for review and negotiation. Handrail prepares the final contract after the business terms are aligned. The direct notes route and PDF explain the proposal without legal boilerplate, statutory caveats or a signature flow.
 
-Lusion (https://lusion.co/) informs physical material/lighting craft. Exat (https://exat.hottype.co/) informs scale and pacing. Obys' design case study informs coherence across type, motion and structure. These are reference principles only; no site assets, logos, fonts or proprietary code are copied. GSAP uses its no-charge commercial license; open-source dependencies keep their own licenses.
+## Motion and reading controls
 
-## Design acceptance
+The tour begins with an overview and uses one scroll owner. GSAP transforms the document; it does not independently smooth all browser scrolling. Chapter buttons navigate to the matching scroll positions. A persistent “Read normally” / “Take the tour” control changes mode. System reduced motion, no JavaScript or unavailable storage defaults to readable content without a required animation.
 
-Inspect desktop/mobile compositions and the opening-to-path transition before full implementation. Reject arbitrary particle effects, conventional SaaS cards, excessive pinned scrolling, illegible contract text or a disconnected gallery of effects. Record critiques against actual rendered screenshots, never solely a prose description.
+Preserve keyboard navigation, a skip link that opens reading mode, visible focus, direct notes access and PDF download. Do not hide essential text in canvas, images or hover states. The same proposal remains readable at narrow widths and when printed.
+
+## Verification boundary
+
+Acceptance evidence must include actual wheel-driven scale and translation, reversal, readable holds, mobile stop framing, chapter navigation and the plain reading path. Browser and accessibility receipts are maintained separately from this design specification. Source approval, implemented behavior, visual inspection and final user acceptance are separate claims. The social preview and PDF must be regenerated and inspected before publication whenever their source design changes.
