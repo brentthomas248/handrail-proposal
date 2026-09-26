@@ -50,8 +50,14 @@ const base = import.meta.env.BASE_URL;
         if (
           !matchMedia('(prefers-reduced-motion: reduce)').matches &&
           localStorage.getItem('proposal-presentation') !== 'read'
-        )
+        ) {
           document.documentElement.dataset.presentation = 'tour';
+          // A failed module or font request must leave a readable proposal.
+          setTimeout(() => {
+            if (!document.documentElement.classList.contains('camera-ready'))
+              document.documentElement.dataset.presentation = 'read';
+          }, 4000);
+        }
       } catch {
         /* Reading mode is the safe default when storage is unavailable. */
       }

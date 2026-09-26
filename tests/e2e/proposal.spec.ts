@@ -153,6 +153,67 @@ function longestStationaryScroll(frames: MotionFrame[]) {
   return longest;
 }
 
+test('slow camera loading keeps the unpositioned flyer hidden until it is ready', async ({
+  page,
+}, testInfo) => {
+  let delayed = false;
+  await page.route('**/_astro/*.js', async (route) => {
+    delayed = true;
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await route.continue();
+  });
+  await page.goto('./', { waitUntil: 'commit' });
+  await expect(page.locator('html')).toHaveAttribute(
+    'data-presentation',
+    'tour',
+  );
+  await expect(page.locator('.proposal-sheet')).toBeAttached();
+  await expect(page.locator('html')).not.toHaveClass(/camera-ready/);
+  await expect(page.locator('.proposal-sheet')).toBeHidden();
+  await expect(page.locator('.tour-controls')).toBeHidden();
+  await testInfo.attach('camera-pending', {
+    body: await page.screenshot(),
+    contentType: 'image/png',
+  });
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  await expect(page.locator('.proposal-sheet')).toBeVisible();
+  await expect(page.locator('.tour-controls')).toBeVisible();
+  await expect(page.locator('.proposal-sheet')).not.toHaveCSS(
+    'transform',
+    'none',
+  );
+  expect(delayed).toBeTruthy();
+});
+
+test('a failed camera script reveals normal reading within five seconds', async ({
+  page,
+}) => {
+  let aborted = false;
+  await page.route('**/_astro/*.js', (route) => {
+    aborted = true;
+    return route.abort('failed');
+  });
+  await page.goto('./');
+  await expect(page.locator('html')).toHaveAttribute(
+    'data-presentation',
+    'tour',
+  );
+  await expect(page.locator('.proposal-sheet')).toBeHidden();
+  await expect(page.locator('html')).toHaveAttribute(
+    'data-presentation',
+    'read',
+    {
+      timeout: 5000,
+    },
+  );
+  expect(await page.evaluate(() => performance.now())).toBeLessThan(5000);
+  await expect(page.locator('.proposal-sheet h1')).toBeVisible();
+  await expect(page.locator('.proposal-sheet')).toHaveCSS('transform', 'none');
+  await expect(page.locator('.proposal-sheet')).toContainText('20%');
+  await expectNoOverflow(page);
+  expect(aborted).toBeTruthy();
+});
+
 test('real scrolling unfolds both hinges, moves the camera and reverses to the folded packet', async ({
   page,
 }, testInfo) => {

@@ -691,6 +691,10 @@ html[data-presentation='tour'] .proposal-sheet {
 html[data-presentation='tour'] .fold-panel {
   will-change: transform;
 }
+html[data-presentation='tour']:not(.camera-ready) .proposal-sheet,
+html[data-presentation='tour']:not(.camera-ready) .tour-controls {
+  visibility: hidden;
+}
 .paper-shadow {
   display: none;
 }
