@@ -9,9 +9,15 @@ const base = import.meta.env.BASE_URL;
   <main id="main">
     <div class="flyer-journey">
       <div class="flyer-stage">
+        <svg class="paper-shadow" aria-hidden="true" focusable="false">
+          <polygon />
+          <polygon />
+          <polygon />
+        </svg>
         <article
           class="proposal-sheet"
           aria-label="Growth partnership proposal"
+          data-fold="z-fold"
         >
           <div class="fold-panel" data-panel="left">
             <div class="panel-face">

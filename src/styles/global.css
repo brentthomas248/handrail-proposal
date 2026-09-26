@@ -205,12 +205,7 @@ main {
   flex-direction: column;
 }
 .panel-face::after {
-  content: '';
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 26px;
-  background: linear-gradient(90deg, #4b382414, transparent);
-  pointer-events: none;
+  content: none;
 }
 .panel-masthead {
   display: flex;
@@ -681,7 +676,7 @@ html[data-presentation='tour'] .flyer-stage {
   position: sticky;
   top: 0;
   width: 100%;
-  height: 100svh;
+  height: var(--stage-height, 100svh);
   overflow: clip;
   perspective: 2400px;
   perspective-origin: 50% 50%;
@@ -695,6 +690,95 @@ html[data-presentation='tour'] .proposal-sheet {
 }
 html[data-presentation='tour'] .fold-panel {
   will-change: transform;
+}
+.paper-shadow {
+  display: none;
+}
+html[data-presentation='tour'] .paper-shadow {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: #58412bb3;
+  opacity: 0.14;
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+/* Texture is static; only the leaf-face lighting layers change with the fold. */
+html[data-presentation='tour'] .panel-face,
+html[data-presentation='tour'] .panel-back {
+  background-image:
+    url('/paper-grain.svg'),
+    radial-gradient(ellipse at 18% 5%, #ffffff0a 0, transparent 65%),
+    linear-gradient(106deg, #fffdf90d, transparent 46%, #56351b05);
+  background-size:
+    256px 256px,
+    100% 100%,
+    100% 100%;
+  background-repeat: repeat, no-repeat, no-repeat;
+  box-shadow:
+    inset 0 1px 0 #fffdf9a6,
+    inset 0 -1px 0 #8f76574d,
+    0 1px 0 #eee4d4,
+    0 2px 0 #ad9778,
+    0 3px 0 #e5d8c5;
+}
+html[data-presentation='tour'] .panel-face::before,
+html[data-presentation='tour'] .panel-back::before,
+html[data-presentation='tour'] .panel-face::after,
+html[data-presentation='tour'] .panel-back::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  will-change: opacity;
+}
+html[data-presentation='tour'] .panel-face::after,
+html[data-presentation='tour'] .panel-back::after {
+  background: linear-gradient(108deg, #37251170, #372511c9 58%, #372511);
+}
+html[data-presentation='tour'] .panel-face::after {
+  opacity: var(--front-shade, 0);
+}
+html[data-presentation='tour'] .panel-back::after {
+  opacity: var(--back-shade, 0.03);
+}
+html[data-presentation='tour'] .panel-face::before,
+html[data-presentation='tour'] .panel-back::before {
+  width: 36px;
+  opacity: var(--crease-opacity, 0.08);
+  background: linear-gradient(
+    var(--crease-direction, 90deg),
+    #352210b3,
+    #fffaf1cc 1px,
+    #35221080 3px,
+    #35221029 11px,
+    transparent
+  );
+}
+html[data-presentation='tour']
+  .fold-panel[data-panel='left']
+  > .panel-face::before,
+html[data-presentation='tour']
+  .fold-panel[data-panel='right']
+  > .panel-back::before {
+  --crease-direction: 270deg;
+  left: auto;
+  right: 0;
+}
+html[data-presentation='tour']
+  .fold-panel[data-panel='center']
+  > .panel-face::before,
+html[data-presentation='tour']
+  .fold-panel[data-panel='center']
+  > .panel-back::before {
+  width: 100%;
+  background:
+    linear-gradient(90deg, #35221080, #3522101a 8px, transparent 25px),
+    linear-gradient(270deg, #35221080, #3522101a 8px, transparent 25px);
 }
 .tour-controls {
   display: none;
@@ -1362,6 +1446,17 @@ html[data-presentation='read'] .partnership-details {
   }
 }
 @media print {
+  .paper-shadow,
+  .panel-face::before,
+  .panel-face::after,
+  .panel-back::before,
+  .panel-back::after {
+    display: none !important;
+  }
+  .panel-face,
+  .panel-back {
+    background-image: none !important;
+  }
   .document-brand {
     width: 40mm;
     margin-bottom: 5mm;

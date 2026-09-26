@@ -1,8 +1,8 @@
 # Handrail proposal
 
-An interactive business proposal from Brent Showalter to Handrail. A real HTML trifold becomes the scene: its wings unfold in sequence, then a scroll-driven camera moves across the printed proposal and settles into flat reading views.
+An interactive business proposal from Brent Showalter to Handrail. A three-dimensional Z-fold becomes the scene: its wings open in opposite depth directions, then a scroll-driven camera moves across the printed proposal. Matte paper grain, creases, directional lighting and a projected shadow give the document a physical presence.
 
-**[Explore the live trifold](https://brentthomas248.github.io/handrail-proposal/).** The current revision is published from source `a7fc658` and verified on GitHub Pages: all 19 browser checks passed, hosted assets match the build, and the downloaded PDF matches the complete proposal notes. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for current evidence and limits. Finished-design acceptance remains with the user.
+**[Explore the live proposal](https://brentthomas248.github.io/handrail-proposal/).** See [IMPLEMENTATION.md](IMPLEMENTATION.md) for verified behavior, release evidence and remaining limits.
 
 ## The proposal
 
@@ -16,7 +16,7 @@ The higher rate rewards originating the business that makes hiring possible. Ben
 
 The flyer uses Handrail's actual wordmark, warm paper, near-black text and rust accents. Locally served Inter and Playfair Display connect the typography to Handrail's published materials. Large type, thin rules and a receipt-like payment example form one continuous composition.
 
-Three hinged panels have actual front and back faces. CSS 3D transforms and GSAP ScrollTrigger coordinate sequential opening, perspective travel and flat readable holds. The reader can select chapters or switch to ordinary reading. Mobile has closer views where needed. Reduced motion and JavaScript-disabled viewing keep the complete proposal in normal document flow. Decorative arrows and symbols are removed; the document’s movement supplies the visual interest.
+Three hinged panels have actual front and back faces. CSS 3D transforms and a GSAP ticker coordinate the accordion opening, continuous camera travel and framed reading views. A critically damped response follows native scroll, with no fixed dead-scroll intervals. Pausing between sections settles the camera; new input immediately takes control. The reader can select chapters or switch to ordinary reading. Mobile has closer views where needed. Reduced motion and JavaScript-disabled viewing keep the complete proposal in normal document flow. Decorative arrows and symbols are removed; the document’s movement supplies the visual interest.
 
 ## Engineering
 
@@ -24,10 +24,10 @@ Three hinged panels have actual front and back faces. CSS 3D transforms and GSAP
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Pages          | Astro static output, strict TypeScript and a reusable React rate component. No backend, accounts, analytics or electronic signing.                     |
 | Business terms | `src/content/proposal.ts` supplies rates, partnership copy and seven sections of proposal notes. HTML, generated Markdown and PDF use that source.     |
-| Scroll camera  | `src/scripts/motion.ts` measures the three panel faces and coordinates hinges and camera in one GSAP timeline driven by native scrolling.              |
+| Scroll camera  | `motion.ts` measures the document and owns input/lifecycle; `tour-path.ts` handles fold geometry, a continuous cubic camera path, logarithmic zoom and refresh-rate-independent damping.              |
 | Reading paths  | The same essential HTML supports tour and ordinary reading. Decorative back faces are hidden from assistive technology; no canvas or WebGL dependency. |
 | Brand assets   | The official Handrail PNG wordmark, locally served Inter and Playfair Display.                                                                         |
-| Verification   | Vitest document checks, Playwright browser flows, axe accessibility checks and Storybook component states.                                             |
+| Verification   | Vitest geometry/motion/content checks, Playwright continuous scrolling and interruption regressions, axe scans and Storybook states.                                             |
 
 The PDF is printed from the proposal-notes route. Regenerate it when the content changes; a previously generated PDF does not update itself. The existing `agreement/` URL and PDF filename are retained for link compatibility, while the visible content is proposal notes.
 

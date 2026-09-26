@@ -44,6 +44,15 @@ async function hingeAngles(page: Page) {
       return {
         panel: (panel as HTMLElement).dataset.panel,
         degrees: (Math.atan2(-matrix.m13, matrix.m11) * 180) / Math.PI,
+        freeEdgeDepth: new DOMPoint(
+          (panel as HTMLElement).dataset.panel === 'left'
+            ? -(panel as HTMLElement).offsetWidth
+            : (panel as HTMLElement).offsetWidth,
+          0,
+          0,
+          0,
+        ).matrixTransform(matrix).z,
+        width: (panel as HTMLElement).offsetWidth,
       };
     }),
   );
@@ -84,6 +93,66 @@ function angularDistance(first: number, second: number) {
   return Math.min(difference, 360 - difference);
 }
 
+interface MotionFrame {
+  time: number;
+  scroll: number;
+  progress: number;
+  camera: string;
+  left: string;
+  right: string;
+}
+
+function collectMotion(page: Page, duration: number): Promise<MotionFrame[]> {
+  return page.evaluate(
+    (duration) =>
+      new Promise((resolve) => {
+        const sheet = document.querySelector<HTMLElement>('.proposal-sheet')!;
+        const left = sheet.querySelector<HTMLElement>('[data-panel="left"]')!;
+        const right = sheet.querySelector<HTMLElement>('[data-panel="right"]')!;
+        const progress = document.querySelector<HTMLElement>('.scroll-line')!;
+        const start = performance.now();
+        const frames: MotionFrame[] = [];
+        function sample(time: number) {
+          frames.push({
+            time,
+            scroll: scrollY,
+            progress: Number(
+              progress.style.getPropertyValue('--tour-progress') ||
+                document.documentElement.style.getPropertyValue(
+                  '--tour-progress',
+                ),
+            ),
+            camera: sheet.style.transform,
+            left: left.style.transform,
+            right: right.style.transform,
+          });
+          if (time - start < duration) requestAnimationFrame(sample);
+          else resolve(frames);
+        }
+        sample(start);
+      }),
+    duration,
+  );
+}
+
+function longestStationaryScroll(frames: MotionFrame[]) {
+  let start = frames[0];
+  let longest = 0;
+  for (let i = 1; i < frames.length; i += 1) {
+    const frame = frames[i];
+    const previous = frames[i - 1];
+    if (
+      frame.camera !== previous.camera ||
+      frame.left !== previous.left ||
+      frame.right !== previous.right
+    )
+      start = frame;
+    else if (Math.abs(frame.scroll - start.scroll) > 10)
+      longest = Math.max(longest, frame.time - start.time);
+  }
+  return longest;
+}
+
 test('real scrolling unfolds both hinges, moves the camera and reverses to the folded packet', async ({
   page,
 }, testInfo) => {
@@ -119,9 +188,9 @@ test('real scrolling unfolds both hinges, moves the camera and reverses to the f
     hinges: Awaited<ReturnType<typeof hingeAngles>>;
     camera: Awaited<ReturnType<typeof sheetTransform>>;
   }[] = [];
-  let previous = 0;
   for (const progress of [0.04, 0.08, 0.13, 0.2, 0.28, 0.5, 0.8]) {
-    await page.mouse.wheel(0, Math.round(travel * (progress - previous)));
+    const currentY = await page.evaluate(() => scrollY);
+    await page.mouse.wheel(0, Math.round(travel * progress - currentY));
     await expect
       .poll(() => page.evaluate(() => scrollY))
       .toBeGreaterThan(travel * progress - 20);
@@ -137,7 +206,6 @@ test('real scrolling unfolds both hinges, moves the camera and reverses to the f
         body: await page.screenshot(),
         contentType: 'image/png',
       });
-    previous = progress;
   }
   for (const wing of ['left', 'right']) {
     const initial = folded.find((hinge) => hinge.panel === wing)!;
@@ -153,6 +221,18 @@ test('real scrolling unfolds both hinges, moves the camera and reverses to the f
       `${wing} must physically unfold when the user scrolls`,
     ).toBeGreaterThan(30);
   }
+  expect(
+    samples.some(({ hinges }) => {
+      const left = hinges.find((hinge) => hinge.panel === 'left')!;
+      const right = hinges.find((hinge) => hinge.panel === 'right')!;
+      return (
+        left.freeEdgeDepth * right.freeEdgeDepth < 0 &&
+        Math.abs(left.freeEdgeDepth) / left.width > 0.25 &&
+        Math.abs(right.freeEdgeDepth) / right.width > 0.25
+      );
+    }),
+    'The free edges must unfold onto opposite sides of the center panel',
+  ).toBeTruthy();
   expect(
     Math.max(
       ...samples.map((sample) => Math.abs(sample.camera.scale - opening.scale)),
@@ -215,6 +295,216 @@ test('keyboard chapter navigation moves the camera to a chosen section', async (
     .toBeGreaterThan(100);
 });
 
+test('continuous wheel input keeps the camera moving through reading windows', async ({
+  page,
+}, testInfo) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto('./');
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  const travel = await page.evaluate(
+    () => document.documentElement.scrollHeight - innerHeight,
+  );
+  const recording = collectMotion(page, 7500);
+  for (let i = 0; i < 140; i += 1) {
+    await page.mouse.wheel(0, Math.round((travel * 0.9) / 140));
+    await page.waitForTimeout(16);
+  }
+  const inputEnded = await page.evaluate(() => performance.now());
+  const frames = (await recording).filter((frame) => frame.time <= inputEnded);
+  await testInfo.attach('continuous-scroll-frames', {
+    body: Buffer.from(JSON.stringify(frames)),
+    contentType: 'application/json',
+  });
+  expect(frames.at(-1)!.progress).toBeGreaterThan(0.75);
+  expect(
+    longestStationaryScroll(frames),
+    'Scrolling through a reading window must not leave the flyer motionless',
+  ).toBeLessThan(150);
+});
+
+test('an immediate fast flick is smoothed and reversing input takes control', async ({
+  page,
+}, testInfo) => {
+  await page.goto('./');
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  const travel = await page.evaluate(
+    () => document.documentElement.scrollHeight - innerHeight,
+  );
+  const recording = collectMotion(page, 700);
+  await page.mouse.wheel(0, Math.round(travel * 0.8));
+  await page.waitForTimeout(90);
+  const reversedAt = await page.evaluate(() => performance.now());
+  await page.mouse.wheel(0, -Math.round(travel * 0.7));
+  const frames = await recording;
+  await testInfo.attach('fast-flick-and-reverse-frames', {
+    body: Buffer.from(JSON.stringify({ reversedAt, frames })),
+    contentType: 'application/json',
+  });
+  const speeds = frames.slice(1).map((frame, index) => {
+    const previous = frames[index];
+    return (
+      Math.abs(frame.progress - previous.progress) /
+      ((frame.time - previous.time) / 1000)
+    );
+  });
+  expect(Math.max(...speeds)).toBeLessThan(12);
+  const reverseFrames = frames.filter(
+    (frame) => frame.time > reversedAt + 50 && frame.time < reversedAt + 300,
+  );
+  expect(reverseFrames.length).toBeGreaterThan(4);
+  for (let i = 1; i < reverseFrames.length; i += 1)
+    expect(reverseFrames[i].progress).toBeLessThanOrEqual(
+      reverseFrames[i - 1].progress + 0.0005,
+    );
+  expect(reverseFrames.at(-1)!.progress).toBeLessThan(
+    reverseFrames[0].progress - 0.02,
+  );
+});
+
+test('pausing between chapters settles into readable content and fresh input cancels the move', async ({
+  page,
+}) => {
+  await page.goto('./');
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  const cash = page.getByRole('button', { name: 'Cash flow', exact: true });
+  const paths = page.getByRole('button', {
+    name: 'The two paths',
+    exact: true,
+  });
+  await cash.click();
+  await page.waitForTimeout(1400);
+  const cashY = await page.evaluate(() => scrollY);
+  await paths.click();
+  await page.waitForTimeout(1400);
+  const pathsY = await page.evaluate(() => scrollY);
+  const delta = Math.round((pathsY - cashY) * 0.56);
+  await page.mouse.wheel(0, -delta);
+  await page.waitForTimeout(100);
+  const midpoint = await page.evaluate(() => scrollY);
+  await expect
+    .poll(() => page.evaluate(() => scrollY), { timeout: 3000 })
+    .toBeLessThan(midpoint - 30);
+  await page.mouse.wheel(0, 130);
+  await page.waitForTimeout(60);
+  const resumed = await page.evaluate(() => scrollY);
+  await page.waitForTimeout(250);
+  expect(await page.evaluate(() => scrollY)).toBe(resumed);
+  await expect(page.locator('#cash-flow')).toBeInViewport({ ratio: 0.98 });
+  await expect(cash).toHaveAttribute('aria-current', 'step');
+});
+
+test('phone browser-height changes preserve the camera and navigation nodes', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('./');
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  const chapter = page.getByRole('button', {
+    name: 'As money arrives',
+    exact: true,
+  });
+  await chapter.click();
+  await page.waitForTimeout(1400);
+  const chapterNode = await chapter.elementHandle();
+  const before = await page.evaluate(() => ({
+    y: scrollY,
+    camera:
+      document.querySelector<HTMLElement>('.proposal-sheet')!.style.transform,
+    height: document
+      .querySelector<HTMLElement>('.flyer-stage')!
+      .style.getPropertyValue('--stage-height'),
+  }));
+  for (const height of [800, 760, 810, 844, 770, 844]) {
+    await page.setViewportSize({ width: 390, height });
+    await page.waitForTimeout(230);
+    expect(
+      await chapterNode!.evaluate((node) => node.isConnected),
+    ).toBeTruthy();
+    expect(await page.evaluate(() => scrollY)).toBe(before.y);
+    expect(
+      await page
+        .locator('.proposal-sheet')
+        .evaluate((sheet) => (sheet as HTMLElement).style.transform),
+    ).toBe(before.camera);
+    expect(
+      await page
+        .locator('.flyer-stage')
+        .evaluate((stage) =>
+          (stage as HTMLElement).style.getPropertyValue('--stage-height'),
+        ),
+    ).toBe(before.height);
+    await expect(chapter).toHaveAttribute('aria-current', 'step');
+  }
+  await expect(
+    page.locator('[data-camera-mobile="As money arrives"]'),
+  ).toBeInViewport({ ratio: 0.98 });
+});
+
+test('a phone chapter remains its parent chapter after changing to a wide viewport', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('./');
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  await page.getByRole('button', { name: 'Client first', exact: true }).click();
+  await page.waitForTimeout(1400);
+  await page.setViewportSize({ width: 1000, height: 720 });
+  await expect(
+    page.getByRole('button', { name: 'The two paths', exact: true }),
+  ).toHaveAttribute('aria-current', 'step');
+  await expect(page.locator('#paths')).toBeInViewport({ ratio: 0.98 });
+  const reframed = await sheetTransform(page);
+  await page.mouse.wheel(0, 120);
+  await expect.poll(() => sheetTransform(page)).not.toEqual(reframed);
+});
+
+test('a cancelled touch still allows a paused transition to settle', async ({
+  browser,
+}) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    isMobile: true,
+    hasTouch: true,
+  });
+  const page = await context.newPage();
+  await page.goto(baseURL);
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  await page
+    .getByRole('button', { name: 'As money arrives', exact: true })
+    .click();
+  await page.waitForTimeout(1400);
+  const startingY = await page.evaluate(() => scrollY);
+  const session = await context.newCDPSession(page);
+  await session.send('Input.dispatchTouchEvent', {
+    type: 'touchStart',
+    touchPoints: [{ x: 195, y: 650 }],
+  });
+  for (const y of [600, 550, 500, 450]) {
+    await session.send('Input.dispatchTouchEvent', {
+      type: 'touchMove',
+      touchPoints: [{ x: 195, y }],
+    });
+    await page.waitForTimeout(30);
+  }
+  await expect
+    .poll(() => page.evaluate(() => scrollY))
+    .toBeGreaterThan(startingY + 80);
+  await session.send('Input.dispatchTouchEvent', {
+    type: 'touchCancel',
+    touchPoints: [],
+  });
+  await expect
+    .poll(
+      async () => Math.abs((await page.evaluate(() => scrollY)) - startingY),
+      { timeout: 4000 },
+    )
+    .toBeLessThan(3);
+  await expect(
+    page.locator('[data-camera-mobile="As money arrives"]'),
+  ).toBeInViewport({ ratio: 0.98 });
+  await context.close();
+});
+
 for (const viewport of [
   { width: 1440, height: 1000 },
   { width: 390, height: 844 },
@@ -243,17 +533,22 @@ for (const viewport of [
           () =>
             target.evaluate((element) => {
               const panel = element.closest('.fold-panel');
-              if (!panel) return 180;
-              const matrix = new DOMMatrixReadOnly(
+              const sheet = element.closest('.proposal-sheet');
+              if (!panel || !sheet) return -1;
+              const camera = new DOMMatrixReadOnly(
+                getComputedStyle(sheet).transform,
+              );
+              const hinge = new DOMMatrixReadOnly(
                 getComputedStyle(panel).transform,
               );
-              return Math.abs(
-                (Math.atan2(-matrix.m13, matrix.m11) * 180) / Math.PI,
+              const normal = new DOMPoint(0, 0, 1, 0).matrixTransform(
+                camera.multiply(hinge),
               );
+              return normal.z / Math.hypot(normal.x, normal.y, normal.z);
             }),
-          { message: `${label} panel must be flat while reading` },
+          { message: `${label} front face must point toward the reader` },
         )
-        .toBeLessThan(0.5);
+        .toBeGreaterThan(0.995);
       await expect(target).toBeInViewport({ ratio: 0.98 });
       await expect
         .poll(

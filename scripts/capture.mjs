@@ -11,6 +11,7 @@ const warnings = [];
 const failedRequests = [];
 const captures = [];
 const foldSamples = [];
+const journeys = [];
 
 async function hinges(page) {
   return page.locator('.fold-panel').evaluateAll((panels) =>
@@ -19,6 +20,15 @@ async function hinges(page) {
       return {
         panel: panel.dataset.panel,
         degrees: (Math.atan2(-matrix.m13, matrix.m11) * 180) / Math.PI,
+        freeEdgeDepth: new DOMPoint(
+          panel.dataset.panel === 'left'
+            ? -panel.offsetWidth
+            : panel.offsetWidth,
+          0,
+          0,
+          0,
+        ).matrixTransform(matrix).z,
+        width: panel.offsetWidth,
       };
     }),
   );
@@ -30,6 +40,7 @@ async function captureViewport(name, viewport, mobile = false) {
     deviceScaleFactor: 1,
     isMobile: mobile,
     hasTouch: mobile,
+    recordVideo: { dir: `${output}/videos`, size: viewport },
   });
   page.on('pageerror', (error) => errors.push(`${name}: ${error.message}`));
   page.on('console', (event) => {
@@ -49,10 +60,54 @@ async function captureViewport(name, viewport, mobile = false) {
   const travel = await page.evaluate(
     () => document.documentElement.scrollHeight - innerHeight,
   );
-  let previous = 0;
+  const recording = page.evaluate(
+    () =>
+      new Promise((resolve) => {
+        const frames = [];
+        const start = performance.now();
+        const sheet = document.querySelector('.proposal-sheet');
+        const line = document.querySelector('.scroll-line');
+        function sample(time) {
+          frames.push({
+            time,
+            scroll: scrollY,
+            progress: Number(line.style.getPropertyValue('--tour-progress')),
+            camera: sheet.style.transform,
+          });
+          if (time - start < 6500) requestAnimationFrame(sample);
+          else resolve(frames);
+        }
+        sample(start);
+      }),
+  );
+  const continuousImages = [];
+  for (let step = 0; step < 110; step += 1) {
+    await page.mouse.wheel(0, Math.round((travel * 0.88) / 110));
+    await page.waitForTimeout(16);
+    if ([20, 50, 80].includes(step)) {
+      const path = `${output}/${name}-continuous-${step}.png`;
+      await page.screenshot({ path });
+      continuousImages.push(path);
+    }
+  }
+  await page.mouse.wheel(0, -Math.round(travel * 0.32));
+  await page.waitForTimeout(2100);
+  const pausedPath = `${output}/${name}-pause-after-reverse.png`;
+  await page.screenshot({ path: pausedPath });
+  journeys.push({
+    viewport: name,
+    frames: await recording,
+    continuousImages,
+    pausedPath,
+    videoPath: await page.video().path(),
+  });
+  await page.mouse.wheel(0, -travel * 2);
+  await page.waitForTimeout(1400);
   for (const progress of [0, 0.04, 0.08, 0.13, 0.2]) {
-    if (progress)
-      await page.mouse.wheel(0, Math.round(travel * (progress - previous)));
+    if (progress) {
+      const currentY = await page.evaluate(() => scrollY);
+      await page.mouse.wheel(0, Math.round(travel * progress - currentY));
+    }
     await page.waitForTimeout(450);
     const path = `${output}/${name}-fold-${String(Math.round(progress * 100)).padStart(2, '0')}.png`;
     await page.screenshot({ path });
@@ -75,7 +130,6 @@ async function captureViewport(name, viewport, mobile = false) {
       ),
       path,
     });
-    previous = progress;
   }
   const stops = page.locator('.chapter-nav button[data-go-to]');
   const count = await stops.count();
@@ -107,11 +161,20 @@ async function captureViewport(name, viewport, mobile = false) {
       framing = await target.evaluate((element) => {
         const box = element.getBoundingClientRect();
         const scale = box.width / element.offsetWidth;
+        const panel = element.closest('.fold-panel');
+        const camera = new DOMMatrixReadOnly(
+          getComputedStyle(element.closest('.proposal-sheet')).transform,
+        );
+        const hinge = new DOMMatrixReadOnly(getComputedStyle(panel).transform);
+        const normal = new DOMPoint(0, 0, 1, 0).matrixTransform(
+          camera.multiply(hinge),
+        );
         return {
           left: box.left,
           top: box.top,
           right: box.right,
           bottom: box.bottom,
+          frontNormalZ: normal.z / Math.hypot(normal.x, normal.y, normal.z),
           text: [...element.querySelectorAll('p, h1, h2, h3')].map((text) => ({
             text: text.textContent.slice(0, 90),
             renderedFontPx:
@@ -168,6 +231,7 @@ try {
     failedRequests,
     captures,
     foldSamples,
+    journeys,
   };
   await writeFile(
     `${output}/capture.json`,

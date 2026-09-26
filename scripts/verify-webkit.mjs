@@ -16,6 +16,15 @@ const angles = (page) =>
       return {
         panel: panel.dataset.panel,
         degrees: (Math.atan2(-m.m13, m.m11) * 180) / Math.PI,
+        freeEdgeDepth: new DOMPoint(
+          panel.dataset.panel === 'left'
+            ? -panel.offsetWidth
+            : panel.offsetWidth,
+          0,
+          0,
+          0,
+        ).matrixTransform(m).z,
+        width: panel.offsetWidth,
       };
     }),
   );
@@ -48,10 +57,10 @@ try {
     const travel = await page.evaluate(
       () => document.documentElement.scrollHeight - innerHeight,
     );
-    let previous = 0;
     for (const progress of [0, 0.04, 0.08, 0.13]) {
       if (progress) {
-        const delta = Math.round(travel * (progress - previous));
+        const currentY = await page.evaluate(() => scrollY);
+        const delta = Math.round(travel * progress - currentY);
         if (viewport.width < 700)
           await page.evaluate((delta) => window.scrollBy(0, delta), delta);
         else await page.mouse.wheel(0, delta);
@@ -76,8 +85,18 @@ try {
       }
       samples.push({ progress, hinges: await angles(page), bounds });
       await page.screenshot({ path: `${output}/${name}-fold-${progress}.png` });
-      previous = progress;
     }
+    expect(
+      samples.some(({ hinges }) => {
+        const left = hinges.find((hinge) => hinge.panel === 'left');
+        const right = hinges.find((hinge) => hinge.panel === 'right');
+        return (
+          left.freeEdgeDepth * right.freeEdgeDepth < 0 &&
+          Math.abs(left.freeEdgeDepth) / left.width > 0.25 &&
+          Math.abs(right.freeEdgeDepth) / right.width > 0.25
+        );
+      }),
+    ).toBeTruthy();
     for (const wing of ['left', 'right'])
       expect(
         Math.max(
@@ -115,14 +134,19 @@ try {
       await expect
         .poll(() =>
           target.evaluate((e) => {
-            const m = new DOMMatrixReadOnly(
+            const camera = new DOMMatrixReadOnly(
+              getComputedStyle(e.closest('.proposal-sheet')).transform,
+            );
+            const hinge = new DOMMatrixReadOnly(
               getComputedStyle(e.closest('.fold-panel')).transform,
             );
-            return Math.abs((Math.atan2(-m.m13, m.m11) * 180) / Math.PI);
+            const normal = new DOMPoint(0, 0, 1, 0).matrixTransform(
+              camera.multiply(hinge),
+            );
+            return normal.z / Math.hypot(normal.x, normal.y, normal.z);
           }),
         )
-        .toBeLessThan(0.5);
-      await expect(target).toBeInViewport({ ratio: 0.98 });
+        .toBeGreaterThan(0.995);
       await expect
         .poll(() =>
           target.evaluate((e) => {
@@ -142,6 +166,26 @@ try {
           }),
         )
         .toBeTruthy();
+      // WebKit's IntersectionObserver clips nested 3D descendants incorrectly.
+      // Native-window review verifies paint; geometry and hit tests verify bounds
+      // and occlusion without accepting the incorrect intersection ratio.
+      const frontGrid = await target.evaluate((element) => {
+        const box = element.getBoundingClientRect();
+        const face = element.closest('.panel-face');
+        const points = [];
+        for (const x of [0.05, 0.25, 0.5, 0.75, 0.95])
+          for (const y of [0.05, 0.25, 0.5, 0.75, 0.95])
+            points.push(
+              face.contains(
+                document.elementFromPoint(
+                  box.left + box.width * x,
+                  box.top + box.height * y,
+                ),
+              ),
+            );
+        return points;
+      });
+      expect(frontGrid.filter(Boolean)).toHaveLength(25);
       const minText = await target.evaluate((e) => {
         const scale = e.getBoundingClientRect().width / e.offsetWidth;
         return Math.min(
@@ -151,7 +195,7 @@ try {
         );
       });
       expect(minText).toBeGreaterThanOrEqual(12);
-      holds.push({ label, minText });
+      holds.push({ label, minText, unobscuredFrontPoints: frontGrid.length });
       await page.screenshot({ path: `${output}/${name}-hold-${index}.png` });
     }
     await page.locator('#reading-mode').click();
@@ -188,6 +232,8 @@ try {
     visualStatus:
       'Requires native-window confirmation: WebKit protocol screenshots ignore hidden backfaces',
     screenshotIssue: 'https://github.com/microsoft/playwright/issues/21620',
+    intersectionLimitation:
+      'Nested 3D IntersectionObserver reported 0.593 for a fully framed and unobscured cover. Verified by matching Chromium/WebKit bounds, 25 front-face hit tests and a native-window screenshot. This run uses bounds and front-face hit tests; Chromium keeps IntersectionObserver assertions.',
     errors,
     warnings,
     failedRequests,
