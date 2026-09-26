@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0",
   "url": "https://brentthomas248.github.io/handrail-proposal/",
-  "checkedAt": "2026-09-26T20:47:48.590070+00:00",
+  "checkedAt": "2026-09-26T21:27:25.346338+00:00",
   "passed": true,
-  "sourceCommit": "a7fc658ce169e4dae1927a7fd3eae95f8c14f6c7",
-  "staticCommit": "92975026a1d4ae002716349bd1663e2335c3fdc1",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36270588222",
+  "sourceCommit": "0dfbaaaa065adeeabf0d7c64da106dca8917de88",
+  "staticCommit": "4013024ba8464a5e4158c0199a45952999cd7af5",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36272824422",
   "publishingSource": {
     "branch": "gh-pages",
     "path": "/",
@@ -14,30 +14,29 @@
   },
   "browserSuite": {
     "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm test:e2e",
-    "passed": 19,
+    "passed": 27,
     "failed": 0,
-    "durationSeconds": 8.7
+    "durationSeconds": 21.7
   },
   "checks": [
-    "Real wheel input unfolds both independent hinges, moves the camera and reverses to the folded packet",
-    "Intro wings fit between header and controls; active reading faces are flat and framed on desktop, 390px and 320px",
-    "Mobile touch emulation, keyboard chapter navigation and focus reveal",
-    "Reading preference, reduced motion, JavaScript-disabled content and browser Back navigation",
-    "Canonical proposal notes, PDF availability and both route axe scans",
-    "Hosted homepage, notes, PDF, logo and social image match the release build byte-for-byte"
+    "True accordion depth, continuous wheel movement, early reversal and input-cancelled idle settlement",
+    "Stable mobile height changes, parent-chapter breakpoint preservation and touchCancel release",
+    "Delayed camera initialization stays hidden; failed initialization falls back to reading",
+    "Keyboard, reduced motion, no-JavaScript and normal reading paths",
+    "Eight hosted assets match final build; downloaded PDF completely matches canonical content"
   ],
   "staticAssetChecks": [
     {
       "path": "index.html",
       "http": 200,
-      "bytes": 34089,
-      "sha256": "a8fc9d80413554fcc4b23976fcb2f6945f0adb000b644a448dace1c9b9646b77"
+      "bytes": 36732,
+      "sha256": "dcaa21202ff00d397c8d36e5ebf450718154eb0c0fdf3e6faa2eada30b6eb440"
     },
     {
       "path": "agreement/index.html",
       "http": 200,
-      "bytes": 35469,
-      "sha256": "80912b98cf2271a05f533a988f230fc9b1b6d6f18f20dc7e0e1920a91e73af3a"
+      "bytes": 37681,
+      "sha256": "a223abf86fe6a140f7da85b52490dd688886dd8bbeea385905e8cc81a9861c0d"
     },
     {
       "path": "handrail-proposed-agreement.pdf",
@@ -56,6 +55,24 @@
       "http": 200,
       "bytes": 72589,
       "sha256": "f5cd97ea07cba230f692b3613127166200a1bc37f8fae34e0266cd779a6495d7"
+    },
+    {
+      "path": "paper-grain.svg",
+      "http": 200,
+      "bytes": 1062,
+      "sha256": "7d64a2251e5479a45be557f4a8847e3b0591b29fa7c6a00bdc1d5be645a953d0"
+    },
+    {
+      "path": "_astro/index.astro_astro_type_script_index_0_lang.jeu0j9ga.js",
+      "http": 200,
+      "bytes": 80781,
+      "sha256": "ad52b71c41f08cd9a6f8c870b4dbfe425366087de5e406c9b997d681c399096a"
+    },
+    {
+      "path": "_astro/client.CCxN9xF8.js",
+      "http": 200,
+      "bytes": 220825,
+      "sha256": "4907db89a5bc4160920b577b51facb283e0e376ee1b4d5acab82c2e4d5654811"
     }
   ],
   "pdfCanonicalCheck": {
@@ -68,16 +85,14 @@
   "errors": [],
   "failedRequests": [],
   "hostedCapture": {
-    "capturedAt": "2026-09-26T20:46:38.085Z",
-    "chapterImages": 24,
-    "foldSamples": 15,
-    "evidencePath": "qa-artifacts/trifold-hosted/capture.json",
+    "capturedAt": "2026-09-26T21:21:12Z",
+    "evidencePath": "qa-artifacts/z-fold-hosted/capture.json",
+    "scope": "Current motion/material scene before startup-only refinement; current cold load additionally reviewed natively",
+    "viewports": [1440, 390, 320],
     "errors": [],
-    "warnings": [],
-    "failedRequests": [],
-    "minimumRenderedTextPx": 14.05005548650568
+    "failedRequests": []
   },
-  "edition": "hinged-html-trifold",
+  "edition": "continuous-z-fold-matte-paper",
   "isCurrentRevision": true,
   "supplementaryWebKitEvidence": "agentic-ui/webkit-verification.json"
 }

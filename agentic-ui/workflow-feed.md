@@ -51,3 +51,10 @@ The user requested independent folds, stronger scroll motion, no decorative symb
 ## 2026-09-26T20:47:48.590070+00:00 — trifold published and verified
 
 Published source a7fc658 as static 92975026a1d4ae002716349bd1663e2335c3fdc1. Pages run 36270588222 succeeded. All 19 Chromium browser checks pass at the public URL; 24 chapter images and 15 fold samples have no errors, warnings or failed requests. Public assets match local output and the downloaded PDF matches seven sections and 15 paragraphs. Supplementary WebKit behavior and actual native-window rendering passed; its screenshot API has an independently reproduced hidden-backface defect, documented in webkit-verification.json. No CSS workaround was applied. User visual acceptance remains separate.
+
+
+## 2026-09-26T21:27:25.346338+00:00 — continuous Z-fold and paper revision published
+
+The prior endpoint-only checks missed stationary scroll intervals and unnecessary resize rebuilding. The replacement uses true opposite-depth accordion geometry, a continuous camera path, bounded damping, input-cancelled settlement and stable phone-height behavior. Paper now has original fine grain/fibers, edge and crease depth, directional shading and a close soft projected shadow. A cold-public-load flash was separately reproduced and fixed with a ready-frame guard plus readable failure fallback.
+
+Source 0dfbaaa, static 4013024, Pages run 36272824422 succeeded. All 27 Chromium checks pass locally and hosted; all six original gesture regressions fail against the preceding release. Eleven unit and three component checks pass; PDF is unchanged and canonical. Final public HTML/assets match dist. Supplementary WebKit covers 21 reading positions and actual native desktop paint, with protocol/IO/hit-test/headful-phone limitations preserved. User visual acceptance, native/physical mobile and field performance remain separate. See docs/motion-remediation.md and deployment-verification.json.

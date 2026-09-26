@@ -167,8 +167,8 @@ try {
         )
         .toBeTruthy();
       // WebKit's IntersectionObserver clips nested 3D descendants incorrectly.
-      // Native-window review verifies paint; geometry and hit tests verify bounds
-      // and occlusion without accepting the incorrect intersection ratio.
+      // Native-window review verifies paint; full bounds and face normals verify
+      // framing without accepting the incorrect intersection ratio.
       const frontGrid = await target.evaluate((element) => {
         const box = element.getBoundingClientRect();
         const face = element.closest('.panel-face');
@@ -185,7 +185,6 @@ try {
             );
         return points;
       });
-      expect(frontGrid.filter(Boolean)).toHaveLength(25);
       const minText = await target.evaluate((e) => {
         const scale = e.getBoundingClientRect().width / e.offsetWidth;
         return Math.min(
@@ -195,7 +194,12 @@ try {
         );
       });
       expect(minText).toBeGreaterThanOrEqual(12);
-      holds.push({ label, minText, unobscuredFrontPoints: frontGrid.length });
+      holds.push({
+        label,
+        minText,
+        frontFaceHitPoints: frontGrid.filter(Boolean).length,
+        sampledHitPoints: frontGrid.length,
+      });
       await page.screenshot({ path: `${output}/${name}-hold-${index}.png` });
     }
     await page.locator('#reading-mode').click();
@@ -233,7 +237,11 @@ try {
       'Requires native-window confirmation: WebKit protocol screenshots ignore hidden backfaces',
     screenshotIssue: 'https://github.com/microsoft/playwright/issues/21620',
     intersectionLimitation:
-      'Nested 3D IntersectionObserver reported 0.593 for a fully framed and unobscured cover. Verified by matching Chromium/WebKit bounds, 25 front-face hit tests and a native-window screenshot. This run uses bounds and front-face hit tests; Chromium keeps IntersectionObserver assertions.',
+      'Nested 3D IntersectionObserver reported 0.593 for a fully framed cover. Verified by matching Chromium/WebKit bounds and a native-window screenshot. This run uses full bounds and composed face normals; Chromium keeps IntersectionObserver assertions.',
+    hitTestingLimitation:
+      'Right-wing targets can return the transparent ARTICLE.proposal-sheet ancestor from elementFromPoint in both Chromium and WebKit. Grid counts are diagnostics, not an occlusion or clickability pass; native-window review is required for actual paint.',
+    nativeMobileLimitation:
+      'Headful WebKit retained desktop layout despite a reported 390px configured viewport. Headless mobile geometry is covered separately; native mobile and physical iOS remain unverified.',
     errors,
     warnings,
     failedRequests,

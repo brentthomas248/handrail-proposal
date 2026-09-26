@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T20:36:42.602124+00:00",
+  "generatedAt": "2026-09-26T21:11:36.683828+00:00",
   "assets": [
     {
       "id": "handrail-logo",
@@ -46,6 +46,16 @@
       "representativeLatinFile": "node_modules/@fontsource/playfair-display/files/playfair-display-latin-400-italic.woff2",
       "sha256": "eabce94d4a69e439cd050755c31f9894ac8a78f93e58b063c6c01f370474e1de",
       "usage": ["Italic cover introduction"]
+    },
+    {
+      "id": "paper-grain",
+      "kind": "procedural-texture",
+      "path": "public/paper-grain.svg",
+      "sha256": "7d64a2251e5479a45be557f4a8847e3b0591b29fa7c6a00bdc1d5be645a953d0",
+      "width": 256,
+      "height": 256,
+      "provenance": "Original deterministic SVG grain and fiber tile authored for this project.",
+      "usage": ["Matte front and back paper faces; print excludes texture."]
     }
   ],
   "notes": [

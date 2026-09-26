@@ -20,14 +20,14 @@ Three hinged panels have actual front and back faces. CSS 3D transforms and a GS
 
 ## Engineering
 
-| Responsibility | Implementation                                                                                                                                         |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Pages          | Astro static output, strict TypeScript and a reusable React rate component. No backend, accounts, analytics or electronic signing.                     |
-| Business terms | `src/content/proposal.ts` supplies rates, partnership copy and seven sections of proposal notes. HTML, generated Markdown and PDF use that source.     |
-| Scroll camera  | `motion.ts` measures the document and owns input/lifecycle; `tour-path.ts` handles fold geometry, a continuous cubic camera path, logarithmic zoom and refresh-rate-independent damping.              |
-| Reading paths  | The same essential HTML supports tour and ordinary reading. Decorative back faces are hidden from assistive technology; no canvas or WebGL dependency. |
-| Brand assets   | The official Handrail PNG wordmark, locally served Inter and Playfair Display.                                                                         |
-| Verification   | Vitest geometry/motion/content checks, Playwright continuous scrolling and interruption regressions, axe scans and Storybook states.                                             |
+| Responsibility | Implementation                                                                                                                                                                           |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pages          | Astro static output, strict TypeScript and a reusable React rate component. No backend, accounts, analytics or electronic signing.                                                       |
+| Business terms | `src/content/proposal.ts` supplies rates, partnership copy and seven sections of proposal notes. HTML, generated Markdown and PDF use that source.                                       |
+| Scroll camera  | `motion.ts` measures the document and owns input/lifecycle; `tour-path.ts` handles fold geometry, a continuous cubic camera path, logarithmic zoom and refresh-rate-independent damping. |
+| Reading paths  | The same essential HTML supports tour and ordinary reading. Decorative back faces are hidden from assistive technology; no canvas or WebGL dependency.                                   |
+| Brand assets   | The official Handrail PNG wordmark, locally served Inter and Playfair Display.                                                                                                           |
+| Verification   | Vitest geometry/motion/content checks, Playwright continuous scrolling and interruption regressions, axe scans and Storybook states.                                                     |
 
 The PDF is printed from the proposal-notes route. Regenerate it when the content changes; a previously generated PDF does not update itself. The existing `agreement/` URL and PDF filename are retained for link compatibility, while the visible content is proposal notes.
 

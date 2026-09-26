@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Handrail — A beginning together
-description: A hinged HTML trifold introducing a partnership, with Handrail's warm editorial identity.
+description: A continuous Z-fold paper journey introducing a partnership, with Handrail's warm editorial identity.
 colors:
   primary: '#C8502A'
   secondary: '#6B6258'
@@ -72,23 +72,41 @@ components:
 
 # A beginning together
 
-## Direction and acceptance
+## Current motion and material revision
 
-The user approved Telescope's zoom transitions, Igloo's continuous camera journey, Exat's typographic confidence and Stripe Press's document presentation, then requested Handrail's actual branding. Those reference approvals persist. After reviewing the published flat flyer, the user described it as an improvement but wanted more dynamic movement on an actual trifold and removal of decorative symbols.
+The approved Telescope, Igloo, Exat and Stripe Press references and Handrail brand direction remain. The user reviewed the published trifold, found its motion choppy or stuck, and requested a true Z-fold plus realistic paper texture and lighting. This is a redesign of 3D geometry, choreography and material treatment; the business proposal and identity are unchanged.
 
-This revision uses three hinged HTML panels with front and back faces. Its finished visual treatment has not yet been reviewed by the user. Reference approval, implemented behavior, automated checks and final visual acceptance remain separate claims. Publication of this revision is pending; the live flat-flyer source `ad6fa8b` and its receipts are historical evidence for that edition.
+The replacement motion and material implementation is complete and verified locally. The current 27-test browser suite exercises the whole scroll journey and its lifecycle, in addition to chapter endpoints. Final capture includes 24 chapter images, 15 opening samples, three full-journey videos and 1,143 frame records, with no console/network issues and a 13.48px minimum measured reading-text size. Independent rendered review and root’s native-window review support local closure of the selected findings. Supplementary WebKit geometry and native desktop review pass. The revision is published and all 27 hosted browser tests pass, including cold-load safeguards. The user’s visual acceptance remains separate. The durable plan, baseline findings and acceptance ledger are in [motion remediation](docs/motion-remediation.md).
 
-The earlier sculpture, paperclip, neon and interim cobalt/Archivo treatments are not current design sources. See [brand sources](docs/brand-sources.md) and [redesign research](docs/redesign-research.md).
+The independent baseline found extended unchanged scene poses despite advancing progress, with a maximum stationary interval of 716.6ms, approximately 60fps and no long tasks. The revised probe measured a 50ms maximum and reduced same-pose samples during advancing rendered progress from 147/527 to 2/560. A baseline 390×844 to 390×780 resize rebuilt the journey and rebased scrollY from 3514 to 3232 while preserving the chapter; this was not evidence of a chapter change. The new six-height probe preserved scrollY at 2640 with zero rebuilds. These measurements isolate choreography and viewport-state handling from rendering throughput. Source approval, functional checks, rendered review and user acceptance remain separate claims.
 
-## One physical document
+## A true Z-fold
 
-The actual proposal is a trifold built from semantic HTML. A center panel anchors two independently hinged wings, each with a readable front and a back face. CSS perspective, transform origins and backface visibility establish the document's depth; GSAP ScrollTrigger coordinates hinge opening and camera travel from native scrolling.
+The actual proposal stays in semantic HTML with a center panel and two independently hinged wings, each with front and back faces. The wings rotate in the same signed direction around opposite hinge edges, placing them on opposite sides of the center sheet. This is accordion geometry, rather than two wings both folding inward.
 
-The opening presents a folded cover, then opens the wings in sequence. Travel between sections uses perspective and panel movement; each reading hold brings its target face flat to the viewer. The difference must be visible on the document itself. Transforming the entire sheet while its wings remain rigid does not satisfy this direction.
+The camera moves around the folded structure to face the reading panel. A reader sees an actual fold, a thin paper edge and correctly oriented text. Do not flatten the whole structure just to hide incorrect hinge geometry or show a mirrored back face. The selected panel faces the camera at exact chapter positions; neighboring geometry may retain its fold if it does not obscure the content.
 
-The desktop sheet uses three 900px panels; the mobile camera artboard uses 760px panels. Heights follow the measured face content. These are native artboard dimensions, not fixed viewport widths. The camera must fit each reading target between the persistent header and controls. Mobile separates the compensation paths and rationale when needed for legibility.
+Artboard measurements follow the panel content. They are not fixed viewport dimensions. The scene must frame relevant text between the header and controls at desktop and mobile widths. Narrow views can split the compensation paths and supporting copy into closer reading targets.
 
-Ordinary reading removes the hinges and perspective and puts the same essential content into normal responsive flow. Decorative backs are excluded from the accessible reading content. No essential term may be available only on a back face, in an image or during a transition.
+Ordinary reading removes perspective and hinges and puts the same essential content into responsive document flow. Decorative backs remain excluded from accessible content. No proposal term may be available only during a transition, in an image or on a decorative back face.
+
+## Continuous choreography
+
+Native scrolling is the input. A single GSAP ticker owns critically damped scene progress, including startup, so fast initial input cannot jump past a separate animation mapping. A pure sampled camera path coordinates position, orientation, hinges and logarithmic scale. Position and first derivative must be continuous at segment joins (C1 continuity); chapter navigation lands on exact readable poses.
+
+The document responds throughout sustained scroll. Remove fixed blocks of dead scroll and stop/start easing at every chapter. Reading is paced by slower, gentle movement near important content and by the reader pausing, rather than spending scroll distance on a frozen frame. Reverse input traverses the same path smoothly.
+
+After about 650ms of inactivity between reading regions, the scene may settle smoothly toward a readable position by animating native scroll. Wheel, touch or keyboard input immediately cancels that settling. It must never compete with sustained input or pull the reader back after they reverse direction. Verify pause, resume, rapid flick and cancellation through the whole journey.
+
+Mobile address-bar height changes do not rebuild the journey or rebase the user's position; the stage keeps its initial stable height. Width/orientation changes remeasure the scene and preserve the same stop, falling back to its containing section across the mobile/desktop breakpoint. Both `touchend` and `touchcancel` release touch ownership, allowing settling and deferred resizing to resume. Height-only, breakpoint and canceled-touch scenarios have explicit browser regressions.
+
+## Paper and light
+
+The material should read as printed matte paper. Use subtle local grain at a believable physical scale, a thin visible edge, restrained crease shading and soft projected shadows. The surface stays quiet at normal reading distance; texture becomes apparent in closer views without turning into coarse noise or a patterned background.
+
+Directional light responds coherently to face orientation. Folded and open panels receive different diffuse light, and crease/contact shadows change with the fold. Cast shadows belong to the surrounding surface and should soften with separation. Their purpose is to establish depth and weight, not add a dark halo around every panel.
+
+Preserve sharp typography and contrast. Keep grain and illumination treatments from blurring, washing out or flickering over text. Use a matte finish: no glossy streak, metallic reflection, shiny card effect, bloom or continuously drifting decorative light. Verify front, back, edge and crease treatment across multiple orientations, not just the opening screenshot.
 
 ## Handrail identity
 
@@ -110,18 +128,18 @@ The closing explains that the parties can shape Brent's contribution around what
 
 This remains a proposal for discussion. Handrail prepares the final contract after the business terms align. The notes and PDF preserve seven concise sections without legal boilerplate, statutory caveats or a signature flow.
 
-## Motion and reading controls
+## Reading controls and access
 
-Use one scroll owner and one coordinated timeline. Scrolling forward opens and traverses the trifold; reversing scroll reverses both camera and hinge movement. Chapter buttons target stable reading holds. A persistent Read normally / Take the tour control, system reduced motion and no-JavaScript viewing preserve access to the content.
+Keep the Read normally / Take the tour control, chapter buttons, visible focus, skip link and direct notes/PDF access. Reduced motion and no-JavaScript viewing preserve complete content without the 3D journey. Keyboard focus on an offscreen link must restore a usable reading context; returning from notes must restore a functioning scene.
 
-The focused reading face must be flat, fully visible and readable at each hold. Neighboring wings may retain a shallow angle if they do not cover that face. Perspective and hinge activity belong to transitions, not a constant idle animation that interrupts reading.
-
-Preserve keyboard navigation, visible focus, the skip link, notes access and PDF download. Focusing a link on an offscreen face must first restore a usable reading context. Returning from notes must restore a working tour rather than a stale transform.
+The selected reading face must be correctly oriented, framed and legible. A chapter button landing correctly is necessary but insufficient: the path into and out of it must remain coherent. User intent owns pause and reversal; neither fixed dwell regions nor idle settling may make the scene feel stuck.
 
 ## Verification boundary
 
-New receipts must demonstrate independent left and right hinge movement under actual wheel input, front/back behavior, reversible opening, perspective travel and flat readable holds. Tests that inspect only the sheet's root scale/translation cannot establish those behaviors.
+The [remediation batch](docs/motion-remediation.md) defines the current findings and exact closeout expectations. Capture continuous wheel and touch-like input, rapid flicks, immediate reversal, pause/resume, idle-settle cancellation and resize sequences. Measure actual scene movement throughout active scrolling, both wing angles and logical progress before/after viewport changes.
 
-Render and inspect the folded cover, both opening stages and every reading hold at desktop and mobile widths. Verify text size, framing, native touch input, keyboard navigation, ordinary reading, reduced motion, JavaScript-disabled reading and PDF consistency. Regenerate and inspect the PDF and social image when their content or composition changes.
+Inspect material closeups and content-distinct transition frames or a video/replay, along with the whole forward/reverse journey. Verify Z geometry, correctly oriented faces, matte directional light, crease/edge depth, projected shadows and sharp text at normal reading distance. The independent browser reviewer must review current rendered motion; screenshots made only by an implementer or a passing endpoint suite do not settle these findings.
 
-The preceding flat flyer's 19 browser passes and Lighthouse scores do not validate this trifold revision. Current checks, remaining issues and publication belong in IMPLEMENTATION.md and the evidence artifacts. Do not claim current performance or test success before those receipts exist.
+Re-run appropriate type/unit/build checks, canonical PDF consistency, current browser regressions, keyboard/accessibility paths and performance measurements. Preserve the documented WebKit screenshot-protocol limitation and use native-window evidence when that defect affects backface capture. No physical-device, manual VoiceOver or field-INP certification is inferred.
+
+The user-approved local workflow remains in force. Credentialed Stagehand/Browserbase services stay omitted; do not fabricate semantic service receipts or claim full global certification. Record actual local evidence, independent review, unresolved concerns and current publication status before describing this revision as complete.

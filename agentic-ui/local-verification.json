@@ -1,59 +1,49 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T20:47:48.590070+00:00",
-  "scope": "Current hinged HTML trifold and broader beginning-of-partnership proposal; approved local workflow",
+  "generatedAt": "2026-09-26T21:27:25.346338+00:00",
+  "scope": "Continuous Z-fold, tactile paper and stable input/lifecycle; approved local workflow",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
   "deployed": true,
   "checks": [
     {
       "command": "pnpm check",
-      "result": "22 files; zero errors, warnings and hints",
+      "result": "24 files, zero errors/warnings/hints",
       "exitCode": 0
     },
     {
       "command": "pnpm test",
-      "result": "4 content/consistency tests passed",
+      "result": "11 content/geometry/interpolation/damping checks passed",
       "exitCode": 0
     },
     {
-      "command": "pnpm build:release",
-      "result": "Two static routes and current two-page proposal PDF",
+      "command": "pnpm build",
+      "result": "Two static routes built",
       "exitCode": 0
     },
     {
-      "command": "pnpm contract:check",
-      "result": "Generated Markdown matches typed source",
-      "exitCode": 0
-    },
-    {
-      "command": "pnpm pdf:check",
-      "result": "Introduction, 7 sections, 15 paragraphs and endnote match completely and in order",
+      "command": "pnpm contract:check && pnpm pdf:check",
+      "result": "Markdown and unchanged seven-section/15-paragraph PDF match canonical content",
       "exitCode": 0
     },
     {
       "command": "pnpm test:e2e",
-      "result": "19 browser tests passed: both real hinge motions and reversal, unfolding bounds, readable flat chapter holds, keyboard, touch emulation, reading preference, Back navigation, reduced motion, no JS, notes/PDF and both axe scans",
+      "result": "27 Chromium checks passed in 20.8s; gesture, resize, cancellation and delayed/failed initialization",
       "exitCode": 0
     },
     {
-      "command": "pnpm capture",
-      "result": "24 chapter captures and 15 intermediate scroll samples; zero errors, warnings and failed requests; minimum sampled rendered text 14.05px",
+      "command": "CAPTURE_OUTPUT=qa-artifacts/z-fold-final pnpm capture",
+      "result": "24 chapter images,15 fold samples,three continuous/reversal journey recordings; no browser errors/warnings/failed requests",
       "exitCode": 0
     },
     {
-      "command": "pnpm build-storybook",
-      "result": "Production workshop build passed; workshop-only large-chunk warning",
+      "command": "pnpm build-storybook && pnpm test:components",
+      "result": "Workshop built, three checks passed,zero axe violations; workshop-only chunk warning",
       "exitCode": 0
     },
     {
-      "command": "pnpm test:components",
-      "result": "3 checks; zero axe violations and uncaught errors",
-      "exitCode": 0
-    },
-    {
-      "command": "Storybook MCP readiness and component-state validation",
-      "result": "Live endpoint and current DealPath state coverage passed",
+      "command": "pnpm performance",
+      "result": "Mobile performance 99,desktop 100; other categories 100; script transfer 31,601 bytes",
       "exitCode": 0
     },
     {
@@ -62,19 +52,19 @@
       "exitCode": 0
     },
     {
-      "command": "pnpm performance",
-      "result": "Local Lighthouse 100 in all four categories on mobile and desktop;46,763 script-transfer bytes under the unchanged 250 KB budget",
+      "command": "WEBKIT_OUTPUT=qa-artifacts/z-fold-webkit node scripts/verify-webkit.mjs",
+      "result": "21 reading positions pass geometry/readability; native desktop paint reviewed; diagnostic limitations explicitly retained",
       "exitCode": 0
     }
   ],
   "evidenceNotes": [
-    "Current desktop/mobile trifold and both regenerated PDF pages were visually inspected.",
-    "The previous flat-flyer and paper-sculpture evidence is historical. Current receipts verify independent hinges and camera motion.",
-    "Raw reports and screenshots remain ignored under qa-artifacts/ and test-results/.",
-    "Lighthouse measures the current release build; physical-device and field measurements are not claimed.",
-    "PDF rendering emitted a Poppler Type3 bounding-box warning; both rendered pages and complete canonical text comparison passed.",
-    "The same 19 browser checks pass against GitHub Pages. Hosted assets match the release build, and the downloaded PDF independently matches complete canonical content.",
-    "Supplementary WebKit checks cover 21 reading holds and three native-window states; protocol screenshots have a separately reproduced capture limitation. See webkit-verification.json."
+    "Independent continuous-input and cold-load evidence is in docs/motion-remediation.md.",
+    "Root and independent reviewers inspected actual paper, shadow, folds and text; three full-journey recordings remain local.",
+    "27 Chromium checks pass locally and against the final deployed release (21.7s hosted).",
+    "WebKit supplementary geometry and native desktop review pass; native mobile/physical iOS remain unverified.",
+    "No PDF regeneration needed; source content and notes layout are unchanged. Downloaded public PDF matches all seven sections and 15 paragraphs.",
+    "Eight public HTML/assets including motion code and paper texture match dist byte-for-byte.",
+    "Raw screenshots, frame records and videos remain ignored under qa-artifacts/."
   ],
   "limitations": [
     "agentic-ui/blockers.json",

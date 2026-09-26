@@ -1,6 +1,6 @@
 {
-  "checkedAt": "2026-09-26",
-  "scope": "Supplementary WebKit behavior and native-window visual verification",
+  "checkedAt": "2026-09-26T21:19:04.486Z",
+  "scope": "Supplementary Z-fold WebKit geometry and native desktop rendering verification",
   "engine": {
     "name": "Playwright WebKit",
     "version": "26.6",
@@ -11,23 +11,25 @@
     "viewports": ["1440x1000", "390x844", "320x740"],
     "readingHoldsVerified": 21,
     "checks": [
-      "Both physical hinges change with scrolling and reverse to their initial angles",
+      "Both hinges change with scrolling, reverse, and place their free edges on opposite sides of the center panel",
       "Introductory folding stays inside the visible stage",
-      "Every reading hold has a flat active panel, framed content and text at least 12 rendered pixels high",
+      "Every reading position has a front-facing composed camera/panel normal, full content bounds between header and controls, and text at least 12 rendered pixels high",
       "Normal reading mode has no horizontal overflow"
     ],
     "mobileInput": "Programmatic document scrolling; Playwright does not support mouse-wheel input in mobile WebKit",
     "script": "scripts/verify-webkit.mjs",
-    "receipt": "qa-artifacts/trifold-webkit/verification.json"
+    "receipt": "qa-artifacts/z-fold-webkit/verification.json",
+    "minimumRenderedTextPx": 13.480924571644175
   },
   "nativeWindow": {
     "passed": true,
     "verifiedBy": "Root agent using Cua to inspect the live headful Playwright window",
     "states": [
-      "Closed folded cover",
-      "Unfolded three-panel flyer reached with native wheel input",
-      "Cash receipt with normally oriented text and amounts"
-    ]
+      "The beginning: complete heading, statement and descriptive paragraph",
+      "Opened Z-fold: alternating hinges, normally oriented faces and matte texture",
+      "The two paths: both complete rate columns, rationale, benefits and future-sales copy"
+    ],
+    "scope": "Actual desktop native window; headful viewport emulation did not produce a phone layout"
   },
   "protocolScreenshots": {
     "reliableForBackfaceVisualAcceptance": false,
@@ -47,5 +49,16 @@
   "browserErrors": [],
   "failedRequests": [],
   "physicalIOSVerified": false,
-  "relationshipToChromium": "Separate supplementary evidence; this does not represent the complete 19-test Chromium suite running in WebKit."
+  "relationshipToChromium": "Separate supplementary evidence; this does not represent the complete 25-test Chromium suite running in WebKit.",
+  "intersectionObserver": {
+    "reliableForNested3DFraming": false,
+    "finding": "Nested 3D IntersectionObserver reported 0.593 for a fully framed cover. Verified by matching Chromium/WebKit bounds and a native-window screenshot. This run uses full bounds and composed face normals; Chromium keeps IntersectionObserver assertions.",
+    "acceptance": "Full transformed bounds, composed camera/panel normals, minimum rendered font size and independent native-window review; Chromium retains the 98% intersection assertion."
+  },
+  "hitTesting": {
+    "claim": "Diagnostic only; no complete clickability or occlusion pass claimed",
+    "finding": "Right-wing targets can return the transparent ARTICLE.proposal-sheet ancestor from elementFromPoint in both Chromium and WebKit. Grid counts are diagnostics, not an occlusion or clickability pass; native-window review is required for actual paint."
+  },
+  "nativeMobileVerified": false,
+  "headfulViewportLimitation": "Headful WebKit retained desktop layout despite a reported 390px configured viewport. Headless mobile geometry is covered separately; native mobile and physical iOS remain unverified."
 }
