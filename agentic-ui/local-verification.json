@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T20:10:01.595Z",
-  "scope": "Approved local Handrail flyer redesign; product evidence separated from full global certification",
+  "generatedAt": "2026-09-26T20:35:15.113809+00:00",
+  "scope": "Current hinged HTML trifold and broader beginning-of-partnership proposal; approved local workflow",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": true,
+  "deployed": false,
   "checks": [
     {
       "command": "pnpm check",
@@ -33,12 +33,12 @@
     },
     {
       "command": "pnpm test:e2e",
-      "result": "19 browser tests passed, including real scrolling and touch, framing and readable type at each stop, keyboard, reading preferences, Back navigation, no-JS, notes/PDF and both axe scans",
+      "result": "19 browser tests passed: both real hinge motions and reversal, unfolding bounds, readable flat chapter holds, keyboard, touch emulation, reading preference, Back navigation, reduced motion, no JS, notes/PDF and both axe scans",
       "exitCode": 0
     },
     {
       "command": "pnpm capture",
-      "result": "22 chapter images plus reading/notes screenshots; zero browser or failed-request errors",
+      "result": "24 chapter captures and 15 intermediate scroll samples; zero errors, warnings and failed requests; minimum sampled rendered text 14.05px",
       "exitCode": 0
     },
     {
@@ -63,22 +63,17 @@
     },
     {
       "command": "pnpm performance",
-      "result": "Local Lighthouse 100 in all four categories on mobile and desktop; 45870 script-transfer bytes under unchanged 250 KB budget",
-      "exitCode": 0
-    },
-    {
-      "command": "DESIGN.md lint, DTCG export and design-brief validation",
-      "result": "Zero lint errors, two unused-token warnings, token export and brief validation passed",
+      "result": "Local Lighthouse 100 in all four categories on mobile and desktop;46,763 script-transfer bytes under the unchanged 250 KB budget",
       "exitCode": 0
     }
   ],
   "evidenceNotes": [
-    "Rendered desktop/mobile flyer captures and both PDF pages were inspected.",
-    "Runtime verification uses the current HTML flyer. Earlier sculpture test counts are historical and superseded.",
-    "Raw artifacts are ignored under qa-artifacts/ and test-results/.",
-    "Lighthouse measurement preceded the final keyboard/back-navigation cleanup; physical-device and field measurements are not claimed.",
-    "PDF rendering emitted a Poppler Type3 bounding-box warning; visual review and full text comparison passed.",
-    "The same 19 browser tests passed against GitHub Pages. Hosted assets match the build; the downloaded PDF passed independent full-text verification."
+    "Current desktop/mobile trifold and both regenerated PDF pages were visually inspected.",
+    "The previous flat-flyer and paper-sculpture evidence is historical. Current receipts verify independent hinges and camera motion.",
+    "Raw reports and screenshots remain ignored under qa-artifacts/ and test-results/.",
+    "Lighthouse measures the current release build; physical-device and field measurements are not claimed.",
+    "PDF rendering emitted a Poppler Type3 bounding-box warning; both rendered pages and complete canonical text comparison passed.",
+    "Hosted verification is pending publication of this revision."
   ],
   "limitations": [
     "agentic-ui/blockers.json",

@@ -1,18 +1,14 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T20:10:01.595Z",
+  "generatedAt": "2026-09-26T20:36:42.602124+00:00",
   "mode": "full-lifecycle",
   "sections": [
     {
       "id": "product-design-intent",
       "status": "pass",
-      "evidence": [
-        "PROJECT.md",
-        "DESIGN.md",
-        "src/content/proposal.ts"
-      ],
+      "evidence": ["PROJECT.md", "DESIGN.md", "src/content/proposal.ts"],
       "notes": [
-        "Approved flyer-camera direction and negotiable business-proposal framing with actual Handrail branding."
+        "Current hinged trifold introduces a partnership that starts with new business and can grow with Handrail. Compensation and proposed status remain clear; actual company branding is retained."
       ]
     },
     {
@@ -24,7 +20,7 @@
         "src/scripts/motion.ts"
       ],
       "notes": [
-        "One HTML flyer, chapter navigation, ordinary reading, proposal notes and matching PDF."
+        "Three hinged HTML panels open from a folded cover, then present stable reading holds, chapter navigation, ordinary reading and direct proposal notes/PDF. Mobile separates long cash-flow content, individual rate paths and the rationale."
       ]
     },
     {
@@ -49,15 +45,13 @@
         "qa-artifacts/storybook/verification.json"
       ],
       "notes": [
-        "Three current DealPath checks passed with zero axe violations and zero uncaught errors. Deleted 3D components are excluded."
+        "Three current DealPath checks passed with zero axe violations and zero uncaught errors. Hinges and camera are document-level behavior verified by browser tests, not obsolete React/WebGL stories."
       ]
     },
     {
       "id": "accessibility",
       "status": "in-progress",
-      "evidence": [
-        "agentic-ui/accessibility-evidence.json"
-      ],
+      "evidence": ["agentic-ui/accessibility-evidence.json"],
       "notes": [
         "19 browser tests include two passing route-level axe scans and keyboard/reduced-motion paths. Manual VoiceOver and physical-device review remain unverified."
       ]
@@ -67,10 +61,10 @@
       "status": "pass",
       "evidence": [
         "tests/e2e/proposal.spec.ts",
-        "qa-artifacts/flyer-camera/capture.json"
+        "qa-artifacts/trifold/capture.json"
       ],
       "notes": [
-        "Final 19 browser checks passed, including camera framing with at least 12px rendered body text and reading reflow. Desktop/mobile images were reviewed after the 320px typography polish."
+        "19 browser checks passed. All 24 chapter views and 15 actual-scroll samples were captured; implementation and browser reviewers inspected desktop/mobile states. Both wings visibly move and reverse; reading faces are flat, framed and at least 14.05px in the recorded text samples."
       ]
     },
     {
@@ -81,17 +75,20 @@
         "agentic-ui/design-critique.json"
       ],
       "notes": [
-        "Copy emphasizes collected cash before commission, requested benefits as a cost and Handrail preparing the final contract."
+        "The beginning-of-partnership copy leaves room for Brent's contribution to evolve without inventing future roles. It retains customer collections before commission, benefits as a separate cost and Handrail preparing the final contract."
       ]
     },
     {
       "id": "performance",
       "status": "in-progress",
       "evidence": [
+        "qa-artifacts/lighthouse-mobile.json",
+        "qa-artifacts/lighthouse-desktop.json",
         "agentic-ui/performance-evidence.json"
       ],
       "notes": [
-        "Local Lighthouse records 100 in all categories on mobile/desktop, 45,870 transferred script bytes and passing LCP/CLS/250KB route-script budgets. Measurements precede final keyboard/back-navigation cleanup. Field INP and physical-device performance remain unverified."
+        "Current trifold local Lighthouse: 100 in all four categories on both devices. Mobile LCP 1656.355ms / TBT 0ms / CLS 0.02279675; desktop LCP 368.8312ms / TBT 0ms / CLS 0.01910344. Field INP and physical-device measurements remain unavailable; no earlier keyboard-cleanup caveat applies to this run.",
+        "Measured route script transfer is 46,763 bytes (120,036 resource bytes)."
       ]
     },
     {
@@ -113,10 +110,11 @@
         "tests/agreement.test.ts",
         "tests/e2e/proposal.spec.ts",
         ".storybook/verify-components.mjs",
-        "scripts/verify-pdf.ts"
+        "scripts/verify-pdf.ts",
+        "qa-artifacts/trifold/capture.json"
       ],
       "notes": [
-        "Local check: 22 files, zero issues. Four unit, 19 browser and three component checks passed. Two routes built; two-page PDF rendered and independently matched seven sections/15 paragraphs. This is local evidence, not hosted or global certification."
+        "Current local check: 22 files, zero issues. Four unit, 19 browser and three component checks passed. Captures contain 24 chapter views and 15 scroll samples, with zero browser errors, warnings or failed requests. Current publication is pending; this is not hosted or global certification."
       ]
     },
     {
@@ -128,15 +126,13 @@
         "src/scripts/motion.ts"
       ],
       "notes": [
-        "The redesign replaces decorative 3D folding with zoom/pan on the actual flyer and removes final-contract legal boilerplate. Final focused checks cover small-screen typography, keyboard focus and browser-back camera restoration."
+        "The revised document has real left/right hinges instead of a rigid flat camera plane. Numeric-camera uniform scale3d fixes exaggerated hinge depth and header clipping. Mobile cash content is split into readable targets; current checks cover keyboard focus, Back restoration and native touch gestures."
       ]
     },
     {
       "id": "full-stack-data-states",
       "status": "not-affected",
-      "evidence": [
-        "PROJECT.md"
-      ],
+      "evidence": ["PROJECT.md"],
       "notes": [
         "No API, database or authentication. Local presentation-preference storage is the only retained UI state."
       ]
@@ -152,10 +148,7 @@
         "accessibility",
         "responsive-layout"
       ],
-      "evidence": [
-        "DESIGN.md",
-        "agentic-ui/ui-handoff.json"
-      ]
+      "evidence": ["DESIGN.md", "agentic-ui/ui-handoff.json"]
     },
     {
       "path": "src/pages/agreement.astro",
@@ -166,10 +159,7 @@
         "accessibility",
         "responsive-layout"
       ],
-      "evidence": [
-        "DESIGN.md",
-        "agentic-ui/ui-handoff.json"
-      ]
+      "evidence": ["DESIGN.md", "agentic-ui/ui-handoff.json"]
     },
     {
       "path": "src/layouts/Page.astro",
@@ -180,10 +170,7 @@
         "accessibility",
         "responsive-layout"
       ],
-      "evidence": [
-        "DESIGN.md",
-        "agentic-ui/ui-handoff.json"
-      ]
+      "evidence": ["DESIGN.md", "agentic-ui/ui-handoff.json"]
     },
     {
       "path": "src/styles/global.css",
@@ -194,10 +181,7 @@
         "accessibility",
         "responsive-layout"
       ],
-      "evidence": [
-        "DESIGN.md",
-        "agentic-ui/ui-handoff.json"
-      ]
+      "evidence": ["DESIGN.md", "agentic-ui/ui-handoff.json"]
     },
     {
       "path": "src/scripts/motion.ts",
@@ -208,10 +192,7 @@
         "accessibility",
         "responsive-layout"
       ],
-      "evidence": [
-        "DESIGN.md",
-        "agentic-ui/ui-handoff.json"
-      ]
+      "evidence": ["DESIGN.md", "agentic-ui/ui-handoff.json"]
     },
     {
       "path": "src/components/DealPath.tsx",
@@ -222,28 +203,21 @@
         "accessibility",
         "responsive-layout"
       ],
-      "evidence": [
-        "DESIGN.md",
-        "agentic-ui/ui-handoff.json"
-      ]
+      "evidence": ["DESIGN.md", "agentic-ui/ui-handoff.json"]
     }
   ],
   "fullStackStateAssumptions": {
-    "apiContracts": [
-      "No API or backend contract."
-    ],
+    "apiContracts": ["No API or backend contract."],
     "coveredDataStates": [
-      "Static proposal content; tour and normal reading; system reduced motion and JavaScript-disabled flow."
+      "Static proposal content; folded and unfolding trifold, flat reading holds, ordinary reading, system reduced motion and JavaScript-disabled flow."
     ],
-    "authRoleStates": [
-      "No authentication or authorization roles."
-    ],
+    "authRoleStates": ["No authentication or authorization roles."],
     "mutationSafety": [
       "No business mutations; isolated browser preference storage only."
     ]
   },
   "localScopeStatus": "verified",
   "fullLifecycleCertified": false,
-  "scope": "User-approved local redesign; full lifecycle certification is not claimed.",
-  "publicationStatus": "published-and-verified"
+  "scope": "User-approved local trifold redesign; reference approval does not establish final visual acceptance or full global lifecycle certification.",
+  "publicationStatus": "pending-current-revision"
 }

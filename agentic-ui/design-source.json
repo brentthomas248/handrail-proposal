@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T20:01:44.547158+00:00",
+  "generatedAt": "2026-09-26T20:36:42.602124+00:00",
   "canonical": {
     "sourceType": "design-md",
     "path": "DESIGN.md",
@@ -23,7 +23,7 @@
       "type": "existing-ui",
       "path": "src/styles/global.css",
       "role": "reference",
-      "purpose": "Implemented palette, typography, artboard and reading-mode dimensions"
+      "purpose": "Implemented Handrail palette, typography, three-panel geometry, front/back faces and ordinary reading layout"
     },
     {
       "type": "existing-ui",
@@ -72,12 +72,26 @@
       "path": "https://press.stripe.com/",
       "role": "reference",
       "purpose": "Approved document material and reading transition"
+    },
+    {
+      "type": "existing-ui",
+      "path": "src/scripts/motion.ts",
+      "role": "reference",
+      "purpose": "Current GSAP hinge choreography and uniformly scaled 3D camera"
+    },
+    {
+      "type": "screenshot",
+      "path": "qa-artifacts/trifold/capture.json",
+      "role": "reference",
+      "purpose": "Current local trifold capture receipt: 24 chapter views and 15 actual-scroll samples, visually reviewed by implementation and browser reviewers"
     }
   ],
   "approval": {
     "referenceDirection": "user-approved",
     "brandAlignment": "user-requested",
     "implementationVisualAcceptance": "pending-user-review",
-    "note": "Reference approval and behavior verification do not establish acceptance of the implemented visual result."
+    "note": "Reference approval and behavior verification do not establish acceptance of the implemented visual result.",
+    "localVisualReview": "Current folded cover, unfolding stages and reading holds were reviewed locally; final user acceptance remains pending.",
+    "publication": "pending-current-revision"
   }
 }

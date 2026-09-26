@@ -1,0 +1,51 @@
+{
+  "checkedAt": "2026-09-26",
+  "scope": "Supplementary WebKit behavior and native-window visual verification",
+  "engine": {
+    "name": "Playwright WebKit",
+    "version": "26.6",
+    "build": "2359"
+  },
+  "behavior": {
+    "passed": true,
+    "viewports": ["1440x1000", "390x844", "320x740"],
+    "readingHoldsVerified": 21,
+    "checks": [
+      "Both physical hinges change with scrolling and reverse to their initial angles",
+      "Introductory folding stays inside the visible stage",
+      "Every reading hold has a flat active panel, framed content and text at least 12 rendered pixels high",
+      "Normal reading mode has no horizontal overflow"
+    ],
+    "mobileInput": "Programmatic document scrolling; Playwright does not support mouse-wheel input in mobile WebKit",
+    "script": "scripts/verify-webkit.mjs",
+    "receipt": "qa-artifacts/trifold-webkit/verification.json"
+  },
+  "nativeWindow": {
+    "passed": true,
+    "verifiedBy": "Root agent using Cua to inspect the live headful Playwright window",
+    "states": [
+      "Closed folded cover",
+      "Unfolded three-panel flyer reached with native wheel input",
+      "Cash receipt with normally oriented text and amounts"
+    ]
+  },
+  "protocolScreenshots": {
+    "reliableForBackfaceVisualAcceptance": false,
+    "finding": "The screenshot API paints hidden backfaces as mirrored content. Native-window rendering is correct. An independent two-face card reproduces the same capture defect without application CSS or GSAP.",
+    "source": "https://github.com/microsoft/playwright/issues/21620",
+    "reproduction": "qa-artifacts/trifold-webkit/isolation/repro.mjs",
+    "productWorkaroundApplied": false
+  },
+  "warnings": [
+    {
+      "type": "unused-font-preload",
+      "resource": "inter-latin-wght-normal.woff2",
+      "count": 3,
+      "detail": "One WebKit warning per viewport reported that the preloaded font was not used within a few seconds. These were warnings, not browser errors."
+    }
+  ],
+  "browserErrors": [],
+  "failedRequests": [],
+  "physicalIOSVerified": false,
+  "relationshipToChromium": "Separate supplementary evidence; this does not represent the complete 19-test Chromium suite running in WebKit."
+}

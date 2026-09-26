@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
-  "surface": "Handrail growth partnership flyer and negotiable proposal notes",
-  "generatedAt": "2026-09-26T20:10:01.595Z",
+  "surface": "Handrail hinged HTML trifold and beginning-of-partnership proposal",
+  "generatedAt": "2026-09-26T20:35:15.113809+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -10,37 +10,34 @@
     "agentic-ui/design-critique.json"
   ],
   "acceptedDecisions": [
-    "One actual HTML flyer, zoomed and panned with native scrolling and GSAP ScrollTrigger.",
-    "Telescope scale changes, Igloo continuity, Exat typography and Stripe Press reading quality: references explicitly approved.",
-    "Blend Handrail careers, sample MOU and supplied pricing/one-pager materials; official wordmark, Inter/Playfair, warm paper and rust.",
-    "No base salary; commission paid after customer collections and in matching installments.",
-    "15/5 if hired first; 20/5 if the qualifying client comes first, applying to that client and future credited sales.",
-    "A 90-day proposal, benefits request, roles and next discussion; Handrail writes the final contract.",
-    "Approved local design, Storybook and Playwright workflow."
+    "Three hinged semantic HTML panels with front/back faces, sequential opening, CSS 3D perspective travel and flat readable holds.",
+    "Telescope scale changes, Igloo camera continuity, Exat typography and Stripe Press document presentation remain approved references.",
+    "Preserve the official Handrail wordmark, warm paper/rust palette and locally served Inter/Playfair typography.",
+    "Remove decorative Unicode arrows, emojis and ornamental symbols; no paperclip or separate decorative sculpture.",
+    "Lead with the beginning of a partnership and growing Handrail; new business is a starting point and Brent’s contribution can grow with company needs.",
+    "Keep no base salary and commission paid after customer collections, with matching installments.",
+    "Keep 15/5 if hired first and 20/5 if the qualifying client comes first, including that client and all future credited sales.",
+    "Keep the 90-day proposal and benefits request. Handrail writes the final contract; no named future roles or private financial problems appear.",
+    "Continue the approved local design, Storybook and Playwright workflow."
   ],
   "rejectedDecisions": [
     "Neon/glow design direction",
     "Calculator or speculative sales forecast",
     "Electronic signature or acceptance flow",
     "Published paper sculpture and clip treatment rejected by user after live review.",
-    "Full contract framing and legal boilerplate; replacement must be a negotiable business proposal."
+    "Full contract framing and legal boilerplate; replacement must be a negotiable business proposal.",
+    "The published flat flyer improved the direction but did not provide enough dynamic motion; replace it with a real hinged trifold."
   ],
   "implementation": {
-    "routes": [
-      "/handrail-proposal/",
-      "/handrail-proposal/agreement/"
-    ],
-    "components": [
-      "DealPath"
-    ],
+    "routes": ["/handrail-proposal/", "/handrail-proposal/agreement/"],
+    "components": ["DealPath"],
     "filesChanged": [
       "src/pages/index.astro",
       "src/pages/agreement.astro",
       "src/layouts/Page.astro",
       "src/styles/global.css",
       "src/scripts/motion.ts",
-      "src/content/proposal.ts",
-      "src/components/DealPath.tsx"
+      "src/content/proposal.ts"
     ],
     "reviewedFiles": [
       "DESIGN.md",
@@ -48,7 +45,8 @@
       "docs/brand-sources.md",
       "agentic-ui/component-state-matrix.json",
       "tests/e2e/proposal.spec.ts"
-    ]
+    ],
+    "camera": "CSS 3D panel hinges and GSAP ScrollTrigger share one reversible native-scroll timeline; reading faces flatten at their holds."
   },
   "tokenExports": {
     "dtcg": "agentic-ui/tokens.dtcg.json",
@@ -56,18 +54,18 @@
   },
   "componentCoverage": {
     "matrixPath": "agentic-ui/component-state-matrix.json",
-    "components": [
-      "DealPath"
-    ],
-    "missingCoverage": []
+    "components": ["DealPath"],
+    "missingCoverage": [],
+    "status": "verified-current-local"
   },
   "designReview": {
     "critiqueLogPath": "agentic-ui/critique-log.jsonl",
     "acceptedCritiques": [
-      "Remove sculpture and clip; make the actual flyer the camera subject.",
-      "Replace full contract framing and invented clauses with seven business-proposal sections.",
-      "Enlarge phone detail text; keep every target between persistent header and navigation.",
-      "Correct narrow reading overflow, text contrast and initial camera layout shift."
+      "Move beyond root-sheet zoom/pan: open independent wings and expose front/back faces on the actual trifold.",
+      "Use perspective while traveling and flat, framed, legible targets during reading holds.",
+      "Remove decorative symbols and preserve the official Handrail brand.",
+      "Present a practical beginning to a broader partnership without limiting Brent to sales forever or promising a specific future position.",
+      "Preserve the original economic terms and proposal-not-contract framing."
     ],
     "rejectedCritiques": []
   },
@@ -81,30 +79,39 @@
       "Engineering reviewers visiting Brent’s GitHub"
     ],
     "jobs": [
-      "Understand and discuss the proposed relationship",
-      "Inspect the scroll camera and public source"
+      "Understand and discuss the beginning of the proposed partnership",
+      "Inspect the hinged trifold, scroll camera and public source"
     ],
     "primaryTasks": [
-      "See the collections-first model",
+      "Understand how the relationship can begin and develop",
+      "See the collections-first compensation model",
       "Compare rates and commitment order",
-      "Review scope and the 90-day window",
+      "Review the 90-day window and requested support",
       "Read or download proposal notes"
     ]
   },
   "openDesignQuestions": [
-    "User review of the finished redesign remains pending; reference approval is not final visual acceptance."
+    "The finished trifold revision still needs user visual review; reference approval persists but does not substitute for that review."
   ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
-    "Redesign published and verified: 19 live browser tests pass. See deployment-verification.json. User visual acceptance remains pending.",
-    "No WebGL, external assets at runtime, calculator, forms or signatures.",
-    "Full global certification remains unclaimed; token-policy and manual-review limitations remain explicit."
+    "This trifold revision is not yet published. The live flat-flyer source ad6fa8b and static commit 05eaf7d are historical references.",
+    "Current local checks passed: 19 browser flows, 4 unit tests, 3 component checks, 22-file typecheck, readable two-page PDF and local Lighthouse 100 in all categories. Current hosted checks pending.",
+    "No WebGL, calculator, forms or signatures. Essential content remains semantic HTML; decorative back faces do not duplicate accessible content.",
+    "Full global certification remains unclaimed; manual review, physical devices and field-performance limits remain explicit."
   ],
   "userReview": {
     "date": "2026-09-26",
-    "status": "references-and-brand-direction-approved-deliverable-review-pending",
+    "status": "reference-direction-approved-trifold-deliverable-review-pending",
     "researchPath": "docs/redesign-research.md",
     "implementationPaused": false,
-    "reason": "User approved the reference direction and requested the shared Handrail vibe across all supplied materials."
+    "reason": "The user found the flat version better but requested an actual dynamic trifold, removal of decorative symbols and a broader beginning-of-partnership message."
+  },
+  "publication": {
+    "status": "pending-current-revision",
+    "url": "https://brentthomas248.github.io/handrail-proposal/",
+    "previousEditionSource": "ad6fa8b",
+    "previousEditionStatic": "05eaf7d",
+    "previousEditionEvidenceIsCurrent": false
   }
 }

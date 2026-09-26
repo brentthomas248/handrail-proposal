@@ -10,7 +10,7 @@ interface Props {
 }
 const {
   title,
-  description = 'No base salary. Commission paid from collected revenue. A growth partnership proposal from Brent Showalter to Handrail.',
+  description = 'A beginning together. No base salary, commissions paid from collected revenue, and room to grow with Handrail. A proposal by Brent Showalter.',
   document = false,
 } = Astro.props;
 const base = import.meta.env.BASE_URL;
@@ -85,7 +85,7 @@ const base = import.meta.env.BASE_URL;
           href={`${base}agreement/`}
           aria-current={document ? 'page' : undefined}
         >
-          Proposal notes <span aria-hidden="true">↗</span>
+          Proposal notes
         </a>
         {!document && (
           <button type="button" id="reading-mode" aria-pressed="false" hidden>
@@ -103,7 +103,7 @@ const base = import.meta.env.BASE_URL;
         target="_blank"
         rel="noreferrer"
       >
-        My GitHub ↗
+        My GitHub
       </a>
     </footer>
   </body>

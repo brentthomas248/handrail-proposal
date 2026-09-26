@@ -1,6 +1,18 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "react", "types": ["node"] },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "types": ["node"]
+  },
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "storybook-static", "node_modules", "agentic-ui-qa"]
+  "exclude": [
+    "dist",
+    "storybook-static",
+    "node_modules",
+    "agentic-ui-qa",
+    "playwright-report",
+    "test-results",
+    "qa-artifacts"
+  ]
 }

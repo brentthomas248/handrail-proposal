@@ -4,11 +4,11 @@
 
 **For discussion · 2026-09-26**
 
-A way to grow sales without adding a base salary: tie my commission to the customer money Handrail actually receives, and reward me for bringing the client that makes hiring possible. These are proposed business terms for us to review and refine together.
+A practical way to begin a partnership: bring me on board without adding a base salary, connect commissions to collected customer revenue, and build from there. I want to help Handrail grow, with room for my contribution to evolve as we work together. These are proposed business terms for us to review and refine.
 
 ## 1. No base salary. Revenue comes first.
 
-I am proposing a commission-led role with no base salary. Handrail receives the customer payment first; my commission follows that collection. There is no upfront commission on money the customer has not paid.
+I am proposing a commission-led start with no base salary. Handrail receives the customer payment first; my commission follows that collection. There is no upfront commission on money the customer has not paid.
 
 If a customer pays over 12 months, my commission follows those 12 installments. That keeps the sales payout connected to incoming cash instead of creating an upfront commission bill.
 
@@ -24,7 +24,7 @@ This is the lower build rate in exchange for Handrail making the commitment firs
 
 If I bring the qualifying client first, Handrail brings me on at 20% of collected build fees and 5% of collected recurring fees. That rate applies to the triggering client and all future credited sales under our relationship.
 
-The additional five percentage points reward me for originating the business that makes hiring possible. The higher rate still follows collections, so the customer cash arrives before the commission is paid.
+The additional five percentage points reward me for bringing in the business that makes it possible to bring me on board. The higher rate still follows collections, so the customer cash arrives before the commission is paid.
 
 ## 4. A simple example of the cash timing
 
@@ -38,15 +38,15 @@ Agree on the structure now, with a 90-day window to bring in the qualifying clie
 
 If neither happens, Handrail can walk away without an obligation to hire. Before starting, we should agree on what counts as the qualifying client, how we confirm my credit for the sale, and how to handle a deal already in progress when the window ends.
 
-## 6. The support that makes this workable
+## 6. A starting point with room to grow
 
-I would focus on prospecting, discovery, relationships and closing. Handrail would support technical scoping and pricing, then handle delivery and ongoing customer support through a clear handoff.
+I would start by helping bring in new business, working with the team on discovery, scoping and pricing. As we work together, we can shape my contribution around what Handrail needs to grow and agree on the support that makes that work possible.
 
-My request includes a benefits package when I join. We should confirm coverage where I live, the start date and my contribution, along with sales tools and a practical policy for approved travel and selling expenses.
+My request includes a benefits package when I join. We should confirm coverage where I live, the start date and my contribution, along with the tools and support I need and a practical policy for approved travel and selling expenses.
 
 ## 7. Align on the idea. Then write the agreement.
 
-The decision now is whether this structure works for both of us: no base salary, commissions tied to collected revenue, and a higher build rate if I create the business that unlocks the hire.
+The decision now is how we begin a partnership that helps Handrail grow. This structure offers a starting point: no base salary, commissions tied to collected revenue, and a higher build rate if I bring the business that enables the hire. We can build on that foundation as we learn where I can contribute most.
 
 The next conversation can settle qualifying-client criteria, credited accounts, recurring commission duration, payment reporting and benefits. Handrail can then prepare the final contract. This proposal is open to discussion and adjustment.
 

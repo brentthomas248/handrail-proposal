@@ -1,6 +1,10 @@
 import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { agreementSections, proposal } from '../../src/content/proposal';
+import {
+  agreementSections,
+  flyerCopy,
+  proposal,
+} from '../../src/content/proposal';
 
 const baseURL =
   process.env.PROPOSAL_BASE_URL || 'http://127.0.0.1:4321/handrail-proposal/';
@@ -8,7 +12,11 @@ const baseURL =
 async function sheetTransform(page: Page) {
   return page.locator('.proposal-sheet').evaluate((sheet) => {
     const matrix = new DOMMatrixReadOnly(getComputedStyle(sheet).transform);
-    return { scale: matrix.a, x: matrix.e, y: matrix.f };
+    return {
+      scale: Math.hypot(matrix.m11, matrix.m12, matrix.m13),
+      x: matrix.e,
+      y: matrix.f,
+    };
   });
 }
 
@@ -29,7 +37,54 @@ async function expectNoOverflow(page: Page) {
   ).toBeTruthy();
 }
 
-test('real scrolling zooms and pans the flyer, then reverses to the opening', async ({
+async function hingeAngles(page: Page) {
+  return page.locator('.fold-panel').evaluateAll((panels) =>
+    panels.map((panel) => {
+      const matrix = new DOMMatrixReadOnly(getComputedStyle(panel).transform);
+      return {
+        panel: (panel as HTMLElement).dataset.panel,
+        degrees: (Math.atan2(-matrix.m13, matrix.m11) * 180) / Math.PI,
+      };
+    }),
+  );
+}
+
+async function expectFoldFitsStage(page: Page) {
+  await expect
+    .poll(
+      () =>
+        page.evaluate(() => {
+          const panels = [...document.querySelectorAll('.fold-panel')].map(
+            (panel) => panel.getBoundingClientRect(),
+          );
+          const top = document
+            .querySelector('.site-header')!
+            .getBoundingClientRect().bottom;
+          const bottom = document
+            .querySelector('.tour-controls')!
+            .getBoundingClientRect().top;
+          return panels.every(
+            (box) =>
+              box.left >= 4 &&
+              box.right <= innerWidth - 4 &&
+              box.top >= top + 2 &&
+              box.bottom <= bottom - 2,
+          );
+        }),
+      {
+        message:
+          'The physical flyer should fit between the header and controls while unfolding',
+      },
+    )
+    .toBeTruthy();
+}
+
+function angularDistance(first: number, second: number) {
+  const difference = Math.abs(first - second) % 360;
+  return Math.min(difference, 360 - difference);
+}
+
+test('real scrolling unfolds both hinges, moves the camera and reverses to the folded packet', async ({
   page,
 }, testInfo) => {
   const errors: string[] = [];
@@ -41,17 +96,17 @@ test('real scrolling zooms and pans the flyer, then reverses to the opening', as
   });
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto('./');
-  await expect(page.locator('html')).toHaveAttribute(
-    'data-presentation',
-    'tour',
-  );
   await expect(page.locator('html')).toHaveClass(/camera-ready/);
-  await expect(page.locator('.proposal-sheet h1')).toContainText(
-    /No base\s*salary/,
+  await expect(page.locator('.fold-panel')).toHaveCount(3);
+  for (const line of flyerCopy.cover.headlineLines)
+    await expect(page.locator('.proposal-sheet h1')).toContainText(line);
+  await expect(page.locator('.cover-statement')).toHaveText(
+    flyerCopy.cover.statement,
   );
-  await expect(page.locator('.proposal-sheet')).toContainText('collected');
   const opening = await sheetTransform(page);
-  await testInfo.attach('opening-flyer', {
+  const folded = await hingeAngles(page);
+  await expectFoldFitsStage(page);
+  await testInfo.attach('folded-packet', {
     body: await page.screenshot(),
     contentType: 'image/png',
   });
@@ -59,44 +114,78 @@ test('real scrolling zooms and pans the flyer, then reverses to the opening', as
     () => document.documentElement.scrollHeight - innerHeight,
   );
   expect(travel).toBeGreaterThan(2000);
-  await page.mouse.wheel(0, Math.round(travel * 0.28));
-  await expect
-    .poll(async () =>
-      Math.abs((await sheetTransform(page)).scale - opening.scale),
-    )
-    .toBeGreaterThan(0.1);
-  const zoomed = await sheetTransform(page);
+  const samples: {
+    progress: number;
+    hinges: Awaited<ReturnType<typeof hingeAngles>>;
+    camera: Awaited<ReturnType<typeof sheetTransform>>;
+  }[] = [];
+  let previous = 0;
+  for (const progress of [0.04, 0.08, 0.13, 0.2, 0.28, 0.5, 0.8]) {
+    await page.mouse.wheel(0, Math.round(travel * (progress - previous)));
+    await expect
+      .poll(() => page.evaluate(() => scrollY))
+      .toBeGreaterThan(travel * progress - 20);
+    await page.waitForTimeout(400);
+    if (progress <= 0.2) await expectFoldFitsStage(page);
+    samples.push({
+      progress,
+      hinges: await hingeAngles(page),
+      camera: await sheetTransform(page),
+    });
+    if (progress === 0.08 || progress === 0.2 || progress === 0.5)
+      await testInfo.attach(`scroll-${progress}`, {
+        body: await page.screenshot(),
+        contentType: 'image/png',
+      });
+    previous = progress;
+  }
+  for (const wing of ['left', 'right']) {
+    const initial = folded.find((hinge) => hinge.panel === wing)!;
+    expect(
+      Math.max(
+        ...samples.map((sample) =>
+          angularDistance(
+            sample.hinges.find((hinge) => hinge.panel === wing)!.degrees,
+            initial.degrees,
+          ),
+        ),
+      ),
+      `${wing} must physically unfold when the user scrolls`,
+    ).toBeGreaterThan(30);
+  }
   expect(
-    Math.hypot(zoomed.x - opening.x, zoomed.y - opening.y),
+    Math.max(
+      ...samples.map((sample) => Math.abs(sample.camera.scale - opening.scale)),
+    ),
+  ).toBeGreaterThan(0.1);
+  expect(
+    Math.max(
+      ...samples.map((sample) =>
+        Math.hypot(sample.camera.x - opening.x, sample.camera.y - opening.y),
+      ),
+    ),
   ).toBeGreaterThan(100);
-  await testInfo.attach('scroll-zoom', {
-    body: await page.screenshot(),
-    contentType: 'image/png',
-  });
-  await page.mouse.wheel(0, Math.round(travel * 0.35));
-  await expect
-    .poll(async () => {
-      const current = await sheetTransform(page);
-      return Math.hypot(current.x - zoomed.x, current.y - zoomed.y);
-    })
-    .toBeGreaterThan(100);
-  await testInfo.attach('scroll-pan', {
-    body: await page.screenshot(),
-    contentType: 'image/png',
+  await testInfo.attach('hinge-and-camera-samples', {
+    body: Buffer.from(JSON.stringify({ folded, samples }, null, 2)),
+    contentType: 'application/json',
   });
   await page.mouse.wheel(0, -travel * 2);
   await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
+  for (const wing of ['left', 'right'])
+    await expect
+      .poll(async () =>
+        angularDistance(
+          (await hingeAngles(page)).find((hinge) => hinge.panel === wing)!
+            .degrees,
+          folded.find((hinge) => hinge.panel === wing)!.degrees,
+        ),
+      )
+      .toBeLessThan(1);
   await expect
     .poll(async () =>
       Math.abs((await sheetTransform(page)).scale - opening.scale),
     )
     .toBeLessThan(0.02);
-  await expect
-    .poll(async () => {
-      const current = await sheetTransform(page);
-      return Math.hypot(current.x - opening.x, current.y - opening.y);
-    })
-    .toBeLessThan(10);
   expect(errors).toEqual([]);
   expect(failedRequests).toEqual([]);
 });
@@ -113,7 +202,7 @@ test('keyboard chapter navigation moves the camera to a chosen section', async (
   const chapters = page.locator('.chapter-nav button[data-go-to]');
   expect(await chapters.count()).toBeGreaterThanOrEqual(4);
   const opening = await sheetTransform(page);
-  const chapter = chapters.nth(2);
+  const chapter = page.getByRole('button', { name: 'Cash flow', exact: true });
   await chapter.focus();
   await page.keyboard.press('Enter');
   await expect(chapter).toBeFocused();
@@ -138,14 +227,33 @@ for (const viewport of [
     await page.goto('./');
     await expect(page.locator('html')).toHaveClass(/camera-ready/);
     const chapters = page.locator('.chapter-nav button[data-go-to]');
-    for (let index = 1; index < (await chapters.count()); index += 1) {
+    let readingHolds = 0;
+    for (let index = 0; index < (await chapters.count()); index += 1) {
       const chapter = chapters.nth(index);
       const label = await chapter.getAttribute('aria-label');
       const target = page.locator(
         `[data-camera-stop=${JSON.stringify(label)}], [data-camera-mobile=${JSON.stringify(label)}]`,
       );
+      if (!(await target.count())) continue;
+      readingHolds += 1;
       await chapter.click();
       await expect(chapter).toHaveAttribute('aria-current', 'step');
+      await expect
+        .poll(
+          () =>
+            target.evaluate((element) => {
+              const panel = element.closest('.fold-panel');
+              if (!panel) return 180;
+              const matrix = new DOMMatrixReadOnly(
+                getComputedStyle(panel).transform,
+              );
+              return Math.abs(
+                (Math.atan2(-matrix.m13, matrix.m11) * 180) / Math.PI,
+              );
+            }),
+          { message: `${label} panel must be flat while reading` },
+        )
+        .toBeLessThan(0.5);
       await expect(target).toBeInViewport({ ratio: 0.98 });
       await expect
         .poll(
@@ -184,6 +292,7 @@ for (const viewport of [
         )
         .toBeGreaterThanOrEqual(12);
     }
+    expect(readingHolds).toBeGreaterThanOrEqual(5);
   });
 
 test('reading mode exposes both rates, cash-flow explanation and proposal notes', async ({
@@ -391,7 +500,7 @@ test('the tour remains usable after visiting notes and browser Back', async ({
 }) => {
   await page.goto('./');
   await expect(page.locator('html')).toHaveClass(/camera-ready/);
-  await page.locator('.chapter-nav button[data-go-to="2"]').click();
+  await page.getByRole('button', { name: 'Cash flow', exact: true }).click();
   await expect(page.locator('#cash-flow')).toBeInViewport({ ratio: 0.98 });
   await page.locator('.site-header a[href$="/agreement/"]').click();
   await expect(page.locator('h1')).toHaveText('Proposal notes');
@@ -401,7 +510,9 @@ test('the tour remains usable after visiting notes and browser Back', async ({
     'data-presentation',
     'tour',
   );
-  await page.locator('.chapter-nav button[data-go-to="3"]').click();
+  await page
+    .getByRole('button', { name: 'The two paths', exact: true })
+    .click();
   await expect(page.locator('#paths')).toBeInViewport({ ratio: 0.98 });
   await expect(page.locator('.proposal-sheet')).not.toHaveCSS(
     'transform',

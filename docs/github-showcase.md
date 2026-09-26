@@ -1,6 +1,6 @@
 # GitHub showcase handoff
 
-Updated September 26, 2026. The [public source repository](https://github.com/brentthomas248/handrail-proposal) and [existing public URL](https://brentthomas248.github.io/handrail-proposal/) are available. The user rejected the first published edition and approved a redesigned camera journey across the actual proposal flyer. **The redesign is published and passed 19 hosted browser tests.** Profile README and pin changes remain unapplied.
+Updated September 26, 2026. The [public source repository](https://github.com/brentthomas248/handrail-proposal) and [existing public URL](https://brentthomas248.github.io/handrail-proposal/) are available. The user rejected the first published edition and approved a redesigned camera journey across the actual proposal flyer. **The current trifold revision is not yet published or reviewed by the user.** The preceding flat-flyer edition at source `ad6fa8b` remains the live reference; its 19 hosted test passes are historical evidence only. Profile README and pin changes remain unapplied.
 
 The repository README documents the current working architecture and commands, with publication status explicitly separated. The public-profile observations below are the original September 26 audit snapshot, not a new profile audit. HTTP availability is separate from browser QA.
 
@@ -22,9 +22,9 @@ Pins at that audit, verified through GitHub GraphQL: demand forecasting, `GruftN
 
 [github-profile-draft.md](github-profile-draft.md) is the proposed README body. It contains only currently inspectable public examples and accurate contribution attribution. It deliberately has no speculative proposal link or performance claim.
 
-After the redesign is published and verified, a separately authorized profile update could use this first selected-work entry:
+After this trifold revision is published, verified and visually reviewed, a separately authorized profile update could use this first selected-work entry:
 
-> **Handrail proposal** — A scroll-driven camera journey across a readable HTML flyer. Explore the cash-flow proposal, switch to ordinary reading or download matching proposal notes. The source includes the GSAP camera, canonical content, accessibility paths and browser tests. [View proposal](https://brentthomas248.github.io/handrail-proposal/) · [Source](https://github.com/brentthomas248/handrail-proposal)
+> **Handrail proposal** — A hinged HTML trifold that unfolds and guides readers through the beginning of a partnership. Explore the proposed cash model, switch to ordinary reading or download matching notes. The source includes the CSS 3D hinges, GSAP camera, canonical content, accessible reading paths and browser tests. [View proposal](https://brentthomas248.github.io/handrail-proposal/) · [Source](https://github.com/brentthomas248/handrail-proposal)
 
 Only retain capabilities in that paragraph that actually ship and pass verification. Use a single optimized screenshot linked to the live proposal above the selected-work list; provide descriptive alt text. Do not add status badges, visitor counters, skill-logo grids, animated typing banners or unsupported impact metrics.
 
@@ -40,24 +40,25 @@ Leave the sixth pin empty until another project offers equally clear evidence. T
 
 ## Proposal repository presentation
 
-Suggested repository description: **A scroll-driven camera journey through a Handrail business proposal, with readable HTML, accessible controls and matching PDF notes.**
+Suggested repository description after publication: **A scroll-driven HTML trifold with real hinges, readable business terms and matching proposal notes.**
 
-The repository README documents the actual HTML flyer, GSAP camera, two compensation paths, local commands and verified deployment. Its opening screenshot shows the current branded flyer and was rendered and reviewed before inclusion.
+The repository README documents the three HTML panels, CSS 3D hinges, GSAP camera, broader partnership intent and pending publication. The preceding flat-flyer screenshot is removed from the README until a current trifold image has been rendered and reviewed.
 
 Handrail branding uses the official PNG wordmark, warm paper/rust palette and locally served Inter and Playfair Display. No Three.js, React Three Fiber or Lenis remains. Do not link directly to ignored `qa-artifacts/` or `test-results/` paths. Review the current source and regenerated PDF for private information before publishing.
 
 The existing GitHub Pages route is `/handrail-proposal/`, matching `astro.config.mjs`. Pages serves the root of the gh-pages branch over HTTPS. The rejected first edition used source commit 2028557 and static commit 94c25d09c26ffd3bad98205926764623a2a585d4; GitHub's built-in Pages job is [run 36265530452](https://github.com/brentthomas248/handrail-proposal/actions/runs/36265530452).
 
-The current OAuth credential lacks workflow-write permission. The optional project workflows are therefore inactive templates under `docs/github-actions/`. The pages template would build and verify the site and PDF before deployment; the verify template would run checks on pushes and pull requests. Neither template ran remotely. The first edition was validated locally; the redesign needs its own release checks. GitHub's own Pages job handles branch deployment. Do not describe that deployment job as a remote project-test pass.
+The current OAuth credential lacks workflow-write permission. The optional project workflows are therefore inactive templates under `docs/github-actions/`. The pages template would build and verify the site and PDF before deployment; the verify template would run checks on pushes and pull requests. Neither template ran remotely. The earlier editions were validated separately; this trifold needs its own release checks. GitHub's own Pages job handles branch deployment. Do not describe that deployment job as a remote project-test pass.
 
 Describe AI assistance accurately: Brent supplied the business intent and negotiated proposal; AI tools assisted design, implementation and review. List completed validation separately from planned validation. Do not describe an installed tool, generated scaffold or an unexecuted workflow as successful end-to-end evidence.
 
 ## Publication and remaining work
 
 1. Historical: the first edition was published and its hosted smoke checks passed. The user subsequently rejected its visual treatment and legal-contract framing. Those checks do not validate the replacement.
-2. Pending: complete current local build, PDF, browser, component and rendered checks; publish the redesigned static output; verify the hosted zoom/pan journey, notes, downloads and mobile behavior.
-3. Pending separate profile work: create the profile repository using the reviewed README, add the published redesign and a current screenshot, and apply the proposed pin order. No profile or pin mutation is included in this redesign.
-4. After a profile update, inspect the public profile as a visitor. Confirm project and contribution links resolve and that no text implies ownership of the team projects.
+2. Historical: the flat-flyer source `ad6fa8b` was published as static commit `05eaf7d` and passed its hosted checks. The user then requested a more dynamic actual trifold and a broader beginning-of-partnership story.
+3. Pending: verify the current hinges, perspective camera, flat reading holds, responsive text, PDF and accessibility paths; publish the current static output and repeat hosted checks. No current test or performance success is inferred from the preceding edition.
+4. Pending separate profile work: create the profile repository using the reviewed README, add the published redesign and a current screenshot, and apply the proposed pin order. No profile or pin mutation is included in this redesign.
+5. After a profile update, inspect the public profile as a visitor. Confirm project and contribution links resolve and that no text implies ownership of the team projects.
 
 The DFB live page's visual quality and the current public portfolio link need a browser review before any recommendation to change the profile's website field. No change to that field is proposed here.
 

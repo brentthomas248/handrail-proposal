@@ -1,6 +1,6 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
-  "$description": "A scroll-directed tour through a real proposal flyer, using Handrail's warm editorial identity.",
+  "$description": "A hinged HTML trifold introducing a partnership, with Handrail's warm editorial identity.",
   "color": {
     "$type": "color",
     "primary": {
@@ -133,12 +133,12 @@
       "$value": {
         "fontFamily": "Inter Variable",
         "fontSize": {
-          "value": 190,
+          "value": 132,
           "unit": "px"
         },
-        "fontWeight": 760,
+        "fontWeight": 700,
         "letterSpacing": {
-          "value": -14.25,
+          "value": -9.9,
           "unit": "px"
         }
       }
@@ -148,12 +148,12 @@
       "$value": {
         "fontFamily": "Inter Variable",
         "fontSize": {
-          "value": 64,
+          "value": 68,
           "unit": "px"
         },
-        "fontWeight": 550,
+        "fontWeight": 600,
         "letterSpacing": {
-          "value": -3.328,
+          "value": -4.08,
           "unit": "px"
         }
       }
@@ -163,12 +163,12 @@
       "$value": {
         "fontFamily": "Inter Variable",
         "fontSize": {
-          "value": 31,
+          "value": 34,
           "unit": "px"
         },
         "fontWeight": 400,
         "letterSpacing": {
-          "value": -0.682,
+          "value": -0.68,
           "unit": "px"
         }
       }
@@ -178,7 +178,7 @@
       "$value": {
         "fontFamily": "Inter Variable",
         "fontSize": {
-          "value": 23,
+          "value": 30,
           "unit": "px"
         },
         "fontWeight": 400,
@@ -193,7 +193,7 @@
       "$value": {
         "fontFamily": "Playfair Display",
         "fontSize": {
-          "value": 31,
+          "value": 37,
           "unit": "px"
         },
         "fontWeight": 400,

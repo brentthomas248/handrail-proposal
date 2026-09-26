@@ -1,11 +1,11 @@
 ---
 import Page from '../layouts/Page.astro';
 import DealPath from '../components/DealPath';
-import { proposal } from '../content/proposal';
+import { proposal, flyerCopy } from '../content/proposal';
 const base = import.meta.env.BASE_URL;
 ---
 
-<Page title="Revenue first · A proposal for Handrail">
+<Page title="A beginning together · A proposal for Handrail">
   <main id="main">
     <div class="flyer-journey">
       <div class="flyer-stage">
@@ -13,241 +13,296 @@ const base = import.meta.env.BASE_URL;
           class="proposal-sheet"
           aria-label="Growth partnership proposal"
         >
-          <div class="sheet-masthead">
-            <img
-              class="sheet-logo"
-              src={`${base}handrail-logo.png`}
-              width="1397"
-              height="392"
-              alt="Handrail"
-            />
-            <span>
-              Growth partnership proposal
-              <br />
-              Brent Showalter / September 2026
-            </span>
+          <div class="fold-panel" data-panel="left">
+            <div class="panel-face">
+              <div class="panel-masthead">
+                <img
+                  class="sheet-logo"
+                  src={`${base}handrail-logo.png`}
+                  width="1397"
+                  height="392"
+                  alt="Handrail"
+                />
+                <span>
+                  Brent Showalter
+                  <br />
+                  For discussion
+                </span>
+              </div>
+              <section
+                class="flyer-cover"
+                id="idea"
+                data-camera-stop="The beginning"
+                data-camera-order="1"
+              >
+                <p class="cover-intro">{flyerCopy.cover.eyebrow}</p>
+                <h1>
+                  {flyerCopy.cover.headlineLines.map((line) => (
+                    <span>{line}</span>
+                  ))}
+                </h1>
+                <p class="cover-statement">{flyerCopy.cover.statement}</p>
+                <p class="cover-description">{flyerCopy.cover.description}</p>
+              </section>
+              <section
+                class="flyer-partnership"
+                id="together"
+                data-camera-stop="Grow together"
+                data-camera-order="5"
+              >
+                <div class="partnership-lead">
+                  <p>{flyerCopy.closing.eyebrow}</p>
+                  <h2>
+                    {flyerCopy.closing.headlineLines.map((line) => (
+                      <span>{line}</span>
+                    ))}
+                  </h2>
+                </div>
+                <div class="partnership-details">
+                  <div>
+                    <h3>{flyerCopy.closing.startingPointTitle}</h3>
+                    <p>{flyerCopy.closing.startingPointBody}</p>
+                  </div>
+                  <div>
+                    <h3>{flyerCopy.closing.partnershipTitle}</h3>
+                    <p>{flyerCopy.closing.partnershipBody}</p>
+                  </div>
+                  <p class="proposal-note">{flyerCopy.closing.proposalNote}</p>
+                  <a class="proposal-link" href={`${base}agreement/`}>
+                    Read the proposal notes
+                  </a>
+                </div>
+              </section>
+              <div class="panel-colophon">
+                Growth partnership proposal <span>September 2026</span>
+              </div>
+            </div>
+            <div class="panel-back brochure-cover" aria-hidden="true">
+              <img
+                class="sheet-logo"
+                src={`${base}handrail-logo.png`}
+                width="1397"
+                height="392"
+                alt=""
+              />
+              <div class="back-heading">
+                A beginning.
+                <br />
+                Room to
+                <br />
+                grow.
+              </div>
+              <div class="back-statement">
+                No base salary.
+                <br />
+                Commission follows
+                <br />
+                collected revenue.
+              </div>
+              <div class="back-footer">
+                A proposal by
+                <br />
+                <strong>Brent Showalter</strong>
+              </div>
+              <span class="back-edition">For discussion / September 2026</span>
+            </div>
           </div>
 
-          <section class="flyer-cover" data-camera-stop="The idea" id="idea">
-            <p class="cover-intro">A different way to grow together.</p>
-            <h1>
-              No base
-              <br />
-              salary<span class="period">.</span>
-            </h1>
-            <p class="cover-statement">
-              Commission paid from
-              <br />
-              collected revenue.
-            </p>
-            <div class="cover-bottom">
-              <p>
-                I build the sales pipeline.
-                <br />
-                Compensation follows the business.
-              </p>
-              <svg
-                class="direction-arrow"
-                viewBox="0 0 100 100"
-                aria-hidden="true"
+          <div class="fold-panel" data-panel="center">
+            <div class="panel-face cash-face">
+              <div class="panel-masthead">
+                <span>The starting structure</span>
+                <span>Revenue comes first.</span>
+              </div>
+              <section
+                class="flyer-cash"
+                id="cash-flow"
+                data-camera-stop="Cash flow"
+                data-camera-order="2"
               >
-                <path d="M10 50h76M53 17l34 33-34 33" />
-              </svg>
-            </div>
-          </section>
-
-          <section
-            class="flyer-cash"
-            data-camera-stop="Cash flow"
-            id="cash-flow"
-          >
-            <div class="cash-heading">
-              <span class="cash-symbol" aria-hidden="true">
-                ↘
-              </span>
-              <h2>
-                Revenue first.
-                <br />
-                Commission follows.
-              </h2>
-            </div>
-            <p class="cash-intro">
-              No commission advance on a contract.
-              <br />
-              Payment starts with money received.
-            </p>
-            <div
-              class="cash-receipt"
-              aria-label="Illustrative client-first build payment"
-            >
-              <div class="receipt-row receipt-in">
-                <span>Customer payment collected</span>
-                <strong>$10,000</strong>
-              </div>
-              <div class="receipt-track" aria-hidden="true">
-                <span></span>
-                <i></i>
-                <i></i>
-                <i></i>
-              </div>
-              <div class="receipt-row receipt-out">
-                <span>20% build commission</span>
-                <strong>$2,000</strong>
-              </div>
-              <div class="receipt-balance">
-                <span>Handrail retains</span>
-                <strong>$8,000</strong>
-              </div>
-              <p>
-                Before delivery costs, benefits and other expenses.
-                <br />
-                An illustration, not a sales forecast.
-              </p>
-            </div>
-            <div class="installments">
-              <div class="installment-bars" aria-hidden="true">
-                {Array.from({ length: 12 }, () => (
-                  <i />
-                ))}
-              </div>
-              <p>
-                Paid over 12 months?
-                <br />
-                <strong>My commission follows each payment.</strong>
-              </p>
-            </div>
-          </section>
-
-          <section
-            class="flyer-rates"
-            data-camera-stop="The two paths"
-            id="paths"
-          >
-            <div class="rates-heading">
-              <h2>
-                The order of commitment
-                <br />
-                sets the rate.
-              </h2>
-              <span class="rates-glyph" aria-hidden="true">
-                ↗
-              </span>
-            </div>
-            <div class="deal-paths">
-              <div data-camera-mobile="Hire me first">
-                <DealPath variant="employment" />
-              </div>
-              <div data-camera-mobile="Client first">
-                <DealPath variant="client" />
+                <div data-camera-mobile="Revenue first">
+                  <h2>
+                    Bring me
+                    <br />
+                    on board.
+                    <br />
+                    <span>
+                      Let revenue
+                      <br />
+                      lead.
+                    </span>
+                  </h2>
+                  <p class="cash-intro">
+                    No base salary. No commission advance on a contract.
+                    Customer money arrives first.
+                  </p>
+                </div>
+                <div data-camera-mobile="As money arrives">
+                  <div
+                    class="cash-receipt"
+                    aria-label="Illustrative client-first build payment"
+                  >
+                    <div class="receipt-row receipt-in">
+                      <span>Customer payment collected</span>
+                      <strong>$10,000</strong>
+                    </div>
+                    <div class="receipt-track" aria-hidden="true">
+                      <span></span>
+                      <i></i>
+                      <i></i>
+                      <i></i>
+                    </div>
+                    <div class="receipt-row receipt-out">
+                      <span>
+                        {proposal.rates.clientFirst}% build commission
+                      </span>
+                      <strong>$2,000</strong>
+                    </div>
+                    <div class="receipt-balance">
+                      <span>Handrail retains</span>
+                      <strong>$8,000</strong>
+                    </div>
+                    <p>
+                      Before delivery costs, benefits and other expenses. An
+                      illustration, not a sales forecast.
+                    </p>
+                  </div>
+                  <div class="installments">
+                    <div class="installment-bars" aria-hidden="true">
+                      {Array.from({ length: 12 }, () => (
+                        <i />
+                      ))}
+                    </div>
+                    <p>
+                      Paid over 12 months?
+                      <br />
+                      <strong>My commission follows each payment.</strong>
+                    </p>
+                  </div>
+                  <p class="cash-closing">
+                    A way to start working together, with compensation connected
+                    to incoming cash.
+                  </p>
+                </div>
+              </section>
+              <div class="panel-colophon">
+                No base salary. <span>Collections before commission.</span>
               </div>
             </div>
-            <div class="rate-rationale" data-camera-mobile="Why the difference">
-              <p class="rate-reason">
-                If I bring the client that makes hiring possible, the higher
-                rate reflects the business I created and the risk I took to
-                create it.
-              </p>
-              <p class="rate-scope">
-                The selected rate applies to all my future credited sales. Both
-                paths: no base salary, with an employment benefits package.
-              </p>
-            </div>
-          </section>
-
-          <section
-            class="flyer-window"
-            data-camera-stop="The window"
-            id="window"
-          >
-            <div class="window-title">
-              <strong>{proposal.activationDays}</strong>
-              <h2>
-                days
-                <br />
-                to begin.
-              </h2>
-            </div>
-            <div class="window-rule" aria-hidden="true">
-              <i></i>
-              <span></span>
-              <i></i>
-            </div>
-            <ol class="window-steps">
-              <li>
-                <strong>Agree on the structure.</strong>
-                <p>
-                  We align on the proposal and what qualifies as the first
-                  client.
-                </p>
-              </li>
-              <li>
-                <strong>Either path can start.</strong>
-                <p>
-                  Handrail can hire me during the window, or I can bring the
-                  paying client first.
-                </p>
-              </li>
-              <li>
-                <strong>A clear stopping point.</strong>
-                <p>
-                  If there is no client and no hire within 90 days, the hiring
-                  commitment ends.
-                </p>
-              </li>
-            </ol>
-          </section>
-
-          <section
-            class="flyer-partnership"
-            data-camera-stop="Build together"
-            id="together"
-          >
-            <div class="partnership-lead">
-              <span>
-                Shared upside.
-                <br />
-                Clear responsibilities.
-              </span>
-              <h2>
-                Let’s make
-                <br />
-                room to grow.
-              </h2>
-            </div>
-            <div class="partnership-details">
+            <div class="panel-back plain-back" aria-hidden="true">
               <div>
-                <h3>I bring the business.</h3>
-                <p>
-                  Prospecting, discovery, relationships and closing, with
-                  technical input from your team.
-                </p>
+                Handrail
+                <br />
+                and Brent
+                <br />
+                Showalter.
               </div>
-              <div>
-                <h3>You help make it work.</h3>
-                <p>
-                  Scoping, pricing, implementation and support. We align on
-                  benefits, tools and selling expenses.
-                </p>
-              </div>
-              <p class="proposal-note">
-                This is a starting point for discussion. We can adjust the
-                structure together; Handrail prepares the final contract.
-              </p>
-              <a class="proposal-link" href={`${base}agreement/`}>
-                Read the proposal notes <span aria-hidden="true">↗</span>
-              </a>
+              <span>A starting point for what comes next.</span>
             </div>
-          </section>
-          <div class="sheet-colophon">
-            <span>Prepared by Brent Showalter</span>
-            <span>A proposal. Open to a conversation.</span>
-            <a
-              href="https://github.com/brentthomas248/handrail-proposal"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Explore the source ↗
-            </a>
+          </div>
+
+          <div class="fold-panel" data-panel="right">
+            <div class="panel-face">
+              <div class="panel-masthead">
+                <span>Two ways to begin</span>
+                <span>One partnership.</span>
+              </div>
+              <section
+                class="flyer-rates"
+                id="paths"
+                data-camera-stop="The two paths"
+                data-camera-order="3"
+              >
+                <div class="rates-heading">
+                  <h2>
+                    The commitment
+                    <br />
+                    sets the rate.
+                  </h2>
+                </div>
+                <div class="deal-paths">
+                  <div data-camera-mobile="Hire me first">
+                    <DealPath variant="employment" />
+                  </div>
+                  <div data-camera-mobile="Client first">
+                    <DealPath variant="client" />
+                  </div>
+                </div>
+                <div
+                  class="rate-rationale"
+                  data-camera-mobile="Why the difference"
+                >
+                  <p class="rate-reason">
+                    If I bring the client that makes hiring possible, the higher
+                    rate reflects the business I created and the risk I took to
+                    create it.
+                  </p>
+                  <p class="rate-scope">
+                    The selected rate applies to all my future credited sales.
+                    Both paths: no base salary, with an employment benefits
+                    package.
+                  </p>
+                </div>
+              </section>
+              <section
+                class="flyer-window"
+                id="window"
+                data-camera-stop="The window"
+                data-camera-order="4"
+              >
+                <div class="window-title">
+                  <strong>{proposal.activationDays}</strong>
+                  <h2>
+                    days
+                    <br />
+                    to begin.
+                  </h2>
+                </div>
+                <ol class="window-steps">
+                  <li>
+                    <strong>Align on the starting point.</strong>
+                    <p>
+                      Agree on the structure and what qualifies as the first
+                      client.
+                    </p>
+                  </li>
+                  <li>
+                    <strong>Either path can start.</strong>
+                    <p>
+                      Handrail can bring me on during the window, or I can bring
+                      the paying client first.
+                    </p>
+                  </li>
+                  <li>
+                    <strong>A clear stopping point.</strong>
+                    <p>
+                      If there is no client and no hire within 90 days, the
+                      hiring commitment ends.
+                    </p>
+                  </li>
+                </ol>
+              </section>
+              <div class="panel-colophon">
+                <span>Prepared by Brent Showalter</span>
+                <a
+                  href="https://github.com/brentthomas248/handrail-proposal"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Explore the source
+                </a>
+              </div>
+            </div>
+            <div class="panel-back rust-back" aria-hidden="true">
+              <div>
+                Start here.
+                <br />
+                Grow
+                <br />
+                together.
+              </div>
+              <span>A proposal for Handrail.</span>
+            </div>
           </div>
         </article>
       </div>
@@ -255,7 +310,7 @@ const base = import.meta.env.BASE_URL;
     <div class="tour-controls" aria-label="Proposal tour">
       <div class="tour-instruction">
         <span class="scroll-line" aria-hidden="true"></span>
-        <span id="tour-caption">Scroll to step inside</span>
+        <span id="tour-caption">Scroll to open the proposal</span>
       </div>
       <nav class="chapter-nav" aria-label="Proposal chapters">
         <button
@@ -266,24 +321,9 @@ const base = import.meta.env.BASE_URL;
         >
           <span>Overview</span>
         </button>
-        <button type="button" data-go-to="1" aria-label="The idea">
-          <span>The idea</span>
-        </button>
-        <button type="button" data-go-to="2" aria-label="Cash flow">
-          <span>Cash flow</span>
-        </button>
-        <button type="button" data-go-to="3" aria-label="The two paths">
-          <span>The paths</span>
-        </button>
-        <button type="button" data-go-to="4" aria-label="The window">
-          <span>The window</span>
-        </button>
-        <button type="button" data-go-to="5" aria-label="Build together">
-          <span>Together</span>
-        </button>
       </nav>
       <span class="tour-counter" aria-hidden="true">
-        <span id="current-stop">00</span> / <span id="total-stops">05</span>
+        <span id="current-stop">00</span> / <span id="total-stops">06</span>
       </span>
     </div>
   </main>

@@ -41,3 +41,8 @@ User approved the reference direction and requested the shared identity across a
 ## 2026-09-26T20:10:01.595Z — flyer redesign published and verified
 
 Source ad6fa8b, static 05eaf7dc6478f6203c554bd40335c2602de4c793, GitHub Pages run 36268461522 succeeded. All 19 browser tests passed against the public site. Hosted HTML, notes, PDF, logo and social image match the verified output byte-for-byte; the downloaded PDF passes complete independent canonical-text comparison. Profile README and pins remain unchanged. Reference direction was approved; user acceptance of the finished visuals remains a separate review.
+
+
+## 2026-09-26T20:36:18.948973+00:00 — actual trifold verified locally
+
+The user requested independent folds, stronger scroll motion, no decorative symbols and the beginning of a broader partnership. The three HTML panels now open sequentially and move through perspective transitions before flat reading holds. Both hinge angles and reverse scrolling are exercised by real wheel input. A camera-depth defect found in rendered review was corrected with uniform numeric scale3d; 320px cash content was split into two framed stops. Current evidence: 19 browser tests, four content tests, three component checks, 24 chapter images and 15 fold samples. Current Lighthouse scores are 100 across all four categories on desktop and mobile, with 46,763 script-transfer bytes. Both PDF pages were rendered and checked. Publishing and hosted verification are next; user visual acceptance remains separate.

@@ -74,5 +74,7 @@
     "errors": [],
     "failedRequests": [],
     "minimumRenderedTextPx": 12.174000707165948
-  }
+  },
+  "edition": "historical-flat-flyer",
+  "isCurrentRevision": false
 }

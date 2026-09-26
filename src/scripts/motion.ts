@@ -3,15 +3,25 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+type PanelName = 'left' | 'center' | 'right';
 interface Frame {
   x: number;
   y: number;
   scale: number;
+  rotationX: number;
+  rotationY: number;
   rotation: number;
 }
 interface Stop {
   name: string;
   element: HTMLElement | null;
+  panel: PanelName;
+  arrival: number;
+  position: number;
+}
+interface Fold {
+  left: number;
+  right: number;
 }
 const root = document.documentElement;
 const sheet = document.querySelector<HTMLElement>('.proposal-sheet');
@@ -22,24 +32,27 @@ const nav = document.querySelector<HTMLElement>('.chapter-nav');
 const caption = document.querySelector<HTMLElement>('#tour-caption');
 const current = document.querySelector<HTMLElement>('#current-stop');
 const total = document.querySelector<HTMLElement>('#total-stops');
+const left = sheet?.querySelector<HTMLElement>('[data-panel="left"]');
+const right = sheet?.querySelector<HTMLElement>('[data-panel="right"]');
+const panels = sheet?.querySelectorAll<HTMLElement>('.fold-panel');
 const preference = matchMedia('(prefers-reduced-motion: reduce)');
+const hold = 0.8;
+const travel = 1.25;
+let camera: Frame | undefined;
 let timeline: gsap.core.Timeline | undefined;
 let trigger: ScrollTrigger | undefined;
 let stops: Stop[] = [];
-let frames: Frame[] = [];
 let resizeTimer: ReturnType<typeof setTimeout>;
-const segment = 1.8;
-const hold = 0.65;
 let lastIndex = -1;
 
-function bounds(element: HTMLElement): {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-} {
-  let x = 0,
-    y = 0;
+function panelFor(element: HTMLElement): PanelName {
+  const name = element.closest<HTMLElement>('[data-panel]')?.dataset.panel;
+  return name === 'left' || name === 'right' ? name : 'center';
+}
+
+function bounds(element: HTMLElement) {
+  let x = 0;
+  let y = 0;
   let node: HTMLElement | null = element;
   while (node && node !== sheet) {
     x += node.offsetLeft;
@@ -49,85 +62,145 @@ function bounds(element: HTMLElement): {
   return { x, y, width: element.offsetWidth, height: element.offsetHeight };
 }
 
-function frameFor(element: HTMLElement | null): Frame {
-  if (!sheet || !stage) return { x: 0, y: 0, scale: 1, rotation: 0 };
+function frameFor(element: HTMLElement | null, folded = false): Frame {
+  if (!sheet || !stage) {
+    return {
+      x: 0,
+      y: 0,
+      scale: 1,
+      rotationX: 0,
+      rotationY: 0,
+      rotation: 0,
+    };
+  }
   const mobile = innerWidth < 760;
+  const sheetWidth = sheet.offsetWidth;
+  const sheetHeight = sheet.offsetHeight;
+  const panelWidth = left?.offsetWidth || sheetWidth / 3;
   const rect = element
     ? bounds(element)
     : {
-        x: 0,
+        x: folded ? panelWidth : 0,
         y: 0,
-        width: sheet.offsetWidth,
-        height: mobile ? 1120 : sheet.offsetHeight,
+        width: folded ? panelWidth : sheetWidth,
+        height: sheetHeight,
       };
-  const width = stage.clientWidth;
-  const height = stage.clientHeight;
   const top = mobile ? 105 : 112;
   const bottom = mobile ? 118 : 115;
-  const availableHeight = height - top - bottom;
-  let scale = Math.min(
-    (width - (mobile ? 38 : 180)) / rect.width,
-    availableHeight / rect.height,
-  );
-  let rotation = 0;
-  if (!element) {
-    scale *= mobile ? 0.96 : 0.91;
-    rotation = mobile ? -3 : -4;
-  } else scale *= mobile ? 0.96 : 0.93;
+  const availableHeight = Math.max(100, stage.clientHeight - top - bottom);
+  const scale =
+    Math.min(
+      (stage.clientWidth - (mobile ? 38 : 160)) / rect.width,
+      availableHeight / rect.height,
+    ) * (element ? 0.94 : folded ? 0.88 : 0.85);
   const centerX = rect.x + rect.width / 2;
   const centerY = rect.y + rect.height / 2;
-  const angle = (rotation * Math.PI) / 180;
+  // The root turns around the spread's center. These translations fit a flat
+  // target exactly, while the folded cover shares that center naturally.
   return {
     x:
-      width / 2 -
-      scale * (centerX * Math.cos(angle) - centerY * Math.sin(angle)),
+      stage.clientWidth / 2 -
+      sheetWidth / 2 +
+      scale * (sheetWidth / 2 - centerX),
     y:
       top +
       availableHeight / 2 -
-      scale * (centerX * Math.sin(angle) + centerY * Math.cos(angle)),
+      sheetHeight / 2 +
+      scale * (sheetHeight / 2 - centerY),
     scale,
-    rotation,
+    rotationX: 0,
+    rotationY: 0,
+    rotation: 0,
   };
 }
 
 function collectStops(): Stop[] {
   if (!sheet) return [];
-  const result: Stop[] = [{ name: 'Overview', element: null }];
-  sheet
-    .querySelectorAll<HTMLElement>('[data-camera-stop]')
-    .forEach((element) => {
-      const mobileParts = element.querySelectorAll<HTMLElement>(
-        '[data-camera-mobile]',
-      );
-      if (innerWidth < 760 && mobileParts.length) {
-        mobileParts.forEach((part) =>
-          result.push({ name: part.dataset.cameraMobile || '', element: part }),
-        );
-      } else result.push({ name: element.dataset.cameraStop || '', element });
-    });
+  const result: Stop[] = [
+    {
+      name: 'Overview',
+      element: null,
+      panel: 'center',
+      arrival: 0,
+      position: 0,
+    },
+  ];
+  const elements = Array.from(
+    sheet.querySelectorAll<HTMLElement>('[data-camera-stop]'),
+  ).sort(
+    (a, b) =>
+      Number(a.dataset.cameraOrder || 0) - Number(b.dataset.cameraOrder || 0),
+  );
+  for (const element of elements) {
+    const mobileParts = element.querySelectorAll<HTMLElement>(
+      '[data-camera-mobile]',
+    );
+    const targets =
+      innerWidth < 760 && mobileParts.length
+        ? Array.from(mobileParts)
+        : [element];
+    for (const target of targets) {
+      result.push({
+        name: target.dataset.cameraMobile || target.dataset.cameraStop || '',
+        element: target,
+        panel: panelFor(target),
+        arrival: 0,
+        position: 0,
+      });
+    }
+  }
   return result;
 }
 
-function updateNavigation(index: number) {
-  if (index === lastIndex) return;
-  lastIndex = index;
-  nav?.querySelectorAll<HTMLButtonElement>('[data-go-to]').forEach((button) => {
-    if (Number(button.dataset.goTo) === index)
-      button.setAttribute('aria-current', 'step');
-    else button.removeAttribute('aria-current');
-  });
-  if (caption)
+function readingFold(panel: PanelName): Fold {
+  return {
+    left: panel === 'left' ? 0 : 22,
+    right: panel === 'right' ? 0 : -22,
+  };
+}
+
+function renderCamera() {
+  if (!sheet || !camera) return;
+  const { x, y, scale, rotationX, rotationY, rotation } = camera;
+  // CSSPlugin's scale alias scales X/Y only. The hinge depth must scale with
+  // the document too, otherwise a small brochure keeps full-size 3D depth.
+  sheet.style.transform = `translate3d(${x}px, ${y}px, 0) rotateZ(${rotation}deg) rotateY(${rotationY}deg) rotateX(${rotationX}deg) scale3d(${scale}, ${scale}, ${scale})`;
+}
+
+function updateNavigation() {
+  if (!timeline) return;
+  const time = timeline.time();
+  let index = 0;
+  for (let i = 1; i < stops.length; i += 1) {
+    if (time >= stops[i].arrival - 0.16) index = i;
+  }
+  if (index !== lastIndex) {
+    lastIndex = index;
+    nav
+      ?.querySelectorAll<HTMLButtonElement>('[data-go-to]')
+      .forEach((button) => {
+        if (Number(button.dataset.goTo) === index)
+          button.setAttribute('aria-current', 'step');
+        else button.removeAttribute('aria-current');
+      });
+    if (current) current.textContent = String(index).padStart(2, '0');
+  }
+  if (caption) {
     caption.textContent =
       index === 0
-        ? 'Scroll to step inside'
-        : index === stops.length - 1
-          ? 'A starting point. Let’s talk.'
-          : stops[index]?.name || '';
-  if (current) current.textContent = String(index).padStart(2, '0');
+        ? time < 0.5
+          ? 'Scroll to unfold'
+          : 'One proposal. Three connected pages.'
+        : stops[index].name;
+  }
+  root.style.setProperty('--tour-progress', String(timeline.progress()));
 }
 
 function rebuildNavigation() {
   if (!nav) return;
+  const focusedName = nav.contains(document.activeElement)
+    ? document.activeElement?.getAttribute('aria-label')
+    : null;
   nav.replaceChildren(
     ...stops.map((stop, index) => {
       const button = document.createElement('button');
@@ -140,6 +213,11 @@ function rebuildNavigation() {
       return button;
     }),
   );
+  if (focusedName) {
+    Array.from(nav.querySelectorAll('button'))
+      .find((button) => button.getAttribute('aria-label') === focusedName)
+      ?.focus({ preventScroll: true });
+  }
   if (total) total.textContent = String(stops.length - 1).padStart(2, '0');
   lastIndex = -1;
 }
@@ -149,68 +227,193 @@ function destroyTour() {
   timeline?.kill();
   trigger = undefined;
   timeline = undefined;
-  if (sheet) gsap.set(sheet, { clearProps: 'all' });
-  if (journey) journey.style.removeProperty('height');
+  camera = undefined;
+  if (sheet) {
+    gsap.set(sheet, { clearProps: 'transform,transformOrigin' });
+    sheet.style.removeProperty('--panel-height');
+  }
+  panels?.forEach((panel) =>
+    gsap.set(panel, { clearProps: 'transform,transformOrigin' }),
+  );
+  journey?.style.removeProperty('height');
+  root.style.removeProperty('--tour-progress');
   root.classList.remove('camera-ready');
 }
 
-function buildTour(progress = 0) {
-  if (!sheet || !stage || !journey || root.dataset.presentation !== 'tour')
+function buildTour(progress?: number) {
+  if (
+    !sheet ||
+    !stage ||
+    !journey ||
+    !left ||
+    !right ||
+    root.dataset.presentation !== 'tour'
+  )
     return;
   destroyTour();
+  const faceHeights = Array.from(
+    sheet.querySelectorAll<HTMLElement>('.panel-face'),
+  ).map((face) => face.scrollHeight);
+  sheet.style.setProperty(
+    '--panel-height',
+    `${Math.max(sheet.offsetHeight, ...faceHeights)}px`,
+  );
   stops = collectStops();
-  frames = stops.map((stop) => frameFor(stop.element));
   rebuildNavigation();
-  journey.style.height = `${Math.max(900, innerHeight * 1.22) * (stops.length - 1) + innerHeight}px`;
+  const closed = {
+    ...frameFor(null, true),
+    rotationX: 12,
+    rotationY: -15,
+    rotation: -6,
+  };
+  const open = frameFor(null);
   root.classList.add('camera-ready');
-  gsap.set(sheet, {
-    ...frames[0],
-    transformOrigin: '0 0',
-    xPercent: 0,
-    yPercent: 0,
+  camera = { ...closed };
+  sheet.style.transformOrigin = '50% 50%';
+  renderCamera();
+  gsap.set(left, {
+    rotationY: 168,
+    z: 40,
+    transformOrigin: '100% 50%',
     force3D: true,
   });
-  timeline = gsap.timeline({ paused: true });
-  frames.forEach((frame, index) => {
-    if (!index) return;
-    timeline?.to(
-      sheet,
-      { ...frame, duration: segment - hold, ease: 'power2.inOut' },
-      (index - 1) * segment + hold,
-    );
+  gsap.set(right, {
+    rotationY: -178,
+    z: 1,
+    transformOrigin: '0% 50%',
+    force3D: true,
   });
-  timeline.to({}, { duration: hold });
+  timeline = gsap.timeline({
+    paused: true,
+    onUpdate: () => {
+      renderCamera();
+      updateNavigation();
+    },
+  });
+  timeline.addLabel('stop-0', 0);
+  // Pull back before opening the wings, so their full movement is visible.
+  timeline.to(
+    camera,
+    {
+      ...open,
+      scale: open.scale * 0.94,
+      rotationX: 9,
+      rotationY: -11,
+      rotation: -4,
+      duration: 0.9,
+      ease: 'power2.inOut',
+    },
+    0.25,
+  );
+  timeline.to(
+    left,
+    { rotationY: 78, z: 15, duration: 0.85, ease: 'power2.inOut' },
+    0.45,
+  );
+  timeline.to(
+    left,
+    { rotationY: 0, z: 0.6, duration: 0.85, ease: 'power2.inOut' },
+    1.3,
+  );
+  timeline.to(
+    right,
+    { rotationY: -72, z: 0.4, duration: 0.8, ease: 'power2.inOut' },
+    1.15,
+  );
+  timeline.to(
+    right,
+    { rotationY: 0, duration: 0.75, ease: 'power2.inOut' },
+    1.95,
+  );
+  timeline.to(camera, { ...open, duration: 0.9, ease: 'power2.inOut' }, 1.8);
+  let cursor = 3.05;
+  let previous = open;
+  let previousPanel: PanelName = 'center';
+  for (let index = 1; index < stops.length; index += 1) {
+    const stop = stops[index];
+    const target = frameFor(stop.element);
+    const crossing = previousPanel !== stop.panel;
+    const direction = target.x >= previous.x ? 1 : -1;
+    const transit = {
+      x: (previous.x + target.x) / 2,
+      y: (previous.y + target.y) / 2,
+      scale: Math.min(previous.scale, target.scale) * (crossing ? 0.83 : 0.92),
+      rotationX: crossing ? 9 : 4,
+      rotationY: direction * (crossing ? 11 : 5),
+      rotation: direction * (crossing ? 2.5 : 1),
+    };
+    const folds = readingFold(stop.panel);
+    timeline.to(
+      camera,
+      { ...transit, duration: travel * 0.43, ease: 'power2.inOut' },
+      cursor,
+    );
+    timeline.to(
+      camera,
+      { ...target, duration: travel * 0.57, ease: 'power2.inOut' },
+      cursor + travel * 0.43,
+    );
+    timeline.to(
+      left,
+      {
+        rotationY: crossing ? 58 : 34,
+        z: 0.6,
+        duration: travel * 0.43,
+        ease: 'power2.inOut',
+      },
+      cursor,
+    );
+    timeline.to(
+      right,
+      {
+        rotationY: crossing ? -52 : -32,
+        z: 0.4,
+        duration: travel * 0.43,
+        ease: 'power2.inOut',
+      },
+      cursor,
+    );
+    timeline.to(
+      left,
+      { rotationY: folds.left, duration: travel * 0.57, ease: 'power2.inOut' },
+      cursor + travel * 0.43,
+    );
+    timeline.to(
+      right,
+      { rotationY: folds.right, duration: travel * 0.57, ease: 'power2.inOut' },
+      cursor + travel * 0.43,
+    );
+    stop.arrival = cursor + travel;
+    stop.position = stop.arrival + hold / 2;
+    timeline.addLabel(`stop-${index}`, stop.position);
+    cursor = stop.arrival + hold;
+    previous = target;
+    previousPanel = stop.panel;
+  }
+  timeline.to({}, { duration: hold }, cursor - hold);
+  const scrollDistance = Math.max(620, innerHeight * 0.84) * (stops.length + 2);
+  journey.style.height = `${scrollDistance + innerHeight}px`;
   trigger = ScrollTrigger.create({
     trigger: journey,
     start: 'top top',
     end: 'bottom bottom',
     animation: timeline,
-    scrub: 0.32,
-    onUpdate: (self) => {
-      const time = self.progress * (segment * (stops.length - 1) + hold);
-      const index = Math.min(
-        stops.length - 1,
-        Math.max(0, Math.round((time - hold / 2) / segment)),
-      );
-      updateNavigation(index);
-      root.style.setProperty('--tour-progress', String(self.progress));
-    },
+    scrub: 0.28,
   });
   trigger.refresh();
-  timeline.progress(progress);
-  if (progress)
+  if (progress !== undefined) {
     window.scrollTo({
       top: trigger.start + (trigger.end - trigger.start) * progress,
       behavior: 'instant',
     });
-  updateNavigation(
-    Math.min(stops.length - 1, Math.round(progress * (stops.length - 1))),
-  );
+    trigger.update();
+  }
+  timeline.progress(progress ?? trigger.progress);
+  updateNavigation();
 }
 
-function setMode(read: boolean, persist: boolean) {
-  const previousIndex = Math.max(0, lastIndex);
-  const element = stops[previousIndex]?.element;
+function setMode(read: boolean, persist: boolean, preservePosition = false) {
+  const element = stops[Math.max(0, lastIndex)]?.element;
   destroyTour();
   root.dataset.presentation = read ? 'read' : 'tour';
   if (mode) {
@@ -222,15 +425,16 @@ function setMode(read: boolean, persist: boolean) {
     try {
       localStorage.setItem('proposal-presentation', read ? 'read' : 'tour');
     } catch {
-      /* Persistence is optional. */
+      // Reading and animation remain usable when preference storage is unavailable.
     }
   }
   if (read) {
     if (persist && element)
       element.scrollIntoView({ block: 'start', behavior: 'instant' });
-    else window.scrollTo({ top: 0, behavior: 'instant' });
+    else if (!preservePosition)
+      window.scrollTo({ top: 0, behavior: 'instant' });
   } else {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    if (!preservePosition) window.scrollTo({ top: 0, behavior: 'instant' });
     buildTour();
   }
 }
@@ -238,8 +442,12 @@ function setMode(read: boolean, persist: boolean) {
 if (sheet && mode) {
   await document.fonts.ready;
   mode.hidden = false;
-  const read = preference.matches || root.dataset.presentation === 'read';
-  setMode(read, false);
+  const read =
+    preference.matches ||
+    root.dataset.presentation === 'read' ||
+    !left ||
+    !right;
+  setMode(read, false, true);
   mode.addEventListener('click', () =>
     setMode(root.dataset.presentation !== 'read', true),
   );
@@ -248,7 +456,7 @@ if (sheet && mode) {
     try {
       savedRead = localStorage.getItem('proposal-presentation') === 'read';
     } catch {
-      /* Persistence is optional. */
+      savedRead = true;
     }
     setMode(preference.matches || savedRead, false);
   });
@@ -258,17 +466,20 @@ if (sheet && mode) {
         ? event.target.closest<HTMLButtonElement>('button[data-go-to]')
         : null;
     if (!target || !trigger || !timeline) return;
-    const index = Number(target.dataset.goTo);
-    const duration = timeline.duration();
-    const time = index === 0 ? 0 : index * segment + hold * 0.3;
+    const stop = stops[Number(target.dataset.goTo)];
+    if (!stop) return;
     const position =
       trigger.start +
-      (trigger.end - trigger.start) * Math.min(1, time / duration);
+      (trigger.end - trigger.start) * (stop.position / timeline.duration());
     window.scrollTo({ top: position, behavior: 'smooth' });
   });
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => buildTour(trigger?.progress || 0), 180);
+    resizeTimer = setTimeout(() => buildTour(trigger?.progress), 180);
+  });
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted && root.dataset.presentation === 'tour')
+      buildTour(trigger?.progress);
   });
   document
     .querySelector('.skip-link')

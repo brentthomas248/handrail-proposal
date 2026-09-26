@@ -7,8 +7,22 @@ const output = process.env.CAPTURE_OUTPUT || 'qa-artifacts/flyer-camera';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ headless: true });
 const errors = [];
+const warnings = [];
 const failedRequests = [];
 const captures = [];
+const foldSamples = [];
+
+async function hinges(page) {
+  return page.locator('.fold-panel').evaluateAll((panels) =>
+    panels.map((panel) => {
+      const matrix = new DOMMatrixReadOnly(getComputedStyle(panel).transform);
+      return {
+        panel: panel.dataset.panel,
+        degrees: (Math.atan2(-matrix.m13, matrix.m11) * 180) / Math.PI,
+      };
+    }),
+  );
+}
 
 async function captureViewport(name, viewport, mobile = false) {
   const page = await browser.newPage({
@@ -20,6 +34,7 @@ async function captureViewport(name, viewport, mobile = false) {
   page.on('pageerror', (error) => errors.push(`${name}: ${error.message}`));
   page.on('console', (event) => {
     if (event.type() === 'error') errors.push(`${name}: ${event.text()}`);
+    if (event.type() === 'warning') warnings.push(`${name}: ${event.text()}`);
   });
   page.on('response', (response) => {
     if (response.status() >= 400)
@@ -31,6 +46,37 @@ async function captureViewport(name, viewport, mobile = false) {
     'tour',
   );
   await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  const travel = await page.evaluate(
+    () => document.documentElement.scrollHeight - innerHeight,
+  );
+  let previous = 0;
+  for (const progress of [0, 0.04, 0.08, 0.13, 0.2]) {
+    if (progress)
+      await page.mouse.wheel(0, Math.round(travel * (progress - previous)));
+    await page.waitForTimeout(450);
+    const path = `${output}/${name}-fold-${String(Math.round(progress * 100)).padStart(2, '0')}.png`;
+    await page.screenshot({ path });
+    foldSamples.push({
+      viewport: name,
+      progress,
+      scrollY: await page.evaluate(() => scrollY),
+      hinges: await hinges(page),
+      panelBounds: await page.locator('.fold-panel').evaluateAll((panels) =>
+        panels.map((panel) => {
+          const box = panel.getBoundingClientRect();
+          return {
+            panel: panel.dataset.panel,
+            left: box.left,
+            top: box.top,
+            right: box.right,
+            bottom: box.bottom,
+          };
+        }),
+      ),
+      path,
+    });
+    previous = progress;
+  }
   const stops = page.locator('.chapter-nav button[data-go-to]');
   const count = await stops.count();
   if (count < 4)
@@ -45,14 +91,18 @@ async function captureViewport(name, viewport, mobile = false) {
       .locator('.proposal-sheet')
       .evaluate((sheet) => {
         const matrix = new DOMMatrixReadOnly(getComputedStyle(sheet).transform);
-        return { scale: matrix.a, x: matrix.e, y: matrix.f };
+        return {
+          scale: Math.hypot(matrix.m11, matrix.m12, matrix.m13),
+          x: matrix.e,
+          y: matrix.f,
+        };
       });
     const label = await stops.nth(index).getAttribute('aria-label');
     let framing = null;
-    if (index > 0) {
-      const target = page.locator(
-        `[data-camera-stop=${JSON.stringify(label)}], [data-camera-mobile=${JSON.stringify(label)}]`,
-      );
+    const target = page.locator(
+      `[data-camera-stop=${JSON.stringify(label)}], [data-camera-mobile=${JSON.stringify(label)}]`,
+    );
+    if (await target.count()) {
       await expect(target).toBeInViewport({ ratio: 0.98 });
       framing = await target.evaluate((element) => {
         const box = element.getBoundingClientRect();
@@ -77,6 +127,7 @@ async function captureViewport(name, viewport, mobile = false) {
       chapter: index,
       label,
       transform,
+      hinges: await hinges(page),
       framing,
       path,
     });
@@ -113,8 +164,10 @@ try {
     base,
     capturedAt: new Date().toISOString(),
     errors,
+    warnings,
     failedRequests,
     captures,
+    foldSamples,
   };
   await writeFile(
     `${output}/capture.json`,

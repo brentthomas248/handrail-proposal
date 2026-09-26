@@ -1,25 +1,22 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T20:10:01.595Z",
-  "surface": "Handrail HTML flyer camera and proposal notes",
-  "scope": "Current redesign, published and browser-verified; no full global certification or user visual acceptance claim.",
+  "generatedAt": "2026-09-26T20:36:42.602124+00:00",
+  "surface": "Handrail hinged HTML trifold and partnership proposal notes",
+  "scope": "Current trifold revision verified locally; publication and final user visual acceptance pending. No full global certification is claimed.",
   "sources": [
     "DESIGN.md",
     "src/pages/index.astro",
     "src/pages/agreement.astro",
     "src/scripts/motion.ts",
-    "qa-artifacts/flyer-camera/capture.json"
+    "qa-artifacts/trifold/capture.json"
   ],
   "checks": [
     {
       "id": "product-intent",
       "status": "pass",
-      "evidence": [
-        "PROJECT.md",
-        "src/content/proposal.ts"
-      ],
+      "evidence": ["PROJECT.md", "src/content/proposal.ts"],
       "notes": [
-        "No base salary, collection-based commissions,15/5 versus 20/5 and the 90-day proposal window match the business intent. Handrail prepares the final contract."
+        "The proposal opens a broader working relationship. New business is the starting point, with room for Brent's contribution to grow; no specific future title is promised. No base salary, collections-based commission, 15/5 versus 20/5, all future credited sales and the 90-day window remain explicit. Handrail prepares the final contract."
       ]
     },
     {
@@ -37,10 +34,7 @@
     {
       "id": "match-real-world",
       "status": "pass",
-      "evidence": [
-        "src/content/proposal.ts",
-        "src/pages/index.astro"
-      ],
+      "evidence": ["src/content/proposal.ts", "src/pages/index.astro"],
       "notes": [
         "The cash receipt explains money received before commission; retained funds explicitly exclude delivery, benefits and other costs."
       ]
@@ -48,10 +42,7 @@
     {
       "id": "user-control-and-freedom",
       "status": "pass",
-      "evidence": [
-        "src/scripts/motion.ts",
-        "tests/e2e/proposal.spec.ts"
-      ],
+      "evidence": ["src/scripts/motion.ts", "tests/e2e/proposal.spec.ts"],
       "notes": [
         "Chapter buttons, a persisted reading preference, direct proposal notes and a matching PDF let readers bypass the camera journey."
       ]
@@ -71,10 +62,7 @@
     {
       "id": "error-prevention",
       "status": "pass",
-      "evidence": [
-        "src/content/proposal.ts",
-        "tests/agreement.test.ts"
-      ],
+      "evidence": ["src/content/proposal.ts", "tests/agreement.test.ts"],
       "notes": [
         "Content is explicitly a proposal for discussion. No signature or acceptance mechanism exists; unagreed qualifying-client and benefits details remain discussion points."
       ]
@@ -82,10 +70,7 @@
     {
       "id": "recognition-not-recall",
       "status": "pass",
-      "evidence": [
-        "src/components/DealPath.tsx",
-        "src/pages/agreement.astro"
-      ],
+      "evidence": ["src/components/DealPath.tsx", "src/pages/agreement.astro"],
       "notes": [
         "Rates have explicit collected-fee labels; notes provide a linked seven-section table of contents."
       ]
@@ -107,11 +92,13 @@
       "status": "pass",
       "evidence": [
         "DESIGN.md",
-        "qa-artifacts/flyer-camera/desktop-00.png",
-        "qa-artifacts/flyer-camera/desktop-01.png"
+        "qa-artifacts/trifold/capture.json",
+        "qa-artifacts/trifold/desktop-fold-00.png",
+        "qa-artifacts/trifold/desktop-fold-08.png",
+        "qa-artifacts/trifold/desktop-fold-20.png"
       ],
       "notes": [
-        "Root rendered review covered all six desktop stops. The actual branded flyer is the scene; the paperclip and separate 3D sculpture are removed."
+        "The actual semantic HTML proposal forms three hinged panels with front/back faces. Local rendered review covered the folded cover, left/right opening stages, full spread and reading holds. Decorative symbols and the old separate paper sculpture are removed. This is reviewer assessment, not user acceptance."
       ]
     },
     {
@@ -129,10 +116,7 @@
     {
       "id": "help-and-documentation",
       "status": "pass",
-      "evidence": [
-        "src/content/proposal.ts",
-        "docs/proposed-agreement.md"
-      ],
+      "evidence": ["src/content/proposal.ts", "docs/proposed-agreement.md"],
       "notes": [
         "Concise proposal notes explain the commercial structure, requested support and discussion points without legal boilerplate."
       ]
@@ -141,9 +125,9 @@
       "id": "visual-hierarchy",
       "status": "pass",
       "evidence": [
-        "qa-artifacts/flyer-camera/desktop-01.png",
-        "qa-artifacts/flyer-camera/desktop-02.png",
-        "qa-artifacts/flyer-camera/desktop-03.png"
+        "qa-artifacts/trifold/desktop-01.png",
+        "qa-artifacts/trifold/desktop-02.png",
+        "qa-artifacts/trifold/desktop-03.png"
       ],
       "notes": [
         "Reviewed desktop stops emphasize no base salary, collection timing and the two build rates."
@@ -154,18 +138,16 @@
       "status": "pass",
       "evidence": [
         "tests/e2e/proposal.spec.ts",
-        "qa-artifacts/flyer-camera/capture.json"
+        "qa-artifacts/trifold/capture.json"
       ],
       "notes": [
-        "19 browser tests passed. Camera framing checks at 320/390/1440 now assert rendered body text of at least 12px; ordinary reading reflows at 320/390/768/1440. Final cash-flow body text measured 12.2px at 320 and 14.9px at 390. Root reviewed the desktop/mobile captures."
+        "19 browser checks passed. The capture receipt contains 24 desktop/mobile chapter views and 15 actual-scroll samples, with zero errors, warnings or failed requests. Active reading faces are flat and framed; minimum captured reading text is 14.05px. Both hinges change with wheel input and reverse. Ordinary reading reflows at 320/390/768/1440."
       ]
     },
     {
       "id": "accessibility",
       "status": "needs-work",
-      "evidence": [
-        "agentic-ui/accessibility-evidence.json"
-      ],
+      "evidence": ["agentic-ui/accessibility-evidence.json"],
       "notes": [
         "Automated app and three component checks have zero axe violations. Manual VoiceOver and physical-device review remain unperformed."
       ]
@@ -173,10 +155,7 @@
     {
       "id": "ux-writing-feedback",
       "status": "pass",
-      "evidence": [
-        "src/content/proposal.ts",
-        "src/scripts/motion.ts"
-      ],
+      "evidence": ["src/content/proposal.ts", "src/scripts/motion.ts"],
       "notes": [
         "Proposed status, commission timing, benefits cost and visible presentation controls are stated plainly."
       ]
@@ -185,50 +164,39 @@
       "id": "performance",
       "status": "needs-work",
       "evidence": [
+        "qa-artifacts/lighthouse-mobile.json",
+        "qa-artifacts/lighthouse-desktop.json",
         "agentic-ui/performance-evidence.json"
       ],
       "notes": [
-        "Current local Lighthouse evidence records 100 in all categories on mobile/desktop and passing LCP, CLS and 250KB route-script budgets. It precedes the final keyboard/back-navigation cleanup; field INP and physical-device performance remain unmeasured."
+        "Current trifold local Lighthouse scores are 100 in performance, accessibility, best practices and SEO on both devices. Mobile LCP is 1656.355ms, TBT 0ms and CLS 0.02279675; desktop LCP is 368.8312ms, TBT 0ms and CLS 0.01910344. Physical-device performance and field INP remain unmeasured.",
+        "Measured route script transfer is 46,763 bytes (120,036 resource bytes)."
       ]
     },
     {
       "id": "form-autocomplete",
       "status": "not-affected",
-      "evidence": [
-        "src/pages/index.astro",
-        "src/pages/agreement.astro"
-      ],
-      "notes": [
-        "No forms."
-      ]
+      "evidence": ["src/pages/index.astro", "src/pages/agreement.astro"],
+      "notes": ["No forms."]
     },
     {
       "id": "paste-behavior",
       "status": "not-affected",
-      "evidence": [
-        "src/pages/index.astro"
-      ],
-      "notes": [
-        "No text inputs or paste interception."
-      ]
+      "evidence": ["src/pages/index.astro"],
+      "notes": ["No text inputs or paste interception."]
     },
     {
       "id": "focus-obscured",
-      "status": "not-assessed",
-      "evidence": [
-        "tests/e2e/proposal.spec.ts",
-        "src/styles/global.css"
-      ],
+      "status": "pass",
+      "evidence": ["tests/e2e/proposal.spec.ts", "src/styles/global.css"],
       "notes": [
-        "Keyboard chapter navigation, mode switching and skip-link activation are tested; an exhaustive focus-obscuration review is not claimed."
+        "Current browser checks cover keyboard chapter navigation, mode switching, skip-link activation and focusing an offscreen document link, which restores ordinary reading. This is checked local-flow coverage, not exhaustive manual assistive-technology certification."
       ]
     },
     {
       "id": "safe-area",
       "status": "not-assessed",
-      "evidence": [
-        "src/styles/global.css"
-      ],
+      "evidence": ["src/styles/global.css"],
       "notes": [
         "Emulated viewports do not establish physical notched-device coverage."
       ]
@@ -236,10 +204,7 @@
     {
       "id": "reduced-motion",
       "status": "pass",
-      "evidence": [
-        "src/scripts/motion.ts",
-        "tests/e2e/proposal.spec.ts"
-      ],
+      "evidence": ["src/scripts/motion.ts", "tests/e2e/proposal.spec.ts"],
       "notes": [
         "System reduced motion selects ordinary reading with no camera transform. A saved reading preference survives reload and motion-preference changes."
       ]
@@ -247,31 +212,23 @@
     {
       "id": "transition-specificity",
       "status": "pass",
-      "evidence": [
-        "src/scripts/motion.ts",
-        "src/styles/global.css"
-      ],
+      "evidence": ["src/scripts/motion.ts", "src/styles/global.css"],
       "notes": [
-        "GSAP coordinates explicit translate, scale and rotation properties; reading mode removes the camera transform."
+        "One ScrollTrigger timeline opens both hinges sequentially, then coordinates camera pullbacks, 3D rotation and panel movement between flat reading holds. A numeric camera composes uniform CSS scale3d so hinge depth scales with the document. Scrolling back reverses the scene; ordinary reading removes transforms."
       ]
     },
     {
       "id": "heading-wrap",
       "status": "pass",
-      "evidence": [
-        "qa-artifacts/flyer-camera/capture.json"
-      ],
+      "evidence": ["qa-artifacts/trifold/capture.json"],
       "notes": [
-        "Desktop and mobile rendered review includes the final 320px typography polish; automated chapter checks verify framing and a 12px minimum rendered body size."
+        "24 chapter captures across desktop, mobile and small mobile were inspected. Browser checks enforce target framing and readable type; the minimum captured reading size is 14.05px."
       ]
     },
     {
       "id": "date-number-formatting",
       "status": "pass",
-      "evidence": [
-        "src/content/proposal.ts",
-        "tests/agreement.test.ts"
-      ],
+      "evidence": ["src/content/proposal.ts", "tests/agreement.test.ts"],
       "notes": [
         "Rates and the illustrative payment arithmetic are checked; the 90-day window is a proposal term, not a live countdown."
       ]
@@ -279,21 +236,15 @@
     {
       "id": "hydration-date-rendering",
       "status": "not-affected",
-      "evidence": [
-        "src/content/proposal.ts"
-      ],
-      "notes": [
-        "No live date or locale-sensitive client rendering."
-      ]
+      "evidence": ["src/content/proposal.ts"],
+      "notes": ["No live date or locale-sensitive client rendering."]
     },
     {
       "id": "touch-behavior",
-      "status": "not-assessed",
-      "evidence": [
-        "tests/e2e/proposal.spec.ts"
-      ],
+      "status": "pass",
+      "evidence": ["tests/e2e/proposal.spec.ts"],
       "notes": [
-        "An emulated 390px touch gesture moves the flyer in browser QA. Physical-device interaction is unverified."
+        "An emulated mobile touch gesture advances the tour in browser QA. Physical-device interaction remains unverified."
       ]
     },
     {
@@ -301,12 +252,11 @@
       "status": "pass",
       "evidence": [
         "src/pages/agreement.astro",
-        "qa-artifacts/redesign/proposal-notes-1.png",
-        "qa-artifacts/redesign/proposal-notes-2.png",
+        "src/content/proposal.ts",
         "scripts/verify-pdf.ts"
       ],
       "notes": [
-        "Both proposal PDF pages were visually reviewed with a balanced page break and white background. Independent text verification matched the introduction, seven sections, 15 paragraphs and endnote."
+        "The notes route presents the canonical introduction, seven sections, 15 paragraphs and endnote. PDF generation and rendered-document verification are tracked in the current release receipts."
       ]
     },
     {
@@ -314,7 +264,7 @@
       "status": "pass",
       "evidence": [
         "src/components/DealPath.tsx",
-        "qa-artifacts/flyer-camera/desktop-03.png"
+        "qa-artifacts/trifold/desktop-03.png"
       ],
       "notes": [
         "Rendered rate numerals retain associated percentage and collected-fee labels."
@@ -336,9 +286,7 @@
     {
       "id": "full-stack-states",
       "status": "not-affected",
-      "evidence": [
-        "PROJECT.md"
-      ],
+      "evidence": ["PROJECT.md"],
       "notes": [
         "Static app; no API, database, authentication or business mutation states."
       ]

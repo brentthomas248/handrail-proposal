@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T20:03:48.417Z",
+  "generatedAt": "2026-09-26T20:35:15.113809+00:00",
   "scope": "Local production-preview Lighthouse laboratory measurements; not field data.",
   "command": "pnpm performance",
   "lighthouseVersion": "13.5.0",
@@ -9,42 +9,40 @@
     {
       "device": "mobile",
       "source": "qa-artifacts/lighthouse-mobile.json",
-      "measuredAt": "2026-09-26T20:01:25.667Z",
+      "measuredAt": "2026-09-26T20:32:10.765Z",
       "scores": {
         "performance": 100,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
-      "lcpMs": 1717.0157,
-      "tbtMs": 11,
-      "cls": 0.002903796674607959,
-      "scriptTransferBytes": 45870,
-      "scriptResourceBytes": 117198
+      "lcpMs": 1656.355,
+      "tbtMs": 0,
+      "cls": 0.02279675040632479,
+      "scriptTransferBytes": 46763,
+      "scriptResourceBytes": 120036
     },
     {
       "device": "desktop",
       "source": "qa-artifacts/lighthouse-desktop.json",
-      "measuredAt": "2026-09-26T20:01:35.688Z",
+      "measuredAt": "2026-09-26T20:32:20.854Z",
       "scores": {
         "performance": 100,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
-      "lcpMs": 376.87,
+      "lcpMs": 368.8312,
       "tbtMs": 0,
-      "cls": 0.004846865833771123,
-      "scriptTransferBytes": 45870,
-      "scriptResourceBytes": 117198
+      "cls": 0.0191034405827715,
+      "scriptTransferBytes": 46763,
+      "scriptResourceBytes": 120036
     }
   ],
   "fieldInp": {
     "status": "not-measured",
     "valueMs": null,
-    "notes": [
-      "TBT is a laboratory measure and does not establish field INP."
-    ]
+    "notes": ["TBT is a laboratory measure and does not establish field INP."]
   },
   "budgets": {
     "lcp": "pass",
@@ -53,8 +51,8 @@
     "inp": "not-measured"
   },
   "notes": [
-    "The HTML flyer camera replaces Three.js and React hydration. One GSAP bundle is loaded; the 250 KB route script-transfer budget is unchanged.",
-    "Camera initialization keeps a stable layout origin; measured CLS fell below 0.01 on both devices after fixing its initial origin change.",
-    "Measurements precede a final keyboard-focus/back-navigation cleanup. Laboratory performance is not a physical-device or field certification."
+    "The semantic HTML trifold uses CSS 3D hinges and one GSAP bundle. No WebGL renderer or client React hydration is loaded.",
+    "Measurements cover the current trifold release build, including numeric-camera uniform scale3d. The unchanged 250 KB route-script budget passes.",
+    "Laboratory results do not establish field INP or physical-device performance."
   ]
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T20:01:44.547158+00:00",
+  "generatedAt": "2026-09-26T20:36:42.602124+00:00",
   "assets": [
     {
       "id": "handrail-logo",
@@ -11,7 +11,11 @@
       "pixelWidth": 1397,
       "pixelHeight": 392,
       "transformations": [],
-      "usage": ["site header", "flyer masthead", "proposal notes"],
+      "usage": [
+        "site header",
+        "trifold masthead and decorative cover back",
+        "proposal notes"
+      ],
       "provenance": "Official public Handrail asset; user requested use of the company identity in this Handrail-directed proposal.",
       "ownership": "Handrail; no ownership or general redistribution license is claimed by this project."
     },
@@ -46,7 +50,8 @@
   ],
   "notes": [
     "No raster assets or proprietary fonts are copied from the animation inspiration sites.",
-    "Arrows, rules and payment graphics are project-authored HTML/CSS/SVG.",
-    "Social image and proposal PDF are generated derivatives; their regeneration and verification are recorded in release evidence, not asserted by this source-asset manifest."
+    "The trifold panels, front/back faces, folds, rules and payment graphics are project-authored HTML/CSS. Decorative Unicode arrows and standalone symbols are removed.",
+    "Hinge geometry and camera transforms are runtime code, not generated image assets; all essential proposal text remains semantic HTML.",
+    "Social image and proposal PDF are generated derivatives; regeneration and verification are recorded in release evidence, not asserted by this source-asset manifest."
   ]
 }

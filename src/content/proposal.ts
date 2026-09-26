@@ -1,6 +1,6 @@
 /** Canonical business proposal. The flyer, notes and PDF read this source. */
 export const proposal = {
-  name: 'Handrail × Brent Showalter',
+  name: 'Handrail and Brent Showalter',
   title: 'Growth partnership proposal',
   status: 'For discussion',
   version: '2026-09-26',
@@ -8,6 +8,28 @@ export const proposal = {
   rates: { employmentFirst: 15, clientFirst: 20, recurring: 5 },
   activationDays: 90,
   paths: { agreement: 'agreement/', pdf: 'handrail-proposed-agreement.pdf' },
+} as const;
+
+export const flyerCopy = {
+  cover: {
+    eyebrow: 'A proposal for working together.',
+    headlineLines: ['Let’s grow', 'Handrail.'],
+    statement: 'No base salary. Commission follows collected revenue.',
+    description:
+      'A practical way to bring me on board, with room for my contribution to grow.',
+  },
+  closing: {
+    eyebrow: 'The beginning of a partnership.',
+    headlineLines: ['Start here.', 'Grow together.'],
+    startingPointTitle: 'Begin with new business.',
+    startingPointBody:
+      'I help bring in the clients that move Handrail forward, working closely with your team to turn opportunities into results.',
+    partnershipTitle: 'Build from there.',
+    partnershipBody:
+      'As we work together, my contribution can grow with Handrail’s needs. We align on priorities, support and where I can add the most value.',
+    proposalNote:
+      'This is a starting point for discussion. We can shape the partnership together; Handrail prepares the final contract.',
+  },
 } as const;
 
 export const dealPathCopy = {
@@ -30,7 +52,7 @@ export interface AgreementSection {
 }
 
 export const agreementIntro =
-  'A way to grow sales without adding a base salary: tie my commission to the customer money Handrail actually receives, and reward me for bringing the client that makes hiring possible. These are proposed business terms for us to review and refine together.';
+  'A practical way to begin a partnership: bring me on board without adding a base salary, connect commissions to collected customer revenue, and build from there. I want to help Handrail grow, with room for my contribution to evolve as we work together. These are proposed business terms for us to review and refine.';
 
 export const agreementEndnote =
   'A proposal for discussion. Handrail will prepare the final agreement after we align on the business terms.';
@@ -40,7 +62,7 @@ export const agreementSections: AgreementSection[] = [
     id: 'cash-flow',
     title: 'No base salary. Revenue comes first.',
     paragraphs: [
-      'I am proposing a commission-led role with no base salary. Handrail receives the customer payment first; my commission follows that collection. There is no upfront commission on money the customer has not paid.',
+      'I am proposing a commission-led start with no base salary. Handrail receives the customer payment first; my commission follows that collection. There is no upfront commission on money the customer has not paid.',
       'If a customer pays over 12 months, my commission follows those 12 installments. That keeps the sales payout connected to incoming cash instead of creating an upfront commission bill.',
       'A benefits package is part of my request and a separate company cost. Delivery, operating costs and benefits still need to fit the economics of each sale.',
     ],
@@ -58,7 +80,7 @@ export const agreementSections: AgreementSection[] = [
     title: `Client first: ${proposal.rates.clientFirst}% build + ${proposal.rates.recurring}% recurring`,
     paragraphs: [
       `If I bring the qualifying client first, Handrail brings me on at ${proposal.rates.clientFirst}% of collected build fees and ${proposal.rates.recurring}% of collected recurring fees. That rate applies to the triggering client and all future credited sales under our relationship.`,
-      'The additional five percentage points reward me for originating the business that makes hiring possible. The higher rate still follows collections, so the customer cash arrives before the commission is paid.',
+      'The additional five percentage points reward me for bringing in the business that makes it possible to bring me on board. The higher rate still follows collections, so the customer cash arrives before the commission is paid.',
     ],
   },
   {
@@ -79,17 +101,17 @@ export const agreementSections: AgreementSection[] = [
   },
   {
     id: 'support',
-    title: 'The support that makes this workable',
+    title: 'A starting point with room to grow',
     paragraphs: [
-      'I would focus on prospecting, discovery, relationships and closing. Handrail would support technical scoping and pricing, then handle delivery and ongoing customer support through a clear handoff.',
-      'My request includes a benefits package when I join. We should confirm coverage where I live, the start date and my contribution, along with sales tools and a practical policy for approved travel and selling expenses.',
+      'I would start by helping bring in new business, working with the team on discovery, scoping and pricing. As we work together, we can shape my contribution around what Handrail needs to grow and agree on the support that makes that work possible.',
+      'My request includes a benefits package when I join. We should confirm coverage where I live, the start date and my contribution, along with the tools and support I need and a practical policy for approved travel and selling expenses.',
     ],
   },
   {
     id: 'next-step',
     title: 'Align on the idea. Then write the agreement.',
     paragraphs: [
-      'The decision now is whether this structure works for both of us: no base salary, commissions tied to collected revenue, and a higher build rate if I create the business that unlocks the hire.',
+      'The decision now is how we begin a partnership that helps Handrail grow. This structure offers a starting point: no base salary, commissions tied to collected revenue, and a higher build rate if I bring the business that enables the hire. We can build on that foundation as we learn where I can contribute most.',
       'The next conversation can settle qualifying-client criteria, credited accounts, recurring commission duration, payment reporting and benefits. Handrail can then prepare the final contract. This proposal is open to discussion and adjustment.',
     ],
   },

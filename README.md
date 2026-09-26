@@ -1,12 +1,12 @@
 # Handrail proposal
 
-An interactive business proposal from Brent Showalter to Handrail. One HTML flyer becomes the scene: scrolling zooms into its headline, moves through the cash-flow example and compares two ways to begin working together.
+An interactive business proposal from Brent Showalter to Handrail. A real HTML trifold becomes the scene: its wings unfold in sequence, then a scroll-driven camera moves across the printed proposal and settles into flat reading views.
 
-**[Explore the live proposal](https://brentthomas248.github.io/handrail-proposal/).** Scroll through the flyer or choose a chapter. The redesigned site is published and passed all 19 browser checks on GitHub Pages; see [IMPLEMENTATION.md](IMPLEMENTATION.md) for evidence and limits.
-
-![The Handrail flyer at the opening camera view](docs/media/proposal-desktop.png)
+**Trifold revision publication is pending.** The [existing public URL](https://brentthomas248.github.io/handrail-proposal/) serves the preceding flat-flyer edition from source `ad6fa8b`. Its verification does not establish readiness of this revision. See [IMPLEMENTATION.md](IMPLEMENTATION.md) for current evidence and limits.
 
 ## The proposal
+
+A practical way to begin a partnership and help Handrail grow. New business is the starting point, with room for Brent’s contribution to evolve as the company’s needs develop.
 
 No base salary. Commission is paid as customer revenue is collected, with customer installments producing matching commission installments. Hiring first proposes **15% of collected build fees plus 5% recurring**. Bringing the qualifying client first proposes **20% plus 5% recurring**, applying to that client and all future credited sales under the relationship.
 
@@ -16,18 +16,18 @@ The higher rate rewards originating the business that makes hiring possible. Ben
 
 The flyer uses Handrail's actual wordmark, warm paper, near-black text and rust accents. Locally served Inter and Playfair Display connect the typography to Handrail's published materials. Large type, thin rules and a receipt-like payment example form one continuous composition.
 
-GSAP ScrollTrigger moves the actual HTML document with coordinated translation, rotation and scale. The reader can select chapters or switch to ordinary reading. Mobile has closer views of each compensation path. Reduced motion and JavaScript-disabled viewing keep the complete proposal in normal document flow.
+Three hinged panels have actual front and back faces. CSS 3D transforms and GSAP ScrollTrigger coordinate sequential opening, perspective travel and flat readable holds. The reader can select chapters or switch to ordinary reading. Mobile has closer views where needed. Reduced motion and JavaScript-disabled viewing keep the complete proposal in normal document flow. Decorative arrows and symbols are removed; the document’s movement supplies the visual interest.
 
 ## Engineering
 
-| Responsibility | Implementation                                                                                                                              |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| Pages          | Astro static output, strict TypeScript and a reusable React rate component. No backend, accounts, analytics or electronic signing.          |
-| Business terms | `src/content/proposal.ts` supplies rates, path copy and seven sections of proposal notes. HTML, generated Markdown and PDF use that source. |
-| Scroll camera  | `src/scripts/motion.ts` measures the semantic flyer and builds one GSAP timeline. Native scrolling drives the tour.                         |
-| Reading paths  | The same HTML remains selectable and accessible in tour and normal reading modes. No canvas or WebGL dependency.                            |
-| Brand assets   | The official Handrail PNG wordmark, locally served Inter and Playfair Display.                                                              |
-| Verification   | Vitest document checks, Playwright browser flows, axe accessibility checks and Storybook component states.                                  |
+| Responsibility | Implementation                                                                                                                                         |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Pages          | Astro static output, strict TypeScript and a reusable React rate component. No backend, accounts, analytics or electronic signing.                     |
+| Business terms | `src/content/proposal.ts` supplies rates, partnership copy and seven sections of proposal notes. HTML, generated Markdown and PDF use that source.     |
+| Scroll camera  | `src/scripts/motion.ts` measures the three panel faces and coordinates hinges and camera in one GSAP timeline driven by native scrolling.              |
+| Reading paths  | The same essential HTML supports tour and ordinary reading. Decorative back faces are hidden from assistive technology; no canvas or WebGL dependency. |
+| Brand assets   | The official Handrail PNG wordmark, locally served Inter and Playfair Display.                                                                         |
+| Verification   | Vitest document checks, Playwright browser flows, axe accessibility checks and Storybook component states.                                             |
 
 The PDF is printed from the proposal-notes route. Regenerate it when the content changes; a previously generated PDF does not update itself. The existing `agreement/` URL and PDF filename are retained for link compatibility, while the visible content is proposal notes.
 
