@@ -1,16 +1,17 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T21:16:32.475956+00:00",
+  "generatedAt": "2026-09-27T21:20:52.871920+00:00",
   "scope": "Bounded first-opening camera pacing refinement",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": false,
+  "deployed": true,
   "evidenceNotes": [
     "Four new cold-opening regressions failed against the preceding release; all eight opening checks pass after correction.",
     "36 focused Chromium checks and eight WebKit opening checks pass. 45-file typecheck, 29 unit checks, formatting and build pass.",
     "26 of 28 output assets are byte-identical, including notes, resume, PDFs, CSS and fonts. Only main HTML script reference and scene JS change.",
     "Cold headed Chromium, sixfold CPU-throttled Chromium and WebKit measured separately from prior warm-traversal and Lighthouse evidence.",
-    "Physical iPhone playback remains unverified. Full global lifecycle certification is not claimed."
+    "Physical iPhone playback remains unverified. Full global lifecycle certification is not claimed.",
+    "Published assets match all 28 frozen candidate files; all 11 scoped hosted checks pass."
   ],
   "limitations": [
     "agentic-ui/blockers.json",
@@ -222,6 +223,11 @@
       "command": "Independent current rendered opening review across five viewports",
       "result": "Accepted; 1,182 opening samples with zero clipping; forward/reverse/interrupt and cover arrival inspected",
       "exitCode": 0
+    },
+    {
+      "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test tests/e2e/fold-opening.spec.ts tests/e2e/proposal.spec.ts --grep 'cold opening|full three-panel opening|high-density|immediate fast flick|mobile touch scroll' --output=qa-artifacts/opening-smoothness/hosted-e2e --reporter=list",
+      "result": "11 passed in 36.4s; no retries",
+      "exitCode": 0
     }
   ],
   "previousRelease": {
@@ -240,5 +246,6 @@
       }
     },
     "note": "Six-category review and full 185-check release are historical; user approved design except first-opening pacing."
-  }
+  },
+  "sourceCommit": "9cb065782302c80027bb8a2bb0d54de3b76f9426"
 }

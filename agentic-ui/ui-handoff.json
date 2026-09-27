@@ -150,9 +150,9 @@
     "reason": "User reports only first-opening choppiness; rest looks good."
   },
   "publication": {
-    "status": "opening-refinement-awaiting-publication",
+    "status": "published-and-verified",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidencePath": "agentic-ui/deployment-verification.json",
-    "note": "Opening refinement passed independent rendered review and scoped verification; publication is next."
+    "note": "Source 9cb0657; static d4eb34c; all 28 hosted assets and 11 scoped browser checks verified."
   }
 }

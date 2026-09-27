@@ -61,3 +61,9 @@ User authorized implementing the independent design director review. Bounded sco
 Candidate 1 was rejected for the edge-on opening, phone thumbnail excursion and ghosted peripheral paragraphs. Actual browser tests also caught premature phone annotation. Camera orientation, hinge distance, print typography/spacing and trace timing were revised; a stacked cash experiment was rejected and removed. Candidate 2 passes 39 Chromium checks, 37 supplementary WebKit reading positions, 11 unit and 3 component checks. Independent final creative verdict and publication receipts are recorded in IMPLEMENTATION.md and docs/paper-prototype-adversarial-review.md.
 
 The local workflow authorization persists. No cloud generation, Stagehand or Browserbase success is claimed; global certification gate remains unpassed for the documented policy/schema, literal-token and manual/field gaps. No new dependencies, engines or compositor surfaces were introduced.
+
+## September 27 — first-opening pacing refinement published
+
+The user approved the rest of the proposal and reported first-opening choppiness. Independent investigation identified an uneven camera-scale fit sequence. One continuous pullback now distributes the retreat across the fold, preserving all-panel framing and later reading poses. Four new cold-opening tests failed before the fix; 36 focused Chromium checks, eight WebKit opening checks, 29 unit checks, typecheck and formatting pass. Independent current rendered review accepted five viewports with 1,182 unclipped opening samples. Cold laboratory profiling is documented separately from physical-device claims.
+
+Source 9cb0657, static d4eb34c, Pages run 36351226460 succeeded. All 28 hosted files match the reviewed build; all 11 scoped hosted checks pass. Physical iPhone playback remains unverified. See docs/opening-smoothness-remediation.md and docs/opening-smoothness-review.md.

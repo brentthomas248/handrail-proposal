@@ -1,13 +1,13 @@
 {
   "schemaVersion": "1.0",
-  "scope": "Six-specialty reviewed final proposal, notes and resume",
+  "scope": "Independently reviewed first-opening pacing refinement",
   "url": "https://brentthomas248.github.io/handrail-proposal/",
-  "checkedAt": "2026-09-27T20:57:52.457997+00:00",
+  "checkedAt": "2026-09-27T21:20:52.871920+00:00",
   "passed": true,
-  "isCurrentRevision": false,
-  "sourceCommit": "5b06411fb1788190088ce98a9f684da1029ce0f3",
-  "staticCommit": "3921256a56bf205f42f5cc32e2effec75d326e55",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36349637874",
+  "isCurrentRevision": true,
+  "sourceCommit": "9cb065782302c80027bb8a2bb0d54de3b76f9426",
+  "staticCommit": "d4eb34c32a371574426b914ace5681aad82ad2d4",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36351226460",
   "publishingSource": {
     "branch": "gh-pages",
     "path": "/",
@@ -17,12 +17,12 @@
   "deploymentConclusion": "success",
   "browserSuite": {
     "status": "passed",
-    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test --reporter=list --output=qa-artifacts/final-design/r8/hosted-e2e",
-    "passed": 185,
+    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test tests/e2e/fold-opening.spec.ts tests/e2e/proposal.spec.ts --grep 'cold opening|full three-panel opening|high-density|immediate fast flick|mobile touch scroll' --output=qa-artifacts/opening-smoothness/hosted-e2e --reporter=list",
+    "passed": 11,
     "failed": 0,
     "skipped": 0,
     "flaky": 0,
-    "durationReported": "4.1m"
+    "durationReported": "36.4s"
   },
   "staticAssetChecks": [
     {
@@ -32,10 +32,10 @@
       "sha256": "4907db89a5bc4160920b577b51facb283e0e376ee1b4d5acab82c2e4d5654811"
     },
     {
-      "path": "_astro/index.astro_astro_type_script_index_0_lang.CQDEWMIY.js",
+      "path": "_astro/index.astro_astro_type_script_index_0_lang.cUFhnljo.js",
       "http": 200,
-      "bytes": 95258,
-      "sha256": "2942e9da3b974b5a3394a61e35a578b2318b7ecd34afeea6c19a232f33f4a3ee"
+      "bytes": 95419,
+      "sha256": "95ea7261f35acfd2ba14ea2354a825c027ed439c5333c8ac1896190afbb18b1f"
     },
     {
       "path": "_astro/inter-cyrillic-ext-wght-normal.BOeWTOD4.woff2",
@@ -155,7 +155,7 @@
       "path": "index.html",
       "http": 200,
       "bytes": 50536,
-      "sha256": "4cfd4b0411d2abdf97221e88a912cef897f3c0cddba54ac7f9bd5f24813ddfe1"
+      "sha256": "a00a911bd51082edfbf2a245ae998a57b552cbe74e5cddbc671f8b68788e7983"
     },
     {
       "path": "licenses/Inter-OFL.txt",
@@ -196,19 +196,18 @@
   ],
   "checks": [
     "All 28 hosted files match the independently reviewed candidate byte for byte.",
-    "Both downloaded two-page PDFs pass complete canonical content validation.",
-    "All 185 hosted browser checks pass without retries.",
-    "Six fresh independent scores: 98 copy, 99 editorial, 98 art, 100 motion, 100 interaction, 99 rendering."
+    "26 files, including PDFs, remain byte-identical to the prior fully reviewed release. PDF contents were not changed or regenerated.",
+    "All 11 scoped hosted browser checks pass without retries.",
+    "Independent opening review accepts five viewports; 1,182 opening samples have zero clipped silhouettes."
   ],
   "limitations": [
     "Physical iPhone stability, true hidden-tab recovery, manual VoiceOver, actual GPU memory and field INP remain unverified.",
     "Minor PDF continuation and DPR1 ink finish observations remain documented; scores are internal assessments, not external certification."
   ],
   "previousRelease": {
-    "sourceCommit": "33f64ef7e648ec740cf443120663faba0d39d218",
-    "staticCommit": "4b11b12fc0063155b8af87265f3065a15b91a1a6",
-    "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36325370312"
+    "sourceCommit": "5b06411fb1788190088ce98a9f684da1029ce0f3",
+    "staticCommit": "3921256a56bf205f42f5cc32e2effec75d326e55",
+    "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36349637874"
   },
-  "generatedAt": "2026-09-27T20:57:52.457997+00:00",
-  "pendingRevisionReport": "docs/opening-smoothness-remediation.md"
+  "generatedAt": "2026-09-27T21:20:52.871920+00:00"
 }

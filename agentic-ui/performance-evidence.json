@@ -121,6 +121,7 @@
       "Sixfold CPU-throttled initialization before camera-ready still has long tasks.",
       "Primary correction is deliberate camera-scale pacing, not a demonstrated general renderer throughput increase."
     ],
-    "isCurrentRevision": true
+    "isCurrentRevision": true,
+    "sourceCommit": "9cb065782302c80027bb8a2bb0d54de3b76f9426"
   }
 }

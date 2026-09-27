@@ -1,6 +1,6 @@
 # First-opening motion refinement
 
-Status: local verification and independent review passed; publication is next. The previously published whole-site design review remains historical evidence.
+Status: independently reviewed, published and verified. The previously published whole-site design review remains historical evidence.
 
 ## Finding OPEN-01
 
@@ -28,4 +28,4 @@ All four new cold-opening tests failed against the published app for zoom revers
 
 On an isolated repeat of the same headed cold/reverse/warm probe, the phone's peak zoom change per hinge degree dropped from 3.24 times its opening average to 1.89. First-traversal rAF maxima were 17.1 ms Chromium, 25.0 ms at sixfold CPU throttling and 18 ms WebKit, with no first-traversal long tasks. The throttled loading phase still contains initialization tasks before the camera is ready. These small laboratory samples establish the pacing change and observed playback, not a guaranteed physical-device frame rate or a general renderer speedup.
 
-Two additional Chromium fast-flick/native-touch checks and all eight WebKit opening checks pass, for 36 targeted Chromium checks and eight WebKit checks. The [independent rendered review](opening-smoothness-review.md) accepts the current opening after five viewport captures, original/candidate comparison and 1,182 unclipped opening samples. Publication and hosted verification are next.
+Two additional Chromium fast-flick/native-touch checks and all eight WebKit opening checks pass, for 36 targeted Chromium checks and eight WebKit checks. The [independent rendered review](opening-smoothness-review.md) accepts the current opening after five viewport captures, original/candidate comparison and 1,182 unclipped opening samples. Published source `9cb065782302c80027bb8a2bb0d54de3b76f9426` as static `d4eb34c32a371574426b914ace5681aad82ad2d4`. [Pages run 36351226460](https://github.com/brentthomas248/handrail-proposal/actions/runs/36351226460) succeeded. All 28 hosted assets match the frozen candidate, and all 11 scoped hosted checks pass without retries in 36.4 seconds.

@@ -2,7 +2,7 @@
 
 ## Current state
 
-The user approved the design except for choppiness in the first opening. A bounded [opening refinement](docs/opening-smoothness-remediation.md) replaces independently fitted zoom beats with one continuous pullback. Four new cold-opening regressions failed against the published version; all eight opening/panel-framing checks now pass. Typecheck, all 29 unit tests and formatting pass. All 36 targeted Chromium and eight WebKit opening checks pass. Cold profiling and the independent rendered review across five viewports pass within their documented scope. Publication is next. The release below remains the currently published revision until the follow-up receipt is completed.
+The user approved the design except for choppiness in the first opening. A bounded [opening refinement](docs/opening-smoothness-remediation.md) replaces independently fitted zoom beats with one continuous pullback. Four new cold-opening regressions failed against the published version; all eight opening/panel-framing checks now pass. Typecheck, all 29 unit tests and formatting pass. All 36 targeted Chromium and eight WebKit opening checks pass. Cold profiling and the independent rendered review across five viewports pass within their documented scope. The refinement is published: source `9cb065782302c80027bb8a2bb0d54de3b76f9426`, static `d4eb34c32a371574426b914ace5681aad82ad2d4`. [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36351226460) succeeded; all 28 hosted assets match and all 11 scoped hosted checks pass without retries. Physical iPhone playback remains unverified.
 
 ## Previous published design pass
 
@@ -10,7 +10,7 @@ Candidate-v8 passed all six fresh independent categories: copy 98, editorial 99,
 
 Six independent specialties cover commercial copy/grouping, editorial typography/spacing, art/material, motion, inclusive interaction and rendering engineering. Two scrutinize copy and spacing independently. Fresh reviewers receive the [neutral brief](docs/final-design-review/brief.md), original references and unchanged rendered app without prior grades or a requested target. All grades and failures remain in [the scorecard](docs/final-design-review/scorecard.md). The release owner separately applies the user's 95/100-per-category gate; no unresolved material defect is allowed regardless of score.
 
-## Changes
+## Previous design changes
 
 The complete three-panel unfold, matte Z-fold material and camera orbits remain. This pass refines crease pacing, reversible input, mobile and tablet framing, supporting type, comparison hierarchy, whitespace and stable front ink. Camera fitting includes text-line overhang while preserving the paper-surface budget.
 
@@ -18,7 +18,7 @@ Desktop and tablet window steps now use aligned label/explanation rows. The quie
 
 Complete semantic reading is independent of hidden paper faces. Keyboard navigation, section URLs, text-spacing recovery, a one-visit reading escape, loading fallback and prominent resume/GitHub links remain available. Returning from the bottom of normal reading now restores the closing chapter; the accessible window heading includes its number. A canceled mobile chapter shortcut restores the current chapter in the strip without overriding horizontal navigation or keyboard focus.
 
-## Verification and release
+## Previous release verification
 
 - All 38 affected Chromium checks pass, including new tests that failed against the previous candidate.
 - Typecheck covers 45 files with zero issues; all 29 unit checks and three Storybook checks pass. Component checks found no axe violations or browser errors.
