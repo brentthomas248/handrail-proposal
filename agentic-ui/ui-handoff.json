@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
   "surface": "Complete Z-fold partnership proposal, tailored resume/PDF and public portfolio navigation",
-  "generatedAt": "2026-09-27T05:12:33.839195+00:00",
+  "generatedAt": "2026-09-27T05:17:34.105218+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -23,7 +23,6 @@
     "Continue the approved local design, Storybook and Playwright workflow.",
     "Use mobile ink hierarchy rather than extra opacity/filter layers; active text stays full strength.",
     "Require an independent adversarial design critic for mobile camera/layout changes; record and resolve blockers before publication.",
-    "Desktop first-slice reading scale capped; opening unfolds once and cash is reached along its adjacent hinge.",
     "Six complete phone reading scenes and five desktop scenes follow the visible three-panel overview.",
     "Equal collected-dollar comparison for15% and20%, with cash remaining before delivery/benefits/other costs.",
     "Physical crease orbits, bounded surfaces, stable ink and same-document reading.",
@@ -123,7 +122,7 @@
   "notes": [
     "Current64-browser/27-unit/3-component/29-WebKit checks passed; both two-page PDFs verified.",
     "All four independent reviews closed actionable findings. Root separately inspected the refined opening shadow.",
-    "See local-verification.json for current checks and deployment-verification.json for the last published version."
+    "Current hosted release:64 browser checks and28 byte-matching files pass. Both downloaded PDFs match canonical content."
   ],
   "userReview": {
     "date": "2026-09-26",
@@ -133,8 +132,10 @@
     "reason": "User requested direct implementation of researched specialist findings while continuing resume/profile/motion work."
   },
   "publication": {
-    "status": "current-local-ready-previous-release-live",
+    "status": "published-and-hosted-verified",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
+    "sourceCommit": "dc99b79cf863cac58385381375b2cbb10aa4774c",
+    "staticCommit": "40c72dd75350081674c6f5da7be5f22601d5b8d3",
     "evidencePath": "agentic-ui/deployment-verification.json"
   }
 }

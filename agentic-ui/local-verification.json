@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T05:12:33.839195+00:00",
+  "generatedAt": "2026-09-27T05:17:34.105218+00:00",
   "scope": "Round-three spatial opening and hinge orbits, tailored resume/PDF, public portfolio navigation and profile; four specialist reviews",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": false,
+  "deployed": true,
   "checks": [
     {
       "command": "pnpm check",
@@ -59,7 +59,7 @@
     "Back/forward history restores exact tour progress after layout mounts. Resume links meet24px project target; chapters retain44px with inset focus outlines.",
     "Profile README, bio and curated pins are public and independently inspected. No private repositories changed visibility.",
     "Physical iPhone, manual VoiceOver and field INP remain unverified.",
-    "Source/static publication and hosted checks are the next checkpoint."
+    "Published source dc99b79 as static 40c72dd; Pages run36296630342 succeeded.64 hosted checks and28 byte-matching assets pass; both downloaded PDFs verified."
   ],
   "limitations": [
     "agentic-ui/blockers.json",

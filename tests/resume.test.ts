@@ -53,8 +53,6 @@ describe('public Handrail resume', () => {
     expect(publicText).not.toMatch(
       /@[a-z0-9.-]+\.[a-z]{2,}|\+?1?\s?\(?\d{3}\)?[-.\s]\d{3}[-.\s]\d{4}/i,
     );
-    expect(publicText).not.toMatch(
-      /one semester|closed.won|quota attainment/i,
-    );
+    expect(publicText).not.toMatch(/one semester|closed.won|quota attainment/i);
   });
 });

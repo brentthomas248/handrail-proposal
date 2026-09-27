@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T05:12:33.839195+00:00",
+  "generatedAt": "2026-09-27T05:17:34.105218+00:00",
   "ok": false,
-  "status": "round-three-local-ready-publication-pending",
+  "status": "round-three-published-and-hosted-verified-physical-iphone-pending",
   "localRelease": {
     "passed": true,
     "evidence": [
@@ -17,7 +17,7 @@
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidence": "agentic-ui/deployment-verification.json",
     "notes": [
-      "Current revision is locally accepted and publication is authorized. Public profile README, bio and pins are already applied.",
+      "Current application and resume are published and hosted verified. Public profile README, bio and pins are applied and independently inspected.",
       "Branch publication uses a locally verified static build. Inactive Actions templates remain under docs/github-actions because the current credential cannot create or update executable workflows."
     ]
   },

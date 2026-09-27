@@ -16,9 +16,13 @@ Research-based spatial, editorial, interaction and narrative reviewers independe
 - Both two-page PDFs match complete canonical text; every page was rendered and inspected. Resume link annotations point to the five correct public destinations.
 - Formatting passed. Lighthouse lab performance: 99 mobile/100 desktop, all other categories 100, zero TBT. This is page-load lab evidence, not field INP or device scroll performance.
 
-## Publication checkpoint
+## Published and hosted verified
 
-The current revision is locally ready. Public profile changes are complete; source/static publication and hosted verification are next. The prior application release remains live at source `d3363fd`, static `18f262a`. Current publication proof belongs in [deployment-verification.json](agentic-ui/deployment-verification.json).
+[Open the updated proposal](https://brentthomas248.github.io/handrail-proposal/?v=dc99b79), [tailored resume](https://brentthomas248.github.io/handrail-proposal/resume/) or [public GitHub](https://github.com/brentthomas248). Source `dc99b79cf863cac58385381375b2cbb10aa4774c` is published as static `40c72dd75350081674c6f5da7be5f22601d5b8d3`. [Pages run 36296630342](https://github.com/brentthomas248/handrail-proposal/actions/runs/36296630342) succeeded.
+
+All 64 hosted browser checks passed in the runner's reported 1.0 minute, with no failures, skips or retries. All 28 hosted files match the reviewed build byte for byte. Both downloaded PDFs pass complete canonical text verification. [Deployment receipt](agentic-ui/deployment-verification.json) and [local verification](agentic-ui/local-verification.json) retain the evidence.
+
+The public profile README is commit `771ad2a`; bio and pins were verified through public API readback and independent logged-out rendering. This documentation checkpoint changes no deployed assets.
 
 ## Remaining limits
 

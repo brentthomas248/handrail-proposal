@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0",
   "url": "https://brentthomas248.github.io/handrail-proposal/",
-  "checkedAt": "2026-09-27T04:08:29.494042+00:00",
+  "checkedAt": "2026-09-27T05:17:34.105218+00:00",
   "passed": true,
-  "sourceCommit": "d3363fd5e5e82cdd91890c72ce686db5034b3866",
-  "staticCommit": "18f262af8bdb212828749af080ea7844500ffabe",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36293281659",
+  "sourceCommit": "dc99b79cf863cac58385381375b2cbb10aa4774c",
+  "staticCommit": "40c72dd75350081674c6f5da7be5f22601d5b8d3",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36296630342",
   "publishingSource": {
     "branch": "gh-pages",
     "path": "/",
@@ -13,20 +13,19 @@
     "httpsEnforced": true
   },
   "browserSuite": {
-    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test --output=qa-artifacts/round-2-candidate/hosted-playwright",
-    "passed": 55,
+    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test --output=qa-artifacts/round-3/hosted-e2e",
+    "passed": 64,
     "failed": 0,
     "skipped": 0,
     "flaky": 0,
-    "durationSeconds": 60.4
+    "durationReported": "1.0m"
   },
   "checks": [
-    "Complete phone rate headings, both rates and shared terms fit; ink remains stable through camera travel.",
-    "Collected-dollar comparison has both labeled paths, collection units, cost qualification and illustrative status.",
-    "Native keyboard chapter traversal, direction-respecting pause/reversal, stale-focus return and held native touch pass.",
-    "Normal/reduced/no-JavaScript reading keeps the same narrative order and ending.",
-    "Paper rendering estimates stay below the unchanged 64MiB and 4096px limits.",
-    "All 26 hosted files match the reviewed static build; downloaded PDF matches all canonical content."
+    "All 28 hosted files match the reviewed build byte for byte.",
+    "All 64 hosted browser checks pass, including responsive resume navigation, normal/reduced/no-JavaScript reading, actual PDF downloads and exact browser Back restoration.",
+    "Downloaded proposal and resume PDFs pass complete canonical content verification.",
+    "Opening geometry, camera movement, complete phone reading groups and unchanged renderer limits pass.",
+    "Four independent local specialist reviews accepted the candidate after focused corrections. Hosted-byte equality links that candidate to this deployment."
   ],
   "staticAssetChecks": [
     {
@@ -38,8 +37,8 @@
     {
       "path": "index.html",
       "http": 200,
-      "bytes": 43549,
-      "sha256": "905e3349d0617cc94dc4eb3895c20e2640a6b3d777d43a4003995d8702850f42"
+      "bytes": 44917,
+      "sha256": "59126f3247cf94a09a117d9e6d4d359c19bc5e91578e725ba19bd560897af6c4"
     },
     {
       "path": "handrail-logo.png",
@@ -51,13 +50,19 @@
       "path": "handrail-proposed-agreement.pdf",
       "http": 200,
       "bytes": 237278,
-      "sha256": "c8ed822f7567ccb325368cb8442aabb63c21ed49bf213802a2ae93a7ac91c5a9"
+      "sha256": "66f0d2b1d8becd3a991ed79c0579e615a83dba0b06971b84aa501d67bf949a62"
     },
     {
       "path": "social.svg",
       "http": 200,
       "bytes": 1626,
       "sha256": "909bc91da4ec3b28e3b8bc4a600703df209a449d4c3589b5b179a79db8de4e18"
+    },
+    {
+      "path": "brent-showalter-handrail-resume.pdf",
+      "http": 200,
+      "bytes": 376630,
+      "sha256": "c832d6895f0e51c19c52a042a8c202661ae2b8b9d5d0181e0ed771490fe4b649"
     },
     {
       "path": "social.png",
@@ -78,10 +83,16 @@
       "sha256": "c052aafd2a71e90bcee6e69f475029d430a10d548c08ffcae350171f0e9668b1"
     },
     {
+      "path": "resume/index.html",
+      "http": 200,
+      "bytes": 50294,
+      "sha256": "a3061efa9f5d374504929f12ef581bb31dad177ecc4fc4866f1316b591bbb2e6"
+    },
+    {
       "path": "agreement/index.html",
       "http": 200,
-      "bytes": 44772,
-      "sha256": "6ed0d57e635d1a16d9cf2b3ea1291032a6661d08e3bfbbe43e685c0a758b7ceb"
+      "bytes": 46186,
+      "sha256": "dc75aaf96162799589aea818ac8056e85b4f9a3d92fa7731612c2bf3a8a75e40"
     },
     {
       "path": "_astro/playfair-display-latin-ext-400-italic.CZOjvne0.woff",
@@ -144,6 +155,12 @@
       "sha256": "71d5ee93cc1e9f1d520a3a8b66456de18c7879d8df09d57fcd2eaff75fef0075"
     },
     {
+      "path": "_astro/index.astro_astro_type_script_index_0_lang.4uTx0kXk.js",
+      "http": 200,
+      "bytes": 86236,
+      "sha256": "88a973fb169be8a2a7e8bbfbcf4984f6fa153e002f5b61d1d7caa6d1e90b43c8"
+    },
+    {
       "path": "_astro/playfair-display-latin-400-italic.LeeEXsx5.woff2",
       "http": 200,
       "bytes": 21884,
@@ -178,12 +195,6 @@
       "http": 200,
       "bytes": 11232,
       "sha256": "6e9e020a25f9b56d418f2c085b1d3c09725a4da23fe693a5b463064606732190"
-    },
-    {
-      "path": "_astro/index.astro_astro_type_script_index_0_lang.buKxMMfr.js",
-      "http": 200,
-      "bytes": 85180,
-      "sha256": "f6267665082a083d813cec6bcec87236e50362dd4e7f4ef62882b639dc13ad66"
     }
   ],
   "pdfCanonicalCheck": {

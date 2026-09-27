@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T21:54:45.790255+00:00",
-  "mode": "full-lifecycle",
+  "generatedAt": "2026-09-27T05:17:34.105218+00:00",
+  "mode": "approved-local-workflow",
   "sections": [
     {
       "id": "product-design-intent",
@@ -15,12 +15,13 @@
       "id": "information-architecture-flows",
       "status": "pass",
       "evidence": [
-        "src/pages/index.astro",
-        "src/pages/agreement.astro",
-        "src/scripts/motion.ts"
+        "src/layouts/Page.astro",
+        "src/pages/resume.astro",
+        "src/scripts/motion.ts",
+        "docs/round-3-interaction-review.md"
       ],
       "notes": [
-        "Three hinged HTML panels open from a folded cover, then present stable reading holds, chapter navigation, ordinary reading and direct proposal notes/PDF. Mobile separates long cash-flow content, individual rate paths and the rationale."
+        "Three joined panels in the opening, physical crease orbits, ordinary reading, proposal notes, resume/PDF and prominent portfolio access. Browser Back restores the originating proposal position."
       ]
     },
     {
@@ -60,11 +61,12 @@
       "id": "responsive-layout",
       "status": "pass",
       "evidence": [
-        "tests/e2e/proposal.spec.ts",
-        "qa-artifacts/wide-paper-final/capture.json"
+        "docs/round-3-editorial-review.md",
+        "docs/round-3-spatial-review.md",
+        "docs/round-3-interaction-review.md"
       ],
       "notes": [
-        "38 current chapter views and15 fold samples captured across1440/390/320px; broader paper preserves readable phone subregions. Recorded minimum text12.251px. Physical iPhone crash remediation still needs actual-device retry."
+        "Independent four-specialist review accepted mobile and desktop compositions, complete reading groups, resume measure/spacing and unwrapped tablet actions after corrections."
       ]
     },
     {
@@ -108,23 +110,18 @@
       "status": "pass",
       "evidence": [
         "agentic-ui/local-verification.json",
-        "agentic-ui/deployment-verification.json",
-        "qa-artifacts/wide-paper-final/capture.json"
+        "agentic-ui/deployment-verification.json"
       ],
       "notes": [
-        "Current local check:24 files,zero issues;11 unit,29 browser and3 component checks passed. Current capture contains38 chapter views and15 fold samples. The29 hosted browser checks pass in32.9s. Physical iPhone stability and full global certification remain unverified."
+        "Current64 local and64 hosted browser checks,27 unit and three component checks,29 WebKit reading positions, both complete PDFs and28 hosted asset matches pass. See receipts for explicit limits."
       ]
     },
     {
       "id": "remediation-learning",
       "status": "pass",
-      "evidence": [
-        "docs/redesign-research.md",
-        "DESIGN.md",
-        "src/scripts/motion.ts"
-      ],
+      "evidence": ["docs/portfolio-resume-motion-implementation.md"],
       "notes": [
-        "The revised document has real left/right hinges instead of a rigid flat camera plane. Numeric-camera uniform scale3d fixes exaggerated hinge depth and header clipping. Mobile cash content is split into readable targets; current checks cover keyboard focus, Back restoration and native touch gestures."
+        "Rendered review caught tour position lost after Back, clipped phone focus outlines, tablet wrapping and weak resume evidence hierarchy. Behavioral regressions and focused fresh review closed the findings."
       ]
     },
     {
@@ -211,11 +208,11 @@
     ],
     "authRoleStates": ["No authentication or authorization roles."],
     "mutationSafety": [
-      "No business mutations; isolated browser preference storage only."
+      "No business mutation or submission; presentation preference and per-history-entry position only. Public GitHub profile changes are separate authorized showcase work."
     ]
   },
   "localScopeStatus": "verified",
   "fullLifecycleCertified": false,
-  "scope": "User-approved local trifold redesign; reference approval does not establish final visual acceptance or full global lifecycle certification.",
+  "scope": "Round-three proposal motion, resume/PDF and public portfolio; research-based independent specialist reviews",
   "publicationStatus": "published-and-hosted-verified"
 }
