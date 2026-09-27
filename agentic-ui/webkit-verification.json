@@ -1,6 +1,6 @@
 {
-  "checkedAt": "2026-09-27T05:09:49.835Z",
-  "scope": "Round-three geometry and reading behavior; not physical iOS stability",
+  "checkedAt": "2026-09-27T14:13:47.306Z",
+  "scope": "Fold-out opening correction and unchanged reading geometry; not physical iOS stability",
   "engine": {
     "name": "Playwright WebKit",
     "version": "26.6",
@@ -8,17 +8,23 @@
   },
   "behavior": {
     "passed": true,
-    "viewports": ["1440x1000", "390x844", "320x740", "430x932", "390x664"],
+    "viewports": [
+      "1440x1000",
+      "390x844",
+      "320x740",
+      "430x932",
+      "390x664"
+    ],
     "readingHoldsVerified": 29,
     "checks": [
       "Both hinges change with scrolling, reverse, and place their free edges on opposite sides of the center panel",
-      "Initial folded packet fits the stage; subsequent unfolding follows the left hinge and may crop decorative panels.",
+      "Initial folded packet fits the stage and both hinges unfold before the cover approach. Continuous all-panel opening bounds are covered separately by Chromium regression and headed review.",
       "Every reading group has a front-facing composed normal; all text-node lines and bounds clear measured header/controls by 24px; every primary text node is at least 12 rendered pixels high",
       "Normal reading mode has no horizontal overflow"
     ],
     "mobileInput": "Programmatic document scrolling; Playwright does not support mouse-wheel input in mobile WebKit",
     "script": "scripts/verify-webkit.mjs",
-    "receipt": "qa-artifacts/round-3/webkit/verification.json",
+    "receipt": "qa-artifacts/fold-opening/webkit/verification.json",
     "minimumRenderedTextPx": 12.158187866210938,
     "deviceScaleFactors": {
       "desktop": 1,
@@ -67,7 +73,7 @@
   "nativeMobileVerified": false,
   "headfulViewportLimitation": "Headful WebKit retained desktop layout despite a reported 390px configured viewport. Headless mobile geometry is covered separately; native mobile and physical iOS remain unverified.",
   "notes": [
-    "Round-two paper geometry and complete reading groups passed across all five sizes.",
+    "Current fold-out opening and all 29 reading positions passed across five sizes.",
     "Historical native-window evidence and known protocol screenshot limitations remain separate from current headless geometry.",
     "Physical iPhone crash verification requires actual-device evidence."
   ]

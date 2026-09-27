@@ -324,26 +324,27 @@ async function expectSubstantialUnfoldingPaper(page: Page) {
           const bottom = document
             .querySelector('.tour-controls')!
             .getBoundingClientRect().top;
-          return [
-            ...document.querySelectorAll('.panel-face, .panel-back'),
-          ].some((face) => {
-            const style = getComputedStyle(face);
-            if (style.display === 'none' || style.visibility === 'hidden')
-              return false;
-            const box = face.getBoundingClientRect();
-            const visibleHeight = Math.max(
-              0,
-              Math.min(box.bottom, bottom) - Math.max(box.top, top),
-            );
-            const visibleWidth = Math.max(
-              0,
-              Math.min(box.right, innerWidth) - Math.max(box.left, 0),
-            );
-            return (
-              visibleHeight >= (bottom - top) * 0.55 &&
-              visibleWidth >= innerWidth * 0.25
-            );
-          });
+          const panels = [...document.querySelectorAll('.fold-panel')].map(
+            (panel) => panel.getBoundingClientRect(),
+          );
+          const visibleHeight = Math.max(
+            0,
+            Math.min(Math.max(...panels.map((box) => box.bottom)), bottom) -
+              Math.max(Math.min(...panels.map((box) => box.top)), top),
+          );
+          const visibleWidth = Math.max(
+            0,
+            Math.min(Math.max(...panels.map((box) => box.right)), innerWidth) -
+              Math.max(Math.min(...panels.map((box) => box.left)), 0),
+          );
+          // An opening accordion becomes landscape-shaped. Judge its complete
+          // silhouette, rather than forcing one face into a cropped close-up.
+          return (
+            visibleHeight >= (bottom - top) * 0.2 &&
+            visibleWidth >= innerWidth * 0.25 &&
+            (visibleHeight >= (bottom - top) * 0.55 ||
+              visibleWidth >= innerWidth * 0.65)
+          );
         }),
       {
         message:

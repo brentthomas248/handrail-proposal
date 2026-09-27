@@ -1,65 +1,49 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T05:17:34.105218+00:00",
-  "scope": "Round-three spatial opening and hinge orbits, tailored resume/PDF, public portfolio navigation and profile; four specialist reviews",
+  "generatedAt": "2026-09-27T14:15:23.600783+00:00",
+  "scope": "Restore a folded opening and keep the whole three-panel reveal in frame before cover approach",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": true,
+  "deployed": false,
   "checks": [
     {
       "command": "pnpm check",
-      "result": "32 files, zero errors/warnings/hints",
+      "result": "33 checked files; zero errors, warnings or hints",
       "exitCode": 0
     },
     {
       "command": "pnpm test",
-      "result": "27 checks across three unit suites",
+      "result": "27 unit checks passed",
       "exitCode": 0
     },
     {
-      "command": "pnpm build:release; pnpm build after motion/navigation fixes",
-      "result": "Three static routes; two proposal PDF pages and two resume PDF pages",
+      "command": "pnpm build",
+      "result": "Three static routes built; unchanged published PDFs preserved",
       "exitCode": 0
     },
     {
-      "command": "pnpm contract:check; pnpm pdf:check; pnpm resume:check",
-      "result": "Complete canonical text verified in both PDFs; resume has five correct URL annotations",
+      "command": "pnpm exec playwright test --reporter=line --output=qa-artifacts/fold-opening/release-e2e",
+      "result": "68 Chromium checks passed in 1.2 minutes, zero failures/skips/retries",
       "exitCode": 0
     },
     {
-      "command": "pnpm exec playwright test --output=qa-artifacts/round-3/release-e2e",
-      "result": "64 Chromium checks passed in58.5 seconds; zero failures/skips/retries; renderer budget preserved",
-      "exitCode": 0
-    },
-    {
-      "command": "pnpm test:components",
-      "result": "Three component checks passed; zero axe violations or browser errors",
-      "exitCode": 0
-    },
-    {
-      "command": "pnpm format:check",
+      "command": "pnpm format:check; git diff --check",
       "result": "Passed",
       "exitCode": 0
     },
     {
-      "command": "WEBKIT_OUTPUT=qa-artifacts/round-3/webkit node scripts/verify-webkit.mjs",
-      "result": "29 reading positions across five sizes passed; no errors or failed requests; known screenshot limitations and five preload warnings retained",
-      "exitCode": 0
-    },
-    {
-      "command": "pnpm performance",
-      "result": "99 mobile/100 desktop page-load lab performance; other categories100; zeroTBT; not field or physical-device performance",
+      "command": "WEBKIT_OUTPUT=qa-artifacts/fold-opening/webkit node scripts/verify-webkit.mjs",
+      "result": "29 reading positions across five sizes passed; zero errors/failed requests; five known font-preload warnings",
       "exitCode": 0
     }
   ],
   "evidenceNotes": [
-    "Independent spatial, editorial, interaction and narrative reviews captured their own rendered evidence and rechecked corrections.",
-    "All three panels visible on opening; real camera orbit at both physical hinges. Headless Chromium center-paint anomaly ruled out by matching headed captures.",
-    "Resume foregrounds verified results, preserves2025degree/coursework distinction, and separates experience from proposed contributions. Every PDF page was rendered and inspected.",
-    "Back/forward history restores exact tour progress after layout mounts. Resume links meet24px project target; chapters retain44px with inset focus outlines.",
-    "Profile README, bio and curated pins are public and independently inspected. No private repositories changed visibility.",
-    "Physical iPhone, manual VoiceOver and field INP remain unverified.",
-    "Published source dc99b79 as static 40c72dd; Pages run36296630342 succeeded.64 hosted checks and28 byte-matching assets pass; both downloaded PDFs verified."
+    "New four-viewport regression fails against the previously published 74-degree opening and passes at 146 degrees, unfolding 108 degrees before the cover approach.",
+    "Focused continuous forward/reverse sampling recorded 1,074 frames with no panel outside the stage safe area.",
+    "Independent headed review inspects compact packet, intermediate edge-on states, complete spread, reversal and reading arrival. Root independently inspected original frames.",
+    "Existing complete reading-group, high-DPR 64MiB/4096px, input ownership, accessibility, fallback and resume navigation tests pass.",
+    "Materials, content, PDFs, component implementation and public profile are unchanged in this correction; their prior verification is documented in docs/portfolio-resume-motion-implementation.md.",
+    "Physical iPhone, manual VoiceOver and field INP remain unverified."
   ],
   "limitations": [
     "agentic-ui/blockers.json",
@@ -68,10 +52,7 @@
   ],
   "deploymentEvidencePath": "agentic-ui/deployment-verification.json",
   "independentReviews": {
-    "spatial": "docs/round-3-spatial-review.md",
-    "editorial": "docs/round-3-editorial-review.md",
-    "narrative": "docs/round-3-narrative-review.md",
-    "interaction": "docs/round-3-interaction-review.md",
-    "verdict": "All actionable findings closed; root also inspected the optional shadow comparison."
+    "opening": "docs/fold-opening-independent-review.md",
+    "verdict": "Accepted after headed review at four sizes; see report for scope."
   }
 }

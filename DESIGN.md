@@ -158,7 +158,7 @@ Current evidence and independent review belong in [the round-two remediation](do
 
 ## Resume, portfolio and spatial introduction
 
-The opening presents a visibly connected, partly open Z-fold before approaching the cover. A paired viewpoint orbit at each crossed crease reveals the physical object; same-panel paragraphs retain quieter reading travel. Keep the approved reading poses, native interruption/reversal and renderer budgets.
+The opening starts with a compact folded packet. Both wings unfold while the camera keeps the entire three-panel object in view; only after establishing the opened spread does it approach the cover. Natural self-occlusion while folded is expected. A paired viewpoint orbit at each later crossed crease reveals the physical object; same-panel paragraphs retain quieter reading travel. Keep the approved reading poses, native interruption/reversal and renderer budgets.
 
 A second header group makes the Handrail resume and wider GitHub immediately discoverable. On phones the header uses two rows; the existing total reading-space reservation is redistributed between header and chapter controls. Tablet navigation stays on one line. Chapter focus outlines sit inside their controls. Browser Back restores the proposal history entry after its scroll geometry mounts. Fresh visits and explicit reading URLs keep their normal behavior.
 

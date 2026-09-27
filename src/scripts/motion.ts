@@ -591,52 +591,25 @@ function mountTour(
     ]);
     shadow?.setAttribute('viewBox', `0 0 ${width} ${height}`);
     stops = collectStops();
-    const beginning = readingPose(stops[1]);
-    const beginningBox = boxFor(stops[1].element!);
-    const coverCenter = {
-      x: beginningBox.x + beginningBox.width / 2,
-      y: beginningBox.y + beginningBox.height / 2,
-      z: 1,
-    };
-    const unfoldingFocus = foldPoint(coverCenter, 'left', panelWidth, 58);
-    const approachingFocus = foldPoint(coverCenter, 'left', panelWidth, 46);
-    const frames: Keyframe[] = [
-      // An open accordion silhouette establishes all three printed panels and
-      // both creases before the camera approaches the first reading group.
-      { at: 0, pose: overview(74, -32, 16, -4) },
-      {
-        at: 0.85,
-        pose: {
-          ...beginning,
-          focusX: unfoldingFocus.x,
-          focusY: unfoldingFocus.y,
-          focusZ: unfoldingFocus.z,
-          scale: beginning.scale * 0.62,
-          left: 58,
-          right: 58,
-          yaw: -64,
-          pitch: 14,
-          roll: -3,
-        },
-      },
-      {
-        at: 1.55,
-        pose: {
-          ...beginning,
-          focusX: approachingFocus.x,
-          focusY: approachingFocus.y,
-          focusZ: approachingFocus.z,
-          scale: beginning.scale * 0.82,
-          left: 46,
-          right: 46,
-          yaw: -46,
-          pitch: 5,
-          roll: -2,
-        },
-      },
+    // Finish opening the whole object before transferring focus to the cover.
+    // Each fit includes both free edges, so expansion never unfolds offscreen.
+    const openingViews = [
+      [146, 6, 12, -5],
+      [128, 0, 15, -5],
+      [110, -8, 17, -5],
+      [92, -16, 18, -4],
+      [74, -24, 16, -4],
+      [56, -28, 13, -3],
+      [38, -24, 10, -2],
     ];
-    openingAnchors = [0, 0.85];
-    let previousPose = frames[2].pose;
+    const frames: Keyframe[] = openingViews.map(
+      ([angle, yaw, pitch, roll], index) => ({
+        at: (index / (openingViews.length - 1)) * 1.7,
+        pose: overview(angle, yaw, pitch, roll),
+      }),
+    );
+    openingAnchors = [0, 1.7];
+    let previousPose = frames[frames.length - 1].pose;
     let previousPanel: Panel | null = null;
     let cursor = 2.65;
     for (let i = 1; i < stops.length; i += 1) {
