@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
-  "surface": "Final six-specialty review of the Handrail Z-fold proposal, reading paths, notes and tailored resume",
-  "generatedAt": "2026-09-27T20:57:52.457997+00:00",
+  "surface": "Mandatory magnetic stops for the approved Handrail trifold",
+  "generatedAt": "2026-09-27T22:04:22.322731+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -25,7 +25,8 @@
     "Equal collected-dollar comparison for15% and20%, with cash remaining before delivery/benefits/other costs.",
     "Physical crease orbits, bounded surfaces, stable ink and same-document reading.",
     "Evidence-backed resume with2025degree, proposed contribution areas and decorative Handrail watermark.",
-    "Prominent resume/GitHub links, responsive navigation and exact history-entry return position."
+    "Prominent resume/GitHub links, responsive navigation and exact history-entry return position.",
+    "Every released vertical gesture completes the next concrete stop in its direction, including 1px nudges. Exact arrivals hold without chaining; ordinary reading stays native."
   ],
   "rejectedDecisions": [
     "Neon/glow design direction",
@@ -60,7 +61,7 @@
       "agentic-ui/component-state-matrix.json",
       "tests/e2e/proposal.spec.ts"
     ],
-    "camera": "Native scroll drives one critically damped GSAP ticker and a pure continuous cubic camera path; logarithmic zoom and camera-facing reading poses preserve accordion depth."
+    "camera": "Native scroll owns active gestures. After 140ms of vertical inactivity, an eased native-scroll tween completes the directional concrete stop; the existing damped camera and physical fold path remain."
   },
   "tokenExports": {
     "dtcg": "agentic-ui/tokens.dtcg.json",
@@ -133,26 +134,27 @@
     ]
   },
   "openDesignQuestions": [
-    "Physical iPhone playback of the opening refinement awaits user verification."
+    "Physical iPhone playback of magnetic stops awaits user verification."
   ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
     "Previous release 5b06411: 185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
     "Physical iPhone stability, genuine hidden-tab recovery, manual VoiceOver, actual GPU memory and field INP remain unverified. Full global lifecycle certification is not claimed.",
     "Previous release 5b06411: All six independent scores meet the requested category threshold; publication and all hosted verification are complete.",
-    "Opening pacing follow-up: see docs/opening-smoothness-remediation.md and current local-verification.json; prior six-category scores are historical."
+    "Opening pacing follow-up: see docs/opening-smoothness-remediation.md and current local-verification.json; prior six-category scores are historical.",
+    "Magnetic follow-up: docs/magnetic-scroll-remediation.md and docs/magnetic-scroll-review.md; final 27 Chromium and 11 WebKit checks pass."
   ],
   "userReview": {
     "date": "2026-09-27",
-    "status": "approved-except-first-opening-pacing",
+    "status": "requested-mandatory-magnetic-stops",
     "researchPath": "docs/design-director-review.md",
     "implementationPaused": false,
-    "reason": "User reports only first-opening choppiness; rest looks good."
+    "reason": "User requires every small scroll to land firmly at a concrete stop."
   },
   "publication": {
-    "status": "published-and-verified",
+    "status": "locally-verified-awaiting-publication",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidencePath": "agentic-ui/deployment-verification.json",
-    "note": "Source 9cb0657; static d4eb34c; all 28 hosted assets and 11 scoped browser checks verified."
+    "note": "Previous opening release remains live until the magnetic-stop deployment receipt."
   }
 }

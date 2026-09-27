@@ -58,7 +58,7 @@
     "These page-load laboratory results do not establish motion continuity, field INP or physical-device performance; continuous-input evidence is recorded separately."
   ],
   "isCurrentRevision": false,
-  "currentRevisionNote": "Lighthouse and R8 rendering evidence applies to source 5b06411. Current opening-only follow-up measurements are recorded below; Lighthouse was not rerun.",
+  "currentRevisionNote": "Lighthouse and R8 evidence applies to source 5b06411; opening-pacing measurements apply to 9cb0657. Current magnetic-stop input and rendered review are recorded separately; no fresh Lighthouse or physical-device claim.",
   "motionEvidence": "docs/final-design-review/r8-rendering.md",
   "openingFollowUp": {
     "scope": "Cold first-opening pacing, separately measured from historical Lighthouse scores",
@@ -123,5 +123,10 @@
     ],
     "isCurrentRevision": true,
     "sourceCommit": "9cb065782302c80027bb8a2bb0d54de3b76f9426"
+  },
+  "magneticFollowUp": {
+    "report": "docs/magnetic-scroll-remediation.md",
+    "review": "docs/magnetic-scroll-review.md",
+    "scope": "Released gesture completion; unchanged fold/camera/material curves and rendering budgets."
   }
 }

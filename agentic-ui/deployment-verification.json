@@ -4,7 +4,7 @@
   "url": "https://brentthomas248.github.io/handrail-proposal/",
   "checkedAt": "2026-09-27T21:20:52.871920+00:00",
   "passed": true,
-  "isCurrentRevision": true,
+  "isCurrentRevision": false,
   "sourceCommit": "9cb065782302c80027bb8a2bb0d54de3b76f9426",
   "staticCommit": "d4eb34c32a371574426b914ace5681aad82ad2d4",
   "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36351226460",
@@ -209,5 +209,6 @@
     "staticCommit": "3921256a56bf205f42f5cc32e2effec75d326e55",
     "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36349637874"
   },
-  "generatedAt": "2026-09-27T21:20:52.871920+00:00"
+  "generatedAt": "2026-09-27T21:20:52.871920+00:00",
+  "currentRevisionNote": "This receipt is for the previous opening refinement. Magnetic-stop candidate is locally verified and awaiting publication."
 }

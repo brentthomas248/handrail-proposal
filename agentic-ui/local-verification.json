@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T21:20:52.871920+00:00",
-  "scope": "Bounded first-opening camera pacing refinement",
+  "generatedAt": "2026-09-27T22:04:22.322731+00:00",
+  "scope": "Mandatory directional magnetic reading stops",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": true,
+  "deployed": false,
   "evidenceNotes": [
-    "Four new cold-opening regressions failed against the preceding release; all eight opening checks pass after correction.",
-    "36 focused Chromium checks and eight WebKit opening checks pass. 45-file typecheck, 29 unit checks, formatting and build pass.",
-    "26 of 28 output assets are byte-identical, including notes, resume, PDFs, CSS and fonts. Only main HTML script reference and scene JS change.",
-    "Cold headed Chromium, sixfold CPU-throttled Chromium and WebKit measured separately from prior warm-traversal and Lighthouse evidence.",
-    "Physical iPhone playback remains unverified. Full global lifecycle certification is not claimed.",
-    "Published assets match all 28 frozen candidate files; all 11 scoped hosted checks pass."
+    "Initial published release failed all three one-pixel/terminal-tail repros; new regressions now pass.",
+    "WebKit consumed reverse wheel deltas exposed a real direction bug, fixed and retested.",
+    "Original failures and fixture diagnoses are retained; no geometry thresholds were weakened.",
+    "Only the main HTML script reference and scene JS changed; 26 assets including both PDFs remain byte-identical.",
+    "Physical iPhone playback remains unverified; no global lifecycle certification or fresh six-category grade is claimed.",
+    "Final candidate passes 27 Chromium and 11 WebKit focused checks; publication is pending."
   ],
   "limitations": [
     "agentic-ui/blockers.json",
@@ -20,19 +20,12 @@
   ],
   "deploymentEvidencePath": "agentic-ui/deployment-verification.json",
   "independentReviews": {
-    "report": "docs/opening-smoothness-review.md",
+    "report": "docs/magnetic-scroll-review.md",
     "verdict": "accepted-within-inspected-local-scope"
   },
   "candidateIdentity": {
-    "brent-showalter-handrail-resume.pdf": "dbf5cae25589697e1c9904e82ffa27aa384a9a98212a1a57272dcfca845ef501",
-    "handrail-logo.png": "1e024d51ef5f28a6bcedfa90ff58c5f0481a81db81cbcd5efede50594766bb3a",
-    "handrail-proposed-agreement.pdf": "8ace1fd73de5d542e4655bb25c45a96eb15cb77a56c2d2746a878c809dffceb2",
-    "index.html": "a00a911bd51082edfbf2a245ae998a57b552cbe74e5cddbc671f8b68788e7983",
-    "paper-grain.svg": "f1ad2a836254dd1e1bda3de717abb7c3de39007361741e634977267450cc774b",
-    "social.png": "e329ac6843b8636966fea598494c587a4cff1b15650eda476035b01abc9dad74",
-    "social.svg": "82d9b39af42667ba6af5d8134cbacb1cae4b2df257dfa8de6fc10a5e987ab1f9",
     "_astro/client.CCxN9xF8.js": "4907db89a5bc4160920b577b51facb283e0e376ee1b4d5acab82c2e4d5654811",
-    "_astro/index.astro_astro_type_script_index_0_lang.cUFhnljo.js": "95ea7261f35acfd2ba14ea2354a825c027ed439c5333c8ac1896190afbb18b1f",
+    "_astro/index.astro_astro_type_script_index_0_lang.DDz78qqw.js": "0978590e1db88b37a284471e7604d34ec24be239c7b0a946b9a0c3946a001ad8",
     "_astro/inter-cyrillic-ext-wght-normal.BOeWTOD4.woff2": "ca157063339ac4ad418f214f3abfed119b0798ab4d377386ce5c9e5a7a435ebd",
     "_astro/inter-cyrillic-wght-normal.DqGufNeO.woff2": "71d5ee93cc1e9f1d520a3a8b66456de18c7879d8df09d57fcd2eaff75fef0075",
     "_astro/inter-greek-ext-wght-normal.DlzME5K_.woff2": "6e9e020a25f9b56d418f2c085b1d3c09725a4da23fe693a5b463064606732190",
@@ -49,9 +42,16 @@
     "_astro/playfair-display-vietnamese-400-italic.CD15TOr5.woff2": "9a08f3c0730f6311b18adadf42797a91900c4bbc32602785ec1e329db5354685",
     "_astro/playfair-display-vietnamese-400-italic.Cpv4sfwY.woff": "44d830fe9bae45b8a4dc798f7df77568a0d6c9e0c2b0838289a8c02d54c4278c",
     "agreement/index.html": "0104372613437b960567c3b8df24dc8dc8d615d2e52de10f36ad96af827769dd",
+    "brent-showalter-handrail-resume.pdf": "dbf5cae25589697e1c9904e82ffa27aa384a9a98212a1a57272dcfca845ef501",
+    "handrail-logo.png": "1e024d51ef5f28a6bcedfa90ff58c5f0481a81db81cbcd5efede50594766bb3a",
+    "handrail-proposed-agreement.pdf": "8ace1fd73de5d542e4655bb25c45a96eb15cb77a56c2d2746a878c809dffceb2",
+    "index.html": "7dc8b494029c47a492a6b581ba39bd5f01f726e3528d2ae719a95d568da5b7c6",
     "licenses/Inter-OFL.txt": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345",
     "licenses/Playfair-Display-OFL.txt": "c052aafd2a71e90bcee6e69f475029d430a10d548c08ffcae350171f0e9668b1",
-    "resume/index.html": "38796c82b8a52ddbf7441b5d82792812b4cad8dbeb78873d387efaf9cb6833de"
+    "paper-grain.svg": "f1ad2a836254dd1e1bda3de717abb7c3de39007361741e634977267450cc774b",
+    "resume/index.html": "38796c82b8a52ddbf7441b5d82792812b4cad8dbeb78873d387efaf9cb6833de",
+    "social.png": "e329ac6843b8636966fea598494c587a4cff1b15650eda476035b01abc9dad74",
+    "social.svg": "82d9b39af42667ba6af5d8134cbacb1cae4b2df257dfa8de6fc10a5e987ab1f9"
   },
   "historicalChecks": [
     {
@@ -171,9 +171,7 @@
       "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test --reporter=list",
       "result": "185 passed in 4.1m; no retries",
       "exitCode": 0
-    }
-  ],
-  "checks": [
+    },
     {
       "command": "pnpm check",
       "result": "45 files; zero errors, warnings or hints",
@@ -227,6 +225,49 @@
     {
       "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test tests/e2e/fold-opening.spec.ts tests/e2e/proposal.spec.ts --grep 'cold opening|full three-panel opening|high-density|immediate fast flick|mobile touch scroll' --output=qa-artifacts/opening-smoothness/hosted-e2e --reporter=list",
       "result": "11 passed in 36.4s; no retries",
+      "exitCode": 0
+    }
+  ],
+  "checks": [
+    {
+      "command": "pnpm check",
+      "result": "46 files; zero errors, warnings or hints",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm test",
+      "result": "31 passed",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm format:check && git diff --check",
+      "result": "passed",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm build",
+      "result": "three routes; 28-file frozen candidate",
+      "exitCode": 0
+    },
+    {
+      "command": "Full Chromium suite; log qa-artifacts/magnetic-scroll/full-chromium.log",
+      "result": "198/199 passed; one test-fixture failure; both corrected viewport cases passed afterward without lowering thresholds",
+      "exitCode": 0,
+      "initialExitCode": 1
+    },
+    {
+      "command": "Focused final Chromium verification; qa-artifacts/magnetic-scroll/final-chromium.log",
+      "result": "27 passed; current final candidate and corrected fixtures; zero retries",
+      "exitCode": 0
+    },
+    {
+      "command": "Focused final WebKit verification; qa-artifacts/magnetic-scroll/final-webkit.log",
+      "result": "11 passed; current final candidate; zero retries",
+      "exitCode": 0
+    },
+    {
+      "command": "Independent rendered review",
+      "result": "See docs/magnetic-scroll-review.md for exact scope and observations",
       "exitCode": 0
     }
   ],

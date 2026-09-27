@@ -111,22 +111,36 @@ describe('scroll response', () => {
 });
 
 describe('direction-owned idle settling', () => {
-  const anchors = [0, 2, 4, 6];
+  const anchors = [0, 600, 1200, 1800];
 
   it.each([0.15, 0.4, 0.6])(
     'does not undo forward or reverse movement across %s of an interval',
     (fraction) => {
-      const forward = 2 + fraction * 2;
-      const reverse = 4 - fraction * 2;
-      expect(settleAnchor(anchors, forward, 1, 0.24)).toBe(4);
-      expect(settleAnchor(anchors, reverse, -1, 0.24)).toBe(2);
+      const forward = 600 + fraction * 600;
+      const reverse = 1200 - fraction * 600;
+      expect(settleAnchor(anchors, forward, 1)).toBe(1200);
+      expect(settleAnchor(anchors, reverse, -1)).toBe(600);
     },
   );
 
-  it('leaves readable positions and directionless jitter alone', () => {
-    expect(settleAnchor(anchors, 2.1, 1, 0.24)).toBeNull();
-    expect(settleAnchor(anchors, 3, 0, 0.24)).toBeNull();
-    expect(settleAnchor(anchors, 6.4, 1, 0.24)).toBeNull();
+  it('advances even a one-pixel gesture without a reading dead zone', () => {
+    expect(settleAnchor(anchors, 601, 1)).toBe(1200);
+    expect(settleAnchor(anchors, 599, -1)).toBe(0);
+    expect(settleAnchor(anchors, 1199, 1)).toBe(1200);
+    expect(settleAnchor(anchors, 1201, -1)).toBe(1200);
+  });
+
+  it('stays on exact arrivals and clamps overscroll to the concrete endpoint', () => {
+    expect(settleAnchor(anchors, 600, 1)).toBeNull();
+    expect(settleAnchor(anchors, 600.4, 1)).toBeNull();
+    expect(settleAnchor(anchors, 1801, 1)).toBe(1800);
+    expect(settleAnchor(anchors, -1, -1)).toBe(0);
+    expect(settleAnchor([], 20, 1)).toBeNull();
+  });
+
+  it('recovers a directionless interrupted transition at its nearest stop', () => {
+    expect(settleAnchor(anchors, 700, 0)).toBe(600);
+    expect(settleAnchor(anchors, 1150, 0)).toBe(1200);
   });
 });
 

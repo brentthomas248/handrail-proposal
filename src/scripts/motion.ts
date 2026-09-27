@@ -68,6 +68,7 @@ function mountTour(
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
   const perspective = 2400;
   const readingRadius = 0.24;
+  const magnetDelay = 140;
   let stops: Stop[] = [];
   let path: ReturnType<typeof createPath> | undefined;
   let width = 0;
@@ -479,12 +480,16 @@ function mountTour(
       });
       shadow.style.opacity = '0.25';
     }
-    const { index, caption: label } = sceneAt(
+    const { index, caption: sceneLabel } = sceneAt(
       stops,
       time,
       readingRadius,
       lastIndex,
     );
+    const label =
+      Math.abs(time - openingAnchors[1]) <= path.duration / range
+        ? 'The full proposal'
+        : sceneLabel;
     if (index !== lastIndex) {
       lastIndex = index;
       nav
@@ -548,26 +553,42 @@ function mountTour(
     inputScrollY = window.scrollY;
   }
 
-  function scrollToPosition(progress: number, chapterDistance = 0) {
+  function scrollToPosition(
+    progress: number,
+    chapterDistance = 0,
+    magnetic = false,
+  ) {
     if (!path) return;
     cancelAutomaticScroll();
-    userDirection = 0;
     const state = { y: window.scrollY };
-    const destination = offset + progress * range;
+    const destination = Math.round(offset + progress * range);
+    userDirection = Math.sign(destination - state.y);
     scrollTween = gsap.to(state, {
       y: destination,
-      duration: Math.min(
-        chapterDistance > 1
-          ? Math.min(3.2, 0.55 + chapterDistance * 0.55)
-          : 1.55,
-        Math.max(0.5, Math.abs(progress - visual) * path.duration * 0.44),
-      ),
-      ease: 'sine.inOut',
+      duration: magnetic
+        ? Math.min(
+            1.25,
+            Math.max(0.65, Math.abs(progress - visual) * path.duration * 0.42),
+          )
+        : Math.min(
+            chapterDistance > 1
+              ? Math.min(3.2, 0.55 + chapterDistance * 0.55)
+              : 1.55,
+            Math.max(0.5, Math.abs(progress - visual) * path.duration * 0.44),
+          ),
+      ease: magnetic ? 'power2.out' : 'sine.inOut',
       onUpdate: () => writeScroll(state.y),
       onComplete: () => {
         scrollTween = undefined;
+        userDirection = 0;
       },
     });
+  }
+
+  function scheduleSettle() {
+    clearTimeout(settleTimer);
+    if (root.dataset.presentation === 'tour' && !scrollTween && !touchActive)
+      settleTimer = setTimeout(settle, magnetDelay);
   }
 
   function settle() {
@@ -589,18 +610,15 @@ function mountTour(
           });
       }
     }
-    const time = target * path.duration;
+    const duration = path.duration;
     const anchors = [
       ...openingAnchors,
       ...stops.slice(1).map((stop) => stop.at),
-    ];
-    const destination = settleAnchor(
-      anchors,
-      time,
-      userDirection,
-      Math.max(readingRadius, (180 * path.duration) / range),
-    );
-    if (destination !== null) scrollToPosition(destination / path.duration);
+    ].map((time) => Math.round(offset + (time / duration) * range));
+    const destination = settleAnchor(anchors, window.scrollY, userDirection);
+    if (destination !== null)
+      scrollToPosition((destination - offset) / range, 0, true);
+    else userDirection = 0;
   }
 
   function handleScroll() {
@@ -616,12 +634,12 @@ function mountTour(
     const scrollY = window.scrollY;
     const appOwned =
       scrollTween ||
-      (writtenScrollY !== undefined && Math.abs(scrollY - writtenScrollY) <= 1);
+      (writtenScrollY !== undefined &&
+        Math.abs(scrollY - writtenScrollY) <= 0.5);
     if (!appOwned) {
       navigationElement = null;
       const distance = scrollY - inputScrollY;
-      // Ignore subpixel/jitter changes; deliberate native travel owns settling.
-      if (Math.abs(distance) >= 3) {
+      if (Math.abs(distance) >= 0.5) {
         chapterNavNeedsReconcile = true;
         userDirection = Math.sign(distance);
         inputScrollY = scrollY;
@@ -630,8 +648,7 @@ function mountTour(
     writtenScrollY = undefined;
     target = Math.max(0, Math.min(1, (window.scrollY - offset) / range));
     startTick();
-    clearTimeout(settleTimer);
-    if (!scrollTween) settleTimer = setTimeout(settle, 650);
+    scheduleSettle();
   }
 
   function destroyTour() {
@@ -870,6 +887,8 @@ function mountTour(
     velocity = 0;
     root.classList.add('camera-ready');
     render();
+    // Refit releases the previous tween; resume completion after input settles.
+    scheduleSettle();
   }
 
   function readingElement(preferFocus = true): HTMLElement | null {
@@ -1226,10 +1245,24 @@ function mountTour(
   }
   function handleUserInput() {
     cancelAutomaticScroll();
+    writtenScrollY = undefined;
     readingInput = root.dataset.presentation === 'read';
     releaseReadingInputAfterIdle();
+    if (!readingInput) scheduleSettle();
   }
-  window.addEventListener('wheel', handleUserInput, { passive: true });
+  window.addEventListener(
+    'wheel',
+    (event) => {
+      // Horizontal chapter browsing and browser pinch zoom do not own the tour.
+      if (!event.ctrlKey && Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+        handleUserInput();
+        // WebKit can consume the first wheel delta while interrupting a
+        // programmatic scroll. Its direction still owns the released pull.
+        userDirection = Math.sign(event.deltaY);
+      }
+    },
+    { passive: true },
+  );
   window.addEventListener(
     'touchstart',
     () => {
@@ -1242,7 +1275,7 @@ function mountTour(
     touchActive = false;
     clearTimeout(settleTimer);
     if (root.dataset.presentation === 'read') releaseReadingInputAfterIdle();
-    else settleTimer = setTimeout(settle, 650);
+    else scheduleSettle();
   };
   window.addEventListener('touchend', releaseTouch, { passive: true });
   window.addEventListener('touchcancel', releaseTouch, { passive: true });

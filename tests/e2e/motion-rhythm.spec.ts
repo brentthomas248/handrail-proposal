@@ -10,7 +10,7 @@ async function destination(page: Page, name: string): Promise<number> {
 
 async function sampleCameraPath(page: Page, start: number, end: number) {
   const samples: { scroll: number; yaw: number; scale: number }[] = [];
-  // Holding input prevents the optional idle completion from changing each sample.
+  // Holding input prevents magnetic settling from changing each sample.
   await page.evaluate(() => window.dispatchEvent(new Event('touchstart')));
   try {
     const count = Math.ceil(Math.abs(end - start) / 50);
@@ -225,7 +225,7 @@ for (const viewport of [
 
 for (const width of [390, 1440]) {
   for (const direction of [-1, 1]) {
-    test(`a 150px nudge holds and a 300px gesture completes the chapter at ${width}px going ${direction < 0 ? 'backward' : 'forward'}`, async ({
+    test(`every nudge completes the adjacent chapter at ${width}px going ${direction < 0 ? 'backward' : 'forward'}`, async ({
       page,
     }) => {
       test.setTimeout(45_000);
@@ -239,39 +239,18 @@ for (const width of [390, 1440]) {
             ? 'Hire first'
             : 'The two paths';
       const next = await destination(page, nextName);
-      const cash = await destination(page, 'Cash flow');
-      await page.mouse.wheel(0, direction * 150);
-      await expect
-        .poll(() => page.evaluate(() => scrollY))
-        .toBeCloseTo(cash + direction * 150, 0);
-      // Observe the whole inactivity window, including delayed auto-travel, rather than only its final frame.
-      const deviation = await page.evaluate(
-        (expected) =>
-          new Promise<number>((resolve) => {
-            const started = performance.now();
-            let maximum = 0;
-            const observe = (now: number) => {
-              maximum = Math.max(maximum, Math.abs(scrollY - expected));
-              if (now - started >= 2500) resolve(maximum);
-              else requestAnimationFrame(observe);
-            };
-            requestAnimationFrame(observe);
-          }),
-        cash + direction * 150,
-      );
-      expect
-        .soft(
-          deviation,
-          'A small nudge must retain the reader’s native scroll position',
-        )
-        .toBeLessThanOrEqual(2);
-      await destination(page, 'Cash flow');
-      await page.mouse.wheel(0, direction * 300);
-      await expect
-        .poll(() => page.evaluate(() => scrollY), { timeout: 6000 })
-        .toBeCloseTo(next, 0);
-      await waitForTourSettled(page);
-      expect(await page.evaluate(() => scrollY)).toBeCloseTo(next, 0);
+      for (const distance of [1, 2, 150, 300]) {
+        await test.step(`${distance}px reaches ${nextName}`, async () => {
+          await destination(page, 'Cash flow');
+          await page.mouse.move(width / 2, 422);
+          await page.mouse.wheel(0, direction * distance);
+          await expect
+            .poll(() => page.evaluate(() => scrollY), { timeout: 6000 })
+            .toBeCloseTo(next, 0);
+          await waitForTourSettled(page);
+          expect(await page.evaluate(() => scrollY)).toBeCloseTo(next, 0);
+        });
+      }
     });
   }
 }
@@ -383,12 +362,13 @@ for (const viewport of [
   { width: 390, height: 844 },
   { width: 320, height: 740 },
 ]) {
-  test(`a canceled chapter shortcut restores the current chapter in the phone strip at ${viewport.width}px`, async ({
+  test(`a canceled chapter shortcut settles backward and reveals its destination in the phone strip at ${viewport.width}px`, async ({
     page,
   }, testInfo) => {
     await page.setViewportSize(viewport);
     await page.goto('./');
     await expect(page.locator('html')).toHaveClass(/camera-ready/);
+    const beginning = await destination(page, 'The beginning');
     const cash = await destination(page, 'Cash flow');
     await page
       .getByRole('button', { name: 'Grow together', exact: true })
@@ -423,14 +403,18 @@ for (const viewport of [
       };
     });
     await testInfo.attach('canceled-shortcut-navigation', {
-      body: JSON.stringify({ viewport, cash, interrupted, state }, null, 2),
+      body: JSON.stringify(
+        { viewport, beginning, cash, interrupted, state },
+        null,
+        2,
+      ),
       contentType: 'application/json',
     });
     expect(
       state.scroll,
-      'The canceled camera jump must not restart',
-    ).toBeCloseTo(interrupted, 0);
-    expect(state.label).toBe('Cash flow');
+      'The canceled shortcut must yield to the preceding concrete stop',
+    ).toBeCloseTo(beginning, 0);
+    expect(state.label).toBe('The beginning');
     expect(
       state.current.left,
       'After vertical cancellation settles, the current chapter must be visible',

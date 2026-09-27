@@ -2,6 +2,10 @@
 
 ## Current state
 
+The user now requests mandatory magnetic completion after every small scroll. [The magnetic-stop work](docs/magnetic-scroll-remediation.md) replaces the former nudge dead zone while retaining the approved compositions. The independent rendered review accepts the frozen candidate. Typecheck, 31 unit checks, formatting, build, 27 final focused Chromium checks and 11 WebKit checks pass. The full Chromium run passed 198/199; its single fixture issue was corrected and both affected cases pass. Publication and hosted verification are next; the opening-only release below remains live until the next deployment receipt.
+
+## Published opening refinement
+
 The user approved the design except for choppiness in the first opening. A bounded [opening refinement](docs/opening-smoothness-remediation.md) replaces independently fitted zoom beats with one continuous pullback. Four new cold-opening regressions failed against the published version; all eight opening/panel-framing checks now pass. Typecheck, all 29 unit tests and formatting pass. All 36 targeted Chromium and eight WebKit opening checks pass. Cold profiling and the independent rendered review across five viewports pass within their documented scope. The refinement is published: source `9cb065782302c80027bb8a2bb0d54de3b76f9426`, static `d4eb34c32a371574426b914ace5681aad82ad2d4`. [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36351226460) succeeded; all 28 hosted assets match and all 11 scoped hosted checks pass without retries. Physical iPhone playback remains unverified.
 
 ## Previous published design pass

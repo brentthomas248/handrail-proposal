@@ -153,24 +153,26 @@ export function damp(
   };
 }
 
-/** Settling may complete a gesture but must never reverse its direction. */
+/** Complete released travel at a concrete stop, with only pixel-rounding slack. */
 export function settleAnchor(
   anchors: readonly number[],
-  time: number,
+  position: number,
   direction: number,
-  readingRadius: number,
 ): number | null {
-  if (
-    direction === 0 ||
-    anchors.some((anchor) => Math.abs(anchor - time) <= readingRadius)
-  )
-    return null;
-  const candidates = anchors.filter(
-    (anchor) => (anchor - time) * direction > 0,
-  );
+  if (!anchors.length) return null;
+  if (anchors.some((anchor) => Math.abs(anchor - position) <= 0.5)) return null;
+  const first = anchors[0];
+  const last = anchors[anchors.length - 1];
+  if (position < first) return first;
+  if (position > last) return last;
+  const candidates =
+    direction === 0
+      ? anchors
+      : anchors.filter((anchor) => (anchor - position) * direction > 0);
   return candidates.reduce<number | null>(
     (nearest, anchor) =>
-      nearest === null || Math.abs(anchor - time) < Math.abs(nearest - time)
+      nearest === null ||
+      Math.abs(anchor - position) < Math.abs(nearest - position)
         ? anchor
         : nearest,
     null,

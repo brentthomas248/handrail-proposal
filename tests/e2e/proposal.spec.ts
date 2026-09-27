@@ -706,6 +706,7 @@ for (const viewport of [
       firstReadingProgress * 0.28,
     ];
     const samples: {
+      requestedProgress: number;
       progress: number;
       hinges: Awaited<ReturnType<typeof hingeAngles>>;
       camera: Awaited<ReturnType<typeof sheetTransform>>;
@@ -719,10 +720,14 @@ for (const viewport of [
         Math.max(...frames.map((frame) => frame.scroll)),
         'Native scrolling must reach the requested area before any idle settling',
       ).toBeGreaterThanOrEqual(travel * progress - 20);
+      // A released gesture completes at a concrete stop. Continuous opening
+      // geometry is covered separately; judge the resting silhouette here.
+      await waitForTourSettled(page);
       if (openingSamples.includes(progress))
         await expectSubstantialUnfoldingPaper(page);
       samples.push({
-        progress,
+        requestedProgress: progress,
+        progress: (await page.evaluate(() => scrollY)) / travel,
         hinges: await hingeAngles(page),
         camera: await sheetTransform(page),
       });
@@ -867,7 +872,7 @@ test('an immediate fast flick is smoothed and reversing input takes control', as
   );
 });
 
-test('fresh input immediately cancels an automatic settling move', async ({
+test('fresh input cancels automatic settling and lands in the new direction', async ({
   page,
 }) => {
   await page.goto('./');
@@ -889,17 +894,21 @@ test('fresh input immediately cancels an automatic settling move', async ({
   await expect
     .poll(() => page.evaluate(() => scrollY), { timeout: 3000 })
     .toBeLessThan(released - 15);
+  const beforeReverse = await page.evaluate(() => scrollY);
   await page.mouse.wheel(0, 130);
-  await page.waitForTimeout(60);
-  const resumed = await page.evaluate(() => scrollY);
-  await page.waitForTimeout(250);
-  expect(
-    Math.abs((await page.evaluate(() => scrollY)) - resumed),
-  ).toBeLessThanOrEqual(3);
+  await expect
+    .poll(() => page.evaluate(() => scrollY), { intervals: [20] })
+    .toBeGreaterThan(beforeReverse + 80);
+  await expect
+    .poll(() => page.evaluate(() => scrollY), { timeout: 6000 })
+    .toBeCloseTo(pathsY, 0);
+  await waitForTourSettled(page);
   await page.mouse.wheel(0, -130);
   await expect
-    .poll(() => page.evaluate(() => scrollY))
-    .toBeLessThan(resumed - 80);
+    .poll(() => page.evaluate(() => scrollY), { timeout: 6000 })
+    .toBeCloseTo(cashY, 0);
+  await waitForTourSettled(page);
+  expect(await page.evaluate(() => scrollY)).toBeCloseTo(cashY, 0);
 });
 
 test('phone browser-height changes retain the chapter and scroll while keeping its complete text clear of controls', async ({
@@ -929,6 +938,9 @@ test('phone browser-height changes retain the chapter and scroll while keeping i
     await expect(chapter).toHaveAttribute('aria-current', 'step');
   }
   await expect(target).toBeInViewport({ ratio: 0.98 });
+  // Select the document as the keyboard scroll target after interacting with
+  // the horizontally scrollable chapter strip; pointer movement is insufficient.
+  await page.locator('.flyer-stage').click({ position: { x: 195, y: 170 } });
   await page.keyboard.press('End');
   const lastChapter = page.locator('.chapter-nav button[data-go-to]').last();
   await expect(lastChapter).toHaveAttribute('aria-current', 'step');
@@ -941,6 +953,7 @@ test('phone browser-height changes retain the chapter and scroll while keeping i
 
 test('a phone chapter remains its parent chapter after changing to a wide viewport', async ({
   page,
+  browserName,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('./');
@@ -951,7 +964,12 @@ test('a phone chapter remains its parent chapter after changing to a wide viewpo
   await expect(
     page.getByRole('button', { name: 'The two paths', exact: true }),
   ).toHaveAttribute('aria-current', 'step');
-  await expect(page.locator('#paths')).toBeInViewport({ ratio: 0.98 });
+  const target = page.locator('#paths');
+  // WebKit's IntersectionObserver clips nested 3D faces at an unrelated edge;
+  // complete text lines and their containing reading group must fit regardless.
+  if (browserName !== 'webkit')
+    await expect(target).toBeInViewport({ ratio: 0.98 });
+  await expectReadingFrame(target, 'The two paths after viewport expansion');
   const reframed = await sheetTransform(page);
   await page.mouse.wheel(0, 120);
   await expect.poll(() => sheetTransform(page)).not.toEqual(reframed);
