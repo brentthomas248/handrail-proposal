@@ -4,7 +4,7 @@
   "url": "https://brentthomas248.github.io/handrail-proposal/",
   "checkedAt": "2026-09-27T20:57:52.457997+00:00",
   "passed": true,
-  "isCurrentRevision": true,
+  "isCurrentRevision": false,
   "sourceCommit": "5b06411fb1788190088ce98a9f684da1029ce0f3",
   "staticCommit": "3921256a56bf205f42f5cc32e2effec75d326e55",
   "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36349637874",
@@ -209,5 +209,6 @@
     "staticCommit": "4b11b12fc0063155b8af87265f3065a15b91a1a6",
     "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36325370312"
   },
-  "generatedAt": "2026-09-27T20:57:52.457997+00:00"
+  "generatedAt": "2026-09-27T20:57:52.457997+00:00",
+  "pendingRevisionReport": "docs/opening-smoothness-remediation.md"
 }

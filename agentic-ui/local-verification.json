@@ -1,14 +1,16 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T20:57:52.457997+00:00",
-  "scope": "Six-specialty independent final design pass with complete semantic reading and material Z-fold",
+  "generatedAt": "2026-09-27T21:16:32.475956+00:00",
+  "scope": "Bounded first-opening camera pacing refinement",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": true,
+  "deployed": false,
   "evidenceNotes": [
-    "185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
-    "Physical iPhone stability, genuine hidden-tab recovery, manual VoiceOver, actual GPU memory and field INP remain unverified. Full global lifecycle certification is not claimed.",
-    "Original failures, rejected candidates and deductions are preserved in the independent reports and remediation record. All 28 live files and both downloaded PDFs verified; all 185 hosted checks pass."
+    "Four new cold-opening regressions failed against the preceding release; all eight opening checks pass after correction.",
+    "36 focused Chromium checks and eight WebKit opening checks pass. 45-file typecheck, 29 unit checks, formatting and build pass.",
+    "26 of 28 output assets are byte-identical, including notes, resume, PDFs, CSS and fonts. Only main HTML script reference and scene JS change.",
+    "Cold headed Chromium, sixfold CPU-throttled Chromium and WebKit measured separately from prior warm-traversal and Lighthouse evidence.",
+    "Physical iPhone playback remains unverified. Full global lifecycle certification is not claimed."
   ],
   "limitations": [
     "agentic-ui/blockers.json",
@@ -17,20 +19,19 @@
   ],
   "deploymentEvidencePath": "agentic-ui/deployment-verification.json",
   "independentReviews": {
-    "directory": "docs/final-design-review/",
-    "verdict": "accepted-and-published-candidate-v8",
-    "scores": {
-      "copy": 98,
-      "editorial": 99,
-      "art": 98,
-      "motion": 100,
-      "interaction": 100,
-      "rendering": 99
-    }
+    "report": "docs/opening-smoothness-review.md",
+    "verdict": "accepted-within-inspected-local-scope"
   },
   "candidateIdentity": {
+    "brent-showalter-handrail-resume.pdf": "dbf5cae25589697e1c9904e82ffa27aa384a9a98212a1a57272dcfca845ef501",
+    "handrail-logo.png": "1e024d51ef5f28a6bcedfa90ff58c5f0481a81db81cbcd5efede50594766bb3a",
+    "handrail-proposed-agreement.pdf": "8ace1fd73de5d542e4655bb25c45a96eb15cb77a56c2d2746a878c809dffceb2",
+    "index.html": "a00a911bd51082edfbf2a245ae998a57b552cbe74e5cddbc671f8b68788e7983",
+    "paper-grain.svg": "f1ad2a836254dd1e1bda3de717abb7c3de39007361741e634977267450cc774b",
+    "social.png": "e329ac6843b8636966fea598494c587a4cff1b15650eda476035b01abc9dad74",
+    "social.svg": "82d9b39af42667ba6af5d8134cbacb1cae4b2df257dfa8de6fc10a5e987ab1f9",
     "_astro/client.CCxN9xF8.js": "4907db89a5bc4160920b577b51facb283e0e376ee1b4d5acab82c2e4d5654811",
-    "_astro/index.astro_astro_type_script_index_0_lang.CQDEWMIY.js": "2942e9da3b974b5a3394a61e35a578b2318b7ecd34afeea6c19a232f33f4a3ee",
+    "_astro/index.astro_astro_type_script_index_0_lang.cUFhnljo.js": "95ea7261f35acfd2ba14ea2354a825c027ed439c5333c8ac1896190afbb18b1f",
     "_astro/inter-cyrillic-ext-wght-normal.BOeWTOD4.woff2": "ca157063339ac4ad418f214f3abfed119b0798ab4d377386ce5c9e5a7a435ebd",
     "_astro/inter-cyrillic-wght-normal.DqGufNeO.woff2": "71d5ee93cc1e9f1d520a3a8b66456de18c7879d8df09d57fcd2eaff75fef0075",
     "_astro/inter-greek-ext-wght-normal.DlzME5K_.woff2": "6e9e020a25f9b56d418f2c085b1d3c09725a4da23fe693a5b463064606732190",
@@ -47,16 +48,9 @@
     "_astro/playfair-display-vietnamese-400-italic.CD15TOr5.woff2": "9a08f3c0730f6311b18adadf42797a91900c4bbc32602785ec1e329db5354685",
     "_astro/playfair-display-vietnamese-400-italic.Cpv4sfwY.woff": "44d830fe9bae45b8a4dc798f7df77568a0d6c9e0c2b0838289a8c02d54c4278c",
     "agreement/index.html": "0104372613437b960567c3b8df24dc8dc8d615d2e52de10f36ad96af827769dd",
-    "brent-showalter-handrail-resume.pdf": "dbf5cae25589697e1c9904e82ffa27aa384a9a98212a1a57272dcfca845ef501",
-    "handrail-logo.png": "1e024d51ef5f28a6bcedfa90ff58c5f0481a81db81cbcd5efede50594766bb3a",
-    "handrail-proposed-agreement.pdf": "8ace1fd73de5d542e4655bb25c45a96eb15cb77a56c2d2746a878c809dffceb2",
-    "index.html": "4cfd4b0411d2abdf97221e88a912cef897f3c0cddba54ac7f9bd5f24813ddfe1",
     "licenses/Inter-OFL.txt": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345",
     "licenses/Playfair-Display-OFL.txt": "c052aafd2a71e90bcee6e69f475029d430a10d548c08ffcae350171f0e9668b1",
-    "paper-grain.svg": "f1ad2a836254dd1e1bda3de717abb7c3de39007361741e634977267450cc774b",
-    "resume/index.html": "38796c82b8a52ddbf7441b5d82792812b4cad8dbeb78873d387efaf9cb6833de",
-    "social.png": "e329ac6843b8636966fea598494c587a4cff1b15650eda476035b01abc9dad74",
-    "social.svg": "82d9b39af42667ba6af5d8134cbacb1cae4b2df257dfa8de6fc10a5e987ab1f9"
+    "resume/index.html": "38796c82b8a52ddbf7441b5d82792812b4cad8dbeb78873d387efaf9cb6833de"
   },
   "historicalChecks": [
     {
@@ -108,9 +102,7 @@
       "command": "pnpm format:check && git diff --check",
       "result": "Passed",
       "exitCode": 0
-    }
-  ],
-  "checks": [
+    },
     {
       "command": "pnpm format:check",
       "result": "pass",
@@ -179,5 +171,74 @@
       "result": "185 passed in 4.1m; no retries",
       "exitCode": 0
     }
-  ]
+  ],
+  "checks": [
+    {
+      "command": "pnpm check",
+      "result": "45 files; zero errors, warnings or hints",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm test",
+      "result": "29 passed",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm format:check && git diff --check",
+      "result": "passed",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm build",
+      "result": "three routes built; 28-file identity frozen",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm exec playwright test tests/e2e/fold-opening.spec.ts --workers=1",
+      "result": "8 passed; includes 4 cold first-traversal regressions",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm exec playwright test tests/e2e/motion-rhythm.spec.ts tests/e2e/proposal.spec.ts --grep 'hinge|crease|scale|nudge|cancel|high-density|first|height|reverse|reversal|unfold|continuous'",
+      "result": "26 passed",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm exec playwright test tests/e2e/proposal.spec.ts --grep 'immediate fast flick|mobile touch scroll'",
+      "result": "2 passed",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm exec playwright test --config=qa-artifacts/opening-smoothness/webkit.config.mjs",
+      "result": "8 passed",
+      "exitCode": 0
+    },
+    {
+      "command": "node qa-artifacts/opening-smoothness/probe.mjs after",
+      "result": "Cold/reverse/warm headed measurements recorded; no first-traversal long tasks; evidence in performance-evidence.json",
+      "exitCode": 0
+    },
+    {
+      "command": "Independent current rendered opening review across five viewports",
+      "result": "Accepted; 1,182 opening samples with zero clipping; forward/reverse/interrupt and cover arrival inspected",
+      "exitCode": 0
+    }
+  ],
+  "previousRelease": {
+    "sourceCommit": "5b06411fb1788190088ce98a9f684da1029ce0f3",
+    "staticCommit": "3921256a56bf205f42f5cc32e2effec75d326e55",
+    "independentReviews": {
+      "directory": "docs/final-design-review/",
+      "verdict": "accepted-and-published-candidate-v8",
+      "scores": {
+        "copy": 98,
+        "editorial": 99,
+        "art": 98,
+        "motion": 100,
+        "interaction": 100,
+        "rendering": 99
+      }
+    },
+    "note": "Six-category review and full 185-check release are historical; user approved design except first-opening pacing."
+  }
 }

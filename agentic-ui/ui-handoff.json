@@ -104,6 +104,11 @@
       "motion": 100,
       "interaction": 100,
       "rendering": 99
+    },
+    "historicalScoresSource": "5b06411",
+    "openingFollowUp": {
+      "report": "docs/opening-smoothness-review.md",
+      "status": "accepted-within-inspected-local-scope"
     }
   },
   "userAssumptions": [
@@ -128,25 +133,26 @@
     ]
   },
   "openDesignQuestions": [
-    "The finished trifold revision still needs user visual review; reference approval persists but does not substitute for that review."
+    "Physical iPhone playback of the opening refinement awaits user verification."
   ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
-    "185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
+    "Previous release 5b06411: 185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
     "Physical iPhone stability, genuine hidden-tab recovery, manual VoiceOver, actual GPU memory and field INP remain unverified. Full global lifecycle certification is not claimed.",
-    "All six independent scores meet the requested category threshold; publication and all hosted verification are complete."
+    "Previous release 5b06411: All six independent scores meet the requested category threshold; publication and all hosted verification are complete.",
+    "Opening pacing follow-up: see docs/opening-smoothness-remediation.md and current local-verification.json; prior six-category scores are historical."
   ],
   "userReview": {
     "date": "2026-09-27",
-    "status": "current-revision-user-review-pending",
+    "status": "approved-except-first-opening-pacing",
     "researchPath": "docs/design-director-review.md",
     "implementationPaused": false,
-    "reason": "User requested six-specialty adversarial rounds, direct remediation and fresh independent validation."
+    "reason": "User reports only first-opening choppiness; rest looks good."
   },
   "publication": {
-    "status": "published-and-verified",
+    "status": "opening-refinement-awaiting-publication",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidencePath": "agentic-ui/deployment-verification.json",
-    "note": "Source 5b06411; static 3921256; exact assets/PDFs and all 185 hosted checks verified."
+    "note": "Opening refinement passed independent rendered review and scoped verification; publication is next."
   }
 }

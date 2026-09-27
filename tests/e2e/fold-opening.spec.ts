@@ -144,6 +144,71 @@ for (const viewport of [
   { width: 390, height: 664 },
   { width: 320, height: 740 },
 ]) {
+  test(`the cold opening has a consistently paced pullback at ${viewport.width}×${viewport.height}`, async ({
+    page,
+  }, testInfo) => {
+    await page.setViewportSize(viewport);
+    await page.goto('./');
+    await expect(page.locator('html')).toHaveClass(/camera-ready/);
+    // No navigation or preliminary traversal: this must inspect the first reveal.
+    const recording = await page.evaluateHandle(() => {
+      const sheet = document.querySelector<HTMLElement>('.proposal-sheet')!;
+      const wing = document.querySelector<HTMLElement>('[data-panel="left"]')!;
+      const frames: { angle: number; scale: number }[] = [];
+      let running = true;
+      function sample() {
+        if (!running) return;
+        const angle = Number(
+          wing.style.transform.match(/rotateY\(([^d]+)/)?.[1],
+        );
+        const scale = Number(
+          sheet.style.transform.match(/scale3d\(([^,]+)/)?.[1],
+        );
+        if (angle > 38.01) frames.push({ angle, scale });
+        requestAnimationFrame(sample);
+      }
+      sample();
+      return {
+        stop() {
+          running = false;
+          return frames;
+        },
+      };
+    });
+    await page.mouse.move(viewport.width / 2, viewport.height / 2);
+    for (let step = 0; step < 55; step += 1) {
+      await page.mouse.wheel(0, 20);
+      await page.waitForTimeout(20);
+    }
+    const frames = await recording.evaluate((recorder) => recorder.stop());
+    await recording.dispose();
+    await testInfo.attach('cold-opening-scale', {
+      body: JSON.stringify(frames),
+      contentType: 'application/json',
+    });
+    expect(frames.length).toBeGreaterThan(20);
+    expect(frames[0].angle).toBeGreaterThan(140);
+    expect(frames.at(-1)!.angle).toBeLessThan(40);
+    const totalZoom = Math.log(frames[0].scale / frames.at(-1)!.scale);
+    expect(totalZoom).toBeGreaterThanOrEqual(-0.001);
+    const meanRate = totalZoom / (frames[0].angle - frames.at(-1)!.angle);
+    for (let i = 1; i < frames.length; i += 1) {
+      const before = frames[i - 1];
+      const after = frames[i];
+      const hingeTravel = before.angle - after.angle;
+      if (hingeTravel < 0.1) continue;
+      const zoom = Math.log(before.scale / after.scale);
+      expect(
+        zoom,
+        'Unfolding must not reverse the camera pullback',
+      ).toBeGreaterThanOrEqual(-0.00005);
+      expect(
+        zoom / hingeTravel,
+        'No short part of the unfold should carry a sudden zoom surge',
+      ).toBeLessThanOrEqual(meanRate * 2.2 + 0.00005);
+    }
+  });
+
   test(`the full three-panel opening unfolds before approaching the cover at ${viewport.width}×${viewport.height}`, async ({
     page,
   }, testInfo) => {

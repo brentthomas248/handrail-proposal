@@ -2,7 +2,11 @@
 
 ## Current state
 
-Candidate-v8 passed all six fresh independent categories: copy 98, editorial 99, art 98, motion 100, interaction 100 and rendering 99. No unresolved P0–P2 finding remains. Main HTML SHA-256: `4cfd4b0411d2abdf97221e88a912cef897f3c0cddba54ac7f9bd5f24813ddfe1`. The complete 28-file manifest is recorded in `agentic-ui/local-verification.json`. This revision is published. All 28 hosted files match the reviewed candidate; downloaded PDFs pass complete content checks. All 185 hosted browser checks pass without retries.
+The user approved the design except for choppiness in the first opening. A bounded [opening refinement](docs/opening-smoothness-remediation.md) replaces independently fitted zoom beats with one continuous pullback. Four new cold-opening regressions failed against the published version; all eight opening/panel-framing checks now pass. Typecheck, all 29 unit tests and formatting pass. All 36 targeted Chromium and eight WebKit opening checks pass. Cold profiling and the independent rendered review across five viewports pass within their documented scope. Publication is next. The release below remains the currently published revision until the follow-up receipt is completed.
+
+## Previous published design pass
+
+Candidate-v8 passed all six fresh independent categories: copy 98, editorial 99, art 98, motion 100, interaction 100 and rendering 99. No unresolved P0–P2 finding remains. Main HTML SHA-256: `4cfd4b0411d2abdf97221e88a912cef897f3c0cddba54ac7f9bd5f24813ddfe1`. The historical 28-file manifest remains in the release receipt at that commit. That revision was published. All 28 hosted files match the reviewed candidate; downloaded PDFs pass complete content checks. All 185 hosted browser checks pass without retries.
 
 Six independent specialties cover commercial copy/grouping, editorial typography/spacing, art/material, motion, inclusive interaction and rendering engineering. Two scrutinize copy and spacing independently. Fresh reviewers receive the [neutral brief](docs/final-design-review/brief.md), original references and unchanged rendered app without prior grades or a requested target. All grades and failures remain in [the scorecard](docs/final-design-review/scorecard.md). The release owner separately applies the user's 95/100-per-category gate; no unresolved material defect is allowed regardless of score.
 

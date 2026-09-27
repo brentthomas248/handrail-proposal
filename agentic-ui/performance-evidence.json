@@ -57,7 +57,70 @@
     "The unchanged 250 KB route-script budget passes.",
     "These page-load laboratory results do not establish motion continuity, field INP or physical-device performance; continuous-input evidence is recorded separately."
   ],
-  "isCurrentRevision": true,
-  "currentRevisionNote": "Candidate-v8; isolated Lighthouse after reviewer browsers closed. Published assets match this candidate exactly.",
-  "motionEvidence": "docs/final-design-review/r8-rendering.md"
+  "isCurrentRevision": false,
+  "currentRevisionNote": "Lighthouse and R8 rendering evidence applies to source 5b06411. Current opening-only follow-up measurements are recorded below; Lighthouse was not rerun.",
+  "motionEvidence": "docs/final-design-review/r8-rendering.md",
+  "openingFollowUp": {
+    "scope": "Cold first-opening pacing, separately measured from historical Lighthouse scores",
+    "report": "docs/opening-smoothness-remediation.md",
+    "measurement": "qa-artifacts/opening-smoothness/comparison.json",
+    "before": [
+      {
+        "engine": "chromium",
+        "cpuRate": 1,
+        "firstTraversalFrames": 255,
+        "firstTraversalP95Ms": 9.900000000000091,
+        "firstTraversalMaxMs": 16.69999999999999,
+        "peakToMeanZoom": 3.237594413591618
+      },
+      {
+        "engine": "chromium",
+        "cpuRate": 6,
+        "firstTraversalFrames": 234,
+        "firstTraversalP95Ms": 10.299999999999955,
+        "firstTraversalMaxMs": 25.299999999999955,
+        "peakToMeanZoom": 3.2262680448518894
+      },
+      {
+        "engine": "webkit",
+        "cpuRate": 1,
+        "firstTraversalFrames": 114,
+        "firstTraversalP95Ms": 18,
+        "firstTraversalMaxMs": 39,
+        "peakToMeanZoom": 3.2298225753372276
+      }
+    ],
+    "after": [
+      {
+        "engine": "chromium",
+        "cpuRate": 1,
+        "firstTraversalFrames": 255,
+        "firstTraversalP95Ms": 9.600000000000136,
+        "firstTraversalMaxMs": 17.099999999999994,
+        "peakToMeanZoom": 1.8933666591630376
+      },
+      {
+        "engine": "chromium",
+        "cpuRate": 6,
+        "firstTraversalFrames": 238,
+        "firstTraversalP95Ms": 10.299999999999727,
+        "firstTraversalMaxMs": 25,
+        "peakToMeanZoom": 1.8943595006951974
+      },
+      {
+        "engine": "webkit",
+        "cpuRate": 1,
+        "firstTraversalFrames": 114,
+        "firstTraversalP95Ms": 18,
+        "firstTraversalMaxMs": 18,
+        "peakToMeanZoom": 1.8928308706066135
+      }
+    ],
+    "notes": [
+      "Desktop engines on macOS; no physical-iPhone claim. No first-traversal long tasks in these samples.",
+      "Sixfold CPU-throttled initialization before camera-ready still has long tasks.",
+      "Primary correction is deliberate camera-scale pacing, not a demonstrated general renderer throughput increase."
+    ],
+    "isCurrentRevision": true
+  }
 }

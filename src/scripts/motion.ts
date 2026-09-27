@@ -752,6 +752,20 @@ function mountTour(
         ),
       }),
     );
+    // Fitting each hinge pose independently makes the dolly surge when a
+    // different edge becomes widest. Use one pullback that slows toward the
+    // full reveal; the fit measurements establish its destination only.
+    const openingScale = Math.log(frames[0].pose.scale);
+    const revealScale = Math.log(
+      Math.min(...frames.map((frame) => frame.pose.scale)),
+    );
+    for (const frame of frames) {
+      const progress = frame.at / 1.7;
+      const retreat = 1 - (1 - progress) ** 2;
+      frame.pose.scale = Math.exp(
+        openingScale + (revealScale - openingScale) * retreat,
+      );
+    }
     openingAnchors = [0, 1.7];
     let previousPose = frames[frames.length - 1].pose;
     let previousPanel: Panel | null = null;
