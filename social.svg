@@ -7,8 +7,8 @@
     <path d="M70 132H1128" stroke="#1a1816"/>
     <text x="66" y="263" font-size="99" letter-spacing="-7" font-weight="700">Let’s grow</text>
     <text x="66" y="368" font-size="99" letter-spacing="-7" font-weight="700">Handrail.</text>
-    <text x="72" y="441" font-size="32" letter-spacing="-1">No base salary.</text>
-    <text x="72" y="481" font-size="32" letter-spacing="-1">Commissions follow collections.</text>
+    <text id="cover-statement-first" x="72" y="441" font-size="32" letter-spacing="-1">No base salary.</text>
+    <text id="cover-statement-second" x="72" y="481" font-size="32" letter-spacing="-1">Commission follows collected revenue.</text>
     <text x="72" y="561" font-size="18">The beginning of a partnership</text>
   </g>
   <rect x="676" y="161" width="452" height="410" fill="#c8502a"/>
