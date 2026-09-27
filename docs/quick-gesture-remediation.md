@@ -1,6 +1,6 @@
 # Immediate gesture completion
 
-Status: locally verified; publication pending.
+Status: published and verified.
 
 Finding QUICK-01: the user still experiences excessive effort and delayed magnetism. The previous release waits for native input and momentum to stop, cancels the pull on every wheel delta and blocks it while a finger is held. Tests established eventual completion but did not prove prompt commitment during ongoing input.
 
@@ -23,3 +23,5 @@ The other two failures exposed a chapter-strip reconciliation defect: interrupti
 The independent comparison and complete journey in [the rendered review](quick-gesture-review.md) accept the prompt gesture model: all 40 forward/reverse arrivals reached their intended stops, and all 479 primary text-line rectangles stayed in the measured safe area. Same-direction momentum cannot cause another transition. The camera path, fold geometry, approved text and paper materials are unchanged.
 
 Typecheck covers 47 files with zero issues; all 34 unit tests, formatting, diff checks and the production build pass. The final 28-file identity is recorded in `agentic-ui/local-verification.json`. The complete 206-case run and its original failures remain separate from the passing final scoped runs. Physical iPhone playback remains unverified.
+
+Published source `98a6867debcf80b4c13d9268324eff09983ab23f` as static `5b4e2ded8a9dec1445c864344abc3542193059cf`. [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36356349551) succeeded. All 28 hosted files match the reviewed candidate byte for byte; all 25 focused hosted Chromium checks pass without retries.

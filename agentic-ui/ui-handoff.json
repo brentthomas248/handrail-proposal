@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
   "surface": "Immediate short-gesture navigation through the approved Handrail trifold",
-  "generatedAt": "2026-09-27T22:42:55.278986+00:00",
+  "generatedAt": "2026-09-27T22:46:46.224736+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -149,9 +149,9 @@
     "reason": "User reports continued repeated scrolling and late magnetic engagement."
   },
   "publication": {
-    "status": "locally-verified-awaiting-publication",
+    "status": "published-and-verified",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidencePath": "agentic-ui/deployment-verification.json",
-    "note": "Previous magnetic release remains live until prompt-gesture deployment."
+    "note": "Source 98a6867; static 5b4e2de; all 28 hosted assets and 25 focused browser checks verified."
   }
 }

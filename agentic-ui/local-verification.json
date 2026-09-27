@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T22:42:55.278986+00:00",
+  "generatedAt": "2026-09-27T22:46:46.224736+00:00",
   "scope": "Prompt gesture commitment with one adjacent destination per gesture",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": false,
+  "deployed": true,
   "evidenceNotes": [
     "Three new promptness/held-touch regressions failed against the previous release; sustained input exposed the user-reported delay.",
     "The new control commits immediately and absorbs same-direction momentum. Controlled camera flights use one easing owner.",
     "Browser touch recognition delivered no move event for 6px/12px in Chromium; 18px and 24px delivered events and began motion about 50ms later. No native threshold was represented as application latency.",
     "Original full-suite failures remain recorded. All eight geometry checks and final 25 focused Chromium checks pass separately with unchanged thresholds; no claim of a single clean 206-case run.",
     "26 of 28 output assets including both PDFs remain unchanged. Physical iPhone and field performance remain unverified.",
-    "Publication and hosted verification pending."
+    "All 28 hosted assets match the reviewed final candidate; all 25 focused hosted Chromium checks pass. Original full-suite failures and passing bounded rechecks remain separately recorded."
   ],
   "limitations": [
     "agentic-ui/blockers.json",
@@ -318,6 +318,11 @@
     {
       "command": "Independent promptness and rendered review",
       "result": "See docs/quick-gesture-review.md; 40 exact arrivals across desktop and two phone sizes",
+      "exitCode": 0
+    },
+    {
+      "command": "Hosted asset and focused browser verification",
+      "result": "28 exact files; 25 Chromium tests passed",
       "exitCode": 0
     }
   ],
