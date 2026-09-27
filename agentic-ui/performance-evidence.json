@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T05:12:33.839195+00:00",
+  "generatedAt": "2026-09-27T20:47:31.289596+00:00",
   "scope": "Local production-preview Lighthouse laboratory measurements; not field data.",
   "command": "pnpm performance",
   "lighthouseVersion": "13.5.0",
@@ -9,40 +9,42 @@
     {
       "device": "mobile",
       "source": "qa-artifacts/lighthouse-mobile.json",
-      "measuredAt": "2026-09-27T05:10:15.105Z",
+      "measuredAt": "2026-09-27T20:46:34.822Z",
       "scores": {
         "performance": 99,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
-      "lcpMs": 1802.6506,
+      "lcpMs": 1803.4693,
       "tbtMs": 0,
       "cls": 0,
-      "scriptTransferBytes": 33561,
-      "scriptResourceBytes": 86236
+      "scriptTransferBytes": 36312,
+      "scriptResourceBytes": 95258
     },
     {
       "device": "desktop",
       "source": "qa-artifacts/lighthouse-desktop.json",
-      "measuredAt": "2026-09-27T05:10:25.116Z",
+      "measuredAt": "2026-09-27T20:46:45.051Z",
       "scores": {
         "performance": 100,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
-      "lcpMs": 403.0368,
+      "lcpMs": 408.4625,
       "tbtMs": 0,
       "cls": 0.001081616375536293,
-      "scriptTransferBytes": 33561,
-      "scriptResourceBytes": 86236
+      "scriptTransferBytes": 36312,
+      "scriptResourceBytes": 95258
     }
   ],
   "fieldInp": {
     "status": "not-measured",
     "valueMs": null,
-    "notes": ["TBT is a laboratory measure and does not establish field INP."]
+    "notes": [
+      "TBT is a laboratory measure and does not establish field INP."
+    ]
   },
   "budgets": {
     "lcp": "pass",
@@ -54,5 +56,8 @@
     "Current Z-fold with a GSAP ticker, continuous cubic camera path and static SVG paper texture. No ScrollTrigger, WebGL renderer or client React hydration is loaded.",
     "The unchanged 250 KB route-script budget passes.",
     "These page-load laboratory results do not establish motion continuity, field INP or physical-device performance; continuous-input evidence is recorded separately."
-  ]
+  ],
+  "isCurrentRevision": true,
+  "currentRevisionNote": "Candidate-v8; isolated Lighthouse run after all independent-review browser sessions closed. Publication remains pending.",
+  "motionEvidence": "docs/final-design-review/r8-rendering.md"
 }

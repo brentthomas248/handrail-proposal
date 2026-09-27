@@ -8,7 +8,7 @@ Astro static output with a React rate component, strict TypeScript, pnpm 11 and 
 
 ## Current delivery
 
-The latest revision establishes the complete Z-fold opening, orbits around both hinges, and adds a tailored resume with prominent portfolio navigation. Four independent research-based specialists review spatial motion, editorial documents, inclusive interaction and hiring credibility. The accepted round-two commercial story, collected-dollar comparison and reading layouts remain intact. Current candidate and publication evidence is in [IMPLEMENTATION.md](IMPLEMENTATION.md).
+The latest revision establishes the complete Z-fold opening, orbits around both hinges, and adds a tailored resume with prominent portfolio navigation. Independent specialists review six categories: commercial copy, editorial typography and spacing, art and materials, motion direction, inclusive interaction, and rendering engineering. The core commercial story and collected-dollar comparison remain intact; copy, reading layouts and motion are refined against current rendered evidence. Current candidate and publication evidence is in [IMPLEMENTATION.md](IMPLEMENTATION.md).
 
 The user approved the Telescope/Igloo/Exat/Stripe Press reference direction and requested Handrail's actual logo, colors and existing-sheet influence. The design uses the official PNG wordmark, warm paper/rust palette, Inter and Playfair Display. No base salary and commission from collected revenue remain prominent. New business starts the relationship; Brent's contribution can grow with the company's needs without assigning a specific future role.
 

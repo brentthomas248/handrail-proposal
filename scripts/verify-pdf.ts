@@ -12,6 +12,12 @@ const pdfPath =
   process.argv[2] ??
   fileURLToPath(new URL(`../public/${proposal.paths.pdf}`, import.meta.url));
 const footer = `${proposal.parties.company} / ${proposal.parties.representative} — ${proposal.status}`;
+const pageCount = execFileSync('pdfinfo', [pdfPath], {
+  encoding: 'utf8',
+}).match(/^Pages:\s+(\d+)$/m)?.[1];
+if (pageCount !== '2') {
+  throw new Error(`Proposal notes must remain two pages; found ${pageCount}.`);
+}
 
 function normalize(text: string): string {
   return (
@@ -71,7 +77,7 @@ const chunks = [
           {
             label: `Section ${index + 1}, comparison column headings`,
             text: collectionComparison.paths
-              .map((path) => `${path.label} · ${path.rate}`)
+              .map((path) => `${path.label} ${path.rate}`)
               .join(' '),
           },
           ...collectionComparison.rows.map((row) => ({

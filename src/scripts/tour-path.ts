@@ -202,7 +202,7 @@ export function sceneAt(
   if (arrived === 0) return { index: 0, caption: 'Scroll to unfold' };
   if (arrived > 0) return { index: arrived, caption: stops[arrived].name };
   const next = stops.findIndex((stop) => stop.at > time);
-  if (next === 1) return { index, caption: 'Unfolding the proposal' };
+  if (next === 1) return { index: 0, caption: 'Unfolding the proposal' };
   if (next > 1)
     return {
       index,
@@ -225,7 +225,7 @@ export function hingeTravel(
   const end = columns[toPanel];
   const direction = Math.sign(end - start);
   const count = Math.abs(end - start);
-  return Array.from({ length: count }, (_, i) => {
+  const bridges = Array.from({ length: count }, (_, i) => {
     const departing = start + direction * i;
     const arriving = departing + direction;
     const hinge = Math.max(departing, arriving);
@@ -247,4 +247,21 @@ export function hingeTravel(
       };
     });
   }).flat();
+  if (count === 2) {
+    // Relax the departing wing before folding the arriving one. The middle
+    // plane gives the transfer a physical sequence in either direction.
+    bridges.splice(2, 0, {
+      ...to,
+      focusX: panelWidth * 1.5,
+      focusY: (from.focusY + to.focusY) / 2,
+      focusZ: 0,
+      scale: Math.min(from.scale, to.scale) * 0.9,
+      left: 38,
+      right: 38,
+      yaw: 6,
+      pitch: 12,
+      roll: 0,
+    });
+  }
+  return bridges;
 }

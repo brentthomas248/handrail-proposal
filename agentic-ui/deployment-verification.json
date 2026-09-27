@@ -217,5 +217,6 @@
     "Manual VoiceOver and field INP remain unverified.",
     "Component, document and portfolio evidence from the preceding revision remains in docs/portfolio-resume-motion-implementation.md; those surfaces did not change."
   ],
-  "isCurrentRevision": true
+  "isCurrentRevision": false,
+  "currentRevisionNote": "Historical deployed/load evidence; candidate-v7 final panel and publication remain pending."
 }

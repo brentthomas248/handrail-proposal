@@ -74,13 +74,13 @@ components:
 
 ## Complete proposal revision
 
-The approved Telescope, Igloo, Exat and Stripe Press references inform material, typography and camera direction; Handrail supplies the logo and cream/rust/ink identity. The full proposal now uses the same print and camera rules from opening through closing. Stable ink and authored spacing replace time-dependent dimming. Local hinge travel connects reading scenes without repeatedly retreating to a distant overview.
+The approved Telescope, Igloo, Exat and Stripe Press references inform material, typography and camera direction; Handrail supplies the logo and cream/rust/ink identity. The full proposal now uses the same print and camera rules from opening through closing. Essential front ink and authored spacing remain stable; decorative reverse ink resolves softly at grazing angles to limit aliasing. Local hinge travel connects reading scenes without repeatedly retreating to a distant overview.
 
 The semantic narrative is beginning → cash flow → proposed rates → 90-day window → growing together. That is also the no-JavaScript and ordinary reading order. The same section nodes mount into physical panel slots only for the tour; decorative backs never carry essential terms. Desktop has five reading scenes plus overview; phone separates the two rate choices, producing six plus overview. Each phone rate scene owns its heading, rationale and common terms. Short window and closing compositions align toward the top of the safe stage rather than exposing unrelated paragraph fragments above them.
 
 The collections illustration compares both paths on the same $10,000 received installment: $1,500 commission/$8,500 remaining at 15%, versus $2,000/$8,000 at 20%. The $500 difference is per collected installment. This is a static accessible table, not an animated count or elementary payment trace. Its hypothetical $120,000 build over 12 installments and before-costs qualification remain visible. Notes add the conditional $18,000/$24,000 full-build totals and separate recurring example.
 
-The [round-two implementation](docs/round-2-implementation.md), [design review](docs/round-2-candidate-design-review.md), [interaction review](docs/round-2-candidate-interaction-review.md) and [IMPLEMENTATION.md](IMPLEMENTATION.md) record the current candidate and publication state. Earlier prototype and mobile reviews are historical evidence, not acceptance of this revision. Physical iPhone stability remains unverified.
+The [final review contract](docs/final-design-review/brief.md) defines current acceptance; [IMPLEMENTATION.md](IMPLEMENTATION.md) records the candidate and publication state. Earlier prototype and mobile reviews are historical evidence, not acceptance of this revision. Physical iPhone stability remains unverified.
 
 ## A true Z-fold
 
@@ -89,6 +89,8 @@ The actual proposal stays in semantic HTML with a center panel and two independe
 The camera moves around the folded structure to face the reading panel. A reader sees an actual fold, a thin paper edge and correctly oriented text. Do not flatten the whole structure just to hide incorrect hinge geometry or show a mirrored back face. The selected panel faces the camera at exact chapter positions; neighboring geometry may retain its fold if it does not obscure the content.
 
 Artboard measurements follow the panel content. They are not fixed viewport dimensions. The scene must frame relevant text between the header and controls at desktop and mobile widths. Narrow views may separate the two compensation paths, but each reading group must retain its associated explanation and complete idea.
+
+During the tour, one clipped semantic transcript exposes the complete proposal in document order independently of the camera. The visual paper is excluded from the accessibility tree, allowing away-facing backing textures to be released without hiding essential text from assistive technology. Transcript IDs are unique and table references are remapped. Keyboard focus on its document link switches to ordinary reading and focuses the original visible link.
 
 Ordinary reading removes perspective and hinges and puts the same essential content into responsive document flow. Decorative backs remain excluded from accessible content. No proposal term may be available only during a transition, in an image or on a decorative back face.
 
@@ -138,7 +140,7 @@ The selected reading face must be correctly oriented, framed and legible. A chap
 
 ## Verification boundary
 
-The [round-two remediation batch](docs/round-2-implementation.md) defines current findings and closeout expectations; the [motion record](docs/motion-remediation.md) preserves the earlier choreography work. Capture continuous wheel and touch-like input, rapid flicks, immediate reversal, pause/resume, idle-settle cancellation and resize sequences. Measure actual scene movement throughout active scrolling, both wing angles and logical progress before/after viewport changes.
+The [final remediation record](docs/final-design-review/remediation.md) defines current findings and closeout expectations; the [motion record](docs/motion-remediation.md) preserves the earlier choreography work. Capture continuous wheel and touch-like input, rapid flicks, immediate reversal, pause/resume, idle-settle cancellation and resize sequences. Measure actual scene movement throughout active scrolling, both wing angles and logical progress before/after viewport changes.
 
 Inspect material closeups and content-distinct transition frames or a video/replay, along with the whole forward/reverse journey. Verify Z geometry, correctly oriented faces, matte directional light, crease/edge depth, projected shadows and sharp text at normal reading distance. The independent browser reviewer must review current rendered motion; screenshots made only by an implementer or a passing endpoint suite do not settle these findings.
 
@@ -154,7 +156,7 @@ The active group has breathing room inside the measured header/control boundarie
 
 Refit the camera after available mobile viewport height changes while preserving native scroll and the current chapter. Reaching the final scene must remain possible after the viewport grows again. A selected rectangle fitting inside a nominal viewport does not prove all of its text lines or related content are readable.
 
-Current evidence and independent review belong in [the round-two remediation](docs/round-2-implementation.md). Earlier screenshot and test-count approvals are historical, not substitutes for current visual judgment.
+Current evidence and independent review belong in [the final remediation record](docs/final-design-review/remediation.md). Earlier screenshot and test-count approvals are historical, not substitutes for current visual judgment.
 
 ## Resume, portfolio and spatial introduction
 
@@ -164,4 +166,4 @@ A second header group makes the Handrail resume and wider GitHub immediately dis
 
 The resume is two intentional editorial sheets: conventional experience/education/tools, then potential contributions and public proof. Use quiet rules, readable measures and a faint official watermark in empty space. The public copy distinguishes demonstrated work from proposed Handrail responsibilities and quantifies only supported results. The PDF and web route share one typed content source.
 
-Current research and independent specialties are recorded in [round-three design research](docs/design-research-round-3.md) and [the implementation record](docs/portfolio-resume-motion-implementation.md).
+The reference research is recorded in [round-three design research](docs/design-research-round-3.md); current independent specialties are defined in [the final review contract](docs/final-design-review/brief.md).

@@ -75,8 +75,11 @@ describe('one public proposal source', () => {
       '| Per collected installment | Hire first · 15% | Client first · 20% |',
     );
     expect(content).toContain('| Build commission | $1,500 | $2,000 |');
+    expect(collectionComparison.rows[1].label).toMatch(
+      /Handrail.*before\s+costs/i,
+    );
     expect(content).toContain(
-      '| Handrail remaining before costs | $8,500 | $8,000 |',
+      `| ${collectionComparison.rows[1].label} | $8,500 | $8,000 |`,
     );
     expect(content).toContain(collectionComparison.difference);
     expect(content).toContain(collectionComparison.rule);

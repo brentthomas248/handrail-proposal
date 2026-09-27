@@ -1,7 +1,11 @@
 {
   "schemaVersion": "1.0",
   "reviewMode": "deterministic-local",
-  "routes": ["/handrail-proposal/", "/handrail-proposal/agreement/"],
+  "routes": [
+    "/handrail-proposal/",
+    "/handrail-proposal/agreement/",
+    "/handrail-proposal/resume/"
+  ],
   "flows": [
     "Scroll forward and backward to open both physical hinges, traverse the trifold in 3D and settle into flat reading holds",
     "Choose a chapter with the keyboard",
@@ -13,7 +17,10 @@
     "Download and independently verify the two-page proposal PDF",
     "Return from proposal notes with the browser Back button and resume the tour",
     "Focus an offscreen document link and restore a usable reading context",
-    "Advance the tour using an emulated mobile touch gesture"
+    "Advance the tour using an emulated mobile touch gesture",
+    "Apply user text-spacing settings and retain complete reading content and place",
+    "Use immediate normal-reading escape when the tour module is blocked",
+    "Use prominent resume and portfolio links; verify both complete PDFs"
   ],
   "visualStates": [
     "folded-front-cover",
@@ -71,7 +78,7 @@
     "collectRuntimeErrors": true,
     "collectSlowInteractions": true,
     "evidencePath": "agentic-ui/performance-evidence.json",
-    "status": "measured-current-local-trifold"
+    "status": "current-lab-and-independent-rendering-verified-with-explicit-limits"
   },
   "agentReliability": {
     "enabled": false,
@@ -89,29 +96,26 @@
     "No uncaught page errors, failed critical requests, broken navigation or axe violations occur in the checked local flows.",
     "No form submission, billing, authentication or destructive operation occurs during QA.",
     "At desktop 1440px, cover/cash body text reads around 20\u201324 CSS pixels with visible edge or hinge context.",
-    "Printed client-first build diagram remains complete in normal, reduced-motion and no-JavaScript reading, with accurate 20/80 split and 12 paired installment events.",
-    "The moving rule annotation follows collection, reverses with input and never changes the printed monetary values.",
-    "Independent critic accepts actual opening-to-cash forward/reverse motion and complete phone ideas before publication."
+    "All six independent specialties meet at least95/100; all material findings corrected or evidence-dispositioned.",
+    "Equal collected dollars compare both rates; retained cash is before costs and commission follows collections.",
+    "Actual opening, crease travel and reversal remain independently inspected; all three panels stay framed during unfold."
   ],
   "knownTradeoffs": [
     "Stitch, Magic, Stagehand and Browserbase are omitted under docs/local-workflow.md; no cloud or full global lifecycle certification is claimed.",
     "Physical-device, manual VoiceOver and field INP evidence remain unavailable.",
-    "This trifold, notes and PDF are published and have fresh hosted checks; user visual acceptance remains separate.",
     "Current Lighthouse scores describe a local production-preview lab run, not physical-device or field performance."
   ],
-  "generatedAt": "2026-09-27T01:33:13.574568+00:00",
-  "scope": "Bounded first-slice prototype plus complete existing behavior regressions",
+  "generatedAt": "2026-09-27T20:51:01.808465+00:00",
+  "scope": "Full proposal tour, reading, notes, resume and PDFs; six independent specialties",
   "localEvidence": {
-    "browserChecks": 39,
-    "unitChecks": 11,
+    "browserChecks": 185,
+    "unitChecks": 29,
     "componentChecks": 3,
-    "typecheckedFiles": 24,
+    "typecheckedFiles": 45,
     "typecheckIssues": 0,
-    "capturePath": "qa-artifacts/paper-prototype/candidate2-capture/capture.json",
-    "scrollSamples": 480,
-    "journeyVideos": 4,
-    "errors": 0,
-    "failedRequests": 0,
-    "supplementaryWebKitReadingPositions": 37
+    "supplementaryWebKitReadingPositions": 29,
+    "supplementaryWebKitTextChecks": 113,
+    "candidateIdentity": "qa-artifacts/final-design/candidate-v8/identity.json",
+    "independentReview": "docs/final-design-review/progress.md"
   }
 }

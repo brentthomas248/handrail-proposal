@@ -27,10 +27,7 @@ try {
     outline: true,
     printBackground: true,
     preferCSSPageSize: true,
-    displayHeaderFooter: true,
-    headerTemplate: '<span></span>',
-    footerTemplate:
-      '<div style="font-family:Arial,sans-serif;font-size:8px;color:#62717d;width:100%;margin:0 18mm;display:flex;justify-content:space-between"><span>Handrail / Brent Showalter — For discussion</span><span><span class="pageNumber"></span> / <span class="totalPages"></span></span></div>',
+    displayHeaderFooter: false,
   });
   await copyFile(
     'public/handrail-proposed-agreement.pdf',

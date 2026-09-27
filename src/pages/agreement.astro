@@ -17,15 +17,23 @@ const base = import.meta.env.BASE_URL;
 >
   <main id="main" class="document-main">
     <header class="document-header">
+      <img
+        class="document-print-logo"
+        src={`${base}handrail-logo.png`}
+        width="1397"
+        height="392"
+        alt=""
+        aria-hidden="true"
+      />
       <span class="document-status">{proposal.status} · September 2026</span>
       <h1>{proposal.notesTitle}</h1>
       <div class="document-tools">
         <a
           class="button button-dark"
           href={`${base}${proposal.paths.pdf}`}
-          download
+          download="handrail-proposal-notes.pdf"
         >
-          Download proposal
+          Download proposal notes
         </a>
         <a class="text-link" href={base}>
           Back to the flyer
@@ -75,10 +83,51 @@ const base = import.meta.env.BASE_URL;
 </Page>
 
 <style>
+  .document-body {
+    min-width: 0;
+    max-width: 70ch;
+  }
+  .document-section h2 {
+    text-wrap: balance;
+  }
+  .document-intro,
+  .document-section > p,
+  .document-endnote {
+    text-wrap: pretty;
+  }
+  .document-print-logo {
+    display: none;
+  }
+  .document-toc a {
+    text-decoration-line: underline;
+    text-decoration-color: #a44020;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  @media screen and (max-width: 760px) {
+    .document-body :global(.collection-rate) {
+      display: block;
+      white-space: nowrap;
+    }
+  }
   @media print {
     @page {
       size: A4;
-      margin: 16mm 18mm 19mm;
+      margin: 16mm 22mm 19mm;
+      @bottom-left {
+        content: 'Handrail / Brent Showalter — For discussion';
+        font:
+          8pt 'Inter Variable',
+          sans-serif;
+        color: #6b6258;
+      }
+      @bottom-right {
+        content: counter(page) ' / ' counter(pages);
+        font:
+          8pt 'Inter Variable',
+          sans-serif;
+        color: #6b6258;
+      }
     }
     :global(html) {
       background: #fff !important;
@@ -106,59 +155,72 @@ const base = import.meta.env.BASE_URL;
       padding: 0 !important;
     }
     .document-header {
-      padding: 0 0 5mm !important;
-      margin: 0 0 4mm !important;
+      position: relative;
+      padding: 0 0 2mm !important;
+      margin: 0 0 2mm !important;
       border-bottom: 1px solid #191a17;
+    }
+    .document-print-logo {
+      display: block;
+      position: absolute;
+      top: 1mm;
+      right: 0;
+      width: 36mm;
+      height: auto;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
     }
     .document-status {
       font-size: 8pt !important;
+      color: #a44020;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
     }
     .document-header h1 {
       font-size: 31pt !important;
       line-height: 1.05 !important;
       margin: 3mm 0 2mm !important;
+      padding-right: 45mm;
     }
     .document-intro {
       font-size: 11pt !important;
       line-height: 1.45 !important;
-      margin: 0 0 5mm !important;
+      margin: 0 0 4mm !important;
     }
     .document-section {
-      break-inside: avoid;
-      margin: 0 0 5mm !important;
+      break-inside: auto;
+      margin: 0 0 4mm !important;
       padding: 0 !important;
       border: 0 !important;
     }
-    .document-section:nth-of-type(4) {
-      break-before: page;
-    }
     .document-section h2 {
-      font-size: 13pt !important;
+      font-size: 14.5pt !important;
       line-height: 1.2 !important;
       margin: 0 0 2mm !important;
       break-after: avoid;
     }
     .document-section p {
-      font-size: 10.5pt !important;
-      line-height: 1.45 !important;
+      font-size: 11.5pt !important;
+      line-height: 1.4 !important;
       margin: 0 0 2mm !important;
       orphans: 3;
       widows: 3;
     }
     .document-discussion-list {
+      break-inside: avoid;
       margin: 2mm 0 !important;
       padding-left: 5mm !important;
-      font-size: 10.5pt !important;
+      font-size: 11.5pt !important;
       line-height: 1.45 !important;
     }
     :global(.collection-comparison) {
       break-inside: avoid;
       margin: 3mm 0 !important;
     }
-    :global(.collection-assumption),
-    :global(.collection-comparison p) {
-      font-size: 9pt !important;
-      line-height: 1.35 !important;
+    .document-body :global(.collection-assumption),
+    .document-body :global(.collection-comparison p) {
+      font-size: 10.5pt !important;
+      line-height: 1.45 !important;
       margin: 2mm 0 !important;
     }
     :global(.collection-collected) {
@@ -184,13 +246,16 @@ const base = import.meta.env.BASE_URL;
       font-size: 10pt !important;
       border-bottom: 1px solid #aaa;
     }
+    :global(.collection-table th[scope='row']) {
+      padding-left: 0 !important;
+    }
     :global(.collection-rate) {
       display: inline !important;
       font-size: inherit !important;
     }
     .document-endnote {
-      font-size: 9pt !important;
-      line-height: 1.4 !important;
+      font-size: 10pt !important;
+      line-height: 1.45 !important;
       border-top: 1px solid #aaa;
       margin: 5mm 0 0 !important;
       padding: 3mm 0 0 !important;

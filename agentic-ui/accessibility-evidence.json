@@ -1,14 +1,16 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T05:12:33.839195+00:00",
+  "generatedAt": "2026-09-27T20:39:21.698470+00:00",
   "target": "WCAG 2.2 AA",
-  "scope": "Round-three local automated and independent keyboard/interaction evidence; no manual conformance certification",
+  "scope": "Final-pass local automated/keyboard/text-setting evidence; no manual conformance certification",
   "checks": [
     {
       "id": "manual-voiceover",
       "status": "not-assessed",
       "evidence": "docs/local-workflow.md",
-      "evidenceRefs": ["docs/local-workflow.md"],
+      "evidenceRefs": [
+        "docs/local-workflow.md"
+      ],
       "notes": [
         "VoiceOver review was not performed. Semantic HTML, axe and keyboard checks are not screen-reader-equivalent manual proof."
       ]
@@ -17,7 +19,9 @@
       "id": "physical-device",
       "status": "not-assessed",
       "evidence": "tests/e2e/proposal.spec.ts",
-      "evidenceRefs": ["tests/e2e/proposal.spec.ts"],
+      "evidenceRefs": [
+        "tests/e2e/proposal.spec.ts"
+      ],
       "notes": [
         "Native Chromium touch dispatch verifies held contact and actual browser scroll. Physical iOS/Android devices, notched-screen behavior and the reported iPhone crash remain unverified."
       ]
@@ -26,25 +30,26 @@
       "id": "zoom-and-forced-colors",
       "status": "not-assessed",
       "evidence": "src/styles/global.css",
-      "evidenceRefs": ["src/styles/global.css"],
+      "evidenceRefs": [
+        "src/styles/global.css"
+      ],
       "notes": [
-        "Viewport reflow is tested. Manual text resizing, browser zoom and forced-colors coverage are not claimed."
+        "Before/after startup CSS font/line/word/letter/paragraph overrides and viewport reflow are tested. Manual browser zoom and forced-colors coverage are not claimed."
       ]
     },
     {
       "id": "current-local-browser-evidence",
       "status": "pass",
-      "evidence": "tests/e2e/proposal.spec.ts; tests/e2e/resume.spec.ts; docs/round-3-interaction-review.md",
+      "evidence": "tests/e2e/ and docs/final-design-review/",
       "evidenceRefs": [
         "tests/e2e/proposal.spec.ts",
         "tests/e2e/resume.spec.ts",
-        "docs/round-3-interaction-review.md",
-        "docs/round-3-editorial-review.md"
+        "tests/e2e/text-spacing.spec.ts",
+        "tests/e2e/loading-affordance.spec.ts"
       ],
       "notes": [
-        "64 checks cover complete reading groups, native keyboard, mode return, Back navigation, resume and both downloads. Three routes pass axe; resume spans320/390/760/768/1440px.",
-        "Independent nativeTab checks found and verified inset phone focus outlines,24px portfolio link targets and unwrapped tablet actions. Chapter buttons remain44px.",
-        "NoJavaScript and reducedmotion retain complete content. Viewport reflow is not manual browser zoom or assistive-technology certification."
+        "185 Chromium checks pass; four revised input-actuation checks also pass independently. Coverage includes route axe, keyboard/focus/history, complete reading groups, no-JS, reduced motion, text overrides, pending-load recovery, notes, resume and downloads.",
+        "WebKit:29 reading positions pass. Supplementary suite initially passed109/113; four input preconditions were corrected to wait for sustained native wheel displacement, and all four pass on recheck. App bytes did not change. Original failures are retained."
       ]
     }
   ]

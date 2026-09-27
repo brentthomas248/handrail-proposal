@@ -1,12 +1,16 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T05:17:34.105218+00:00",
+  "generatedAt": "2026-09-27T20:51:01.808465+00:00",
   "mode": "approved-local-workflow",
   "sections": [
     {
       "id": "product-design-intent",
       "status": "pass",
-      "evidence": ["PROJECT.md", "DESIGN.md", "src/content/proposal.ts"],
+      "evidence": [
+        "PROJECT.md",
+        "DESIGN.md",
+        "src/content/proposal.ts"
+      ],
       "notes": [
         "Current hinged trifold introduces a partnership that starts with new business and can grow with Handrail. Compensation and proposed status remain clear; actual company branding is retained."
       ]
@@ -16,12 +20,12 @@
       "status": "pass",
       "evidence": [
         "src/layouts/Page.astro",
-        "src/pages/resume.astro",
         "src/scripts/motion.ts",
-        "docs/round-3-interaction-review.md"
+        "docs/final-design-review/r8-interaction.md"
       ],
       "notes": [
-        "Three joined panels in the opening, physical crease orbits, ordinary reading, proposal notes, resume/PDF and prominent portfolio access. Browser Back restores the originating proposal position."
+        "185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
+        "Scope is the approved local workflow; publication remains pending."
       ]
     },
     {
@@ -52,21 +56,24 @@
     {
       "id": "accessibility",
       "status": "in-progress",
-      "evidence": ["agentic-ui/accessibility-evidence.json"],
+      "evidence": [
+        "agentic-ui/accessibility-evidence.json"
+      ],
       "notes": [
-        "29 current browser checks include route-level axe, keyboard restoration, reduced motion and recovery navigation. Manual VoiceOver and physical-device stability remain unverified."
+        "185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
+        "Physical iPhone stability, genuine hidden-tab recovery, manual VoiceOver, actual GPU memory and field INP remain unverified. Full global lifecycle certification is not claimed."
       ]
     },
     {
       "id": "responsive-layout",
       "status": "pass",
       "evidence": [
-        "docs/round-3-editorial-review.md",
-        "docs/round-3-spatial-review.md",
-        "docs/round-3-interaction-review.md"
+        "docs/final-design-review/r8-editorial.md",
+        "tests/e2e/final-design.spec.ts"
       ],
       "notes": [
-        "Independent four-specialist review accepted mobile and desktop compositions, complete reading groups, resume measure/spacing and unwrapped tablet actions after corrections."
+        "185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
+        "Scope is the approved local workflow; publication remains pending."
       ]
     },
     {
@@ -82,15 +89,14 @@
     },
     {
       "id": "performance",
-      "status": "in-progress",
+      "status": "pass",
       "evidence": [
-        "qa-artifacts/lighthouse-mobile.json",
-        "qa-artifacts/lighthouse-desktop.json",
-        "agentic-ui/performance-evidence.json"
+        "agentic-ui/performance-evidence.json",
+        "docs/final-design-review/r8-rendering.md"
       ],
       "notes": [
-        "Current trifold local Lighthouse: 100 in all four categories on both devices. Mobile LCP 1656.355ms / TBT 0ms / CLS 0.02279675; desktop LCP 368.8312ms / TBT 0ms / CLS 0.01910344. Field INP and physical-device measurements remain unavailable; no earlier keyboard-cleanup caveat applies to this run.",
-        "Measured route script transfer is 46,763 bytes (120,036 resource bytes)."
+        "185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
+        "Scope is the approved local workflow; publication remains pending."
       ]
     },
     {
@@ -110,24 +116,29 @@
       "status": "pass",
       "evidence": [
         "agentic-ui/local-verification.json",
-        "agentic-ui/deployment-verification.json"
+        "docs/final-design-review/progress.md"
       ],
       "notes": [
-        "Current64 local and64 hosted browser checks,27 unit and three component checks,29 WebKit reading positions, both complete PDFs and28 hosted asset matches pass. See receipts for explicit limits."
+        "185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
+        "Scope is the approved local workflow; publication remains pending."
       ]
     },
     {
       "id": "remediation-learning",
       "status": "pass",
-      "evidence": ["docs/portfolio-resume-motion-implementation.md"],
+      "evidence": [
+        "docs/final-design-review/remediation.md"
+      ],
       "notes": [
-        "Rendered review caught tour position lost after Back, clipped phone focus outlines, tablet wrapping and weak resume evidence hierarchy. Behavioral regressions and focused fresh review closed the findings."
+        "Independent rounds found hidden hire-first scope, weak mobile type, numeric collisions, text-setting resilience and loading/focus affordance defects. Corrections have behavioral evidence. Final panel pending."
       ]
     },
     {
       "id": "full-stack-data-states",
       "status": "not-affected",
-      "evidence": ["PROJECT.md"],
+      "evidence": [
+        "PROJECT.md"
+      ],
       "notes": [
         "No API, database or authentication. Local presentation-preference storage is the only retained UI state."
       ]
@@ -135,84 +146,99 @@
   ],
   "changedSurfaces": [
     {
-      "path": "src/pages/index.astro",
+      "path": "src/content/proposal.ts",
       "affectedSections": [
-        "product-design-intent",
-        "visual-system-tokens",
-        "component-states-storybook",
+        "responsive-layout",
         "accessibility",
-        "responsive-layout"
+        "qa-proof"
       ],
-      "evidence": ["DESIGN.md", "agentic-ui/ui-handoff.json"]
-    },
-    {
-      "path": "src/pages/agreement.astro",
-      "affectedSections": [
-        "product-design-intent",
-        "visual-system-tokens",
-        "component-states-storybook",
-        "accessibility",
-        "responsive-layout"
-      ],
-      "evidence": ["DESIGN.md", "agentic-ui/ui-handoff.json"]
-    },
-    {
-      "path": "src/layouts/Page.astro",
-      "affectedSections": [
-        "product-design-intent",
-        "visual-system-tokens",
-        "component-states-storybook",
-        "accessibility",
-        "responsive-layout"
-      ],
-      "evidence": ["DESIGN.md", "agentic-ui/ui-handoff.json"]
-    },
-    {
-      "path": "src/styles/global.css",
-      "affectedSections": [
-        "product-design-intent",
-        "visual-system-tokens",
-        "component-states-storybook",
-        "accessibility",
-        "responsive-layout"
-      ],
-      "evidence": ["DESIGN.md", "agentic-ui/ui-handoff.json"]
+      "evidence": [
+        "agentic-ui/ui-handoff.json"
+      ]
     },
     {
       "path": "src/scripts/motion.ts",
       "affectedSections": [
-        "product-design-intent",
-        "visual-system-tokens",
-        "component-states-storybook",
+        "responsive-layout",
         "accessibility",
-        "responsive-layout"
+        "qa-proof"
       ],
-      "evidence": ["DESIGN.md", "agentic-ui/ui-handoff.json"]
+      "evidence": [
+        "agentic-ui/ui-handoff.json"
+      ]
     },
     {
-      "path": "src/components/DealPath.tsx",
+      "path": "src/scripts/typography-guard.ts",
       "affectedSections": [
-        "product-design-intent",
-        "visual-system-tokens",
-        "component-states-storybook",
+        "responsive-layout",
         "accessibility",
-        "responsive-layout"
+        "qa-proof"
       ],
-      "evidence": ["DESIGN.md", "agentic-ui/ui-handoff.json"]
+      "evidence": [
+        "agentic-ui/ui-handoff.json"
+      ]
+    },
+    {
+      "path": "src/styles/global.css",
+      "affectedSections": [
+        "responsive-layout",
+        "accessibility",
+        "qa-proof"
+      ],
+      "evidence": [
+        "agentic-ui/ui-handoff.json"
+      ]
+    },
+    {
+      "path": "src/layouts/Page.astro",
+      "affectedSections": [
+        "responsive-layout",
+        "accessibility",
+        "qa-proof"
+      ],
+      "evidence": [
+        "agentic-ui/ui-handoff.json"
+      ]
+    },
+    {
+      "path": "src/pages/index.astro",
+      "affectedSections": [
+        "responsive-layout",
+        "accessibility",
+        "qa-proof"
+      ],
+      "evidence": [
+        "agentic-ui/ui-handoff.json"
+      ]
+    },
+    {
+      "path": "src/pages/resume.astro",
+      "affectedSections": [
+        "responsive-layout",
+        "accessibility",
+        "qa-proof"
+      ],
+      "evidence": [
+        "agentic-ui/ui-handoff.json"
+      ]
     }
   ],
   "fullStackStateAssumptions": {
-    "apiContracts": ["No API or backend contract."],
+    "apiContracts": [
+      "No API or backend contract."
+    ],
     "coveredDataStates": [
       "Static proposal content; folded and unfolding trifold, flat reading holds, ordinary reading, system reduced motion and JavaScript-disabled flow."
     ],
-    "authRoleStates": ["No authentication or authorization roles."],
+    "authRoleStates": [
+      "No authentication or authorization roles."
+    ],
     "mutationSafety": [
       "No business mutation or submission; presentation preference and per-history-entry position only. Public GitHub profile changes are separate authorized showcase work."
     ]
   },
-  "localScopeStatus": "verified",
+  "localScopeStatus": "accepted-local-candidate-v8",
   "fullLifecycleCertified": false,
-  "scope": "Round-three proposal motion, resume/PDF and public portfolio; research-based independent specialist reviews",
-  "publicationStatus": "published-and-hosted-verified"
+  "scope": "Final six-specialty independent review and remediation",
+  "publicationStatus": "candidate-not-published"
 }

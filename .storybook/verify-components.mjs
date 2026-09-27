@@ -1,6 +1,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { dealPathCopy } from '../src/content/proposal.ts';
 
 const base = new URL(process.env.STORYBOOK_BASE_URL || 'http://127.0.0.1:6006');
 if (!['127.0.0.1', 'localhost'].includes(base.hostname)) {
@@ -21,6 +22,11 @@ page.on('pageerror', (error) => errors.push(error.message));
 async function openStory(id) {
   await page.goto(new URL(`/iframe.html?id=${id}&viewMode=story`, base).href);
   await page.locator('#storybook-root .deal-path').waitFor();
+  // The a11y addon's afterEach runs axe too. Wait for Storybook's completed
+  // lifecycle before starting our scoped audit on the same document.
+  await page.waitForFunction(
+    () => window.__STORYBOOK_PREVIEW__?.currentRender?.phase === 'finished',
+  );
 }
 async function check(name, run) {
   await run();
@@ -65,7 +71,7 @@ try {
       await expect(page.getByText('20', { exact: true })).toBeVisible();
       await expect(page.getByText('+ 5%', { exact: true })).toBeVisible();
       await expect(
-        page.getByText('I bring the paying client that makes hiring possible.'),
+        page.getByText(dealPathCopy.client.description),
       ).toBeVisible();
       await expect(
         page.getByText('On that client and all my future credited sales.'),

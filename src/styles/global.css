@@ -57,6 +57,7 @@ html {
 }
 main {
   display: block;
+  scroll-margin-top: 114px;
 }
 .skip-link {
   position: fixed;
@@ -125,6 +126,10 @@ main {
   border-left: 1px solid var(--line);
   font-weight: 550;
 }
+.mobile-link-label,
+.portfolio-navigation .mobile-notes {
+  display: none;
+}
 .portfolio-navigation a {
   display: flex;
   align-items: center;
@@ -141,12 +146,12 @@ main {
   min-height: 42px;
   padding: 0 20px;
 }
-#reading-mode:hover {
+#reading-mode:hover:not([aria-disabled='true']) {
   background: var(--ink);
   color: var(--paper);
   border-color: var(--ink);
 }
-#reading-mode:disabled {
+#reading-mode[aria-disabled='true'] {
   opacity: 0.55;
 }
 .site-footer {
@@ -157,6 +162,9 @@ main {
   font-size: 12px;
 }
 .site-footer a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
   text-decoration: none;
 }
 
@@ -218,6 +226,7 @@ main {
   flex-shrink: 0;
 }
 .panel-back {
+  color: rgb(26 24 22 / var(--back-ink-alpha, 1));
   position: absolute;
   inset: 0;
   transform: rotateY(180deg) translateZ(calc(1 * var(--paper-unit)));
@@ -244,6 +253,9 @@ main {
 .sheet-logo {
   width: calc(258 * var(--paper-unit));
   height: auto;
+}
+.panel-masthead .sheet-logo {
+  width: calc(148 * var(--paper-unit));
 }
 .panel-colophon {
   display: flex;
@@ -300,7 +312,7 @@ main {
 }
 .rust-back {
   background: var(--accent);
-  color: white;
+  color: rgb(255 255 255 / var(--back-ink-alpha, 1));
   justify-content: center;
   padding: calc(75 * var(--paper-unit));
 }
@@ -333,16 +345,20 @@ main {
   margin-bottom: calc(30 * var(--paper-unit));
 }
 .flyer-cover h1 {
-  font-size: var(--display);
+  --authored-font-size: var(--display);
+  --authored-line-height: 0.95;
+  --authored-letter-spacing: -0.075em;
+  font-size: var(--authored-font-size);
   font-weight: 700;
-  letter-spacing: -0.075em;
-  line-height: 0.95;
+  letter-spacing: var(--authored-letter-spacing);
+  line-height: var(--authored-line-height);
 }
 .flyer-cover h1 span,
 .partnership-lead h2 span {
   display: block;
 }
 .cover-statement {
+  text-wrap: balance;
   font-size: calc(46 * var(--paper-unit));
   font-weight: 500;
   letter-spacing: -0.045em;
@@ -350,9 +366,12 @@ main {
   margin-top: calc(36 * var(--paper-unit));
 }
 .cover-description {
-  font-size: var(--body);
-  line-height: 1.4;
-  letter-spacing: -0.02em;
+  --authored-font-size: var(--body);
+  --authored-line-height: 1.4;
+  --authored-letter-spacing: -0.02em;
+  font-size: var(--authored-font-size);
+  line-height: var(--authored-line-height);
+  letter-spacing: var(--authored-letter-spacing);
   margin-top: calc(24 * var(--paper-unit));
 }
 .flyer-cash h2,
@@ -425,6 +444,7 @@ main {
   border-top: calc(1 * var(--paper-unit)) solid var(--line);
 }
 .collection-row-label {
+  text-wrap: balance;
   font-size: var(--detail, 16px);
   padding-right: calc(24 * var(--paper-unit)) !important;
 }
@@ -446,9 +466,18 @@ main {
   margin-top: calc(20 * var(--paper-unit));
 }
 .collection-rule {
+  position: relative;
   font-size: var(--body, 18px);
   margin-top: calc(30 * var(--paper-unit));
-  font-weight: 500;
+  font-weight: 650;
+}
+.collection-rule::before {
+  content: '';
+  position: absolute;
+  top: -0.38em;
+  left: 0;
+  width: 2.5em;
+  border-top: 1px solid currentColor;
 }
 .collection-qualifier {
   font-size: var(--detail, 16px);
@@ -468,8 +497,10 @@ main {
 }
 .rate-scope,
 .rate-reason {
-  font-size: var(--detail);
-  line-height: 1.4;
+  --authored-font-size: var(--detail);
+  --authored-line-height: 1.4;
+  font-size: var(--authored-font-size);
+  line-height: var(--authored-line-height);
   margin-top: calc(24 * var(--paper-unit));
 }
 .rate-shared {
@@ -514,14 +545,48 @@ main {
   display: block;
 }
 .window-steps p {
-  font-size: var(--detail);
-  line-height: 1.4;
+  --authored-font-size: var(--detail);
+  --authored-line-height: 1.4;
+  font-size: var(--authored-font-size);
+  line-height: var(--authored-line-height);
   margin-top: calc(12 * var(--paper-unit));
 }
 .partnership-details {
   margin-top: calc(30 * var(--paper-unit));
   font-size: var(--body);
   line-height: 1.4;
+}
+/* These metrics keep the optional camera tour compatible with user typography. */
+.flyer-cover h1,
+.cover-description,
+.deal-rate,
+.rate-reason,
+.rate-scope,
+.window-steps p,
+.partnership-details p {
+  --authored-word-spacing: 0px;
+  word-spacing: var(--authored-word-spacing);
+}
+.cover-description,
+.rate-reason,
+.rate-scope,
+.window-steps p,
+.partnership-details p {
+  --authored-margin-bottom: 0px;
+  margin-bottom: var(--authored-margin-bottom);
+}
+.rate-reason,
+.rate-scope,
+.window-steps p,
+.partnership-details p {
+  --authored-letter-spacing: 0px;
+  letter-spacing: var(--authored-letter-spacing);
+}
+.partnership-details p {
+  --authored-font-size: var(--body);
+  --authored-line-height: 1.4;
+  font-size: var(--authored-font-size);
+  line-height: var(--authored-line-height);
 }
 .partnership-details p + p {
   margin-top: calc(22 * var(--paper-unit));
@@ -555,12 +620,15 @@ html[data-presentation='tour'] .panel-masthead {
   margin-bottom: calc(60 * var(--paper-unit));
   padding-bottom: calc(24 * var(--paper-unit));
 }
+html[data-presentation='tour'] .panel-face > section:last-of-type {
+  margin-bottom: calc(60 * var(--paper-unit));
+}
 html[data-presentation='tour'] .flyer-cover {
   width: calc(760 * var(--paper-unit));
 }
 html[data-presentation='tour'] .flyer-partnership {
   width: calc(870 * var(--paper-unit));
-  margin-top: calc(180 * var(--paper-unit));
+  margin-top: calc(300 * var(--paper-unit));
 }
 html[data-presentation='tour'] .flyer-cash {
   width: calc(920 * var(--paper-unit));
@@ -585,10 +653,13 @@ html[data-presentation='tour'] .flyer-window {
   display: flex;
   align-items: baseline;
   gap: calc(4 * var(--paper-unit));
-  font-size: var(--rate, calc(124 * var(--paper-unit)));
+  --authored-font-size: var(--rate, calc(124 * var(--paper-unit)));
+  --authored-line-height: 0.9;
+  --authored-letter-spacing: -0.075em;
+  font-size: var(--authored-font-size);
   font-weight: 550;
-  letter-spacing: -0.075em;
-  line-height: 0.9;
+  letter-spacing: var(--authored-letter-spacing);
+  line-height: var(--authored-line-height);
 }
 .deal-rate span:last-child {
   font-size: 0.58em;
@@ -616,6 +687,7 @@ html[data-presentation='tour'] .flyer-window {
   font-size: var(--detail, calc(20 * var(--paper-unit)));
 }
 .deal-description {
+  text-wrap: pretty;
   font-size: var(--body, calc(24 * var(--paper-unit)));
   line-height: 1.3;
   margin-top: calc(25 * var(--paper-unit));
@@ -666,6 +738,27 @@ html[data-presentation='tour'] .proposal-sheet {
 html[data-presentation='tour']:not(.camera-ready) .proposal-sheet,
 html[data-presentation='tour']:not(.camera-ready) .tour-controls {
   visibility: hidden;
+}
+.tour-loading {
+  display: none;
+}
+html[data-presentation='tour']:not(.camera-ready) .tour-loading {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  position: fixed;
+  z-index: 2;
+  inset: 45% 24px auto;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.tour-loading a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  color: var(--ink);
+  text-decoration-color: var(--accent);
 }
 .paper-shadow {
   display: none;
@@ -783,7 +876,9 @@ html[data-presentation='tour'] .tour-controls {
   position: absolute;
   left: -1px;
   width: 3px;
-  height: calc(6px + var(--tour-progress) * 19px);
+  height: 25px;
+  transform-origin: top;
+  transform: scaleY(calc(0.24 + var(--tour-progress) * 0.76));
   background: var(--ink);
 }
 .chapter-nav {
@@ -832,6 +927,10 @@ html[data-presentation='read'] .proposal-sheet {
   transform: none;
   background: var(--paper);
 }
+html[data-presentation='read'] .proposal-sheet h1,
+html[data-presentation='read'] .proposal-sheet h2 {
+  overflow-wrap: anywhere;
+}
 html[data-presentation='read'] .fold-panel {
   display: none !important;
 }
@@ -858,16 +957,16 @@ html[data-presentation='read'] .cover-statement {
 html[data-presentation='read'] .cover-description {
   max-width: 700px;
 }
-html[data-presentation='read'] .collection-collected-amount {
+html[data-presentation='read'] .proposal-sheet .collection-collected-amount {
   font-size: 70px;
 }
-html[data-presentation='read'] .collection-value {
+html[data-presentation='read'] .proposal-sheet .collection-value {
   font-size: 40px;
 }
-html[data-presentation='read'] .collection-assumption {
+html[data-presentation='read'] .proposal-sheet .collection-assumption {
   margin-top: 24px;
 }
-html[data-presentation='read'] .collection-comparison {
+html[data-presentation='read'] .proposal-sheet .collection-comparison {
   max-width: 820px;
 }
 html[data-presentation='read'] .window-title > strong {
@@ -1063,6 +1162,14 @@ html[data-presentation='read'] .flyer-partnership {
     gap: 15px;
   }
 }
+@media (min-width: 760px) {
+  html[data-presentation='tour'] .flyer-cover {
+    --body: calc(28 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .flyer-cash {
+    --body: calc(32 * var(--paper-unit));
+  }
+}
 @media (max-width: 759px) {
   .site-header {
     height: 84px;
@@ -1093,6 +1200,15 @@ html[data-presentation='read'] .flyer-partnership {
     justify-content: space-between;
     font-size: 12px;
     gap: 12px;
+  }
+  .portfolio-navigation .mobile-notes {
+    display: flex;
+  }
+  .mobile-link-label {
+    display: inline;
+  }
+  .desktop-link-label {
+    display: none;
   }
   .portfolio-navigation a {
     display: flex;
@@ -1128,7 +1244,8 @@ html[data-presentation='read'] .flyer-partnership {
     height: 15px;
   }
   .scroll-line::after {
-    height: calc(4px + var(--tour-progress) * 11px);
+    height: 15px;
+    transform: scaleY(calc(0.26667 + var(--tour-progress) * 0.73333));
   }
   .tour-counter {
     grid-row: 1;
@@ -1147,31 +1264,10 @@ html[data-presentation='read'] .flyer-partnership {
     gap: 0;
   }
   .chapter-nav button {
-    width: 32px;
-    min-width: 28px;
-    flex: 1 1 0;
+    flex: 0 0 auto;
     min-height: 44px;
-    padding: 0;
-    border-radius: 0;
-    position: relative;
-  }
-  .chapter-nav button span {
-    font-size: 0;
-  }
-  .chapter-nav button::before {
-    content: '';
-    width: 5px;
-    height: 5px;
-    background: currentColor;
-    border-radius: 50%;
-    display: block;
-    margin: auto;
-  }
-  .chapter-nav button[aria-current]::before {
-    width: 14px;
-    height: 3px;
-    border-radius: 0;
-    background: var(--accent);
+    padding: 0 12px;
+    font-size: 11px;
   }
   html[data-presentation='tour'] .proposal-sheet {
     --body: calc(40 * var(--paper-unit));
@@ -1197,27 +1293,29 @@ html[data-presentation='read'] .flyer-partnership {
     display: none;
   }
   html[data-presentation='tour'] .flyer-partnership {
-    --body: calc(36 * var(--paper-unit));
-    --detail: calc(34 * var(--paper-unit));
+    --body: calc(40 * var(--paper-unit));
+    --detail: calc(40 * var(--paper-unit));
   }
   html[data-presentation='tour'] .flyer-cover {
     width: calc(420 * var(--paper-unit));
     margin-left: calc(30 * var(--paper-unit));
   }
   html[data-presentation='tour'] .flyer-cover h1 {
-    font-size: calc(84 * var(--paper-unit));
+    --authored-font-size: calc(84 * var(--paper-unit));
   }
-  html[data-presentation='tour'] .cover-intro,
-  html[data-presentation='tour'] .cover-description {
+  html[data-presentation='tour'] .cover-intro {
     font-size: calc(30 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .cover-description {
+    --authored-font-size: calc(30 * var(--paper-unit));
   }
   html[data-presentation='tour'] .cover-statement {
     font-size: calc(34 * var(--paper-unit));
   }
   html[data-presentation='tour'] .flyer-cash {
-    --body: calc(40 * var(--paper-unit));
-    --detail: calc(40 * var(--paper-unit));
-    width: calc(800 * var(--paper-unit));
+    --body: calc(44 * var(--paper-unit));
+    --detail: calc(44 * var(--paper-unit));
+    width: calc(760 * var(--paper-unit));
     margin: calc(30 * var(--paper-unit)) auto 0;
   }
   html[data-presentation='tour'] .flyer-cash h2 {
@@ -1229,7 +1327,7 @@ html[data-presentation='read'] .flyer-partnership {
   html[data-presentation='tour'] .collection-table tr {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: calc(46 * var(--paper-unit));
+    column-gap: calc(24 * var(--paper-unit));
   }
   html[data-presentation='tour'] .collection-row-label {
     grid-column: 1/-1;
@@ -1253,20 +1351,26 @@ html[data-presentation='read'] .flyer-partnership {
     padding-block: calc(8 * var(--paper-unit));
   }
   html[data-presentation='tour'] .collection-assumption {
-    margin-top: calc(20 * var(--paper-unit));
+    margin-top: calc(12 * var(--paper-unit));
+    line-height: 1.25;
   }
   html[data-presentation='tour'] .collection-collected {
-    margin-block: calc(16 * var(--paper-unit));
+    margin-block: calc(10 * var(--paper-unit));
   }
   html[data-presentation='tour'] .collection-rule {
-    margin-top: calc(22 * var(--paper-unit));
+    margin-top: calc(27 * var(--paper-unit));
   }
   html[data-presentation='tour'] .collection-qualifier {
-    margin-top: calc(14 * var(--paper-unit));
+    margin-top: calc(27 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .collection-difference,
+  html[data-presentation='tour'] .collection-rule,
+  html[data-presentation='tour'] .collection-qualifier {
+    line-height: 1.25;
   }
   html[data-presentation='tour'] .rate-group {
-    --body: calc(36 * var(--paper-unit));
-    --detail: calc(34 * var(--paper-unit));
+    --body: calc(37 * var(--paper-unit));
+    --detail: calc(35 * var(--paper-unit));
   }
   html[data-presentation='tour'] .rates-heading,
   html[data-presentation='tour'] .rate-shared {
@@ -1274,15 +1378,17 @@ html[data-presentation='read'] .flyer-partnership {
   }
   html[data-presentation='tour'] .rate-context {
     display: block;
-    font-size: calc(42 * var(--paper-unit));
+    color: var(--muted);
+    font-size: calc(34 * var(--paper-unit));
     font-weight: 500;
     letter-spacing: -0.04em;
     line-height: 1.2;
-    margin-bottom: calc(36 * var(--paper-unit));
+    margin-bottom: calc(28 * var(--paper-unit));
   }
   html[data-presentation='tour'] .deal-paths {
-    grid-template-columns: repeat(2, calc(420 * var(--paper-unit)));
-    gap: calc(240 * var(--paper-unit));
+    grid-template-columns: repeat(2, calc(440 * var(--paper-unit)));
+    align-items: start;
+    gap: calc(200 * var(--paper-unit));
   }
   html[data-presentation='tour'] .deal-path {
     display: grid;
@@ -1296,7 +1402,7 @@ html[data-presentation='read'] .flyer-partnership {
   }
   html[data-presentation='tour'] .deal-path-label {
     font-size: calc(46 * var(--paper-unit));
-    margin-bottom: calc(24 * var(--paper-unit));
+    margin-bottom: calc(16 * var(--paper-unit));
   }
   html[data-presentation='tour'] .deal-rate {
     grid-row: 2;
@@ -1304,21 +1410,25 @@ html[data-presentation='read'] .flyer-partnership {
   }
   html[data-presentation='tour'] .deal-rate-label {
     grid-row: 3;
-    grid-column: 1;
+    grid-column: 1/-1;
   }
   html[data-presentation='tour'] .deal-recurring {
-    grid-row: 2/4;
-    grid-column: 2;
-    display: block;
+    grid-row: 4;
+    grid-column: 1/-1;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    gap: calc(18 * var(--paper-unit));
     border: 0;
     padding: 0;
-    margin: 0;
+    margin: calc(20 * var(--paper-unit)) 0 0;
   }
   html[data-presentation='tour'] .deal-recurring strong {
-    font-size: calc(72 * var(--paper-unit));
+    font-size: calc(60 * var(--paper-unit));
     display: block;
     line-height: 1;
-    margin-bottom: calc(18 * var(--paper-unit));
+    margin: 0;
+    flex-shrink: 0;
   }
   html[data-presentation='tour'] .deal-recurring span {
     line-height: 1.25;
@@ -1333,8 +1443,9 @@ html[data-presentation='read'] .flyer-partnership {
     border-top: calc(1 * var(--paper-unit)) solid var(--line);
   }
   html[data-presentation='tour'] .flyer-window {
-    width: calc(700 * var(--paper-unit));
-    margin: calc(120 * var(--paper-unit)) auto 0;
+    --detail: calc(40 * var(--paper-unit));
+    width: calc(580 * var(--paper-unit));
+    margin: calc(240 * var(--paper-unit)) auto 0;
   }
   html[data-presentation='tour'] .window-steps {
     display: block;
@@ -1343,7 +1454,7 @@ html[data-presentation='read'] .flyer-partnership {
     margin-top: calc(30 * var(--paper-unit));
   }
   html[data-presentation='tour'] .flyer-partnership {
-    width: calc(680 * var(--paper-unit));
+    width: calc(600 * var(--paper-unit));
     margin: calc(340 * var(--paper-unit)) 0 0 calc(290 * var(--paper-unit));
   }
   html[data-presentation='tour'] .partnership-lead h2 {
@@ -1373,7 +1484,7 @@ html[data-presentation='read'] .flyer-partnership {
     font-size: 28px;
   }
   html[data-presentation='read'] .cover-description {
-    font-size: 18px;
+    --authored-font-size: 18px;
   }
   html[data-presentation='read'] .deal-paths {
     display: block;
@@ -1382,9 +1493,6 @@ html[data-presentation='read'] .flyer-partnership {
     margin-top: 32px;
     padding-top: 30px;
     border-top: 1px solid var(--line);
-  }
-  html[data-presentation='read'] .rate-scope {
-    display: none;
   }
   html[data-presentation='read'] .rates-heading {
     margin-bottom: 30px;
@@ -1401,7 +1509,7 @@ html[data-presentation='read'] .flyer-partnership {
   html[data-presentation='read'] .window-steps li + li {
     margin-top: 24px;
   }
-  html[data-presentation='read'] .collection-collected-amount {
+  html[data-presentation='read'] .proposal-sheet .collection-collected-amount {
     font-size: 56px;
   }
   html[data-presentation='read'] .collection-table tr {
@@ -1419,7 +1527,7 @@ html[data-presentation='read'] .flyer-partnership {
   html[data-presentation='read'] .collection-table td {
     padding: 10px 0 18px;
   }
-  html[data-presentation='read'] .collection-value {
+  html[data-presentation='read'] .proposal-sheet .collection-value {
     font-size: 32px;
   }
   html[data-presentation='read'] .collection-rate {
@@ -1473,7 +1581,20 @@ html[data-presentation='read'] .flyer-partnership {
     font-size: 48px;
   }
 }
+@media (min-width: 760px) and (max-width: 1023px) {
+  .document-layout {
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 32px;
+    padding-inline: 32px;
+  }
+}
 @media (max-width: 359px) {
+  html[data-presentation='read'] .proposal-sheet .collection-collected-amount {
+    font-size: 48px;
+  }
+  html[data-presentation='read'] .proposal-sheet .collection-value {
+    font-size: 26px;
+  }
   .site-header {
     padding: 0 12px;
     font-size: 10px;
@@ -1498,9 +1619,61 @@ html[data-presentation='read'] .flyer-partnership {
 /* Smaller intrinsic surfaces keep high-density displays within the paper raster budget. */
 @media (min-resolution: 2dppx) {
   html[data-presentation='tour'] .proposal-sheet {
-    --paper-unit: 0.5px;
+    --paper-unit: 0.48px;
   }
 }
+@media (min-width: 760px) and (max-width: 999px) {
+  html[data-presentation='tour'] .flyer-window {
+    margin-top: calc(224 * var(--paper-unit));
+  }
+}
+
+@media (min-width: 760px) {
+  .window-steps {
+    grid-template-rows: auto auto;
+    row-gap: 0;
+  }
+  .window-steps li {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 2;
+  }
+  html[data-presentation='tour'] .flyer-window {
+    width: calc(900 * var(--paper-unit));
+    margin-inline: auto;
+  }
+  html[data-presentation='tour'] .window-steps {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    row-gap: calc(28 * var(--paper-unit));
+  }
+  html[data-presentation='tour'] .window-steps li {
+    grid-template-columns: calc(280 * var(--paper-unit)) 1fr;
+    grid-template-rows: auto;
+    grid-row: auto;
+    column-gap: calc(30 * var(--paper-unit));
+    align-items: baseline;
+  }
+  html[data-presentation='tour'] .window-steps p {
+    margin-top: 0;
+  }
+}
+@media (min-width: 1000px) {
+  html[data-presentation='tour'] .flyer-window {
+    margin-top: calc(208 * var(--paper-unit));
+  }
+}
+
+@media (max-width: 359px) {
+  html[data-presentation='tour'] .collection-rate {
+    display: block;
+    margin-left: 0;
+  }
+  html[data-presentation='tour'] .flyer-cash {
+    width: calc(660 * var(--paper-unit));
+  }
+}
+
 @media print {
   .paper-shadow,
   .panel-face::before,
@@ -1513,4 +1686,58 @@ html[data-presentation='read'] .flyer-partnership {
   .panel-back {
     background-image: none !important;
   }
+}
+
+/* Text alternatives remain available without retaining hidden GPU surfaces. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+html[data-presentation='read'] .tour-guidance {
+  display: none;
+}
+html[data-presentation='tour'] .panel-masthead {
+  border-bottom-width: calc(3 * var(--paper-unit));
+}
+html[data-presentation='tour'] .panel-colophon,
+html[data-presentation='tour'] .back-edition {
+  border-top-width: calc(3 * var(--paper-unit));
+}
+@media (max-width: 759px) {
+  .chapter-nav {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 7px,
+      black calc(100% - 10px),
+      transparent
+    );
+    padding-inline: 7px 12px;
+  }
+}
+
+html[data-presentation='tour'] .collection-table thead th {
+  border-bottom-width: calc(2 * var(--paper-unit));
+}
+html[data-presentation='tour'] .collection-table tbody tr + tr {
+  border-top-width: calc(2 * var(--paper-unit));
+}
+button[aria-disabled='true'] {
+  cursor: default;
+}
+
+.reading-navigation a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+.chapter-nav:focus-within {
+  mask-image: none;
 }

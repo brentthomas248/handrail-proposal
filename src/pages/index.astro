@@ -8,6 +8,10 @@ const base = import.meta.env.BASE_URL;
 
 <Page title="A beginning together · A proposal for Handrail">
   <main id="main">
+    <p class="tour-guidance sr-only">
+      The animated tour follows the complete proposal below. Choose Read
+      normally or Skip to content for a standard document layout.
+    </p>
     <div class="tour-controls" aria-label="Proposal tour">
       <div class="tour-instruction">
         <span class="scroll-line" aria-hidden="true"></span>
@@ -26,6 +30,10 @@ const base = import.meta.env.BASE_URL;
       <span class="tour-counter" aria-hidden="true">
         <span id="current-stop">00</span> / <span id="total-stops">06</span>
       </span>
+    </div>
+    <div class="tour-loading">
+      <p role="status">Opening the proposal</p>
+      <a href={`${base}?view=read`}>Read without animation</a>
     </div>
     <div class="flyer-journey">
       <div class="flyer-stage">
@@ -108,8 +116,10 @@ const base = import.meta.env.BASE_URL;
               data-camera-order="4"
             >
               <div class="window-title">
-                <strong>{proposal.activationDays}</strong>
-                <h2>days to begin.</h2>
+                <strong aria-hidden="true">{proposal.activationDays}</strong>
+                <h2 aria-label={`${proposal.activationDays} days to begin.`}>
+                  days to begin.
+                </h2>
               </div>
               <ol class="window-steps">
                 <li>
@@ -119,8 +129,8 @@ const base = import.meta.env.BASE_URL;
                 <li>
                   <strong>Either path can start.</strong>
                   <p>
-                    Handrail can hire first, or I can bring the paying client
-                    first.
+                    Handrail can hire first, or commit to hire when I bring the
+                    qualifying client.
                   </p>
                 </li>
                 <li>
@@ -183,7 +193,7 @@ const base = import.meta.env.BASE_URL;
                 alt=""
               />
               <div class="back-heading">
-                A beginning.
+                New business.
                 <br />
                 Room to
                 <br />
@@ -232,13 +242,7 @@ const base = import.meta.env.BASE_URL;
                 <span>Handrail / Brent Showalter</span>
               </div>
               <div class="panel-colophon">
-                <a
-                  href="https://github.com/brentthomas248/handrail-proposal"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Explore the source
-                </a>
+                <span>For discussion</span>
               </div>
             </div>
             <div class="panel-back rust-back" aria-hidden="true">

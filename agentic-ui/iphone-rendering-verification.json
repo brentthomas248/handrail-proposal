@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-09-26T21:48:47.606275+00:00",
-  "status": "Desktop-emulated regression verified; physical iPhone confirmation pending",
+  "status": "Historical crash-remediation measurements; current independent rendering evidence is linked separately; physical iPhone pending",
   "trigger": "User reported a repeated browser-page crash after several scrolls on a physical iPhone.",
   "hypothesis": "Large composited paper surfaces and separately promoted shading layers plausibly contributed to rendering pressure. The physical crash cause has not been proven.",
   "measurement": {
@@ -26,7 +26,10 @@
     "drawnLayers": 24,
     "drawnPaperFaces": 6,
     "promotedPaperOverlays": 12,
-    "compositedFaceDimensionsCssPx": [760, 2467],
+    "compositedFaceDimensionsCssPx": [
+      760,
+      2467
+    ],
     "largestPaperDeviceEdgePx": 7401,
     "paperFaceEstimateMiB": 386.222,
     "paperOverlayEstimateMiB": 525.841,
@@ -38,7 +41,10 @@
     "drawnLayers": 9,
     "drawnPaperFaces": 3,
     "promotedPaperOverlays": 0,
-    "compositedFaceDimensionsCssPx": [600, 852],
+    "compositedFaceDimensionsCssPx": [
+      600,
+      852
+    ],
     "largestPaperDeviceEdgePx": 2556,
     "paperFaceEstimateMiB": 52.652,
     "paperOverlayEstimateMiB": 0,
@@ -134,5 +140,7 @@
     "qa-artifacts/iphone-compositing/reverse-baseline.json",
     "qa-artifacts/iphone-compositing/reverse-candidate.json",
     "qa-artifacts/iphone-compositing/webkit/verification.json"
-  ]
+  ],
+  "historical": true,
+  "currentEvidence": "docs/final-design-review/r8-rendering.md"
 }

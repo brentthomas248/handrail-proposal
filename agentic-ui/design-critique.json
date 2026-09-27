@@ -1,300 +1,78 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T01:48:31.058209+00:00",
+  "generatedAt": "2026-09-27T20:51:01.808465+00:00",
   "surface": "Handrail hinged HTML trifold and partnership proposal notes",
-  "scope": "Independent critic accepts the bounded opening-to-cash prototype; remaining rates/window/ending creative work and physical-device validation remain separate.",
+  "scope": "Final full-experience specialist review",
   "sources": [
-    "DESIGN.md",
-    "docs/design-director-review.md",
-    "docs/paper-prototype-adversarial-review.md",
-    "qa-artifacts/paper-prototype/critic/candidate-2/capture.json"
+    "docs/final-design-review/brief.md",
+    "docs/final-design-review/remediation.md"
   ],
   "checks": [
     {
-      "id": "product-intent",
-      "status": "pass",
-      "evidence": ["PROJECT.md", "src/content/proposal.ts"],
-      "notes": [
-        "The proposal opens a broader working relationship. New business is the starting point, with room for Brent's contribution to grow; no specific future title is promised. No base salary, collections-based commission, 15/5 versus 20/5, all future credited sales and the 90-day window remain explicit. Handrail prepares the final contract."
-      ]
-    },
-    {
-      "id": "visibility-of-system-status",
+      "id": "copy",
       "status": "pass",
       "evidence": [
-        "src/scripts/motion.ts",
-        "src/layouts/Page.astro",
-        "tests/e2e/proposal.spec.ts"
+        "docs/final-design-review/r8-copy.md"
       ],
       "notes": [
-        "Current chapter, camera progress and Read normally / Take the tour labels expose the active presentation state."
-      ]
+        "Fresh independent review of the exact frozen candidate; report preserves scope, deductions and limitations."
+      ],
+      "score": 98
     },
     {
-      "id": "match-real-world",
-      "status": "pass",
-      "evidence": ["src/content/proposal.ts", "src/pages/index.astro"],
-      "notes": [
-        "The cash receipt explains money received before commission; retained funds explicitly exclude delivery, benefits and other costs."
-      ]
-    },
-    {
-      "id": "user-control-and-freedom",
-      "status": "pass",
-      "evidence": ["src/scripts/motion.ts", "tests/e2e/proposal.spec.ts"],
-      "notes": [
-        "Chapter buttons, a persisted reading preference, direct proposal notes and a matching PDF let readers bypass the camera journey."
-      ]
-    },
-    {
-      "id": "consistency-and-standards",
+      "id": "editorial",
       "status": "pass",
       "evidence": [
-        "src/styles/global.css",
-        "src/components/DealPath.tsx",
-        "public/handrail-logo.png"
+        "docs/final-design-review/r8-editorial.md"
       ],
       "notes": [
-        "The actual Handrail wordmark, warm paper/rust palette and locally served Inter/Playfair typography establish a coherent brand treatment."
-      ]
+        "Fresh independent review of the exact frozen candidate; report preserves scope, deductions and limitations."
+      ],
+      "score": 99
     },
     {
-      "id": "error-prevention",
-      "status": "pass",
-      "evidence": ["src/content/proposal.ts", "tests/agreement.test.ts"],
-      "notes": [
-        "Content is explicitly a proposal for discussion. No signature or acceptance mechanism exists; unagreed qualifying-client and benefits details remain discussion points."
-      ]
-    },
-    {
-      "id": "recognition-not-recall",
-      "status": "pass",
-      "evidence": ["src/components/DealPath.tsx", "src/pages/agreement.astro"],
-      "notes": [
-        "Rates have explicit collected-fee labels; notes provide a linked seven-section table of contents."
-      ]
-    },
-    {
-      "id": "flexibility-and-efficiency",
+      "id": "art",
       "status": "pass",
       "evidence": [
-        "src/pages/index.astro",
-        "src/pages/agreement.astro",
-        "src/scripts/motion.ts"
+        "docs/final-design-review/r8-art.md"
       ],
       "notes": [
-        "Readers can select chapters, use ordinary scrolling or open the notes and PDF directly."
-      ]
+        "Fresh independent review of the exact frozen candidate; report preserves scope, deductions and limitations."
+      ],
+      "score": 98
     },
     {
-      "id": "aesthetic-minimalist-design",
+      "id": "motion",
       "status": "pass",
       "evidence": [
-        "docs/paper-prototype-adversarial-review.md",
-        "tests/e2e/proposal.spec.ts",
-        "qa-artifacts/paper-prototype/critic/candidate-2/capture.json"
+        "docs/final-design-review/r8-motion.md"
       ],
       "notes": [
-        "Candidate 2 accepted after independent rejection and revision. First slice preserves cover presence, close hinge travel, normal-ink phone composition and meaningful static payment diagram.39 browser checks pass; later chapters retain prior design pending further creative work."
-      ]
+        "Fresh independent review of the exact frozen candidate; report preserves scope, deductions and limitations."
+      ],
+      "score": 100
     },
     {
-      "id": "error-recovery",
+      "id": "interaction",
       "status": "pass",
       "evidence": [
-        "src/layouts/Page.astro",
-        "src/scripts/motion.ts",
-        "tests/e2e/proposal.spec.ts"
+        "docs/final-design-review/r8-interaction.md"
       ],
       "notes": [
-        "No-JavaScript and system reduced-motion paths retain the complete proposal in ordinary document flow. No renderer or WebGL dependency remains."
-      ]
+        "Fresh independent review of the exact frozen candidate; report preserves scope, deductions and limitations."
+      ],
+      "score": 100
     },
     {
-      "id": "help-and-documentation",
-      "status": "pass",
-      "evidence": ["src/content/proposal.ts", "docs/proposed-agreement.md"],
-      "notes": [
-        "Concise proposal notes explain the commercial structure, requested support and discussion points without legal boilerplate."
-      ]
-    },
-    {
-      "id": "visual-hierarchy",
+      "id": "rendering",
       "status": "pass",
       "evidence": [
-        "docs/paper-prototype-adversarial-review.md",
-        "tests/e2e/proposal.spec.ts",
-        "qa-artifacts/paper-prototype/critic/candidate-2/capture.json"
+        "docs/final-design-review/r8-rendering.md"
       ],
       "notes": [
-        "Candidate 2 accepted after independent rejection and revision. First slice preserves cover presence, close hinge travel, normal-ink phone composition and meaningful static payment diagram.39 browser checks pass; later chapters retain prior design pending further creative work."
-      ]
-    },
-    {
-      "id": "responsive-layout",
-      "status": "pass",
-      "evidence": [
-        "docs/paper-prototype-adversarial-review.md",
-        "tests/e2e/proposal.spec.ts",
-        "qa-artifacts/paper-prototype/critic/candidate-2/capture.json"
+        "Fresh independent review of the exact frozen candidate; report preserves scope, deductions and limitations."
       ],
-      "notes": [
-        "Candidate 2 accepted after independent rejection and revision. First slice preserves cover presence, close hinge travel, normal-ink phone composition and meaningful static payment diagram.39 browser checks pass; later chapters retain prior design pending further creative work."
-      ]
-    },
-    {
-      "id": "accessibility",
-      "status": "needs-work",
-      "evidence": ["agentic-ui/accessibility-evidence.json"],
-      "notes": [
-        "Automated app and three component checks have zero axe violations. Manual VoiceOver and physical-device review remain unperformed."
-      ]
-    },
-    {
-      "id": "ux-writing-feedback",
-      "status": "pass",
-      "evidence": ["src/content/proposal.ts", "src/scripts/motion.ts"],
-      "notes": [
-        "Proposed status, commission timing, benefits cost and visible presentation controls are stated plainly."
-      ]
-    },
-    {
-      "id": "performance",
-      "status": "needs-work",
-      "evidence": [
-        "qa-artifacts/lighthouse-mobile.json",
-        "qa-artifacts/lighthouse-desktop.json",
-        "agentic-ui/performance-evidence.json"
-      ],
-      "notes": [
-        "Current DPR3 paper regression passes the 64MiB theoretical surface budget and 4096-device-pixel edge limit through forward/reverse motion. These are project budgets, not actual iPhone memory measurements. Historical Lighthouse scores do not prove current scroll performance or physical-device stability."
-      ]
-    },
-    {
-      "id": "form-autocomplete",
-      "status": "not-affected",
-      "evidence": ["src/pages/index.astro", "src/pages/agreement.astro"],
-      "notes": ["No forms."]
-    },
-    {
-      "id": "paste-behavior",
-      "status": "not-affected",
-      "evidence": ["src/pages/index.astro"],
-      "notes": ["No text inputs or paste interception."]
-    },
-    {
-      "id": "focus-obscured",
-      "status": "pass",
-      "evidence": ["tests/e2e/proposal.spec.ts", "src/styles/global.css"],
-      "notes": [
-        "Current browser checks cover keyboard chapter navigation, mode switching, skip-link activation and focusing an offscreen document link, which restores ordinary reading. This is checked local-flow coverage, not exhaustive manual assistive-technology certification."
-      ]
-    },
-    {
-      "id": "safe-area",
-      "status": "not-assessed",
-      "evidence": ["src/styles/global.css"],
-      "notes": [
-        "Emulated viewports do not establish physical notched-device coverage."
-      ]
-    },
-    {
-      "id": "reduced-motion",
-      "status": "pass",
-      "evidence": ["src/scripts/motion.ts", "tests/e2e/proposal.spec.ts"],
-      "notes": [
-        "System reduced motion selects ordinary reading with no camera transform. A saved reading preference survives reload and motion-preference changes."
-      ]
-    },
-    {
-      "id": "transition-specificity",
-      "status": "pass",
-      "evidence": [
-        "docs/paper-prototype-adversarial-review.md",
-        "tests/e2e/proposal.spec.ts",
-        "qa-artifacts/paper-prototype/critic/candidate-2/capture.json"
-      ],
-      "notes": [
-        "Candidate 2 accepted after independent rejection and revision. First slice preserves cover presence, close hinge travel, normal-ink phone composition and meaningful static payment diagram.39 browser checks pass; later chapters retain prior design pending further creative work."
-      ]
-    },
-    {
-      "id": "heading-wrap",
-      "status": "pass",
-      "evidence": [
-        "docs/paper-prototype-adversarial-review.md",
-        "tests/e2e/proposal.spec.ts",
-        "qa-artifacts/paper-prototype/critic/candidate-2/capture.json"
-      ],
-      "notes": [
-        "Candidate 2 accepted after independent rejection and revision. First slice preserves cover presence, close hinge travel, normal-ink phone composition and meaningful static payment diagram.39 browser checks pass; later chapters retain prior design pending further creative work."
-      ]
-    },
-    {
-      "id": "date-number-formatting",
-      "status": "pass",
-      "evidence": ["src/content/proposal.ts", "tests/agreement.test.ts"],
-      "notes": [
-        "Rates and the illustrative payment arithmetic are checked; the 90-day window is a proposal term, not a live countdown."
-      ]
-    },
-    {
-      "id": "hydration-date-rendering",
-      "status": "not-affected",
-      "evidence": ["src/content/proposal.ts"],
-      "notes": ["No live date or locale-sensitive client rendering."]
-    },
-    {
-      "id": "touch-behavior",
-      "status": "pass",
-      "evidence": ["tests/e2e/proposal.spec.ts"],
-      "notes": [
-        "An emulated mobile touch gesture advances the tour in browser QA. Physical-device interaction remains unverified."
-      ]
-    },
-    {
-      "id": "long-text-handling",
-      "status": "pass",
-      "evidence": [
-        "src/pages/agreement.astro",
-        "src/content/proposal.ts",
-        "scripts/verify-pdf.ts"
-      ],
-      "notes": [
-        "The notes route presents the canonical introduction, seven sections, 15 paragraphs and endnote. PDF generation and rendered-document verification are tracked in the current release receipts."
-      ]
-    },
-    {
-      "id": "numeric-typography",
-      "status": "pass",
-      "evidence": [
-        "src/components/DealPath.tsx",
-        "qa-artifacts/trifold/desktop-03.png"
-      ],
-      "notes": [
-        "Rendered rate numerals retain associated percentage and collected-fee labels."
-      ]
-    },
-    {
-      "id": "agent-compatible-semantics",
-      "status": "pass",
-      "evidence": [
-        "src/layouts/Page.astro",
-        "src/pages/index.astro",
-        "src/pages/agreement.astro",
-        "tests/e2e/proposal.spec.ts"
-      ],
-      "notes": [
-        "Native buttons and links, named navigation, headings and landmarks expose the camera and reading paths through the DOM."
-      ]
-    },
-    {
-      "id": "full-stack-states",
-      "status": "not-affected",
-      "evidence": ["PROJECT.md"],
-      "notes": [
-        "Static app; no API, database, authentication or business mutation states."
-      ]
+      "score": 99
     }
   ]
 }

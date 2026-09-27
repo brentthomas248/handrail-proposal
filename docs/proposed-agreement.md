@@ -2,7 +2,7 @@
 
 # Proposal notes
 
-**For discussion · 2026-09-26**
+**For discussion · 2026-09-27**
 
 Proposed terms for beginning a partnership: no base salary, commission tied to collected revenue, and a requested benefits package. These terms are for discussion.
 
@@ -16,38 +16,38 @@ A benefits package is part of my request and a separate company cost. Delivery, 
 
 If Handrail brings me on before I originate the qualifying client, the proposed rate is 15% of collected build fees and 5% of collected recurring fees on my credited sales.
 
-This is the lower build rate in exchange for Handrail making the commitment first. There is still no base salary in this proposal.
+This is the lower build rate in exchange for Handrail making the commitment first.
 
 ## 3. Client first: 20% build + 5% recurring
 
-If I bring the qualifying client first, Handrail brings me on at 20% of collected build fees and 5% of collected recurring fees. That rate applies to the triggering client and all future credited sales under our relationship.
+If I bring the qualifying client first, Handrail brings me on at 20% of collected build fees and 5% of collected recurring fees. Those rates apply to the triggering client and all future credited sales under our relationship.
 
-The additional 5 percentage points are proposed for bringing in the qualifying client before the hire. The higher rate still follows collections.
+The additional 5 percentage points recognize bringing in the qualifying client before the hire. That revenue enables Handrail to bring me on and creates the starting point for our partnership. The higher rate still follows collections.
 
 ## 4. Illustrative collections and commission
 
-Illustration: $120,000 build, 12 equal monthly installments.
+Illustration: $120,000 build in 12 equal monthly payments.
 
 **Collected per installment: $10,000**
 
 | Per collected installment | Hire first · 15% | Client first · 20% |
 | --- | ---: | ---: |
 | Build commission | $1,500 | $2,000 |
-| Handrail remaining before costs | $8,500 | $8,000 |
+| Handrail keeps, before costs | $8,500 | $8,000 |
 
-$500 more commission per collected installment under client first.
+Client first: $500 more commission per installment.
 
-Customer payment arrives before the related commission is paid.
+Collect first. Pay commission second.
 
-Before delivery, benefits and other costs. Illustration only; not a forecast or Handrail pricing.
+Before all company costs. Illustration only; not Handrail pricing.
 
 If all 12 illustrated installments are collected, total build commission is $18,000 under hire first or $24,000 under client first—a $6,000 difference.
 
 At either path’s 5% recurring rate, a $2,000 recurring collection produces $100 of commission.
 
-## 5. A 90-day opportunity
+## 5. A 90-day window to begin
 
-Agree on the structure now, with a 90-day window to bring in the qualifying client. Handrail can bring me on earlier at the hire-first rate. If I bring the qualifying client first within the window, the client-first rate applies.
+Agree on the structure now, with a 90-day window to bring in the qualifying client. Handrail can bring me on before that client arrives, at the hire-first rate. If I bring the qualifying client first within the window, the client-first rate applies.
 
 If neither happens, Handrail can walk away without an obligation to hire. We should settle the qualifying-client criteria and treatment of deals in progress before starting.
 
@@ -55,7 +55,7 @@ If neither happens, Handrail can walk away without an obligation to hire. We sho
 
 I would start with new business, working with your team on discovery, scoping and pricing. My contribution can evolve with Handrail’s needs as we agree on priorities and support.
 
-My request includes a benefits package when I join. We should confirm coverage where I live, the start date and my contribution, along with the tools and support I need and a practical policy for approved travel and selling expenses.
+My request includes a benefits package when I join. Before starting, we should confirm coverage where I live, the start date and my contribution. We should also agree on tools, support and a practical policy for approved travel and selling expenses.
 
 ## 7. For our next conversation
 

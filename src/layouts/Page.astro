@@ -2,6 +2,7 @@
 import '@fontsource-variable/inter';
 import '@fontsource/playfair-display/400-italic.css';
 import '../styles/global.css';
+import { flyerCopy } from '../content/proposal';
 import regularFont from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 interface Props {
   title: string;
@@ -11,7 +12,7 @@ interface Props {
 }
 const {
   title,
-  description = 'A beginning together. No base salary, commissions paid from collected revenue, and room to grow with Handrail. A proposal by Brent Showalter.',
+  description = `${flyerCopy.cover.statement} Room to grow with Handrail. A proposal by Brent Showalter.`,
   document = false,
   currentPage = document ? 'notes' : 'proposal',
 } = Astro.props;
@@ -39,7 +40,7 @@ const base = import.meta.env.BASE_URL;
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="No base salary. Commission paid from collected revenue. A proposal for Handrail."
+      content={`${flyerCopy.cover.statement} A proposal for Handrail.`}
     />
     <meta
       property="og:image"
@@ -51,8 +52,6 @@ const base = import.meta.env.BASE_URL;
       try {
         const requestedRead =
           new URLSearchParams(location.search).get('view') === 'read';
-        if (requestedRead)
-          localStorage.setItem('proposal-presentation', 'read');
         if (
           !requestedRead &&
           !matchMedia('(prefers-reduced-motion: reduce)').matches &&
@@ -102,28 +101,46 @@ const base = import.meta.env.BASE_URL;
           Proposal notes
         </a>
         {!document && (
-          <button type="button" id="reading-mode" aria-pressed="false" hidden>
-            Read normally
-          </button>
+          <>
+            <button type="button" id="reading-mode" aria-pressed="false" hidden>
+              Read normally
+            </button>
+            <span id="reading-explanation" class="sr-only"></span>
+          </>
         )}
         {document && <a href={base}>The proposal</a>}
       </nav>
       <nav class="portfolio-navigation" aria-label="More about Brent">
         <a
+          class="mobile-notes"
+          href={`${base}agreement/`}
+          aria-current={currentPage === 'notes' ? 'page' : undefined}
+        >
+          Proposal notes
+        </a>
+        <a
           href={`${base}resume/`}
+          aria-label="My Handrail resume"
           aria-current={currentPage === 'resume' ? 'page' : undefined}
         >
-          My Handrail resume
+          <span class="desktop-link-label">My Handrail resume</span>
+          <span class="mobile-link-label">My resume</span>
         </a>
         <a
           href="https://github.com/brentthomas248"
+          aria-label="Explore my GitHub"
           target="_blank"
           rel="noreferrer"
+          aria-describedby="new-tab-description"
         >
-          Explore my GitHub
+          <span class="desktop-link-label">Explore my GitHub</span>
+          <span class="mobile-link-label">My GitHub</span>
         </a>
       </nav>
     </header>
+    <span id="new-tab-description" hidden>
+      Opens in a new tab.
+    </span>
     <slot />
     <footer class="site-footer">
       <span>Brent Showalter for Handrail</span>
@@ -133,6 +150,7 @@ const base = import.meta.env.BASE_URL;
         href="https://github.com/brentthomas248"
         target="_blank"
         rel="noreferrer"
+        aria-describedby="new-tab-description"
       >
         My GitHub
       </a>

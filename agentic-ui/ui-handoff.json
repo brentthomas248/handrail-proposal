@@ -1,15 +1,13 @@
 {
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
-  "surface": "Complete Z-fold partnership proposal, tailored resume/PDF and public portfolio navigation",
-  "generatedAt": "2026-09-27T05:17:34.105218+00:00",
+  "surface": "Final six-specialty review of the Handrail Z-fold proposal, reading paths, notes and tailored resume",
+  "generatedAt": "2026-09-27T20:51:01.808465+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
     "docs/brand-sources.md",
-    "agentic-ui/design-critique.json",
-    "docs/design-director-review.md",
-    "docs/design-research-round-3.md"
+    "docs/final-design-review/brief.md"
   ],
   "acceptedDecisions": [
     "True Z-fold, continuous camera movement, opposite-depth wings, fine paper texture, crease shading and soft projected light.",
@@ -43,15 +41,17 @@
       "/handrail-proposal/agreement/",
       "/handrail-proposal/resume/"
     ],
-    "components": ["DealPath"],
+    "components": [
+      "DealPath"
+    ],
     "filesChanged": [
+      "src/content/proposal.ts",
       "src/scripts/motion.ts",
-      "src/scripts/tour-path.ts",
+      "src/scripts/typography-guard.ts",
       "src/styles/global.css",
       "src/layouts/Page.astro",
-      "src/content/resume.ts",
-      "src/pages/resume.astro",
-      "src/styles/resume.css"
+      "src/pages/index.astro",
+      "src/pages/resume.astro"
     ],
     "reviewedFiles": [
       "DESIGN.md",
@@ -68,7 +68,9 @@
   },
   "componentCoverage": {
     "matrixPath": "agentic-ui/component-state-matrix.json",
-    "components": ["DealPath"],
+    "components": [
+      "DealPath"
+    ],
     "missingCoverage": [],
     "status": "verified-current-local"
   },
@@ -85,13 +87,23 @@
       "Subdue surrounding print so the active reading group remains the focal point."
     ],
     "rejectedCritiques": [],
-    "independentReviewPath": "docs/portfolio-resume-motion-implementation.md",
-    "verdict": "accepted-round-three",
+    "independentReviewPath": "docs/final-design-review/progress.md",
+    "verdict": "accepted-local-candidate-v8",
     "specialistReviews": {
-      "spatial": "docs/round-3-spatial-review.md",
-      "editorial": "docs/round-3-editorial-review.md",
-      "narrative": "docs/round-3-narrative-review.md",
-      "interaction": "docs/round-3-interaction-review.md"
+      "copy": "docs/final-design-review/r8-copy.md",
+      "editorial": "docs/final-design-review/r8-editorial.md",
+      "art": "docs/final-design-review/r8-art.md",
+      "motion": "docs/final-design-review/r8-motion.md",
+      "interaction": "docs/final-design-review/r8-interaction.md",
+      "rendering": "docs/final-design-review/r8-rendering.md"
+    },
+    "scores": {
+      "copy": 98,
+      "editorial": 99,
+      "art": 98,
+      "motion": 100,
+      "interaction": 100,
+      "rendering": 99
     }
   },
   "userAssumptions": [
@@ -120,22 +132,21 @@
   ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
-    "Current64-browser/27-unit/3-component/29-WebKit checks passed; both two-page PDFs verified.",
-    "All four independent reviews closed actionable findings. Root separately inspected the refined opening shadow.",
-    "Current hosted release:64 browser checks and28 byte-matching files pass. Both downloaded PDFs match canonical content."
+    "185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
+    "Physical iPhone stability, genuine hidden-tab recovery, manual VoiceOver, actual GPU memory and field INP remain unverified. Full global lifecycle certification is not claimed.",
+    "All six independent scores meet the requested category threshold; publication and hosted verification remain pending."
   ],
   "userReview": {
-    "date": "2026-09-26",
+    "date": "2026-09-27",
     "status": "current-revision-user-review-pending",
     "researchPath": "docs/design-director-review.md",
     "implementationPaused": false,
-    "reason": "User requested direct implementation of researched specialist findings while continuing resume/profile/motion work."
+    "reason": "User requested six-specialty adversarial rounds, direct remediation and fresh independent validation."
   },
   "publication": {
-    "status": "published-and-hosted-verified",
+    "status": "candidate-not-published",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "sourceCommit": "dc99b79cf863cac58385381375b2cbb10aa4774c",
-    "staticCommit": "40c72dd75350081674c6f5da7be5f22601d5b8d3",
-    "evidencePath": "agentic-ui/deployment-verification.json"
+    "evidencePath": "agentic-ui/deployment-verification.json",
+    "note": "Deployment receipt currently describes the prior release."
   }
 }

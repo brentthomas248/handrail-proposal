@@ -151,6 +151,14 @@ describe('honest scene ownership', () => {
     );
   });
 
+  it('keeps the unfolded overview current until the first reading arrival', () => {
+    expect(sceneAt(stops, 1.7, 0.24, 0)).toEqual({
+      index: 0,
+      caption: 'Unfolding the proposal',
+    });
+    expect(sceneAt(stops, 1.9, 0.24, 0).index).toBe(1);
+  });
+
   it('does not flicker current-step ownership on tiny midpoint reversals', () => {
     expect(sceneAt(stops, 3.02, 0.24, 1).index).toBe(1);
     expect(sceneAt(stops, 2.98, 0.24, 2).index).toBe(2);
@@ -187,15 +195,33 @@ describe('local paper travel', () => {
     const to = { ...pose, focusX: 600, focusY: 1400, scale: 0.4 };
     const bridges = hingeTravel(from, to, 'right', 'left', 1200);
     expect(bridges.map((bridge) => bridge.focusX)).toEqual([
-      2400, 2400, 1200, 1200,
+      2400, 2400, 1800, 1200, 1200,
     ]);
-    expect(bridges.map((bridge) => bridge.yaw)).toEqual([-62, 6, 6, -62]);
+    expect(bridges.map((bridge) => bridge.yaw)).toEqual([-62, 6, 6, 6, -62]);
     for (const bridge of bridges) {
       expect(bridge.scale).toBeGreaterThanOrEqual(0.36);
       expect(bridge.pitch).toBeGreaterThan(8);
       expect(bridge.pitch).toBeLessThanOrEqual(15);
     }
     expect(hingeTravel(from, to, 'right', 'right', 1200)).toEqual([]);
+  });
+
+  it('relaxes one wing before folding the other during the return', () => {
+    const from = {
+      ...pose,
+      left: 38,
+      right: 38,
+      focusX: 3000,
+      focusY: 600,
+      scale: 0.5,
+    };
+    const to = { ...from, focusX: 600, focusY: 1400, scale: 0.4 };
+    const bridges = [from, ...hingeTravel(from, to, 'right', 'left', 1200), to];
+    for (let i = 1; i < bridges.length; i += 1) {
+      const leftMoves = bridges[i].left !== bridges[i - 1].left;
+      const rightMoves = bridges[i].right !== bridges[i - 1].right;
+      expect(leftMoves && rightMoves).toBe(false);
+    }
   });
 
   it('retraces the same physical orbit when the route is reversed', () => {

@@ -1,3 +1,4 @@
+import { waitForTourSettled } from '../tests/helpers/tour-settled.ts';
 import { webkit, expect } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 const output = process.env.WEBKIT_OUTPUT || 'qa-artifacts/trifold-webkit';
@@ -62,10 +63,12 @@ try {
     );
     const navigation = page.locator('.chapter-nav button[data-go-to]');
     await navigation.nth(1).click();
-    await page.waitForTimeout(1400);
+    await waitForTourSettled(page);
     const firstReadingProgress = (await page.evaluate(() => scrollY)) / travel;
     await navigation.nth(0).click();
-    await page.waitForTimeout(1400);
+    await waitForTourSettled(page);
+    // Programmatic mobile sampling must retain input ownership between captures.
+    await page.evaluate(() => window.dispatchEvent(new Event('touchstart')));
     for (const fraction of [0, 0.18, 0.34, 0.5, 0.6, 1]) {
       const progress = firstReadingProgress * fraction;
       if (progress) {
@@ -121,8 +124,10 @@ try {
           ),
         ),
       ).toBeGreaterThan(30);
-    if (viewport.width < 700) await page.evaluate(() => window.scrollTo(0, 0));
-    else await page.mouse.wheel(0, -travel * 2);
+    await page.evaluate(() => window.dispatchEvent(new Event('touchend')));
+    // Native input cancels any automatic travel before reversing the paper.
+    await page.keyboard.press('Home');
+    await waitForTourSettled(page);
     await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
     for (const wing of ['left', 'right'])
       await expect
@@ -148,6 +153,7 @@ try {
       if (!(await target.count())) continue;
       await button.click();
       await expect(button).toHaveAttribute('aria-current', 'step');
+      await waitForTourSettled(page);
       await expect
         .poll(() =>
           target.evaluate((e) => {

@@ -1,6 +1,6 @@
 {
-  "checkedAt": "2026-09-27T14:13:47.306Z",
-  "scope": "Fold-out opening correction and unchanged reading geometry; not physical iOS stability",
+  "checkedAt": "2026-09-27T20:32:12.480Z",
+  "scope": "Final design candidate framing, text settings and reading recovery; not physical iOS stability",
   "engine": {
     "name": "Playwright WebKit",
     "version": "26.6",
@@ -24,8 +24,8 @@
     ],
     "mobileInput": "Programmatic document scrolling; Playwright does not support mouse-wheel input in mobile WebKit",
     "script": "scripts/verify-webkit.mjs",
-    "receipt": "qa-artifacts/fold-opening/webkit/verification.json",
-    "minimumRenderedTextPx": 12.158187866210938,
+    "receipt": "qa-artifacts/final-design/r8/webkit/verification.json",
+    "minimumRenderedTextPx": 16.05510820881515,
     "deviceScaleFactors": {
       "desktop": 1,
       "phone": 3
@@ -73,8 +73,24 @@
   "nativeMobileVerified": false,
   "headfulViewportLimitation": "Headful WebKit retained desktop layout despite a reported 390px configured viewport. Headless mobile geometry is covered separately; native mobile and physical iOS remain unverified.",
   "notes": [
-    "Current fold-out opening and all 29 reading positions passed across five sizes.",
-    "Historical native-window evidence and known protocol screenshot limitations remain separate from current headless geometry.",
-    "Physical iPhone crash verification requires actual-device evidence."
-  ]
+    "Candidate-v8 passes29 reading positions and all113 supplementary checks across the initial run and bounded input rechecks. The original four input-precondition failures are retained.",
+    "Native-window evidence remains historical; protocol screenshot limitations are unchanged. Physical iPhone stability remains unverified."
+  ],
+  "supplementaryTextSettings": {
+    "passed": 113,
+    "failed": 0,
+    "receipt": "qa-artifacts/final-design/r8/webkit-supplemental.log",
+    "tests": [
+      "tests/e2e/text-spacing.spec.ts",
+      "tests/e2e/loading-affordance.spec.ts"
+    ],
+    "limitations": [
+      "Keyboard activation uses explicit focused Enter; this is not manual VoiceOver or native Tab-to-links preference certification.",
+      "WebKit computes universal spacing overrides inside hidden front faces on reveal; then reading fallback activates. Evidence: qa-artifacts/final-design/candidate-v3/webkit-spacing-reveal.json."
+    ],
+    "scopedRecheckReceipt": "qa-artifacts/final-design/r8/webkit-input-final.log",
+    "initialPassed": 109,
+    "initialFailed": 4,
+    "completionMode": "109 unchanged passing cases plus four corrected input-actuation rechecks; not a single clean run"
+  }
 }

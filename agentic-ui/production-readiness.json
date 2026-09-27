@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T05:17:34.105218+00:00",
+  "generatedAt": "2026-09-27T20:51:01.808465+00:00",
   "ok": false,
-  "status": "round-three-published-and-hosted-verified-physical-iphone-pending",
+  "status": "local-accepted-publication-pending",
   "localRelease": {
     "passed": true,
     "evidence": [
@@ -12,13 +12,12 @@
     ]
   },
   "publication": {
-    "deployed": true,
-    "hostedSmokeTestPassed": true,
+    "deployed": false,
+    "hostedSmokeTestPassed": false,
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidence": "agentic-ui/deployment-verification.json",
     "notes": [
-      "Current application and resume are published and hosted verified. Public profile README, bio and pins are applied and independently inspected.",
-      "Branch publication uses a locally verified static build. Inactive Actions templates remain under docs/github-actions because the current credential cannot create or update executable workflows."
+      "Receipt currently identifies previous release. Publish and hosted verification follow independent acceptance."
     ]
   },
   "strictCertification": {
@@ -31,7 +30,7 @@
     ],
     "notes": [
       "The global generation gate reports static-app policy/schema, literal-token, accessibility-schema and route-budget schema gaps; full global certification is not claimed.",
-      "Current product checks passed under the explicit local workflow authorization.",
+      "Approved local scope passed independent review and deterministic verification; full global certification remains unclaimed.",
       "Manual assistive-technology, physical-device and field INP review remain unperformed."
     ]
   }

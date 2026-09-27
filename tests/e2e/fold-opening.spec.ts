@@ -1,9 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import { writeFile } from 'node:fs/promises';
-
-// The overview is complete before the first readable cover position. Calibrate
-// its native scroll distance through the chapter control, not private app state.
-const overviewFraction = 1.7 / 2.65;
+import { waitForTourSettled } from '../helpers/tour-settled';
 
 async function wings(page: Page) {
   return page
@@ -26,6 +23,41 @@ async function scale(page: Page) {
     const matrix = new DOMMatrixReadOnly(getComputedStyle(sheet).transform);
     return Math.hypot(matrix.m11, matrix.m12, matrix.m13);
   });
+}
+
+async function overviewPosition(
+  page: Page,
+  firstReadingY: number,
+  opened: Awaited<ReturnType<typeof wings>>,
+) {
+  let before = 0;
+  let after = Math.ceil(firstReadingY);
+  // The first reading pose has the fully opened hinge angles. Find their first
+  // occurrence through rendered geometry; later cover travel can change freely.
+  await page.evaluate(() => window.dispatchEvent(new Event('touchstart')));
+  try {
+    while (after - before > 1) {
+      const position = Math.floor((before + after) / 2);
+      const current = await page.evaluate(() => scrollY);
+      await page.mouse.wheel(0, position - current);
+      await waitForTourSettled(page);
+      const currentWings = await wings(page);
+      if (
+        currentWings.every(
+          (wing) =>
+            Math.abs(
+              wing.angle -
+                opened.find((target) => target.name === wing.name)!.angle,
+            ) <= 0.01,
+        )
+      )
+        after = position;
+      else before = position;
+    }
+  } finally {
+    await page.evaluate(() => window.dispatchEvent(new Event('touchend')));
+  }
+  return after;
 }
 
 async function recordFrames(page: Page) {
@@ -115,6 +147,7 @@ for (const viewport of [
   test(`the full three-panel opening unfolds before approaching the cover at ${viewport.width}×${viewport.height}`, async ({
     page,
   }, testInfo) => {
+    test.setTimeout(60_000);
     await page.setViewportSize(viewport);
     await page.goto('./');
     await expect(page.locator('html')).toHaveClass(/camera-ready/);
@@ -128,15 +161,16 @@ for (const viewport of [
 
     const chapters = page.locator('.chapter-nav button[data-go-to]');
     await chapters.nth(1).click();
-    await page.waitForTimeout(1200);
+    await waitForTourSettled(page);
     const firstReadingY = await page.evaluate(() => scrollY);
     expect(firstReadingY).toBeGreaterThan(200);
+    const readingWings = await wings(page);
+    const overviewY = await overviewPosition(page, firstReadingY, readingWings);
     await chapters.nth(0).click();
-    await page.waitForTimeout(1200);
+    await waitForTourSettled(page);
     await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
 
     const openingScale = await scale(page);
-    const overviewY = firstReadingY * overviewFraction;
     const recording = await recordFrames(page);
     const screenshots = new Set([0, 8, 16, 24]);
     for (let step = 0; step <= 24; step += 1) {
@@ -157,7 +191,7 @@ for (const viewport of [
         });
       }
     }
-    await page.waitForTimeout(450);
+    await waitForTourSettled(page);
     const opened = await wings(page);
     const overviewScale = await scale(page);
     for (const initial of folded) {
@@ -174,7 +208,7 @@ for (const viewport of [
       await page.mouse.wheel(0, Math.round((overviewY * step) / 24) - current);
       await page.waitForTimeout(45);
     }
-    await page.waitForTimeout(450);
+    await waitForTourSettled(page);
     const frames = await recording.evaluate((recorder) => recorder.stop());
     await recording.dispose();
     const evidence = testInfo.outputPath(
@@ -183,7 +217,15 @@ for (const viewport of [
     await writeFile(
       evidence,
       JSON.stringify(
-        { viewport, firstReadingY, overviewY, folded, opened, frames },
+        {
+          viewport,
+          firstReadingY,
+          overviewY,
+          folded,
+          readingWings,
+          opened,
+          frames,
+        },
         null,
         2,
       ),
@@ -218,7 +260,7 @@ for (const viewport of [
 
     // A close reading composition comes after the visible full-object reveal.
     await page.mouse.wheel(0, firstReadingY);
-    await page.waitForTimeout(500);
+    await waitForTourSettled(page);
     expect(
       await scale(page),
       'The cover approach should visibly zoom in after the overview',

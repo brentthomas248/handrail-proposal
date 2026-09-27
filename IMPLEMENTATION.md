@@ -1,25 +1,25 @@
-# Visible fold-out opening
+# Final proposal design pass
 
-## Changed
+## Current state
 
-The proposal begins as a folded packet. Both wings unfold through a whole-object camera sequence, keeping all three panels within the frame. Only after the spread opens does the camera approach the first reading composition. Both hinges open 108degrees before that approach. Later crease orbits, proposal terms, materials, resume and GitHub links remain unchanged.
+Candidate-v8 passed all six fresh independent categories: copy 98, editorial 99, art 98, motion 100, interaction 100 and rendering 99. No unresolved P0–P2 finding remains. Main HTML SHA-256: `4cfd4b0411d2abdf97221e88a912cef897f3c0cddba54ac7f9bd5f24813ddfe1`. The complete 28-file manifest is recorded in `agentic-ui/local-verification.json`. This revision has not been published; the public URL still serves the previous release and its deployment receipt is explicitly historical.
 
-See the [remediation record](docs/fold-opening-remediation.md) and [independent headed review](docs/fold-opening-independent-review.md). The [prior portfolio/resume checkpoint](docs/portfolio-resume-motion-implementation.md) retains the earlier feature and publication evidence.
+Six independent specialties cover commercial copy/grouping, editorial typography/spacing, art/material, motion, inclusive interaction and rendering engineering. Two scrutinize copy and spacing independently. Fresh reviewers receive the [neutral brief](docs/final-design-review/brief.md), original references and unchanged rendered app without prior grades or a requested target. All grades and failures remain in [the scorecard](docs/final-design-review/scorecard.md). The release owner separately applies the user's 95/100-per-category gate; no unresolved material defect is allowed regardless of score.
 
-## Verified locally
+## Changes
 
-- Type check, 27 unit checks, production build and formatting passed.
-- All 68 Chromium browser checks passed in 1.2 minutes with no failures/skips/retries. The new regression fails against the previous published opener and passes at four desktop/phone sizes.
-- The focused run recorded 1,074 continuous forward/reverse frames with no clipped panel. Complete reading-group and 64MiB/4096px renderer-budget checks still pass.
-- Independent headed review accepted the unfold, whole-spread framing, cover approach and reversal at 1440×1000, 390×844, 320×740 and 390×664. Root also inspected original desktop/phone frames.
-- Supplementary WebKit verified 29 reading positions across five sizes; no browser errors or failed requests. Known font-preload warnings and protocol screenshot limitations remain documented.
+The complete three-panel unfold, matte Z-fold material and camera orbits remain. This pass refines crease pacing, reversible input, mobile and tablet framing, supporting type, comparison hierarchy, whitespace and stable front ink. Camera fitting includes text-line overhang while preserving the paper-surface budget.
 
-## Publication
+Desktop and tablet window steps now use aligned label/explanation rows. The quieter cover wordmark, clearer collection rule and consistent metadata support the printed hierarchy. The notes have stronger section headings, a restrained web reading measure and a verified two-page PDF. Commercial wording preserves both commission rates on the qualifying client and future credited sales, requested benefits, a 90-day window and room for the partnership to grow. Handrail prepares the final contract.
 
-[Open the updated proposal](https://brentthomas248.github.io/handrail-proposal/?v=33f64ef). Source `33f64ef7e648ec740cf443120663faba0d39d218` is published as static `4b11b12fc0063155b8af87265f3065a15b91a1a6`. [Pages run 36325370312](https://github.com/brentthomas248/handrail-proposal/actions/runs/36325370312) succeeded.
+Complete semantic reading is independent of hidden paper faces. Keyboard navigation, section URLs, text-spacing recovery, a one-visit reading escape, loading fallback and prominent resume/GitHub links remain available. Returning from the bottom of normal reading now restores the closing chapter; the accessible window heading includes its number. A canceled mobile chapter shortcut restores the current chapter in the strip without overriding horizontal navigation or keyboard focus.
 
-All 68 hosted browser checks passed in 1.2 minutes, with no failures/skips/retries. All 28 hosted files match the reviewed build byte for byte, including both unchanged PDFs. The [deployment receipt](agentic-ui/deployment-verification.json) records the current release. The temporary publishing worktree was removed after confirming a clean tree, pushed commit and no active process. This closeout changes documentation only.
+## Verification and next checkpoint
 
-## Remaining limits
+- All 38 affected Chromium checks pass, including new tests that failed against the previous candidate.
+- Typecheck covers 45 files with zero issues; all 29 unit checks and three Storybook checks pass. Component checks found no axe violations or browser errors.
+- Canonical Markdown and both complete PDFs pass. The notes PDF is checked to remain two pages and both pages have been visually inspected after the print changes.
+- All 185 full Chromium checks pass. WebKit passes 29 reading positions and 113 supplementary cases across the initial run and four corrected input-actuation rechecks. Original failures are retained; application bytes did not change. All six fresh reviews are complete. Isolated renderer profiling and Lighthouse passed within their documented scope; performance scores are 99 mobile and 100 desktop.
+- A scan of 99 changed public files found no private company figures, private client identifiers, credential material or local machine paths. Public portfolio destinations and attributed contributions were verified during this task.
 
-Physical iPhone stability, manual VoiceOver and field INP remain unverified. The approved [local workflow](docs/local-workflow.md) applies. Private business/resume evidence stays outside this repository. Full global certification is not claimed.
+Next: commit and publish the frozen bytes, verify the GitHub Pages job, compare all 28 hosted files and run the full hosted suite. Physical iPhone stability, genuine hidden-tab recovery, manual VoiceOver, actual GPU memory and field INP remain unverified. Full global lifecycle certification is not claimed. The [approved local workflow](docs/local-workflow.md) applies; full global lifecycle certification is not claimed.

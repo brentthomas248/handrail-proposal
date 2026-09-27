@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T20:36:42.602124+00:00",
+  "generatedAt": "2026-09-27T16:20:27.022574+00:00",
   "productSurface": "interactive-business-proposal",
   "rubricProfile": "marketing-page",
   "audience": [
@@ -23,7 +23,7 @@
     "Animate independent left/right hinges and uniform 3D camera scale, rotation and translation on the semantic HTML trifold; reading holds keep the active face flat and readable",
     "Present a negotiable business proposal, not a final contract, legal review, signature or acceptance flow",
     "Exclude private company finances, customer information and research from public content",
-    "Astro static output, GSAP ScrollTrigger, strict TypeScript and GitHub Pages; no backend or required cloud generation tools",
+    "Astro static output, one GSAP core ticker, strict TypeScript and GitHub Pages; no backend or required cloud generation tools",
     "Native scrolling, keyboard chapter navigation, Back restoration, emulated touch, reduced motion and no-JavaScript paths remain available",
     "No decorative Unicode arrows or symbols; do not position the relationship as a permanently sales-only role or promise a specific future title"
   ],
@@ -48,7 +48,7 @@
     "references": "approved",
     "implementation": "pending-user-review",
     "functionalEvidence": "Maintained separately in product QA receipts; not aesthetic approval",
-    "localVerification": "19 browser, 4 unit and 3 component checks passed; 24 chapter captures and 15 scroll samples were reviewed. This is not user visual acceptance.",
+    "localVerification": "115 Chromium,27 unit,3 component,29 WebKit reading positions and27 supplementary WebKit checks passed. Independent final panel is in progress. This is not user visual acceptance.",
     "publication": "pending-current-revision"
   }
 }
