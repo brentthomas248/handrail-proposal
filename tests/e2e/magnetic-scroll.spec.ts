@@ -81,18 +81,18 @@ test('mobile refitting completes a pending pull instead of stranding the camera'
   const next = await chapter(page, 'Hire first');
   const cash = await chapter(page, 'Cash flow');
   await page.mouse.move(195, 400);
-  await page.evaluate(() => dispatchEvent(new Event('touchstart')));
-  await page.mouse.wheel(0, 20);
-  await expect.poll(() => page.evaluate(() => scrollY)).toBe(cash + 20);
+  await page.mouse.wheel(0, 1);
+  await expect
+    .poll(() => page.evaluate(() => scrollY), { intervals: [10] })
+    .toBeGreaterThan(cash + 5);
   await page.setViewportSize({ width: 390, height: 720 });
-  await page.evaluate(() => dispatchEvent(new Event('touchend')));
   await landed(page, next);
   await expect(
     page.getByRole('button', { name: 'Hire first', exact: true }),
   ).toHaveAttribute('aria-current', 'step');
 });
 
-test('held native touch owns the flyer until release, then it completes the next stop', async ({
+test('a short native touch commits while held and cannot advance again before release', async ({
   browser,
 }) => {
   const context = await browser.newContext({
@@ -109,24 +109,53 @@ test('held native touch owns the flyer until release, then it completes the next
     type: 'touchStart',
     touchPoints: [{ x: 195, y: 580 }],
   });
-  for (const y of [570, 560, 550, 540]) {
+  const response = page.evaluate(
+    (cash) =>
+      new Promise<number>((resolve, reject) => {
+        const timeout = setTimeout(
+          () => reject(new Error('Short touch did not move the flyer')),
+          1000,
+        );
+        addEventListener(
+          'touchmove',
+          () => {
+            const started = performance.now();
+            const sample = () => {
+              if (scrollY > cash + 5) {
+                clearTimeout(timeout);
+                resolve(performance.now() - started);
+              } else requestAnimationFrame(sample);
+            };
+            requestAnimationFrame(sample);
+          },
+          { once: true, capture: true },
+        );
+      }),
+    cash,
+  );
+  // Chromium's mobile touch slop suppresses DOM touchmove at 12px; 18px is
+  // the first delivered gesture in the native input probe. Time the handler.
+  await client.send('Input.dispatchTouchEvent', {
+    type: 'touchMove',
+    touchPoints: [{ x: 195, y: 562 }],
+  });
+  expect(await response).toBeLessThanOrEqual(300);
+  await landed(page, next);
+  for (const y of [540, 510, 480]) {
     await client.send('Input.dispatchTouchEvent', {
       type: 'touchMove',
       touchPoints: [{ x: 195, y }],
     });
-    await page.waitForTimeout(35);
+    await page.waitForTimeout(40);
   }
-  await page.waitForTimeout(400);
-  const held = await page.evaluate(() => scrollY);
-  expect(held).toBeGreaterThan(cash + 5);
-  expect(held).toBeLessThan(next - 100);
   await page.waitForTimeout(350);
-  expect(await page.evaluate(() => scrollY)).toBeCloseTo(held, 0);
+  expect(await page.evaluate(() => scrollY)).toBe(next);
   await client.send('Input.dispatchTouchEvent', {
     type: 'touchEnd',
     touchPoints: [],
   });
-  await landed(page, next);
+  await page.waitForTimeout(400);
+  expect(await page.evaluate(() => scrollY)).toBe(next);
   await context.close();
 });
 

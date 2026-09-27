@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
-  "surface": "Mandatory magnetic stops for the approved Handrail trifold",
-  "generatedAt": "2026-09-27T22:07:26.241362+00:00",
+  "surface": "Immediate short-gesture navigation through the approved Handrail trifold",
+  "generatedAt": "2026-09-27T22:42:55.278986+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -26,7 +26,7 @@
     "Physical crease orbits, bounded surfaces, stable ink and same-document reading.",
     "Evidence-backed resume with2025degree, proposed contribution areas and decorative Handrail watermark.",
     "Prominent resume/GitHub links, responsive navigation and exact history-entry return position.",
-    "Every released vertical gesture completes the next concrete stop in its direction, including 1px nudges. Exact arrivals hold without chaining; ordinary reading stays native."
+    "A short vertical gesture immediately commits to the adjacent concrete scene. Same-gesture momentum stays latched; touch release rearms the next swipe; ordinary reading remains native."
   ],
   "rejectedDecisions": [
     "Neon/glow design direction",
@@ -42,9 +42,7 @@
       "/handrail-proposal/agreement/",
       "/handrail-proposal/resume/"
     ],
-    "components": [
-      "DealPath"
-    ],
+    "components": ["DealPath"],
     "filesChanged": [
       "src/content/proposal.ts",
       "src/scripts/motion.ts",
@@ -61,7 +59,7 @@
       "agentic-ui/component-state-matrix.json",
       "tests/e2e/proposal.spec.ts"
     ],
-    "camera": "Native scroll owns active gestures. After 140ms of vertical inactivity, an eased native-scroll tween completes the directional concrete stop; the existing damped camera and physical fold path remain."
+    "camera": "Wheel/touch intent selects adjacent concrete scenes immediately, with a 0.48\u20130.8s single-owner eased flight. Native keyboard/scrollbar movement keeps a 35ms settling fallback. Paper/path geometry is unchanged."
   },
   "tokenExports": {
     "dtcg": "agentic-ui/tokens.dtcg.json",
@@ -69,9 +67,7 @@
   },
   "componentCoverage": {
     "matrixPath": "agentic-ui/component-state-matrix.json",
-    "components": [
-      "DealPath"
-    ],
+    "components": ["DealPath"],
     "missingCoverage": [],
     "status": "verified-current-local"
   },
@@ -134,7 +130,7 @@
     ]
   },
   "openDesignQuestions": [
-    "Physical iPhone playback of magnetic stops awaits user verification."
+    "Physical iPhone playback of prompt gesture commitment remains unverified."
   ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
@@ -142,19 +138,20 @@
     "Physical iPhone stability, genuine hidden-tab recovery, manual VoiceOver, actual GPU memory and field INP remain unverified. Full global lifecycle certification is not claimed.",
     "Previous release 5b06411: All six independent scores meet the requested category threshold; publication and all hosted verification are complete.",
     "Opening pacing follow-up: see docs/opening-smoothness-remediation.md and current local-verification.json; prior six-category scores are historical.",
-    "Magnetic follow-up: docs/magnetic-scroll-remediation.md and docs/magnetic-scroll-review.md; final 27 Chromium and 11 WebKit checks pass."
+    "Magnetic follow-up: docs/magnetic-scroll-remediation.md and docs/magnetic-scroll-review.md; final 27 Chromium and 11 WebKit checks pass.",
+    "Prompt gesture follow-up: docs/quick-gesture-remediation.md and docs/quick-gesture-review.md supersede the prior input-timing acceptance."
   ],
   "userReview": {
     "date": "2026-09-27",
-    "status": "requested-mandatory-magnetic-stops",
+    "status": "requested-earlier-magnet-and-less-effort",
     "researchPath": "docs/design-director-review.md",
     "implementationPaused": false,
-    "reason": "User requires every small scroll to land firmly at a concrete stop."
+    "reason": "User reports continued repeated scrolling and late magnetic engagement."
   },
   "publication": {
-    "status": "published-and-verified",
+    "status": "locally-verified-awaiting-publication",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidencePath": "agentic-ui/deployment-verification.json",
-    "note": "Source 73cf7e7; static b2d197b; all 28 hosted assets and 27 scoped browser checks verified."
+    "note": "Previous magnetic release remains live until prompt-gesture deployment."
   }
 }

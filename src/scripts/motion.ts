@@ -6,6 +6,7 @@ import {
   damp,
   foldPoint,
   settleAnchor,
+  adjacentAnchor,
   sceneAt,
   hingeTravel,
   rotatePoint,
@@ -68,7 +69,7 @@ function mountTour(
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
   const perspective = 2400;
   const readingRadius = 0.24;
-  const magnetDelay = 140;
+  const magnetDelay = 35;
   let stops: Stop[] = [];
   let path: ReturnType<typeof createPath> | undefined;
   let width = 0;
@@ -90,6 +91,12 @@ function mountTour(
   let ticking = false;
   let previousTick = 0;
   let scrollTween: gsap.core.Tween | undefined;
+  let magneticFlight = false;
+  let wheelDirection = 0;
+  let lastWheelAt = -Infinity;
+  let nativeWheelUntil = 0;
+  let touchGesture:
+    { x: number; y: number; lastY: number; direction: number } | undefined;
   let settleTimer: ReturnType<typeof setTimeout> | undefined;
   let resizeTimer: ReturnType<typeof setTimeout> | undefined;
   let lastScrollAt = 0;
@@ -545,6 +552,7 @@ function mountTour(
     clearTimeout(settleTimer);
     scrollTween?.kill();
     scrollTween = undefined;
+    magneticFlight = false;
   }
 
   function writeScroll(top: number) {
@@ -560,15 +568,25 @@ function mountTour(
   ) {
     if (!path) return;
     cancelAutomaticScroll();
-    const state = { y: window.scrollY };
+    if (!magnetic) {
+      wheelDirection = 0;
+      lastWheelAt = -Infinity;
+    }
+    const state = { y: magnetic ? offset + visual * range : window.scrollY };
     const destination = Math.round(offset + progress * range);
     userDirection = Math.sign(destination - state.y);
+    magneticFlight = magnetic;
+    if (magnetic) {
+      gsap.ticker.remove(tick);
+      ticking = false;
+      velocity = 0;
+    }
     scrollTween = gsap.to(state, {
       y: destination,
       duration: magnetic
         ? Math.min(
-            1.25,
-            Math.max(0.65, Math.abs(progress - visual) * path.duration * 0.42),
+            0.8,
+            Math.max(0.48, Math.abs(progress - visual) * path.duration * 0.2),
           )
         : Math.min(
             chapterDistance > 1
@@ -577,12 +595,46 @@ function mountTour(
             Math.max(0.5, Math.abs(progress - visual) * path.duration * 0.44),
           ),
       ease: magnetic ? 'power2.out' : 'sine.inOut',
-      onUpdate: () => writeScroll(state.y),
+      onUpdate: () => {
+        writeScroll(state.y);
+        if (magnetic) {
+          // The controlled flight is already eased; a second spring delays
+          // response and arrival after the gesture has selected its stop.
+          target = visual = Math.max(
+            0,
+            Math.min(1, (window.scrollY - offset) / range),
+          );
+          render();
+        }
+      },
       onComplete: () => {
         scrollTween = undefined;
+        magneticFlight = false;
         userDirection = 0;
+        reconcileChapterNavigation();
       },
     });
+  }
+
+  function concreteAnchors() {
+    const duration = path?.duration ?? 1;
+    return [...openingAnchors, ...stops.slice(1).map((stop) => stop.at)].map(
+      (time) => Math.round(offset + (time / duration) * range),
+    );
+  }
+
+  function commitGesture(direction: number) {
+    if (!path || root.dataset.presentation !== 'tour') return;
+    const destination = adjacentAnchor(
+      concreteAnchors(),
+      offset + visual * range,
+      direction,
+    );
+    if (destination === null) return;
+    scrollToPosition((destination - offset) / range, 0, true);
+    // The active scene can stay unchanged while an interrupted shortcut has
+    // already scrolled the strip to its former destination.
+    chapterNavNeedsReconcile = true;
   }
 
   function scheduleSettle() {
@@ -591,8 +643,7 @@ function mountTour(
       settleTimer = setTimeout(settle, magnetDelay);
   }
 
-  function settle() {
-    if (!path || scrollTween || touchActive || resizePending) return;
+  function reconcileChapterNavigation() {
     if (chapterNavNeedsReconcile && nav) {
       chapterNavNeedsReconcile = false;
       const button = nav.querySelector<HTMLButtonElement>('[aria-current]');
@@ -610,12 +661,16 @@ function mountTour(
           });
       }
     }
-    const duration = path.duration;
-    const anchors = [
-      ...openingAnchors,
-      ...stops.slice(1).map((stop) => stop.at),
-    ].map((time) => Math.round(offset + (time / duration) * range));
-    const destination = settleAnchor(anchors, window.scrollY, userDirection);
+  }
+
+  function settle() {
+    if (!path || scrollTween || touchActive || resizePending) return;
+    reconcileChapterNavigation();
+    const destination = settleAnchor(
+      concreteAnchors(),
+      window.scrollY,
+      userDirection,
+    );
     if (destination !== null)
       scrollToPosition((destination - offset) / range, 0, true);
     else userDirection = 0;
@@ -641,18 +696,22 @@ function mountTour(
       const distance = scrollY - inputScrollY;
       if (Math.abs(distance) >= 0.5) {
         chapterNavNeedsReconcile = true;
-        userDirection = Math.sign(distance);
+        userDirection =
+          performance.now() < nativeWheelUntil ? 0 : Math.sign(distance);
         inputScrollY = scrollY;
       }
     }
     writtenScrollY = undefined;
     target = Math.max(0, Math.min(1, (window.scrollY - offset) / range));
-    startTick();
+    if (!magneticFlight) startTick();
     scheduleSettle();
   }
 
   function destroyTour() {
     cancelAutomaticScroll();
+    wheelDirection = 0;
+    lastWheelAt = -Infinity;
+    touchGesture = undefined;
     gsap.ticker.remove(tick);
     ticking = false;
     path = undefined;
@@ -691,7 +750,11 @@ function mountTour(
     const previousProgress = target;
     const previousScroll = window.scrollY;
     const previousRange = range;
+    const previousWheelDirection = wheelDirection;
+    const previousWheelAt = lastWheelAt;
     destroyTour();
+    wheelDirection = previousWheelDirection;
+    lastWheelAt = previousWheelAt;
     width = stage.clientWidth;
     height = innerHeight;
     stage.style.setProperty('--stage-height', `${height}px`);
@@ -1245,6 +1308,8 @@ function mountTour(
   }
   function handleUserInput() {
     cancelAutomaticScroll();
+    wheelDirection = 0;
+    nativeWheelUntil = 0;
     writtenScrollY = undefined;
     readingInput = root.dataset.presentation === 'read';
     releaseReadingInputAfterIdle();
@@ -1254,25 +1319,90 @@ function mountTour(
     'wheel',
     (event) => {
       // Horizontal chapter browsing and browser pinch zoom do not own the tour.
-      if (!event.ctrlKey && Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
-        handleUserInput();
-        // WebKit can consume the first wheel delta while interrupting a
-        // programmatic scroll. Its direction still owns the released pull.
-        userDirection = Math.sign(event.deltaY);
+      if (event.ctrlKey || Math.abs(event.deltaY) <= Math.abs(event.deltaX)) {
+        // Some browsers also move native Y during an otherwise native gesture.
+        // Refit the nearest pose instead of treating that as chapter intent.
+        nativeWheelUntil = performance.now() + 250;
+        return;
       }
+      if (!event.ctrlKey && Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+        nativeWheelUntil = 0;
+        if (root.dataset.presentation !== 'tour') {
+          handleUserInput();
+          return;
+        }
+        if (event.cancelable) event.preventDefault();
+        const direction = Math.sign(event.deltaY);
+        const now = performance.now();
+        const ongoing =
+          direction === wheelDirection &&
+          (now - lastWheelAt < 200 || Boolean(scrollTween));
+        lastWheelAt = now;
+        wheelDirection = direction;
+        if (!ongoing) commitGesture(direction);
+      }
+    },
+    { passive: false },
+  );
+  window.addEventListener(
+    'touchstart',
+    (event) => {
+      touchActive = true;
+      touchGesture = undefined;
+      const point = event.touches?.length === 1 ? event.touches[0] : undefined;
+      const control =
+        event.target instanceof Element &&
+        event.target.closest(
+          'a, button, input, textarea, select, [contenteditable], .chapter-nav',
+        );
+      if (root.dataset.presentation === 'tour' && point && !control) {
+        touchGesture = {
+          x: point.clientX,
+          y: point.clientY,
+          lastY: point.clientY,
+          direction: 0,
+        };
+      } else handleUserInput();
     },
     { passive: true },
   );
   window.addEventListener(
-    'touchstart',
-    () => {
-      touchActive = true;
-      handleUserInput();
+    'touchmove',
+    (event) => {
+      if (!touchGesture || root.dataset.presentation !== 'tour') return;
+      if (event.touches.length !== 1) {
+        touchGesture = undefined;
+        return;
+      }
+      const point = event.touches[0];
+      const delta = touchGesture.y - point.clientY;
+      if (
+        !touchGesture.direction &&
+        (Math.abs(delta) < 6 ||
+          Math.abs(delta) <= Math.abs(point.clientX - touchGesture.x))
+      )
+        return;
+      if (!event.cancelable) return;
+      event.preventDefault();
+      const movement = touchGesture.lastY - point.clientY;
+      const direction =
+        touchGesture.direction === 0 ? Math.sign(delta) : Math.sign(movement);
+      if (
+        !touchGesture.direction ||
+        (direction !== touchGesture.direction && Math.abs(movement) >= 6)
+      ) {
+        touchGesture.direction = direction;
+        commitGesture(direction);
+      }
+      if (direction === touchGesture.direction)
+        touchGesture.lastY = point.clientY;
     },
-    { passive: true },
+    { passive: false },
   );
-  const releaseTouch = () => {
-    touchActive = false;
+  const releaseTouch = (event: TouchEvent) => {
+    touchActive = Boolean(event.touches?.length);
+    if (touchActive) return;
+    touchGesture = undefined;
     clearTimeout(settleTimer);
     if (root.dataset.presentation === 'read') releaseReadingInputAfterIdle();
     else scheduleSettle();

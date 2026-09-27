@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T22:07:26.241362+00:00",
-  "scope": "Mandatory directional magnetic reading stops",
+  "generatedAt": "2026-09-27T22:42:55.278986+00:00",
+  "scope": "Prompt gesture commitment with one adjacent destination per gesture",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": true,
+  "deployed": false,
   "evidenceNotes": [
-    "Initial published release failed all three one-pixel/terminal-tail repros; new regressions now pass.",
-    "WebKit consumed reverse wheel deltas exposed a real direction bug, fixed and retested.",
-    "Original failures and fixture diagnoses are retained; no geometry thresholds were weakened.",
-    "Only the main HTML script reference and scene JS changed; 26 assets including both PDFs remain byte-identical.",
-    "Physical iPhone playback remains unverified; no global lifecycle certification or fresh six-category grade is claimed.",
-    "Final candidate passes 27 Chromium and 11 WebKit focused local checks, all 28 hosted asset comparisons and 27 focused hosted Chromium checks."
+    "Three new promptness/held-touch regressions failed against the previous release; sustained input exposed the user-reported delay.",
+    "The new control commits immediately and absorbs same-direction momentum. Controlled camera flights use one easing owner.",
+    "Browser touch recognition delivered no move event for 6px/12px in Chromium; 18px and 24px delivered events and began motion about 50ms later. No native threshold was represented as application latency.",
+    "Original full-suite failures remain recorded. All eight geometry checks and final 25 focused Chromium checks pass separately with unchanged thresholds; no claim of a single clean 206-case run.",
+    "26 of 28 output assets including both PDFs remain unchanged. Physical iPhone and field performance remain unverified.",
+    "Publication and hosted verification pending."
   ],
   "limitations": [
     "agentic-ui/blockers.json",
@@ -20,12 +20,12 @@
   ],
   "deploymentEvidencePath": "agentic-ui/deployment-verification.json",
   "independentReviews": {
-    "report": "docs/magnetic-scroll-review.md",
+    "report": "docs/quick-gesture-review.md",
     "verdict": "accepted-within-inspected-local-scope"
   },
   "candidateIdentity": {
     "_astro/client.CCxN9xF8.js": "4907db89a5bc4160920b577b51facb283e0e376ee1b4d5acab82c2e4d5654811",
-    "_astro/index.astro_astro_type_script_index_0_lang.DDz78qqw.js": "0978590e1db88b37a284471e7604d34ec24be239c7b0a946b9a0c3946a001ad8",
+    "_astro/index.astro_astro_type_script_index_0_lang.BEuDiNcr.js": "1554442c1db68e86c9b612131b71da73ea665ca97169045289407367a67c480d",
     "_astro/inter-cyrillic-ext-wght-normal.BOeWTOD4.woff2": "ca157063339ac4ad418f214f3abfed119b0798ab4d377386ce5c9e5a7a435ebd",
     "_astro/inter-cyrillic-wght-normal.DqGufNeO.woff2": "71d5ee93cc1e9f1d520a3a8b66456de18c7879d8df09d57fcd2eaff75fef0075",
     "_astro/inter-greek-ext-wght-normal.DlzME5K_.woff2": "6e9e020a25f9b56d418f2c085b1d3c09725a4da23fe693a5b463064606732190",
@@ -45,7 +45,7 @@
     "brent-showalter-handrail-resume.pdf": "dbf5cae25589697e1c9904e82ffa27aa384a9a98212a1a57272dcfca845ef501",
     "handrail-logo.png": "1e024d51ef5f28a6bcedfa90ff58c5f0481a81db81cbcd5efede50594766bb3a",
     "handrail-proposed-agreement.pdf": "8ace1fd73de5d542e4655bb25c45a96eb15cb77a56c2d2746a878c809dffceb2",
-    "index.html": "7dc8b494029c47a492a6b581ba39bd5f01f726e3528d2ae719a95d568da5b7c6",
+    "index.html": "f9494650aaf9a794820bd615ed4dcd44a86c25c149566ca7f579dbfa365ca35a",
     "licenses/Inter-OFL.txt": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345",
     "licenses/Playfair-Display-OFL.txt": "c052aafd2a71e90bcee6e69f475029d430a10d548c08ffcae350171f0e9668b1",
     "paper-grain.svg": "f1ad2a836254dd1e1bda3de717abb7c3de39007361741e634977267450cc774b",
@@ -226,9 +226,7 @@
       "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test tests/e2e/fold-opening.spec.ts tests/e2e/proposal.spec.ts --grep 'cold opening|full three-panel opening|high-density|immediate fast flick|mobile touch scroll' --output=qa-artifacts/opening-smoothness/hosted-e2e --reporter=list",
       "result": "11 passed in 36.4s; no retries",
       "exitCode": 0
-    }
-  ],
-  "checks": [
+    },
     {
       "command": "pnpm check",
       "result": "46 files; zero errors, warnings or hints",
@@ -273,6 +271,53 @@
     {
       "command": "Hosted asset and scoped browser verification",
       "result": "28 exact files; 27 Chromium tests passed",
+      "exitCode": 0
+    }
+  ],
+  "checks": [
+    {
+      "command": "pnpm check",
+      "result": "47 files; zero errors, warnings or hints",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm test",
+      "result": "34 passed",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm format:check && git diff --check",
+      "result": "passed",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm build",
+      "result": "three routes; 28-file candidate frozen",
+      "exitCode": 0
+    },
+    {
+      "command": "Full Chromium suite; qa-artifacts/quick-gesture/full-chromium.log",
+      "result": "203/206 passed: one cold-opening sample-count failure under concurrent load (20 observed, >20 required), plus two phone navigation-strip failures repaired in source. Raw failures retained; no thresholds changed.",
+      "exitCode": 1
+    },
+    {
+      "command": "Isolated final geometry; qa-artifacts/quick-gesture/geometry-final.log",
+      "result": "8 passed with original frame, fit and zoom thresholds; final candidate unchanged",
+      "exitCode": 0
+    },
+    {
+      "command": "Final supplementary WebKit; qa-artifacts/quick-gesture/webkit-final.log",
+      "result": "18 passed without retries",
+      "exitCode": 0
+    },
+    {
+      "command": "Final focused Chromium; qa-artifacts/quick-gesture/focused-final.log",
+      "result": "25 passed without retries, including both repaired navigation cases",
+      "exitCode": 0
+    },
+    {
+      "command": "Independent promptness and rendered review",
+      "result": "See docs/quick-gesture-review.md; 40 exact arrivals across desktop and two phone sizes",
       "exitCode": 0
     }
   ],

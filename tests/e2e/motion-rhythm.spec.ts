@@ -368,7 +368,6 @@ for (const viewport of [
     await page.setViewportSize(viewport);
     await page.goto('./');
     await expect(page.locator('html')).toHaveClass(/camera-ready/);
-    const beginning = await destination(page, 'The beginning');
     const cash = await destination(page, 'Cash flow');
     await page
       .getByRole('button', { name: 'Grow together', exact: true })
@@ -377,20 +376,14 @@ for (const viewport of [
       .poll(() => page.evaluate(() => scrollY), { intervals: [20] })
       .toBeGreaterThan(cash + 5);
     await page.mouse.move(viewport.width / 2, viewport.height / 2);
-    // A gesture has multiple samples: WebKit can use the first solely to
-    // interrupt an in-flight programmatic scroll without native displacement.
-    await page.mouse.wheel(0, -90);
-    await page.waitForTimeout(50);
-    const beforeSecondSample = await page.evaluate(() => scrollY);
-    await page.mouse.wheel(0, -90);
-    await expect
-      .poll(() => page.evaluate(() => scrollY))
-      .toBeLessThan(beforeSecondSample - 5);
-    const interrupted = await page.evaluate(() => scrollY);
-    expect(interrupted).toBeLessThan(cash);
-    // Include the idle completion window so a delayed restart cannot pass.
-    await page.waitForTimeout(2500);
+    // A tiny opposite gesture owns the flight immediately, without requiring
+    // a second native delta to interrupt programmatic scrolling.
+    await page.mouse.wheel(0, -1);
     await waitForTourSettled(page);
+    const interrupted = await page.evaluate(() => scrollY);
+    expect(interrupted).toBeCloseTo(cash, 0);
+    // Include a quiet window so canceled navigation cannot restart later.
+    await page.waitForTimeout(600);
     const state = await page.locator('.chapter-nav').evaluate((nav) => {
       const button = nav.querySelector<HTMLButtonElement>('[aria-current]')!;
       const bounds = nav.getBoundingClientRect();
@@ -403,18 +396,14 @@ for (const viewport of [
       };
     });
     await testInfo.attach('canceled-shortcut-navigation', {
-      body: JSON.stringify(
-        { viewport, beginning, cash, interrupted, state },
-        null,
-        2,
-      ),
+      body: JSON.stringify({ viewport, cash, interrupted, state }, null, 2),
       contentType: 'application/json',
     });
     expect(
       state.scroll,
       'The canceled shortcut must yield to the preceding concrete stop',
-    ).toBeCloseTo(beginning, 0);
-    expect(state.label).toBe('The beginning');
+    ).toBeCloseTo(cash, 0);
+    expect(state.label).toBe('Cash flow');
     expect(
       state.current.left,
       'After vertical cancellation settles, the current chapter must be visible',

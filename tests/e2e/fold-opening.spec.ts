@@ -38,8 +38,7 @@ async function overviewPosition(
   try {
     while (after - before > 1) {
       const position = Math.floor((before + after) / 2);
-      const current = await page.evaluate(() => scrollY);
-      await page.mouse.wheel(0, position - current);
+      await page.evaluate((y) => window.scrollTo(0, y), position);
       await waitForTourSettled(page);
       const currentWings = await wings(page);
       if (
@@ -176,10 +175,8 @@ for (const viewport of [
       };
     });
     await page.mouse.move(viewport.width / 2, viewport.height / 2);
-    for (let step = 0; step < 55; step += 1) {
-      await page.mouse.wheel(0, 20);
-      await page.waitForTimeout(20);
-    }
+    await page.mouse.wheel(0, 1);
+    await waitForTourSettled(page);
     const frames = await recording.evaluate((recorder) => recorder.stop());
     await recording.dispose();
     await testInfo.attach('cold-opening-scale', {
@@ -237,24 +234,18 @@ for (const viewport of [
 
     const openingScale = await scale(page);
     const recording = await recordFrames(page);
-    const screenshots = new Set([0, 8, 16, 24]);
-    for (let step = 0; step <= 24; step += 1) {
-      if (step > 0) {
-        const current = await page.evaluate(() => scrollY);
-        await page.mouse.wheel(
-          0,
-          Math.round((overviewY * step) / 24) - current,
-        );
-        await page.waitForTimeout(45);
-      }
-      if (screenshots.has(step)) {
-        const path = testInfo.outputPath(`unfolding-${step}-of-24.png`);
-        await page.screenshot({ path });
-        await testInfo.attach(`unfolding-${step}-of-24`, {
-          path,
-          contentType: 'image/png',
-        });
-      }
+    await page.mouse.move(viewport.width / 2, viewport.height / 2);
+    await page.mouse.wheel(0, 1);
+    for (const fraction of [1 / 3, 2 / 3, 1]) {
+      await expect
+        .poll(() => page.evaluate(() => scrollY))
+        .toBeGreaterThanOrEqual(Math.floor(overviewY * fraction));
+      const path = testInfo.outputPath(`unfolding-${fraction.toFixed(2)}.png`);
+      await page.screenshot({ path });
+      await testInfo.attach(`unfolding-${fraction.toFixed(2)}`, {
+        path,
+        contentType: 'image/png',
+      });
     }
     await waitForTourSettled(page);
     const opened = await wings(page);
@@ -267,12 +258,8 @@ for (const viewport of [
       ).toBeGreaterThanOrEqual(85);
     }
 
-    // Reverse the same natural input before approaching any reading crop.
-    for (let step = 23; step >= 0; step -= 1) {
-      const current = await page.evaluate(() => scrollY);
-      await page.mouse.wheel(0, Math.round((overviewY * step) / 24) - current);
-      await page.waitForTimeout(45);
-    }
+    // One reverse gesture must complete the full return to the folded packet.
+    await page.mouse.wheel(0, -1);
     await waitForTourSettled(page);
     const frames = await recording.evaluate((recorder) => recorder.stop());
     await recording.dispose();
@@ -324,8 +311,14 @@ for (const viewport of [
       .toBeLessThan(0.02);
 
     // A close reading composition comes after the visible full-object reveal.
-    await page.mouse.wheel(0, firstReadingY);
+    await page.mouse.wheel(0, 1);
     await waitForTourSettled(page);
+    await expect
+      .poll(() => page.evaluate(() => scrollY))
+      .toBeGreaterThanOrEqual(overviewY - 2);
+    await page.mouse.wheel(0, 1);
+    await waitForTourSettled(page);
+    await expect.poll(() => page.evaluate(() => scrollY)).toBe(firstReadingY);
     expect(
       await scale(page),
       'The cover approach should visibly zoom in after the overview',

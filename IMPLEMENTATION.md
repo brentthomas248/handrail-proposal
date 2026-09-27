@@ -2,6 +2,12 @@
 
 ## Current state
 
+The user reports that release-triggered magnetism still takes too much scrolling. [Immediate gesture completion](docs/quick-gesture-remediation.md) now starts on the first wheel intent or short vertical touch move and keeps same-gesture momentum latched to one scene. A single easing owner completes controlled flights in 0.48–0.8 seconds. Ordinary reading stays native; existing paper, camera path and complete reading compositions are unchanged. [Independent rendered review](docs/quick-gesture-review.md) accepts the complete journey and the final phone navigation correction.
+
+Typecheck (47 files), all 34 unit tests, formatting and build pass. The full Chromium run passed 203/206; its two phone navigation defects are fixed, and the cold-opening frame-count floor passes in isolation without lowering thresholds. All eight final geometry checks, all 25 final focused Chromium checks and all 18 supplementary WebKit checks pass without retries. The original failures remain recorded. The previous magnetic release below remains live until publication; physical iPhone playback remains unverified.
+
+## Published magnetic release
+
 Mandatory magnetic stops are published. Even a 1px gesture completes the next concrete stop in its direction; exact arrivals hold without chaining. Fresh reverse input changes destination, held touch retains control, and viewport refits resume pending completion. Ordinary reading remains native. See [the remediation](docs/magnetic-scroll-remediation.md) and [independent rendered review](docs/magnetic-scroll-review.md).
 
 Typecheck (46 files), all 31 unit tests, formatting and build pass. The full Chromium run passed 198/199, with its single fixture failure corrected and both affected cases passing afterward. All 27 final focused Chromium checks and 11 WebKit checks pass; original failures and diagnoses are retained. No geometry thresholds were reduced.

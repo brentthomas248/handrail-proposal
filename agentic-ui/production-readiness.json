@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T22:07:26.241362+00:00",
+  "generatedAt": "2026-09-27T22:42:55.278986+00:00",
   "ok": true,
-  "status": "approved-magnetic-stops-published-and-verified",
+  "status": "prompt-gestures-locally-verified-awaiting-publication",
   "localRelease": {
     "passed": true,
     "evidence": [
@@ -12,12 +12,12 @@
     ]
   },
   "publication": {
-    "deployed": true,
-    "hostedSmokeTestPassed": true,
+    "deployed": false,
+    "hostedSmokeTestPassed": false,
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidence": "agentic-ui/deployment-verification.json",
     "notes": [
-      "Mandatory magnetic stops published; all 28 live files match and all 27 scoped hosted checks pass."
+      "Prompt gesture candidate locally verified; prior release remains live."
     ]
   },
   "strictCertification": {

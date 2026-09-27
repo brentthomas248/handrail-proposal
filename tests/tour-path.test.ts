@@ -4,6 +4,7 @@ import {
   damp,
   foldPoint,
   settleAnchor,
+  adjacentAnchor,
   sceneAt,
   hingeTravel,
   rotatePoint,
@@ -141,6 +142,27 @@ describe('direction-owned idle settling', () => {
   it('recovers a directionless interrupted transition at its nearest stop', () => {
     expect(settleAnchor(anchors, 700, 0)).toBe(600);
     expect(settleAnchor(anchors, 1150, 0)).toBe(1200);
+  });
+});
+
+describe('gesture-owned adjacent scenes', () => {
+  const anchors = [0, 600, 1200, 1800];
+
+  it('commits directly from an exact reading stop in either direction', () => {
+    expect(adjacentAnchor(anchors, 600, 1)).toBe(1200);
+    expect(adjacentAnchor(anchors, 1200, -1)).toBe(600);
+  });
+
+  it('reverses an interrupted flight without skipping its starting scene', () => {
+    expect(adjacentAnchor(anchors, 680, -1)).toBe(600);
+    expect(adjacentAnchor(anchors, 1120, 1)).toBe(1200);
+  });
+
+  it('clamps outward input to the endpoint and ignores empty input', () => {
+    expect(adjacentAnchor(anchors, 0, -1)).toBe(0);
+    expect(adjacentAnchor(anchors, 1800, 1)).toBe(1800);
+    expect(adjacentAnchor([], 0, 1)).toBeNull();
+    expect(adjacentAnchor(anchors, 600, 0)).toBeNull();
   });
 });
 

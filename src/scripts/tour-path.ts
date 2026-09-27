@@ -153,6 +153,20 @@ export function damp(
   };
 }
 
+/** Select the next concrete scene from an exact arrival or interrupted flight. */
+export function adjacentAnchor(
+  anchors: readonly number[],
+  position: number,
+  direction: number,
+): number | null {
+  if (!direction || !anchors.length) return null;
+  const ordered = direction > 0 ? anchors : [...anchors].reverse();
+  return (
+    ordered.find((anchor) => (anchor - position) * direction > 0.5) ??
+    ordered.at(-1)!
+  );
+}
+
 /** Complete released travel at a concrete stop, with only pixel-rounding slack. */
 export function settleAnchor(
   anchors: readonly number[],

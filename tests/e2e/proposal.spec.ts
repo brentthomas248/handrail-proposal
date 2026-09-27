@@ -698,48 +698,50 @@ for (const viewport of [
     const chapters = page.locator('.chapter-nav button[data-go-to]');
     await chapters.nth(1).click();
     await waitForTourSettled(page);
-    const firstReadingProgress = (await page.evaluate(() => scrollY)) / travel;
+    const firstReadingY = await page.evaluate(() => scrollY);
     await chapters.nth(0).click();
     await waitForTourSettled(page);
-    const openingSamples = [
-      firstReadingProgress * 0.14,
-      firstReadingProgress * 0.28,
-    ];
     const samples: {
-      requestedProgress: number;
+      label: string;
       progress: number;
       hinges: Awaited<ReturnType<typeof hingeAngles>>;
       camera: Awaited<ReturnType<typeof sheetTransform>>;
     }[] = [];
-    for (const progress of [...openingSamples, 0.13, 0.2, 0.28, 0.5, 0.8]) {
-      const currentY = await page.evaluate(() => scrollY);
-      const nativeMovement = collectMotion(page, 450);
-      await page.mouse.wheel(0, Math.round(travel * progress - currentY));
-      const frames = await nativeMovement;
-      expect(
-        Math.max(...frames.map((frame) => frame.scroll)),
-        'Native scrolling must reach the requested area before any idle settling',
-      ).toBeGreaterThanOrEqual(travel * progress - 20);
-      // A released gesture completes at a concrete stop. Continuous opening
-      // geometry is covered separately; judge the resting silhouette here.
+    const chapterNames = await chapters.evaluateAll((buttons) =>
+      buttons.map((button) => button.getAttribute('aria-label')!),
+    );
+    await page.mouse.move(viewport.width / 2, viewport.height / 2);
+    for (const label of ['The full proposal', ...chapterNames.slice(1)]) {
+      const before = await page.evaluate(() => scrollY);
+      await page.mouse.wheel(0, 1);
+      await expect
+        .poll(() => page.evaluate(() => scrollY), { timeout: 1000 })
+        .toBeGreaterThan(before + 5);
       await waitForTourSettled(page);
-      if (openingSamples.includes(progress))
+      await expect(page.locator('#tour-caption')).toHaveText(label);
+      if (label === 'The full proposal') {
+        expect(await page.evaluate(() => scrollY)).toBeLessThan(firstReadingY);
         await expectSubstantialUnfoldingPaper(page);
+        await expectFoldFitsStage(page);
+      } else {
+        await expect(
+          page.getByRole('button', { name: label, exact: true }),
+        ).toHaveAttribute('aria-current', 'step');
+      }
       samples.push({
-        requestedProgress: progress,
+        label,
         progress: (await page.evaluate(() => scrollY)) / travel,
         hinges: await hingeAngles(page),
         camera: await sheetTransform(page),
       });
-      if (
-        progress === openingSamples[1] ||
-        progress === 0.2 ||
-        progress === 0.5
-      )
-        await testInfo.attach(`scroll-${progress}`, {
-          body: await page.screenshot(),
-          contentType: 'image/png',
-        });
+      if (['The full proposal', 'Cash flow', 'Grow together'].includes(label))
+        await testInfo.attach(
+          `scroll-${label.toLowerCase().replaceAll(' ', '-')}`,
+          {
+            body: await page.screenshot(),
+            contentType: 'image/png',
+          },
+        );
     }
     for (const wing of ['left', 'right']) {
       const initial = folded.find((hinge) => hinge.panel === wing)!;
@@ -785,7 +787,10 @@ for (const viewport of [
       body: Buffer.from(JSON.stringify({ folded, samples }, null, 2)),
       contentType: 'application/json',
     });
-    await page.mouse.wheel(0, -travel * 2);
+    for (let index = 0; index < chapterNames.length; index += 1) {
+      await page.mouse.wheel(0, -1);
+      await waitForTourSettled(page);
+    }
     await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
     for (const wing of ['left', 'right'])
       await expect
@@ -806,31 +811,41 @@ for (const viewport of [
     expect(failedRequests).toEqual([]);
   });
 
-test('continuous wheel input keeps the camera moving through reading windows', async ({
+test('a sustained wheel burst completes one stop without restarting or cascading', async ({
   page,
 }, testInfo) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto('./');
   await expect(page.locator('html')).toHaveClass(/camera-ready/);
-  const travel = await page.evaluate(
-    () => document.documentElement.scrollHeight - innerHeight,
-  );
-  const recording = collectMotion(page, 7500);
-  for (let i = 0; i < 140; i += 1) {
-    await page.mouse.wheel(0, Math.round((travel * 0.9) / 140));
-    await page.waitForTimeout(16);
+  await page.mouse.move(720, 500);
+  const recording = collectMotion(page, 1800);
+  for (let i = 0; i < 45; i += 1) {
+    await page.mouse.wheel(0, i === 0 ? 1 : 20);
+    await page.waitForTimeout(20);
   }
-  const inputEnded = await page.evaluate(() => performance.now());
-  const frames = (await recording).filter((frame) => frame.time <= inputEnded);
+  await waitForTourSettled(page);
+  const destination = await page.evaluate(() => scrollY);
+  const frames = await recording;
   await testInfo.attach('continuous-scroll-frames', {
     body: Buffer.from(JSON.stringify(frames)),
     contentType: 'application/json',
   });
-  expect(frames.at(-1)!.progress).toBeGreaterThan(0.75);
+  await expect(page.locator('#tour-caption')).toHaveText('The full proposal');
+  expect(destination).toBeGreaterThan(100);
+  expect(Math.max(...frames.map((frame) => frame.scroll))).toBe(destination);
+  const moving = frames.filter(
+    (frame) => frame.scroll > 0 && frame.scroll < destination,
+  );
+  expect(moving.length).toBeGreaterThan(10);
   expect(
-    longestStationaryScroll(frames),
-    'Scrolling through a reading window must not leave the flyer motionless',
+    longestStationaryScroll(moving),
+    'Committed movement must not pause or restart while wheel deltas continue',
   ).toBeLessThan(150);
+  await page.waitForTimeout(350);
+  expect(await page.evaluate(() => scrollY)).toBe(destination);
+  await page.mouse.wheel(0, 1);
+  await waitForTourSettled(page);
+  await expect(page.locator('#tour-caption')).toHaveText('The beginning');
 });
 
 test('an immediate fast flick is smoothed and reversing input takes control', async ({
@@ -843,7 +858,7 @@ test('an immediate fast flick is smoothed and reversing input takes control', as
   );
   const recording = collectMotion(page, 700);
   await page.mouse.wheel(0, Math.round(travel * 0.8));
-  await page.waitForTimeout(90);
+  await page.waitForTimeout(200);
   const reversedAt = await page.evaluate(() => performance.now());
   await page.mouse.wheel(0, -Math.round(travel * 0.7));
   const frames = await recording;
@@ -1222,12 +1237,33 @@ for (const viewport of [
     ]);
     expect(initial.colors.length).toBeGreaterThan(5);
     const frames = [];
-    for (const direction of [-1, 1])
-      for (let index = 0; index < 60; index += 1) {
-        await page.mouse.wheel(0, (direction * (end - start)) / 60);
-        await page.waitForTimeout(25);
+    const chapters =
+      viewport.width < 760
+        ? [
+            'Cash flow',
+            'Hire first',
+            'Client first',
+            'The window',
+            'Grow together',
+          ]
+        : ['Cash flow', 'The two paths', 'The window', 'Grow together'];
+    for (const direction of [-1, 1]) {
+      const destinations =
+        direction < 0 ? chapters.slice(0, -1).reverse() : chapters.slice(1);
+      for (const label of destinations) {
+        await page.mouse.move(viewport.width / 2, viewport.height / 2);
+        await page.mouse.wheel(0, direction);
+        for (let frame = 0; frame < 16; frame += 1) {
+          await page.waitForTimeout(30);
+          frames.push(await sample());
+        }
+        await waitForTourSettled(page);
+        await expect(page.locator('#tour-caption')).toHaveText(label);
         frames.push(await sample());
       }
+    }
+    expect(await page.evaluate(() => scrollY)).toBe(end);
+    expect(Math.min(...frames.map((frame) => frame.scroll))).toBe(start);
     await testInfo.attach('printed-values-and-ink', {
       body: Buffer.from(JSON.stringify({ viewport, initial, frames }, null, 2)),
       contentType: 'application/json',

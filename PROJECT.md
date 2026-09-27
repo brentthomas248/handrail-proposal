@@ -4,7 +4,7 @@ A negotiable proposal for the beginning of a partnership between Brent Showalter
 
 ## Runtime
 
-Astro static output with a React rate component, strict TypeScript, pnpm 11 and Node >=22.18. GSAP core and CSS 3D transforms unfold three hinged HTML panels, move the camera in perspective and settle on flat readable faces. Native scrolling, ordinary reading mode, reduced motion and no-JavaScript reading are preserved. There is no WebGL renderer, Lenis, backend, customer database, analytics, account system or electronic signature flow.
+Astro static output with a React rate component, strict TypeScript, pnpm 11 and Node >=22.18. GSAP core and CSS 3D transforms unfold three hinged HTML panels, move the camera in perspective and settle on flat readable faces. Short tour gestures select complete scenes; native ordinary reading, reduced motion and no-JavaScript reading are preserved. There is no WebGL renderer, Lenis, backend, customer database, analytics, account system or electronic signature flow.
 
 ## Current delivery
 
