@@ -111,11 +111,11 @@ The minor closed/open headline variation is intentional: the closed packet intro
 
 ### Integration corrections before the seventh panel
 
-The first v7 browser run passed171/175. One tablet scene exposed partial headings from the next reading group, and three short-phone cases revealed a headline's line rectangle extending above its CSS box. The tablet section gap now fully separates the next steps. Camera fitting measures text-line overhang once when building poses, adding no per-frame text measurement. All175checks pass on that geometry with unchanged margins and type-size floors.
+The first v7 browser run passed171/175. One tablet scene exposed partial headings from the next reading group, and three short-phone cases revealed a headline's line rectangle extending above its CSS box. The tablet section gap now fully separates the next steps. Camera fitting measures text-line overhang once when building poses, adding no per-frame text measurement. All 175checks pass on that geometry with unchanged margins and type-size floors.
 
 Root then reproduced an ink-scope error missed by earlier journey sampling: the reverse-ink alpha declaration was on the shared front/back selector. Setting the decorative variable to .25 also faded the front title to .25. The declaration now belongs exclusively to `.panel-back`. The earlier R5 statement about stable essential front ink described intent, not the defective intermediate build; the new whole-journey regression verifies the corrected behavior. This source-only correction is awaiting the final built verification before the seventh panel.
 
-The release hygiene audit checked all50 changed content/code/document files, extracted both PDFs, verified nine public portfolio destinations and three attributed merged contributions. Canonical Markdown and both PDFs pass; no private company figures, private client identifiers or credential material were found. Unchanged employment and education source evidence was not independently re-audited in this hygiene pass.
+The release hygiene audit checked all 50 changed content/code/document files, extracted both PDFs, verified nine public portfolio destinations and three attributed merged contributions. Canonical Markdown and both PDFs pass; no private company figures, private client identifiers or credential material were found. Unchanged employment and education source evidence was not independently re-audited in this hygiene pass.
 
 ## Eighth candidate: current independent verification
 
@@ -134,3 +134,5 @@ All original failures, captures and probes remain under `qa-artifacts/final-desi
 All six fresh independent reports are complete: copy 98, editorial 99, art 98, motion 100, interaction 100 and rendering 99. The requested minimum 95 in every category is met, with no unresolved P0–P2 product finding. The two P3 visual/document limits above and the rendering evidence gap for true hidden-tab suspension remain explicit. No speculative source change is made for unavailable lifecycle evidence.
 
 Isolated rendering recorded bounded paper surfaces (phone intrinsic estimate 62.89 MiB; 3180 device-pixel edge), no page errors and no failed requests. Rare compositor partial/checkerboard counters are disclosed in the report; these are not presented as flawless frame delivery or physical-phone proof. Lighthouse scored 99 mobile/100 desktop performance, zero TBT, and 100 in its other three categories. Publication and hosted verification are the remaining release steps.
+
+Publication is now complete: source 5b06411, static 3921256, successful Pages run 36349637874. All 28 live files match the reviewed candidate, both downloaded PDFs pass, and all 185 hosted checks pass. The evidence boundaries and P3 dispositions above remain unchanged.

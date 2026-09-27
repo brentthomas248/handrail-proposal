@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T20:47:31.289596+00:00",
+  "generatedAt": "2026-09-27T20:57:52.457997+00:00",
   "scope": "Local production-preview Lighthouse laboratory measurements; not field data.",
   "command": "pnpm performance",
   "lighthouseVersion": "13.5.0",
@@ -58,6 +58,6 @@
     "These page-load laboratory results do not establish motion continuity, field INP or physical-device performance; continuous-input evidence is recorded separately."
   ],
   "isCurrentRevision": true,
-  "currentRevisionNote": "Candidate-v8; isolated Lighthouse run after all independent-review browser sessions closed. Publication remains pending.",
+  "currentRevisionNote": "Candidate-v8; isolated Lighthouse after reviewer browsers closed. Published assets match this candidate exactly.",
   "motionEvidence": "docs/final-design-review/r8-rendering.md"
 }

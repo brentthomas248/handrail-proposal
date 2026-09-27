@@ -1,14 +1,14 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T20:51:01.808465+00:00",
+  "generatedAt": "2026-09-27T20:57:52.457997+00:00",
   "scope": "Six-specialty independent final design pass with complete semantic reading and material Z-fold",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": false,
+  "deployed": true,
   "evidenceNotes": [
     "185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
     "Physical iPhone stability, genuine hidden-tab recovery, manual VoiceOver, actual GPU memory and field INP remain unverified. Full global lifecycle certification is not claimed.",
-    "Original failures, rejected candidates and deductions are preserved in the independent reports and remediation record. Hosted verification remains pending."
+    "Original failures, rejected candidates and deductions are preserved in the independent reports and remediation record. All 28 live files and both downloaded PDFs verified; all 185 hosted checks pass."
   ],
   "limitations": [
     "agentic-ui/blockers.json",
@@ -18,7 +18,7 @@
   "deploymentEvidencePath": "agentic-ui/deployment-verification.json",
   "independentReviews": {
     "directory": "docs/final-design-review/",
-    "verdict": "accepted-local-candidate-v8",
+    "verdict": "accepted-and-published-candidate-v8",
     "scores": {
       "copy": 98,
       "editorial": 99,
@@ -172,6 +172,11 @@
         "interaction": 100,
         "rendering": 99
       },
+      "exitCode": 0
+    },
+    {
+      "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test --reporter=list",
+      "result": "185 passed in 4.1m; no retries",
       "exitCode": 0
     }
   ]

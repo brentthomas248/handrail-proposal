@@ -46,7 +46,7 @@ Isolated v7 re-establishes cover framing before readable zoom at a continuously 
 
 ## Integrated seventh-candidate verification
 
-The corrected shared candidate (main HTML `6bc38cb5310ded53b93d42e52a2fa22cda877292d97d3dc2e9f50a017c45d330`) passes all175 Chromium checks in3.6minutes. The initial171/175 result is retained: tablet peripheral headings and three short-phone text-ink margins were corrected without relaxing assertions. Camera fitting now includes actual text-line overhang rather than only CSS boxes. The14new editorial cases include all small/short/tablet refinements. Three current Storybook checks pass with no axe violations or browser errors.
+The corrected shared candidate (main HTML `6bc38cb5310ded53b93d42e52a2fa22cda877292d97d3dc2e9f50a017c45d330`) passes all 175 Chromium checks in3.6minutes. The initial171/175 result is retained: tablet peripheral headings and three short-phone text-ink margins were corrected without relaxing assertions. Camera fitting now includes actual text-line overhang rather than only CSS boxes. The14new editorial cases include all small/short/tablet refinements. Three current Storybook checks pass with no axe violations or browser errors.
 
 An additional root inspection found that decorative back-ink alpha was inherited by front faces through a shared CSS declaration. A rendered .25alpha probe reproduced front-title fading. The next scoped correction separates the back-only ink rule and adds a forward/reverse computed-contrast regression before freezing the next independent panel. No seventh-round design scores or publication are claimed yet.
 
@@ -61,3 +61,7 @@ The eighth candidate aligns metadata/social copy, clarifies both-rate future-sal
 ## Candidate-v8 local acceptance — 2026-09-27T20:51:01.808465+00:00
 
 Six fresh categories: {'copy': 98, 'editorial': 99, 'art': 98, 'motion': 100, 'interaction': 100, 'rendering': 99}. All exceed the requested threshold; no unresolved material product finding. Canonical PDFs, 185 Chromium, 29 unit,3 component, 45-file typecheck, 29 WebKit positions and113 supplementary cases (initial 109 plus 4 input rechecks) pass. Lighthouse 99 mobile/100 desktop. Frozen 28-file identity preserved. Publication/hosted verification next.
+
+## Published and verified — 2026-09-27T20:57:52.457997+00:00
+
+Source `5b06411fb1788190088ce98a9f684da1029ce0f3`; static `3921256a56bf205f42f5cc32e2effec75d326e55`. Pages run 36349637874 succeeded. All 28 hosted files match the independently reviewed candidate; both downloaded PDFs match complete canonical content. All 185 hosted browser checks passed in 4.1m, without retries. Six independent categories remain 98/99/98/100/100/99. Owned publication worktree removed. Final documentation checkpoint records the completed release; physical-device and other stated limits remain.

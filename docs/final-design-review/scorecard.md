@@ -1,6 +1,6 @@
 # Final design review scorecard
 
-Status: candidate-v8 passes all six independent categories: copy 98, editorial 99, art 98, motion 100, interaction 100 and rendering 99. No unresolved P0–P2 finding remains. Publication and hosted verification are pending.
+Status: candidate-v8 passes all six independent categories: copy 98, editorial 99, art 98, motion 100, interaction 100 and rendering 99. No unresolved P0–P2 finding remains. Published from source `5b06411` and static `3921256`. All 28 hosted files and both downloaded PDFs match; all 185 hosted checks pass.
 
 Six independent specialties use five equally weighted criteria against the [neutral brief](brief.md). Copy/grouping and editorial typography/spacing are separate assignments. Each round uses fresh contexts without prior reports, scores or the requested target. The release owner separately applies at least 95/100 in every category, with no unresolved P0–P2 finding. These are internal specialist assessments of observed evidence, not external design certification.
 

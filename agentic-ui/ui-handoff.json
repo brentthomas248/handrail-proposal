@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
   "surface": "Final six-specialty review of the Handrail Z-fold proposal, reading paths, notes and tailored resume",
-  "generatedAt": "2026-09-27T20:51:01.808465+00:00",
+  "generatedAt": "2026-09-27T20:57:52.457997+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -134,7 +134,7 @@
   "notes": [
     "185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
     "Physical iPhone stability, genuine hidden-tab recovery, manual VoiceOver, actual GPU memory and field INP remain unverified. Full global lifecycle certification is not claimed.",
-    "All six independent scores meet the requested category threshold; publication and hosted verification remain pending."
+    "All six independent scores meet the requested category threshold; publication and all hosted verification are complete."
   ],
   "userReview": {
     "date": "2026-09-27",
@@ -144,9 +144,9 @@
     "reason": "User requested six-specialty adversarial rounds, direct remediation and fresh independent validation."
   },
   "publication": {
-    "status": "candidate-not-published",
+    "status": "published-and-verified",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidencePath": "agentic-ui/deployment-verification.json",
-    "note": "Deployment receipt currently describes the prior release."
+    "note": "Source 5b06411; static 3921256; exact assets/PDFs and all 185 hosted checks verified."
   }
 }

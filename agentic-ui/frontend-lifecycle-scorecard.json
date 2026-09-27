@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T20:51:01.808465+00:00",
+  "generatedAt": "2026-09-27T20:57:52.457997+00:00",
   "mode": "approved-local-workflow",
   "sections": [
     {
@@ -25,7 +25,7 @@
       ],
       "notes": [
         "185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
-        "Scope is the approved local workflow; publication remains pending."
+        "Scope is the approved local workflow; publication is complete and all 185 hosted browser checks pass."
       ]
     },
     {
@@ -73,7 +73,7 @@
       ],
       "notes": [
         "185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
-        "Scope is the approved local workflow; publication remains pending."
+        "Scope is the approved local workflow; publication is complete and all 185 hosted browser checks pass."
       ]
     },
     {
@@ -96,7 +96,7 @@
       ],
       "notes": [
         "185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
-        "Scope is the approved local workflow; publication remains pending."
+        "Scope is the approved local workflow; publication is complete and all 185 hosted browser checks pass."
       ]
     },
     {
@@ -120,7 +120,7 @@
       ],
       "notes": [
         "185 Chromium checks, 29 unit checks, 3 component checks and 45-file typecheck pass. WebKit passes 29 camera positions and 113 supplementary cases across the initial run and four scoped input-actuation rechecks. Both complete PDFs and canonical Markdown pass. Lighthouse performance: 99 mobile, 100 desktop.",
-        "Scope is the approved local workflow; publication remains pending."
+        "Scope is the approved local workflow; publication is complete and all 185 hosted browser checks pass."
       ]
     },
     {
@@ -240,5 +240,5 @@
   "localScopeStatus": "accepted-local-candidate-v8",
   "fullLifecycleCertified": false,
   "scope": "Final six-specialty independent review and remediation",
-  "publicationStatus": "candidate-not-published"
+  "publicationStatus": "published-and-verified"
 }

@@ -1,128 +1,41 @@
 {
   "schemaVersion": "1.0",
-  "scope": "Visible whole-object fold-out before cover approach",
+  "scope": "Six-specialty reviewed final proposal, notes and resume",
   "url": "https://brentthomas248.github.io/handrail-proposal/",
-  "checkedAt": "2026-09-27T14:20:18.205546+00:00",
+  "checkedAt": "2026-09-27T20:57:52.457997+00:00",
   "passed": true,
-  "sourceCommit": "33f64ef7e648ec740cf443120663faba0d39d218",
-  "staticCommit": "4b11b12fc0063155b8af87265f3065a15b91a1a6",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36325370312",
+  "isCurrentRevision": true,
+  "sourceCommit": "5b06411fb1788190088ce98a9f684da1029ce0f3",
+  "staticCommit": "3921256a56bf205f42f5cc32e2effec75d326e55",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36349637874",
   "publishingSource": {
     "branch": "gh-pages",
     "path": "/",
     "buildType": "legacy",
     "httpsEnforced": true
   },
+  "deploymentConclusion": "success",
   "browserSuite": {
-    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test --reporter=line --output=qa-artifacts/fold-opening/hosted-e2e",
-    "passed": 68,
+    "status": "passed",
+    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test --reporter=list --output=qa-artifacts/final-design/r8/hosted-e2e",
+    "passed": 185,
     "failed": 0,
     "skipped": 0,
     "flaky": 0,
-    "durationReported": "1.2m"
+    "durationReported": "4.1m"
   },
-  "checks": [
-    "All 28 hosted files match the reviewed build byte for byte, including both unchanged PDFs.",
-    "All 68 hosted browser checks pass, including the new four-viewport opening/reversal regression, reading groups, renderer budget, fallbacks and resume navigation.",
-    "Published opener starts folded at 146 degrees, reveals the whole three-panel object through 38 degrees, then approaches the cover.",
-    "Independent headed review accepted 128 captured frames at four sizes and a separate pause/settling check. Hosted byte equality links that candidate to this deployment."
-  ],
   "staticAssetChecks": [
     {
-      "path": "paper-grain.svg",
+      "path": "_astro/client.CCxN9xF8.js",
       "http": 200,
-      "bytes": 56694,
-      "sha256": "f1ad2a836254dd1e1bda3de717abb7c3de39007361741e634977267450cc774b"
+      "bytes": 220825,
+      "sha256": "4907db89a5bc4160920b577b51facb283e0e376ee1b4d5acab82c2e4d5654811"
     },
     {
-      "path": "index.html",
+      "path": "_astro/index.astro_astro_type_script_index_0_lang.CQDEWMIY.js",
       "http": 200,
-      "bytes": 44917,
-      "sha256": "a8f6065370756d541c0c4d5543139e6d8bd19db3f150403a19b22d0e3c81dbec"
-    },
-    {
-      "path": "handrail-logo.png",
-      "http": 200,
-      "bytes": 18224,
-      "sha256": "1e024d51ef5f28a6bcedfa90ff58c5f0481a81db81cbcd5efede50594766bb3a"
-    },
-    {
-      "path": "handrail-proposed-agreement.pdf",
-      "http": 200,
-      "bytes": 237278,
-      "sha256": "66f0d2b1d8becd3a991ed79c0579e615a83dba0b06971b84aa501d67bf949a62"
-    },
-    {
-      "path": "social.svg",
-      "http": 200,
-      "bytes": 1626,
-      "sha256": "909bc91da4ec3b28e3b8bc4a600703df209a449d4c3589b5b179a79db8de4e18"
-    },
-    {
-      "path": "brent-showalter-handrail-resume.pdf",
-      "http": 200,
-      "bytes": 376630,
-      "sha256": "c832d6895f0e51c19c52a042a8c202661ae2b8b9d5d0181e0ed771490fe4b649"
-    },
-    {
-      "path": "social.png",
-      "http": 200,
-      "bytes": 72589,
-      "sha256": "f5cd97ea07cba230f692b3613127166200a1bc37f8fae34e0266cd779a6495d7"
-    },
-    {
-      "path": "licenses/Inter-OFL.txt",
-      "http": 200,
-      "bytes": 4477,
-      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
-    },
-    {
-      "path": "licenses/Playfair-Display-OFL.txt",
-      "http": 200,
-      "bytes": 4630,
-      "sha256": "c052aafd2a71e90bcee6e69f475029d430a10d548c08ffcae350171f0e9668b1"
-    },
-    {
-      "path": "resume/index.html",
-      "http": 200,
-      "bytes": 50294,
-      "sha256": "a3061efa9f5d374504929f12ef581bb31dad177ecc4fc4866f1316b591bbb2e6"
-    },
-    {
-      "path": "agreement/index.html",
-      "http": 200,
-      "bytes": 46186,
-      "sha256": "dc75aaf96162799589aea818ac8056e85b4f9a3d92fa7731612c2bf3a8a75e40"
-    },
-    {
-      "path": "_astro/playfair-display-latin-ext-400-italic.CZOjvne0.woff",
-      "http": 200,
-      "bytes": 17444,
-      "sha256": "8a2b40aad8d339ee5a19974b33f4b4ae3e340bfa0996ad65cf8060cc5462f628"
-    },
-    {
-      "path": "_astro/playfair-display-latin-400-italic.hIeePEuE.woff",
-      "http": 200,
-      "bytes": 27268,
-      "sha256": "cc638df9f516b3cbfd87d5012d0b657c81dec4e52dd5a8c9e0b87a2b39697bd9"
-    },
-    {
-      "path": "_astro/inter-vietnamese-wght-normal.CBcvBZtf.woff2",
-      "http": 200,
-      "bytes": 10252,
-      "sha256": "5c66f9e07e90c6d4ac4922cc68d60de26c17b1858e677fb5e603fce3952b3ff2"
-    },
-    {
-      "path": "_astro/playfair-display-cyrillic-400-italic.24vVh5t9.woff",
-      "http": 200,
-      "bytes": 15280,
-      "sha256": "bc2e9803aaa1bc5bd108f552acac6357e1a1e582e821823dbbb57f457e5f4c1a"
-    },
-    {
-      "path": "_astro/playfair-display-latin-ext-400-italic.zVOgzDMq.woff2",
-      "http": 200,
-      "bytes": 13668,
-      "sha256": "b02fdf18a2d7b09f409b01a1ab4afe7b5f7d08926b3c867187398765ea0fb3f1"
+      "bytes": 95258,
+      "sha256": "2942e9da3b974b5a3394a61e35a578b2318b7ecd34afeea6c19a232f33f4a3ee"
     },
     {
       "path": "_astro/inter-cyrillic-ext-wght-normal.BOeWTOD4.woff2",
@@ -131,46 +44,22 @@
       "sha256": "ca157063339ac4ad418f214f3abfed119b0798ab4d377386ce5c9e5a7a435ebd"
     },
     {
-      "path": "_astro/playfair-display-vietnamese-400-italic.CD15TOr5.woff2",
-      "http": 200,
-      "bytes": 5800,
-      "sha256": "9a08f3c0730f6311b18adadf42797a91900c4bbc32602785ec1e329db5354685"
-    },
-    {
-      "path": "_astro/playfair-display-vietnamese-400-italic.Cpv4sfwY.woff",
-      "http": 200,
-      "bytes": 7280,
-      "sha256": "44d830fe9bae45b8a4dc798f7df77568a0d6c9e0c2b0838289a8c02d54c4278c"
-    },
-    {
-      "path": "_astro/inter-greek-wght-normal.CkhJZR-_.woff2",
-      "http": 200,
-      "bytes": 18996,
-      "sha256": "1be3448e292fbf05ffe176fe1e43f135013d50b1e7d324ad1a558f623d3bb6f6"
-    },
-    {
       "path": "_astro/inter-cyrillic-wght-normal.DqGufNeO.woff2",
       "http": 200,
       "bytes": 18748,
       "sha256": "71d5ee93cc1e9f1d520a3a8b66456de18c7879d8df09d57fcd2eaff75fef0075"
     },
     {
-      "path": "_astro/index.astro_astro_type_script_index_0_lang.Cq-k_JAy.js",
+      "path": "_astro/inter-greek-ext-wght-normal.DlzME5K_.woff2",
       "http": 200,
-      "bytes": 86037,
-      "sha256": "81a2d742e4b58323dafaf1a12464144cc479b8a4c570488922de4f877ea168f0"
+      "bytes": 11232,
+      "sha256": "6e9e020a25f9b56d418f2c085b1d3c09725a4da23fe693a5b463064606732190"
     },
     {
-      "path": "_astro/playfair-display-latin-400-italic.LeeEXsx5.woff2",
+      "path": "_astro/inter-greek-wght-normal.CkhJZR-_.woff2",
       "http": 200,
-      "bytes": 21884,
-      "sha256": "eabce94d4a69e439cd050755c31f9894ac8a78f93e58b063c6c01f370474e1de"
-    },
-    {
-      "path": "_astro/client.CCxN9xF8.js",
-      "http": 200,
-      "bytes": 220825,
-      "sha256": "4907db89a5bc4160920b577b51facb283e0e376ee1b4d5acab82c2e4d5654811"
+      "bytes": 18996,
+      "sha256": "1be3448e292fbf05ffe176fe1e43f135013d50b1e7d324ad1a558f623d3bb6f6"
     },
     {
       "path": "_astro/inter-latin-ext-wght-normal.DO1Apj_S.woff2",
@@ -185,38 +74,140 @@
       "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
     },
     {
+      "path": "_astro/inter-vietnamese-wght-normal.CBcvBZtf.woff2",
+      "http": 200,
+      "bytes": 10252,
+      "sha256": "5c66f9e07e90c6d4ac4922cc68d60de26c17b1858e677fb5e603fce3952b3ff2"
+    },
+    {
+      "path": "_astro/playfair-display-cyrillic-400-italic.24vVh5t9.woff",
+      "http": 200,
+      "bytes": 15280,
+      "sha256": "bc2e9803aaa1bc5bd108f552acac6357e1a1e582e821823dbbb57f457e5f4c1a"
+    },
+    {
       "path": "_astro/playfair-display-cyrillic-400-italic.drKdN10-.woff2",
       "http": 200,
       "bytes": 12664,
       "sha256": "2b016e18145f89b6b998a13152ff85a5815e94751210d85d9808549f712c62e1"
     },
     {
-      "path": "_astro/inter-greek-ext-wght-normal.DlzME5K_.woff2",
+      "path": "_astro/playfair-display-latin-400-italic.LeeEXsx5.woff2",
       "http": 200,
-      "bytes": 11232,
-      "sha256": "6e9e020a25f9b56d418f2c085b1d3c09725a4da23fe693a5b463064606732190"
+      "bytes": 21884,
+      "sha256": "eabce94d4a69e439cd050755c31f9894ac8a78f93e58b063c6c01f370474e1de"
+    },
+    {
+      "path": "_astro/playfair-display-latin-400-italic.hIeePEuE.woff",
+      "http": 200,
+      "bytes": 27268,
+      "sha256": "cc638df9f516b3cbfd87d5012d0b657c81dec4e52dd5a8c9e0b87a2b39697bd9"
+    },
+    {
+      "path": "_astro/playfair-display-latin-ext-400-italic.CZOjvne0.woff",
+      "http": 200,
+      "bytes": 17444,
+      "sha256": "8a2b40aad8d339ee5a19974b33f4b4ae3e340bfa0996ad65cf8060cc5462f628"
+    },
+    {
+      "path": "_astro/playfair-display-latin-ext-400-italic.zVOgzDMq.woff2",
+      "http": 200,
+      "bytes": 13668,
+      "sha256": "b02fdf18a2d7b09f409b01a1ab4afe7b5f7d08926b3c867187398765ea0fb3f1"
+    },
+    {
+      "path": "_astro/playfair-display-vietnamese-400-italic.CD15TOr5.woff2",
+      "http": 200,
+      "bytes": 5800,
+      "sha256": "9a08f3c0730f6311b18adadf42797a91900c4bbc32602785ec1e329db5354685"
+    },
+    {
+      "path": "_astro/playfair-display-vietnamese-400-italic.Cpv4sfwY.woff",
+      "http": 200,
+      "bytes": 7280,
+      "sha256": "44d830fe9bae45b8a4dc798f7df77568a0d6c9e0c2b0838289a8c02d54c4278c"
+    },
+    {
+      "path": "agreement/index.html",
+      "http": 200,
+      "bytes": 53256,
+      "sha256": "0104372613437b960567c3b8df24dc8dc8d615d2e52de10f36ad96af827769dd"
+    },
+    {
+      "path": "brent-showalter-handrail-resume.pdf",
+      "http": 200,
+      "bytes": 383667,
+      "sha256": "dbf5cae25589697e1c9904e82ffa27aa384a9a98212a1a57272dcfca845ef501"
+    },
+    {
+      "path": "handrail-logo.png",
+      "http": 200,
+      "bytes": 18224,
+      "sha256": "1e024d51ef5f28a6bcedfa90ff58c5f0481a81db81cbcd5efede50594766bb3a"
+    },
+    {
+      "path": "handrail-proposed-agreement.pdf",
+      "http": 200,
+      "bytes": 266274,
+      "sha256": "8ace1fd73de5d542e4655bb25c45a96eb15cb77a56c2d2746a878c809dffceb2"
+    },
+    {
+      "path": "index.html",
+      "http": 200,
+      "bytes": 50536,
+      "sha256": "4cfd4b0411d2abdf97221e88a912cef897f3c0cddba54ac7f9bd5f24813ddfe1"
+    },
+    {
+      "path": "licenses/Inter-OFL.txt",
+      "http": 200,
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "licenses/Playfair-Display-OFL.txt",
+      "http": 200,
+      "bytes": 4630,
+      "sha256": "c052aafd2a71e90bcee6e69f475029d430a10d548c08ffcae350171f0e9668b1"
+    },
+    {
+      "path": "paper-grain.svg",
+      "http": 200,
+      "bytes": 56694,
+      "sha256": "f1ad2a836254dd1e1bda3de717abb7c3de39007361741e634977267450cc774b"
+    },
+    {
+      "path": "resume/index.html",
+      "http": 200,
+      "bytes": 56414,
+      "sha256": "38796c82b8a52ddbf7441b5d82792812b4cad8dbeb78873d387efaf9cb6833de"
+    },
+    {
+      "path": "social.png",
+      "http": 200,
+      "bytes": 73697,
+      "sha256": "e329ac6843b8636966fea598494c587a4cff1b15650eda476035b01abc9dad74"
+    },
+    {
+      "path": "social.svg",
+      "http": 200,
+      "bytes": 1687,
+      "sha256": "82d9b39af42667ba6af5d8134cbacb1cae4b2df257dfa8de6fc10a5e987ab1f9"
     }
   ],
-  "independentDesignReview": {
-    "verdict": "accepted",
-    "path": "docs/fold-opening-independent-review.md",
-    "scope": "Initial folded packet, complete unfolding, cover approach, forward/reverse input and settling; four desktop/phone viewport sizes."
-  },
-  "visualEvidence": {
-    "path": "qa-artifacts/fold-opening/reviewer/candidate-1/capture.json",
-    "frames": 128,
-    "browserErrors": []
-  },
-  "renderingEvidence": "qa-artifacts/fold-opening/hosted-e2e",
-  "supplementaryWebKitEvidence": "agentic-ui/webkit-verification.json",
-  "physicalIOSVerified": false,
-  "errors": [],
-  "failedRequests": [],
-  "limits": [
-    "Desktop engines and mobile emulation do not establish physical iPhone stability.",
-    "Manual VoiceOver and field INP remain unverified.",
-    "Component, document and portfolio evidence from the preceding revision remains in docs/portfolio-resume-motion-implementation.md; those surfaces did not change."
+  "checks": [
+    "All 28 hosted files match the independently reviewed candidate byte for byte.",
+    "Both downloaded two-page PDFs pass complete canonical content validation.",
+    "All 185 hosted browser checks pass without retries.",
+    "Six fresh independent scores: 98 copy, 99 editorial, 98 art, 100 motion, 100 interaction, 99 rendering."
   ],
-  "isCurrentRevision": false,
-  "currentRevisionNote": "Historical deployed/load evidence; candidate-v7 final panel and publication remain pending."
+  "limitations": [
+    "Physical iPhone stability, true hidden-tab recovery, manual VoiceOver, actual GPU memory and field INP remain unverified.",
+    "Minor PDF continuation and DPR1 ink finish observations remain documented; scores are internal assessments, not external certification."
+  ],
+  "previousRelease": {
+    "sourceCommit": "33f64ef7e648ec740cf443120663faba0d39d218",
+    "staticCommit": "4b11b12fc0063155b8af87265f3065a15b91a1a6",
+    "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36325370312"
+  },
+  "generatedAt": "2026-09-27T20:57:52.457997+00:00"
 }

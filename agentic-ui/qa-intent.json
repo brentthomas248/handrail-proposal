@@ -105,7 +105,7 @@
     "Physical-device, manual VoiceOver and field INP evidence remain unavailable.",
     "Current Lighthouse scores describe a local production-preview lab run, not physical-device or field performance."
   ],
-  "generatedAt": "2026-09-27T20:51:01.808465+00:00",
+  "generatedAt": "2026-09-27T20:57:52.457997+00:00",
   "scope": "Full proposal tour, reading, notes, resume and PDFs; six independent specialties",
   "localEvidence": {
     "browserChecks": 185,
@@ -116,6 +116,8 @@
     "supplementaryWebKitReadingPositions": 29,
     "supplementaryWebKitTextChecks": 113,
     "candidateIdentity": "qa-artifacts/final-design/candidate-v8/identity.json",
-    "independentReview": "docs/final-design-review/progress.md"
+    "independentReview": "docs/final-design-review/progress.md",
+    "hostedBrowserChecks": 185,
+    "hostedAssetMatches": 28
   }
 }
