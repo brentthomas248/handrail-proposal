@@ -1,6 +1,6 @@
 # Magnetic reading stops
 
-Status: locally verified; publication pending.
+Status: published and verified.
 
 ## Intent and scope
 
@@ -32,6 +32,8 @@ The full Chromium run passed 198 of 199 checks. The single failure was an altere
 
 Supplementary WebKit exposed a real small-reversal defect: its first wheel event can interrupt programmatic scrolling without moving the native offset. Direction now comes from the vertical wheel event as well as native scroll movement, so a consumed reverse delta cannot restart the old forward pull. All four opening/reversal rechecks pass at 390px and 1440px. Two other WebKit failures were test-actuation/observer issues: the End key targeted the last clicked horizontal chapter strip until blank stage was selected, and nested 3D IntersectionObserver reported 60% visibility despite complete text and section bounds fitting the safe area. Both corrected cases pass, with geometry thresholds retained and stronger full-line checks. Exact arrivals clear direction, and the opened overview has a settled “The full proposal” caption.
 
-Typecheck covers 46 files with zero issues; all 31 unit checks, formatting and the production build pass. Twenty-six of 28 output files are byte-identical to the previous release; only the scene script and main HTML script reference changed. All 27 final focused Chromium checks and all 11 WebKit checks pass without retries. The independent current rendered review accepts the candidate after 40 exact arrivals and 28 held-touch checks across desktop and two phone sizes, with no automatic chaining or clipped primary reading groups. Reversal, pending resize, bursts and reading escapes pass. Keep the current pull timing. Hosted verification remains pending.
+Typecheck covers 46 files with zero issues; all 31 unit checks, formatting and the production build pass. Twenty-six of 28 output files are byte-identical to the previous release; only the scene script and main HTML script reference changed. All 27 final focused Chromium checks and all 11 WebKit checks pass without retries. The independent current rendered review accepts the candidate after 40 exact arrivals and 28 held-touch checks across desktop and two phone sizes, with no automatic chaining or clipped primary reading groups. Reversal, pending resize, bursts and reading escapes pass. Keep the current pull timing. Hosted verification is complete, as recorded below.
 
 Ignored evidence: `qa-artifacts/magnetic-scroll/` holds the red repros, initial candidate, full-suite log, corrected fixture recheck, WebKit traces and 28-file candidate identity. Source review found no concrete blocker in input ownership, rounding, refit, mode changes or history restoration.
+
+Published source `73cf7e72e3fad3b95b79e7155154302437aafb1a` as static `b2d197bcf348f46d9ae3007d56f93744928d8194`. [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36354053318) succeeded. All 28 hosted files match the reviewed candidate byte for byte; all 27 scoped hosted Chromium checks pass without retries.

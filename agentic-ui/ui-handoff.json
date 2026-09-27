@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
   "surface": "Mandatory magnetic stops for the approved Handrail trifold",
-  "generatedAt": "2026-09-27T22:04:22.322731+00:00",
+  "generatedAt": "2026-09-27T22:07:26.241362+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -152,9 +152,9 @@
     "reason": "User requires every small scroll to land firmly at a concrete stop."
   },
   "publication": {
-    "status": "locally-verified-awaiting-publication",
+    "status": "published-and-verified",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidencePath": "agentic-ui/deployment-verification.json",
-    "note": "Previous opening release remains live until the magnetic-stop deployment receipt."
+    "note": "Source 73cf7e7; static b2d197b; all 28 hosted assets and 27 scoped browser checks verified."
   }
 }

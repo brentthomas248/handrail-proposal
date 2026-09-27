@@ -2,7 +2,11 @@
 
 ## Current state
 
-The user now requests mandatory magnetic completion after every small scroll. [The magnetic-stop work](docs/magnetic-scroll-remediation.md) replaces the former nudge dead zone while retaining the approved compositions. The independent rendered review accepts the frozen candidate. Typecheck, 31 unit checks, formatting, build, 27 final focused Chromium checks and 11 WebKit checks pass. The full Chromium run passed 198/199; its single fixture issue was corrected and both affected cases pass. Publication and hosted verification are next; the opening-only release below remains live until the next deployment receipt.
+Mandatory magnetic stops are published. Even a 1px gesture completes the next concrete stop in its direction; exact arrivals hold without chaining. Fresh reverse input changes destination, held touch retains control, and viewport refits resume pending completion. Ordinary reading remains native. See [the remediation](docs/magnetic-scroll-remediation.md) and [independent rendered review](docs/magnetic-scroll-review.md).
+
+Typecheck (46 files), all 31 unit tests, formatting and build pass. The full Chromium run passed 198/199, with its single fixture failure corrected and both affected cases passing afterward. All 27 final focused Chromium checks and 11 WebKit checks pass; original failures and diagnoses are retained. No geometry thresholds were reduced.
+
+Source `73cf7e72e3fad3b95b79e7155154302437aafb1a`; static `b2d197bcf348f46d9ae3007d56f93744928d8194`. [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36354053318) succeeded. All 28 hosted files match the reviewed candidate and all 27 focused hosted checks pass without retries. Physical iPhone playback remains unverified. Prior six-category design grades and Lighthouse scores remain historical.
 
 ## Published opening refinement
 

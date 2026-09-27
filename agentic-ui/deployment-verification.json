@@ -4,10 +4,10 @@
   "url": "https://brentthomas248.github.io/handrail-proposal/",
   "checkedAt": "2026-09-27T21:20:52.871920+00:00",
   "passed": true,
-  "isCurrentRevision": false,
-  "sourceCommit": "9cb065782302c80027bb8a2bb0d54de3b76f9426",
-  "staticCommit": "d4eb34c32a371574426b914ace5681aad82ad2d4",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36351226460",
+  "isCurrentRevision": true,
+  "sourceCommit": "73cf7e72e3fad3b95b79e7155154302437aafb1a",
+  "staticCommit": "b2d197bcf348f46d9ae3007d56f93744928d8194",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36354053318",
   "publishingSource": {
     "branch": "gh-pages",
     "path": "/",
@@ -17,12 +17,11 @@
   "deploymentConclusion": "success",
   "browserSuite": {
     "status": "passed",
-    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test tests/e2e/fold-opening.spec.ts tests/e2e/proposal.spec.ts --grep 'cold opening|full three-panel opening|high-density|immediate fast flick|mobile touch scroll' --output=qa-artifacts/opening-smoothness/hosted-e2e --reporter=list",
-    "passed": 11,
+    "command": "Hosted scoped Chromium checks; qa-artifacts/magnetic-scroll/hosted-chromium.log",
+    "passed": 27,
     "failed": 0,
     "skipped": 0,
-    "flaky": 0,
-    "durationReported": "36.4s"
+    "flaky": 0
   },
   "staticAssetChecks": [
     {
@@ -32,10 +31,10 @@
       "sha256": "4907db89a5bc4160920b577b51facb283e0e376ee1b4d5acab82c2e4d5654811"
     },
     {
-      "path": "_astro/index.astro_astro_type_script_index_0_lang.cUFhnljo.js",
+      "path": "_astro/index.astro_astro_type_script_index_0_lang.DDz78qqw.js",
       "http": 200,
-      "bytes": 95419,
-      "sha256": "95ea7261f35acfd2ba14ea2354a825c027ed439c5333c8ac1896190afbb18b1f"
+      "bytes": 95812,
+      "sha256": "0978590e1db88b37a284471e7604d34ec24be239c7b0a946b9a0c3946a001ad8"
     },
     {
       "path": "_astro/inter-cyrillic-ext-wght-normal.BOeWTOD4.woff2",
@@ -155,7 +154,7 @@
       "path": "index.html",
       "http": 200,
       "bytes": 50536,
-      "sha256": "a00a911bd51082edfbf2a245ae998a57b552cbe74e5cddbc671f8b68788e7983"
+      "sha256": "7dc8b494029c47a492a6b581ba39bd5f01f726e3528d2ae719a95d568da5b7c6"
     },
     {
       "path": "licenses/Inter-OFL.txt",
@@ -196,19 +195,19 @@
   ],
   "checks": [
     "All 28 hosted files match the independently reviewed candidate byte for byte.",
-    "26 files, including PDFs, remain byte-identical to the prior fully reviewed release. PDF contents were not changed or regenerated.",
-    "All 11 scoped hosted browser checks pass without retries.",
-    "Independent opening review accepts five viewports; 1,182 opening samples have zero clipped silhouettes."
+    "26 files including notes, resume and both PDFs remain byte-identical to the prior release.",
+    "All 27 scoped hosted browser checks pass without retries.",
+    "Independent desktop and two phone viewport review accepts mandatory magnetic stops."
   ],
   "limitations": [
     "Physical iPhone stability, true hidden-tab recovery, manual VoiceOver, actual GPU memory and field INP remain unverified.",
     "Minor PDF continuation and DPR1 ink finish observations remain documented; scores are internal assessments, not external certification."
   ],
   "previousRelease": {
-    "sourceCommit": "5b06411fb1788190088ce98a9f684da1029ce0f3",
-    "staticCommit": "3921256a56bf205f42f5cc32e2effec75d326e55",
-    "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36349637874"
+    "sourceCommit": "9cb065782302c80027bb8a2bb0d54de3b76f9426",
+    "staticCommit": "d4eb34c32a371574426b914ace5681aad82ad2d4",
+    "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36351226460"
   },
-  "generatedAt": "2026-09-27T21:20:52.871920+00:00",
-  "currentRevisionNote": "This receipt is for the previous opening refinement. Magnetic-stop candidate is locally verified and awaiting publication."
+  "generatedAt": "2026-09-27T22:07:26.241362+00:00",
+  "publishedAt": "2026-09-27T22:07:26.241362+00:00"
 }

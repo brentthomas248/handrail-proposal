@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T22:04:22.322731+00:00",
+  "generatedAt": "2026-09-27T22:07:26.241362+00:00",
   "scope": "Mandatory directional magnetic reading stops",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": false,
+  "deployed": true,
   "evidenceNotes": [
     "Initial published release failed all three one-pixel/terminal-tail repros; new regressions now pass.",
     "WebKit consumed reverse wheel deltas exposed a real direction bug, fixed and retested.",
     "Original failures and fixture diagnoses are retained; no geometry thresholds were weakened.",
     "Only the main HTML script reference and scene JS changed; 26 assets including both PDFs remain byte-identical.",
     "Physical iPhone playback remains unverified; no global lifecycle certification or fresh six-category grade is claimed.",
-    "Final candidate passes 27 Chromium and 11 WebKit focused checks; publication is pending."
+    "Final candidate passes 27 Chromium and 11 WebKit focused local checks, all 28 hosted asset comparisons and 27 focused hosted Chromium checks."
   ],
   "limitations": [
     "agentic-ui/blockers.json",
@@ -268,6 +268,11 @@
     {
       "command": "Independent rendered review",
       "result": "See docs/magnetic-scroll-review.md for exact scope and observations",
+      "exitCode": 0
+    },
+    {
+      "command": "Hosted asset and scoped browser verification",
+      "result": "28 exact files; 27 Chromium tests passed",
       "exitCode": 0
     }
   ],
