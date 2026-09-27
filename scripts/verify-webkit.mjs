@@ -66,7 +66,7 @@ try {
     const firstReadingProgress = (await page.evaluate(() => scrollY)) / travel;
     await navigation.nth(0).click();
     await page.waitForTimeout(1400);
-    for (const fraction of [0, 0.18, 0.34, 0.5, 0.6]) {
+    for (const fraction of [0, 0.18, 0.34, 0.5, 0.6, 1]) {
       const progress = firstReadingProgress * fraction;
       if (progress) {
         const currentY = await page.evaluate(() => scrollY);

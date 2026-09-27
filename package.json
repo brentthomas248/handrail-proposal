@@ -19,14 +19,16 @@
     "contract:generate": "node scripts/generate-contract.ts",
     "contract:check": "node scripts/generate-contract.ts --check",
     "pdf": "node scripts/generate-pdf.mjs",
-    "build:release": "pnpm contract:check && pnpm build && pnpm pdf",
+    "build:release": "pnpm contract:check && pnpm build && pnpm pdf && pnpm resume:pdf",
     "capture": "node scripts/capture.mjs",
     "test:components": "node .storybook/verify-components.mjs",
     "pdf:check": "node scripts/verify-pdf.ts",
     "social:generate": "node scripts/generate-social.mjs",
     "format": "prettier --write src scripts tests *.ts .storybook docs/github-actions",
     "format:check": "prettier --check src scripts tests *.ts .storybook docs/github-actions",
-    "performance": "node scripts/performance.mjs"
+    "performance": "node scripts/performance.mjs",
+    "resume:pdf": "node scripts/generate-resume.mjs",
+    "resume:check": "node scripts/verify-resume.ts"
   },
   "dependencies": {
     "@astrojs/react": "7.0.0",

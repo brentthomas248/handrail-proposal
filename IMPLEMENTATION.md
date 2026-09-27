@@ -1,29 +1,25 @@
-# Implementation checkpoint — complete round-two revision
+# Fold camera, resume and public portfolio
 
-## What changed
+## Changed
 
-All actionable findings from the [round-two review](docs/review-round-2.md) are implemented. The full proposal now uses stable printed ink, complete phone rate groups, local hinge travel, a composed 90-day scene and one closing with contribution, growth, discussion status and notes action. The broken highlight is replaced by clear rate-heading ownership. Both commission paths receive equal visual weight and shared terms.
+The opening now establishes three connected Z-fold panels. Camera travel rotates around actual creases before returning to complete reading compositions. Near-edge-on projected shadows are quieter. Native scrolling, phone renderer budgets and all proposed compensation terms remain intact.
 
-The elementary diagram is replaced by one accessible comparison: each illustrated $10,000 customer installment produces $1,500 commission/$8,500 remaining at 15%, or $2,000/$8,000 at 20%. The $500 difference is per collected installment. Cash remaining is before delivery, benefits and other costs. The notes, generated Markdown and PDF use the same typed values; rates, future-sales scope, no base salary, requested benefits and the proposed 90-day window remain consistent.
+A prominent header links the tailored Handrail resume and broader GitHub. The resume includes the confirmed 2025 degree, conventional experience/tools, verified public proof and four potential contribution areas; HTML and a two-page PDF share one typed source. Public GitHub now has a curated README, updated bio and Handrail/DFB/forecasting pins.
 
-Native keyboard navigation no longer forces an unwanted mode change. Idle settling cannot undo deliberate scroll direction. Reading mode follows the same narrative order as the tour, keeps the mode control visible and returns to the idea selected by the last reading gesture or paper-link focus. Held touch, stale focus and fractional section boundaries have explicit regressions. See [implementation and rejected-candidate evidence](docs/round-2-implementation.md).
+Research-based spatial, editorial, interaction and narrative reviewers independently inspected rendered output. All actionable findings were corrected and rechecked: resume measure/spacing, result-first copy, tablet navigation, target sizes, focus outlines and browser Back preserving exact tour position. See [implementation/review record](docs/portfolio-resume-motion-implementation.md).
 
-## Verified candidate
+## Verified locally
 
-- 55 Chromium browser checks passed in 56.2 seconds, with zero skips, failures or retries. Six partial forward/reverse tests measured 0px of movement against the user's direction after release.
-- 26 typechecked files, zero issues; 21 unit tests and 3 component checks passed. Component axe reported zero violations or browser errors.
-- Canonical Markdown, build, full PDF text and formatting checks passed. Both PDF pages were rasterized and visually inspected.
-- WebKit: 29 reading positions across five sizes passed, minimum primary text 12.158px; no errors or failed requests. Known protocol/backface screenshot limits remain documented.
-- Estimated paper surfaces peak at 59.26MiB with a 2877-device-pixel maximum edge, below the unchanged 64MiB/4096px limits. These are compositor estimates, not physical GPU measurements.
-- Lighthouse page-load lab: 99 mobile/100 desktop performance, zero TBT/CLS; other categories 100. Not field performance or real-device scroll evidence.
-- Independent [design/commercial](docs/round-2-candidate-design-review.md) and [interaction](docs/round-2-candidate-interaction-review.md) reviews accepted the complete bounded revision after rejected candidates and fresh rendered checks. The desktop source action is intentionally retained; redundant phone colophons are removed.
+- 32 checked files: no errors, warnings or hints; 27 unit checks and three component checks passed.
+- 64 Chromium browser checks passed in 58.5 seconds with no failures/skips/retries; renderer limits remain 64MiB/4096px.
+- 29 WebKit reading positions passed across five sizes. Headless/protocol rendering limitations remain documented; no physical iPhone certification.
+- Both two-page PDFs match complete canonical text; every page was rendered and inspected. Resume link annotations point to the five correct public destinations.
+- Formatting passed. Lighthouse lab performance: 99 mobile/100 desktop, all other categories 100, zero TBT. This is page-load lab evidence, not field INP or device scroll performance.
 
-## Publication
+## Publication checkpoint
 
-The [updated public proposal](https://brentthomas248.github.io/handrail-proposal/?v=d3363fd) is published from source `d3363fd5e5e82cdd91890c72ce686db5034b3866` as static `18f262af8bdb212828749af080ea7844500ffabe`. [Pages run 36293281659](https://github.com/brentthomas248/handrail-proposal/actions/runs/36293281659) succeeded. All 55 hosted browser checks passed in 60.4 seconds, with zero failures, skips or retries. All 26 hosted files match the reviewed build byte for byte, including the PDF; the downloaded PDF passes the complete canonical check.
-
-[Ordinary reading](https://brentthomas248.github.io/handrail-proposal/?view=read&v=d3363fd) remains available. Application publication and hosted verification are complete. This documentation checkpoint reconciles [local evidence](agentic-ui/local-verification.json) and the [deployment receipt](agentic-ui/deployment-verification.json); it changes no application code or deployed assets.
+The current revision is locally ready. Public profile changes are complete; source/static publication and hosted verification are next. The prior application release remains live at source `d3363fd`, static `18f262a`. Current publication proof belongs in [deployment-verification.json](agentic-ui/deployment-verification.json).
 
 ## Remaining limits
 
-Physical iPhone stability, manual VoiceOver, field INP and an unbriefed business-reader comprehension exercise remain unverified. The [approved local workflow](docs/local-workflow.md) applies; credentialed services remain omitted and full global certification is not claimed. Raw QA captures stay ignored. Private business material remains outside the public repository. GitHub profile and pins remain unchanged.
+Physical iPhone stability, manual VoiceOver and field INP remain unverified. The approved [local workflow](docs/local-workflow.md) applies. Private business/resume evidence stays outside this repository. No full global certification is claimed.

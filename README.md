@@ -2,7 +2,7 @@
 
 An interactive business proposal from Brent Showalter to Handrail. A three-dimensional Z-fold becomes the scene: its wings open in opposite depth directions, then a scroll-driven camera moves across the printed proposal. Matte paper grain, creases, directional lighting and a projected shadow give the document a physical presence.
 
-**[Explore the live proposal](https://brentthomas248.github.io/handrail-proposal/).** See [IMPLEMENTATION.md](IMPLEMENTATION.md) for verified behavior, release evidence and remaining limits.
+**[Explore the live proposal](https://brentthomas248.github.io/handrail-proposal/)** · **[Resume for Handrail](https://brentthomas248.github.io/handrail-proposal/resume/)** · **[Explore my GitHub](https://github.com/brentthomas248)** See [IMPLEMENTATION.md](IMPLEMENTATION.md) for verified behavior, release evidence and remaining limits.
 
 ## The proposal
 
@@ -14,9 +14,9 @@ The higher rate rewards originating the business that makes hiring possible. Ben
 
 ## The experience
 
-The flyer uses Handrail's actual wordmark, warm paper, near-black text and rust accents. Locally served Inter and Playfair Display connect the typography to Handrail's published materials. Large type, thin rules and a payment diagram form one continuous composition. A static 20/80 split and twelve paired collection/commission events explain the cash timing; a restrained reversible annotation follows money collected.
+The flyer uses Handrail's actual wordmark, warm paper, near-black text and rust accents. Locally served Inter and Playfair Display connect the typography to Handrail's published materials. Large type, thin rules and a collected-dollar comparison form one continuous composition. Both commission paths share the same $10,000 installment: $1,500/$8,500 at 15%, or $2,000/$8,000 at 20%, before delivery, benefits and other costs. The comparison remains readable without animation.
 
-Three hinged panels have actual front and back faces. CSS 3D transforms and a GSAP ticker coordinate the accordion opening, continuous camera travel and framed reading views. A critically damped response follows native scroll, with no fixed dead-scroll intervals. Pausing between sections settles the camera; new input immediately takes control. The reader can select chapters or switch to ordinary reading. Mobile has closer views where needed. Reduced motion and JavaScript-disabled viewing keep the complete proposal in normal document flow. Decorative arrows and symbols are removed; the document’s movement supplies the visual interest.
+The opening establishes all three connected panels before approaching the cover. Camera orbits follow the physical creases; reading destinations remain face-on. Three hinged panels have actual front and back faces. CSS 3D transforms and a GSAP ticker coordinate the accordion opening, continuous camera travel and framed reading views. A critically damped response follows native scroll, with no fixed dead-scroll intervals. Pausing between sections settles the camera; new input immediately takes control. The reader can select chapters or switch to ordinary reading. Mobile has closer views where needed. Reduced motion and JavaScript-disabled viewing keep the complete proposal in normal document flow. Decorative arrows and symbols are removed; the document’s movement supplies the visual interest.
 
 ## Engineering
 
@@ -29,7 +29,9 @@ Three hinged panels have actual front and back faces. CSS 3D transforms and a GS
 | Brand assets   | The official Handrail PNG wordmark, locally served Inter and Playfair Display.                                                                                                           |
 | Verification   | Vitest geometry/motion/content checks, Playwright continuous scrolling and interruption regressions, axe scans and Storybook states.                                                     |
 
-The PDF is printed from the proposal-notes route. Regenerate it when the content changes; a previously generated PDF does not update itself. The existing `agreement/` URL and PDF filename are retained for link compatibility, while the visible content is proposal notes.
+The tailored resume has conventional experience and education plus four evidence-backed ways to contribute to Handrail. Its two-page PDF and responsive HTML use `src/content/resume.ts`; the official watermark is decorative. Public contributions link to exact merged pull requests.
+
+The proposal PDF is printed from the proposal-notes route. Regenerate it when the content changes; a previously generated PDF does not update itself. The existing `agreement/` URL and PDF filename are retained for link compatibility, while the visible content is proposal notes.
 
 ## Run locally
 
@@ -58,6 +60,7 @@ pnpm check
 pnpm test
 pnpm build:release
 pnpm pdf:check
+pnpm resume:check
 pnpm build-storybook
 pnpm exec playwright install chromium
 pnpm test:e2e
@@ -75,4 +78,4 @@ Brent supplied the business intent, proposal decisions and approved reference di
 
 [DESIGN.md](DESIGN.md) records the direction. Telescope informed changes in scale, Igloo informed camera continuity, Exat informed typographic confidence, and Stripe Press informed document presentation. No assets from those reference sites are included. Handrail's official wordmark and published color/font choices are used for this proposal.
 
-GitHub Pages serves tested static output from the `gh-pages` branch. Optional Actions templates under `docs/github-actions/` remain inactive; validation runs locally before a publishing push. GitHub's own Pages deployment job establishes deployment, not a remote project-test pass. Profile README and pin changes remain separate, unapplied work; see [the showcase handoff](docs/github-showcase.md).
+GitHub Pages serves tested static output from the `gh-pages` branch. Optional Actions templates under `docs/github-actions/` remain inactive; validation runs locally before a publishing push. GitHub's own Pages deployment job establishes deployment, not a remote project-test pass. The [showcase record](docs/github-showcase.md) records the separate public-profile work and verification.

@@ -7,6 +7,7 @@ import {
   sceneAt,
   hingeTravel,
   rotatePoint,
+  viewPoint,
   type Pose,
 } from '../src/scripts/tour-path';
 
@@ -159,25 +160,71 @@ describe('honest scene ownership', () => {
 });
 
 describe('local paper travel', () => {
-  it('crosses an adjacent hinge at reading scale', () => {
+  it('orbits an adjacent hinge at reading scale before facing the next panel', () => {
     const from = { ...pose, focusX: 1800, focusY: 400, scale: 0.4 };
     const to = { ...pose, focusX: 3000, focusY: 800, scale: 0.5 };
     const bridge = hingeTravel(from, to, 'center', 'right', 1200);
-    expect(bridge).toHaveLength(1);
-    expect(bridge[0].focusX).toBe(2400);
-    expect(bridge[0].focusY).toBe(600);
-    expect(bridge[0].scale).toBeCloseTo(0.36);
+    expect(bridge).toHaveLength(2);
+    expect(bridge.map((beat) => beat.focusX)).toEqual([2400, 2400]);
+    expect(bridge.map((beat) => beat.yaw)).toEqual([6, -62]);
+    for (const beat of bridge) {
+      expect(beat.scale).toBeCloseTo(0.36);
+      expect(beat.focusY).toBeGreaterThan(from.focusY);
+      expect(beat.focusY).toBeLessThan(to.focusY);
+      expect(beat.right).toBeGreaterThan(beat.left);
+      // The camera changes its bearing around the crease, which remains its
+      // center of attention even while the two panels change apparent width.
+      expect(viewPoint({ x: 2400, y: beat.focusY, z: 0 }, beat)).toEqual({
+        x: 0,
+        y: 0,
+        z: 0,
+      });
+    }
   });
 
   it('returns across both hinges without an overview zoom-out', () => {
     const from = { ...pose, focusX: 3000, focusY: 600, scale: 0.5 };
     const to = { ...pose, focusX: 600, focusY: 1400, scale: 0.4 };
     const bridges = hingeTravel(from, to, 'right', 'left', 1200);
-    expect(bridges.map((bridge) => bridge.focusX)).toEqual([2400, 1200]);
+    expect(bridges.map((bridge) => bridge.focusX)).toEqual([
+      2400, 2400, 1200, 1200,
+    ]);
+    expect(bridges.map((bridge) => bridge.yaw)).toEqual([-62, 6, 6, -62]);
     for (const bridge of bridges) {
       expect(bridge.scale).toBeGreaterThanOrEqual(0.36);
-      expect(Math.abs(bridge.pitch)).toBeLessThanOrEqual(4);
+      expect(bridge.pitch).toBeGreaterThan(8);
+      expect(bridge.pitch).toBeLessThanOrEqual(15);
     }
     expect(hingeTravel(from, to, 'right', 'right', 1200)).toEqual([]);
+  });
+
+  it('retraces the same physical orbit when the route is reversed', () => {
+    const from = { ...pose, focusX: 3000, focusY: 600, scale: 0.5 };
+    const to = { ...pose, focusX: 600, focusY: 1400, scale: 0.4 };
+    const forward = hingeTravel(from, to, 'right', 'left', 1200);
+    const reverse = hingeTravel(to, from, 'left', 'right', 1200).reverse();
+    expect(forward).toEqual(reverse);
+  });
+
+  it('keeps both faces front-facing throughout a hinge orbit', () => {
+    const from = { ...pose, focusX: 600, focusY: 400, scale: 0.4 };
+    const to = { ...pose, focusX: 1800, focusY: 800, scale: 0.5 };
+    const orbit = createPath(
+      hingeTravel(from, to, 'left', 'center', 1200).map((beat, index) => ({
+        at: index,
+        pose: beat,
+      })),
+    );
+    for (let time = 0; time <= 1; time += 0.02) {
+      const sample = orbit.sample(time);
+      for (const angle of [0, sample.left]) {
+        const theta = (angle * Math.PI) / 180;
+        const normal = rotatePoint(
+          { x: Math.sin(theta), y: 0, z: Math.cos(theta) },
+          sample,
+        );
+        expect(normal.z).toBeGreaterThan(0.3);
+      }
+    }
   });
 });

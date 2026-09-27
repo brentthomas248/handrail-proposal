@@ -1,6 +1,6 @@
 {
-  "checkedAt": "2026-09-27T04:01:09.691734+00:00",
-  "scope": "Current round-two tour geometry and complete-text readability; not physical iOS stability verification",
+  "checkedAt": "2026-09-27T05:09:49.835Z",
+  "scope": "Round-three geometry and reading behavior; not physical iOS stability",
   "engine": {
     "name": "Playwright WebKit",
     "version": "26.6",
@@ -18,7 +18,7 @@
     ],
     "mobileInput": "Programmatic document scrolling; Playwright does not support mouse-wheel input in mobile WebKit",
     "script": "scripts/verify-webkit.mjs",
-    "receipt": "qa-artifacts/round-2-candidate/webkit/verification.json",
+    "receipt": "qa-artifacts/round-3/webkit/verification.json",
     "minimumRenderedTextPx": 12.158187866210938,
     "deviceScaleFactors": {
       "desktop": 1,

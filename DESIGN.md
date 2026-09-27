@@ -155,3 +155,13 @@ The active group has breathing room inside the measured header/control boundarie
 Refit the camera after available mobile viewport height changes while preserving native scroll and the current chapter. Reaching the final scene must remain possible after the viewport grows again. A selected rectangle fitting inside a nominal viewport does not prove all of its text lines or related content are readable.
 
 Current evidence and independent review belong in [the round-two remediation](docs/round-2-implementation.md). Earlier screenshot and test-count approvals are historical, not substitutes for current visual judgment.
+
+## Resume, portfolio and spatial introduction
+
+The opening presents a visibly connected, partly open Z-fold before approaching the cover. A paired viewpoint orbit at each crossed crease reveals the physical object; same-panel paragraphs retain quieter reading travel. Keep the approved reading poses, native interruption/reversal and renderer budgets.
+
+A second header group makes the Handrail resume and wider GitHub immediately discoverable. On phones the header uses two rows; the existing total reading-space reservation is redistributed between header and chapter controls. Tablet navigation stays on one line. Chapter focus outlines sit inside their controls. Browser Back restores the proposal history entry after its scroll geometry mounts. Fresh visits and explicit reading URLs keep their normal behavior.
+
+The resume is two intentional editorial sheets: conventional experience/education/tools, then potential contributions and public proof. Use quiet rules, readable measures and a faint official watermark in empty space. The public copy distinguishes demonstrated work from proposed Handrail responsibilities and quantifies only supported results. The PDF and web route share one typed content source.
+
+Current research and independent specialties are recorded in [round-three design research](docs/design-research-round-3.md) and [the implementation record](docs/portfolio-resume-motion-implementation.md).

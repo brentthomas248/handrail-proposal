@@ -1269,7 +1269,7 @@ test('reading mode exposes both rates, cash-flow explanation and proposal notes'
   await expect(flyer).toContainText(/future/i);
   await expect(page.locator('[data-camera-stop]')).not.toHaveCount(0);
   await expectNoOverflow(page);
-  await page.locator('a[href$="/agreement/"]').first().click();
+  await page.locator('.proposal-sheet a[href$="/agreement/"]').click();
   await expect(page).toHaveURL(/\/agreement\/$/);
   await expect(page.locator('h1')).toContainText(/proposal/i);
   for (const section of agreementSections) {
@@ -1418,7 +1418,7 @@ test('without JavaScript the complete proposal remains readable and linked', asy
   await expect(page.locator('.proposal-sheet h1')).toBeVisible();
   await expect(page.locator('.proposal-sheet')).toContainText('20%');
   await expectNoOverflow(page);
-  await page.locator('a[href$="/agreement/"]').first().click();
+  await page.locator('.proposal-sheet a[href$="/agreement/"]').click();
   for (const section of agreementSections)
     await expect(page.locator(`#${section.id}`)).toBeAttached();
   await context.close();
@@ -1556,8 +1556,12 @@ test('intentional reading scroll owns the return chapter after keyboard focus mo
     true,
   );
   await enterReadingMode(page);
-  await page.keyboard.press('Tab');
   const notesLink = page.locator('.proposal-sheet a[href$="/agreement/"]');
+  for (let step = 0; step < 8; step += 1) {
+    await page.keyboard.press('Tab');
+    if (await notesLink.evaluate((link) => link === document.activeElement))
+      break;
+  }
   await expect(notesLink).toBeFocused();
   await expect(notesLink).toBeInViewport({ ratio: 1 });
   const cash = page.locator('#cash-flow');

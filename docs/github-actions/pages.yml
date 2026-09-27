@@ -21,7 +21,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium
       - run: sudo apt-get update && sudo apt-get install -y poppler-utils
-      - run: pnpm check && pnpm test && pnpm build:release && pnpm pdf:check && pnpm test:e2e
+      - run: pnpm check && pnpm test && pnpm build:release && pnpm pdf:check && pnpm resume:check && pnpm test:e2e
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist

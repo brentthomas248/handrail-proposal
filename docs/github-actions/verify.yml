@@ -22,6 +22,6 @@ jobs:
       - run: pnpm check
       - run: pnpm test
       - run: pnpm build:release
-      - run: pnpm pdf:check
+      - run: pnpm pdf:check && pnpm resume:check
       - run: pnpm test:e2e
       - run: pnpm build-storybook

@@ -1,0 +1,160 @@
+---
+import Page from '../layouts/Page.astro';
+import { resume } from '../content/resume';
+import '../styles/resume.css';
+const base = import.meta.env.BASE_URL;
+---
+
+<Page
+  title={`${resume.name} · Resume for Handrail`}
+  description="Brent Showalter's experience in workflow software, analytics and customer-facing work, with ways to contribute to Handrail."
+  document
+  currentPage="resume"
+>
+  <main id="main" class="resume-main">
+    <div class="resume-tools" aria-label="Resume actions">
+      <a class="button button-dark" href={`${base}${resume.pdf}`} download>
+        {resume.labels.download}
+      </a>
+      <a class="text-link" href={base}>
+        Back to the proposal
+      </a>
+    </div>
+    <article class="resume-document" aria-label="Brent Showalter resume">
+      <section
+        class="resume-sheet resume-background"
+        aria-labelledby="resume-name"
+      >
+        <img
+          class="resume-watermark"
+          src={`${base}handrail-logo.png`}
+          width="1397"
+          height="392"
+          alt=""
+          aria-hidden="true"
+        />
+        <header class="resume-heading">
+          <p class="resume-prepared">{resume.preparedFor}</p>
+          <h1 id="resume-name">{resume.name}</h1>
+          <p class="resume-role">{resume.title}</p>
+          <div class="resume-links">
+            <a href={resume.github} target="_blank" rel="noreferrer">
+              {resume.labels.github}
+            </a>
+            <a href={resume.product} target="_blank" rel="noreferrer">
+              {resume.labels.product}
+            </a>
+          </div>
+          <p class="resume-profile">{resume.profile}</p>
+        </header>
+
+        <section class="resume-section" aria-labelledby="experience-title">
+          <h2 id="experience-title">{resume.labels.experience}</h2>
+          {resume.experience.map((experience) => (
+            <section
+              class="resume-job"
+              aria-label={`${experience.role} at ${experience.organization}`}
+            >
+              <header class="resume-job-heading">
+                <div>
+                  <h3>{experience.role}</h3>
+                  <p class="resume-organization">{experience.organization}</p>
+                </div>
+                <p class="resume-period">{experience.period}</p>
+              </header>
+              <ul>
+                {experience.bullets.map((bullet) => (
+                  <li>{bullet}</li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </section>
+
+        <section
+          class="resume-section resume-earlier"
+          aria-labelledby="earlier-title"
+        >
+          <h2 id="earlier-title">{resume.labels.earlier}</h2>
+          <p>{resume.earlier}</p>
+        </section>
+
+        <div class="resume-foundations">
+          <section aria-labelledby="education-title">
+            <h2 id="education-title">{resume.labels.education}</h2>
+            <p class="resume-institution">{resume.education.institution}</p>
+            <p>{resume.education.degree}</p>
+            <p>{resume.education.graduate}</p>
+          </section>
+          <section aria-labelledby="skills-title">
+            <h2 id="skills-title">{resume.labels.skills}</h2>
+            <dl class="resume-skills">
+              {resume.skills.map((skill) => (
+                <div>
+                  <dt>{skill.label}</dt>
+                  <dd>{skill.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+        </div>
+      </section>
+
+      <section
+        class="resume-sheet resume-fit"
+        aria-labelledby="contribution-title"
+      >
+        <img
+          class="resume-watermark"
+          src={`${base}handrail-logo.png`}
+          width="1397"
+          height="392"
+          alt=""
+          aria-hidden="true"
+        />
+        <header class="resume-contribution-heading">
+          <div class="resume-page-context">
+            <p class="resume-prepared">{resume.preparedFor}</p>
+            <p>{resume.name}</p>
+          </div>
+          <h2 id="contribution-title">{resume.contributionTitle}</h2>
+          <p class="resume-contribution-intro">{resume.contributionIntro}</p>
+        </header>
+
+        <div class="resume-contributions">
+          {resume.contributions.map((contribution) => (
+            <section
+              class="resume-contribution"
+              aria-labelledby={`contribution-${contribution.id}`}
+            >
+              <h3 id={`contribution-${contribution.id}`}>
+                {contribution.title}
+              </h3>
+              <div>
+                <p>{contribution.body}</p>
+                <p class="resume-foundation">{contribution.foundation}</p>
+              </div>
+            </section>
+          ))}
+        </div>
+
+        <section class="resume-proof-section" aria-labelledby="proof-title">
+          <h2 id="proof-title">{resume.labels.proof}</h2>
+          <ul class="resume-proof-list">
+            {resume.proof.map((proof) => (
+              <li>
+                <h3>{proof.title}</h3>
+                <p>{proof.description}</p>
+                <a href={proof.href} target="_blank" rel="noreferrer">
+                  {proof.linkLabel}
+                  <span class="resume-sr-only">: {proof.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+        <p class="resume-closing">{resume.closing}</p>
+      </section>
+    </article>
+  </main>
+</Page>

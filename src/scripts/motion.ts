@@ -380,10 +380,20 @@ function mountTour(
           maxX = Math.max(...xs);
         const minY = Math.min(...ys),
           maxY = Math.max(...ys);
+        const radiusX = (maxX - minX) * 0.55;
+        const radiusY = (maxY - minY) * 0.52;
+        // Edge-on projections should diffuse into the ground, not form thin
+        // vertical streaks. Smooth weighting avoids a visible threshold.
+        const elongation = Math.max(
+          0,
+          Math.min(1, (radiusY / Math.max(radiusX, 1) - 3) / 4),
+        );
+        const diffusion = elongation * elongation * (3 - 2 * elongation);
         pad.setAttribute('cx', String((minX + maxX) / 2));
         pad.setAttribute('cy', String((minY + maxY) / 2 + 12));
-        pad.setAttribute('rx', String((maxX - minX) * 0.55));
-        pad.setAttribute('ry', String((maxY - minY) * 0.52));
+        pad.setAttribute('rx', String(radiusX + radiusY * 0.075 * diffusion));
+        pad.setAttribute('ry', String(radiusY * (1 - 0.35 * diffusion)));
+        pad.setAttribute('opacity', String(1 - 0.45 * diffusion));
       });
       shadow.style.opacity = String(Math.max(0.025, 0.13 - pose.scale * 0.05));
     }
@@ -583,18 +593,17 @@ function mountTour(
     stops = collectStops();
     const beginning = readingPose(stops[1]);
     const beginningBox = boxFor(stops[1].element!);
-    const unfoldingFocus = foldPoint(
-      {
-        x: beginningBox.x + beginningBox.width / 2,
-        y: beginningBox.y + beginningBox.height / 2,
-        z: 1,
-      },
-      'left',
-      panelWidth,
-      92,
-    );
+    const coverCenter = {
+      x: beginningBox.x + beginningBox.width / 2,
+      y: beginningBox.y + beginningBox.height / 2,
+      z: 1,
+    };
+    const unfoldingFocus = foldPoint(coverCenter, 'left', panelWidth, 58);
+    const approachingFocus = foldPoint(coverCenter, 'left', panelWidth, 46);
     const frames: Keyframe[] = [
-      { at: 0, pose: overview(146, 6, 8, -5) },
+      // An open accordion silhouette establishes all three printed panels and
+      // both creases before the camera approaches the first reading group.
+      { at: 0, pose: overview(74, -32, 16, -4) },
       {
         at: 0.85,
         pose: {
@@ -603,10 +612,10 @@ function mountTour(
           focusY: unfoldingFocus.y,
           focusZ: unfoldingFocus.z,
           scale: beginning.scale * 0.62,
-          left: 92,
-          right: 92,
-          yaw: -58,
-          pitch: 8,
+          left: 58,
+          right: 58,
+          yaw: -64,
+          pitch: 14,
           roll: -3,
         },
       },
@@ -614,10 +623,13 @@ function mountTour(
         at: 1.55,
         pose: {
           ...beginning,
+          focusX: approachingFocus.x,
+          focusY: approachingFocus.y,
+          focusZ: approachingFocus.z,
           scale: beginning.scale * 0.82,
-          left: 52,
-          right: 52,
-          yaw: -52,
+          left: 46,
+          right: 46,
+          yaw: -46,
           pitch: 5,
           roll: -2,
         },
@@ -632,24 +644,7 @@ function mountTour(
       const pose = readingPose(stop);
       const enteringCash =
         stop.element?.closest('.flyer-cash') && previousPanel === 'left';
-      if (enteringCash) {
-        // Travel across the adjacent hinge at reading distance, instead of
-        // returning to the same distant overview for each new panel.
-        frames.push({
-          at: cursor - (width < 760 ? 1.1 : 1.5),
-          pose: {
-            ...pose,
-            focusX: panelWidth,
-            focusY: (previousPose.focusY + pose.focusY) / 2,
-            scale: Math.min(previousPose.scale, pose.scale) * 0.86,
-            left: 46,
-            right: 46,
-            yaw: -18,
-            pitch: 4,
-            roll: 1,
-          },
-        });
-      } else if (previousPanel && previousPanel !== stop.panel) {
+      if (previousPanel && previousPanel !== stop.panel) {
         const bridges = hingeTravel(
           previousPose,
           pose,
@@ -657,9 +652,11 @@ function mountTour(
           stop.panel,
           panelWidth,
         );
+        const departure = stops[i - 1].at + readingRadius;
+        const travel = cursor - readingRadius - departure;
         bridges.forEach((bridge, index) => {
           frames.push({
-            at: cursor - (bridges.length === 1 ? 0.85 : 1.15 - index * 0.5),
+            at: departure + (travel * (index + 1)) / (bridges.length + 1),
             pose: bridge,
           });
         });
@@ -802,6 +799,65 @@ function mountTour(
     false,
     true,
   );
+  function restoreHistoryPosition() {
+    const state: unknown = history.state;
+    if (!state || typeof state !== 'object' || !('handrailPosition' in state))
+      return;
+    const saved = state.handrailPosition;
+    if (
+      !saved ||
+      typeof saved !== 'object' ||
+      !('mode' in saved) ||
+      !('progress' in saved) ||
+      !('scrollY' in saved) ||
+      (saved.mode !== 'read' && saved.mode !== 'tour') ||
+      typeof saved.progress !== 'number' ||
+      !Number.isFinite(saved.progress) ||
+      typeof saved.scrollY !== 'number' ||
+      !Number.isFinite(saved.scrollY)
+    )
+      return;
+    const forceReading =
+      preference.matches ||
+      new URLSearchParams(location.search).get('view') === 'read';
+    if (forceReading && saved.mode === 'tour') return;
+    // The camera's scroll range exists only after mounting. Native history
+    // restoration can run earlier and clamp the saved tour position to zero.
+    history.scrollRestoration = 'manual';
+    setMode(saved.mode === 'read', false, true);
+    if (saved.mode === 'tour' && path) {
+      target = visual = Math.max(0, Math.min(1, saved.progress));
+      velocity = 0;
+      writeScroll(offset + range * target);
+      render();
+    } else writeScroll(Math.max(0, saved.scrollY));
+  }
+  window.addEventListener('pagehide', () => {
+    try {
+      history.replaceState(
+        {
+          ...history.state,
+          handrailPosition: {
+            mode: root.dataset.presentation,
+            progress: Math.max(
+              0,
+              Math.min(1, (window.scrollY - offset) / range),
+            ),
+            scrollY: window.scrollY,
+          },
+        },
+        '',
+      );
+    } catch {
+      // Native restoration remains available when history storage is blocked.
+    }
+  });
+  const navigation = performance.getEntriesByType('navigation')[0];
+  if (
+    navigation instanceof PerformanceNavigationTiming &&
+    navigation.type === 'back_forward'
+  )
+    restoreHistoryPosition();
   mode.addEventListener('click', () =>
     setMode(root.dataset.presentation !== 'read', true),
   );
@@ -891,8 +947,7 @@ function mountTour(
     buildTour(true);
   });
   window.addEventListener('pageshow', (event) => {
-    if (event.persisted && root.dataset.presentation === 'tour')
-      buildTour(true);
+    if (event.persisted) restoreHistoryPosition();
   });
   document
     .querySelector('.skip-link')

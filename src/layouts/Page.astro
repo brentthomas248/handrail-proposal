@@ -7,11 +7,13 @@ interface Props {
   title: string;
   description?: string;
   document?: boolean;
+  currentPage?: 'proposal' | 'notes' | 'resume';
 }
 const {
   title,
   description = 'A beginning together. No base salary, commissions paid from collected revenue, and room to grow with Handrail. A proposal by Brent Showalter.',
   document = false,
+  currentPage = document ? 'notes' : 'proposal',
 } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
@@ -91,10 +93,11 @@ const base = import.meta.env.BASE_URL;
           <strong>Brent Showalter</strong>
         </span>
       </a>
-      <nav aria-label="Main navigation">
+      <nav class="reading-navigation" aria-label="Main navigation">
         <a
+          class="notes-navigation"
           href={`${base}agreement/`}
-          aria-current={document ? 'page' : undefined}
+          aria-current={currentPage === 'notes' ? 'page' : undefined}
         >
           Proposal notes
         </a>
@@ -103,12 +106,29 @@ const base = import.meta.env.BASE_URL;
             Read normally
           </button>
         )}
+        {document && <a href={base}>The proposal</a>}
+      </nav>
+      <nav class="portfolio-navigation" aria-label="More about Brent">
+        <a
+          href={`${base}resume/`}
+          aria-current={currentPage === 'resume' ? 'page' : undefined}
+        >
+          My Handrail resume
+        </a>
+        <a
+          href="https://github.com/brentthomas248"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Explore my GitHub
+        </a>
       </nav>
     </header>
     <slot />
     <footer class="site-footer">
       <span>Brent Showalter for Handrail</span>
       <span>For discussion · September 2026</span>
+      <a href={`${base}agreement/`}>Proposal notes</a>
       <a
         href="https://github.com/brentthomas248"
         target="_blank"

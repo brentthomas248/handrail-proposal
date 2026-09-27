@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
-  "surface": "Bounded paper prototype: opening, beginning and collection-first cash diagram",
-  "generatedAt": "2026-09-27T01:48:31.058209+00:00",
+  "surface": "Complete Z-fold partnership proposal, tailored resume/PDF and public portfolio navigation",
+  "generatedAt": "2026-09-27T05:12:33.839195+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
     "docs/brand-sources.md",
     "agentic-ui/design-critique.json",
-    "docs/design-director-review.md"
+    "docs/design-director-review.md",
+    "docs/design-research-round-3.md"
   ],
   "acceptedDecisions": [
-    "Preserve the wider 1200 \u00d7 1700 paper proportions without restoring the clip. Frame eight complete phone reading groups plus the opening view, with restrained zoom and surrounding context.",
     "True Z-fold, continuous camera movement, opposite-depth wings, fine paper texture, crease shading and soft projected light.",
     "Telescope scale changes, Igloo camera continuity, Exat typography and Stripe Press document presentation remain approved references.",
     "Preserve the official Handrail wordmark, warm paper/rust palette and locally served Inter/Playfair typography.",
@@ -24,7 +24,11 @@
     "Use mobile ink hierarchy rather than extra opacity/filter layers; active text stays full strength.",
     "Require an independent adversarial design critic for mobile camera/layout changes; record and resolve blockers before publication.",
     "Desktop first-slice reading scale capped; opening unfolds once and cash is reached along its adjacent hinge.",
-    "Static 20/80 payment split and twelve matched installment-event pairs replace arbitrary bars; a narrow reversible trace is digital annotation."
+    "Six complete phone reading scenes and five desktop scenes follow the visible three-panel overview.",
+    "Equal collected-dollar comparison for15% and20%, with cash remaining before delivery/benefits/other costs.",
+    "Physical crease orbits, bounded surfaces, stable ink and same-document reading.",
+    "Evidence-backed resume with2025degree, proposed contribution areas and decorative Handrail watermark.",
+    "Prominent resume/GitHub links, responsive navigation and exact history-entry return position."
   ],
   "rejectedDecisions": [
     "Neon/glow design direction",
@@ -35,13 +39,20 @@
     "The published flat flyer improved the direction but did not provide enough dynamic motion; replace it with a real hinged trifold."
   ],
   "implementation": {
-    "routes": ["/handrail-proposal/", "/handrail-proposal/agreement/"],
+    "routes": [
+      "/handrail-proposal/",
+      "/handrail-proposal/agreement/",
+      "/handrail-proposal/resume/"
+    ],
     "components": ["DealPath"],
     "filesChanged": [
-      "src/pages/index.astro",
-      "src/styles/global.css",
       "src/scripts/motion.ts",
-      "tests/e2e/proposal.spec.ts"
+      "src/scripts/tour-path.ts",
+      "src/styles/global.css",
+      "src/layouts/Page.astro",
+      "src/content/resume.ts",
+      "src/pages/resume.astro",
+      "src/styles/resume.css"
     ],
     "reviewedFiles": [
       "DESIGN.md",
@@ -75,8 +86,14 @@
       "Subdue surrounding print so the active reading group remains the focal point."
     ],
     "rejectedCritiques": [],
-    "independentReviewPath": "docs/paper-prototype-adversarial-review.md",
-    "verdict": "accepted-bounded-prototype"
+    "independentReviewPath": "docs/portfolio-resume-motion-implementation.md",
+    "verdict": "accepted-round-three",
+    "specialistReviews": {
+      "spatial": "docs/round-3-spatial-review.md",
+      "editorial": "docs/round-3-editorial-review.md",
+      "narrative": "docs/round-3-narrative-review.md",
+      "interaction": "docs/round-3-interaction-review.md"
+    }
   },
   "userAssumptions": [
     "Names and proposed compensation may be public; private financial research remains outside the repository.",
@@ -104,23 +121,20 @@
   ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
-    "39 Chromium checks, 37 supplementary WebKit reading positions, 11 unit checks and 3 component checks passed.",
-    "Independent rendered review accepted the bounded opening-to-cash prototype after candidate 1 rejection.",
-    "Rates/window/ending creative work and physical iPhone validation remain.",
-    "Publication receipts are maintained in agentic-ui/deployment-verification.json."
+    "Current64-browser/27-unit/3-component/29-WebKit checks passed; both two-page PDFs verified.",
+    "All four independent reviews closed actionable findings. Root separately inspected the refined opening shadow.",
+    "See local-verification.json for current checks and deployment-verification.json for the last published version."
   ],
   "userReview": {
     "date": "2026-09-26",
-    "status": "bounded-prototype-visual-review-pending",
+    "status": "current-revision-user-review-pending",
     "researchPath": "docs/design-director-review.md",
     "implementationPaused": false,
-    "reason": "User approved beginning implementation of the independent critique."
+    "reason": "User requested direct implementation of researched specialist findings while continuing resume/profile/motion work."
   },
   "publication": {
-    "status": "published-and-hosted-verified-user-review-pending",
+    "status": "current-local-ready-previous-release-live",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "sourceCommit": "16d332dafbc1f7ff91ef74226dc39a0b4fe6337d",
-    "staticCommit": "8e7975883bd08a115734c3798a68c95f0377cdee",
     "evidencePath": "agentic-ui/deployment-verification.json"
   }
 }

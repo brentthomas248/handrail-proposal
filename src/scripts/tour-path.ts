@@ -211,7 +211,7 @@ export function sceneAt(
   return { index, caption: stops[stops.length - 1].name };
 }
 
-/** Cross the intervening paper hinges without returning to a distant overview. */
+/** Orbit each physical hinge from its departing face to its arriving face. */
 export function hingeTravel(
   from: Pose,
   to: Pose,
@@ -226,18 +226,25 @@ export function hingeTravel(
   const direction = Math.sign(end - start);
   const count = Math.abs(end - start);
   return Array.from({ length: count }, (_, i) => {
-    const fraction = (i + 1) / (count + 1);
-    return {
-      ...to,
-      focusX: (direction > 0 ? start + i + 1 : start - i) * panelWidth,
-      focusY: from.focusY + (to.focusY - from.focusY) * fraction,
-      focusZ: 0,
-      scale: Math.min(from.scale, to.scale) * 0.9,
-      left: 38,
-      right: 38,
-      yaw: -18,
-      pitch: 2,
-      roll: direction,
-    };
-  });
+    const departing = start + direction * i;
+    const arriving = departing + direction;
+    const hinge = Math.max(departing, arriving);
+    // Staying on the hinge for both beats makes the change of viewpoint an
+    // orbit around a real crease, rather than a sideways pan with a tilt.
+    return [departing, arriving].map((column, side) => {
+      const fraction = (i * 2 + side + 1) / (count * 2 + 1);
+      return {
+        ...to,
+        focusX: hinge * panelWidth,
+        focusY: from.focusY + (to.focusY - from.focusY) * fraction,
+        focusZ: 0,
+        scale: Math.min(from.scale, to.scale) * 0.9,
+        left: hinge === 1 ? 62 : 38,
+        right: hinge === 2 ? 62 : 38,
+        yaw: column === 1 ? 6 : -62,
+        pitch: 12,
+        roll: direction * (side === 0 ? -1.5 : 1.5),
+      };
+    });
+  }).flat();
 }
