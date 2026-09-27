@@ -152,3 +152,92 @@ export function damp(
     velocity: (alignedVelocity - omega * coefficient * dt) * decay,
   };
 }
+
+/** Settling may complete a gesture but must never reverse its direction. */
+export function settleAnchor(
+  anchors: readonly number[],
+  time: number,
+  direction: number,
+  readingRadius: number,
+): number | null {
+  if (
+    direction === 0 ||
+    anchors.some((anchor) => Math.abs(anchor - time) <= readingRadius)
+  )
+    return null;
+  const candidates = anchors.filter(
+    (anchor) => (anchor - time) * direction > 0,
+  );
+  return candidates.reduce<number | null>(
+    (nearest, anchor) =>
+      nearest === null || Math.abs(anchor - time) < Math.abs(nearest - time)
+        ? anchor
+        : nearest,
+    null,
+  );
+}
+
+/** Navigation owns the nearest scene; captions distinguish travel from arrival. */
+export function sceneAt(
+  stops: readonly { name: string; at: number }[],
+  time: number,
+  readingRadius: number,
+  previousIndex: number,
+): { index: number; caption: string } {
+  if (!stops.length) return { index: 0, caption: '' };
+  let nearest = 0;
+  for (let i = 1; i < stops.length; i += 1)
+    if (Math.abs(stops[i].at - time) < Math.abs(stops[nearest].at - time))
+      nearest = i;
+  const previous = stops[previousIndex];
+  // A small ownership deadband prevents aria-current flicker at a midpoint.
+  const index =
+    previous &&
+    Math.abs(previous.at - time) <= Math.abs(stops[nearest].at - time) + 0.1
+      ? previousIndex
+      : nearest;
+  const arrived = stops.findIndex(
+    (stop) => Math.abs(stop.at - time) <= readingRadius,
+  );
+  if (arrived === 0) return { index: 0, caption: 'Scroll to unfold' };
+  if (arrived > 0) return { index: arrived, caption: stops[arrived].name };
+  const next = stops.findIndex((stop) => stop.at > time);
+  if (next === 1) return { index, caption: 'Unfolding the proposal' };
+  if (next > 1)
+    return {
+      index,
+      caption: `Between ${stops[next - 1].name} and ${stops[next].name}`,
+    };
+  return { index, caption: stops[stops.length - 1].name };
+}
+
+/** Cross the intervening paper hinges without returning to a distant overview. */
+export function hingeTravel(
+  from: Pose,
+  to: Pose,
+  fromPanel: Panel,
+  toPanel: Panel,
+  panelWidth: number,
+): Pose[] {
+  if (fromPanel === toPanel) return [];
+  const columns: Record<Panel, number> = { left: 0, center: 1, right: 2 };
+  const start = columns[fromPanel];
+  const end = columns[toPanel];
+  const direction = Math.sign(end - start);
+  const count = Math.abs(end - start);
+  return Array.from({ length: count }, (_, i) => {
+    const fraction = (i + 1) / (count + 1);
+    return {
+      ...to,
+      focusX: (direction > 0 ? start + i + 1 : start - i) * panelWidth,
+      focusY: from.focusY + (to.focusY - from.focusY) * fraction,
+      focusZ: 0,
+      scale: Math.min(from.scale, to.scale) * 0.9,
+      left: 38,
+      right: 38,
+      yaw: -18,
+      pitch: 2,
+      roll: direction,
+    };
+  });
+}

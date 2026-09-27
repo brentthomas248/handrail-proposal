@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T22:25:31.003773+00:00",
+  "generatedAt": "2026-09-27T04:02:53.821159+00:00",
   "target": "WCAG 2.2 AA",
-  "scope": "Current mobile contextual-framing automated evidence; no manual conformance certification",
+  "scope": "Round-two complete proposal automated evidence; no manual conformance certification",
   "checks": [
     {
       "id": "component-axe",
@@ -27,28 +27,23 @@
         "tests/e2e/proposal.spec.ts"
       ],
       "notes": [
-        "The 32 passing browser checks cover keyboard navigation, mode switching, persisted reading, skip link, reduced motion, and restoration of inert/hidden secondary groups before keyboard traversal."
+        "Native Tab/Shift+Tab reach chapter controls without switching modes. A paper link restores reading with focus preserved. Directional settling, mode return after stale focus, held native touch, viewport resize and semantic reading order are covered by the 55-test browser suite."
       ]
     },
     {
       "id": "app-axe",
       "status": "pass",
       "evidence": "tests/e2e/proposal.spec.ts",
-      "evidenceRefs": [
-        "tests/e2e/proposal.spec.ts"
-      ],
+      "evidenceRefs": ["tests/e2e/proposal.spec.ts"],
       "notes": [
-        "Both routes pass axe in ordinary reading; an active phone rate scene also passes axe with only its complete active reading group exposed. Inactive peripheral previews are inert/hidden and restored in normal reading. Automated scans are not complete conformance certification."
+        "Both routes pass automated axe in ordinary reading. A phone rate scene retains its complete associated heading and terms. Accessible content is no longer toggled inert/hidden by camera progress. These scans are not complete conformance certification."
       ]
     },
     {
       "id": "javascript-disabled-reading",
       "status": "pass",
       "evidence": "src/pages/index.astro; tests/e2e/proposal.spec.ts",
-      "evidenceRefs": [
-        "src/pages/index.astro",
-        "tests/e2e/proposal.spec.ts"
-      ],
+      "evidenceRefs": ["src/pages/index.astro", "tests/e2e/proposal.spec.ts"],
       "notes": [
         "The complete flyer and linked proposal notes remain readable without JavaScript; no canvas fallback is needed."
       ]
@@ -57,32 +52,28 @@
       "id": "responsive-reading",
       "status": "pass",
       "evidence": "tests/e2e/proposal.spec.ts",
-      "evidenceRefs": [
-        "tests/e2e/proposal.spec.ts"
-      ],
+      "evidenceRefs": ["tests/e2e/proposal.spec.ts"],
       "notes": [
-        "Normal reading and notes have no horizontal overflow. Every complete camera group is tested at 1440×1000, 320×740, 390×844, 430×932 and 390×664; phones DPR3."
+        "Normal reading and notes have no horizontal overflow. Every complete camera group is tested at 1440\u00d71000, 320\u00d7740, 390\u00d7844, 430\u00d7932 and 390\u00d7664; phones DPR3."
       ]
     },
     {
       "id": "responsive-visual-polish",
       "status": "pass",
-      "evidence": "docs/mobile-context-adversarial-review.md",
+      "evidence": "docs/round-2-candidate-design-review.md",
       "evidenceRefs": [
-        "docs/mobile-context-adversarial-review.md",
-        "qa-artifacts/mobile-context/final-capture/capture.json"
+        "docs/round-2-candidate-design-review.md",
+        "qa-artifacts/round-2-candidate/critic-art/approved/capture.json"
       ],
       "notes": [
-        "Independent critic accepted complete mobile framing and peripheral hierarchy after rejecting the first candidate. Captured primary text minimum is 14.0374px. Measured header/control insets are tested through viewport shrink and restore."
+        "Independent design/commercial review accepted the complete round-two composition at desktop, phone, small and short sizes after rejected iterations. Primary text bounds, measured header/control insets and minimum rendered size are tested separately."
       ]
     },
     {
       "id": "manual-voiceover",
       "status": "not-assessed",
       "evidence": "docs/local-workflow.md",
-      "evidenceRefs": [
-        "docs/local-workflow.md"
-      ],
+      "evidenceRefs": ["docs/local-workflow.md"],
       "notes": [
         "VoiceOver review was not performed. Semantic HTML, axe and keyboard checks are not screen-reader-equivalent manual proof."
       ]
@@ -91,20 +82,16 @@
       "id": "physical-device",
       "status": "not-assessed",
       "evidence": "tests/e2e/proposal.spec.ts",
-      "evidenceRefs": [
-        "tests/e2e/proposal.spec.ts"
-      ],
+      "evidenceRefs": ["tests/e2e/proposal.spec.ts"],
       "notes": [
-        "A browser-emulated touch gesture is tested; physical iOS/Android devices and notched-screen behavior are unverified."
+        "Native Chromium touch dispatch verifies held contact and actual browser scroll. Physical iOS/Android devices, notched-screen behavior and the reported iPhone crash remain unverified."
       ]
     },
     {
       "id": "zoom-and-forced-colors",
       "status": "not-assessed",
       "evidence": "src/styles/global.css",
-      "evidenceRefs": [
-        "src/styles/global.css"
-      ],
+      "evidenceRefs": ["src/styles/global.css"],
       "notes": [
         "Viewport reflow is tested. Manual text resizing, browser zoom and forced-colors coverage are not claimed."
       ]

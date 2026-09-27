@@ -86,7 +86,7 @@
   "errors": [],
   "failedRequests": [],
   "edition": "opening-to-cash-prototype",
-  "isCurrentRevision": true,
+  "isCurrentRevision": false,
   "supplementaryWebKitEvidence": "agentic-ui/webkit-verification.json",
   "physicalIOSVerified": false,
   "visualEvidence": {
@@ -107,5 +107,6 @@
     "verdict": "accepted",
     "path": "docs/paper-prototype-adversarial-review.md",
     "scope": "Bounded opening-to-cash direction after candidate 1 rejection; later scenes remain deferred"
-  }
+  },
+  "historicalNote": "Superseded by local round-two candidate; current publication receipt follows release."
 }

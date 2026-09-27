@@ -2,6 +2,7 @@ import { test, expect, type Locator, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {
   agreementSections,
+  collectionComparison,
   flyerCopy,
   proposal,
 } from '../../src/content/proposal';
@@ -133,20 +134,17 @@ async function expectMobileReadingGroup(target: Locator, label: string | null) {
       ['.cover-statement', 1],
       ['.cover-description', 1],
     ],
-    'Revenue first': [
+    'Cash flow': [
       ['h2', 1],
-      ['.cash-intro', 1],
+      ['.collection-comparison', 1],
     ],
-    'As money arrives': [
-      ['.cash-receipt', 1],
-      ['.installments', 1],
-      ['.cash-closing', 1],
-    ],
-    'Hire me first': [
+    'Hire first': [
+      ['h2.rate-context', 1],
       ['.deal-path', 1],
       ['.rate-scope', 1],
     ],
     'Client first': [
+      ['h2.rate-context', 1],
       ['.deal-path', 1],
       ['.rate-reason', 1],
     ],
@@ -156,10 +154,7 @@ async function expectMobileReadingGroup(target: Locator, label: string | null) {
     ],
     'Grow together': [
       ['.partnership-lead', 1],
-      ['.partnership-details h3', 2],
       ['.partnership-details p', 2],
-    ],
-    'A proposal to discuss': [
       ['.proposal-note', 1],
       ['.proposal-link', 1],
     ],
@@ -173,105 +168,81 @@ async function expectMobileReadingGroup(target: Locator, label: string | null) {
       target.locator(selector),
       `${label} must include its related ${selector}`,
     ).toHaveCount(count);
-}
-
-async function expectPrintedCashDiagram(page: Page) {
-  const diagram = page.locator('[data-payment-diagram]');
-  await expect(diagram).toHaveAttribute(
-    'aria-label',
-    /client-first build payment/i,
-  );
-  await expect(diagram.locator('.receipt-example')).toHaveText(
-    'Client-first example',
-  );
-  await expect(diagram.locator('.receipt-in')).toContainText(
-    'Customer payment collected',
-  );
-  await expect(diagram.locator('.receipt-in strong')).toHaveText('$10,000');
-  await expect(diagram.locator('.receipt-out')).toContainText(
-    '20% build commission',
-  );
-  await expect(diagram.locator('.receipt-out strong')).toHaveText('$2,000');
-  await expect(diagram.locator('.receipt-balance')).toContainText(
-    'Handrail retains',
-  );
-  await expect(diagram.locator('.receipt-balance')).toContainText('80%');
-  await expect(diagram.locator('.receipt-balance strong')).toHaveText('$8,000');
-  await expect(diagram.locator('.receipt-qualification')).toHaveText(
-    'Before delivery costs, benefits and other expenses. An illustration, not a sales forecast.',
-  );
-  for (const selector of [
-    '.receipt-in strong',
-    '.receipt-out strong',
-    '.receipt-balance strong',
-    '.receipt-qualification',
-  ])
-    await expect(diagram.locator(selector)).toBeVisible();
-  const proportions = await diagram.evaluate((element) => {
-    const commission = element
-      .querySelector('[data-payment-part="commission"]')!
-      .getBoundingClientRect().width;
-    const retained = element
-      .querySelector('[data-payment-part="retained"]')!
-      .getBoundingClientRect().width;
-    return {
-      commission,
-      retained,
-      fraction: commission / (commission + retained),
-    };
-  });
-  expect(proportions.commission).toBeGreaterThan(0);
-  expect(proportions.retained).toBeGreaterThan(0);
-  expect(proportions.fraction).toBeCloseTo(0.2, 2);
-  const installments = page.locator('.installments');
-  await expect(installments).toContainText('Paid over 12 months?');
-  await expect(installments).toContainText(
-    'My commission follows each payment.',
-  );
-  await expect(installments.locator('.installment-note')).toHaveText(
-    'Matched events, not equal amounts.',
-  );
-  const pairs = installments.locator('[data-payment-event]');
-  await expect(pairs).toHaveCount(12);
-  const geometry = [];
-  for (const pair of await pairs.all()) {
-    await expect(pair.locator('[data-payment-collected]')).toHaveCount(1);
-    await expect(pair.locator('[data-payment-commission]')).toHaveCount(1);
-    geometry.push(
-      await pair.evaluate((element) => {
-        const collected = element
-          .querySelector('[data-payment-collected]')!
-          .getBoundingClientRect();
-        const commission = element
-          .querySelector('[data-payment-commission]')!
-          .getBoundingClientRect();
-        return {
-          collectedWidth: collected.width,
-          collectedHeight: collected.height,
-          commissionWidth: commission.width,
-          commissionHeight: commission.height,
-          collectedBeforeCommission: collected.bottom <= commission.top,
-        };
-      }),
+  if (label === 'Hire first' || label === 'Client first') {
+    await expect(target.locator('h2.rate-context')).toHaveText(
+      'Two ways to begin',
+    );
+    await expect(target).toContainText(/both paths/i);
+    await expect(target).toContainText(/no base salary/i);
+    await expect(target).toContainText(
+      /benefits.*requested|requested.*benefits/i,
     );
   }
-  for (const pair of geometry) {
-    expect(pair.collectedBeforeCommission).toBe(true);
-    expect(pair.collectedWidth).toBeGreaterThan(0);
-    expect(pair.collectedHeight).toBeGreaterThan(0);
-    expect(pair.commissionWidth).toBeGreaterThan(0);
-    expect(pair.commissionHeight).toBeGreaterThan(0);
-  }
-  for (const property of [
-    'collectedWidth',
-    'collectedHeight',
-    'commissionWidth',
-    'commissionHeight',
-  ] as const)
-    expect(
-      Math.max(...geometry.map((pair) => pair[property])) -
-        Math.min(...geometry.map((pair) => pair[property])),
-    ).toBeLessThan(0.5);
+}
+
+async function expectPrintedCashComparison(page: Page) {
+  const comparison = page.locator('.collection-comparison');
+  await expect(comparison).toHaveCount(1);
+  await expect(comparison.locator('.collection-assumption')).toContainText(
+    '$120,000',
+  );
+  await expect(comparison.locator('.collection-assumption')).toContainText(
+    /12 equal monthly installments/i,
+  );
+  await expect(comparison.locator('.collection-collected')).toContainText(
+    '$10,000',
+  );
+  await expect(comparison.locator('.collection-collected')).toContainText(
+    /collected per installment/i,
+  );
+  const table = comparison.getByRole('table', {
+    name: 'Build commission per collected installment',
+  });
+  await expect(table.getByRole('columnheader')).toHaveText([
+    'Hire first · 15%',
+    'Client first · 20%',
+  ]);
+  await expect(
+    table.getByRole('row', { name: /Build commission \$1,500 \$2,000/ }),
+  ).toHaveCount(1);
+  await expect(
+    table.getByRole('row', {
+      name: /Handrail remaining before costs \$8,500 \$8,000/,
+    }),
+  ).toHaveCount(1);
+  await expect(comparison.locator('.collection-difference')).toContainText(
+    '$500',
+  );
+  await expect(comparison.locator('.collection-difference')).toContainText(
+    /more commission per (?:\$10,000 collected|collected installment) under client first/i,
+  );
+  await expect(comparison.locator('.collection-rule')).toHaveText(
+    collectionComparison.rule,
+  );
+  await expect(comparison.locator('.collection-rule')).toContainText(
+    /customer payment.*before.*commission.*paid/i,
+  );
+  await expect(comparison.locator('.collection-qualifier')).toHaveText(
+    collectionComparison.qualifier,
+  );
+  await expect(comparison.locator('.collection-qualifier')).toContainText(
+    /before delivery, benefits and other (?:costs|expenses).*illustration only.*not a forecast or Handrail pricing/i,
+  );
+  for (const part of await comparison
+    .locator('figcaption, p, th, td:not([aria-hidden])')
+    .all())
+    await expect(part).toBeVisible();
+  const description = await table.getAttribute('aria-describedby');
+  expect(description).toBeTruthy();
+  for (const id of description!.split(/\s+/))
+    await expect(
+      comparison.locator(`[id=${JSON.stringify(id)}]`),
+    ).toBeVisible();
+  await expect(
+    page.locator(
+      '[data-payment-event], [data-payment-part], [data-payment-trace]',
+    ),
+  ).toHaveCount(0);
 }
 
 async function enterReadingMode(page: Page) {
@@ -821,31 +792,6 @@ for (const viewport of [
     expect(failedRequests).toEqual([]);
   });
 
-test('keyboard chapter navigation moves the camera to a chosen section', async ({
-  page,
-}) => {
-  await page.goto('./');
-  await expect(page.locator('html')).toHaveAttribute(
-    'data-presentation',
-    'tour',
-  );
-  await expect(page.locator('html')).toHaveClass(/camera-ready/);
-  const chapters = page.locator('.chapter-nav button[data-go-to]');
-  expect(await chapters.count()).toBeGreaterThanOrEqual(4);
-  const opening = await sheetTransform(page);
-  const chapter = page.getByRole('button', { name: 'Cash flow', exact: true });
-  await chapter.focus();
-  await page.keyboard.press('Enter');
-  await expect(chapter).toBeFocused();
-  await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(0);
-  await expect
-    .poll(async () => {
-      const current = await sheetTransform(page);
-      return Math.hypot(current.x - opening.x, current.y - opening.y);
-    })
-    .toBeGreaterThan(100);
-});
-
 test('continuous wheel input keeps the camera moving through reading windows', async ({
   page,
 }, testInfo) => {
@@ -912,7 +858,7 @@ test('an immediate fast flick is smoothed and reversing input takes control', as
   );
 });
 
-test('pausing between chapters settles into readable content and fresh input cancels the move', async ({
+test('fresh input immediately cancels an automatic settling move', async ({
   page,
 }) => {
   await page.goto('./');
@@ -928,20 +874,23 @@ test('pausing between chapters settles into readable content and fresh input can
   await paths.click();
   await page.waitForTimeout(1400);
   const pathsY = await page.evaluate(() => scrollY);
-  const delta = Math.round((pathsY - cashY) * 0.56);
-  await page.mouse.wheel(0, -delta);
+  await page.mouse.wheel(0, -Math.round((pathsY - cashY) * 0.4));
   await page.waitForTimeout(100);
-  const midpoint = await page.evaluate(() => scrollY);
+  const released = await page.evaluate(() => scrollY);
   await expect
     .poll(() => page.evaluate(() => scrollY), { timeout: 3000 })
-    .toBeLessThan(midpoint - 30);
+    .toBeLessThan(released - 15);
   await page.mouse.wheel(0, 130);
   await page.waitForTimeout(60);
   const resumed = await page.evaluate(() => scrollY);
   await page.waitForTimeout(250);
-  expect(await page.evaluate(() => scrollY)).toBe(resumed);
-  await expect(page.locator('#cash-flow')).toBeInViewport({ ratio: 0.98 });
-  await expect(cash).toHaveAttribute('aria-current', 'step');
+  expect(
+    Math.abs((await page.evaluate(() => scrollY)) - resumed),
+  ).toBeLessThanOrEqual(3);
+  await page.mouse.wheel(0, -130);
+  await expect
+    .poll(() => page.evaluate(() => scrollY))
+    .toBeLessThan(resumed - 80);
 });
 
 test('phone browser-height changes retain the chapter and scroll while keeping its complete text clear of controls', async ({
@@ -951,17 +900,17 @@ test('phone browser-height changes retain the chapter and scroll while keeping i
   await page.goto('./');
   await expect(page.locator('html')).toHaveClass(/camera-ready/);
   const chapter = page.getByRole('button', {
-    name: 'As money arrives',
+    name: 'Cash flow',
     exact: true,
   });
-  const target = await cameraTarget(page, 'As money arrives');
+  const target = await cameraTarget(page, 'Cash flow');
   await chapter.click();
   await page.waitForTimeout(1400);
   const chapterNode = await chapter.elementHandle();
   const originalScroll = await page.evaluate(() => scrollY);
   for (const height of [800, 760, 664, 810, 844, 770, 844]) {
     await page.setViewportSize({ width: 390, height });
-    await expectReadingFrame(target, 'As money arrives');
+    await expectReadingFrame(target, 'Cash flow');
     expect(
       await chapterNode!.evaluate((node) => node.isConnected),
     ).toBeTruthy();
@@ -999,7 +948,7 @@ test('a phone chapter remains its parent chapter after changing to a wide viewpo
   await expect.poll(() => sheetTransform(page)).not.toEqual(reframed);
 });
 
-test('a cancelled touch still allows a paused transition to settle', async ({
+test('a cancelled touch preserves travel direction and releases viewport refitting', async ({
   browser,
 }) => {
   const context = await browser.newContext({
@@ -1010,9 +959,7 @@ test('a cancelled touch still allows a paused transition to settle', async ({
   const page = await context.newPage();
   await page.goto(baseURL);
   await expect(page.locator('html')).toHaveClass(/camera-ready/);
-  await page
-    .getByRole('button', { name: 'As money arrives', exact: true })
-    .click();
+  await page.getByRole('button', { name: 'Cash flow', exact: true }).click();
   await page.waitForTimeout(1400);
   const startingY = await page.evaluate(() => scrollY);
   const session = await context.newCDPSession(page);
@@ -1034,15 +981,22 @@ test('a cancelled touch still allows a paused transition to settle', async ({
     type: 'touchCancel',
     touchPoints: [],
   });
+  const released = await page.evaluate(() => scrollY);
+  const frames = await collectMotion(page, 1800);
+  expect(
+    Math.min(...frames.map((frame) => frame.scroll)),
+  ).toBeGreaterThanOrEqual(released - 3);
+  await page.setViewportSize({ width: 390, height: 664 });
+  await page.getByRole('button', { name: 'Cash flow', exact: true }).click();
+  await expectReadingFrame(
+    await cameraTarget(page, 'Cash flow'),
+    'Cash flow after cancelled touch',
+    true,
+  );
+  await page.mouse.wheel(0, 180);
   await expect
-    .poll(
-      async () => Math.abs((await page.evaluate(() => scrollY)) - startingY),
-      { timeout: 4000 },
-    )
-    .toBeLessThan(3);
-  await expect(
-    page.locator('[data-camera-mobile="As money arrives"]'),
-  ).toBeInViewport({ ratio: 0.98 });
+    .poll(() => page.evaluate(() => scrollY))
+    .toBeGreaterThan(startingY + 80);
   await context.close();
 });
 
@@ -1067,14 +1021,12 @@ for (const viewport of [
     await page.goto(baseURL);
     await expect(page.locator('html')).toHaveClass(/camera-ready/);
     const chapters = page.locator('.chapter-nav button[data-go-to]');
-    let readingHolds = 0;
     for (let index = 1; index < (await chapters.count()); index += 1) {
       const chapter = chapters.nth(index);
       const label = await chapter.getAttribute('aria-label');
       const target = await cameraTarget(page, label);
       await expect(target, `${label} needs a reading group`).toHaveCount(1);
       if (mobile) await expectMobileReadingGroup(target, label);
-      readingHolds += 1;
       await chapter.click();
       await expect(chapter).toHaveAttribute('aria-current', 'step');
       await expect
@@ -1101,10 +1053,6 @@ for (const viewport of [
       await expect(target).toBeInViewport({ ratio: 0.98 });
       await expectReadingFrame(target, label, mobile);
       if (mobile) {
-        if (label === 'Hire me first')
-          expect(await page.locator('.rates-heading h2').innerText()).toMatch(
-            /commitment\s+sets/,
-          );
         await expect.poll(() => target.getAttribute('aria-hidden')).toBeNull();
         expect(
           await target.evaluate((element) => (element as HTMLElement).inert),
@@ -1114,22 +1062,31 @@ for (const viewport of [
             element.closest('[aria-hidden="true"], [inert]'),
           ),
         ).toBeNull();
-        for (let other = 1; other < (await chapters.count()); other += 1) {
-          if (other === index) continue;
-          const secondary = await cameraTarget(
-            page,
-            await chapters.nth(other).getAttribute('aria-label'),
-          );
-          await expect(secondary).toHaveAttribute('aria-hidden', 'true');
-          expect(
-            await secondary.evaluate(
-              (element) => (element as HTMLElement).inert,
-            ),
-          ).toBe(true);
-        }
       }
     }
-    expect(readingHolds).toBe(mobile ? 8 : 5);
+    const labels = await chapters.evaluateAll((buttons) =>
+      buttons.map((button) => button.getAttribute('aria-label')),
+    );
+    expect(labels).toEqual(
+      mobile
+        ? [
+            'Overview',
+            'The beginning',
+            'Cash flow',
+            'Hire first',
+            'Client first',
+            'The window',
+            'Grow together',
+          ]
+        : [
+            'Overview',
+            'The beginning',
+            'Cash flow',
+            'The two paths',
+            'The window',
+            'Grow together',
+          ],
+    );
     if (mobile) {
       await enterReadingMode(page);
       for (let index = 1; index < (await chapters.count()); index += 1) {
@@ -1156,7 +1113,7 @@ for (const mode of [
   'reduced motion',
   'no JavaScript',
 ] as const)
-  test(`the static cash diagram explains collections, the 20/80 split and twelve paired events with ${mode}`, async ({
+  test(`the complete two-path cash comparison remains readable with ${mode}`, async ({
     browser,
   }) => {
     const context = await browser.newContext({
@@ -1174,7 +1131,7 @@ for (const mode of [
       'data-presentation',
       'read',
     );
-    await expectPrintedCashDiagram(page);
+    await expectPrintedCashComparison(page);
     await expectNoOverflow(page);
     await context.close();
   });
@@ -1183,128 +1140,62 @@ for (const viewport of [
   { width: 1440, height: 1000 },
   { width: 390, height: 844 },
 ])
-  test(`the cash annotation follows collection, traces the split and reverses without changing print at ${viewport.width}px`, async ({
+  test(`cash values and surrounding ink stay stable through forward and reverse travel at ${viewport.width}px`, async ({
     browser,
   }, testInfo) => {
-    const mobile = viewport.width < 760;
-    const context = await browser.newContext({
-      viewport,
-      deviceScaleFactor: mobile ? 3 : 1,
-      isMobile: mobile,
-      hasTouch: mobile,
-    });
+    const context = await browser.newContext({ viewport });
     const page = await context.newPage();
     await page.goto(baseURL);
     await expect(page.locator('html')).toHaveClass(/camera-ready/);
-    const first = page.getByRole('button', {
-      name: mobile ? 'Revenue first' : 'The beginning',
-      exact: true,
-    });
-    const cash = page.getByRole('button', {
-      name: mobile ? 'As money arrives' : 'Cash flow',
-      exact: true,
-    });
-    await cash.click();
-    await page.waitForTimeout(1400);
-    const end = await page.evaluate(() => scrollY);
-    await first.click();
+    await page.getByRole('button', { name: 'Cash flow', exact: true }).click();
     await page.waitForTimeout(1400);
     const start = await page.evaluate(() => scrollY);
+    await page
+      .getByRole('button', { name: 'Grow together', exact: true })
+      .click();
+    await page.waitForTimeout(1400);
+    const end = await page.evaluate(() => scrollY);
     const sample = () =>
-      page.evaluate(() => {
-        const rule = document
-          .querySelector('[data-payment-rule]')!
-          .getBoundingClientRect();
-        const trace = document
-          .querySelector('[data-payment-trace]')!
-          .getBoundingClientRect();
-        const values = [
+      page.evaluate(() => ({
+        scroll: scrollY,
+        amounts: [
           ...document.querySelectorAll(
-            '.receipt-in strong, .receipt-out strong, .receipt-balance strong',
+            '.collection-collected-amount, .collection-value',
           ),
-        ];
-        const collected = values[0].getBoundingClientRect();
-        const top = document
-          .querySelector('.site-header')!
-          .getBoundingClientRect().bottom;
-        const bottom = document
-          .querySelector('.tour-controls')!
-          .getBoundingClientRect().top;
-        return {
-          scroll: scrollY,
-          trace: trace.width / rule.width,
-          traceHeight: trace.height,
-          amounts: values.map((element) => element.textContent!.trim()),
-          printVisible: values.every(
-            (element) =>
-              getComputedStyle(element).visibility === 'visible' &&
-              element.getClientRects().length > 0,
+        ].map((element) => element.textContent!.trim()),
+        colors: [
+          ...document.querySelectorAll(
+            '.rate-group h2, .deal-path h3, .rate-reason, .rate-common, .window-title h2, .partnership-details p',
           ),
-          collectedFramed:
-            collected.left >= 0 &&
-            collected.right <= innerWidth &&
-            collected.top >= top &&
-            collected.bottom <= bottom,
-        };
-      });
+        ].map((element) => getComputedStyle(element).color),
+      }));
     const initial = await sample();
-    expect(initial.trace).toBeLessThan(0.01);
-    const forward = [initial];
-    for (let index = 0; index < 40; index += 1) {
-      await page.mouse.wheel(0, (end - start) / 40);
-      await page.waitForTimeout(35);
-      forward.push(await sample());
-    }
-    await page.waitForTimeout(300);
-    forward.push(await sample());
-    await testInfo.attach('cash-annotation-forward', {
-      body: Buffer.from(JSON.stringify({ viewport, forward }, null, 2)),
+    expect(initial.amounts).toEqual([
+      '$10,000',
+      '$1,500',
+      '$2,000',
+      '$8,500',
+      '$8,000',
+    ]);
+    expect(initial.colors.length).toBeGreaterThan(5);
+    const frames = [];
+    for (const direction of [-1, 1])
+      for (let index = 0; index < 60; index += 1) {
+        await page.mouse.wheel(0, (direction * (end - start)) / 60);
+        await page.waitForTimeout(25);
+        frames.push(await sample());
+      }
+    await testInfo.attach('printed-values-and-ink', {
+      body: Buffer.from(JSON.stringify({ viewport, initial, frames }, null, 2)),
       contentType: 'application/json',
     });
-    const firstTrace = forward.findIndex((frame) => frame.trace > 0.03);
-    expect(firstTrace).toBeGreaterThan(0);
-    expect(
-      forward
-        .slice(0, firstTrace)
-        .some((frame) => frame.trace <= 0.03 && frame.collectedFramed),
-      'The collection is visibly established before the split annotation starts',
-    ).toBe(true);
-    expect(forward[firstTrace].collectedFramed).toBe(true);
-    expect(
-      forward.some((frame) => frame.trace > 0.15 && frame.trace < 0.85),
-      'Actual scroll must render an intermediate trace',
-    ).toBe(true);
-    expect(forward.at(-1)!.trace).toBeGreaterThan(0.95);
-    expect(forward.at(-1)!.traceHeight).toBeGreaterThan(0);
-    await testInfo.attach('cash-split-complete', {
-      body: await page.screenshot(),
-      contentType: 'image/png',
-    });
-    const reverse = [];
-    for (let index = 0; index < 40; index += 1) {
-      await page.mouse.wheel(0, -(end - start) / 40);
-      await page.waitForTimeout(35);
-      reverse.push(await sample());
-    }
-    await page.waitForTimeout(300);
-    reverse.push(await sample());
-    expect(
-      reverse.some((frame) => frame.trace > 0.15 && frame.trace < 0.85),
-    ).toBe(true);
-    expect(reverse.at(-1)!.trace).toBeLessThan(0.01);
-    for (const frame of [...forward, ...reverse]) {
-      expect(frame.amounts).toEqual(['$10,000', '$2,000', '$8,000']);
+    for (const frame of frames) {
+      expect(frame.amounts).toEqual(initial.amounts);
       expect(
-        frame.printVisible,
-        'Essential printed amounts must not be hidden by the annotation',
-      ).toBe(true);
+        frame.colors,
+        'Moving between scenes must not flash neighboring print between black and gray',
+      ).toEqual(initial.colors);
     }
-    await testInfo.attach('cash-annotation-forward-reverse', {
-      body: Buffer.from(
-        JSON.stringify({ viewport, forward, reverse }, null, 2),
-      ),
-      contentType: 'application/json',
-    });
     await context.close();
   });
 
@@ -1316,7 +1207,7 @@ test('desktop beginning and cash retain readable print scale and a visible paper
   await expect(page.locator('html')).toHaveClass(/camera-ready/);
   for (const [label, selector] of [
     ['The beginning', '.cover-description'],
-    ['Cash flow', '.cash-intro, .cash-closing'],
+    ['Cash flow', '.collection-rule'],
   ]) {
     await page.getByRole('button', { name: label, exact: true }).click();
     await page.waitForTimeout(1400);
@@ -1383,9 +1274,14 @@ test('reading mode exposes both rates, cash-flow explanation and proposal notes'
   await expect(page.locator('h1')).toContainText(/proposal/i);
   for (const section of agreementSections) {
     await expect(page.locator(`#${section.id}`)).toBeAttached();
-    expect(await page.locator(`#${section.id} p`).allTextContents()).toEqual(
+    expect(await page.locator(`#${section.id} > p`).allTextContents()).toEqual(
       section.paragraphs,
     );
+    if (section.comparison) await expectPrintedCashComparison(page);
+    if (section.items)
+      await expect(
+        page.locator(`#${section.id} .document-discussion-list li`),
+      ).toHaveText(section.items);
   }
   const response = await page.request.get(
     new URL(proposal.paths.pdf, page.url().replace(/agreement\/$/, '')).href,
@@ -1538,47 +1434,32 @@ for (const route of ['./', 'agreement/'])
     expect(result.violations).toEqual([]);
   });
 
-test('mobile reading focus keeps inactive groups inaccessible and restores them in normal reading', async ({
+test('mobile related headings and terms stay accessible and normal reading restores the complete document', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('./');
   await expect(page.locator('html')).toHaveClass(/camera-ready/);
   await page.getByRole('button', { name: 'Client first', exact: true }).click();
-  await expectReadingFrame(
-    await cameraTarget(page, 'Client first'),
-    'Client first',
-    true,
-  );
-  const hiddenLink = page.locator('.proposal-link');
-  await expect
-    .poll(async () => {
-      const active = await cameraTarget(page, 'Client first');
-      return (
-        (await active.getAttribute('aria-hidden')) === null &&
-        (await hiddenLink.evaluate(
-          (element) => element.closest('[inert]') !== null,
-        ))
-      );
-    })
-    .toBe(true);
+  const group = await cameraTarget(page, 'Client first');
+  await expectReadingFrame(group, 'Client first', true);
+  await expect(
+    group.getByRole('heading', { name: 'Two ways to begin', exact: true }),
+  ).toBeVisible();
   const result = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'])
     .analyze();
   expect(result.violations).toEqual([]);
-  await page.locator('#reading-mode').focus();
-  await page.keyboard.press('Tab');
-  await expect(page.locator('html')).toHaveAttribute(
-    'data-presentation',
-    'read',
-  );
-  await expect(hiddenLink).toBeFocused();
-  await expect(hiddenLink).toBeInViewport({ ratio: 1 });
-  expect(
-    await hiddenLink.evaluate((element) =>
-      element.closest('[aria-hidden="true"], [inert]'),
-    ),
-  ).toBeNull();
+  await enterReadingMode(page);
+  for (const section of await page.locator('[data-camera-stop]').all()) {
+    expect(
+      await section.evaluate((element) =>
+        element.closest('[aria-hidden="true"], [inert]'),
+      ),
+    ).toBeNull();
+  }
+  await page.locator('.proposal-link').scrollIntoViewIfNeeded();
+  await expect(page.locator('.proposal-link')).toBeInViewport({ ratio: 1 });
 });
 
 test('skip link sends keyboard users to the proposal content', async ({
@@ -1593,12 +1474,25 @@ test('skip link sends keyboard users to the proposal content', async ({
   await expect(page).toHaveURL(/#main$/);
 });
 
-test('keyboard navigation into the flyer reveals the focused link in reading mode', async ({
+test('entering a paper link from the keyboard restores a readable focused link', async ({
   page,
 }) => {
   await page.goto('./');
   await expect(page.locator('html')).toHaveClass(/camera-ready/);
-  await page.locator('#reading-mode').focus();
+  const lastChapter = page.locator('.chapter-nav button').last();
+  for (let index = 0; index < 20; index += 1) {
+    await page.keyboard.press('Tab');
+    if (
+      await lastChapter.evaluate(
+        (element) => element === document.activeElement,
+      )
+    )
+      break;
+  }
+  await expect(lastChapter).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(lastChapter).toHaveAttribute('aria-current', 'step');
+  await page.waitForTimeout(1400);
   await page.keyboard.press('Tab');
   const notesLink = page.locator('.proposal-sheet a[href$="/agreement/"]');
   await expect(notesLink).toBeFocused();
@@ -1607,6 +1501,176 @@ test('keyboard navigation into the flyer reveals the focused link in reading mod
     'read',
   );
   await expect(notesLink).toBeInViewport({ ratio: 1 });
+});
+
+test('tour and reading round trips preserve the selected path and the same content nodes', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('./');
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  const client = page.getByRole('button', {
+    name: 'Client first',
+    exact: true,
+  });
+  await client.click();
+  await expectReadingFrame(
+    await cameraTarget(page, 'Client first'),
+    'Client first',
+    true,
+  );
+  const sections = await page.locator('[data-camera-stop]').elementHandles();
+  const text = await page.locator('.proposal-sheet').textContent();
+  await enterReadingMode(page);
+  await page
+    .getByRole('button', { name: 'Take the tour', exact: true })
+    .click();
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  await expect(client).toHaveAttribute('aria-current', 'step');
+  await expectReadingFrame(
+    await cameraTarget(page, 'Client first'),
+    'Client first after mode round trip',
+    true,
+  );
+  for (const section of sections)
+    expect(await section.evaluate((element) => element.isConnected)).toBe(true);
+  expect(await page.locator('.proposal-sheet').textContent()).toBe(text);
+  expect(
+    await page.locator('[id]').evaluateAll((elements) => {
+      const ids = elements.map((element) => element.id);
+      return ids.filter((id, index) => ids.indexOf(id) !== index);
+    }),
+  ).toEqual([]);
+});
+
+test('intentional reading scroll owns the return chapter after keyboard focus moved to the notes link', async ({
+  page,
+}, testInfo) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('./');
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  await page.getByRole('button', { name: 'Client first', exact: true }).click();
+  await expectReadingFrame(
+    await cameraTarget(page, 'Client first'),
+    'Client first',
+    true,
+  );
+  await enterReadingMode(page);
+  await page.keyboard.press('Tab');
+  const notesLink = page.locator('.proposal-sheet a[href$="/agreement/"]');
+  await expect(notesLink).toBeFocused();
+  await expect(notesLink).toBeInViewport({ ratio: 1 });
+  const cash = page.locator('#cash-flow');
+  const cashTop = await cash.evaluate(
+    (element) => element.getBoundingClientRect().top,
+  );
+  const readingTop = await page
+    .locator('.site-header')
+    .evaluate(
+      (header) => Math.max(0, header.getBoundingClientRect().bottom) + 24,
+    );
+  expect(cashTop).toBeLessThan(0);
+  await page.mouse.wheel(0, cashTop - readingTop);
+  await expect
+    .poll(async () => Math.abs((await cash.boundingBox())!.y - readingTop))
+    .toBeLessThanOrEqual(3);
+  await expect(notesLink).toBeFocused();
+  await testInfo.attach('reading-scroll-after-notes-focus', {
+    body: Buffer.from(
+      JSON.stringify(
+        await page.evaluate(() => ({
+          scroll: scrollY,
+          focused: document.activeElement?.textContent?.trim(),
+          cashTop: document.querySelector('#cash-flow')!.getBoundingClientRect()
+            .top,
+          sections: [...document.querySelectorAll('[data-camera-stop]')].map(
+            (element) => ({
+              id: element.id,
+              top: element.getBoundingClientRect().top,
+            }),
+          ),
+        })),
+        null,
+        2,
+      ),
+    ),
+    contentType: 'application/json',
+  });
+  await page
+    .getByRole('button', { name: 'Take the tour', exact: true })
+    .click();
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  await expect(
+    page.getByRole('button', { name: 'Cash flow', exact: true }),
+  ).toHaveAttribute('aria-current', 'step');
+  await expectReadingFrame(
+    cash,
+    'Cash flow after intentional reading scroll',
+    true,
+  );
+});
+
+test('a held native touch in normal reading updates the chapter used to resume the tour', async ({
+  browser,
+}, testInfo) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    deviceScaleFactor: 3,
+    isMobile: true,
+    hasTouch: true,
+  });
+  const page = await context.newPage();
+  await page.goto(baseURL);
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  await page.getByRole('button', { name: 'Client first', exact: true }).click();
+  await page.waitForTimeout(1400);
+  await enterReadingMode(page);
+  const session = await context.newCDPSession(page);
+  for (let gesture = 0; gesture < 2; gesture += 1) {
+    await session.send('Input.dispatchTouchEvent', {
+      type: 'touchStart',
+      touchPoints: [{ x: 200, y: 150 }],
+    });
+    await page.waitForTimeout(450);
+    for (let y = 200; y <= 650; y += 50) {
+      await session.send('Input.dispatchTouchEvent', {
+        type: 'touchMove',
+        touchPoints: [{ x: 200, y }],
+      });
+      await page.waitForTimeout(60);
+    }
+    await session.send('Input.dispatchTouchEvent', {
+      type: 'touchEnd',
+      touchPoints: [],
+    });
+    await page.waitForTimeout(800);
+  }
+  const cash = page.locator('#cash-flow');
+  const readingPosition = await cash.evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    const readingTop =
+      Math.max(
+        0,
+        document.querySelector('.site-header')!.getBoundingClientRect().bottom,
+      ) + 24;
+    return { scroll: scrollY, top: rect.top, bottom: rect.bottom, readingTop };
+  });
+  expect(readingPosition.top).toBeLessThanOrEqual(readingPosition.readingTop);
+  expect(readingPosition.bottom).toBeGreaterThan(readingPosition.readingTop);
+  await testInfo.attach('held-touch-reading-position', {
+    body: Buffer.from(JSON.stringify(readingPosition, null, 2)),
+    contentType: 'application/json',
+  });
+  await page
+    .getByRole('button', { name: 'Take the tour', exact: true })
+    .click();
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  await expect(
+    page.getByRole('button', { name: 'Cash flow', exact: true }),
+  ).toHaveAttribute('aria-current', 'step');
+  await expectReadingFrame(cash, 'Cash flow after held reading gesture', true);
+  await session.detach();
+  await context.close();
 });
 
 test('the tour remains usable after visiting notes and browser Back', async ({
@@ -1633,3 +1697,254 @@ test('the tour remains usable after visiting notes and browser Back', async ({
     'none',
   );
 });
+
+for (const viewport of [
+  { width: 390, height: 844 },
+  { width: 320, height: 740 },
+  { width: 390, height: 664 },
+])
+  test(`round 2: each mobile rate owns and frames its associated heading at ${viewport.width}x${viewport.height}`, async ({
+    page,
+  }, testInfo) => {
+    await page.setViewportSize(viewport);
+    await page.goto('./');
+    await expect(page.locator('html')).toHaveClass(/camera-ready/);
+    const observations = [];
+    for (const name of [/^Hire (?:me )?first$/, /^Client first$/]) {
+      const chapter = page.getByRole('button', { name });
+      const label = await chapter.getAttribute('aria-label');
+      const group = await cameraTarget(page, label);
+      await chapter.click();
+      await page.waitForTimeout(1400);
+      observations.push({
+        label,
+        ownedHeadings: await group.locator('h2').allTextContents(),
+        frame: await readingFrame(group),
+      });
+      await testInfo.attach(`rate-${label}`, {
+        body: await page.screenshot(),
+        contentType: 'image/png',
+      });
+      await expect.soft(group.locator('h2')).toHaveText('Two ways to begin');
+      const headingInk = await group.locator('h2').evaluate((heading) => {
+        const style = getComputedStyle(heading);
+        const channels = style.color.match(/[\d.]+/g)!.map(Number);
+        const linear = channels.slice(0, 3).map((channel) => {
+          const value = channel / 255;
+          return value <= 0.04045
+            ? value / 12.92
+            : ((value + 0.055) / 1.055) ** 2.4;
+        });
+        return {
+          luminance:
+            linear[0] * 0.2126 + linear[1] * 0.7152 + linear[2] * 0.0722,
+          alpha: channels[3] ?? 1,
+          opacity: Number(style.opacity),
+        };
+      });
+      expect(
+        headingInk.luminance,
+        'A related heading must retain strong printed ink',
+      ).toBeLessThan(0.25);
+      expect(headingInk.alpha).toBe(1);
+      expect(headingInk.opacity).toBe(1);
+      await expectReadingFrame(group, label, true);
+    }
+    await testInfo.attach('rate-heading-groups', {
+      body: Buffer.from(JSON.stringify(observations, null, 2)),
+      contentType: 'application/json',
+    });
+  });
+
+for (const width of [1440, 390])
+  test(`round 2: native Tab and Shift+Tab reach every chapter without changing mode at ${width}px`, async ({
+    page,
+  }, testInfo) => {
+    await page.setViewportSize({ width, height: width === 390 ? 844 : 1000 });
+    await page.goto('./');
+    await expect(page.locator('html')).toHaveClass(/camera-ready/);
+    const chapters = page.locator('.chapter-nav button');
+    const expected = await chapters.evaluateAll((buttons) =>
+      buttons.map((button) => button.getAttribute('aria-label')),
+    );
+    const visited: (string | null)[] = [];
+    const sequence = [];
+    for (let index = 0; index < expected.length + 8; index += 1) {
+      await page.keyboard.press('Tab');
+      const focus = await page.evaluate(() => ({
+        name:
+          document.activeElement?.getAttribute('aria-label') ||
+          document.activeElement?.textContent?.trim(),
+        chapter: document.activeElement?.matches('.chapter-nav button')
+          ? document.activeElement.getAttribute('aria-label')
+          : null,
+        mode: document.documentElement.dataset.presentation,
+      }));
+      sequence.push(focus);
+      if (focus.chapter) visited.push(focus.chapter);
+      if (visited.length === expected.length || focus.mode !== 'tour') break;
+    }
+    await testInfo.attach('native-tab-sequence', {
+      body: Buffer.from(JSON.stringify(sequence, null, 2)),
+      contentType: 'application/json',
+    });
+    expect(visited).toEqual(expected);
+    await expect(page.locator('html')).toHaveAttribute(
+      'data-presentation',
+      'tour',
+    );
+    for (let index = expected.length - 2; index >= 0; index -= 1) {
+      await page.keyboard.press('Shift+Tab');
+      await expect(chapters.nth(index)).toBeFocused();
+    }
+    await page.keyboard.press('Tab');
+    await expect(chapters.nth(1)).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(chapters.nth(1)).toHaveAttribute('aria-current', 'step');
+    await page.keyboard.press('Tab');
+    await expect(chapters.nth(2)).toBeFocused();
+    await page.keyboard.press('Space');
+    await expect(chapters.nth(2)).toHaveAttribute('aria-current', 'step');
+    await expect(page.locator('html')).toHaveAttribute(
+      'data-presentation',
+      'tour',
+    );
+    expect(
+      await page
+        .locator('[tabindex]')
+        .evaluateAll((elements) =>
+          elements.some(
+            (element) => Number(element.getAttribute('tabindex')) > 0,
+          ),
+        ),
+    ).toBe(false);
+  });
+
+for (const direction of [-1, 1])
+  for (const fraction of [0.15, 0.4, 0.6])
+    test(`round 2: ${direction < 0 ? 'reverse' : 'forward'} ${fraction * 100}% scroll survives a 1.8-second pause`, async ({
+      page,
+    }, testInfo) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.goto('./');
+      await expect(page.locator('html')).toHaveClass(/camera-ready/);
+      const earlier = page.getByRole('button', {
+        name: /^Hire (?:me )?first$/,
+      });
+      const later = page.getByRole('button', {
+        name: 'Client first',
+        exact: true,
+      });
+      await earlier.click();
+      await page.waitForTimeout(1400);
+      const earlierY = await page.evaluate(() => scrollY);
+      await later.click();
+      await page.waitForTimeout(1400);
+      const laterY = await page.evaluate(() => scrollY);
+      if (direction > 0) {
+        await earlier.click();
+        await page.waitForTimeout(1400);
+      }
+      const startingY = await page.evaluate(() => scrollY);
+      await page.mouse.wheel(
+        0,
+        direction * Math.round((laterY - earlierY) * fraction),
+      );
+      await page.waitForTimeout(120);
+      const releasedY = await page.evaluate(() => scrollY);
+      expect(direction * (releasedY - startingY)).toBeGreaterThan(40);
+      const frames = await collectMotion(page, 1800);
+      await testInfo.attach('partial-scroll-pause', {
+        body: Buffer.from(
+          JSON.stringify(
+            { direction, fraction, startingY, releasedY, frames },
+            null,
+            2,
+          ),
+        ),
+        contentType: 'application/json',
+      });
+      expect(
+        Math.min(
+          ...frames.map((frame) => direction * (frame.scroll - releasedY)),
+        ),
+        'Idle settling must never undo the most recent deliberate scroll direction',
+      ).toBeGreaterThanOrEqual(-3);
+      for (let index = 1; index < frames.length; index += 1)
+        expect(
+          direction * (frames[index].progress - frames[index - 1].progress),
+        ).toBeGreaterThanOrEqual(-0.0005);
+    });
+
+for (const mode of [
+  'normal reading',
+  'reduced motion',
+  'no JavaScript',
+] as const)
+  test(`round 2: ${mode} preserves visual, DOM and ARIA narrative order`, async ({
+    browser,
+  }, testInfo) => {
+    const context = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+      javaScriptEnabled: mode !== 'no JavaScript',
+      reducedMotion: mode === 'reduced motion' ? 'reduce' : 'no-preference',
+    });
+    const page = await context.newPage();
+    await page.goto(baseURL);
+    if (mode === 'normal reading') await enterReadingMode(page);
+    await expect(page.locator('html')).toHaveAttribute(
+      'data-presentation',
+      'read',
+    );
+    const expected = ['idea', 'cash-flow', 'paths', 'window', 'together'];
+    const sections = page.locator('.proposal-sheet [data-camera-stop]');
+    const dom = await sections.evaluateAll((elements) =>
+      elements.map((element) => element.id),
+    );
+    const visual = await sections.evaluateAll((elements) =>
+      elements
+        .map((element) => ({
+          id: element.id,
+          top: element.getBoundingClientRect().top,
+        }))
+        .sort((first, second) => first.top - second.top)
+        .map(({ id }) => id),
+    );
+    const aria = await page.locator('.proposal-sheet').ariaSnapshot();
+    const headings = await Promise.all(
+      expected.map(async (id) => ({
+        id,
+        text: (await page.locator(`#${id} h1, #${id} h2`).first().innerText())
+          .replace(/\s+/g, ' ')
+          .trim(),
+      })),
+    );
+    const ariaPositions = headings.map(({ id, text }) => ({
+      id,
+      position: aria.indexOf(text),
+    }));
+    await testInfo.attach('reading-order', {
+      body: Buffer.from(
+        JSON.stringify({ dom, visual, headings, ariaPositions, aria }, null, 2),
+      ),
+      contentType: 'application/json',
+    });
+    expect.soft(dom).toEqual(expected);
+    expect.soft(visual).toEqual(expected);
+    for (const heading of ariaPositions)
+      expect
+        .soft(heading.position, `${heading.id} heading must be exposed`)
+        .toBeGreaterThanOrEqual(0);
+    expect
+      .soft(
+        [...ariaPositions]
+          .sort((first, second) => first.position - second.position)
+          .map(({ id }) => id),
+      )
+      .toEqual(expected);
+    expect(aria.indexOf('Read the proposal notes')).toBeGreaterThan(
+      ariaPositions.at(-1)!.position,
+    );
+    await expectNoOverflow(page);
+    await context.close();
+  });

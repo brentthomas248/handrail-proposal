@@ -35,11 +35,26 @@
         ".storybook/verify-components.mjs"
       ],
       "notes": [
-        "A presentational article with one documented variant prop. No selected, disabled, loading, or empty state is part of this API.",
+        "Presentational article with documented variant and optional showScope props. Contextual flyer groups supply their own scope; ordinary component stories retain it.",
         "Verify both proposed rates, collection-based compensation, future-sales language, and readable content without horizontal overflow at 320px.",
         "The default presentational state is exercised by EmploymentFirst with its required variant prop explicitly supplied; the component does not invent a default prop value."
       ]
+    },
+    {
+      "name": "CollectionComparison",
+      "category": "other",
+      "sourceFiles": ["src/components/CollectionComparison.astro"],
+      "requiredStates": ["flyer", "notes", "narrow-layout", "no-javascript"],
+      "coveredStates": ["flyer", "notes", "narrow-layout", "no-javascript"],
+      "coverageArtifacts": [
+        "tests/e2e/proposal.spec.ts",
+        "tests/agreement.test.ts",
+        "scripts/verify-pdf.ts"
+      ],
+      "notes": [
+        "Static Astro component, verified on product routes and PDF rather than inventing a React Storybook duplicate. Both paths, collection units and cost qualification stay visible."
+      ]
     }
   ],
-  "generatedAt": "2026-09-26T19:48:45.495325+00:00"
+  "generatedAt": "2026-09-27T04:01:09.691734+00:00"
 }

@@ -1,0 +1,67 @@
+---
+import { collectionComparison as copy } from '../content/proposal';
+
+interface Props {
+  id: string;
+  variant?: 'flyer' | 'notes';
+}
+
+const { id, variant = 'flyer' } = Astro.props;
+---
+
+<figure
+  id={id}
+  class:list={['collection-comparison', `collection-comparison--${variant}`]}
+>
+  <figcaption id={`${id}-assumption`} class="collection-assumption">
+    {copy.assumption}
+  </figcaption>
+  <p class="collection-collected">
+    <span class="collection-collected-label">{copy.collectedLabel}</span>
+    <strong class="collection-collected-amount">{copy.collectedAmount}</strong>
+  </p>
+  <table
+    class="collection-table"
+    aria-label={copy.tableLabel}
+    aria-describedby={`${id}-assumption ${id}-rule ${id}-qualifier`}
+  >
+    <thead>
+      <tr>
+        <td class="collection-table-corner" aria-hidden="true"></td>
+        {copy.paths.map((path) => (
+          <th
+            id={`${id}-${path.id}`}
+            class="collection-path-heading"
+            scope="col"
+          >
+            {path.label} <span class="collection-rate">· {path.rate}</span>
+          </th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {copy.rows.map((row) => (
+        <tr>
+          <th id={`${id}-${row.id}`} class="collection-row-label" scope="row">
+            {row.label}
+          </th>
+          {row.amounts.map((amount, index) => (
+            <td
+              class="collection-value"
+              headers={`${id}-${row.id} ${id}-${copy.paths[index].id}`}
+            >
+              {amount}
+            </td>
+          ))}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="collection-difference">{copy.difference}</p>
+  <p id={`${id}-rule`} class="collection-rule">
+    {copy.rule}
+  </p>
+  <p id={`${id}-qualifier`} class="collection-qualifier">
+    {copy.qualifier}
+  </p>
+</figure>

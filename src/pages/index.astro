@@ -1,12 +1,32 @@
 ---
 import Page from '../layouts/Page.astro';
 import DealPath from '../components/DealPath';
+import CollectionComparison from '../components/CollectionComparison.astro';
 import { proposal, flyerCopy } from '../content/proposal';
 const base = import.meta.env.BASE_URL;
 ---
 
 <Page title="A beginning together · A proposal for Handrail">
   <main id="main">
+    <div class="tour-controls" aria-label="Proposal tour">
+      <div class="tour-instruction">
+        <span class="scroll-line" aria-hidden="true"></span>
+        <span id="tour-caption">Scroll to open the proposal</span>
+      </div>
+      <nav class="chapter-nav" aria-label="Proposal chapters">
+        <button
+          type="button"
+          data-go-to="0"
+          aria-label="Overview"
+          aria-current="step"
+        >
+          <span>Overview</span>
+        </button>
+      </nav>
+      <span class="tour-counter" aria-hidden="true">
+        <span id="current-stop">00</span> / <span id="total-stops">06</span>
+      </span>
+    </div>
     <div class="flyer-journey">
       <div class="flyer-stage">
         <svg class="paper-shadow" aria-hidden="true" focusable="false">
@@ -26,6 +46,118 @@ const base = import.meta.env.BASE_URL;
           aria-label="Growth partnership proposal"
           data-fold="z-fold"
         >
+          <div class="proposal-content">
+            <section
+              class="flyer-cover"
+              id="idea"
+              data-print-panel="left"
+              data-camera-stop="The beginning"
+              data-camera-order="1"
+            >
+              <p class="cover-intro">{flyerCopy.cover.eyebrow}</p>
+              <h1>
+                {flyerCopy.cover.headlineLines.map((line) => (
+                  <span>{line}</span>
+                ))}
+              </h1>
+              <p class="cover-statement">{flyerCopy.cover.statement}</p>
+              <p class="cover-description">{flyerCopy.cover.description}</p>
+            </section>
+            <section
+              class="flyer-cash"
+              id="cash-flow"
+              data-print-panel="center"
+              data-camera-stop="Cash flow"
+              data-camera-order="2"
+            >
+              <h2>{flyerCopy.cash.headline}</h2>
+              <CollectionComparison id="flyer-collections" />
+            </section>
+            <section
+              class="flyer-rates"
+              id="paths"
+              data-print-panel="right"
+              data-camera-stop="The two paths"
+              data-camera-order="3"
+            >
+              <div class="rates-heading">
+                <h2>Two ways to begin</h2>
+              </div>
+              <div class="deal-paths">
+                <div class="rate-group" data-camera-mobile="Hire first">
+                  <h2 class="rate-context">Two ways to begin</h2>
+                  <DealPath variant="employment" showScope={false} />
+                  <p class="rate-scope">{flyerCopy.paths.scope}</p>
+                  <p class="rate-common">{flyerCopy.paths.sharedTerms}</p>
+                </div>
+                <div class="rate-group" data-camera-mobile="Client first">
+                  <h2 class="rate-context">Two ways to begin</h2>
+                  <DealPath variant="client" showScope={false} />
+                  <p class="rate-reason">{flyerCopy.paths.clientReason}</p>
+                  <p class="rate-common">{flyerCopy.paths.sharedTerms}</p>
+                </div>
+              </div>
+              <p class="rate-shared">{flyerCopy.paths.sharedTerms}</p>
+            </section>
+            <section
+              class="flyer-window"
+              id="window"
+              data-camera-align="start"
+              data-print-panel="right"
+              data-camera-stop="The window"
+              data-camera-order="4"
+            >
+              <div class="window-title">
+                <strong>{proposal.activationDays}</strong>
+                <h2>days to begin.</h2>
+              </div>
+              <ol class="window-steps">
+                <li>
+                  <strong>Agree on the starting point.</strong>
+                  <p>Define the structure and qualifying client together.</p>
+                </li>
+                <li>
+                  <strong>Either path can start.</strong>
+                  <p>
+                    Handrail can hire first, or I can bring the paying client
+                    first.
+                  </p>
+                </li>
+                <li>
+                  <strong>If neither happens.</strong>
+                  <p>
+                    No client and no hire by day 90: the hiring commitment ends.
+                  </p>
+                </li>
+              </ol>
+            </section>
+            <section
+              class="flyer-partnership"
+              id="together"
+              data-camera-align="start"
+              data-print-panel="left"
+              data-camera-stop="Grow together"
+              data-camera-order="5"
+            >
+              <div class="partnership-lead">
+                <h2>
+                  {flyerCopy.closing.headlineLines.map((line) => (
+                    <span>{line}</span>
+                  ))}
+                </h2>
+              </div>
+              <div class="partnership-details">
+                <p>{flyerCopy.closing.startingPointBody}</p>
+                <p>{flyerCopy.closing.partnershipBody}</p>
+              </div>
+              <div class="proposal-followup">
+                <p class="proposal-note">{flyerCopy.closing.proposalNote}</p>
+                <a class="proposal-link" href={`${base}agreement/`}>
+                  Read the proposal notes
+                </a>
+              </div>
+            </section>
+          </div>
           <div class="fold-panel" data-panel="left">
             <div class="panel-face">
               <div class="panel-masthead">
@@ -36,68 +168,10 @@ const base = import.meta.env.BASE_URL;
                   height="392"
                   alt="Handrail"
                 />
-                <span>
-                  Brent Showalter
-                  <br />
-                  For discussion
-                </span>
+                <span>For discussion</span>
               </div>
-              <section
-                class="flyer-cover"
-                id="idea"
-                data-camera-stop="The beginning"
-                data-camera-order="1"
-              >
-                <p class="cover-intro">{flyerCopy.cover.eyebrow}</p>
-                <h1>
-                  {flyerCopy.cover.headlineLines.map((line) => (
-                    <span>{line}</span>
-                  ))}
-                </h1>
-                <p class="cover-statement">{flyerCopy.cover.statement}</p>
-                <p class="cover-description">{flyerCopy.cover.description}</p>
-              </section>
-              <section
-                class="flyer-partnership"
-                id="together"
-                data-camera-stop="Grow together"
-                data-camera-order="5"
-              >
-                <div
-                  class="partnership-story"
-                  data-camera-mobile="Grow together"
-                >
-                  <div class="partnership-lead">
-                    <p>{flyerCopy.closing.eyebrow}</p>
-                    <h2>
-                      {flyerCopy.closing.headlineLines.map((line) => (
-                        <span>{line}</span>
-                      ))}
-                    </h2>
-                  </div>
-                  <div class="partnership-details">
-                    <div>
-                      <h3>{flyerCopy.closing.startingPointTitle}</h3>
-                      <p>{flyerCopy.closing.startingPointBody}</p>
-                    </div>
-                    <div>
-                      <h3>{flyerCopy.closing.partnershipTitle}</h3>
-                      <p>{flyerCopy.closing.partnershipBody}</p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="proposal-followup"
-                  data-camera-mobile="A proposal to discuss"
-                >
-                  <p class="proposal-note">{flyerCopy.closing.proposalNote}</p>
-                  <a class="proposal-link" href={`${base}agreement/`}>
-                    Read the proposal notes
-                  </a>
-                </div>
-              </section>
               <div class="panel-colophon">
-                Growth partnership proposal <span>September 2026</span>
+                <span>Brent Showalter</span>
               </div>
             </div>
             <div class="panel-back brochure-cover" aria-hidden="true">
@@ -130,104 +204,14 @@ const base = import.meta.env.BASE_URL;
               <span class="back-edition">For discussion / September 2026</span>
             </div>
           </div>
-
           <div class="fold-panel" data-panel="center">
             <div class="panel-face cash-face">
               <div class="panel-masthead">
-                <span>The starting structure</span>
-                <span>Revenue comes first.</span>
+                <span>Collections before commission</span>
+                <span>Handrail / Brent Showalter</span>
               </div>
-              <section
-                class="flyer-cash"
-                id="cash-flow"
-                data-camera-stop="Cash flow"
-                data-camera-order="2"
-              >
-                <div data-camera-mobile="Revenue first">
-                  <h2>
-                    <span>Bring me on board.</span>
-                    <span>Let revenue lead.</span>
-                  </h2>
-                  <p class="cash-intro">
-                    No base salary. No commission advance on a contract.
-                    Customer money arrives first.
-                  </p>
-                </div>
-                <div data-camera-mobile="As money arrives">
-                  <div
-                    class="cash-receipt"
-                    data-payment-diagram
-                    aria-label="Illustrative client-first build payment"
-                  >
-                    <p class="receipt-example">Client-first example</p>
-                    <div class="receipt-row receipt-in">
-                      <span>Customer payment collected</span>
-                      <strong>$10,000</strong>
-                    </div>
-                    <div
-                      class="payment-split"
-                      data-payment-rule
-                      aria-hidden="true"
-                    >
-                      <span data-payment-part="commission"></span>
-                      <span data-payment-part="retained"></span>
-                      <i data-payment-trace></i>
-                    </div>
-                    <div class="receipt-row receipt-out">
-                      <span>
-                        {proposal.rates.clientFirst}% build commission
-                      </span>
-                      <strong>$2,000</strong>
-                    </div>
-                    <div class="receipt-balance">
-                      <span>
-                        Handrail retains <span class="retained-share">80%</span>
-                      </span>
-                      <strong>$8,000</strong>
-                    </div>
-                    <p class="receipt-qualification">
-                      Before delivery costs, benefits and other expenses. An
-                      illustration, not a sales forecast.
-                    </p>
-                  </div>
-                  <div class="installments">
-                    <p>
-                      Paid over 12 months?
-                      <br />
-                      <strong>My commission follows each payment.</strong>
-                    </p>
-                    <div class="installment-key" aria-hidden="true">
-                      <span>
-                        <i class="collected-key"></i>Collected
-                      </span>
-                      <span>
-                        <i class="commission-key"></i>Commission
-                      </span>
-                    </div>
-                    <div
-                      class="installment-events"
-                      data-payment-events
-                      aria-hidden="true"
-                    >
-                      {Array.from({ length: 12 }, () => (
-                        <i data-payment-event>
-                          <b data-payment-collected></b>
-                          <b data-payment-commission></b>
-                        </i>
-                      ))}
-                    </div>
-                    <p class="installment-note">
-                      Matched events, not equal amounts.
-                    </p>
-                  </div>
-                  <p class="cash-closing">
-                    A way to start working together, with compensation connected
-                    to incoming cash.
-                  </p>
-                </div>
-              </section>
               <div class="panel-colophon">
-                No base salary. <span>Collections before commission.</span>
+                <span>Commission follows collected revenue.</span>
               </div>
             </div>
             <div class="panel-back plain-back" aria-hidden="true">
@@ -241,84 +225,13 @@ const base = import.meta.env.BASE_URL;
               <span>A starting point for what comes next.</span>
             </div>
           </div>
-
           <div class="fold-panel" data-panel="right">
             <div class="panel-face">
               <div class="panel-masthead">
-                <span>Two ways to begin</span>
-                <span>One partnership.</span>
+                <span>The proposed terms</span>
+                <span>Handrail / Brent Showalter</span>
               </div>
-              <section
-                class="flyer-rates"
-                id="paths"
-                data-camera-stop="The two paths"
-                data-camera-order="3"
-              >
-                <div class="rates-heading">
-                  <h2>
-                    The commitment <br />
-                    sets the rate.
-                  </h2>
-                </div>
-                <div class="deal-paths">
-                  <div class="rate-group" data-camera-mobile="Hire me first">
-                    <DealPath variant="employment" />
-                    <p class="rate-scope">
-                      The selected rate applies to all my future credited sales.
-                      Both paths: no base salary, with an employment benefits
-                      package.
-                    </p>
-                  </div>
-                  <div class="rate-group" data-camera-mobile="Client first">
-                    <DealPath variant="client" />
-                    <p class="rate-reason">
-                      If I bring the client that makes hiring possible, the
-                      higher rate reflects the business I created and the risk I
-                      took to create it.
-                    </p>
-                  </div>
-                </div>
-              </section>
-              <section
-                class="flyer-window"
-                id="window"
-                data-camera-stop="The window"
-                data-camera-order="4"
-              >
-                <div class="window-title">
-                  <strong>{proposal.activationDays}</strong>
-                  <h2>
-                    days
-                    <br />
-                    to begin.
-                  </h2>
-                </div>
-                <ol class="window-steps">
-                  <li>
-                    <strong>Align on the starting point.</strong>
-                    <p>
-                      Agree on the structure and what qualifies as the first
-                      client.
-                    </p>
-                  </li>
-                  <li>
-                    <strong>Either path can start.</strong>
-                    <p>
-                      Handrail can bring me on during the window, or I can bring
-                      the paying client first.
-                    </p>
-                  </li>
-                  <li>
-                    <strong>A clear stopping point.</strong>
-                    <p>
-                      If there is no client and no hire within 90 days, the
-                      hiring commitment ends.
-                    </p>
-                  </li>
-                </ol>
-              </section>
               <div class="panel-colophon">
-                <span>Prepared by Brent Showalter</span>
                 <a
                   href="https://github.com/brentthomas248/handrail-proposal"
                   target="_blank"
@@ -341,25 +254,6 @@ const base = import.meta.env.BASE_URL;
           </div>
         </article>
       </div>
-    </div>
-    <div class="tour-controls" aria-label="Proposal tour">
-      <div class="tour-instruction">
-        <span class="scroll-line" aria-hidden="true"></span>
-        <span id="tour-caption">Scroll to open the proposal</span>
-      </div>
-      <nav class="chapter-nav" aria-label="Proposal chapters">
-        <button
-          type="button"
-          data-go-to="0"
-          aria-label="Overview"
-          aria-current="step"
-        >
-          <span>Overview</span>
-        </button>
-      </nav>
-      <span class="tour-counter" aria-hidden="true">
-        <span id="current-stop">00</span> / <span id="total-stops">06</span>
-      </span>
     </div>
   </main>
   <script src="../scripts/motion.ts"></script>

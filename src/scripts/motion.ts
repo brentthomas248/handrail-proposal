@@ -1,8 +1,12 @@
 import gsap from 'gsap';
+import { mountPaper } from './paper-layout';
 import {
   createPath,
   damp,
   foldPoint,
+  settleAnchor,
+  sceneAt,
+  hingeTravel,
   rotatePoint,
   viewPoint,
   type Keyframe,
@@ -57,9 +61,6 @@ function mountTour(
   const progressMark = document.querySelector<HTMLElement>('.scroll-line');
   const header = document.querySelector<HTMLElement>('.site-header');
   const controls = document.querySelector<HTMLElement>('.tour-controls');
-  const paymentDiagram = sheet.querySelector<HTMLElement>(
-    '[data-payment-diagram]',
-  );
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
   const perspective = 2400;
   const readingRadius = 0.24;
@@ -78,10 +79,6 @@ function mountTour(
   let velocity = 0;
   let lastIndex = -1;
   let lastCaption = '';
-  let lastReadingFocus = -1;
-  let lastPaymentTrace = '';
-  let paymentTraceStart = 0;
-  let paymentTraceEnd = 1;
   let openingAnchors: number[] = [];
   let lastWidth = 0;
   let lastHeight = 0;
@@ -94,6 +91,13 @@ function mountTour(
   let touchActive = false;
   let resizePending = false;
   let corners: Point[][] = [];
+  let restorePaper: (() => void) | undefined;
+  let userDirection = 0;
+  let inputScrollY = window.scrollY;
+  let writtenScrollY: number | undefined;
+  let navigationElement: HTMLElement | null = null;
+  let readingResumeElement: HTMLElement | null = null;
+  let readingInput = false;
 
   function boxFor(element: HTMLElement): Box {
     let x = 0;
@@ -191,9 +195,7 @@ function mountTour(
     const fold = 38;
     const mobilePrintScale = stop.element?.matches('.flyer-cover')
       ? 0.65
-      : stop.element?.dataset.cameraMobile === 'Revenue first'
-        ? 0.86
-        : 0.43;
+      : 0.43;
     const center = foldPoint(
       { x: box.x + box.width / 2, y: box.y + box.height / 2, z: 1 },
       stop.panel,
@@ -216,9 +218,7 @@ function mountTour(
                 (width - 160) / box.width,
                 availableHeight / box.height,
               ) * 0.92,
-              stop.element?.closest('.flyer-cover, .flyer-cash')
-                ? 0.66 / (panelWidth / 1200)
-                : Infinity,
+              0.66 / (panelWidth / 1200),
             ),
       left: fold,
       right: fold,
@@ -226,6 +226,16 @@ function mountTour(
       yaw: stop.panel === 'center' ? 0 : -fold,
       roll: 0,
     };
+    if (stop.element?.dataset.cameraAlign === 'start') {
+      const drawnHeight = box.height * pose.scale;
+      const inset = Math.min(
+        width < 760 ? 8 : 24,
+        (availableHeight - drawnHeight) / 2,
+      );
+      const desiredCenter =
+        cameraY - availableHeight / 2 + inset + drawnHeight / 2;
+      pose.focusY += (cameraY - desiredCenter) / pose.scale;
+    }
     return pose;
   }
 
@@ -294,19 +304,6 @@ function mountTour(
     if (!path) return;
     const time = visual * path.duration;
     const pose = path.sample(time);
-    // The printed receipt is complete at all times. Only this narrow digital
-    // annotation traces its rule, after the collection has been established.
-    const paymentTrace = Math.max(
-      0,
-      Math.min(
-        1,
-        (time - paymentTraceStart) / (paymentTraceEnd - paymentTraceStart),
-      ),
-    ).toFixed(3);
-    if (paymentTrace !== lastPaymentTrace) {
-      paymentDiagram?.style.setProperty('--payment-trace', paymentTrace);
-      lastPaymentTrace = paymentTrace;
-    }
     sheet.style.transform = `translate3d(${width / 2}px,${cameraY}px,0) rotateZ(${pose.roll}deg) rotateX(${pose.pitch}deg) rotateY(${pose.yaw}deg) scale3d(${pose.scale},${pose.scale},${pose.scale}) translate3d(${-pose.focusX}px,${-pose.focusY}px,${-pose.focusZ}px)`;
     wings.left.style.transform = `rotateY(${pose.left}deg)`;
     wings.right.style.transform = `rotateY(${pose.right}deg)`;
@@ -390,33 +387,12 @@ function mountTour(
       });
       shadow.style.opacity = String(Math.max(0.025, 0.13 - pose.scale * 0.05));
     }
-    let index = 0;
-    for (let i = 1; i < stops.length; i += 1)
-      if (time >= stops[i].at - readingRadius - 0.04) index = i;
-    const readingFocus =
-      width < 760 && index > 0 && Math.abs(time - stops[index].at) <= 0.55
-        ? index
-        : 0;
-    if (readingFocus !== lastReadingFocus) {
-      lastReadingFocus = readingFocus;
-      sheet.toggleAttribute('data-reading-focus', readingFocus > 0);
-      if (readingFocus > 0)
-        sheet.dataset.readingFocus = stops[readingFocus].element?.closest(
-          '.flyer-cover, .flyer-cash',
-        )
-          ? 'paper'
-          : 'context';
-      stops.forEach((stop, stopIndex) => {
-        if (!stop.element) return;
-        const secondary = readingFocus > 0 && stopIndex !== readingFocus;
-        stop.element.toggleAttribute('data-reading-secondary', secondary);
-        // The peripheral print is a preview of other chapters. The active
-        // chapter and Read normally provide their complete accessible content.
-        stop.element.inert = secondary;
-        if (secondary) stop.element.setAttribute('aria-hidden', 'true');
-        else stop.element.removeAttribute('aria-hidden');
-      });
-    }
+    const { index, caption: label } = sceneAt(
+      stops,
+      time,
+      readingRadius,
+      lastIndex,
+    );
     if (index !== lastIndex) {
       lastIndex = index;
       nav
@@ -437,12 +413,6 @@ function mountTour(
         });
       if (current) current.textContent = String(index).padStart(2, '0');
     }
-    const label =
-      index === 0
-        ? time < 0.2
-          ? 'Scroll to unfold'
-          : 'One proposal. Room to grow.'
-        : stops[index].name;
     if (caption && label !== lastCaption) {
       caption.textContent = label;
       lastCaption = label;
@@ -473,21 +443,29 @@ function mountTour(
   }
 
   function cancelAutomaticScroll() {
+    navigationElement = null;
     clearTimeout(settleTimer);
     scrollTween?.kill();
     scrollTween = undefined;
   }
 
+  function writeScroll(top: number) {
+    window.scrollTo({ top, behavior: 'instant' });
+    writtenScrollY = window.scrollY;
+    inputScrollY = window.scrollY;
+  }
+
   function scrollToPosition(progress: number) {
     if (!path) return;
     cancelAutomaticScroll();
+    userDirection = 0;
     const state = { y: window.scrollY };
     const destination = offset + progress * range;
     scrollTween = gsap.to(state, {
       y: destination,
       duration: Math.min(0.8, 0.36 + Math.abs(destination - state.y) / 7000),
       ease: 'power2.inOut',
-      onUpdate: () => window.scrollTo({ top: state.y, behavior: 'instant' }),
+      onUpdate: () => writeScroll(state.y),
       onComplete: () => {
         scrollTween = undefined;
       },
@@ -497,26 +475,43 @@ function mountTour(
   function settle() {
     if (!path || scrollTween || touchActive || resizePending) return;
     const time = target * path.duration;
-    if (
-      stops.some(
-        (stop, i) => i > 0 && Math.abs(stop.at - time) <= readingRadius,
-      )
-    )
-      return;
     const anchors = [
       ...openingAnchors,
       ...stops.slice(1).map((stop) => stop.at),
     ];
-    const nearest = anchors.reduce((best, value) =>
-      Math.abs(value - time) < Math.abs(best - time) ? value : best,
+    const destination = settleAnchor(
+      anchors,
+      time,
+      userDirection,
+      readingRadius,
     );
-    if (Math.abs(nearest - time) > 0.015)
-      scrollToPosition(nearest / path.duration);
+    if (destination !== null) scrollToPosition(destination / path.duration);
   }
 
   function handleScroll() {
-    if (!path || root.dataset.presentation !== 'tour') return;
+    if (root.dataset.presentation === 'read') {
+      if (readingInput) {
+        readingResumeElement = readingElement(false);
+        releaseReadingInputAfterIdle();
+      }
+      return;
+    }
+    if (!path) return;
     lastScrollAt = performance.now();
+    const scrollY = window.scrollY;
+    const appOwned =
+      scrollTween ||
+      (writtenScrollY !== undefined && Math.abs(scrollY - writtenScrollY) <= 1);
+    if (!appOwned) {
+      navigationElement = null;
+      const distance = scrollY - inputScrollY;
+      // Ignore subpixel/jitter changes; deliberate native travel owns settling.
+      if (Math.abs(distance) >= 3) {
+        userDirection = Math.sign(distance);
+        inputScrollY = scrollY;
+      }
+    }
+    writtenScrollY = undefined;
     target = Math.max(0, Math.min(1, (window.scrollY - offset) / range));
     startTick();
     clearTimeout(settleTimer);
@@ -529,16 +524,6 @@ function mountTour(
     ticking = false;
     path = undefined;
     velocity = 0;
-    lastReadingFocus = -1;
-    lastPaymentTrace = '';
-    paymentDiagram?.style.removeProperty('--payment-trace');
-    sheet.removeAttribute('data-reading-focus');
-    stops.forEach((stop) => {
-      if (!stop.element) return;
-      stop.element.removeAttribute('data-reading-secondary');
-      stop.element.removeAttribute('aria-hidden');
-      stop.element.inert = false;
-    });
     sheet.style.removeProperty('transform');
     sheet.style.removeProperty('transform-origin');
     sheet.style.removeProperty('--panel-height');
@@ -664,27 +649,20 @@ function mountTour(
             roll: 1,
           },
         });
-        if (width >= 760 && paymentDiagram) {
-          const receipt = boxFor(paymentDiagram);
-          frames.push({
-            at: cursor - 1,
-            pose: {
-              ...pose,
-              focusY: receipt.y + receipt.height * 0.24,
-              scale: pose.scale * 0.93,
-              pitch: 2,
-            },
-          });
-        }
       } else if (previousPanel && previousPanel !== stop.panel) {
-        const orbit = overview(
-          70,
-          stop.panel === 'center' ? 8 : -44,
-          16,
-          stop.panel === 'left' ? -3 : 3,
+        const bridges = hingeTravel(
+          previousPose,
+          pose,
+          previousPanel,
+          stop.panel,
+          panelWidth,
         );
-        orbit.focusY = (previousPose.focusY + pose.focusY) / 2;
-        frames.push({ at: cursor - 0.8, pose: orbit });
+        bridges.forEach((bridge, index) => {
+          frames.push({
+            at: cursor - (bridges.length === 1 ? 0.85 : 1.15 - index * 0.5),
+            pose: bridge,
+          });
+        });
       }
       const drift = Math.min(9, availableHeight * 0.016) / pose.scale;
       frames.push({
@@ -708,13 +686,6 @@ function mountTour(
             ? 2.2
             : 1.7;
     }
-    const cashStop = stops.find((stop) =>
-      width < 760
-        ? stop.element?.dataset.cameraMobile === 'As money arrives'
-        : stop.element?.matches('.flyer-cash'),
-    );
-    paymentTraceStart = (cashStop?.at ?? 1) - (width < 760 ? 0.58 : 0.75);
-    paymentTraceEnd = (cashStop?.at ?? 1) - (width < 760 ? 0.05 : 0.15);
     path = createPath(frames);
     range = preserveScroll
       ? previousRange
@@ -740,10 +711,7 @@ function mountTour(
             : previousProgress,
         ),
       );
-      window.scrollTo({
-        top: preserveScroll ? previousScroll : offset + range * target,
-        behavior: 'instant',
-      });
+      writeScroll(preserveScroll ? previousScroll : offset + range * target);
     } else target = Math.max(0, Math.min(1, (window.scrollY - offset) / range));
     visual = target;
     velocity = 0;
@@ -751,9 +719,45 @@ function mountTour(
     render();
   }
 
+  function readingElement(preferFocus = true): HTMLElement | null {
+    const focused = document.activeElement?.closest<HTMLElement>(
+      '[data-camera-mobile], [data-camera-stop]',
+    );
+    if (preferFocus && focused && sheet.contains(focused)) return focused;
+    const elements = [
+      ...sheet.querySelectorAll<HTMLElement>('[data-camera-mobile]'),
+      ...sheet.querySelectorAll<HTMLElement>('[data-camera-stop]'),
+    ];
+    // Scroll offsets round to device pixels while layout retains fractions;
+    // a section aligned to the reading line must not select the one above it.
+    const readingTop =
+      Math.max(0, header?.getBoundingClientRect().bottom ?? 0) + 25;
+    const containing = elements.find((element) => {
+      const box = element.getBoundingClientRect();
+      return box.top <= readingTop && box.bottom > readingTop;
+    });
+    if (containing) return containing;
+    return elements.reduce<HTMLElement | null>(
+      (nearest, element) =>
+        !nearest ||
+        Math.abs(element.getBoundingClientRect().top - readingTop) <
+          Math.abs(nearest.getBoundingClientRect().top - readingTop)
+          ? element
+          : nearest,
+      null,
+    );
+  }
+
   function setMode(read: boolean, persist: boolean, preservePosition = false) {
-    const element = stops[Math.max(0, lastIndex)]?.element;
+    const wasRead = root.dataset.presentation === 'read';
+    const element = wasRead
+      ? (readingResumeElement ?? readingElement())
+      : (navigationElement ?? stops[Math.max(0, lastIndex)]?.element);
+    // Returning to the mode control can scroll the ordinary document. Keep the
+    // reading idea until an actual reading gesture selects another position.
+    readingInput = false;
     destroyTour();
+    userDirection = 0;
     root.dataset.presentation = read ? 'read' : 'tour';
     mode.textContent = read ? 'Take the tour' : 'Read normally';
     mode.setAttribute('aria-pressed', String(read));
@@ -765,13 +769,30 @@ function mountTour(
         /* Preference storage is optional. */
       }
     if (read) {
-      if (persist && element)
+      readingResumeElement = element ?? null;
+      restorePaper?.();
+      restorePaper = undefined;
+      if (!preservePosition && element)
         element.scrollIntoView({ block: 'start', behavior: 'instant' });
-      else if (!preservePosition)
-        window.scrollTo({ top: 0, behavior: 'instant' });
+      else if (!preservePosition) writeScroll(0);
     } else {
-      if (!preservePosition) window.scrollTo({ top: 0, behavior: 'instant' });
+      restorePaper ??= mountPaper(sheet);
+      if (!preservePosition) writeScroll(0);
       buildTour();
+      if (!preservePosition && wasRead && element && path) {
+        const section = element.closest('[data-camera-stop]');
+        const stop =
+          stops.find((candidate) => candidate.element === element) ??
+          stops.find(
+            (candidate) =>
+              candidate.element?.closest('[data-camera-stop]') === section,
+          );
+        if (stop) {
+          target = visual = stop.at / path.duration;
+          writeScroll(offset + range * target);
+          render();
+        }
+      }
     }
   }
 
@@ -799,34 +820,44 @@ function mountTour(
         ? event.target.closest<HTMLButtonElement>('button[data-go-to]')
         : null;
     const stop = button ? stops[Number(button.dataset.goTo)] : undefined;
-    if (stop && path) scrollToPosition(stop.at / path.duration);
+    if (stop && path) {
+      scrollToPosition(stop.at / path.duration);
+      navigationElement = stop.element;
+    }
   });
   window.addEventListener('scroll', handleScroll, { passive: true });
-  window.addEventListener('wheel', cancelAutomaticScroll, { passive: true });
+  function releaseReadingInputAfterIdle() {
+    clearTimeout(settleTimer);
+    // A held finger still owns the gesture. After release, momentum scroll
+    // refreshes this timeout until the ordinary document stops moving.
+    if (readingInput && !touchActive)
+      settleTimer = setTimeout(() => {
+        readingInput = false;
+      }, 180);
+  }
+  function handleUserInput() {
+    cancelAutomaticScroll();
+    readingInput = root.dataset.presentation === 'read';
+    releaseReadingInputAfterIdle();
+  }
+  window.addEventListener('wheel', handleUserInput, { passive: true });
   window.addEventListener(
     'touchstart',
     () => {
       touchActive = true;
-      cancelAutomaticScroll();
+      handleUserInput();
     },
     { passive: true },
   );
   const releaseTouch = () => {
     touchActive = false;
     clearTimeout(settleTimer);
-    settleTimer = setTimeout(settle, 650);
+    if (root.dataset.presentation === 'read') releaseReadingInputAfterIdle();
+    else settleTimer = setTimeout(settle, 650);
   };
   window.addEventListener('touchend', releaseTouch, { passive: true });
   window.addEventListener('touchcancel', releaseTouch, { passive: true });
   window.addEventListener('keydown', (event) => {
-    // Restore culled paper content before native tab traversal enters it.
-    if (
-      event.key === 'Tab' &&
-      root.dataset.presentation === 'tour' &&
-      ((!event.shiftKey && document.activeElement === mode) ||
-        (event.shiftKey && document.activeElement === nav?.firstElementChild))
-    )
-      setMode(true, false);
     if (
       [
         'ArrowDown',
@@ -838,7 +869,7 @@ function mountTour(
         ' ',
       ].includes(event.key)
     )
-      cancelAutomaticScroll();
+      handleUserInput();
   });
   window.addEventListener('resize', () => {
     const widthChanged = Math.abs(innerWidth - lastWidth) > 2;
@@ -868,12 +899,21 @@ function mountTour(
     ?.addEventListener('click', () => setMode(true, false));
   sheet.addEventListener('focusin', (event) => {
     if (
+      root.dataset.presentation === 'read' &&
+      event.target instanceof HTMLElement
+    ) {
+      readingResumeElement = event.target.closest<HTMLElement>(
+        '[data-camera-mobile], [data-camera-stop]',
+      );
+    }
+    if (
       root.dataset.presentation === 'tour' &&
       event.target instanceof HTMLElement &&
       event.target.matches(':focus-visible')
     ) {
       const target = event.target;
       setMode(true, false);
+      target.focus({ preventScroll: true });
       target.scrollIntoView({ block: 'center', behavior: 'instant' });
     }
   });

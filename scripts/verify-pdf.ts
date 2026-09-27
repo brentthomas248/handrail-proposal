@@ -4,6 +4,7 @@ import {
   agreementEndnote,
   agreementIntro,
   agreementSections,
+  collectionComparison,
   proposal,
 } from '../src/content/proposal.ts';
 
@@ -57,15 +58,53 @@ const chunks = [
       label: `Section ${index + 1} heading`,
       text: `${index + 1}. ${section.title}`,
     },
+    ...(section.comparison
+      ? [
+          {
+            label: `Section ${index + 1}, collection assumption`,
+            text: collectionComparison.assumption,
+          },
+          {
+            label: `Section ${index + 1}, collected amount`,
+            text: `${collectionComparison.collectedLabel} ${collectionComparison.collectedAmount}`,
+          },
+          {
+            label: `Section ${index + 1}, comparison column headings`,
+            text: collectionComparison.paths
+              .map((path) => `${path.label} · ${path.rate}`)
+              .join(' '),
+          },
+          ...collectionComparison.rows.map((row) => ({
+            label: `Section ${index + 1}, comparison row ${row.id}`,
+            text: `${row.label} ${row.amounts.join(' ')}`,
+          })),
+          {
+            label: `Section ${index + 1}, comparison difference`,
+            text: collectionComparison.difference,
+          },
+          {
+            label: `Section ${index + 1}, collection rule`,
+            text: collectionComparison.rule,
+          },
+          {
+            label: `Section ${index + 1}, comparison qualifier`,
+            text: collectionComparison.qualifier,
+          },
+        ]
+      : []),
     ...section.paragraphs.map((text, paragraph) => ({
       label: `Section ${index + 1}, paragraph ${paragraph + 1}`,
+      text,
+    })),
+    ...(section.items ?? []).map((text, item) => ({
+      label: `Section ${index + 1}, discussion item ${item + 1}`,
       text,
     })),
   ]),
 ];
 
 if (
-  !document.includes(normalize(proposal.title)) ||
+  !document.includes(normalize(proposal.notesTitle)) ||
   !document.includes(proposal.status)
 ) {
   throw new Error('PDF is missing the canonical title or discussion status.');
@@ -105,5 +144,5 @@ if (remainder !== expectedEndnote) {
 }
 
 console.log(
-  `PDF verified: introduction, ${agreementSections.length} ordered sections, ${chunks.length - agreementSections.length - 1} complete paragraphs and discussion status match canonical content.`,
+  `PDF verified: introduction, ${agreementSections.length} ordered sections, comparison labels and amounts, ${agreementSections.reduce((count, section) => count + section.paragraphs.length, 0)} complete paragraphs, ${agreementSections.reduce((count, section) => count + (section.items?.length ?? 0), 0)} discussion items and discussion status match canonical content.`,
 );

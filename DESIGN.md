@@ -72,21 +72,15 @@ components:
 
 # A beginning together
 
-## Opening-to-cash prototype
+## Complete proposal revision
 
-The first storyboard slice now keeps the folded cover facing the viewer, follows its left hinge at a substantial distance, and crosses directly into the payment panel. Desktop body copy is about 21–22 CSS pixels. Phone first-scene typography uses compact authored columns and measured camera framing so surrounding paper can remain normal ink. Later scenes retain their earlier focus treatment until their editorial redesign.
+The approved Telescope, Igloo, Exat and Stripe Press references inform material, typography and camera direction; Handrail supplies the logo and cream/rust/ink identity. The full proposal now uses the same print and camera rules from opening through closing. Stable ink and authored spacing replace time-dependent dimming. Local hinge travel connects reading scenes without repeatedly retreating to a distant overview.
 
-The payment graphic is a complete static 20/80 split with stable labeled amounts and twelve paired collection/commission events. Its only moving annotation is a narrow rule trace that starts after collection is visible and reverses with scroll. Keep the cost qualifier and illustrative status explicit. The compact navigation retains touch/keyboard controls and reclaims 46 pixels on phones.
+The semantic narrative is beginning → cash flow → proposed rates → 90-day window → growing together. That is also the no-JavaScript and ordinary reading order. The same section nodes mount into physical panel slots only for the tour; decorative backs never carry essential terms. Desktop has five reading scenes plus overview; phone separates the two rate choices, producing six plus overview. Each phone rate scene owns its heading, rationale and common terms. Short window and closing compositions align toward the top of the safe stage rather than exposing unrelated paragraph fragments above them.
 
-Current review and delivery evidence: [prototype implementation](docs/paper-prototype-implementation.md), [independent review](docs/paper-prototype-adversarial-review.md) and [IMPLEMENTATION.md](IMPLEMENTATION.md). The full rates/window/ending storyboard remains future work.
+The collections illustration compares both paths on the same $10,000 received installment: $1,500 commission/$8,500 remaining at 15%, versus $2,000/$8,000 at 20%. The $500 difference is per collected installment. This is a static accessible table, not an animated count or elementary payment trace. Its hypothetical $120,000 build over 12 installments and before-costs qualification remain visible. Notes add the conditional $18,000/$24,000 full-build totals and separate recurring example.
 
-## Current motion and material revision
-
-The approved Telescope, Igloo, Exat and Stripe Press references and Handrail brand direction remain. The user reviewed the published trifold, found its motion choppy or stuck, and requested a true Z-fold plus realistic paper texture and lighting. This is a redesign of 3D geometry, choreography and material treatment; the business proposal and identity are unchanged.
-
-Current implementation and publication evidence is recorded in [IMPLEMENTATION.md](IMPLEMENTATION.md). The latest mobile revision uses eight complete reading scenes, restrained camera scale, secondary peripheral ink and viewport-height adaptation. The [independent adversarial review](docs/mobile-context-adversarial-review.md) accepted the rendered composition after rejecting the first candidate. User acceptance and actual iPhone stability remain distinct from local review.
-
-Earlier choreography measurements are retained in [motion remediation](docs/motion-remediation.md). They established smoother continuous scene movement, but the earlier frozen-stage treatment of mobile height changes was superseded after it hid primary text behind fixed controls. Do not reuse historical test counts, native-window observations or throughput measurements as evidence for the current mobile composition.
+The [round-two implementation](docs/round-2-implementation.md), [design review](docs/round-2-candidate-design-review.md), [interaction review](docs/round-2-candidate-interaction-review.md) and [IMPLEMENTATION.md](IMPLEMENTATION.md) record the current candidate and publication state. Earlier prototype and mobile reviews are historical evidence, not acceptance of this revision. Physical iPhone stability remains unverified.
 
 ## A true Z-fold
 
@@ -104,7 +98,7 @@ Native scrolling is the input. A single GSAP ticker owns critically damped scene
 
 The document responds throughout sustained scroll. Remove fixed blocks of dead scroll and stop/start easing at every chapter. Reading is paced by slower, gentle movement near important content and by the reader pausing, rather than spending scroll distance on a frozen frame. Reverse input traverses the same path smoothly.
 
-After about 650ms of inactivity between reading regions, the scene may settle smoothly toward a readable position by animating native scroll. Wheel, touch or keyboard input immediately cancels that settling. It must never compete with sustained input or pull the reader back after they reverse direction. Verify pause, resume, rapid flick and cancellation through the whole journey.
+After about 650ms of inactivity between reading regions, the scene may settle smoothly toward the next readable position in the last deliberate direction by animating native scroll. Wheel, touch or keyboard input immediately cancels that settling. It must never compete with sustained input or pull the reader back after they reverse direction. Verify pause, resume, rapid flick and cancellation through the whole journey.
 
 Mobile address-bar height changes refit the scene after input settles while preserving native scroll position, travel range, navigation nodes and the current chapter. The stage adopts the visible height, and journey height changes keep the final scene reachable. Width/orientation changes remeasure the scene and preserve the same stop, falling back to its containing section across the mobile/desktop breakpoint. Both `touchend` and `touchcancel` release touch ownership, allowing settling and deferred resizing to resume. Height-only, breakpoint and canceled-touch scenarios have explicit browser regressions.
 
@@ -132,19 +126,19 @@ Keep the economic structure prominent: **No base salary. Commission follows coll
 
 Hire first proposes 15% of collected build fees plus 5% recurring. Client first proposes 20% plus 5%, rewarding the business that enables bringing Brent on board. That rate applies to the triggering client and all future credited sales under the relationship. The 90-day window limits the proposed hiring commitment; no client and no hire ends that commitment.
 
-The closing explains that the parties can shape Brent's contribution around what helps Handrail grow. It does not name specific future positions or expose private financial circumstances. The $10,000 / $2,000 / $8,000 receipt is an illustration; retained cash is before delivery, benefits and other costs, not profit or a guarantee of positive cash flow.
+The closing explains that the parties can shape Brent's contribution around what helps Handrail grow. It does not name specific future positions or expose private financial circumstances. The comparison of a $10,000 collection under both rates is an illustration; retained cash is before delivery, benefits and other costs, not profit or a guarantee of positive cash flow.
 
 This remains a proposal for discussion. Handrail prepares the final contract after the business terms align. The notes and PDF preserve seven concise sections without legal boilerplate, statutory caveats or a signature flow.
 
 ## Reading controls and access
 
-Keep the Read normally / Take the tour control, chapter buttons, visible focus, skip link and direct notes/PDF access. Reduced motion and no-JavaScript viewing preserve complete content without the 3D journey. Keyboard focus on an offscreen link must restore a usable reading context; returning from notes must restore a functioning scene.
+Keep the Read normally / Take the tour control visible in both modes, alongside chapter buttons, visible focus, skip link and direct notes/PDF access. Tab traverses the header and chapter controls naturally; it does not automatically leave the tour. Reduced motion and no-JavaScript viewing preserve complete content without the 3D journey. Keyboard focus on a paper link restores ordinary reading. A deliberate reading gesture supersedes stale link focus when choosing the return chapter, and held touch retains input ownership through release and momentum; returning from notes must restore a functioning scene.
 
 The selected reading face must be correctly oriented, framed and legible. A chapter button landing correctly is necessary but insufficient: the path into and out of it must remain coherent. User intent owns pause and reversal; neither fixed dwell regions nor idle settling may make the scene feel stuck.
 
 ## Verification boundary
 
-The [mobile remediation batch](docs/mobile-framing-remediation.md) defines current findings and closeout expectations; the [motion record](docs/motion-remediation.md) preserves the earlier choreography work. Capture continuous wheel and touch-like input, rapid flicks, immediate reversal, pause/resume, idle-settle cancellation and resize sequences. Measure actual scene movement throughout active scrolling, both wing angles and logical progress before/after viewport changes.
+The [round-two remediation batch](docs/round-2-implementation.md) defines current findings and closeout expectations; the [motion record](docs/motion-remediation.md) preserves the earlier choreography work. Capture continuous wheel and touch-like input, rapid flicks, immediate reversal, pause/resume, idle-settle cancellation and resize sequences. Measure actual scene movement throughout active scrolling, both wing angles and logical progress before/after viewport changes.
 
 Inspect material closeups and content-distinct transition frames or a video/replay, along with the whole forward/reverse journey. Verify Z geometry, correctly oriented faces, matte directional light, crease/edge depth, projected shadows and sharp text at normal reading distance. The independent browser reviewer must review current rendered motion; screenshots made only by an implementer or a passing endpoint suite do not settle these findings.
 
@@ -154,10 +148,10 @@ The user-approved local workflow remains in force. Credentialed Stagehand/Browse
 
 ## Mobile contextual framing
 
-The phone tour should present complete editorial ideas at a restrained reading distance. Keep related labels, bodies, qualifications and examples together; use at most eight reading scenes plus the folded overview for this proposal. Do not turn short paragraphs into separate full-screen macro shots. The full 90-day sequence and the partnership contribution story each form a coherent reading group.
+The phone tour should present complete editorial ideas at a restrained reading distance. Keep related labels, bodies, qualifications and examples together; use six reading scenes plus the folded overview for this proposal. Do not turn short paragraphs into separate full-screen macro shots. The full 90-day sequence and the partnership contribution story each form a coherent reading group.
 
 The active group has breathing room inside the measured header/control boundaries. Neighboring print may remain visible around it, but spacing, quieter secondary typography and the camera composition must make the primary idea unambiguous. Peripheral cropping is acceptable only outside the active reading group. Avoid adding filters or opacity layers to simulate focus.
 
 Refit the camera after available mobile viewport height changes while preserving native scroll and the current chapter. Reaching the final scene must remain possible after the viewport grows again. A selected rectangle fitting inside a nominal viewport does not prove all of its text lines or related content are readable.
 
-Current evidence and the independent adversarial review belong in [the mobile framing remediation](docs/mobile-framing-remediation.md). Earlier screenshot and test-count approvals are historical, not substitutes for current visual judgment.
+Current evidence and independent review belong in [the round-two remediation](docs/round-2-implementation.md). Earlier screenshot and test-count approvals are historical, not substitutes for current visual judgment.

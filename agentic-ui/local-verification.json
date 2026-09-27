@@ -1,39 +1,39 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T01:45:31.296173+00:00",
-  "scope": "Opening-to-cash paper prototype; existing whole-page behavior regressions retained",
+  "generatedAt": "2026-09-27T04:02:53.821159+00:00",
+  "scope": "Complete round-two proposal remediation, including independent design/commercial and interaction review",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": true,
+  "deployed": false,
   "checks": [
     {
       "command": "pnpm check",
-      "result": "24 files; zero errors, warnings or hints",
+      "result": "26 files; zero errors, warnings or hints",
       "exitCode": 0
     },
     {
       "command": "pnpm test",
-      "result": "11 content, geometry and motion unit checks passed",
+      "result": "21 content, geometry and motion checks passed",
       "exitCode": 0
     },
     {
-      "command": "pnpm build",
-      "result": "Two static routes built",
+      "command": "pnpm build:release; pnpm build after motion-only revisions",
+      "result": "Two static routes built; PDF regenerated from canonical notes",
       "exitCode": 0
     },
     {
       "command": "pnpm contract:check && pnpm pdf:check",
-      "result": "Canonical Markdown and complete unchanged PDF match",
+      "result": "Canonical Markdown and full PDF match: 7 sections, comparison, 13 paragraphs, 6 discussion items",
       "exitCode": 0
     },
     {
-      "command": "pnpm exec playwright test --output=qa-artifacts/paper-prototype/candidate2-playwright",
-      "result": "39 Chromium checks passed in 41.3s; static 20/80 diagram, twelve event pairs, ordered reversible annotation, desktop scale, substantial unfolding and prior complete reading/resize/semantic/rendering checks",
+      "command": "pnpm exec playwright test --output=qa-artifacts/review-round-2/regression-full-5",
+      "result": "55 Chromium checks passed in 56.2 seconds; zero skips, retries or failures",
       "exitCode": 0
     },
     {
       "command": "pnpm test:components",
-      "result": "3 component checks passed, zero axe violations or browser errors",
+      "result": "3 component checks passed; zero axe violations or browser errors",
       "exitCode": 0
     },
     {
@@ -42,28 +42,39 @@
       "exitCode": 0
     },
     {
-      "command": "WEBKIT_OUTPUT=qa-artifacts/paper-prototype/webkit node scripts/verify-webkit.mjs",
-      "result": "37 reading positions across five viewports pass; minimum primary text 13.17px; no errors or failed requests; five font-preload warnings",
+      "command": "WEBKIT_OUTPUT=qa-artifacts/round-2-candidate/webkit node scripts/verify-webkit.mjs",
+      "result": "29 reading positions across five viewports pass; minimum text12.158px; no errors/failed requests; five font-preload warnings",
       "exitCode": 0
     },
     {
       "command": "pnpm performance",
-      "result": "Page-load lab performance 99 mobile/100 desktop; zero TBT; all other Lighthouse categories 100",
+      "result": "Mobile99/desktop100 performance; all other Lighthouse categories100, zero TBT/CLS. Lab page-load results, not device scrolling or field INP.",
       "exitCode": 0
     }
   ],
   "evidenceNotes": [
-    "Candidate 1 was rejected and revised. Independent critic accepts candidate 2 for the bounded first slice; see docs/paper-prototype-adversarial-review.md.",
-    "Initial test failures identified premature phone trace and undersized desktop cash introduction; both corrected. Opening test now checks whole initial packet and substantial unfolding instead of requiring the whole three-panel spread at every camera approach.",
-    "64 MiB estimated paper surface and 4096-device-pixel edge budgets pass; these are not physical GPU measurements.",
-    "Rates/window/ending redesign remains deferred; canonical business terms and PDF unchanged.",
-    "Physical iPhone stability, manual VoiceOver and field performance remain unverified.",
-    "Published source 16d332d as static 8e79758; Pages run 36286697372 succeeded. All 39 hosted checks passed in 43.9s; eight assets and complete PDF match."
+    "Independent design review accepts the complete composition after rejected candidates; docs/round-2-candidate-design-review.md.",
+    "Independent interaction review and two additional regressions caught stale-focus and delayed-touch reading ownership; fractional reading-line alignment also corrected.",
+    "Paper estimate remains below unchanged64MiB/4096-device-pixel budget; not total GPU or physical iPhone evidence.",
+    "Two PDF pages were rasterized and visually inspected, including comparison and all discussion items.",
+    "Physical iPhone stability, manual VoiceOver, field INP and business-reader comprehension exercise remain unverified."
   ],
   "limitations": [
     "agentic-ui/blockers.json",
     "agentic-ui/accessibility-evidence.json",
     "agentic-ui/token-drift.json"
   ],
-  "deploymentEvidencePath": "agentic-ui/deployment-verification.json"
+  "deploymentEvidencePath": "agentic-ui/deployment-verification.json",
+  "renderingBudget": {
+    "samples": 408,
+    "maxEstimatedMiB": 59.264373779296875,
+    "maxDeviceEdge": 2877,
+    "budgetMiB": 64,
+    "budgetEdge": 4096
+  },
+  "independentReviews": {
+    "design": "docs/round-2-candidate-design-review.md",
+    "interaction": "docs/round-2-candidate-interaction-review.md",
+    "verdict": "accepted for bounded round-two scope"
+  }
 }

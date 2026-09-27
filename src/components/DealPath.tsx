@@ -2,9 +2,10 @@ import { dealPathCopy, proposal } from '../content/proposal';
 
 export interface DealPathProps {
   variant: 'employment' | 'client';
+  showScope?: boolean;
 }
 
-export default function DealPath({ variant }: DealPathProps) {
+export default function DealPath({ variant, showScope = true }: DealPathProps) {
   const clientFirst = variant === 'client';
   const copy = dealPathCopy[variant];
   const rate = clientFirst
@@ -24,7 +25,7 @@ export default function DealPath({ variant }: DealPathProps) {
         <span>of collected recurring fees</span>
       </p>
       <p className="deal-description">{copy.description}</p>
-      <p className="deal-path-note">{copy.note}</p>
+      {showScope && <p className="deal-path-note">{copy.note}</p>}
     </article>
   );
 }

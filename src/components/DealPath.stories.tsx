@@ -15,6 +15,11 @@ const meta = {
     },
   },
   argTypes: {
+    showScope: {
+      control: 'boolean',
+      description:
+        'Omit the scope note only when the enclosing proposal group supplies its complete credited-sales scope.',
+    },
     variant: {
       control: 'radio',
       options: ['employment', 'client'],

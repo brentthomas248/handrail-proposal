@@ -3,6 +3,9 @@ import {
   createPath,
   damp,
   foldPoint,
+  settleAnchor,
+  sceneAt,
+  hingeTravel,
   rotatePoint,
   type Pose,
 } from '../src/scripts/tour-path';
@@ -103,5 +106,78 @@ describe('scroll response', () => {
       expect(state.value).toBeLessThanOrEqual(0.5);
     }
     expect(state.value).toBeCloseTo(0.5, 5);
+  });
+});
+
+describe('direction-owned idle settling', () => {
+  const anchors = [0, 2, 4, 6];
+
+  it.each([0.15, 0.4, 0.6])(
+    'does not undo forward or reverse movement across %s of an interval',
+    (fraction) => {
+      const forward = 2 + fraction * 2;
+      const reverse = 4 - fraction * 2;
+      expect(settleAnchor(anchors, forward, 1, 0.24)).toBe(4);
+      expect(settleAnchor(anchors, reverse, -1, 0.24)).toBe(2);
+    },
+  );
+
+  it('leaves readable positions and directionless jitter alone', () => {
+    expect(settleAnchor(anchors, 2.1, 1, 0.24)).toBeNull();
+    expect(settleAnchor(anchors, 3, 0, 0.24)).toBeNull();
+    expect(settleAnchor(anchors, 6.4, 1, 0.24)).toBeNull();
+  });
+});
+
+describe('honest scene ownership', () => {
+  const stops = [
+    { name: 'Overview', at: 0 },
+    { name: 'Cash flow', at: 2 },
+    { name: 'Hire first', at: 4 },
+    { name: 'Client first', at: 6 },
+  ];
+
+  it('names the reading idea only inside its reading region', () => {
+    expect(sceneAt(stops, 4, 0.24, 1)).toEqual({
+      index: 2,
+      caption: 'Hire first',
+    });
+    expect(sceneAt(stops, 3.5, 0.24, 1).caption).toBe(
+      'Between Cash flow and Hire first',
+    );
+    expect(sceneAt(stops, 3.5, 0.24, 2).caption).toBe(
+      'Between Cash flow and Hire first',
+    );
+  });
+
+  it('does not flicker current-step ownership on tiny midpoint reversals', () => {
+    expect(sceneAt(stops, 3.02, 0.24, 1).index).toBe(1);
+    expect(sceneAt(stops, 2.98, 0.24, 2).index).toBe(2);
+    expect(sceneAt(stops, 3.1, 0.24, 1).index).toBe(2);
+    expect(sceneAt(stops, 2.9, 0.24, 2).index).toBe(1);
+  });
+});
+
+describe('local paper travel', () => {
+  it('crosses an adjacent hinge at reading scale', () => {
+    const from = { ...pose, focusX: 1800, focusY: 400, scale: 0.4 };
+    const to = { ...pose, focusX: 3000, focusY: 800, scale: 0.5 };
+    const bridge = hingeTravel(from, to, 'center', 'right', 1200);
+    expect(bridge).toHaveLength(1);
+    expect(bridge[0].focusX).toBe(2400);
+    expect(bridge[0].focusY).toBe(600);
+    expect(bridge[0].scale).toBeCloseTo(0.36);
+  });
+
+  it('returns across both hinges without an overview zoom-out', () => {
+    const from = { ...pose, focusX: 3000, focusY: 600, scale: 0.5 };
+    const to = { ...pose, focusX: 600, focusY: 1400, scale: 0.4 };
+    const bridges = hingeTravel(from, to, 'right', 'left', 1200);
+    expect(bridges.map((bridge) => bridge.focusX)).toEqual([2400, 1200]);
+    for (const bridge of bridges) {
+      expect(bridge.scale).toBeGreaterThanOrEqual(0.36);
+      expect(Math.abs(bridge.pitch)).toBeLessThanOrEqual(4);
+    }
+    expect(hingeTravel(from, to, 'right', 'right', 1200)).toEqual([]);
   });
 });

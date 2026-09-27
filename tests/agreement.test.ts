@@ -4,6 +4,8 @@ import {
   agreementEndnote,
   agreementIntro,
   agreementSections,
+  collectionComparison,
+  collectionIllustration,
   proposal,
 } from '../src/content/proposal.ts';
 import { renderAgreementMarkdown } from '../src/lib/agreement.ts';
@@ -45,13 +47,52 @@ describe('one public proposal source', () => {
   });
 
   it('uses the proposed rates consistently in the installment illustration', () => {
-    const installment = 120_000 / 12;
-    const clientFirst = (installment * proposal.rates.clientFirst) / 100;
-    const hireFirst = (installment * proposal.rates.employmentFirst) / 100;
-    expect(clientFirst).toBe(2_000);
-    expect(installment - clientFirst).toBe(8_000);
-    expect(hireFirst).toBe(1_500);
-    expect(installment - hireFirst).toBe(8_500);
-    expect((2_000 * proposal.rates.recurring) / 100).toBe(100);
+    const illustration = collectionIllustration;
+    expect(illustration.buildTotal).toBe(120_000);
+    expect(illustration.installments).toBe(12);
+    expect(illustration.collectedPerInstallment).toBe(10_000);
+    expect(illustration.hireFirst).toEqual({
+      rate: proposal.rates.employmentFirst,
+      commission: 1_500,
+      remainingBeforeCosts: 8_500,
+      totalCommission: 18_000,
+    });
+    expect(illustration.clientFirst).toEqual({
+      rate: proposal.rates.clientFirst,
+      commission: 2_000,
+      remainingBeforeCosts: 8_000,
+      totalCommission: 24_000,
+    });
+    expect(illustration.commissionDifference).toBe(500);
+    expect(illustration.totalCommissionDifference).toBe(6_000);
+    expect(illustration.recurringCommission).toBe(100);
+  });
+
+  it('preserves comparison labels, amounts and qualification in the portable document', () => {
+    const content = renderAgreementMarkdown();
+    expect(content).toContain(collectionComparison.assumption);
+    expect(content).toContain(
+      '| Per collected installment | Hire first · 15% | Client first · 20% |',
+    );
+    expect(content).toContain('| Build commission | $1,500 | $2,000 |');
+    expect(content).toContain(
+      '| Handrail remaining before costs | $8,500 | $8,000 |',
+    );
+    expect(content).toContain(collectionComparison.difference);
+    expect(content).toContain(collectionComparison.rule);
+    expect(content).toContain(collectionComparison.qualifier);
+    expect(content).toContain(collectionComparison.total);
+    expect(content).toContain(collectionComparison.recurring);
+  });
+
+  it('keeps the unresolved discussion points as canonical list items', () => {
+    const discussion = agreementSections.find(
+      (section) => section.id === 'next-step',
+    );
+    expect(discussion?.items).toHaveLength(6);
+    const content = renderAgreementMarkdown();
+    for (const item of discussion?.items ?? []) {
+      expect(content).toContain(`- ${item}`);
+    }
   });
 });

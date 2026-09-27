@@ -1,5 +1,6 @@
 ---
 import Page from '../layouts/Page.astro';
+import CollectionComparison from '../components/CollectionComparison.astro';
 import {
   proposal,
   agreementIntro,
@@ -16,16 +17,8 @@ const base = import.meta.env.BASE_URL;
 >
   <main id="main" class="document-main">
     <header class="document-header">
-      <img
-        class="document-brand"
-        src={`${base}handrail-logo.png`}
-        width="1397"
-        height="392"
-        alt="Handrail"
-      />
       <span class="document-status">{proposal.status} · September 2026</span>
-      <h1>Proposal notes</h1>
-      <p class="document-subtitle">{proposal.title}</p>
+      <h1>{proposal.notesTitle}</h1>
       <div class="document-tools">
         <a
           class="button button-dark"
@@ -57,9 +50,22 @@ const base = import.meta.env.BASE_URL;
             <h2>
               {index + 1}. {section.title}
             </h2>
+            {section.comparison && (
+              <CollectionComparison
+                id={`${section.id}-comparison`}
+                variant="notes"
+              />
+            )}
             {section.paragraphs.map((paragraph) => (
               <p>{paragraph}</p>
             ))}
+            {section.items && (
+              <ul class="document-discussion-list">
+                {section.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            )}
           </section>
         ))}
         <p class="document-endnote">{agreementEndnote}</p>
@@ -112,10 +118,6 @@ const base = import.meta.env.BASE_URL;
       line-height: 1.05 !important;
       margin: 3mm 0 2mm !important;
     }
-    .document-subtitle {
-      font-size: 11pt !important;
-      margin: 0 !important;
-    }
     .document-intro {
       font-size: 11pt !important;
       line-height: 1.45 !important;
@@ -142,6 +144,49 @@ const base = import.meta.env.BASE_URL;
       margin: 0 0 2mm !important;
       orphans: 3;
       widows: 3;
+    }
+    .document-discussion-list {
+      margin: 2mm 0 !important;
+      padding-left: 5mm !important;
+      font-size: 10.5pt !important;
+      line-height: 1.45 !important;
+    }
+    :global(.collection-comparison) {
+      break-inside: avoid;
+      margin: 3mm 0 !important;
+    }
+    :global(.collection-assumption),
+    :global(.collection-comparison p) {
+      font-size: 9pt !important;
+      line-height: 1.35 !important;
+      margin: 2mm 0 !important;
+    }
+    :global(.collection-collected) {
+      display: flex !important;
+      align-items: baseline;
+      gap: 3mm;
+    }
+    :global(.collection-collected-amount) {
+      font-size: 15pt !important;
+    }
+    :global(.collection-table) {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 10pt !important;
+    }
+    :global(.collection-table tr) {
+      display: table-row !important;
+    }
+    :global(.collection-table th),
+    :global(.collection-table td) {
+      display: table-cell !important;
+      padding: 2mm !important;
+      font-size: 10pt !important;
+      border-bottom: 1px solid #aaa;
+    }
+    :global(.collection-rate) {
+      display: inline !important;
+      font-size: inherit !important;
     }
     .document-endnote {
       font-size: 9pt !important;
