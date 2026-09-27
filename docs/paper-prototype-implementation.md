@@ -16,7 +16,7 @@ Baseline: desktop opening body copy measured 42.42 CSS pixels; the previous twel
 
 ## Current state
 
-Candidate 2 accepted by the independent critic. Local verification passed; publication and hosted verification are in progress.
+Candidate 2 accepted by the independent critic. Local and hosted verification passed; the accepted prototype is published.
 
 ## Local lifecycle boundary
 
@@ -30,6 +30,10 @@ The independent critic rejected the edge-on opening, the remaining phone thumbna
 
 ## Verified candidate
 
-All 39 Chromium checks passed in 41.3 seconds. Desktop opening body measured 22.43px; cash body measured 20.74px. Four viewport recordings captured 480 real-wheel forward/reverse samples without page errors or failed requests. Supplementary WebKit passed37 reading positions across five viewport sizes, minimum primary text13.17px; protocol screenshot limitations and five preload warnings remain documented. Typecheck24 files,11 unit checks,3 component checks, canonical Markdown/PDF, build and formatting passed. Lighthouse page-load performance measured99 mobile/100 desktop with zero TBT, separate from physical-device motion evidence.
+All 39 Chromium checks passed in 41.3 seconds. Desktop opening body measured 22.43px; cash body measured 20.74px. Four viewport recordings captured 480 real-wheel forward/reverse samples without page errors or failed requests. Supplementary WebKit passed 37 reading positions across five viewport sizes, minimum primary text 13.17px; protocol screenshot limitations and five preload warnings remain documented. Typecheck 24 files, 11 unit checks, 3 component checks, canonical Markdown/PDF, build and formatting passed. Lighthouse page-load performance measured 99 mobile/100 desktop with zero TBT, separate from physical-device motion evidence.
 
-The independent critic accepted candidate2 after inspecting all four sizes and72 intermediate forward/reverse stills. Full raw evidence remains ignored under `qa-artifacts/paper-prototype/`; no physical iPhone crash resolution is certified. The first slice's code is accepted for publication. Rates/window/ending remain the next creative checkpoint.
+The independent critic accepted candidate 2 after inspecting all four sizes and 72 intermediate forward/reverse stills. Full raw evidence remains ignored under `qa-artifacts/paper-prototype/`; no physical iPhone crash resolution is certified. The first slice's code is accepted for publication. Rates/window/ending remain the next creative checkpoint.
+
+## Publication receipt
+
+Source `16d332dafbc1f7ff91ef74226dc39a0b4fe6337d` is published as static `8e7975883bd08a115734c3798a68c95f0377cdee`. [Pages run 36286697372](https://github.com/brentthomas248/handrail-proposal/actions/runs/36286697372) succeeded; all 39 hosted browser checks passed in 43.9 seconds. Eight public assets are byte-identical and the downloaded PDF passed canonical verification. [Open the prototype](https://brentthomas248.github.io/handrail-proposal/?v=16d332d).

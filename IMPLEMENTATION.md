@@ -17,13 +17,15 @@ Candidate 1 was rejected for an edge-on opener, a small intermediate paper view 
 - Build, canonical Markdown, complete PDF and formatting checks passed.
 - WebKit: 37 reading positions across five viewports passed; no browser errors or failed requests. Protocol screenshot limitations remain documented.
 - Lighthouse page-load lab results: mobile 99, desktop 100; zero total blocking time. These are not physical-device scroll measurements.
-- Independent critic accepted the bounded prototype after reviewing all four viewport sizes and72 intermediate forward/reverse frames. Publication verification is in progress.
+- Independent critic accepted the bounded prototype after reviewing all four viewport sizes and 72 intermediate forward/reverse frames. All 39 hosted browser checks also passed in 43.9 seconds.
 
 The initial packet still must fit; later unfolding intentionally follows a hinge and may crop decorative panels. Complete primary reading groups continue to be checked against measured header/control bounds. The 64 MiB estimated-paper and 4096-device-pixel edge budgets pass. These are desktop browser measurements, not physical iPhone stability certification.
 
 ## Publication
 
-The previous published source remains `25e5680` while publication proceeds. The candidate has passed independent review; no new hosted release is claimed yet. [Deployment receipts](agentic-ui/deployment-verification.json) will be reconciled after publication and fresh hosted verification.
+The [updated public prototype](https://brentthomas248.github.io/handrail-proposal/?v=16d332d) is published from source `16d332dafbc1f7ff91ef74226dc39a0b4fe6337d` as static commit `8e7975883bd08a115734c3798a68c95f0377cdee`. [Pages run 36286697372](https://github.com/brentthomas248/handrail-proposal/actions/runs/36286697372) succeeded. All 39 hosted browser checks passed in 43.9 seconds. Eight public assets match the reviewed build byte-for-byte; the downloaded PDF matches the introduction, seven sections, 15 complete paragraphs and discussion status.
+
+The [ordinary reading link](https://brentthomas248.github.io/handrail-proposal/?view=read&v=16d332d) remains available. Application publication is complete; this subsequent documentation checkpoint reconciles release receipts without changing the deployed application. See [deployment verification](agentic-ui/deployment-verification.json).
 
 ## Scope and remaining work
 

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T21:54:45.790255+00:00",
+  "generatedAt": "2026-09-27T01:52:15.012516+00:00",
   "ok": false,
-  "status": "published-and-hosted-verified-physical-iphone-retry-pending",
+  "status": "bounded-prototype-published-and-hosted-verified-physical-iphone-pending",
   "localRelease": {
     "passed": true,
     "evidence": [
@@ -30,9 +30,9 @@
       "agentic-ui/performance-evidence.json"
     ],
     "notes": [
-      "The global static-app policy validator still expects database/mutation evidence that does not apply to this read-only static proposal.",
-      "Manual assistive-technology, physical-device and field INP review remain unperformed.",
-      "The route script budget passes; current global.css literal-value scan findings remain explicit."
+      "The global generation gate reports static-app policy/schema, literal-token, accessibility-schema and route-budget schema gaps; full global certification is not claimed.",
+      "Current product checks passed under the explicit local workflow authorization.",
+      "Manual assistive-technology, physical-device and field INP review remain unperformed."
     ]
   }
 }

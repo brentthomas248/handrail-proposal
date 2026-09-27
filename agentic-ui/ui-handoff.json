@@ -104,23 +104,23 @@
   ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
-    "39 Chromium checks,37 supplementary WebKit reading positions,11 unit checks and3 component checks passed.",
-    "Independent rendered review accepted the bounded opening-to-cash prototype after candidate1 rejection.",
+    "39 Chromium checks, 37 supplementary WebKit reading positions, 11 unit checks and 3 component checks passed.",
+    "Independent rendered review accepted the bounded opening-to-cash prototype after candidate 1 rejection.",
     "Rates/window/ending creative work and physical iPhone validation remain.",
     "Publication receipts are maintained in agentic-ui/deployment-verification.json."
   ],
   "userReview": {
     "date": "2026-09-26",
-    "status": "implementation-authorized",
+    "status": "bounded-prototype-visual-review-pending",
     "researchPath": "docs/design-director-review.md",
     "implementationPaused": false,
     "reason": "User approved beginning implementation of the independent critique."
   },
   "publication": {
-    "status": "published-and-hosted-verified-user-visual-review-pending",
+    "status": "published-and-hosted-verified-user-review-pending",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "sourceCommit": "25e5680315dac0a1db9059893314bd640bab8e9e",
-    "staticCommit": "54cb926ddb14cf03263b10d7ba244e9a635367ed",
+    "sourceCommit": "16d332dafbc1f7ff91ef74226dc39a0b4fe6337d",
+    "staticCommit": "8e7975883bd08a115734c3798a68c95f0377cdee",
     "evidencePath": "agentic-ui/deployment-verification.json"
   }
 }

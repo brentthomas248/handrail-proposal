@@ -35,8 +35,7 @@
   "dataRequirements": {
     "representativeDataRequired": false,
     "dataStateReadinessPath": "agentic-ui/data-state-readiness.json",
-    "emptyStateOnly": false,
-    "seedEvidencePath": "agentic-ui/data-fixture-evidence.json"
+    "emptyStateOnly": false
   },
   "safety": {
     "destructiveActionsAllowed": false,

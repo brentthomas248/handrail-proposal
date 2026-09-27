@@ -4,7 +4,7 @@
   "scope": "Opening-to-cash paper prototype; existing whole-page behavior regressions retained",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": false,
+  "deployed": true,
   "checks": [
     {
       "command": "pnpm check",
@@ -43,12 +43,12 @@
     },
     {
       "command": "WEBKIT_OUTPUT=qa-artifacts/paper-prototype/webkit node scripts/verify-webkit.mjs",
-      "result": "37 reading positions across five viewports pass; minimum primary text13.17px; no errors or failed requests; five font-preload warnings",
+      "result": "37 reading positions across five viewports pass; minimum primary text 13.17px; no errors or failed requests; five font-preload warnings",
       "exitCode": 0
     },
     {
       "command": "pnpm performance",
-      "result": "Page-load lab performance99 mobile/100 desktop; zero TBT; all other Lighthouse categories100",
+      "result": "Page-load lab performance 99 mobile/100 desktop; zero TBT; all other Lighthouse categories 100",
       "exitCode": 0
     }
   ],
@@ -57,7 +57,8 @@
     "Initial test failures identified premature phone trace and undersized desktop cash introduction; both corrected. Opening test now checks whole initial packet and substantial unfolding instead of requiring the whole three-panel spread at every camera approach.",
     "64 MiB estimated paper surface and 4096-device-pixel edge budgets pass; these are not physical GPU measurements.",
     "Rates/window/ending redesign remains deferred; canonical business terms and PDF unchanged.",
-    "Physical iPhone stability, manual VoiceOver and field performance remain unverified."
+    "Physical iPhone stability, manual VoiceOver and field performance remain unverified.",
+    "Published source 16d332d as static 8e79758; Pages run 36286697372 succeeded. All 39 hosted checks passed in 43.9s; eight assets and complete PDF match."
   ],
   "limitations": [
     "agentic-ui/blockers.json",

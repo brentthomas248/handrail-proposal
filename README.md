@@ -14,7 +14,7 @@ The higher rate rewards originating the business that makes hiring possible. Ben
 
 ## The experience
 
-The flyer uses Handrail's actual wordmark, warm paper, near-black text and rust accents. Locally served Inter and Playfair Display connect the typography to Handrail's published materials. Large type, thin rules and a receipt-like payment example form one continuous composition.
+The flyer uses Handrail's actual wordmark, warm paper, near-black text and rust accents. Locally served Inter and Playfair Display connect the typography to Handrail's published materials. Large type, thin rules and a payment diagram form one continuous composition. A static 20/80 split and twelve paired collection/commission events explain the cash timing; a restrained reversible annotation follows money collected.
 
 Three hinged panels have actual front and back faces. CSS 3D transforms and a GSAP ticker coordinate the accordion opening, continuous camera travel and framed reading views. A critically damped response follows native scroll, with no fixed dead-scroll intervals. Pausing between sections settles the camera; new input immediately takes control. The reader can select chapters or switch to ordinary reading. Mobile has closer views where needed. Reduced motion and JavaScript-disabled viewing keep the complete proposal in normal document flow. Decorative arrows and symbols are removed; the document’s movement supplies the visual interest.
 

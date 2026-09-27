@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0",
   "url": "https://brentthomas248.github.io/handrail-proposal/",
-  "checkedAt": "2026-09-26T22:29:05.018240+00:00",
+  "checkedAt": "2026-09-27T01:52:15.012516+00:00",
   "passed": true,
-  "sourceCommit": "25e5680315dac0a1db9059893314bd640bab8e9e",
-  "staticCommit": "54cb926ddb14cf03263b10d7ba244e9a635367ed",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36276285064",
+  "sourceCommit": "16d332dafbc1f7ff91ef74226dc39a0b4fe6337d",
+  "staticCommit": "8e7975883bd08a115734c3798a68c95f0377cdee",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36286697372",
   "publishingSource": {
     "branch": "gh-pages",
     "path": "/",
@@ -13,31 +13,31 @@
     "httpsEnforced": true
   },
   "browserSuite": {
-    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test --output=qa-artifacts/mobile-context/hosted-playwright",
-    "passed": 32,
+    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test --output=qa-artifacts/paper-prototype/hosted-playwright",
+    "passed": 39,
     "failed": 0,
-    "durationSeconds": 31.4
+    "durationSeconds": 43.9
   },
   "checks": [
-    "Exactly eight complete phone reading groups plus opening; associated copy stays together",
-    "All text lines clear measured fixed controls by 24px across four phone sizes at DPR3",
-    "Height shrink and restore preserve chapter/scroll/navigation, keeping the final scene reachable",
-    "Active-group accessibility, inert peripheral previews and normal-reading/keyboard restoration",
-    "DPR3 rendering budgets, scroll/reversal, reduced motion, no-JavaScript, recovery and initialization paths",
-    "Eight published assets match dist byte-for-byte; downloaded PDF matches all canonical content"
+    "Initial folded packet fits; opening follows the left hinge with substantial paper presence.",
+    "Static labeled 20/80 split and twelve paired events survive normal, reduced-motion and no-JavaScript reading.",
+    "Collection is visible before the reversible annotation starts; printed monetary values remain unchanged.",
+    "Complete phone reading groups, height adaptation, accessible focus and restoration retain their existing checks.",
+    "High-density renderer budget, continuous scrolling, immediate reversal and cancellation pass.",
+    "Eight hosted assets match the reviewed build; downloaded PDF matches all canonical paragraphs."
   ],
   "staticAssetChecks": [
     {
       "path": "index.html",
       "http": 200,
-      "bytes": 52804,
-      "sha256": "26d5c23fcf1a845ff21871f4961c46f600883b53f5610fda26e03f80987ea30b"
+      "bytes": 57657,
+      "sha256": "b0624c92787fe1129841bfe87c8a829520be7e59b9a33a89462afad6e5545575"
     },
     {
       "path": "agreement/index.html",
       "http": 200,
-      "bytes": 53047,
-      "sha256": "68f11734c23d8878de5a6ff2b97aa1273a5fa36cccf3d73c39de01613b72e019"
+      "bytes": 56453,
+      "sha256": "59d25e473074464b081991e87212bd0fdc118437f0f6fdf5d450bf04e5be5218"
     },
     {
       "path": "handrail-proposed-agreement.pdf",
@@ -64,16 +64,16 @@
       "sha256": "f1ad2a836254dd1e1bda3de717abb7c3de39007361741e634977267450cc774b"
     },
     {
-      "path": "_astro/index.astro_astro_type_script_index_0_lang.Byp8DVzT.js",
-      "http": 200,
-      "bytes": 82641,
-      "sha256": "4d0bd0bdc8e4807c7383f30d12868bf3d09c0d16fe538592028d14a9b542d7a7"
-    },
-    {
       "path": "_astro/client.CCxN9xF8.js",
       "http": 200,
       "bytes": 220825,
       "sha256": "4907db89a5bc4160920b577b51facb283e0e376ee1b4d5acab82c2e4d5654811"
+    },
+    {
+      "path": "_astro/index.astro_astro_type_script_index_0_lang.DbET3kR6.js",
+      "http": 200,
+      "bytes": 83903,
+      "sha256": "18f80f30d90f6e203900ac648d3fa0b5f6c3bbd88cbacbac63b681e968e1b67b"
     }
   ],
   "pdfCanonicalCheck": {
@@ -85,26 +85,27 @@
   "profileChanged": false,
   "errors": [],
   "failedRequests": [],
-  "edition": "mobile-contextual-framing",
+  "edition": "opening-to-cash-prototype",
   "isCurrentRevision": true,
   "supplementaryWebKitEvidence": "agentic-ui/webkit-verification.json",
   "physicalIOSVerified": false,
   "visualEvidence": {
-    "path": "qa-artifacts/mobile-context/final-capture/capture.json",
-    "scope": "Local rendered pages; published assets verified byte-for-byte",
-    "chapterImages": 42,
-    "foldSamples": 25,
-    "journeyVideos": 5,
+    "path": "qa-artifacts/paper-prototype/critic/candidate-2/capture.json",
+    "scope": "Independent first-slice rendered review; hosted assets match byte-for-byte",
+    "chapterImages": 15,
+    "transitionImages": 72,
+    "journeyVideos": 4,
     "browserErrors": [],
-    "failedRequests": [],
-    "transitionImages": 32,
-    "minimumPrimaryTextPx": 14.0374,
-    "headingCorrection": "Eight affected rates captures refreshed; independent critic re-rendered corrected word spacing"
+    "additionalBehaviorCapture": {
+      "path": "qa-artifacts/paper-prototype/candidate2-capture/capture.json",
+      "realWheelSamples": 480,
+      "viewports": 4
+    }
   },
-  "renderingEvidence": "agentic-ui/iphone-rendering-verification.json",
+  "renderingEvidence": "qa-artifacts/paper-prototype/candidate2-playwright",
   "independentDesignReview": {
     "verdict": "accepted",
-    "path": "docs/mobile-context-adversarial-review.md",
-    "scope": "Mobile composition and hierarchy, after baseline and candidate-1 rejection"
+    "path": "docs/paper-prototype-adversarial-review.md",
+    "scope": "Bounded opening-to-cash direction after candidate 1 rejection; later scenes remain deferred"
   }
 }
