@@ -88,7 +88,11 @@
     "Opening wings fit between header and controls. Every reading hold makes the active face flat and fully framed; captured body text remains readable at 320px and wider.",
     "All seven note sections and the complete PDF match the canonical proposal source.",
     "No uncaught page errors, failed critical requests, broken navigation or axe violations occur in the checked local flows.",
-    "No form submission, billing, authentication or destructive operation occurs during QA."
+    "No form submission, billing, authentication or destructive operation occurs during QA.",
+    "At desktop 1440px, cover/cash body text reads around 20\u201324 CSS pixels with visible edge or hinge context.",
+    "Printed client-first build diagram remains complete in normal, reduced-motion and no-JavaScript reading, with accurate 20/80 split and 12 paired installment events.",
+    "The moving rule annotation follows collection, reverses with input and never changes the printed monetary values.",
+    "Independent critic accepts actual opening-to-cash forward/reverse motion and complete phone ideas before publication."
   ],
   "knownTradeoffs": [
     "Stitch, Magic, Stagehand and Browserbase are omitted under docs/local-workflow.md; no cloud or full global lifecycle certification is claimed.",
@@ -96,21 +100,19 @@
     "This trifold, notes and PDF are published and have fresh hosted checks; user visual acceptance remains separate.",
     "Current Lighthouse scores describe a local production-preview lab run, not physical-device or field performance."
   ],
-  "generatedAt": "2026-09-26T20:47:48.590070+00:00",
-  "scope": "Current hinged HTML trifold and broader partnership proposal; local and hosted verification completed.",
+  "generatedAt": "2026-09-27T01:33:13.574568+00:00",
+  "scope": "Bounded first-slice prototype plus complete existing behavior regressions",
   "localEvidence": {
-    "browserChecks": 19,
-    "unitChecks": 4,
+    "browserChecks": 39,
+    "unitChecks": 11,
     "componentChecks": 3,
-    "typecheckedFiles": 22,
+    "typecheckedFiles": 24,
     "typecheckIssues": 0,
-    "capturePath": "qa-artifacts/trifold/capture.json",
-    "chapterCaptures": 24,
-    "scrollSamples": 15,
-    "minimumCapturedReadingTextPx": 14.05005548650568,
+    "capturePath": "qa-artifacts/paper-prototype/candidate2-capture/capture.json",
+    "scrollSamples": 480,
+    "journeyVideos": 4,
     "errors": 0,
-    "warnings": 0,
     "failedRequests": 0,
-    "browserScope": "Chromium product suite and capture set; additional engine smoke checks are tracked separately in release evidence."
+    "supplementaryWebKitReadingPositions": 37
   }
 }

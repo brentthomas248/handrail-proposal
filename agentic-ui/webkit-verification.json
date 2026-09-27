@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-09-26T22:25:31.003773+00:00",
+  "checkedAt": "2026-09-27T01:46:38.879750+00:00",
   "scope": "Supplementary complete-group geometry and all-text readability at DPR3; not physical iOS stability verification",
   "engine": {
     "name": "Playwright WebKit",
@@ -8,24 +8,18 @@
   },
   "behavior": {
     "passed": true,
-    "viewports": [
-      "1440x1000",
-      "390x844",
-      "320x740",
-      "430x932",
-      "390x664"
-    ],
+    "viewports": ["1440x1000", "390x844", "320x740", "430x932", "390x664"],
     "readingHoldsVerified": 37,
     "checks": [
       "Both hinges change with scrolling, reverse, and place their free edges on opposite sides of the center panel",
-      "Introductory folding stays inside the visible stage",
+      "Initial folded packet fits the stage; subsequent unfolding follows the left hinge and may crop decorative panels.",
       "Every reading group has a front-facing composed normal; all text-node lines and bounds clear measured header/controls by 24px; every primary text node is at least 12 rendered pixels high",
       "Normal reading mode has no horizontal overflow"
     ],
     "mobileInput": "Programmatic document scrolling; Playwright does not support mouse-wheel input in mobile WebKit",
     "script": "scripts/verify-webkit.mjs",
-    "receipt": "qa-artifacts/mobile-context/webkit/verification.json",
-    "minimumRenderedTextPx": 14.0792,
+    "receipt": "qa-artifacts/paper-prototype/webkit/verification.json",
+    "minimumRenderedTextPx": 13.170214946762922,
     "deviceScaleFactors": {
       "desktop": 1,
       "phone": 3
@@ -60,7 +54,7 @@
   "browserErrors": [],
   "failedRequests": [],
   "physicalIOSVerified": false,
-  "relationshipToChromium": "37 supplementary reading positions at five sizes; separate from the 32 current Chromium browser checks.",
+  "relationshipToChromium": "37 supplementary reading positions at five sizes, separate from the 39 current Chromium browser checks.",
   "intersectionObserver": {
     "reliableForNested3DFraming": false,
     "finding": "Nested 3D IntersectionObserver reported 0.593 for a fully framed cover. Verified by matching Chromium/WebKit bounds and a native-window screenshot. This run uses full bounds and composed face normals; Chromium keeps IntersectionObserver assertions.",
@@ -73,8 +67,8 @@
   "nativeMobileVerified": false,
   "headfulViewportLimitation": "Headful WebKit retained desktop layout despite a reported 390px configured viewport. Headless mobile geometry is covered separately; native mobile and physical iOS remain unverified.",
   "notes": [
-    "Physical iPhone crash verification requires actual-device evidence.",
-    "Complete-group WebKit geometry passed before the heading whitespace-only correction; Chromium rechecked that correction.",
-    "Historical native-window evidence and known protocol screenshot limitations remain distinct from current headless geometry."
+    "Current paper prototype geometry and complete reading groups passed across all five sizes.",
+    "Historical native-window evidence and known protocol screenshot limitations remain distinct from current headless geometry.",
+    "Physical iPhone crash verification requires actual-device evidence."
   ]
 }

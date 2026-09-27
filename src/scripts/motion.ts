@@ -57,6 +57,9 @@ function mountTour(
   const progressMark = document.querySelector<HTMLElement>('.scroll-line');
   const header = document.querySelector<HTMLElement>('.site-header');
   const controls = document.querySelector<HTMLElement>('.tour-controls');
+  const paymentDiagram = sheet.querySelector<HTMLElement>(
+    '[data-payment-diagram]',
+  );
   const preference = matchMedia('(prefers-reduced-motion: reduce)');
   const perspective = 2400;
   const readingRadius = 0.24;
@@ -76,6 +79,10 @@ function mountTour(
   let lastIndex = -1;
   let lastCaption = '';
   let lastReadingFocus = -1;
+  let lastPaymentTrace = '';
+  let paymentTraceStart = 0;
+  let paymentTraceEnd = 1;
+  let openingAnchors: number[] = [];
   let lastWidth = 0;
   let lastHeight = 0;
   let ticking = false;
@@ -182,13 +189,18 @@ function mountTour(
   function readingPose(stop: Stop): Pose {
     const box = boxFor(stop.element!);
     const fold = 38;
+    const mobilePrintScale = stop.element?.matches('.flyer-cover')
+      ? 0.65
+      : stop.element?.dataset.cameraMobile === 'Revenue first'
+        ? 0.86
+        : 0.43;
     const center = foldPoint(
       { x: box.x + box.width / 2, y: box.y + box.height / 2, z: 1 },
       stop.panel,
       panelWidth,
       fold,
     );
-    return {
+    const pose: Pose = {
       focusX: center.x,
       focusY: center.y,
       focusZ: center.z,
@@ -197,16 +209,24 @@ function mountTour(
           ? Math.min(
               (width * 0.76) / box.width,
               (availableHeight * 0.86) / box.height,
-              0.43 / (panelWidth / 1200),
+              mobilePrintScale / (panelWidth / 1200),
             )
-          : Math.min((width - 160) / box.width, availableHeight / box.height) *
-            0.92,
+          : Math.min(
+              Math.min(
+                (width - 160) / box.width,
+                availableHeight / box.height,
+              ) * 0.92,
+              stop.element?.closest('.flyer-cover, .flyer-cash')
+                ? 0.66 / (panelWidth / 1200)
+                : Infinity,
+            ),
       left: fold,
       right: fold,
       pitch: 0,
       yaw: stop.panel === 'center' ? 0 : -fold,
       roll: 0,
     };
+    return pose;
   }
 
   function collectStops(): Stop[] {
@@ -274,6 +294,19 @@ function mountTour(
     if (!path) return;
     const time = visual * path.duration;
     const pose = path.sample(time);
+    // The printed receipt is complete at all times. Only this narrow digital
+    // annotation traces its rule, after the collection has been established.
+    const paymentTrace = Math.max(
+      0,
+      Math.min(
+        1,
+        (time - paymentTraceStart) / (paymentTraceEnd - paymentTraceStart),
+      ),
+    ).toFixed(3);
+    if (paymentTrace !== lastPaymentTrace) {
+      paymentDiagram?.style.setProperty('--payment-trace', paymentTrace);
+      lastPaymentTrace = paymentTrace;
+    }
     sheet.style.transform = `translate3d(${width / 2}px,${cameraY}px,0) rotateZ(${pose.roll}deg) rotateX(${pose.pitch}deg) rotateY(${pose.yaw}deg) scale3d(${pose.scale},${pose.scale},${pose.scale}) translate3d(${-pose.focusX}px,${-pose.focusY}px,${-pose.focusZ}px)`;
     wings.left.style.transform = `rotateY(${pose.left}deg)`;
     wings.right.style.transform = `rotateY(${pose.right}deg)`;
@@ -352,10 +385,10 @@ function mountTour(
           maxY = Math.max(...ys);
         pad.setAttribute('cx', String((minX + maxX) / 2));
         pad.setAttribute('cy', String((minY + maxY) / 2 + 12));
-        pad.setAttribute('rx', String((maxX - minX) * 0.67));
-        pad.setAttribute('ry', String((maxY - minY) * 0.62));
+        pad.setAttribute('rx', String((maxX - minX) * 0.55));
+        pad.setAttribute('ry', String((maxY - minY) * 0.52));
       });
-      shadow.style.opacity = String(Math.max(0.025, 0.2 - pose.scale * 0.08));
+      shadow.style.opacity = String(Math.max(0.025, 0.13 - pose.scale * 0.05));
     }
     let index = 0;
     for (let i = 1; i < stops.length; i += 1)
@@ -367,6 +400,12 @@ function mountTour(
     if (readingFocus !== lastReadingFocus) {
       lastReadingFocus = readingFocus;
       sheet.toggleAttribute('data-reading-focus', readingFocus > 0);
+      if (readingFocus > 0)
+        sheet.dataset.readingFocus = stops[readingFocus].element?.closest(
+          '.flyer-cover, .flyer-cash',
+        )
+          ? 'paper'
+          : 'context';
       stops.forEach((stop, stopIndex) => {
         if (!stop.element) return;
         const secondary = readingFocus > 0 && stopIndex !== readingFocus;
@@ -464,7 +503,10 @@ function mountTour(
       )
     )
       return;
-    const anchors = [0, 0.9, 1.8, ...stops.slice(1).map((stop) => stop.at)];
+    const anchors = [
+      ...openingAnchors,
+      ...stops.slice(1).map((stop) => stop.at),
+    ];
     const nearest = anchors.reduce((best, value) =>
       Math.abs(value - time) < Math.abs(best - time) ? value : best,
     );
@@ -488,6 +530,8 @@ function mountTour(
     path = undefined;
     velocity = 0;
     lastReadingFocus = -1;
+    lastPaymentTrace = '';
+    paymentDiagram?.style.removeProperty('--payment-trace');
     sheet.removeAttribute('data-reading-focus');
     stops.forEach((stop) => {
       if (!stop.element) return;
@@ -552,18 +596,87 @@ function mountTour(
     ]);
     shadow?.setAttribute('viewBox', `0 0 ${width} ${height}`);
     stops = collectStops();
+    const beginning = readingPose(stops[1]);
+    const beginningBox = boxFor(stops[1].element!);
+    const unfoldingFocus = foldPoint(
+      {
+        x: beginningBox.x + beginningBox.width / 2,
+        y: beginningBox.y + beginningBox.height / 2,
+        z: 1,
+      },
+      'left',
+      panelWidth,
+      92,
+    );
     const frames: Keyframe[] = [
-      { at: 0, pose: overview(174, -22, 10, -4) },
-      { at: 0.9, pose: overview(88, -42, 18, -3) },
-      { at: 1.8, pose: overview(42, -23, 12, -2) },
+      { at: 0, pose: overview(146, 6, 8, -5) },
+      {
+        at: 0.85,
+        pose: {
+          ...beginning,
+          focusX: unfoldingFocus.x,
+          focusY: unfoldingFocus.y,
+          focusZ: unfoldingFocus.z,
+          scale: beginning.scale * 0.62,
+          left: 92,
+          right: 92,
+          yaw: -58,
+          pitch: 8,
+          roll: -3,
+        },
+      },
+      {
+        at: 1.55,
+        pose: {
+          ...beginning,
+          scale: beginning.scale * 0.82,
+          left: 52,
+          right: 52,
+          yaw: -52,
+          pitch: 5,
+          roll: -2,
+        },
+      },
     ];
+    openingAnchors = [0, 0.85];
     let previousPose = frames[2].pose;
     let previousPanel: Panel | null = null;
-    let cursor = 3;
+    let cursor = 2.65;
     for (let i = 1; i < stops.length; i += 1) {
       const stop = stops[i];
       const pose = readingPose(stop);
-      if (previousPanel && previousPanel !== stop.panel) {
+      const enteringCash =
+        stop.element?.closest('.flyer-cash') && previousPanel === 'left';
+      if (enteringCash) {
+        // Travel across the adjacent hinge at reading distance, instead of
+        // returning to the same distant overview for each new panel.
+        frames.push({
+          at: cursor - (width < 760 ? 1.1 : 1.5),
+          pose: {
+            ...pose,
+            focusX: panelWidth,
+            focusY: (previousPose.focusY + pose.focusY) / 2,
+            scale: Math.min(previousPose.scale, pose.scale) * 0.86,
+            left: 46,
+            right: 46,
+            yaw: -18,
+            pitch: 4,
+            roll: 1,
+          },
+        });
+        if (width >= 760 && paymentDiagram) {
+          const receipt = boxFor(paymentDiagram);
+          frames.push({
+            at: cursor - 1,
+            pose: {
+              ...pose,
+              focusY: receipt.y + receipt.height * 0.24,
+              scale: pose.scale * 0.93,
+              pitch: 2,
+            },
+          });
+        }
+      } else if (previousPanel && previousPanel !== stop.panel) {
         const orbit = overview(
           70,
           stop.panel === 'center' ? 8 : -44,
@@ -586,8 +699,22 @@ function mountTour(
       stop.at = cursor;
       previousPose = pose;
       previousPanel = stop.panel;
-      cursor += 1.7;
+      cursor +=
+        i === 1
+          ? width < 760
+            ? 2.3
+            : 2.95
+          : enteringCash && width < 760
+            ? 2.2
+            : 1.7;
     }
+    const cashStop = stops.find((stop) =>
+      width < 760
+        ? stop.element?.dataset.cameraMobile === 'As money arrives'
+        : stop.element?.matches('.flyer-cash'),
+    );
+    paymentTraceStart = (cashStop?.at ?? 1) - (width < 760 ? 0.58 : 0.75);
+    paymentTraceEnd = (cashStop?.at ?? 1) - (width < 760 ? 0.05 : 0.15);
     path = createPath(frames);
     range = preserveScroll
       ? previousRange

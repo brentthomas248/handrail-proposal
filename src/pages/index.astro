@@ -145,15 +145,8 @@ const base = import.meta.env.BASE_URL;
               >
                 <div data-camera-mobile="Revenue first">
                   <h2>
-                    Bring me
-                    <br />
-                    on board.
-                    <br />
-                    <span>
-                      Let revenue
-                      <br />
-                      lead.
-                    </span>
+                    <span>Bring me on board.</span>
+                    <span>Let revenue lead.</span>
                   </h2>
                   <p class="cash-intro">
                     No base salary. No commission advance on a contract.
@@ -163,17 +156,22 @@ const base = import.meta.env.BASE_URL;
                 <div data-camera-mobile="As money arrives">
                   <div
                     class="cash-receipt"
+                    data-payment-diagram
                     aria-label="Illustrative client-first build payment"
                   >
+                    <p class="receipt-example">Client-first example</p>
                     <div class="receipt-row receipt-in">
                       <span>Customer payment collected</span>
                       <strong>$10,000</strong>
                     </div>
-                    <div class="receipt-track" aria-hidden="true">
-                      <span></span>
-                      <i></i>
-                      <i></i>
-                      <i></i>
+                    <div
+                      class="payment-split"
+                      data-payment-rule
+                      aria-hidden="true"
+                    >
+                      <span data-payment-part="commission"></span>
+                      <span data-payment-part="retained"></span>
+                      <i data-payment-trace></i>
                     </div>
                     <div class="receipt-row receipt-out">
                       <span>
@@ -182,24 +180,44 @@ const base = import.meta.env.BASE_URL;
                       <strong>$2,000</strong>
                     </div>
                     <div class="receipt-balance">
-                      <span>Handrail retains</span>
+                      <span>
+                        Handrail retains <span class="retained-share">80%</span>
+                      </span>
                       <strong>$8,000</strong>
                     </div>
-                    <p>
+                    <p class="receipt-qualification">
                       Before delivery costs, benefits and other expenses. An
                       illustration, not a sales forecast.
                     </p>
                   </div>
                   <div class="installments">
-                    <div class="installment-bars" aria-hidden="true">
-                      {Array.from({ length: 12 }, () => (
-                        <i />
-                      ))}
-                    </div>
                     <p>
                       Paid over 12 months?
                       <br />
                       <strong>My commission follows each payment.</strong>
+                    </p>
+                    <div class="installment-key" aria-hidden="true">
+                      <span>
+                        <i class="collected-key"></i>Collected
+                      </span>
+                      <span>
+                        <i class="commission-key"></i>Commission
+                      </span>
+                    </div>
+                    <div
+                      class="installment-events"
+                      data-payment-events
+                      aria-hidden="true"
+                    >
+                      {Array.from({ length: 12 }, () => (
+                        <i data-payment-event>
+                          <b data-payment-collected></b>
+                          <b data-payment-commission></b>
+                        </i>
+                      ))}
+                    </div>
+                    <p class="installment-note">
+                      Matched events, not equal amounts.
                     </p>
                   </div>
                   <p class="cash-closing">

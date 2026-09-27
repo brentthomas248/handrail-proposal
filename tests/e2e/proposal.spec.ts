@@ -175,6 +175,105 @@ async function expectMobileReadingGroup(target: Locator, label: string | null) {
     ).toHaveCount(count);
 }
 
+async function expectPrintedCashDiagram(page: Page) {
+  const diagram = page.locator('[data-payment-diagram]');
+  await expect(diagram).toHaveAttribute(
+    'aria-label',
+    /client-first build payment/i,
+  );
+  await expect(diagram.locator('.receipt-example')).toHaveText(
+    'Client-first example',
+  );
+  await expect(diagram.locator('.receipt-in')).toContainText(
+    'Customer payment collected',
+  );
+  await expect(diagram.locator('.receipt-in strong')).toHaveText('$10,000');
+  await expect(diagram.locator('.receipt-out')).toContainText(
+    '20% build commission',
+  );
+  await expect(diagram.locator('.receipt-out strong')).toHaveText('$2,000');
+  await expect(diagram.locator('.receipt-balance')).toContainText(
+    'Handrail retains',
+  );
+  await expect(diagram.locator('.receipt-balance')).toContainText('80%');
+  await expect(diagram.locator('.receipt-balance strong')).toHaveText('$8,000');
+  await expect(diagram.locator('.receipt-qualification')).toHaveText(
+    'Before delivery costs, benefits and other expenses. An illustration, not a sales forecast.',
+  );
+  for (const selector of [
+    '.receipt-in strong',
+    '.receipt-out strong',
+    '.receipt-balance strong',
+    '.receipt-qualification',
+  ])
+    await expect(diagram.locator(selector)).toBeVisible();
+  const proportions = await diagram.evaluate((element) => {
+    const commission = element
+      .querySelector('[data-payment-part="commission"]')!
+      .getBoundingClientRect().width;
+    const retained = element
+      .querySelector('[data-payment-part="retained"]')!
+      .getBoundingClientRect().width;
+    return {
+      commission,
+      retained,
+      fraction: commission / (commission + retained),
+    };
+  });
+  expect(proportions.commission).toBeGreaterThan(0);
+  expect(proportions.retained).toBeGreaterThan(0);
+  expect(proportions.fraction).toBeCloseTo(0.2, 2);
+  const installments = page.locator('.installments');
+  await expect(installments).toContainText('Paid over 12 months?');
+  await expect(installments).toContainText(
+    'My commission follows each payment.',
+  );
+  await expect(installments.locator('.installment-note')).toHaveText(
+    'Matched events, not equal amounts.',
+  );
+  const pairs = installments.locator('[data-payment-event]');
+  await expect(pairs).toHaveCount(12);
+  const geometry = [];
+  for (const pair of await pairs.all()) {
+    await expect(pair.locator('[data-payment-collected]')).toHaveCount(1);
+    await expect(pair.locator('[data-payment-commission]')).toHaveCount(1);
+    geometry.push(
+      await pair.evaluate((element) => {
+        const collected = element
+          .querySelector('[data-payment-collected]')!
+          .getBoundingClientRect();
+        const commission = element
+          .querySelector('[data-payment-commission]')!
+          .getBoundingClientRect();
+        return {
+          collectedWidth: collected.width,
+          collectedHeight: collected.height,
+          commissionWidth: commission.width,
+          commissionHeight: commission.height,
+          collectedBeforeCommission: collected.bottom <= commission.top,
+        };
+      }),
+    );
+  }
+  for (const pair of geometry) {
+    expect(pair.collectedBeforeCommission).toBe(true);
+    expect(pair.collectedWidth).toBeGreaterThan(0);
+    expect(pair.collectedHeight).toBeGreaterThan(0);
+    expect(pair.commissionWidth).toBeGreaterThan(0);
+    expect(pair.commissionHeight).toBeGreaterThan(0);
+  }
+  for (const property of [
+    'collectedWidth',
+    'collectedHeight',
+    'commissionWidth',
+    'commissionHeight',
+  ] as const)
+    expect(
+      Math.max(...geometry.map((pair) => pair[property])) -
+        Math.min(...geometry.map((pair) => pair[property])),
+    ).toBeLessThan(0.5);
+}
+
 async function enterReadingMode(page: Page) {
   if ((await page.locator('html').getAttribute('data-presentation')) !== 'read')
     await page.locator('#reading-mode').click();
@@ -241,6 +340,46 @@ async function expectFoldFitsStage(page: Page) {
       },
     )
     .toBeTruthy();
+}
+
+async function expectSubstantialUnfoldingPaper(page: Page) {
+  await expect
+    .poll(
+      () =>
+        page.evaluate(() => {
+          const top = document
+            .querySelector('.site-header')!
+            .getBoundingClientRect().bottom;
+          const bottom = document
+            .querySelector('.tour-controls')!
+            .getBoundingClientRect().top;
+          return [
+            ...document.querySelectorAll('.panel-face, .panel-back'),
+          ].some((face) => {
+            const style = getComputedStyle(face);
+            if (style.display === 'none' || style.visibility === 'hidden')
+              return false;
+            const box = face.getBoundingClientRect();
+            const visibleHeight = Math.max(
+              0,
+              Math.min(box.bottom, bottom) - Math.max(box.top, top),
+            );
+            const visibleWidth = Math.max(
+              0,
+              Math.min(box.right, innerWidth) - Math.max(box.left, 0),
+            );
+            return (
+              visibleHeight >= (bottom - top) * 0.55 &&
+              visibleWidth >= innerWidth * 0.25
+            );
+          });
+        }),
+      {
+        message:
+          'The unfolding paper must remain substantial rather than becoming a distant thumbnail',
+      },
+    )
+    .toBe(true);
 }
 
 function angularDistance(first: number, second: number) {
@@ -542,124 +681,145 @@ test('high-density mobile paper stays within its compositing budget through zoom
   await context.close();
 });
 
-test('real scrolling unfolds both hinges, moves the camera and reverses to the folded packet', async ({
-  page,
-}, testInfo) => {
-  const errors: string[] = [];
-  const failedRequests: string[] = [];
-  page.on('pageerror', (error) => errors.push(error.message));
-  page.on('response', (response) => {
-    if (response.status() >= 400)
-      failedRequests.push(`${response.status()} ${response.url()}`);
-  });
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto('./');
-  await expect(page.locator('html')).toHaveClass(/camera-ready/);
-  await expect(page.locator('.fold-panel')).toHaveCount(3);
-  for (const line of flyerCopy.cover.headlineLines)
-    await expect(page.locator('.proposal-sheet h1')).toContainText(line);
-  await expect(page.locator('.cover-statement')).toHaveText(
-    flyerCopy.cover.statement,
-  );
-  const opening = await sheetTransform(page);
-  const folded = await hingeAngles(page);
-  await expectFoldFitsStage(page);
-  await testInfo.attach('folded-packet', {
-    body: await page.screenshot(),
-    contentType: 'image/png',
-  });
-  const travel = await page.evaluate(
-    () => document.documentElement.scrollHeight - innerHeight,
-  );
-  expect(travel).toBeGreaterThan(2000);
-  const samples: {
-    progress: number;
-    hinges: Awaited<ReturnType<typeof hingeAngles>>;
-    camera: Awaited<ReturnType<typeof sheetTransform>>;
-  }[] = [];
-  for (const progress of [0.04, 0.08, 0.13, 0.2, 0.28, 0.5, 0.8]) {
-    const currentY = await page.evaluate(() => scrollY);
-    const nativeMovement = collectMotion(page, 450);
-    await page.mouse.wheel(0, Math.round(travel * progress - currentY));
-    const frames = await nativeMovement;
-    expect(
-      Math.max(...frames.map((frame) => frame.scroll)),
-      'Native scrolling must reach the requested area before any idle settling',
-    ).toBeGreaterThanOrEqual(travel * progress - 20);
-    if (progress <= 0.2) await expectFoldFitsStage(page);
-    samples.push({
-      progress,
-      hinges: await hingeAngles(page),
-      camera: await sheetTransform(page),
+for (const viewport of [
+  { width: 1440, height: 1000 },
+  { width: 390, height: 844 },
+])
+  test(`real scrolling unfolds both hinges, moves the camera and reverses to the folded packet at ${viewport.width}px`, async ({
+    page,
+  }, testInfo) => {
+    const errors: string[] = [];
+    const failedRequests: string[] = [];
+    page.on('pageerror', (error) => errors.push(error.message));
+    page.on('response', (response) => {
+      if (response.status() >= 400)
+        failedRequests.push(`${response.status()} ${response.url()}`);
     });
-    if (progress === 0.08 || progress === 0.2 || progress === 0.5)
-      await testInfo.attach(`scroll-${progress}`, {
-        body: await page.screenshot(),
-        contentType: 'image/png',
+    await page.setViewportSize(viewport);
+    await page.goto('./');
+    await expect(page.locator('html')).toHaveClass(/camera-ready/);
+    await expect(page.locator('.fold-panel')).toHaveCount(3);
+    for (const line of flyerCopy.cover.headlineLines)
+      await expect(page.locator('.proposal-sheet h1')).toContainText(line);
+    await expect(page.locator('.cover-statement')).toHaveText(
+      flyerCopy.cover.statement,
+    );
+    const opening = await sheetTransform(page);
+    const folded = await hingeAngles(page);
+    await expectFoldFitsStage(page);
+    await testInfo.attach('folded-packet', {
+      body: await page.screenshot(),
+      contentType: 'image/png',
+    });
+    const travel = await page.evaluate(
+      () => document.documentElement.scrollHeight - innerHeight,
+    );
+    expect(travel).toBeGreaterThan(2000);
+    const chapters = page.locator('.chapter-nav button[data-go-to]');
+    await chapters.nth(1).click();
+    await page.waitForTimeout(1400);
+    const firstReadingProgress = (await page.evaluate(() => scrollY)) / travel;
+    await chapters.nth(0).click();
+    await page.waitForTimeout(1400);
+    const openingSamples = [
+      firstReadingProgress * 0.14,
+      firstReadingProgress * 0.28,
+    ];
+    const samples: {
+      progress: number;
+      hinges: Awaited<ReturnType<typeof hingeAngles>>;
+      camera: Awaited<ReturnType<typeof sheetTransform>>;
+    }[] = [];
+    for (const progress of [...openingSamples, 0.13, 0.2, 0.28, 0.5, 0.8]) {
+      const currentY = await page.evaluate(() => scrollY);
+      const nativeMovement = collectMotion(page, 450);
+      await page.mouse.wheel(0, Math.round(travel * progress - currentY));
+      const frames = await nativeMovement;
+      expect(
+        Math.max(...frames.map((frame) => frame.scroll)),
+        'Native scrolling must reach the requested area before any idle settling',
+      ).toBeGreaterThanOrEqual(travel * progress - 20);
+      if (openingSamples.includes(progress))
+        await expectSubstantialUnfoldingPaper(page);
+      samples.push({
+        progress,
+        hinges: await hingeAngles(page),
+        camera: await sheetTransform(page),
       });
-  }
-  for (const wing of ['left', 'right']) {
-    const initial = folded.find((hinge) => hinge.panel === wing)!;
+      if (
+        progress === openingSamples[1] ||
+        progress === 0.2 ||
+        progress === 0.5
+      )
+        await testInfo.attach(`scroll-${progress}`, {
+          body: await page.screenshot(),
+          contentType: 'image/png',
+        });
+    }
+    for (const wing of ['left', 'right']) {
+      const initial = folded.find((hinge) => hinge.panel === wing)!;
+      expect(
+        Math.max(
+          ...samples.map((sample) =>
+            angularDistance(
+              sample.hinges.find((hinge) => hinge.panel === wing)!.degrees,
+              initial.degrees,
+            ),
+          ),
+        ),
+        `${wing} must physically unfold when the user scrolls`,
+      ).toBeGreaterThan(30);
+    }
+    expect(
+      samples.some(({ hinges }) => {
+        const left = hinges.find((hinge) => hinge.panel === 'left')!;
+        const right = hinges.find((hinge) => hinge.panel === 'right')!;
+        return (
+          left.freeEdgeDepth * right.freeEdgeDepth < 0 &&
+          Math.abs(left.freeEdgeDepth) / left.width > 0.25 &&
+          Math.abs(right.freeEdgeDepth) / right.width > 0.25
+        );
+      }),
+      'The free edges must unfold onto opposite sides of the center panel',
+    ).toBeTruthy();
     expect(
       Math.max(
         ...samples.map((sample) =>
-          angularDistance(
-            sample.hinges.find((hinge) => hinge.panel === wing)!.degrees,
-            initial.degrees,
-          ),
+          Math.abs(sample.camera.scale - opening.scale),
         ),
       ),
-      `${wing} must physically unfold when the user scrolls`,
-    ).toBeGreaterThan(30);
-  }
-  expect(
-    samples.some(({ hinges }) => {
-      const left = hinges.find((hinge) => hinge.panel === 'left')!;
-      const right = hinges.find((hinge) => hinge.panel === 'right')!;
-      return (
-        left.freeEdgeDepth * right.freeEdgeDepth < 0 &&
-        Math.abs(left.freeEdgeDepth) / left.width > 0.25 &&
-        Math.abs(right.freeEdgeDepth) / right.width > 0.25
-      );
-    }),
-    'The free edges must unfold onto opposite sides of the center panel',
-  ).toBeTruthy();
-  expect(
-    Math.max(
-      ...samples.map((sample) => Math.abs(sample.camera.scale - opening.scale)),
-    ),
-  ).toBeGreaterThan(0.1);
-  expect(
-    Math.max(
-      ...samples.map((sample) =>
-        Math.hypot(sample.camera.x - opening.x, sample.camera.y - opening.y),
+    ).toBeGreaterThan(0.1);
+    expect(
+      Math.max(
+        ...samples.map((sample) =>
+          Math.hypot(sample.camera.x - opening.x, sample.camera.y - opening.y),
+        ),
       ),
-    ),
-  ).toBeGreaterThan(100);
-  await testInfo.attach('hinge-and-camera-samples', {
-    body: Buffer.from(JSON.stringify({ folded, samples }, null, 2)),
-    contentType: 'application/json',
-  });
-  await page.mouse.wheel(0, -travel * 2);
-  await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
-  for (const wing of ['left', 'right'])
+    ).toBeGreaterThan(100);
+    await testInfo.attach('hinge-and-camera-samples', {
+      body: Buffer.from(JSON.stringify({ folded, samples }, null, 2)),
+      contentType: 'application/json',
+    });
+    await page.mouse.wheel(0, -travel * 2);
+    await expect.poll(() => page.evaluate(() => scrollY)).toBe(0);
+    for (const wing of ['left', 'right'])
+      await expect
+        .poll(async () =>
+          angularDistance(
+            (await hingeAngles(page)).find((hinge) => hinge.panel === wing)!
+              .degrees,
+            folded.find((hinge) => hinge.panel === wing)!.degrees,
+          ),
+        )
+        .toBeLessThan(1);
     await expect
       .poll(async () =>
-        angularDistance(
-          (await hingeAngles(page)).find((hinge) => hinge.panel === wing)!
-            .degrees,
-          folded.find((hinge) => hinge.panel === wing)!.degrees,
-        ),
+        Math.abs((await sheetTransform(page)).scale - opening.scale),
       )
-      .toBeLessThan(1);
-  await expect
-    .poll(async () =>
-      Math.abs((await sheetTransform(page)).scale - opening.scale),
-    )
-    .toBeLessThan(0.02);
-  expect(errors).toEqual([]);
-  expect(failedRequests).toEqual([]);
-});
+      .toBeLessThan(0.02);
+    expect(errors).toEqual([]);
+    expect(failedRequests).toEqual([]);
+  });
 
 test('keyboard chapter navigation moves the camera to a chosen section', async ({
   page,
@@ -990,6 +1150,221 @@ for (const viewport of [
     }
     await context.close();
   });
+
+for (const mode of [
+  'normal reading',
+  'reduced motion',
+  'no JavaScript',
+] as const)
+  test(`the static cash diagram explains collections, the 20/80 split and twelve paired events with ${mode}`, async ({
+    browser,
+  }) => {
+    const context = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+      javaScriptEnabled: mode !== 'no JavaScript',
+      reducedMotion: mode === 'reduced motion' ? 'reduce' : 'no-preference',
+    });
+    const page = await context.newPage();
+    await page.goto(baseURL);
+    if (mode === 'normal reading') {
+      await expect(page.locator('html')).toHaveClass(/camera-ready/);
+      await enterReadingMode(page);
+    }
+    await expect(page.locator('html')).toHaveAttribute(
+      'data-presentation',
+      'read',
+    );
+    await expectPrintedCashDiagram(page);
+    await expectNoOverflow(page);
+    await context.close();
+  });
+
+for (const viewport of [
+  { width: 1440, height: 1000 },
+  { width: 390, height: 844 },
+])
+  test(`the cash annotation follows collection, traces the split and reverses without changing print at ${viewport.width}px`, async ({
+    browser,
+  }, testInfo) => {
+    const mobile = viewport.width < 760;
+    const context = await browser.newContext({
+      viewport,
+      deviceScaleFactor: mobile ? 3 : 1,
+      isMobile: mobile,
+      hasTouch: mobile,
+    });
+    const page = await context.newPage();
+    await page.goto(baseURL);
+    await expect(page.locator('html')).toHaveClass(/camera-ready/);
+    const first = page.getByRole('button', {
+      name: mobile ? 'Revenue first' : 'The beginning',
+      exact: true,
+    });
+    const cash = page.getByRole('button', {
+      name: mobile ? 'As money arrives' : 'Cash flow',
+      exact: true,
+    });
+    await cash.click();
+    await page.waitForTimeout(1400);
+    const end = await page.evaluate(() => scrollY);
+    await first.click();
+    await page.waitForTimeout(1400);
+    const start = await page.evaluate(() => scrollY);
+    const sample = () =>
+      page.evaluate(() => {
+        const rule = document
+          .querySelector('[data-payment-rule]')!
+          .getBoundingClientRect();
+        const trace = document
+          .querySelector('[data-payment-trace]')!
+          .getBoundingClientRect();
+        const values = [
+          ...document.querySelectorAll(
+            '.receipt-in strong, .receipt-out strong, .receipt-balance strong',
+          ),
+        ];
+        const collected = values[0].getBoundingClientRect();
+        const top = document
+          .querySelector('.site-header')!
+          .getBoundingClientRect().bottom;
+        const bottom = document
+          .querySelector('.tour-controls')!
+          .getBoundingClientRect().top;
+        return {
+          scroll: scrollY,
+          trace: trace.width / rule.width,
+          traceHeight: trace.height,
+          amounts: values.map((element) => element.textContent!.trim()),
+          printVisible: values.every(
+            (element) =>
+              getComputedStyle(element).visibility === 'visible' &&
+              element.getClientRects().length > 0,
+          ),
+          collectedFramed:
+            collected.left >= 0 &&
+            collected.right <= innerWidth &&
+            collected.top >= top &&
+            collected.bottom <= bottom,
+        };
+      });
+    const initial = await sample();
+    expect(initial.trace).toBeLessThan(0.01);
+    const forward = [initial];
+    for (let index = 0; index < 40; index += 1) {
+      await page.mouse.wheel(0, (end - start) / 40);
+      await page.waitForTimeout(35);
+      forward.push(await sample());
+    }
+    await page.waitForTimeout(300);
+    forward.push(await sample());
+    await testInfo.attach('cash-annotation-forward', {
+      body: Buffer.from(JSON.stringify({ viewport, forward }, null, 2)),
+      contentType: 'application/json',
+    });
+    const firstTrace = forward.findIndex((frame) => frame.trace > 0.03);
+    expect(firstTrace).toBeGreaterThan(0);
+    expect(
+      forward
+        .slice(0, firstTrace)
+        .some((frame) => frame.trace <= 0.03 && frame.collectedFramed),
+      'The collection is visibly established before the split annotation starts',
+    ).toBe(true);
+    expect(forward[firstTrace].collectedFramed).toBe(true);
+    expect(
+      forward.some((frame) => frame.trace > 0.15 && frame.trace < 0.85),
+      'Actual scroll must render an intermediate trace',
+    ).toBe(true);
+    expect(forward.at(-1)!.trace).toBeGreaterThan(0.95);
+    expect(forward.at(-1)!.traceHeight).toBeGreaterThan(0);
+    await testInfo.attach('cash-split-complete', {
+      body: await page.screenshot(),
+      contentType: 'image/png',
+    });
+    const reverse = [];
+    for (let index = 0; index < 40; index += 1) {
+      await page.mouse.wheel(0, -(end - start) / 40);
+      await page.waitForTimeout(35);
+      reverse.push(await sample());
+    }
+    await page.waitForTimeout(300);
+    reverse.push(await sample());
+    expect(
+      reverse.some((frame) => frame.trace > 0.15 && frame.trace < 0.85),
+    ).toBe(true);
+    expect(reverse.at(-1)!.trace).toBeLessThan(0.01);
+    for (const frame of [...forward, ...reverse]) {
+      expect(frame.amounts).toEqual(['$10,000', '$2,000', '$8,000']);
+      expect(
+        frame.printVisible,
+        'Essential printed amounts must not be hidden by the annotation',
+      ).toBe(true);
+    }
+    await testInfo.attach('cash-annotation-forward-reverse', {
+      body: Buffer.from(
+        JSON.stringify({ viewport, forward, reverse }, null, 2),
+      ),
+      contentType: 'application/json',
+    });
+    await context.close();
+  });
+
+test('desktop beginning and cash retain readable print scale and a visible paper edge', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto('./');
+  await expect(page.locator('html')).toHaveClass(/camera-ready/);
+  for (const [label, selector] of [
+    ['The beginning', '.cover-description'],
+    ['Cash flow', '.cash-intro, .cash-closing'],
+  ]) {
+    await page.getByRole('button', { name: label, exact: true }).click();
+    await page.waitForTimeout(1400);
+    const target = await cameraTarget(page, label);
+    await expectReadingFrame(target, label);
+    const composition = await target.evaluate((element, selector) => {
+      const rect = element.getBoundingClientRect();
+      const scale = rect.width / (element as HTMLElement).offsetWidth;
+      const panel = element.closest('.fold-panel')!.getBoundingClientRect();
+      const top =
+        document.querySelector('.site-header')!.getBoundingClientRect().bottom +
+        24;
+      const bottom =
+        document.querySelector('.tour-controls')!.getBoundingClientRect().top -
+        24;
+      const verticalEdge =
+        ((panel.left >= 24 && panel.left <= innerWidth - 24) ||
+          (panel.right >= 24 && panel.right <= innerWidth - 24)) &&
+        Math.min(panel.bottom, bottom) - Math.max(panel.top, top) >= 160;
+      const horizontalEdge =
+        ((panel.top >= top && panel.top <= bottom) ||
+          (panel.bottom >= top && panel.bottom <= bottom)) &&
+        Math.min(panel.right, innerWidth - 24) - Math.max(panel.left, 24) >=
+          160;
+      return {
+        fonts: [...element.querySelectorAll(selector)].map(
+          (text) => parseFloat(getComputedStyle(text).fontSize) * scale,
+        ),
+        visiblePaperEdge: verticalEdge || horizontalEdge,
+      };
+    }, selector);
+    expect(composition.fonts.length).toBeGreaterThan(0);
+    for (const font of composition.fonts) {
+      expect(
+        font,
+        `${label} body should read like print rather than a macro crop`,
+      ).toBeGreaterThanOrEqual(20);
+      expect(
+        font,
+        `${label} body should read like print rather than a macro crop`,
+      ).toBeLessThanOrEqual(24);
+    }
+    expect(
+      composition.visiblePaperEdge,
+      `${label} must retain the paper's physical context`,
+    ).toBe(true);
+  }
+});
 
 test('reading mode exposes both rates, cash-flow explanation and proposal notes', async ({
   page,

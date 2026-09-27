@@ -1,27 +1,30 @@
 {
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
-  "surface": "Wide Z-fold with complete mobile reading scenes, secondary peripheral ink and adaptive viewport framing",
-  "generatedAt": "2026-09-26T22:29:05.018240+00:00",
+  "surface": "Bounded paper prototype: opening, beginning and collection-first cash diagram",
+  "generatedAt": "2026-09-27T01:48:31.058209+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
     "docs/brand-sources.md",
-    "agentic-ui/design-critique.json"
+    "agentic-ui/design-critique.json",
+    "docs/design-director-review.md"
   ],
   "acceptedDecisions": [
-    "Preserve the wider 1200 × 1700 paper proportions without restoring the clip. Frame eight complete phone reading groups plus the opening view, with restrained zoom and surrounding context.",
+    "Preserve the wider 1200 \u00d7 1700 paper proportions without restoring the clip. Frame eight complete phone reading groups plus the opening view, with restrained zoom and surrounding context.",
     "True Z-fold, continuous camera movement, opposite-depth wings, fine paper texture, crease shading and soft projected light.",
     "Telescope scale changes, Igloo camera continuity, Exat typography and Stripe Press document presentation remain approved references.",
     "Preserve the official Handrail wordmark, warm paper/rust palette and locally served Inter/Playfair typography.",
     "Remove decorative Unicode arrows, emojis and ornamental symbols; no paperclip or separate decorative sculpture.",
-    "Lead with the beginning of a partnership and growing Handrail; new business is a starting point and Brent’s contribution can grow with company needs.",
+    "Lead with the beginning of a partnership and growing Handrail; new business is a starting point and Brent\u2019s contribution can grow with company needs.",
     "Keep no base salary and commission paid after customer collections, with matching installments.",
     "Keep 15/5 if hired first and 20/5 if the qualifying client comes first, including that client and all future credited sales.",
     "Keep the 90-day proposal and benefits request. Handrail writes the final contract; no named future roles or private financial problems appear.",
     "Continue the approved local design, Storybook and Playwright workflow.",
     "Use mobile ink hierarchy rather than extra opacity/filter layers; active text stays full strength.",
-    "Require an independent adversarial design critic for mobile camera/layout changes; record and resolve blockers before publication."
+    "Require an independent adversarial design critic for mobile camera/layout changes; record and resolve blockers before publication.",
+    "Desktop first-slice reading scale capped; opening unfolds once and cash is reached along its adjacent hinge.",
+    "Static 20/80 payment split and twelve matched installment-event pairs replace arbitrary bars; a narrow reversible trace is digital annotation."
   ],
   "rejectedDecisions": [
     "Neon/glow design direction",
@@ -32,20 +35,13 @@
     "The published flat flyer improved the direction but did not provide enough dynamic motion; replace it with a real hinged trifold."
   ],
   "implementation": {
-    "routes": [
-      "/handrail-proposal/",
-      "/handrail-proposal/agreement/"
-    ],
-    "components": [
-      "DealPath"
-    ],
+    "routes": ["/handrail-proposal/", "/handrail-proposal/agreement/"],
+    "components": ["DealPath"],
     "filesChanged": [
       "src/pages/index.astro",
-      "src/scripts/motion.ts",
       "src/styles/global.css",
-      "tests/e2e/proposal.spec.ts",
-      "scripts/capture.mjs",
-      "scripts/verify-webkit.mjs"
+      "src/scripts/motion.ts",
+      "tests/e2e/proposal.spec.ts"
     ],
     "reviewedFiles": [
       "DESIGN.md",
@@ -62,9 +58,7 @@
   },
   "componentCoverage": {
     "matrixPath": "agentic-ui/component-state-matrix.json",
-    "components": [
-      "DealPath"
-    ],
+    "components": ["DealPath"],
     "missingCoverage": [],
     "status": "verified-current-local"
   },
@@ -81,8 +75,8 @@
       "Subdue surrounding print so the active reading group remains the focal point."
     ],
     "rejectedCritiques": [],
-    "independentReviewPath": "docs/mobile-context-adversarial-review.md",
-    "verdict": "accepted-mobile-composition"
+    "independentReviewPath": "docs/paper-prototype-adversarial-review.md",
+    "verdict": "accepted-bounded-prototype"
   },
   "userAssumptions": [
     "Names and proposed compensation may be public; private financial research remains outside the repository.",
@@ -91,7 +85,7 @@
   "taskModel": {
     "targetUsers": [
       "Josh and Handrail decision makers",
-      "Engineering reviewers visiting Brent’s GitHub"
+      "Engineering reviewers visiting Brent\u2019s GitHub"
     ],
     "jobs": [
       "Understand and discuss the beginning of the proposed partnership",
@@ -110,19 +104,17 @@
   ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
-    "32 local Chromium checks, 11 unit checks, 3 component checks and 24-file typecheck pass.",
-    "42 chapter images, 25 fold samples, 32 intermediate frames and five recordings captured; affected heading captures refreshed.",
-    "Minimum primary text across recorded phone scenes is 14.0374px; paper rendering budget remains bounded.",
-    "No business copy, PDF terms or private business facts changed.",
-    "Current publication status is recorded in agentic-ui/deployment-verification.json.",
-    "All 32 hosted browser checks passed in 31.4s; eight public assets and the complete downloaded PDF match the build."
+    "39 Chromium checks,37 supplementary WebKit reading positions,11 unit checks and3 component checks passed.",
+    "Independent rendered review accepted the bounded opening-to-cash prototype after candidate1 rejection.",
+    "Rates/window/ending creative work and physical iPhone validation remain.",
+    "Publication receipts are maintained in agentic-ui/deployment-verification.json."
   ],
   "userReview": {
     "date": "2026-09-26",
-    "status": "mobile-context-framing-review-pending",
-    "researchPath": "docs/redesign-research.md",
+    "status": "implementation-authorized",
+    "researchPath": "docs/design-director-review.md",
     "implementationPaused": false,
-    "reason": "User reports the mobile tour is too close; requests surrounding secondary text, spacing and an adversarial critic."
+    "reason": "User approved beginning implementation of the independent critique."
   },
   "publication": {
     "status": "published-and-hosted-verified-user-visual-review-pending",

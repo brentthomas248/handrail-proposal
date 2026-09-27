@@ -72,6 +72,14 @@ components:
 
 # A beginning together
 
+## Opening-to-cash prototype
+
+The first storyboard slice now keeps the folded cover facing the viewer, follows its left hinge at a substantial distance, and crosses directly into the payment panel. Desktop body copy is about 21–22 CSS pixels. Phone first-scene typography uses compact authored columns and measured camera framing so surrounding paper can remain normal ink. Later scenes retain their earlier focus treatment until their editorial redesign.
+
+The payment graphic is a complete static 20/80 split with stable labeled amounts and twelve paired collection/commission events. Its only moving annotation is a narrow rule trace that starts after collection is visible and reverses with scroll. Keep the cost qualifier and illustrative status explicit. The compact navigation retains touch/keyboard controls and reclaims 46 pixels on phones.
+
+Current review and delivery evidence: [prototype implementation](docs/paper-prototype-implementation.md), [independent review](docs/paper-prototype-adversarial-review.md) and [IMPLEMENTATION.md](IMPLEMENTATION.md). The full rates/window/ending storyboard remains future work.
+
 ## Current motion and material revision
 
 The approved Telescope, Igloo, Exat and Stripe Press references and Handrail brand direction remain. The user reviewed the published trifold, found its motion choppy or stuck, and requested a true Z-fold plus realistic paper texture and lighting. This is a redesign of 3D geometry, choreography and material treatment; the business proposal and identity are unchanged.

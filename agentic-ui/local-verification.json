@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T22:29:05.018240+00:00",
-  "scope": "Mobile contextual camera framing, complete editorial groups and viewport-height adaptation; approved local workflow",
+  "generatedAt": "2026-09-27T01:45:31.296173+00:00",
+  "scope": "Opening-to-cash paper prototype; existing whole-page behavior regressions retained",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": true,
+  "deployed": false,
   "checks": [
     {
       "command": "pnpm check",
@@ -18,27 +18,22 @@
     },
     {
       "command": "pnpm build",
-      "result": "Two static routes built; formatting-only source rebuild byte-identical",
+      "result": "Two static routes built",
       "exitCode": 0
     },
     {
       "command": "pnpm contract:check && pnpm pdf:check",
-      "result": "Canonical Markdown and unchanged complete PDF match",
+      "result": "Canonical Markdown and complete unchanged PDF match",
       "exitCode": 0
     },
     {
-      "command": "pnpm exec playwright test --output=qa-artifacts/mobile-context/final-playwright-confirmed",
-      "result": "32 Chromium checks passed in 30.1s, including complete text-line framing, viewport shrink/restore, semantic focus, keyboard restoration and DPR3 rendering budget",
-      "exitCode": 0
-    },
-    {
-      "command": "CAPTURE_OUTPUT=qa-artifacts/mobile-context/final-capture pnpm capture",
-      "result": "42 chapter images, 25 fold samples, 32 intermediate frames, 5 journey videos; no browser errors, warnings or failed requests; minimum primary text 14.0374px; eight affected rate captures refreshed after heading fix",
+      "command": "pnpm exec playwright test --output=qa-artifacts/paper-prototype/candidate2-playwright",
+      "result": "39 Chromium checks passed in 41.3s; static 20/80 diagram, twelve event pairs, ordered reversible annotation, desktop scale, substantial unfolding and prior complete reading/resize/semantic/rendering checks",
       "exitCode": 0
     },
     {
       "command": "pnpm test:components",
-      "result": "3 component checks passed, zero axe violations or errors; local Storybook service started before successful retry",
+      "result": "3 component checks passed, zero axe violations or browser errors",
       "exitCode": 0
     },
     {
@@ -47,18 +42,22 @@
       "exitCode": 0
     },
     {
-      "command": "WEBKIT_OUTPUT=qa-artifacts/mobile-context/webkit node scripts/verify-webkit.mjs",
-      "result": "37 supplementary reading positions pass across five viewports; phones DPR3; minimum 14.0792px; zero errors or failed requests; five preload warnings",
+      "command": "WEBKIT_OUTPUT=qa-artifacts/paper-prototype/webkit node scripts/verify-webkit.mjs",
+      "result": "37 reading positions across five viewports pass; minimum primary text13.17px; no errors or failed requests; five font-preload warnings",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm performance",
+      "result": "Page-load lab performance99 mobile/100 desktop; zero TBT; all other Lighthouse categories100",
       "exitCode": 0
     }
   ],
   "evidenceNotes": [
-    "Independent design critic rejected the baseline and first candidate; accepted the final composition after a heading-spacing correction. See docs/mobile-context-adversarial-review.md.",
-    "Complete active reading groups fit with at least 24px clearance from measured header and controls; inactive previews restore in ordinary reading.",
-    "Final browser suite had an initial timing failure in the new active-focus test: it checked during camera approach. A bounded state poll fixed the test; all 32 then passed.",
-    "Paper dimensions and 64MiB/4096-device-pixel project budgets remain unchanged; theoretical area estimates are not actual iPhone memory.",
-    "Physical iPhone stability, manual VoiceOver and field performance remain unverified. Historical Lighthouse and native-window evidence do not certify this revision.",
-    "Published source 25e5680 as static 54cb926; Pages run 36276285064 succeeded. Hosted suite passed all 32 checks in 31.4s. Eight assets match exactly; downloaded PDF matches seven sections and 15 paragraphs."
+    "Candidate 1 was rejected and revised. Independent critic accepts candidate 2 for the bounded first slice; see docs/paper-prototype-adversarial-review.md.",
+    "Initial test failures identified premature phone trace and undersized desktop cash introduction; both corrected. Opening test now checks whole initial packet and substantial unfolding instead of requiring the whole three-panel spread at every camera approach.",
+    "64 MiB estimated paper surface and 4096-device-pixel edge budgets pass; these are not physical GPU measurements.",
+    "Rates/window/ending redesign remains deferred; canonical business terms and PDF unchanged.",
+    "Physical iPhone stability, manual VoiceOver and field performance remain unverified."
   ],
   "limitations": [
     "agentic-ui/blockers.json",

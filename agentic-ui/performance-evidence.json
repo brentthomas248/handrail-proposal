@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T21:24:05.920174+00:00",
+  "generatedAt": "2026-09-27T01:46:38.879750+00:00",
   "scope": "Local production-preview Lighthouse laboratory measurements; not field data.",
   "command": "pnpm performance",
   "lighthouseVersion": "13.5.0",
@@ -9,34 +9,34 @@
     {
       "device": "mobile",
       "source": "qa-artifacts/lighthouse-mobile.json",
-      "measuredAt": "2026-09-26T21:22:42.765Z",
+      "measuredAt": "2026-09-27T01:44:44.334Z",
       "scores": {
-        "performance": 99,
+        "performance": 99.0,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
-      "lcpMs": 1801.0287,
+      "lcpMs": 1801.7827,
       "tbtMs": 0,
       "cls": 0.002903796674607959,
-      "scriptTransferBytes": 31601,
-      "scriptResourceBytes": 80781
+      "scriptTransferBytes": 32697,
+      "scriptResourceBytes": 83903
     },
     {
       "device": "desktop",
       "source": "qa-artifacts/lighthouse-desktop.json",
-      "measuredAt": "2026-09-26T21:22:52.749Z",
+      "measuredAt": "2026-09-27T01:44:54.456Z",
       "scores": {
         "performance": 100,
         "accessibility": 100,
         "best-practices": 100,
         "seo": 100
       },
-      "lcpMs": 380.9782,
+      "lcpMs": 402.7689,
       "tbtMs": 0,
       "cls": 0.001081616375536293,
-      "scriptTransferBytes": 31601,
-      "scriptResourceBytes": 80781
+      "scriptTransferBytes": 32697,
+      "scriptResourceBytes": 83903
     }
   ],
   "fieldInp": {

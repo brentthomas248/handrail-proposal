@@ -32,29 +32,32 @@ The final approved local scope is complete. Strict global generation/professiona
 
 Published https://brentthomas248.github.io/handrail-proposal/ from gh-pages commit94c25d0, corresponding to source2028557. GitHub Pages run36265530452 succeeded with HTTPS enforced. Deterministic public-browser checks passed for live WebGL rendering, scroll progress, navigation, both rates, agreement paragraphs, PDF download, mobile layout, persisted motion and system reduced motion. No browser errors or failed asset responses were observed. The downloaded PDF independently matched18sections and29paragraphs. GitHub profile and pins were unchanged.
 
-
 ## 2026-09-26 — approved flyer redesign verified locally
 
 User approved the reference direction and requested the shared identity across all Handrail materials. Implemented actual-flyer zoom/pan with GSAP; removed sculpture, clip, WebGL and legal boilerplate. Local evidence:19 app browser checks,4 content tests,3 component checks,22 chapter captures,7-section/15-paragraph PDF comparison and both rendered PDF pages. Small-screen type, contrast, overflow and initial layout shift were fixed after observed failures. Local Lighthouse scores100 across all categories on both devices; script transfer45,870bytes meets the unchanged250KB budget. The actual deliverable awaits user visual review; publication and hosted checks are next.
-
 
 ## 2026-09-26T20:10:01.595Z — flyer redesign published and verified
 
 Source ad6fa8b, static 05eaf7dc6478f6203c554bd40335c2602de4c793, GitHub Pages run 36268461522 succeeded. All 19 browser tests passed against the public site. Hosted HTML, notes, PDF, logo and social image match the verified output byte-for-byte; the downloaded PDF passes complete independent canonical-text comparison. Profile README and pins remain unchanged. Reference direction was approved; user acceptance of the finished visuals remains a separate review.
 
-
 ## 2026-09-26T20:36:18.948973+00:00 — actual trifold verified locally
 
 The user requested independent folds, stronger scroll motion, no decorative symbols and the beginning of a broader partnership. The three HTML panels now open sequentially and move through perspective transitions before flat reading holds. Both hinge angles and reverse scrolling are exercised by real wheel input. A camera-depth defect found in rendered review was corrected with uniform numeric scale3d; 320px cash content was split into two framed stops. Current evidence: 19 browser tests, four content tests, three component checks, 24 chapter images and 15 fold samples. Current Lighthouse scores are 100 across all four categories on desktop and mobile, with 46,763 script-transfer bytes. Both PDF pages were rendered and checked. Publishing and hosted verification are next; user visual acceptance remains separate.
 
-
 ## 2026-09-26T20:47:48.590070+00:00 — trifold published and verified
 
 Published source a7fc658 as static 92975026a1d4ae002716349bd1663e2335c3fdc1. Pages run 36270588222 succeeded. All 19 Chromium browser checks pass at the public URL; 24 chapter images and 15 fold samples have no errors, warnings or failed requests. Public assets match local output and the downloaded PDF matches seven sections and 15 paragraphs. Supplementary WebKit behavior and actual native-window rendering passed; its screenshot API has an independently reproduced hidden-backface defect, documented in webkit-verification.json. No CSS workaround was applied. User visual acceptance remains separate.
-
 
 ## 2026-09-26T21:27:25.346338+00:00 — continuous Z-fold and paper revision published
 
 The prior endpoint-only checks missed stationary scroll intervals and unnecessary resize rebuilding. The replacement uses true opposite-depth accordion geometry, a continuous camera path, bounded damping, input-cancelled settlement and stable phone-height behavior. Paper now has original fine grain/fibers, edge and crease depth, directional shading and a close soft projected shadow. A cold-public-load flash was separately reproduced and fixed with a ready-frame guard plus readable failure fallback.
 
 Source 0dfbaaa, static 4013024, Pages run 36272824422 succeeded. All 27 Chromium checks pass locally and hosted; all six original gesture regressions fail against the preceding release. Eleven unit and three component checks pass; PDF is unchanged and canonical. Final public HTML/assets match dist. Supplementary WebKit covers 21 reading positions and actual native desktop paint, with protocol/IO/hit-test/headful-phone limitations preserved. User visual acceptance, native/physical mobile and field performance remain separate. See docs/motion-remediation.md and deployment-verification.json.
+
+## September 26 — opening-to-cash prototype
+
+User authorized implementing the independent design director review. Bounded scope: opening, beginning and cash flow. Replaced decorative cash bars with a static proportional split and twelve paired collection/commission events; preserved exact proposed terms and normal/reduced/no-JS reading.
+
+Candidate 1 was rejected for the edge-on opening, phone thumbnail excursion and ghosted peripheral paragraphs. Actual browser tests also caught premature phone annotation. Camera orientation, hinge distance, print typography/spacing and trace timing were revised; a stacked cash experiment was rejected and removed. Candidate 2 passes 39 Chromium checks, 37 supplementary WebKit reading positions, 11 unit and 3 component checks. Independent final creative verdict and publication receipts are recorded in IMPLEMENTATION.md and docs/paper-prototype-adversarial-review.md.
+
+The local workflow authorization persists. No cloud generation, Stagehand or Browserbase success is claimed; global certification gate remains unpassed for the documented policy/schema, literal-token and manual/field gaps. No new dependencies, engines or compositor surfaces were introduced.
