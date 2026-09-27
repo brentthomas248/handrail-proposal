@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T04:02:53.821159+00:00",
+  "generatedAt": "2026-09-27T04:08:29.494042+00:00",
   "scope": "Complete round-two proposal remediation, including independent design/commercial and interaction review",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": false,
+  "deployed": true,
   "checks": [
     {
       "command": "pnpm check",
@@ -43,21 +43,22 @@
     },
     {
       "command": "WEBKIT_OUTPUT=qa-artifacts/round-2-candidate/webkit node scripts/verify-webkit.mjs",
-      "result": "29 reading positions across five viewports pass; minimum text12.158px; no errors/failed requests; five font-preload warnings",
+      "result": "29 reading positions across five viewports pass; minimum text 12.158px; no errors/failed requests; five font-preload warnings",
       "exitCode": 0
     },
     {
       "command": "pnpm performance",
-      "result": "Mobile99/desktop100 performance; all other Lighthouse categories100, zero TBT/CLS. Lab page-load results, not device scrolling or field INP.",
+      "result": "Mobile 99/desktop 100 performance; all other Lighthouse categories 100, zero TBT/CLS. Lab page-load results, not device scrolling or field INP.",
       "exitCode": 0
     }
   ],
   "evidenceNotes": [
     "Independent design review accepts the complete composition after rejected candidates; docs/round-2-candidate-design-review.md.",
     "Independent interaction review and two additional regressions caught stale-focus and delayed-touch reading ownership; fractional reading-line alignment also corrected.",
-    "Paper estimate remains below unchanged64MiB/4096-device-pixel budget; not total GPU or physical iPhone evidence.",
+    "Paper estimate remains below unchanged 64MiB/4096-device-pixel budget; not total GPU or physical iPhone evidence.",
     "Two PDF pages were rasterized and visually inspected, including comparison and all discussion items.",
-    "Physical iPhone stability, manual VoiceOver, field INP and business-reader comprehension exercise remain unverified."
+    "Physical iPhone stability, manual VoiceOver, field INP and business-reader comprehension exercise remain unverified.",
+    "Published source d3363fd as static 18f262a; Pages run 36293281659 succeeded. All 55 hosted checks passed in60.4s and 26 hosted assets match."
   ],
   "limitations": [
     "agentic-ui/blockers.json",

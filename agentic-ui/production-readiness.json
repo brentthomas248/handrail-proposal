@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T04:02:53.821159+00:00",
+  "generatedAt": "2026-09-27T04:08:29.494042+00:00",
   "ok": false,
-  "status": "round-two-local-verified-publication-pending",
+  "status": "complete-round-two-published-and-hosted-verified-physical-iphone-pending",
   "localRelease": {
     "passed": true,
     "evidence": [
@@ -12,8 +12,8 @@
     ]
   },
   "publication": {
-    "deployed": false,
-    "hostedSmokeTestPassed": false,
+    "deployed": true,
+    "hostedSmokeTestPassed": true,
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidence": "agentic-ui/deployment-verification.json",
     "notes": [

@@ -1,5 +1,7 @@
 # Round 2 — consolidated adversarial review
 
+Historical baseline audit. Implementation and accepted candidate evidence are recorded in [the round-two remediation](round-2-implementation.md) and [current delivery checkpoint](../IMPLEMENTATION.md).
+
 Reviewed September 26, 2026, against the [published proposal at source `16d332d`](https://brentthomas248.github.io/handrail-proposal/?v=16d332d). This is a review and implementation brief. No application changes or new deployment accompany it.
 
 ## Verdict

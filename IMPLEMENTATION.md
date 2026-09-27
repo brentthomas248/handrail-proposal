@@ -20,7 +20,9 @@ Native keyboard navigation no longer forces an unwanted mode change. Idle settli
 
 ## Publication
 
-Local acceptance is complete. The previously deployed source is 16d332d; publication of the verified round-two source is the next checkpoint. Current local checks are recorded in [local verification](agentic-ui/local-verification.json). The previous [deployment receipt](agentic-ui/deployment-verification.json) is explicitly historical until replaced with hosted results. No application rebuild is needed for this documentation checkpoint.
+The [updated public proposal](https://brentthomas248.github.io/handrail-proposal/?v=d3363fd) is published from source `d3363fd5e5e82cdd91890c72ce686db5034b3866` as static `18f262af8bdb212828749af080ea7844500ffabe`. [Pages run 36293281659](https://github.com/brentthomas248/handrail-proposal/actions/runs/36293281659) succeeded. All 55 hosted browser checks passed in 60.4 seconds, with zero failures, skips or retries. All 26 hosted files match the reviewed build byte for byte, including the PDF; the downloaded PDF passes the complete canonical check.
+
+[Ordinary reading](https://brentthomas248.github.io/handrail-proposal/?view=read&v=d3363fd) remains available. Application publication and hosted verification are complete. This documentation checkpoint reconciles [local evidence](agentic-ui/local-verification.json) and the [deployment receipt](agentic-ui/deployment-verification.json); it changes no application code or deployed assets.
 
 ## Remaining limits
 

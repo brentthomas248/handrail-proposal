@@ -1,11 +1,11 @@
 {
   "schemaVersion": "1.0",
   "url": "https://brentthomas248.github.io/handrail-proposal/",
-  "checkedAt": "2026-09-27T01:52:15.012516+00:00",
+  "checkedAt": "2026-09-27T04:08:29.494042+00:00",
   "passed": true,
-  "sourceCommit": "16d332dafbc1f7ff91ef74226dc39a0b4fe6337d",
-  "staticCommit": "8e7975883bd08a115734c3798a68c95f0377cdee",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36286697372",
+  "sourceCommit": "d3363fd5e5e82cdd91890c72ce686db5034b3866",
+  "staticCommit": "18f262af8bdb212828749af080ea7844500ffabe",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36293281659",
   "publishingSource": {
     "branch": "gh-pages",
     "path": "/",
@@ -13,37 +13,33 @@
     "httpsEnforced": true
   },
   "browserSuite": {
-    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test --output=qa-artifacts/paper-prototype/hosted-playwright",
-    "passed": 39,
+    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test --output=qa-artifacts/round-2-candidate/hosted-playwright",
+    "passed": 55,
     "failed": 0,
-    "durationSeconds": 43.9
+    "skipped": 0,
+    "flaky": 0,
+    "durationSeconds": 60.4
   },
   "checks": [
-    "Initial folded packet fits; opening follows the left hinge with substantial paper presence.",
-    "Static labeled 20/80 split and twelve paired events survive normal, reduced-motion and no-JavaScript reading.",
-    "Collection is visible before the reversible annotation starts; printed monetary values remain unchanged.",
-    "Complete phone reading groups, height adaptation, accessible focus and restoration retain their existing checks.",
-    "High-density renderer budget, continuous scrolling, immediate reversal and cancellation pass.",
-    "Eight hosted assets match the reviewed build; downloaded PDF matches all canonical paragraphs."
+    "Complete phone rate headings, both rates and shared terms fit; ink remains stable through camera travel.",
+    "Collected-dollar comparison has both labeled paths, collection units, cost qualification and illustrative status.",
+    "Native keyboard chapter traversal, direction-respecting pause/reversal, stale-focus return and held native touch pass.",
+    "Normal/reduced/no-JavaScript reading keeps the same narrative order and ending.",
+    "Paper rendering estimates stay below the unchanged 64MiB and 4096px limits.",
+    "All 26 hosted files match the reviewed static build; downloaded PDF matches all canonical content."
   ],
   "staticAssetChecks": [
     {
+      "path": "paper-grain.svg",
+      "http": 200,
+      "bytes": 56694,
+      "sha256": "f1ad2a836254dd1e1bda3de717abb7c3de39007361741e634977267450cc774b"
+    },
+    {
       "path": "index.html",
       "http": 200,
-      "bytes": 57657,
-      "sha256": "b0624c92787fe1129841bfe87c8a829520be7e59b9a33a89462afad6e5545575"
-    },
-    {
-      "path": "agreement/index.html",
-      "http": 200,
-      "bytes": 56453,
-      "sha256": "59d25e473074464b081991e87212bd0fdc118437f0f6fdf5d450bf04e5be5218"
-    },
-    {
-      "path": "handrail-proposed-agreement.pdf",
-      "http": 200,
-      "bytes": 184675,
-      "sha256": "4c8977a28976f760f9b20c23584e8b04769bd561a15ed1c459bbbeadc963200d"
+      "bytes": 43549,
+      "sha256": "905e3349d0617cc94dc4eb3895c20e2640a6b3d777d43a4003995d8702850f42"
     },
     {
       "path": "handrail-logo.png",
@@ -52,16 +48,106 @@
       "sha256": "1e024d51ef5f28a6bcedfa90ff58c5f0481a81db81cbcd5efede50594766bb3a"
     },
     {
+      "path": "handrail-proposed-agreement.pdf",
+      "http": 200,
+      "bytes": 237278,
+      "sha256": "c8ed822f7567ccb325368cb8442aabb63c21ed49bf213802a2ae93a7ac91c5a9"
+    },
+    {
+      "path": "social.svg",
+      "http": 200,
+      "bytes": 1626,
+      "sha256": "909bc91da4ec3b28e3b8bc4a600703df209a449d4c3589b5b179a79db8de4e18"
+    },
+    {
       "path": "social.png",
       "http": 200,
       "bytes": 72589,
       "sha256": "f5cd97ea07cba230f692b3613127166200a1bc37f8fae34e0266cd779a6495d7"
     },
     {
-      "path": "paper-grain.svg",
+      "path": "licenses/Inter-OFL.txt",
       "http": 200,
-      "bytes": 56694,
-      "sha256": "f1ad2a836254dd1e1bda3de717abb7c3de39007361741e634977267450cc774b"
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "licenses/Playfair-Display-OFL.txt",
+      "http": 200,
+      "bytes": 4630,
+      "sha256": "c052aafd2a71e90bcee6e69f475029d430a10d548c08ffcae350171f0e9668b1"
+    },
+    {
+      "path": "agreement/index.html",
+      "http": 200,
+      "bytes": 44772,
+      "sha256": "6ed0d57e635d1a16d9cf2b3ea1291032a6661d08e3bfbbe43e685c0a758b7ceb"
+    },
+    {
+      "path": "_astro/playfair-display-latin-ext-400-italic.CZOjvne0.woff",
+      "http": 200,
+      "bytes": 17444,
+      "sha256": "8a2b40aad8d339ee5a19974b33f4b4ae3e340bfa0996ad65cf8060cc5462f628"
+    },
+    {
+      "path": "_astro/playfair-display-latin-400-italic.hIeePEuE.woff",
+      "http": 200,
+      "bytes": 27268,
+      "sha256": "cc638df9f516b3cbfd87d5012d0b657c81dec4e52dd5a8c9e0b87a2b39697bd9"
+    },
+    {
+      "path": "_astro/inter-vietnamese-wght-normal.CBcvBZtf.woff2",
+      "http": 200,
+      "bytes": 10252,
+      "sha256": "5c66f9e07e90c6d4ac4922cc68d60de26c17b1858e677fb5e603fce3952b3ff2"
+    },
+    {
+      "path": "_astro/playfair-display-cyrillic-400-italic.24vVh5t9.woff",
+      "http": 200,
+      "bytes": 15280,
+      "sha256": "bc2e9803aaa1bc5bd108f552acac6357e1a1e582e821823dbbb57f457e5f4c1a"
+    },
+    {
+      "path": "_astro/playfair-display-latin-ext-400-italic.zVOgzDMq.woff2",
+      "http": 200,
+      "bytes": 13668,
+      "sha256": "b02fdf18a2d7b09f409b01a1ab4afe7b5f7d08926b3c867187398765ea0fb3f1"
+    },
+    {
+      "path": "_astro/inter-cyrillic-ext-wght-normal.BOeWTOD4.woff2",
+      "http": 200,
+      "bytes": 25960,
+      "sha256": "ca157063339ac4ad418f214f3abfed119b0798ab4d377386ce5c9e5a7a435ebd"
+    },
+    {
+      "path": "_astro/playfair-display-vietnamese-400-italic.CD15TOr5.woff2",
+      "http": 200,
+      "bytes": 5800,
+      "sha256": "9a08f3c0730f6311b18adadf42797a91900c4bbc32602785ec1e329db5354685"
+    },
+    {
+      "path": "_astro/playfair-display-vietnamese-400-italic.Cpv4sfwY.woff",
+      "http": 200,
+      "bytes": 7280,
+      "sha256": "44d830fe9bae45b8a4dc798f7df77568a0d6c9e0c2b0838289a8c02d54c4278c"
+    },
+    {
+      "path": "_astro/inter-greek-wght-normal.CkhJZR-_.woff2",
+      "http": 200,
+      "bytes": 18996,
+      "sha256": "1be3448e292fbf05ffe176fe1e43f135013d50b1e7d324ad1a558f623d3bb6f6"
+    },
+    {
+      "path": "_astro/inter-cyrillic-wght-normal.DqGufNeO.woff2",
+      "http": 200,
+      "bytes": 18748,
+      "sha256": "71d5ee93cc1e9f1d520a3a8b66456de18c7879d8df09d57fcd2eaff75fef0075"
+    },
+    {
+      "path": "_astro/playfair-display-latin-400-italic.LeeEXsx5.woff2",
+      "http": 200,
+      "bytes": 21884,
+      "sha256": "eabce94d4a69e439cd050755c31f9894ac8a78f93e58b063c6c01f370474e1de"
     },
     {
       "path": "_astro/client.CCxN9xF8.js",
@@ -70,43 +156,66 @@
       "sha256": "4907db89a5bc4160920b577b51facb283e0e376ee1b4d5acab82c2e4d5654811"
     },
     {
-      "path": "_astro/index.astro_astro_type_script_index_0_lang.DbET3kR6.js",
+      "path": "_astro/inter-latin-ext-wght-normal.DO1Apj_S.woff2",
       "http": 200,
-      "bytes": 83903,
-      "sha256": "18f80f30d90f6e203900ac648d3fa0b5f6c3bbd88cbacbac63b681e968e1b67b"
+      "bytes": 85068,
+      "sha256": "34b9c504cab7a73e37b746343a449132e56cf7b5481af2cb81dc74dcff25c956"
+    },
+    {
+      "path": "_astro/inter-latin-wght-normal.Dx4kXJAl.woff2",
+      "http": 200,
+      "bytes": 48256,
+      "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+    },
+    {
+      "path": "_astro/playfair-display-cyrillic-400-italic.drKdN10-.woff2",
+      "http": 200,
+      "bytes": 12664,
+      "sha256": "2b016e18145f89b6b998a13152ff85a5815e94751210d85d9808549f712c62e1"
+    },
+    {
+      "path": "_astro/inter-greek-ext-wght-normal.DlzME5K_.woff2",
+      "http": 200,
+      "bytes": 11232,
+      "sha256": "6e9e020a25f9b56d418f2c085b1d3c09725a4da23fe693a5b463064606732190"
+    },
+    {
+      "path": "_astro/index.astro_astro_type_script_index_0_lang.buKxMMfr.js",
+      "http": 200,
+      "bytes": 85180,
+      "sha256": "f6267665082a083d813cec6bcec87236e50362dd4e7f4ef62882b639dc13ad66"
     }
   ],
   "pdfCanonicalCheck": {
     "passed": true,
     "sections": 7,
-    "paragraphs": 15
+    "paragraphs": 13,
+    "discussionItems": 6,
+    "comparisonVerified": true,
+    "visualPagesReviewed": 2
   },
-  "mobileEvidence": "Chromium DPR3 and touch emulation; physical iPhone crash retry still pending",
+  "mobileEvidence": "Chromium DPR3 and native touch emulation; physical iPhone crash retry still pending",
   "profileChanged": false,
   "errors": [],
   "failedRequests": [],
-  "edition": "opening-to-cash-prototype",
-  "isCurrentRevision": false,
+  "edition": "complete-round-two-proposal",
+  "isCurrentRevision": true,
   "supplementaryWebKitEvidence": "agentic-ui/webkit-verification.json",
   "physicalIOSVerified": false,
   "visualEvidence": {
-    "path": "qa-artifacts/paper-prototype/critic/candidate-2/capture.json",
-    "scope": "Independent first-slice rendered review; hosted assets match byte-for-byte",
-    "chapterImages": 15,
-    "transitionImages": 72,
-    "journeyVideos": 4,
-    "browserErrors": [],
-    "additionalBehaviorCapture": {
-      "path": "qa-artifacts/paper-prototype/candidate2-capture/capture.json",
-      "realWheelSamples": 480,
-      "viewports": 4
-    }
+    "path": "qa-artifacts/round-2-candidate/critic-art/approved/capture.json",
+    "scope": "Complete design/commercial review at four viewports; earlier full forward/reverse candidate captures plus focused final framing checks. One-pixel reading lookup adjustment changes no tour composition. Hosted assets match reviewed build.",
+    "browserErrors": []
   },
-  "renderingEvidence": "qa-artifacts/paper-prototype/candidate2-playwright",
+  "renderingEvidence": "qa-artifacts/round-2-candidate/hosted-playwright",
   "independentDesignReview": {
     "verdict": "accepted",
-    "path": "docs/paper-prototype-adversarial-review.md",
-    "scope": "Bounded opening-to-cash direction after candidate 1 rejection; later scenes remain deferred"
+    "path": "docs/round-2-candidate-design-review.md",
+    "scope": "Complete bounded round-two proposal composition and rendered commercial meaning"
   },
-  "historicalNote": "Superseded by local round-two candidate; current publication receipt follows release."
+  "independentInteractionReview": {
+    "verdict": "accepted",
+    "path": "docs/round-2-candidate-interaction-review.md",
+    "scope": "Keyboard, direction, normal reading, input ownership and resource budget; no physical-device or VoiceOver claim"
+  }
 }
