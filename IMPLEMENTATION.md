@@ -16,7 +16,9 @@ See the [remediation record](docs/fold-opening-remediation.md) and [independent 
 
 ## Publication
 
-Local candidate accepted; publication and hosted verification are the next checkpoint. The currently published prior source is `dc99b79` as static `40c72dd`. The [deployment receipt](agentic-ui/deployment-verification.json) still records that prior release until hosted verification completes.
+[Open the updated proposal](https://brentthomas248.github.io/handrail-proposal/?v=33f64ef). Source `33f64ef7e648ec740cf443120663faba0d39d218` is published as static `4b11b12fc0063155b8af87265f3065a15b91a1a6`. [Pages run 36325370312](https://github.com/brentthomas248/handrail-proposal/actions/runs/36325370312) succeeded.
+
+All 68 hosted browser checks passed in 1.2 minutes, with no failures/skips/retries. All 28 hosted files match the reviewed build byte for byte, including both unchanged PDFs. The [deployment receipt](agentic-ui/deployment-verification.json) records the current release. The temporary publishing worktree was removed after confirming a clean tree, pushed commit and no active process. This closeout changes documentation only.
 
 ## Remaining limits
 

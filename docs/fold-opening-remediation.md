@@ -22,4 +22,4 @@ The new four-viewport regression fails on the published 74° opener and passes o
 
 All 68 Chromium checks passed in 1.2 minutes, with zero failures/skips/retries. All 27 unit checks, type checks, build and formatting passed. Supplementary WebKit verified 29 reading positions across five viewport sizes with no browser errors or failed requests; five known font-preload warnings remain. Independent headed opening/reversal review passed all four sizes; see [review](fold-opening-independent-review.md). Root inspected the original desktop and phone frames as well.
 
-Publication and hosted verification are the next checkpoint. Physical iPhone stability remains unverified.
+Published from source `33f64ef` as static `4b11b12`. Pages run 36325370312 succeeded. All 68 hosted browser checks passed in 1.2 minutes; all 28 hosted files match the reviewed build byte for byte. The task-owned publishing worktree was removed after the clean/pushed/no-process checks. Physical iPhone stability remains unverified.

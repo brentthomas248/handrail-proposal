@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T14:15:23.600783+00:00",
+  "generatedAt": "2026-09-27T14:20:18.205546+00:00",
   "scope": "Restore a folded opening and keep the whole three-panel reveal in frame before cover approach",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": false,
+  "deployed": true,
   "checks": [
     {
       "command": "pnpm check",
@@ -43,7 +43,8 @@
     "Independent headed review inspects compact packet, intermediate edge-on states, complete spread, reversal and reading arrival. Root independently inspected original frames.",
     "Existing complete reading-group, high-DPR 64MiB/4096px, input ownership, accessibility, fallback and resume navigation tests pass.",
     "Materials, content, PDFs, component implementation and public profile are unchanged in this correction; their prior verification is documented in docs/portfolio-resume-motion-implementation.md.",
-    "Physical iPhone, manual VoiceOver and field INP remain unverified."
+    "Physical iPhone, manual VoiceOver and field INP remain unverified.",
+    "Published source 33f64ef as static 4b11b12. Pages run 36325370312 succeeded. All 68 hosted checks and 28 byte-matching files passed."
   ],
   "limitations": [
     "agentic-ui/blockers.json",

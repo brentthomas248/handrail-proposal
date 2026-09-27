@@ -1,11 +1,12 @@
 {
   "schemaVersion": "1.0",
+  "scope": "Visible whole-object fold-out before cover approach",
   "url": "https://brentthomas248.github.io/handrail-proposal/",
-  "checkedAt": "2026-09-27T05:17:34.105218+00:00",
+  "checkedAt": "2026-09-27T14:20:18.205546+00:00",
   "passed": true,
-  "sourceCommit": "dc99b79cf863cac58385381375b2cbb10aa4774c",
-  "staticCommit": "40c72dd75350081674c6f5da7be5f22601d5b8d3",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36296630342",
+  "sourceCommit": "33f64ef7e648ec740cf443120663faba0d39d218",
+  "staticCommit": "4b11b12fc0063155b8af87265f3065a15b91a1a6",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36325370312",
   "publishingSource": {
     "branch": "gh-pages",
     "path": "/",
@@ -13,19 +14,18 @@
     "httpsEnforced": true
   },
   "browserSuite": {
-    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test --output=qa-artifacts/round-3/hosted-e2e",
-    "passed": 64,
+    "command": "PROPOSAL_BASE_URL=https://brentthomas248.github.io/handrail-proposal/ pnpm exec playwright test --reporter=line --output=qa-artifacts/fold-opening/hosted-e2e",
+    "passed": 68,
     "failed": 0,
     "skipped": 0,
     "flaky": 0,
-    "durationReported": "1.0m"
+    "durationReported": "1.2m"
   },
   "checks": [
-    "All 28 hosted files match the reviewed build byte for byte.",
-    "All 64 hosted browser checks pass, including responsive resume navigation, normal/reduced/no-JavaScript reading, actual PDF downloads and exact browser Back restoration.",
-    "Downloaded proposal and resume PDFs pass complete canonical content verification.",
-    "Opening geometry, camera movement, complete phone reading groups and unchanged renderer limits pass.",
-    "Four independent local specialist reviews accepted the candidate after focused corrections. Hosted-byte equality links that candidate to this deployment."
+    "All 28 hosted files match the reviewed build byte for byte, including both unchanged PDFs.",
+    "All 68 hosted browser checks pass, including the new four-viewport opening/reversal regression, reading groups, renderer budget, fallbacks and resume navigation.",
+    "Published opener starts folded at 146 degrees, reveals the whole three-panel object through 38 degrees, then approaches the cover.",
+    "Independent headed review accepted 128 captured frames at four sizes and a separate pause/settling check. Hosted byte equality links that candidate to this deployment."
   ],
   "staticAssetChecks": [
     {
@@ -38,7 +38,7 @@
       "path": "index.html",
       "http": 200,
       "bytes": 44917,
-      "sha256": "59126f3247cf94a09a117d9e6d4d359c19bc5e91578e725ba19bd560897af6c4"
+      "sha256": "a8f6065370756d541c0c4d5543139e6d8bd19db3f150403a19b22d0e3c81dbec"
     },
     {
       "path": "handrail-logo.png",
@@ -155,10 +155,10 @@
       "sha256": "71d5ee93cc1e9f1d520a3a8b66456de18c7879d8df09d57fcd2eaff75fef0075"
     },
     {
-      "path": "_astro/index.astro_astro_type_script_index_0_lang.4uTx0kXk.js",
+      "path": "_astro/index.astro_astro_type_script_index_0_lang.Cq-k_JAy.js",
       "http": 200,
-      "bytes": 86236,
-      "sha256": "88a973fb169be8a2a7e8bbfbcf4984f6fa153e002f5b61d1d7caa6d1e90b43c8"
+      "bytes": 86037,
+      "sha256": "81a2d742e4b58323dafaf1a12464144cc479b8a4c570488922de4f877ea168f0"
     },
     {
       "path": "_astro/playfair-display-latin-400-italic.LeeEXsx5.woff2",
@@ -197,36 +197,25 @@
       "sha256": "6e9e020a25f9b56d418f2c085b1d3c09725a4da23fe693a5b463064606732190"
     }
   ],
-  "pdfCanonicalCheck": {
-    "passed": true,
-    "sections": 7,
-    "paragraphs": 13,
-    "discussionItems": 6,
-    "comparisonVerified": true,
-    "visualPagesReviewed": 2
-  },
-  "mobileEvidence": "Chromium DPR3 and native touch emulation; physical iPhone crash retry still pending",
-  "profileChanged": false,
-  "errors": [],
-  "failedRequests": [],
-  "edition": "complete-round-two-proposal",
-  "isCurrentRevision": true,
-  "supplementaryWebKitEvidence": "agentic-ui/webkit-verification.json",
-  "physicalIOSVerified": false,
-  "visualEvidence": {
-    "path": "qa-artifacts/round-2-candidate/critic-art/approved/capture.json",
-    "scope": "Complete design/commercial review at four viewports; earlier full forward/reverse candidate captures plus focused final framing checks. One-pixel reading lookup adjustment changes no tour composition. Hosted assets match reviewed build.",
-    "browserErrors": []
-  },
-  "renderingEvidence": "qa-artifacts/round-2-candidate/hosted-playwright",
   "independentDesignReview": {
     "verdict": "accepted",
-    "path": "docs/round-2-candidate-design-review.md",
-    "scope": "Complete bounded round-two proposal composition and rendered commercial meaning"
+    "path": "docs/fold-opening-independent-review.md",
+    "scope": "Initial folded packet, complete unfolding, cover approach, forward/reverse input and settling; four desktop/phone viewport sizes."
   },
-  "independentInteractionReview": {
-    "verdict": "accepted",
-    "path": "docs/round-2-candidate-interaction-review.md",
-    "scope": "Keyboard, direction, normal reading, input ownership and resource budget; no physical-device or VoiceOver claim"
-  }
+  "visualEvidence": {
+    "path": "qa-artifacts/fold-opening/reviewer/candidate-1/capture.json",
+    "frames": 128,
+    "browserErrors": []
+  },
+  "renderingEvidence": "qa-artifacts/fold-opening/hosted-e2e",
+  "supplementaryWebKitEvidence": "agentic-ui/webkit-verification.json",
+  "physicalIOSVerified": false,
+  "errors": [],
+  "failedRequests": [],
+  "limits": [
+    "Desktop engines and mobile emulation do not establish physical iPhone stability.",
+    "Manual VoiceOver and field INP remain unverified.",
+    "Component, document and portfolio evidence from the preceding revision remains in docs/portfolio-resume-motion-implementation.md; those surfaces did not change."
+  ],
+  "isCurrentRevision": true
 }
