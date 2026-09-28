@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
-  "surface": "Immediate short-gesture navigation through the approved Handrail trifold",
-  "generatedAt": "2026-09-27T22:46:46.224736+00:00",
+  "surface": "Deliberately paced Handrail trifold with immediate short-gesture navigation",
+  "generatedAt": "2026-09-28T00:03:15.288068+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -14,7 +14,7 @@
     "Telescope scale changes, Igloo camera continuity, Exat typography and Stripe Press document presentation remain approved references.",
     "Preserve the official Handrail wordmark, warm paper/rust palette and locally served Inter/Playfair typography.",
     "Remove decorative Unicode arrows, emojis and ornamental symbols; no paperclip or separate decorative sculpture.",
-    "Lead with the beginning of a partnership and growing Handrail; new business is a starting point and Brent\u2019s contribution can grow with company needs.",
+    "Lead with the beginning of a partnership and growing Handrail; new business is a starting point and Brent’s contribution can grow with company needs.",
     "Keep no base salary and commission paid after customer collections, with matching installments.",
     "Keep 15/5 if hired first and 20/5 if the qualifying client comes first, including that client and all future credited sales.",
     "Keep the 90-day proposal and benefits request. Handrail writes the final contract; no named future roles or private financial problems appear.",
@@ -59,7 +59,7 @@
       "agentic-ui/component-state-matrix.json",
       "tests/e2e/proposal.spec.ts"
     ],
-    "camera": "Wheel/touch intent selects adjacent concrete scenes immediately, with a 0.48\u20130.8s single-owner eased flight. Native keyboard/scrollbar movement keeps a 35ms settling fallback. Paper/path geometry is unchanged."
+    "camera": "Immediate gesture commitment with a roughly 1.7-second full reveal and 1.1–2-second full reading transfers. One sine easing owner drives continuous floating camera progress; native scroll mirrors position for restoration. Geometry, materials and input latching remain unchanged."
   },
   "tokenExports": {
     "dtcg": "agentic-ui/tokens.dtcg.json",
@@ -115,7 +115,7 @@
   "taskModel": {
     "targetUsers": [
       "Josh and Handrail decision makers",
-      "Engineering reviewers visiting Brent\u2019s GitHub"
+      "Engineering reviewers visiting Brent’s GitHub"
     ],
     "jobs": [
       "Understand and discuss the beginning of the proposed partnership",
@@ -130,7 +130,7 @@
     ]
   },
   "openDesignQuestions": [
-    "Physical iPhone playback of prompt gesture commitment remains unverified."
+    "Physical iPhone playback remains unverified; local cold scheduling delay is documented."
   ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
@@ -139,19 +139,20 @@
     "Previous release 5b06411: All six independent scores meet the requested category threshold; publication and all hosted verification are complete.",
     "Opening pacing follow-up: see docs/opening-smoothness-remediation.md and current local-verification.json; prior six-category scores are historical.",
     "Magnetic follow-up: docs/magnetic-scroll-remediation.md and docs/magnetic-scroll-review.md; final 27 Chromium and 11 WebKit checks pass.",
-    "Prompt gesture follow-up: docs/quick-gesture-remediation.md and docs/quick-gesture-review.md supersede the prior input-timing acceptance."
+    "Prompt gesture follow-up: docs/quick-gesture-remediation.md and docs/quick-gesture-review.md supersede the prior input-timing acceptance.",
+    "Deliberate-motion follow-up: docs/measured-motion-remediation.md and docs/measured-motion-review.md supersede the prior fast-travel timing acceptance."
   ],
   "userReview": {
     "date": "2026-09-27",
-    "status": "requested-earlier-magnet-and-less-effort",
+    "status": "requested-smoother-opening-and-slower-travel",
     "researchPath": "docs/design-director-review.md",
     "implementationPaused": false,
-    "reason": "User reports continued repeated scrolling and late magnetic engagement."
+    "reason": "User reports choppy opening and excessively fast transitions; immediate gesture commitment remains desired."
   },
   "publication": {
-    "status": "published-and-verified",
+    "status": "locally-verified-awaiting-publication",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidencePath": "agentic-ui/deployment-verification.json",
-    "note": "Source 98a6867; static 5b4e2de; all 28 hosted assets and 25 focused browser checks verified."
+    "note": "Deliberately paced candidate verified locally; previous fast-travel release remains live."
   }
 }

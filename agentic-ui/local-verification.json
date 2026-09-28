@@ -1,17 +1,16 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T22:46:46.224736+00:00",
-  "scope": "Prompt gesture commitment with one adjacent destination per gesture",
+  "generatedAt": "2026-09-28T00:03:15.288068+00:00",
+  "scope": "Deliberate opening and camera travel with immediate gesture commitment",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": true,
+  "deployed": false,
   "evidenceNotes": [
-    "Three new promptness/held-touch regressions failed against the previous release; sustained input exposed the user-reported delay.",
-    "The new control commits immediately and absorbs same-direction momentum. Controlled camera flights use one easing owner.",
-    "Browser touch recognition delivered no move event for 6px/12px in Chromium; 18px and 24px delivered events and began motion about 50ms later. No native threshold was represented as application latency.",
-    "Original full-suite failures remain recorded. All eight geometry checks and final 25 focused Chromium checks pass separately with unchanged thresholds; no claim of a single clean 206-case run.",
-    "26 of 28 output assets including both PDFs remain unchanged. Physical iPhone and field performance remain unverified.",
-    "All 28 hosted assets match the reviewed final candidate; all 25 focused hosted Chromium checks pass. Original full-suite failures and passing bounded rechecks remain separately recorded."
+    "All five new timing regressions fail the fast published baseline and pass the candidate. Response latency and travel duration are verified separately.",
+    "The initial isolated run passes 18/20. Two arrival-observation fixtures are corrected and pass 2/2 with unchanged application bytes. Original failures remain retained.",
+    "Independent isolated cold profiles show a largest phone hinge step of 1.89 degrees versus 30.01 previously. A cold callback delay remains; no general renderer-throughput or physical-device guarantee is inferred.",
+    "The camera now advances through floating tween coordinates while native position mirrors it. Exact arrivals, input latching, reversal and ordinary reading are retained.",
+    "26 of 28 assets, including both PDFs, remain byte-identical. Publication and hosted verification pending."
   ],
   "limitations": [
     "agentic-ui/blockers.json",
@@ -20,12 +19,12 @@
   ],
   "deploymentEvidencePath": "agentic-ui/deployment-verification.json",
   "independentReviews": {
-    "report": "docs/quick-gesture-review.md",
+    "report": "docs/measured-motion-review.md",
     "verdict": "accepted-within-inspected-local-scope"
   },
   "candidateIdentity": {
     "_astro/client.CCxN9xF8.js": "4907db89a5bc4160920b577b51facb283e0e376ee1b4d5acab82c2e4d5654811",
-    "_astro/index.astro_astro_type_script_index_0_lang.BEuDiNcr.js": "1554442c1db68e86c9b612131b71da73ea665ca97169045289407367a67c480d",
+    "_astro/index.astro_astro_type_script_index_0_lang.C5eTyZ5l.js": "5d7417daf164e76b5d9d3a8228b6a52c9e6857857044150928c069d1076b1b15",
     "_astro/inter-cyrillic-ext-wght-normal.BOeWTOD4.woff2": "ca157063339ac4ad418f214f3abfed119b0798ab4d377386ce5c9e5a7a435ebd",
     "_astro/inter-cyrillic-wght-normal.DqGufNeO.woff2": "71d5ee93cc1e9f1d520a3a8b66456de18c7879d8df09d57fcd2eaff75fef0075",
     "_astro/inter-greek-ext-wght-normal.DlzME5K_.woff2": "6e9e020a25f9b56d418f2c085b1d3c09725a4da23fe693a5b463064606732190",
@@ -45,7 +44,7 @@
     "brent-showalter-handrail-resume.pdf": "dbf5cae25589697e1c9904e82ffa27aa384a9a98212a1a57272dcfca845ef501",
     "handrail-logo.png": "1e024d51ef5f28a6bcedfa90ff58c5f0481a81db81cbcd5efede50594766bb3a",
     "handrail-proposed-agreement.pdf": "8ace1fd73de5d542e4655bb25c45a96eb15cb77a56c2d2746a878c809dffceb2",
-    "index.html": "f9494650aaf9a794820bd615ed4dcd44a86c25c149566ca7f579dbfa365ca35a",
+    "index.html": "1bc85f8205206d7adbcbedcb244aad96e249553f1be9ecaee049969a231b7126",
     "licenses/Inter-OFL.txt": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345",
     "licenses/Playfair-Display-OFL.txt": "c052aafd2a71e90bcee6e69f475029d430a10d548c08ffcae350171f0e9668b1",
     "paper-grain.svg": "f1ad2a836254dd1e1bda3de717abb7c3de39007361741e634977267450cc774b",
@@ -272,9 +271,7 @@
       "command": "Hosted asset and scoped browser verification",
       "result": "28 exact files; 27 Chromium tests passed",
       "exitCode": 0
-    }
-  ],
-  "checks": [
+    },
     {
       "command": "pnpm check",
       "result": "47 files; zero errors, warnings or hints",
@@ -323,6 +320,63 @@
     {
       "command": "Hosted asset and focused browser verification",
       "result": "28 exact files; 25 Chromium tests passed",
+      "exitCode": 0
+    }
+  ],
+  "checks": [
+    {
+      "command": "pnpm check",
+      "result": "48 files; zero errors, warnings or hints",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm test",
+      "result": "34 passed",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm format:check && git diff --check",
+      "result": "passed",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm build",
+      "result": "three routes; 28 reviewed output files",
+      "exitCode": 0
+    },
+    {
+      "command": "Isolated timing, gesture and geometry; qa-artifacts/measured-motion/candidate-tests.log",
+      "result": "18/20 passed. Two arrival-observation fixtures failed; original traces retained. All eight geometry and five new timing cases passed unchanged.",
+      "exitCode": 1
+    },
+    {
+      "command": "Arrival-observation rechecks; qa-artifacts/measured-motion/arrival-recheck.log",
+      "result": "2/2 passed with unchanged application bytes and exact endpoints",
+      "exitCode": 0
+    },
+    {
+      "command": "Scoped compatibility; qa-artifacts/measured-motion/compatibility.log",
+      "result": "42/44 passed. Two reversal fixtures assumed distances exceeding the slower initial excursion; original failures retained.",
+      "exitCode": 1
+    },
+    {
+      "command": "Reversal fixture rechecks; qa-artifacts/measured-motion/reversal-recheck.log",
+      "result": "2/2 passed; proportional prompt reversal, no overshoot and exact destinations verified",
+      "exitCode": 0
+    },
+    {
+      "command": "Supplementary WebKit; qa-artifacts/measured-motion/webkit.log",
+      "result": "23 passed without retries",
+      "exitCode": 0
+    },
+    {
+      "command": "Isolated before/after cold rendering profiles",
+      "result": "Phone DPR3, desktop and CPU4 phone measurements retained in qa-artifacts/measured-motion/profiling/comparison.json; bounds and limitations in remediation record",
+      "exitCode": 0
+    },
+    {
+      "command": "Independent headed motion review",
+      "result": "See docs/measured-motion-review.md for current rendered verdict and evidence",
       "exitCode": 0
     }
   ],

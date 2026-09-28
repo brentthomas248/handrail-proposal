@@ -878,13 +878,28 @@ test('an immediate fast flick is smoothed and reversing input takes control', as
     (frame) => frame.time > reversedAt + 50 && frame.time < reversedAt + 300,
   );
   expect(reverseFrames.length).toBeGreaterThan(4);
+  const excursion = reverseFrames[0].progress - frames[0].progress;
+  expect(excursion, 'The initial flick must move the camera').toBeGreaterThan(
+    0.00001,
+  );
   for (let i = 1; i < reverseFrames.length; i += 1)
     expect(reverseFrames[i].progress).toBeLessThanOrEqual(
-      reverseFrames[i - 1].progress + 0.0005,
+      reverseFrames[i - 1].progress + Math.min(0.0005, excursion * 0.01),
     );
+  // A gentle launch may travel less than 2% of the entire proposal. Reversal
+  // must recover a meaningful share of that actual excursion promptly.
   expect(reverseFrames.at(-1)!.progress).toBeLessThan(
-    reverseFrames[0].progress - 0.02,
+    reverseFrames[0].progress - excursion * 0.2,
   );
+  await waitForTourSettled(page);
+  const [restored] = await collectMotion(page, 0);
+  expect(restored).toMatchObject({
+    scroll: frames[0].scroll,
+    progress: frames[0].progress,
+    camera: frames[0].camera,
+    left: frames[0].left,
+    right: frames[0].right,
+  });
 });
 
 test('fresh input cancels automatic settling and lands in the new direction', async ({
@@ -910,10 +925,20 @@ test('fresh input cancels automatic settling and lands in the new direction', as
     .poll(() => page.evaluate(() => scrollY), { timeout: 3000 })
     .toBeLessThan(released - 15);
   const beforeReverse = await page.evaluate(() => scrollY);
+  const excursion = pathsY - beforeReverse;
+  expect(excursion).toBeGreaterThan(0);
+  const returnMotion = collectMotion(page, 2500);
   await page.mouse.wheel(0, 130);
   await expect
-    .poll(() => page.evaluate(() => scrollY), { intervals: [20] })
-    .toBeGreaterThan(beforeReverse + 80);
+    .poll(() => page.evaluate(() => scrollY), {
+      timeout: 600,
+      intervals: [20],
+    })
+    .toBeGreaterThan(beforeReverse + Math.min(80, excursion * 0.2));
+  const returnFrames = await returnMotion;
+  expect(
+    Math.max(...returnFrames.map((frame) => frame.scroll)),
+  ).toBeLessThanOrEqual(pathsY);
   await expect
     .poll(() => page.evaluate(() => scrollY), { timeout: 6000 })
     .toBeCloseTo(pathsY, 0);

@@ -574,6 +574,10 @@ function mountTour(
     }
     const state = { y: magnetic ? offset + visual * range : window.scrollY };
     const destination = Math.round(offset + progress * range);
+    const travel = Math.abs(progress - visual) * path.duration;
+    const unfolding =
+      Math.max(progress, visual) * path.duration <=
+      openingAnchors[1] + path.duration / range;
     userDirection = Math.sign(destination - state.y);
     magneticFlight = magnetic;
     if (magnetic) {
@@ -585,8 +589,8 @@ function mountTour(
       y: destination,
       duration: magnetic
         ? Math.min(
-            0.8,
-            Math.max(0.48, Math.abs(progress - visual) * path.duration * 0.2),
+            unfolding ? 1.7 : 2,
+            Math.max(unfolding ? 0.6 : 1.1, travel * (unfolding ? 1 : 0.65)),
           )
         : Math.min(
             chapterDistance > 1
@@ -594,15 +598,17 @@ function mountTour(
               : 1.55,
             Math.max(0.5, Math.abs(progress - visual) * path.duration * 0.44),
           ),
-      ease: magnetic ? 'power2.out' : 'sine.inOut',
+      // Immediate input ownership is separate from camera speed. Ease into
+      // the unfold instead of spending most of its travel on the first frames.
+      ease: 'sine.inOut',
       onUpdate: () => {
         writeScroll(state.y);
         if (magnetic) {
-          // The controlled flight is already eased; a second spring delays
-          // response and arrival after the gesture has selected its stop.
+          // Keep the camera continuous even when native scroll rounds to a
+          // device pixel. Native position mirrors the flight for restoration.
           target = visual = Math.max(
             0,
-            Math.min(1, (window.scrollY - offset) / range),
+            Math.min(1, (state.y - offset) / range),
           );
           render();
         }
@@ -702,8 +708,10 @@ function mountTour(
       }
     }
     writtenScrollY = undefined;
-    target = Math.max(0, Math.min(1, (window.scrollY - offset) / range));
-    if (!magneticFlight) startTick();
+    if (!magneticFlight) {
+      target = Math.max(0, Math.min(1, (window.scrollY - offset) / range));
+      startTick();
+    }
     scheduleSettle();
   }
 

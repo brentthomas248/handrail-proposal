@@ -20,9 +20,7 @@ for (const width of [390, 1440]) {
       await page.mouse.wheel(0, 1);
       await page.waitForTimeout(40);
       if (i === 3) {
-        expect(await page.evaluate(() => scrollY)).toBeGreaterThan(
-          cash + (next - cash) * 0.25,
-        );
+        expect(await page.evaluate(() => scrollY)).toBeGreaterThan(cash + 5);
       }
     }
     await waitForTourSettled(page);
@@ -30,7 +28,10 @@ for (const width of [390, 1440]) {
     await page.waitForTimeout(250);
     await page.mouse.wheel(0, -1);
     await expect
-      .poll(() => page.evaluate(() => scrollY), { timeout: 1200 })
+      .poll(() => page.evaluate(() => scrollY), {
+        timeout: 2500,
+        intervals: [50],
+      })
       .toBe(cash);
     await waitForTourSettled(page);
   });
@@ -62,9 +63,12 @@ test('a short held swipe arrives before release and only a new swipe advances ag
   }
   await expect
     .poll(() => page.evaluate(() => scrollY), { timeout: 250 })
-    .toBeGreaterThan(cash + 100);
+    .toBeGreaterThan(cash + 5);
   await expect
-    .poll(() => page.evaluate(() => scrollY), { timeout: 1000 })
+    .poll(() => page.evaluate(() => scrollY), {
+      timeout: 2500,
+      intervals: [50],
+    })
     .toBe(next);
   for (const y of [460, 440, 420]) await touch('touchMove', y);
   await page.waitForTimeout(250);
@@ -76,7 +80,10 @@ test('a short held swipe arrives before release and only a new swipe advances ag
   await touch('touchMove', 480);
   await touch('touchEnd');
   await expect
-    .poll(() => page.evaluate(() => scrollY), { timeout: 1200 })
+    .poll(() => page.evaluate(() => scrollY), {
+      timeout: 2500,
+      intervals: [50],
+    })
     .toBe(following);
   await context.close();
 });
@@ -92,7 +99,7 @@ test('browser zoom and horizontal gestures do not commit a chapter', async ({
   await page.mouse.wheel(0, 10);
   await page.keyboard.up('Control');
   await page.mouse.wheel(100, 0);
-  await page.waitForTimeout(350);
+  await waitForTourSettled(page);
   expect(await page.evaluate(() => scrollY)).toBe(cash);
 });
 
@@ -132,7 +139,10 @@ test('a touch tap does not interrupt a committed flight', async ({ page }) => {
     );
   });
   await expect
-    .poll(() => page.evaluate(() => scrollY), { timeout: 1000 })
+    .poll(() => page.evaluate(() => scrollY), {
+      timeout: 2500,
+      intervals: [50],
+    })
     .toBe(next);
 });
 
@@ -171,7 +181,10 @@ test('fresh wheel intent interrupts chapter navigation after an earlier wheel ge
   await page.mouse.move(195, 400);
   await page.mouse.wheel(0, 1);
   await expect
-    .poll(() => page.evaluate(() => scrollY), { timeout: 1200 })
+    .poll(() => page.evaluate(() => scrollY), {
+      timeout: 2500,
+      intervals: [50],
+    })
     .toBe(next);
   await waitForTourSettled(page);
 });

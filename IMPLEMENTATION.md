@@ -2,6 +2,14 @@
 
 ## Current state
 
+The [deliberate-motion correction](docs/measured-motion-remediation.md) keeps immediate gesture commitment while giving the unfold about 1.7 seconds and full reading transfers about 1.1–2 seconds. A single sine easing drives continuous floating camera coordinates; native scroll mirrors position. Approved geometry, materials, text and framing remain unchanged. [Independent rendered review](docs/measured-motion-review.md) accepts 42 correct held arrivals across four sizes with 487 primary text-line rectangles and no clipping.
+
+Typecheck (48 files), all 34 unit tests, formatting and build pass. The isolated timing/gesture/geometry run passed 18/20, followed by two passing arrival-fixture rechecks. The broader compatibility run passed 42/44, followed by two passing reversal-fixture rechecks. All 23 supplementary WebKit checks pass. Original failures remain documented; application bytes did not change for the fixture corrections. Phone profiling reduces the largest sampled cold hinge step from 30.01° to 1.89° while preserving prompt response. A cold scheduling delay remains; physical iPhone playback and field performance remain unverified.
+
+Publication pending for the reviewed deliberate-motion candidate.
+
+## Published prompt-gesture release
+
 The user reports that release-triggered magnetism still takes too much scrolling. [Immediate gesture completion](docs/quick-gesture-remediation.md) now starts on the first wheel intent or short vertical touch move and keeps same-gesture momentum latched to one scene. A single easing owner completes controlled flights in 0.48–0.8 seconds. Ordinary reading stays native; existing paper, camera path and complete reading compositions are unchanged. [Independent rendered review](docs/quick-gesture-review.md) accepts the complete journey and the final phone navigation correction.
 
 Typecheck (47 files), all 34 unit tests, formatting and build pass. The full Chromium run passed 203/206; its two phone navigation defects are fixed, and the cold-opening frame-count floor passes in isolation without lowering thresholds. All eight final geometry checks, all 25 final focused Chromium checks and all 18 supplementary WebKit checks pass without retries. The original failures remain recorded. Source `98a6867debcf80b4c13d9268324eff09983ab23f`; static `5b4e2ded8a9dec1445c864344abc3542193059cf`. [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36356349551) succeeded. All 28 hosted files match the reviewed candidate and all 25 focused hosted checks pass without retries. Physical iPhone playback remains unverified.

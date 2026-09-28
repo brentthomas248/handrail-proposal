@@ -56,7 +56,7 @@
     "These page-load laboratory results do not establish motion continuity, field INP or physical-device performance; continuous-input evidence is recorded separately."
   ],
   "isCurrentRevision": false,
-  "currentRevisionNote": "Lighthouse and earlier motion results remain historical. Current prompt-gesture timings are isolated browser measurements, not physical-device or field performance.",
+  "currentRevisionNote": "Earlier Lighthouse and motion results remain historical. Current measured-motion evidence compares camera pacing and local browser callback delivery; physical iPhone and field performance remain unverified.",
   "motionEvidence": "docs/final-design-review/r8-rendering.md",
   "openingFollowUp": {
     "scope": "Cold first-opening pacing, separately measured from historical Lighthouse scores",
@@ -137,5 +137,20 @@
       "baselineLastCameraChangeMs": 3180
     },
     "scope": "Isolated actual wheel and emulated native touch; unchanged rendering surface budgets."
+  },
+  "measuredMotionFollowUp": {
+    "report": "docs/measured-motion-remediation.md",
+    "review": "docs/measured-motion-review.md",
+    "measurements": "qa-artifacts/measured-motion/profiling/comparison.json",
+    "htmlSha256": "1bc85f8205206d7adbcbedcb244aad96e249553f1be9ecaee049969a231b7126",
+    "phoneColdOpening": {
+      "baselineMaxHingeStepDegrees": 30.014,
+      "candidateMaxHingeStepDegrees": 1.894,
+      "baselineChangedFrames": 26,
+      "candidateChangedFrames": 100,
+      "candidateDurationMs": 1683.2,
+      "candidateMaxActualCallbackGapMs": 60.1
+    },
+    "scope": "Isolated Chromium phone DPR3, desktop and CPU-throttled phone captures. No long animation task observed; cold scheduling delay remains. Unchanged material and surface budgets."
   }
 }
