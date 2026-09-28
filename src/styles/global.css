@@ -219,7 +219,10 @@ main {
 .panel-face {
   display: flex;
   flex-direction: column;
-  transform: translateZ(calc(1 * var(--paper-unit)));
+  /* Two-sided print shares the fold midsurface. Offsetting adjacent print
+     planes makes them intersect at the crease and destabilizes 3D clipping.
+     Separate, outward-facing edge quads retain the thin stock silhouette. */
+  transform: translateZ(0);
   border-inline: calc(1 * var(--paper-unit)) solid #d4cab9;
 }
 .panel-face > * {
@@ -229,7 +232,7 @@ main {
   color: rgb(26 24 22 / var(--back-ink-alpha, 1));
   position: absolute;
   inset: 0;
-  transform: rotateY(180deg) translateZ(calc(1 * var(--paper-unit)));
+  transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
 }
@@ -310,20 +313,39 @@ main {
   margin-top: calc(52 * var(--paper-unit));
   padding-top: calc(28 * var(--paper-unit));
 }
-.rust-back {
-  background: var(--accent);
-  color: rgb(255 255 255 / var(--back-ink-alpha, 1));
+.closing-back {
   justify-content: center;
   padding: calc(75 * var(--paper-unit));
 }
-.rust-back > div,
+.flyer-finale {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.flyer-finale h2 {
+  font-size: calc(180 * var(--paper-unit));
+  line-height: 0.98;
+  letter-spacing: -0.065em;
+  font-weight: 600;
+  margin: 0;
+}
+.flyer-finale h2 span {
+  display: block;
+}
+.closing-watermark {
+  width: calc(600 * var(--paper-unit));
+  max-width: 100%;
+  height: auto;
+  margin-top: calc(110 * var(--paper-unit));
+  opacity: 0.3;
+}
 .plain-back > div {
   font-size: calc(128 * var(--paper-unit));
   letter-spacing: -0.06em;
   line-height: 0.98;
   font-weight: 580;
 }
-.rust-back > span,
 .plain-back > span {
   margin-top: calc(75 * var(--paper-unit));
   font-size: calc(36 * var(--paper-unit));
@@ -917,6 +939,8 @@ html[data-presentation='tour'] .paper-edge {
   display: block;
   position: absolute;
   pointer-events: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 html[data-presentation='tour'] .paper-edge-top,
 html[data-presentation='tour'] .paper-edge-bottom {
@@ -1099,6 +1123,17 @@ html[data-presentation='read'] .deal-paths {
 }
 html[data-presentation='read'] .flyer-partnership {
   border-top: 1px solid var(--line);
+}
+html[data-presentation='read'] .flyer-finale {
+  border-top: 1px solid var(--line);
+  padding-block: 80px;
+}
+html[data-presentation='read'] .flyer-finale h2 {
+  font-size: clamp(48px, 8vw, 80px);
+}
+html[data-presentation='read'] .closing-watermark {
+  width: 240px;
+  margin-top: 38px;
 }
 .collection-comparison--notes {
   --body: 18px;

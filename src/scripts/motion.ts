@@ -256,7 +256,7 @@ function mountTour(
         ? 0.5
         : 0.43;
     const center = foldPoint(
-      { x: box.x + box.width / 2, y: box.y + box.height / 2, z: 1 },
+      { x: box.x + box.width / 2, y: box.y + box.height / 2, z: 0 },
       stop.panel,
       panelWidth,
       fold,
@@ -325,7 +325,7 @@ function mountTour(
     if (width < 760 && stop.element?.matches('.flyer-cover')) {
       const paperTop = project(
         foldPoint(
-          { x: box.x + box.width / 2, y: 0, z: 1 },
+          { x: box.x + box.width / 2, y: 0, z: 0 },
           stop.panel,
           panelWidth,
           fold,
@@ -430,7 +430,7 @@ function mountTour(
         const leftHinge =
           i === 0 || (i === 1 && (back ? side === 'right' : side === 'left'));
         const hinge = leftHinge ? pose.left : pose.right;
-        const concave = leftHinge !== back;
+        const concave = hinge >= 0 ? leftHinge !== back : leftHinge === back;
         element.style.opacity = (
           0.06 +
           (concave ? 0.42 : 0.18) *
@@ -584,6 +584,10 @@ function mountTour(
     const unfolding =
       Math.max(progress, visual) * path.duration <=
       openingAnchors[1] + path.duration / range;
+    const closing =
+      stops.at(-1)?.element?.dataset.printFace === 'back' &&
+      Math.max(progress, visual) * path.duration >
+        (stops.at(-2)?.at ?? Infinity) + readingRadius;
     userDirection = Math.sign(destination - state.y);
     magneticFlight = magnetic;
     if (magnetic) {
@@ -593,17 +597,22 @@ function mountTour(
     }
     scrollTween = gsap.to(state, {
       y: destination,
-      duration: magnetic
+      duration: closing
         ? Math.min(
-            unfolding ? 1.7 : 2,
-            Math.max(unfolding ? 0.6 : 1.1, travel * (unfolding ? 1 : 0.65)),
+            chapterDistance > 1 ? 3.2 : 2.8,
+            Math.max(1.1, travel * 0.56),
           )
-        : Math.min(
-            chapterDistance > 1
-              ? Math.min(3.2, 0.55 + chapterDistance * 0.55)
-              : 1.55,
-            Math.max(0.5, Math.abs(progress - visual) * path.duration * 0.44),
-          ),
+        : magnetic
+          ? Math.min(
+              unfolding ? 1.7 : 2,
+              Math.max(unfolding ? 0.6 : 1.1, travel * (unfolding ? 1 : 0.65)),
+            )
+          : Math.min(
+              chapterDistance > 1
+                ? Math.min(3.2, 0.55 + chapterDistance * 0.55)
+                : 1.55,
+              Math.max(0.5, Math.abs(progress - visual) * path.duration * 0.44),
+            ),
       // Immediate input ownership is separate from camera speed. Ease into
       // the unfold instead of spending most of its travel on the first frames.
       ease: 'sine.inOut',
@@ -862,6 +871,46 @@ function mountTour(
     let additionalTravel = cursor - 2.65;
     for (let i = 1; i < stops.length; i += 1) {
       const stop = stops[i];
+      if (stop.element?.dataset.printFace === 'back') {
+        // Close in the opposite accordion direction: the right reverse is
+        // then the exposed exterior, with no substituted print or overlay.
+        const departure = stops[i - 1].at;
+        const closingViews = [
+          [0.7, 34, -30, 18, width < height ? -18 : -5],
+          [1.5, 4, -46, 22, width < height ? -12 : -5],
+          [2.4, -64, -52, 24, width < height ? -7 : -4],
+          [3.3, -126, -30, 16, -4],
+          [4.1, -162, -12, 8, -2],
+          [5, -174, -6, 5, -1.5],
+        ].map(([time, hinge, yaw, pitch, roll]) => ({
+          at: departure + time,
+          pose: overview(hinge, yaw, pitch, roll),
+        }));
+        // Hold the fitted pullback through the broad sweep, then move closer
+        // only as the paper packet actually narrows.
+        const sweepScale = Math.min(
+          ...closingViews.slice(0, 4).map(({ pose }) => pose.scale),
+        );
+        closingViews.slice(0, 4).forEach(({ pose }) => {
+          pose.scale = sweepScale;
+        });
+        const finalPose = closingViews.at(-1)!.pose;
+        finalPose.scale = Math.min(
+          finalPose.scale,
+          (availableHeight * 0.82) / paperHeight,
+          (width * 0.7) / panelWidth,
+        );
+        closingViews[4].pose.scale = Math.min(
+          closingViews[4].pose.scale,
+          Math.exp(
+            Math.log(sweepScale) * 0.4 + Math.log(finalPose.scale) * 0.6,
+          ),
+        );
+        frames.push(...closingViews);
+        stop.at = closingViews.at(-1)!.at;
+        additionalTravel += 3.3;
+        continue;
+      }
       const pose = readingPose(stop);
       if (i === 1 && width < 760) {
         // Establish the cover's framing before the type reaches reading size.
@@ -929,9 +978,13 @@ function mountTour(
     path = createPath(frames);
     range = preserveScroll
       ? previousRange
-      : Math.max(540, height * 0.74) *
-        (stops.length + 1) *
-        (path.duration / (path.duration - additionalTravel));
+      : Math.round(
+          Math.max(540, height * 0.74) *
+            (stops.length + 1) *
+            (path.duration / (path.duration - additionalTravel)),
+        );
+    // Native scrolling lands on whole pixels; its last anchor must represent
+    // the exact path endpoint rather than a fractional unfinished fold.
     journey.style.height = `${range + innerHeight}px`;
     offset = journey.getBoundingClientRect().top + window.scrollY;
     rebuildNavigation();
@@ -992,14 +1045,18 @@ function mountTour(
           Math.min(viewportBottom, box.bottom) - Math.max(readingTop, box.top),
         );
       };
-      // At the document end, the last section cannot reach the reading line.
-      // Prefer it only when it is the dominant visible reading group.
+      const lastBox = lastSection?.getBoundingClientRect();
+      // A short final section cannot reach the reading line. At the document
+      // end, a fully visible closing group still represents the reader's place.
       if (
         lastSection &&
         visibleHeight(lastSection) > 0 &&
-        sections.every(
-          (section) => visibleHeight(section) <= visibleHeight(lastSection),
-        )
+        ((lastBox &&
+          lastBox.top >= readingTop &&
+          lastBox.bottom <= viewportBottom + 1) ||
+          sections.every(
+            (section) => visibleHeight(section) <= visibleHeight(lastSection),
+          ))
       )
         return lastSection;
     }

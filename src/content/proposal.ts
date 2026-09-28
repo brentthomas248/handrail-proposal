@@ -39,6 +39,9 @@ export const flyerCopy = {
     proposalNote:
       'Let’s discuss the starting terms and open questions. Handrail prepares the final contract.',
   },
+  finale: {
+    headlineLines: ['Let’s', 'do this!'],
+  },
 } as const;
 
 export const dealPathCopy = {

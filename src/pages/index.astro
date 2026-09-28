@@ -28,7 +28,7 @@ const base = import.meta.env.BASE_URL;
         </button>
       </nav>
       <span class="tour-counter" aria-hidden="true">
-        <span id="current-stop">00</span> / <span id="total-stops">06</span>
+        <span id="current-stop">00</span> / <span id="total-stops">07</span>
       </span>
     </div>
     <div class="tour-loading">
@@ -160,6 +160,28 @@ const base = import.meta.env.BASE_URL;
                 </a>
               </div>
             </section>
+            <section
+              class="flyer-finale"
+              id="lets-do-this"
+              data-print-panel="right"
+              data-print-face="back"
+              data-camera-stop={flyerCopy.finale.headlineLines.join(' ')}
+              data-camera-order="6"
+            >
+              <h2 aria-label={flyerCopy.finale.headlineLines.join(' ')}>
+                {flyerCopy.finale.headlineLines.map((line) => (
+                  <span>{line}</span>
+                ))}
+              </h2>
+              <img
+                class="closing-watermark"
+                src={`${base}handrail-logo.png`}
+                width="1397"
+                height="392"
+                alt=""
+                aria-hidden="true"
+              />
+            </section>
           </div>
           <div class="fold-panel" data-panel="left">
             <i class="paper-edge paper-edge-top" aria-hidden="true"></i>
@@ -286,21 +308,13 @@ const base = import.meta.env.BASE_URL;
                 <span>For discussion</span>
               </div>
             </div>
-            <div class="panel-back rust-back" aria-hidden="true">
+            <div class="panel-back closing-back" aria-hidden="true">
               <i class="paper-light" aria-hidden="true"></i>
               <i
                 class="paper-crease paper-crease-right"
                 data-crease="right"
                 aria-hidden="true"
               ></i>
-              <div>
-                Start here.
-                <br />
-                Grow
-                <br />
-                together.
-              </div>
-              <span>A proposal for Handrail.</span>
             </div>
           </div>
         </article>

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-27T20:51:01.808465+00:00",
+  "generatedAt": "2026-09-28T02:04:26.376898+00:00",
   "surface": "Handrail hinged HTML trifold and partnership proposal notes",
   "scope": "Final full-experience specialist review",
   "sources": [
@@ -76,9 +76,14 @@
     }
   ],
   "isCurrentRevision": false,
-  "currentRevisionNote": "Original six-category scores and full release remain historical. Current bounded renderer/material follow-up is accepted in docs/paper-depth-review.md; verification is in agentic-ui/local-verification.json.",
+  "currentRevisionNote": "Original broad grades are historical. Current bounded closing-fold addition is independently accepted in docs/closing-fold-review.md; current local checks are in local-verification.json.",
   "paperRenderingFollowUp": {
     "report": "docs/paper-depth-review.md",
     "status": "accepted-within-inspected-local-scope"
+  },
+  "closingFoldFollowUp": {
+    "report": "docs/closing-fold-review.md",
+    "status": "accepted-within-inspected-local-scope",
+    "htmlSha256": "aca0ea5656b652b603c76395f917484f43820372586bf31fc8772d1644b7bc70"
   }
 }

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
-  "surface": "Handrail matte-paper Z-fold with cached lighting and immediate gesture navigation",
-  "generatedAt": "2026-09-28T00:52:13.062454+00:00",
+  "surface": "Handrail matte-paper Z-fold with a reversible folded back-cover invitation",
+  "generatedAt": "2026-09-28T02:04:26.376898+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -21,12 +21,13 @@
     "Continue the approved local design, Storybook and Playwright workflow.",
     "Use mobile ink hierarchy rather than extra opacity/filter layers; active text stays full strength.",
     "Require an independent adversarial design critic for mobile camera/layout changes; record and resolve blockers before publication.",
-    "Six complete phone reading scenes and five desktop scenes follow the visible three-panel overview.",
+    "Six complete phone reading scenes and five desktop scenes follow the visible three-panel overview; the final back-cover invitation adds one concluding stop.",
     "Equal collected-dollar comparison for15% and20%, with cash remaining before delivery/benefits/other costs.",
     "Physical crease orbits, bounded surfaces, stable ink and same-document reading.",
     "Evidence-backed resume with2025degree, proposed contribution areas and decorative Handrail watermark.",
     "Prominent resume/GitHub links, responsive navigation and exact history-entry return position.",
-    "A short vertical gesture immediately commits to the adjacent concrete scene. Same-gesture momentum stays latched; touch release rearms the next swipe; ordinary reading remains native."
+    "A short vertical gesture immediately commits to the adjacent concrete scene. Same-gesture momentum stays latched; touch release rearms the next swipe; ordinary reading remains native.",
+    "The last gesture folds the existing flyer into its right back cover, printing Let’s do this! above the official Handrail watermark."
   ],
   "rejectedDecisions": [
     "Neon/glow design direction",
@@ -42,7 +43,9 @@
       "/handrail-proposal/agreement/",
       "/handrail-proposal/resume/"
     ],
-    "components": ["DealPath"],
+    "components": [
+      "DealPath"
+    ],
     "filesChanged": [
       "src/content/proposal.ts",
       "src/scripts/motion.ts",
@@ -59,7 +62,7 @@
       "agentic-ui/component-state-matrix.json",
       "tests/e2e/proposal.spec.ts"
     ],
-    "camera": "Immediate gesture commitment and accepted 1.7-second reveal / 1.1–2-second transfers remain. Late opening pitch/yaw makes both creases visible in the overview silhouette; all reading poses are unchanged. Static ink/grain use bounded independent opacity lighting, crease strips and transformed floor tiles."
+    "camera": "Accepted 1.7-second opening and 1.1–2-second reading transfers remain. Final 2.8-second closing follows the same reversible path through flat into a negative accordion. Backface-culled two-sided midsurface print avoids crease-plane intersections; outward thin stock edges, cached lighting and grain remain."
   },
   "tokenExports": {
     "dtcg": "agentic-ui/tokens.dtcg.json",
@@ -67,7 +70,9 @@
   },
   "componentCoverage": {
     "matrixPath": "agentic-ui/component-state-matrix.json",
-    "components": ["DealPath"],
+    "components": [
+      "DealPath"
+    ],
     "missingCoverage": [],
     "status": "verified-current-local"
   },
@@ -116,6 +121,10 @@
       "report": "docs/paper-depth-review.md",
       "status": "accepted-within-inspected-local-scope",
       "sourceCommit": "5e7950ce453906c717543ce02cb723bb2569393f"
+    },
+    "closingFoldFollowUp": {
+      "report": "docs/closing-fold-review.md",
+      "status": "accepted-within-inspected-local-scope"
     }
   },
   "userAssumptions": [
@@ -155,15 +164,15 @@
   ],
   "userReview": {
     "date": "2026-09-27",
-    "status": "requested-root-rendering-fix-and-real-paper-depth",
+    "status": "requested-final-folded-back-cover",
     "researchPath": "docs/design-director-review.md",
     "implementationPaused": false,
-    "reason": "User accepts pacing but reports a choppy opening and flat digital material."
+    "reason": "User accepted the paper/material revision and requested a final folding animation with Let’s do this! and the Handrail watermark."
   },
   "publication": {
-    "status": "published-and-verified",
+    "status": "locally-verified-publication-pending",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidencePath": "agentic-ui/deployment-verification.json",
-    "note": "Source 5e7950c; static 7f8a88e; all 28 hosted files and 24 focused checks verified."
+    "note": "Current closing fold accepted locally; hosted verification pending."
   }
 }

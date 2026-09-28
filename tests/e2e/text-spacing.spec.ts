@@ -84,7 +84,14 @@ for (const width of [320, 390, 768, 1440]) {
         expect(frame.top).toBeGreaterThanOrEqual(frame.header);
         expect(frame.focusInside).toBe(true);
       }
-      for (const id of ['idea', 'cash-flow', 'paths', 'window', 'together']) {
+      for (const id of [
+        'idea',
+        'cash-flow',
+        'paths',
+        'window',
+        'together',
+        'lets-do-this',
+      ]) {
         const section = page.locator(`#${id}`);
         await section.scrollIntoViewIfNeeded();
         const bounds = await section.boundingBox();

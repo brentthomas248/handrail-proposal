@@ -76,7 +76,7 @@ components:
 
 The approved Telescope, Igloo, Exat and Stripe Press references inform material, typography and camera direction; Handrail supplies the logo and cream/rust/ink identity. The full proposal now uses the same print and camera rules from opening through closing. Front and reverse ink stay in static printed surfaces; light changes independently while authored spacing remains stable. Local hinge travel connects reading scenes without repeatedly retreating to a distant overview.
 
-The semantic narrative is beginning → cash flow → proposed rates → 90-day window → growing together. That is also the no-JavaScript and ordinary reading order. The same section nodes mount into physical panel slots only for the tour; decorative backs never carry essential terms. Desktop has five reading scenes plus overview; phone separates the two rate choices, producing six plus overview. Each phone rate scene owns its heading, rationale and common terms. Short window and closing compositions align toward the top of the safe stage rather than exposing unrelated paragraph fragments above them.
+The semantic narrative is beginning → cash flow → proposed rates → 90-day window → growing together → closing invitation. That is also the no-JavaScript and ordinary reading order. The same section nodes mount into physical panel slots only for the tour; decorative backs never carry essential terms. Desktop has five reading scenes followed by a closing back-cover scene, plus overview; phone separates the two rate choices, producing six reading scenes followed by the same closing back-cover scene, plus overview. Each phone rate scene owns its heading, rationale and common terms. Short window and partnership compositions align toward the top of the safe stage rather than exposing unrelated paragraph fragments above them.
 
 The collections illustration compares both paths on the same $10,000 received installment: $1,500 commission/$8,500 remaining at 15%, versus $2,000/$8,000 at 20%. The $500 difference is per collected installment. This is a static accessible table, not an animated count or elementary payment trace. Its hypothetical $120,000 build over 12 installments and before-costs qualification remain visible. Notes add the conditional $18,000/$24,000 full-build totals and separate recurring example.
 
@@ -112,7 +112,7 @@ Directional light responds coherently to face orientation. Folded and open panel
 
 Preserve sharp typography and contrast. Keep grain and illumination treatments from blurring, washing out or flickering over text. Use a matte finish: no glossy streak, metallic reflection, shiny card effect, bloom or continuously drifting decorative light. Verify front, back, edge and crease treatment across multiple orientations, not just the opening screenshot.
 
-Static irregular fibers and low-contrast formation belong below the ink. No visible tiled clouds or pale spots on the rust face. Thin edge surfaces connect the existing front/back offsets, with distinct concave and convex fold relief. Keep the lighting texture intrinsically 16×16 pixels and scale it over a face; animate its opacity instead of repainting the face. Narrow crease strips respond to the adjoining hinge, including both seams of the center panel. Floor shadows use fixed 32×32 gradient tiles and transform/opacity updates. Preserve printed layout during face culling.
+Static irregular fibers and low-contrast formation belong below the ink. No visible tiled clouds or pale spots on the rust face. Thin outward-facing edge surfaces supply the stock silhouette around two-sided midsurface print, with distinct concave and convex fold relief. Keep the lighting texture intrinsically 16×16 pixels and scale it over a face; animate its opacity instead of repainting the face. Narrow crease strips respond to the adjoining hinge, including both seams of the center panel. Floor shadows use fixed 32×32 gradient tiles and transform/opacity updates. Preserve printed layout during face culling.
 
 The 64 MiB conservative DPR3 surface-area budget now includes face backings, light tiles, crease strips, stock edges and floor shadows. Keep the 4096-device-pixel edge limit and prohibit full-size promoted face overlays. This is a checkable engineering bound, not a measurement of GPU residency or an iPhone certification.
 
@@ -154,7 +154,7 @@ The user-approved local workflow remains in force. Credentialed Stagehand/Browse
 
 ## Mobile contextual framing
 
-The phone tour should present complete editorial ideas at a restrained reading distance. Keep related labels, bodies, qualifications and examples together; use six reading scenes plus the folded overview for this proposal. Do not turn short paragraphs into separate full-screen macro shots. The full 90-day sequence and the partnership contribution story each form a coherent reading group.
+The phone tour should present complete editorial ideas at a restrained reading distance. Keep related labels, bodies, qualifications and examples together; use six reading scenes, the folded overview and one final back-cover invitation for this proposal. Do not turn short paragraphs into separate full-screen macro shots. The full 90-day sequence and the partnership contribution story each form a coherent reading group.
 
 The active group has breathing room inside the measured header/control boundaries. Neighboring print may remain visible around it, but spacing, quieter secondary typography and the camera composition must make the primary idea unambiguous. Peripheral cropping is acceptable only outside the active reading group. Avoid adding filters or opacity layers to simulate focus.
 
@@ -171,3 +171,9 @@ A second header group makes the Handrail resume and wider GitHub immediately dis
 The resume is two intentional editorial sheets: conventional experience/education/tools, then potential contributions and public proof. Use quiet rules, readable measures and a faint official watermark in empty space. The public copy distinguishes demonstrated work from proposed Handrail responsibilities and quantifies only supported results. The PDF and web route share one typed content source.
 
 The reference research is recorded in [round-three design research](docs/design-research-round-3.md); current independent specialties are defined in [the final review contract](docs/final-design-review/brief.md).
+
+## Closing back cover
+
+After Grow together, the same paper pulls back, folds through flat into a negative accordion and settles on its right reverse. “Let’s do this!” and the official Handrail watermark are printed on that actual face. The final stop is the exact path endpoint; a reverse gesture reopens it through the same camera path. Keep the middle sweep at a stable fitted scale, then approach the packet as it closes. Ordinary reading retains the invitation last. The opening cover, complete reading groups and paper material remain unchanged.
+
+The two-sided print shares each leaf's fold midsurface with backface culling. Separate outward-facing cut-edge quads supply the thin stock silhouette. This is a thin-paper CSS approximation: separating the print planes by ±1 paper unit causes neighboring planes to intersect at the crease and can clip otherwise visible print. Camera focus uses the same midsurface; no reading-angle offset masks that geometry.

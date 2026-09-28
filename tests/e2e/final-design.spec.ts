@@ -162,6 +162,7 @@ for (const width of [320, 390]) {
       'Client first',
       'The window',
       'Grow together',
+      'Let’s do this!',
     ]);
     expect(names.every((name) => name.size >= 11)).toBe(true);
     await page

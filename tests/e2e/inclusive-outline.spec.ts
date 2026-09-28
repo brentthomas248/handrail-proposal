@@ -26,6 +26,7 @@ async function expectCompleteOutline(page: Page) {
     'Client first',
     'days to begin.',
     flyerCopy.closing.headlineLines.join(' '),
+    'Let’s do this!',
   ]);
   const table = main.getByRole('table', {
     name: collectionComparison.tableLabel,
@@ -81,9 +82,7 @@ test('tabbing into the paper restores the original link and complete reading doc
 }) => {
   await page.goto('./');
   await expect(page.locator('html')).toHaveClass(/camera-ready/);
-  await page
-    .getByRole('button', { name: 'Grow together', exact: true })
-    .focus();
+  await page.locator('.chapter-nav button').last().focus();
   // macOS WebKit follows Safari's default: Option-Tab includes links.
   await page.keyboard.press(
     browserName === 'webkit' && process.platform === 'darwin'

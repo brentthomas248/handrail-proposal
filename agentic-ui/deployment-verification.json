@@ -4,7 +4,7 @@
   "url": "https://brentthomas248.github.io/handrail-proposal/",
   "checkedAt": "2026-09-28T00:55:02.293719+00:00",
   "passed": true,
-  "isCurrentRevision": true,
+  "isCurrentRevision": false,
   "sourceCommit": "5e7950ce453906c717543ce02cb723bb2569393f",
   "staticCommit": "7f8a88e8579c131649177480322e388b07d18e26",
   "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36363928330",
@@ -209,5 +209,6 @@
     "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36360950695"
   },
   "generatedAt": "2026-09-28T00:57:54.651695+00:00",
-  "publishedAt": "2026-09-28T00:57:54.651695+00:00"
+  "publishedAt": "2026-09-28T00:57:54.651695+00:00",
+  "currentRevisionNote": "Prior published paper-rendering release; current locally accepted closing fold awaits publication."
 }

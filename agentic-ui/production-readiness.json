@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-28T00:57:54.651695+00:00",
+  "generatedAt": "2026-09-28T02:04:26.376898+00:00",
   "ok": true,
-  "status": "paper-rendering-published-and-verified",
+  "status": "closing-fold-locally-verified-publication-pending",
   "localRelease": {
     "passed": true,
     "evidence": [
@@ -12,12 +12,12 @@
     ]
   },
   "publication": {
-    "deployed": true,
-    "hostedSmokeTestPassed": true,
+    "deployed": false,
+    "hostedSmokeTestPassed": false,
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidence": "agentic-ui/deployment-verification.json",
     "notes": [
-      "Cached paper/material correction published; 28 exact files and 24 hosted checks pass."
+      "Current closing fold is locally accepted; publication and hosted checks are pending."
     ]
   },
   "strictCertification": {

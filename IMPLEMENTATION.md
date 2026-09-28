@@ -2,6 +2,10 @@
 
 ## Current state
 
+The final [closing fold scene](docs/closing-fold-implementation.md) is independently accepted and locally verified: a real back-cover ending with “Let’s do this!” and the Handrail watermark. All 75 final browser checks pass across closing behavior, affected compatibility, isolated opening/rendering, supplementary WebKit and the inclusive mobile surface budget. Publication and hosted verification are next; the paper-rendering release below remains live until then.
+
+## Published paper-rendering release
+
 The [paper rendering and material correction](docs/paper-rendering-remediation.md) separates static printed ink/grain from small opacity-driven light tiles and transformed ground shadows, eliminating repeated full-face repaint and per-frame shadow layout. The paper has restrained fibers, thin stock edges and hinge-driven crease relief. A higher oblique overview exposes both creases in the silhouette while retaining the accepted immediate input response, 1.7-second unfold and 1.1–2-second transfers.
 
 [Independent rendered review](docs/paper-depth-review.md) accepts the final candidate after rejecting an initially mottled texture and a flat-looking overview. Four sizes retain the complete unfold, visible Z silhouette, cover approach and reversal with no observed face flash or clipped primary copy. Typecheck (50 files), all 34 unit checks, formatting, texture reproducibility, canonical Markdown, both PDFs and build pass. Chromium compatibility is 68/70 initially, with two observation-fixture failures resolved by 10 passing atomic visible-text/framing rechecks. All 23 WebKit checks pass. The final isolated profile cuts aggregate cold raster work about 92%, retains two layout passes and records 21/20 ms maximum gaps in two fresh WebKit openings. The inclusive material estimate is 63.8768 MiB. Physical iPhone playback remains unverified.

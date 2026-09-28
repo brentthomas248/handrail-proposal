@@ -8,7 +8,13 @@
   },
   "behavior": {
     "passed": true,
-    "viewports": ["1440x1000", "390x844", "320x740", "430x932", "390x664"],
+    "viewports": [
+      "1440x1000",
+      "390x844",
+      "320x740",
+      "430x932",
+      "390x664"
+    ],
     "readingHoldsVerified": 29,
     "checks": [
       "Both hinges change with scrolling, reverse, and place their free edges on opposite sides of the center panel",
@@ -103,5 +109,11 @@
     },
     "profile": "qa-artifacts/paper-rendering/final-profile-v4/summary.json",
     "physicalIOSVerified": false
+  },
+  "closingFoldFollowUp": {
+    "checkedAt": "2026-09-28T02:04:26.376898+00:00",
+    "verification": "agentic-ui/local-verification.json",
+    "physicalIOSVerified": false,
+    "report": "docs/closing-fold-implementation.md"
   }
 }

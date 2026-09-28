@@ -44,7 +44,7 @@ for (const width of [390, 1440]) {
         ),
       )
       .toBeLessThanOrEqual(1);
-    await expect(page.locator('#together')).toBeInViewport({ ratio: 1 });
+    await expect(page.locator('#lets-do-this')).toBeInViewport({ ratio: 1 });
     // Allow the reading-input idle handler to retain the settled reading place.
     await page.waitForTimeout(800);
     await testInfo.attach('closing-reading-position', {
@@ -60,7 +60,7 @@ for (const width of [390, 1440]) {
       contentType: 'image/png',
     });
     await expect(
-      page.getByRole('button', { name: 'Grow together', exact: true }),
+      page.getByRole('button', { name: 'Let’s do this!', exact: true }),
     ).toHaveAttribute('aria-current', 'step');
   });
 }

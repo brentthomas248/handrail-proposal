@@ -162,6 +162,10 @@ async function expectMobileReadingGroup(target: Locator, label: string | null) {
       ['.proposal-note', 1],
       ['.proposal-link', 1],
     ],
+    'Let’s do this!': [
+      ['h2', 1],
+      ['.closing-watermark', 1],
+    ],
   };
   expect(
     required[label ?? ''],
@@ -562,12 +566,15 @@ test('high-density mobile paper stays within its compositing budget through zoom
   const decorationIds = new Set<number>();
   const materialIds = new Set<number>();
   const floorIds = new Set<number>();
+  const watermarkIds = new Set<number>();
   const samples: {
     faces: number;
     decorations: number;
     materialSurfaces: number;
     materialMiB: number;
     floorMiB: number;
+    watermarkSurfaces: number;
+    watermarkMiB: number;
     paperMiB: number;
     largestDeviceEdge: number;
   }[] = [];
@@ -604,6 +611,8 @@ test('high-density mobile paper stays within its compositing budget through zoom
       };
       identifyFloor(node);
     }
+    if (classes.includes('closing-watermark'))
+      watermarkIds.add(node.backendNodeId);
     for (const child of node.children || []) identifyPaper(child);
   }
   identifyPaper(documentNode);
@@ -622,8 +631,11 @@ test('high-density mobile paper stays within its compositing budget through zoom
     const floor = drawn.filter((layer) =>
       floorIds.has(layer.backendNodeId ?? -1),
     );
+    const watermark = drawn.filter((layer) =>
+      watermarkIds.has(layer.backendNodeId ?? -1),
+    );
     if (!paper.length) return;
-    const stock = [...paper, ...materials, ...floor];
+    const stock = [...paper, ...materials, ...floor, ...watermark];
     const surfaceMiB = (layers: CompositingLayer[]) =>
       layers.reduce(
         (total, layer) => total + layer.width * layer.height * 3 * 3 * 4,
@@ -637,6 +649,8 @@ test('high-density mobile paper stays within its compositing budget through zoom
       materialSurfaces: materials.length,
       materialMiB: surfaceMiB(materials),
       floorMiB: surfaceMiB(floor),
+      watermarkSurfaces: watermark.length,
+      watermarkMiB: surfaceMiB(watermark),
       paperMiB: surfaceMiB(stock),
       largestDeviceEdge: Math.max(
         ...stock.map((layer) => Math.max(layer.width, layer.height) * 3),
@@ -672,7 +686,7 @@ test('high-density mobile paper stays within its compositing budget through zoom
     body: Buffer.from(
       JSON.stringify(
         {
-          note: 'Project surface-area budget, not measured GPU memory or physical iOS stability proof. Faces, stock edges, crease strips, lighting tiles and floor shadows share one 64 MiB budget. Retained drawn layers are counted even if invisible; face pseudo-element backings remain disallowed.',
+          note: 'Project surface-area budget, not measured GPU memory or physical iOS stability proof. Faces, stock edges, crease strips, lighting tiles, floor shadows and any separately promoted closing watermark share one 64 MiB budget. Retained drawn layers are counted even if invisible; face pseudo-element backings remain disallowed.',
           viewport: { width: 390, height: 844, deviceScaleFactor: 3 },
           samples,
         },
@@ -707,6 +721,9 @@ for (const viewport of [
   test(`real scrolling unfolds both hinges, moves the camera and reverses to the folded packet at ${viewport.width}px`, async ({
     page,
   }, testInfo) => {
+    // This complete out-and-back journey includes the deliberate 2.8s close
+    // and reopening. Individual movement and arrival deadlines remain strict.
+    test.setTimeout(45_000);
     const errors: string[] = [];
     const failedRequests: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
@@ -1142,7 +1159,8 @@ for (const viewport of [
             target.evaluate((element) => {
               const panel = element.closest('.fold-panel');
               const sheet = element.closest('.proposal-sheet');
-              if (!panel || !sheet) return -1;
+              const face = element.closest('.panel-face, .panel-back');
+              if (!panel || !sheet || !face) return -1;
               const camera = new DOMMatrixReadOnly(
                 getComputedStyle(sheet).transform,
               );
@@ -1150,11 +1168,15 @@ for (const viewport of [
                 getComputedStyle(panel).transform,
               );
               const normal = new DOMPoint(0, 0, 1, 0).matrixTransform(
-                camera.multiply(hinge),
+                camera
+                  .multiply(hinge)
+                  .multiply(
+                    new DOMMatrixReadOnly(getComputedStyle(face).transform),
+                  ),
               );
               return normal.z / Math.hypot(normal.x, normal.y, normal.z);
             }),
-          { message: `${label} front face must point toward the reader` },
+          { message: `${label} printed face must point toward the reader` },
         )
         .toBeGreaterThan(0.995);
       // WebKit's IntersectionObserver misclips nested 3D faces. The complete
@@ -1199,6 +1221,7 @@ for (const viewport of [
             'Client first',
             'The window',
             'Grow together',
+            'Let’s do this!',
           ]
         : [
             'Overview',
@@ -1207,6 +1230,7 @@ for (const viewport of [
             'The two paths',
             'The window',
             'Grow together',
+            'Let’s do this!',
           ],
     );
     if (mobile) {
@@ -2011,7 +2035,13 @@ for (const direction of [-1, 1])
         0,
         direction * Math.round((laterY - earlierY) * fraction),
       );
-      await page.waitForTimeout(120);
+      await expect
+        .poll(
+          async () =>
+            direction * ((await page.evaluate(() => scrollY)) - startingY),
+          { timeout: 200, intervals: [10] },
+        )
+        .toBeGreaterThan(40);
       const releasedY = await page.evaluate(() => scrollY);
       expect(direction * (releasedY - startingY)).toBeGreaterThan(40);
       const frames = await collectMotion(page, 1800);
@@ -2057,7 +2087,14 @@ for (const mode of [
       'data-presentation',
       'read',
     );
-    const expected = ['idea', 'cash-flow', 'paths', 'window', 'together'];
+    const expected = [
+      'idea',
+      'cash-flow',
+      'paths',
+      'window',
+      'together',
+      'lets-do-this',
+    ];
     const sections = page.locator('.proposal-sheet [data-camera-stop]');
     const dom = await sections.evaluateAll((elements) =>
       elements.map((element) => element.id),
@@ -2103,8 +2140,12 @@ for (const mode of [
           .map(({ id }) => id),
       )
       .toEqual(expected);
-    expect(aria.indexOf('Read the proposal notes')).toBeGreaterThan(
-      ariaPositions.at(-1)!.position,
+    const notesPosition = aria.indexOf('Read the proposal notes');
+    expect(notesPosition).toBeGreaterThan(
+      ariaPositions.find(({ id }) => id === 'together')!.position,
+    );
+    expect(notesPosition).toBeLessThan(
+      ariaPositions.find(({ id }) => id === 'lets-do-this')!.position,
     );
     await expectNoOverflow(page);
     await context.close();

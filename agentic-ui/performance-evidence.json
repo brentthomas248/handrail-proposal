@@ -42,7 +42,9 @@
   "fieldInp": {
     "status": "not-measured",
     "valueMs": null,
-    "notes": ["TBT is a laboratory measure and does not establish field INP."]
+    "notes": [
+      "TBT is a laboratory measure and does not establish field INP."
+    ]
   },
   "budgets": {
     "lcp": "pass",
@@ -56,7 +58,7 @@
     "These page-load laboratory results do not establish motion continuity, field INP or physical-device performance; continuous-input evidence is recorded separately."
   ],
   "isCurrentRevision": false,
-  "currentRevisionNote": "Earlier Lighthouse and camera-pacing evidence is historical. Current cached-paper rendering and camera-depth evidence is recorded in paperRenderingFollowUp; no physical iPhone or field performance certification.",
+  "currentRevisionNote": "Prior Lighthouse and detailed raster profiles are historical. Current closing-fold regression, paint and inclusive surface-budget checks are recorded in closingFoldFollowUp; no physical-device or field certification.",
   "motionEvidence": "docs/final-design-review/r8-rendering.md",
   "openingFollowUp": {
     "scope": "Cold first-opening pacing, separately measured from historical Lighthouse scores",
@@ -157,7 +159,7 @@
     "isCurrentRevision": false
   },
   "paperRenderingFollowUp": {
-    "isCurrentRevision": true,
+    "isCurrentRevision": false,
     "report": "docs/paper-rendering-remediation.md",
     "review": "docs/paper-depth-review.md",
     "measurement": "qa-artifacts/paper-rendering/final-profile-v4/summary.json",
@@ -358,5 +360,13 @@
       "rasterTotalsAreParallelWorkerCPUNotWallTime": true
     },
     "sourceCommit": "5e7950ce453906c717543ce02cb723bb2569393f"
+  },
+  "closingFoldFollowUp": {
+    "isCurrentRevision": true,
+    "report": "docs/closing-fold-implementation.md",
+    "htmlSha256": "aca0ea5656b652b603c76395f917484f43820372586bf31fc8772d1644b7bc70",
+    "verification": "agentic-ui/local-verification.json",
+    "physicalIPhoneVerified": false,
+    "surfaceBudgetIsEstimateNotGPUMemory": true
   }
 }

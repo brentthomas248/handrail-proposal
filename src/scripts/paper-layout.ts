@@ -9,8 +9,10 @@ export function mountPaper(
     ...content.querySelectorAll<HTMLElement>('[data-print-panel]'),
   ];
   const placements = sections.map((section) => {
+    const side =
+      section.dataset.printFace === 'back' ? 'panel-back' : 'panel-face';
     const face = sheet.querySelector<HTMLElement>(
-      `.fold-panel[data-panel="${section.dataset.printPanel}"] > .panel-face`,
+      `.fold-panel[data-panel="${section.dataset.printPanel}"] > .${side}`,
     );
     if (!face) throw new Error('A proposal section has no paper panel.');
     return { section, face };
