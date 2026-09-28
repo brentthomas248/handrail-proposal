@@ -6,7 +6,7 @@ The [paper rendering and material correction](docs/paper-rendering-remediation.m
 
 [Independent rendered review](docs/paper-depth-review.md) accepts the final candidate after rejecting an initially mottled texture and a flat-looking overview. Four sizes retain the complete unfold, visible Z silhouette, cover approach and reversal with no observed face flash or clipped primary copy. Typecheck (50 files), all 34 unit checks, formatting, texture reproducibility, canonical Markdown, both PDFs and build pass. Chromium compatibility is 68/70 initially, with two observation-fixture failures resolved by 10 passing atomic visible-text/framing rechecks. All 23 WebKit checks pass. The final isolated profile cuts aggregate cold raster work about 92%, retains two layout passes and records 21/20 ms maximum gaps in two fresh WebKit openings. The inclusive material estimate is 63.8768 MiB. Physical iPhone playback remains unverified.
 
-Publication pending for the reviewed paper-rendering candidate.
+Source `5e7950ce453906c717543ce02cb723bb2569393f`; static `7f8a88e8579c131649177480322e388b07d18e26`. [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36363928330) succeeded. All 28 hosted files match the reviewed candidate; all 24 focused hosted checks pass without retries.
 
 ## Published deliberate-motion release
 

@@ -1,6 +1,6 @@
 # Paper rendering and material refinement
 
-Status: locally verified; publication pending.
+Status: published and verified.
 
 ## Target and findings
 
@@ -53,4 +53,6 @@ Final compatibility covers 70 Chromium scenarios. The initial run passes 68/70; 
 
 Typecheck covers 50 files with zero issues; all 34 unit tests, formatting, deterministic texture, canonical Markdown, both complete PDFs and the three-route build pass. All 28 rebuilt assets match the independently reviewed/profiled manifest. Current profiling is in `qa-artifacts/paper-rendering/final-profile-v4/`; the v3 profile remains historical. Full global/cloud lifecycle certification, physical iPhone playback, manual VoiceOver, actual GPU memory and field performance remain unclaimed.
 
-Publication pending for the reviewed paper-rendering candidate.
+Source `5e7950ce453906c717543ce02cb723bb2569393f`; static `7f8a88e8579c131649177480322e388b07d18e26`. [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36363928330) succeeded. All 28 hosted files match the reviewed candidate; all 24 focused hosted checks pass without retries.
+
+The closeout reconciles the paper asset manifest to the 512×512 generated tile. `texture:generate` now updates its digest, dimensions and generator provenance; `texture:check` verifies both the SVG and manifest. This check prevents stale asset metadata without changing the reviewed/published image bytes.

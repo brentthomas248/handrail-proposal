@@ -67,3 +67,11 @@ The local workflow authorization persists. No cloud generation, Stagehand or Bro
 The user approved the rest of the proposal and reported first-opening choppiness. Independent investigation identified an uneven camera-scale fit sequence. One continuous pullback now distributes the retreat across the fold, preserving all-panel framing and later reading poses. Four new cold-opening tests failed before the fix; 36 focused Chromium checks, eight WebKit opening checks, 29 unit checks, typecheck and formatting pass. Independent current rendered review accepted five viewports with 1,182 unclipped opening samples. Cold laboratory profiling is documented separately from physical-device claims.
 
 Source 9cb0657, static d4eb34c, Pages run 36351226460 succeeded. All 28 hosted files match the reviewed build; all 11 scoped hosted checks pass. Physical iPhone playback remains unverified. See docs/opening-smoothness-remediation.md and docs/opening-smoothness-review.md.
+
+## September 27 — cached paper rendering and physical depth published
+
+Cold-process rendering investigation isolates changing full-face material paint and SVG shadow geometry as repeated work during the unfold. The implementation caches printed ink/grain, changes small lighting/crease surfaces independently and transforms fixed floor tiles. Thin edge surfaces and a revised overview camera make the Z-fold legible; the independent reviewer rejects initial mottling and a flat overview before accepting the corrected rendering at four sizes.
+
+Source 5e7950c, static 7f8a88e, Pages run 36363928330 succeeded. All 28 hosted files match and all 24 focused hosted checks pass. The initial local Chromium suite is 68/70, with two observation-fixture failures resolved by 10 stricter atomic visible-text/framing rechecks; all 23 WebKit checks pass. Four actual paint/layout regressions fail the immutable baseline and pass the correction. The final isolated cold raster total is about 92% lower; fresh WebKit callback maxima are 21/20 ms. Neither aggregate worker time nor browser emulation certifies physical iPhone presentation. See docs/paper-rendering-remediation.md and docs/paper-depth-review.md.
+
+The procedural texture generator also maintains its asset digest/dimensions, and texture:check rejects stale provenance. This closeout changes no published application bytes.

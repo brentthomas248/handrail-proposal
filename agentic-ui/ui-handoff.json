@@ -114,7 +114,8 @@
     },
     "paperRenderingFollowUp": {
       "report": "docs/paper-depth-review.md",
-      "status": "accepted-within-inspected-local-scope"
+      "status": "accepted-within-inspected-local-scope",
+      "sourceCommit": "5e7950ce453906c717543ce02cb723bb2569393f"
     }
   },
   "userAssumptions": [
@@ -160,9 +161,9 @@
     "reason": "User accepts pacing but reports a choppy opening and flat digital material."
   },
   "publication": {
-    "status": "locally-verified-awaiting-publication",
+    "status": "published-and-verified",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidencePath": "agentic-ui/deployment-verification.json",
-    "note": "Cached paper rendering and depth candidate verified locally; previous release still live."
+    "note": "Source 5e7950c; static 7f8a88e; all 28 hosted files and 24 focused checks verified."
   }
 }

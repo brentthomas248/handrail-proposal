@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-28T00:52:13.062454+00:00",
+  "generatedAt": "2026-09-28T00:57:54.651695+00:00",
   "scope": "Cached paper rendering, matte material and legible Z-fold overview",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": false,
+  "deployed": true,
   "evidenceNotes": [
     "Four cold paper regressions fail the immutable baseline: exposed fronts repaint 27–29 times and document layout runs 101–102 times. They pass the candidate; paint counters require nonzero evidence.",
     "Chromium initial run passed 68/70. Two hidden-text readiness observations failed; the helper now requires visible ink and all framing conditions in one snapshot. All 10 focused rechecks pass. Original failures are retained, with unchanged application bytes.",
@@ -12,7 +12,7 @@
     "Fresh WebKit opening callback maxima are 21/20 ms versus 51/47 ms baseline. Chromium retains a 33.1 ms first-input scheduling gap; this is not physical iPhone or displayed-frame certification.",
     "All material, including floor, remains within 63.8768 MiB estimated drawn surfaces and 3177 device-pixel edge. This is not measured GPU memory.",
     "Independent review rejects pale mottling and the flat v3 overview, then accepts the calmer stock and final v4 visible-Z camera angle. All reading poses and accepted timing remain.",
-    "23 of 28 assets, including both PDFs, remain unchanged. Publication and hosted verification pending."
+    "All 28 hosted files match; 23 including both PDFs are unchanged. All 24 focused hosted checks pass without retries."
   ],
   "limitations": [
     "agentic-ui/blockers.json",
@@ -398,7 +398,7 @@
     },
     {
       "command": "pnpm texture:check",
-      "result": "SVG matches deterministic generator",
+      "result": "SVG and asset manifest match deterministic source, dimensions and digest",
       "exitCode": 0
     },
     {
@@ -470,6 +470,11 @@
       "command": "Independent current rendered depth review",
       "result": "Accepted at four sizes; final 16 held arrivals and 30 safe primary cover lines; earlier full material journey with 54 arrivals and 648 safe lines",
       "exitCode": 0
+    },
+    {
+      "command": "Hosted exact assets and focused Chromium",
+      "result": "28 exact files; 24 checks passed",
+      "exitCode": 0
     }
   ],
   "previousRelease": {
@@ -488,5 +493,6 @@
       }
     },
     "note": "Six-category review and full 185-check release are historical; user approved design except first-opening pacing."
-  }
+  },
+  "sourceCommit": "5e7950ce453906c717543ce02cb723bb2569393f"
 }

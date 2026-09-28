@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-26T21:49:10.878656+00:00",
+  "generatedAt": "2026-09-28T00:57:00.693Z",
   "assets": [
     {
       "id": "handrail-logo",
@@ -51,11 +51,12 @@
       "id": "paper-grain",
       "kind": "procedural-texture",
       "path": "public/paper-grain.svg",
-      "sha256": "f1ad2a836254dd1e1bda3de717abb7c3de39007361741e634977267450cc774b",
-      "width": 128,
-      "height": 128,
+      "sha256": "db5cc6197e90a427b102935630b6f57075e980a198ae908b7b3b1516f5f1a620",
+      "width": 512,
+      "height": 512,
       "provenance": "Original fixed-seed filter-free SVG vector grain and fiber tile authored for this project.",
-      "usage": ["Matte front and back paper faces; print excludes texture."]
+      "usage": ["Matte front and back paper faces; print excludes texture."],
+      "generator": "scripts/generate-paper-grain.mjs"
     }
   ],
   "notes": [

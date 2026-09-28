@@ -1,7 +1,12 @@
 import { readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 
 const tile = 512;
 const destination = new URL('../public/paper-grain.svg', import.meta.url);
+const manifestPath = new URL(
+  '../agentic-ui/assets.manifest.json',
+  import.meta.url,
+);
 let seed = 0x50415045;
 const random = () => {
   seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
@@ -80,12 +85,29 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${tile}" height="${t
 </svg>
 `;
 
+const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+const asset = manifest.assets.find((entry) => entry.id === 'paper-grain');
+if (!asset)
+  throw new Error('Paper texture is missing from the asset manifest.');
+const identity = {
+  sha256: createHash('sha256').update(svg).digest('hex'),
+  width: tile,
+  height: tile,
+  generator: 'scripts/generate-paper-grain.mjs',
+};
+
 if (process.argv.includes('--check')) {
   if ((await readFile(destination, 'utf8')) !== svg)
     throw new Error('Paper texture differs from its deterministic source.');
-  console.log('Paper texture matches its deterministic source.');
+  for (const [key, value] of Object.entries(identity))
+    if (asset[key] !== value)
+      throw new Error(`Paper texture manifest has a stale ${key}.`);
+  console.log('Paper texture and manifest match their deterministic source.');
 } else {
   await writeFile(destination, svg);
+  Object.assign(asset, identity);
+  manifest.generatedAt = new Date().toISOString();
+  await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
   console.log(
     `Generated ${Buffer.byteLength(svg)} bytes of static paper texture.`,
   );
