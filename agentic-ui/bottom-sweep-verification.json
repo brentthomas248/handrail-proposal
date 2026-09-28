@@ -2,7 +2,7 @@
   "scope": "One continuous bottom right-to-left camera sweep",
   "generatedAt": "2026-09-28T02:36:12.471740+00:00",
   "passed": true,
-  "isCurrentRevision": true,
+  "isCurrentRevision": false,
   "sourceCommit": "93923264a084a7d0b6c8d1d8941c1c34824f7c04",
   "staticCommit": "7f0651387f84b1250a3f912e2b9ab8ecdd392e00",
   "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36370346932",
@@ -205,5 +205,6 @@
   "limitations": [
     "Physical iPhone playback remains unverified.",
     "Earlier broader journey/profile results remain historical."
-  ]
+  ],
+  "currentRevisionNote": "Historical bottom-sweep release. The current content update is verified in agentic-ui/proposal-terms-verification.json."
 }

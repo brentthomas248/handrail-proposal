@@ -1,13 +1,13 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-28T02:07:47.789961+00:00",
+  "generatedAt": "2026-09-28T03:35:36.230227+00:00",
   "ok": true,
-  "status": "bottom-sweep-published-and-verified",
+  "status": "proposal-terms-published-and-verified",
   "localRelease": {
     "passed": true,
     "evidence": [
-      "agentic-ui/local-verification.json",
-      "IMPLEMENTATION.md",
+      "docs/proposal-terms-update.md",
+      "docs/proposal-terms-design-review.md",
       "docs/local-workflow.md"
     ]
   },
@@ -15,9 +15,9 @@
     "deployed": true,
     "hostedSmokeTestPassed": true,
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "evidence": "agentic-ui/bottom-sweep-verification.json",
+    "evidence": "agentic-ui/proposal-terms-verification.json",
     "notes": [
-      "Single bottom sweep independently reviewed at three sizes;7localbrowserchecks,28exacthostedassets and hostedforward/reverse check pass."
+      "Corrected commission terms independently reviewed; all 28 hosted files match and all 17 live browser checks pass."
     ]
   },
   "strictCertification": {

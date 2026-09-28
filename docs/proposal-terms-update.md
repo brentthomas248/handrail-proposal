@@ -22,7 +22,7 @@ The existing header supplies prominent résumé and GitHub links. Preserve the 9
 
 ## Status
 
-Implementation and local verification are complete. The independent rendered review accepts the final candidate after the mobile hierarchy correction. Publication and hosted verification remain pending.
+Implementation and local verification are complete. The independent rendered review accepts the final candidate after the mobile hierarchy correction. Published and verified: source `7b46389`, static `5e30398`. [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36374185473) succeeded. All 28 hosted files match and all 17 live checks pass. See [the receipt](../agentic-ui/proposal-terms-verification.json).
 
 - Typecheck: 53 files, zero errors/warnings/hints. All 35 unit checks pass.
 - Four new phase/basis browser assertions failed against the former built site; all pass after correction.

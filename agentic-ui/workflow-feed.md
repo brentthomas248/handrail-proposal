@@ -90,3 +90,5 @@ Source 4443b6b, static 1c2c981, Pages run 36368465198 succeeded. A real reverse-
 - Final candidate accepted independently after fixing a cramped mobile month-13 descriptor. Four-size rendered evidence covers 27 groups and 360 text-line rectangles without clipping or browser errors.
 - Local checks pass: 53-file typecheck, 35 unit, 3 Storybook, 45 initial Chromium plus 15 final affected, 12 WebKit, 2 route axe scans, formatting, canonical Markdown and complete notes/résumé PDF checks. Publication pending.
 - The broad global generation gate still reports existing policy/schema/token gaps; the explicit local workflow remains the delivery authority and full global certification is not claimed.
+
+- Published source `7b46389`, static `5e30398`. Pages run 36374185473 succeeded. All 28 hosted files match the reviewed candidate; all 17 hosted browser checks pass without retries. Release record: `agentic-ui/proposal-terms-verification.json`.

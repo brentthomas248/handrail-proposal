@@ -174,9 +174,9 @@
     "reason": "Clarify the corrected client-first commission structure and cash-flow pitch; keep the presentation negotiable and verify the r\u00e9sum\u00e9 and GitHub links."
   },
   "publication": {
-    "status": "local-verified-publication-pending",
+    "status": "published-and-verified",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "evidencePath": "docs/proposal-terms-update.md",
-    "note": "Independent commercial/rendered review and scoped deterministic verification pass. Prior published bottom-sweep receipt remains historical."
+    "evidencePath": "agentic-ui/proposal-terms-verification.json",
+    "note": "Source 7b46389; static 5e30398. Independent reviews accepted; all 28 hosted files match and 17 live checks pass."
   }
 }
