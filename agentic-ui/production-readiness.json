@@ -1,13 +1,13 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-28T03:35:36.230227+00:00",
+  "generatedAt": "2026-09-28T03:46:14.843584+00:00",
   "ok": true,
-  "status": "proposal-terms-published-and-verified",
+  "status": "equal-path-published-and-verified",
   "localRelease": {
     "passed": true,
     "evidence": [
-      "docs/proposal-terms-update.md",
-      "docs/proposal-terms-design-review.md",
+      "docs/equal-path-update.md",
+      "docs/equal-path-review.md",
       "docs/local-workflow.md"
     ]
   },
@@ -15,9 +15,9 @@
     "deployed": true,
     "hostedSmokeTestPassed": true,
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "evidence": "agentic-ui/proposal-terms-verification.json",
+    "evidence": "agentic-ui/equal-path-verification.json",
     "notes": [
-      "Corrected commission terms independently reviewed; all 28 hosted files match and all 17 live browser checks pass."
+      "Identical commission phases independently reviewed; all 28 hosted files match and all 15 live browser checks pass."
     ]
   },
   "strictCertification": {

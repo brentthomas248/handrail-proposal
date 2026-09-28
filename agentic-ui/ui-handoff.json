@@ -178,9 +178,9 @@
     "reason": "Clarify the corrected client-first commission structure and cash-flow pitch; keep the presentation negotiable and verify the r\u00e9sum\u00e9 and GitHub links."
   },
   "publication": {
-    "status": "local-verified-publication-pending",
+    "status": "published-and-verified",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "evidencePath": "docs/equal-path-update.md",
-    "note": "Both commission bases and phase wording now match; independent rendered review and scoped local checks pass."
+    "evidencePath": "agentic-ui/equal-path-verification.json",
+    "note": "Source 25d905c; static 23cd233. All 28 hosted files match and 15 live browser checks pass."
   }
 }

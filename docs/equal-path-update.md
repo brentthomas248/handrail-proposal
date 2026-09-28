@@ -10,7 +10,7 @@ On a $2,000 subscription collection during service months 1–12, the illustrati
 
 Verify shared labels in components and reading modes, both phone rate compositions, correct subscription math, generated Markdown/PDF consistency and two-page PDF layout. Run independent rendered review, typecheck, unit, component and affected browser checks. Preserve approved motion, cash-flow emphasis and portfolio links. Publish the verified candidate and check exact hosted files plus live behavior.
 
-Local verification is complete; publication is pending.
+Published source `25d905c`, static `23cd233`; [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36374896563) succeeded. All 28 hosted files match the reviewed candidate and all 15 live browser checks pass. See [the receipt](../agentic-ui/equal-path-verification.json).
 
 - Typecheck: 53 files, zero issues. All 36 unit checks pass.
 - Four Storybook checks pass with zero axe violations or browser errors; both narrow variants were visually inspected.

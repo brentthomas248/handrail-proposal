@@ -1,14 +1,14 @@
 {
-  "scope": "Corrected client-first commission phases and collections-first proposal presentation",
-  "generatedAt": "2026-09-28T03:35:36.230227+00:00",
+  "scope": "Identical commission basis and phase wording; 15% versus 20% initial rate",
+  "generatedAt": "2026-09-28T03:46:14.843584+00:00",
   "passed": true,
-  "isCurrentRevision": false,
-  "sourceCommit": "7b46389f6806e9fe266b72f24b9cacdda9a77a24",
-  "staticCommit": "5e3039822cb35a381dcb6b7532957d0ee376ef9e",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36374185473",
+  "isCurrentRevision": true,
+  "sourceCommit": "25d905cf4b87d1a166fa1eebfcda982829ba73e7",
+  "staticCommit": "23cd2339eae98e68feb2b7e10b8b5a9f4f7ffda3",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36374896563",
   "deploymentConclusion": "success",
   "review": {
-    "report": "docs/proposal-terms-design-review.md",
+    "report": "docs/equal-path-review.md",
     "verdict": "accepted",
     "viewports": [
       "1440x1000",
@@ -16,23 +16,19 @@
       "320x740",
       "390x664"
     ],
-    "completeReadingGroups": 27,
-    "safeTextLines": 360
+    "rateCompositions": 7,
+    "safeTextLines": 137
   },
   "checks": {
-    "typecheck": "53 files; zero issues",
-    "unit": 35,
-    "storybook": 3,
-    "initialChromium": 45,
-    "finalAffectedChromium": 15,
+    "typecheck": "53 files, zero issues",
+    "unit": 36,
+    "storybook": 4,
+    "chromium": 27,
     "webkit": 12,
-    "routeAccessibility": 2,
-    "hosted": 17,
+    "hosted": 15,
     "failed": 0,
     "flaky": 0,
-    "notesPDF": "two pages; complete canonical content and rendered layout verified",
-    "resumePDF": "unchanged; complete canonical content verified",
-    "markdownAndFormatting": "passed"
+    "markdownBuildFormatPDF": "passed; two-page PDF also visually reviewed"
   },
   "staticAssetChecks": [
     {
@@ -140,7 +136,7 @@
     {
       "path": "agreement/index.html",
       "http": 200,
-      "sha256": "a956223df8ec50e57a31c53dc67f9c5e1ee48ff5a0d9277d452ad7c511bfff1c",
+      "sha256": "566bd79080d7a57473b4bf1f725153d392bf790c70fbb4dc4bc1a83c5416f2fd",
       "matched": true
     },
     {
@@ -158,13 +154,13 @@
     {
       "path": "handrail-proposed-agreement.pdf",
       "http": 200,
-      "sha256": "d226f65169e7d301b2294ec890780b972ec5a712a4484193bc51090536d700b3",
+      "sha256": "25d6a4e8f2f31b5f292f1a0b480cf2b316a4e74e18bc860030828790754221e6",
       "matched": true
     },
     {
       "path": "index.html",
       "http": 200,
-      "sha256": "539783b6d7f2d4ce69b0c6bcb09a3e04ddbd659b8dda9fcd5eea91c2748219e1",
+      "sha256": "6ddb5e3b3c0fdbf4a116b06b8ad46097be1d51f1c0e445bf21f3304ebb36e3e0",
       "matched": true
     },
     {
@@ -188,7 +184,7 @@
     {
       "path": "resume/index.html",
       "http": 200,
-      "sha256": "960fe01f90dfa3fbfc505f94ee9753eed654a28ed147b7db94b498ca62a75aba",
+      "sha256": "a979f3cbd669adfe4bc2d994ec8e3938b17dd70d4d53c18cf14f139404c73cbe",
       "matched": true
     },
     {
@@ -205,9 +201,7 @@
     }
   ],
   "limitations": [
-    "Hire-first commission basis remains the previously proposed 15% build plus 5% recurring from the start; no change to that basis was confirmed.",
     "Physical iPhone playback, manual VoiceOver and field performance remain unverified.",
-    "Approved local workflow applies; full global lifecycle certification is not claimed."
-  ],
-  "currentRevisionNote": "Historical initial correction. Equal commission bases for both paths are now published and verified in agentic-ui/equal-path-verification.json."
+    "Approved local workflow applies; no full global lifecycle certification is claimed."
+  ]
 }

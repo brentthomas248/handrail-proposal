@@ -98,3 +98,5 @@ Source 4443b6b, static 1c2c981, Pages run 36368465198 succeeded. A real reverse-
 The user clarified that both commission pathways use identical wording and economic bases, differing only in the initial 15%/20% rate. Shared canonical phase copy and notes text now prevent drift. Phone descriptors share the same layout; subscription examples are corrected to $300/$400 initially and $100 for either path from service month 13. Current verification and publication are tracked in `docs/equal-path-update.md`.
 
 - Equal-path local verification passes: 53-file typecheck, 36 unit checks, 4 Storybook checks, 27 Chromium checks, 12 WebKit checks, canonical Markdown, formatting, build and PDF. Independent review accepts the matching rate compositions and both PDF pages. Publication pending.
+
+- Equal-path correction published: source `25d905c`, static `23cd233`. Pages run 36374896563 succeeded; all 28 assets match and all 15 hosted checks pass without retries. See `agentic-ui/equal-path-verification.json`.

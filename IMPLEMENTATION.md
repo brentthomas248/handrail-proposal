@@ -2,7 +2,7 @@
 
 ## Current state
 
-The user clarified that both commission pathways must have identical bases and phase wording, differing only in the initial 15%/20% rate. The [equal-path correction](docs/equal-path-update.md) shares canonical labels and notes definitions, corrects subscription illustrations, and applies the same phone layout to both options. Independent rendered review accepts the corrected candidate. Typecheck, all 36 unit checks, 4 Storybook checks, 27 affected Chromium checks, 12 WebKit checks, formatting, canonical Markdown, build and two-page PDF verification pass. Publication is pending.
+The user clarified that both commission pathways must have identical bases and phase wording, differing only in the initial 15%/20% rate. The [equal-path correction](docs/equal-path-update.md) shares canonical labels and notes definitions, corrects subscription illustrations, and applies the same phone layout to both options. Independent rendered review accepts the corrected candidate. Typecheck, all 36 unit checks, 4 Storybook checks, 27 affected Chromium checks, 12 WebKit checks, formatting, canonical Markdown, build and two-page PDF verification pass. Published source `25d905c`, static `23cd233`; [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36374896563) succeeded. All 28 hosted files match the reviewed candidate and all 15 live browser checks pass. See [the receipt](agentic-ui/equal-path-verification.json).
 
 ## Published initial terms update
 
