@@ -43,16 +43,21 @@ async function check(name, run) {
 }
 try {
   await check(
-    'employment-first proposal uses collected 15/5 fees',
+    'employment-first proposal uses 15% initially, then 5% recurring',
     async () => {
       await openStory('proposal-deal-path--employment-first');
       await expect(
         page.getByRole('heading', { name: 'Hire first' }),
       ).toBeVisible();
       await expect(page.getByText('15', { exact: true })).toBeVisible();
-      await expect(page.getByText('+ 5%', { exact: true })).toBeVisible();
-      await expect(page.getByText('of collected build fees')).toBeVisible();
-      await expect(page.getByText('of collected recurring fees')).toBeVisible();
+      await expect(page.getByText('then 5%', { exact: true })).toBeVisible();
+      await expect(
+        page.getByText('build + first 12 subscription months', { exact: true }),
+      ).toBeVisible();
+      await expect(
+        page.getByText('recurring from service month 13', { exact: true }),
+      ).toBeVisible();
+      await expect(page.getByText('+ 5%', { exact: true })).toHaveCount(0);
       await expect(
         page.getByText('Bring me on before I land the qualifying client.'),
       ).toBeVisible();
@@ -76,6 +81,7 @@ try {
       await expect(
         page.getByText('recurring from service month 13', { exact: true }),
       ).toBeVisible();
+      await expect(page.getByText('+ 5%', { exact: true })).toHaveCount(0);
       await expect(
         page.getByText(dealPathCopy.client.description),
       ).toBeVisible();
@@ -85,37 +91,52 @@ try {
       await page.screenshot({ path: new URL('client.png', output).pathname });
     },
   );
-  await check(
-    'printed terms remain readable at 320px without horizontal overflow',
-    async () => {
-      await page.setViewportSize({ width: 320, height: 900 });
-      await openStory('proposal-deal-path--narrow-layout');
-      await expect(page.getByText('20', { exact: true })).toBeVisible();
-      await expect(page.getByText('then 5%', { exact: true })).toBeVisible();
-      await expect(
-        page.getByText('build + first 12 subscription months', { exact: true }),
-      ).toBeVisible();
-      await expect(
-        page.getByText('recurring from service month 13', { exact: true }),
-      ).toBeVisible();
-      await expect(
-        page.getByText('On that client and all my future credited sales.'),
-      ).toBeVisible();
-      expect(
-        await page.evaluate(() => {
-          const article = document.querySelector('.deal-path');
-          if (!(article instanceof HTMLElement)) return false;
-          return (
-            article.scrollWidth <= article.clientWidth &&
-            document.documentElement.scrollWidth <= innerWidth
-          );
-        }),
-      ).toBe(true);
-      await page.screenshot({
-        path: new URL('client-mobile.png', output).pathname,
-      });
+  for (const path of [
+    {
+      id: 'employment',
+      story: 'narrow-employment',
+      rate: '15',
+      note: dealPathCopy.employment.note,
     },
-  );
+    {
+      id: 'client',
+      story: 'narrow-layout',
+      rate: '20',
+      note: dealPathCopy.client.note,
+    },
+  ]) {
+    await check(
+      `${path.id} terms remain readable at 320px without horizontal overflow`,
+      async () => {
+        await page.setViewportSize({ width: 320, height: 900 });
+        await openStory(`proposal-deal-path--${path.story}`);
+        await expect(page.getByText(path.rate, { exact: true })).toBeVisible();
+        await expect(page.getByText('then 5%', { exact: true })).toBeVisible();
+        await expect(
+          page.getByText('build + first 12 subscription months', {
+            exact: true,
+          }),
+        ).toBeVisible();
+        await expect(
+          page.getByText('recurring from service month 13', { exact: true }),
+        ).toBeVisible();
+        await expect(page.getByText(path.note)).toBeVisible();
+        expect(
+          await page.evaluate(() => {
+            const article = document.querySelector('.deal-path');
+            if (!(article instanceof HTMLElement)) return false;
+            return (
+              article.scrollWidth <= article.clientWidth &&
+              document.documentElement.scrollWidth <= innerWidth
+            );
+          }),
+        ).toBe(true);
+        await page.screenshot({
+          path: new URL(`${path.id}-mobile.png`, output).pathname,
+        });
+      },
+    );
+  }
   expect(errors, 'Uncaught story errors').toEqual([]);
   await writeFile(
     new URL('verification.json', output),

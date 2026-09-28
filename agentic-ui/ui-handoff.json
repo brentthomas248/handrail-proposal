@@ -16,7 +16,7 @@
     "Remove decorative Unicode arrows, emojis and ornamental symbols; no paperclip or separate decorative sculpture.",
     "Lead with the beginning of a partnership and growing Handrail; new business is a starting point and Brent\u2019s contribution can grow with company needs.",
     "Keep no base salary and commission paid after customer collections, with matching installments.",
-    "Hire first: 15% collected build plus 5% recurring from the start. Client first: 20% collected build and first 12 contracted subscription months, then 5% from service month 13, covering that client and future credited sales.",
+    "Both paths use build plus first 12 subscription months, paid as collected, then 5% from service month 13. Only the initial rate differs: 15% hire first or 20% client first.",
     "Keep the 90-day proposal and benefits request. Handrail writes the final contract; no named future roles or private financial problems appear.",
     "Continue the approved local design, Storybook and Playwright workflow.",
     "Use mobile ink hierarchy rather than extra opacity/filter layers; active text stays full strength.",
@@ -28,7 +28,7 @@
     "Prominent resume/GitHub links, responsive navigation and exact history-entry return position.",
     "A short vertical gesture immediately commits to the adjacent concrete scene. Same-gesture momentum stays latched; touch release rearms the next swipe; ordinary reading remains native.",
     "The last gesture folds the existing flyer into its right back cover, printing Let\u2019s do this! above the official Handrail watermark.",
-    "The dollar comparison is build-only because the two proposed subscription commission bases differ. Preserve the approved animation and prominent portfolio navigation."
+    "The dollar comparison remains build-only, with subscription examples in the notes. Both paths share the same phase wording and mobile layout."
   ],
   "rejectedDecisions": [
     "Neon/glow design direction",
@@ -130,6 +130,10 @@
     "proposalTermsFollowUp": {
       "report": "docs/proposal-terms-design-review.md",
       "status": "accepted-within-inspected-local-scope"
+    },
+    "equalPathFollowUp": {
+      "report": "docs/equal-path-review.md",
+      "status": "accepted-within-inspected-local-scope"
     }
   },
   "userAssumptions": [
@@ -174,9 +178,9 @@
     "reason": "Clarify the corrected client-first commission structure and cash-flow pitch; keep the presentation negotiable and verify the r\u00e9sum\u00e9 and GitHub links."
   },
   "publication": {
-    "status": "published-and-verified",
+    "status": "local-verified-publication-pending",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "evidencePath": "agentic-ui/proposal-terms-verification.json",
-    "note": "Source 7b46389; static 5e30398. Independent reviews accepted; all 28 hosted files match and 17 live checks pass."
+    "evidencePath": "docs/equal-path-update.md",
+    "note": "Both commission bases and phase wording now match; independent rendered review and scoped local checks pass."
   }
 }

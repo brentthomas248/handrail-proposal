@@ -1583,7 +1583,7 @@ html[data-presentation='read'] .closing-watermark {
     line-height: 1.25;
     display: block;
   }
-  html[data-presentation='tour'] .deal-path--client .deal-recurring {
+  html[data-presentation='tour'] .deal-path .deal-recurring {
     flex-direction: column;
     align-items: flex-start;
     gap: calc(8 * var(--paper-unit));

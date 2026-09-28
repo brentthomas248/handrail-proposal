@@ -6,6 +6,7 @@ import {
   agreementSections,
   collectionComparison,
   collectionIllustration,
+  dealPathCopy,
   proposal,
 } from '../src/content/proposal.ts';
 import { renderAgreementMarkdown } from '../src/lib/agreement.ts';
@@ -66,32 +67,50 @@ describe('one public proposal source', () => {
     expect(illustration.commissionDifference).toBe(500);
     expect(illustration.totalCommissionDifference).toBe(6_000);
     expect(illustration.subscriptionCommissions).toEqual({
-      hireFirst: 100,
+      hireFirstInitial: 300,
       clientFirstInitial: 400,
-      clientFirstOngoing: 100,
+      ongoing: 100,
     });
   });
 
-  it('distinguishes the subscription phases without stacking recurring rates', () => {
-    expect(proposal.clientFirstSubscriptionMonths).toBe(12);
+  it('uses the same commission phases for both proposed paths', () => {
+    expect(proposal.initialSubscriptionMonths).toBe(12);
+    for (const copy of Object.values(dealPathCopy)) {
+      expect(copy.rateLabel).toBe('build + first 12 subscription months');
+      expect(copy.recurringPrefix).toBe('then');
+      expect(copy.recurringLabel).toBe('recurring from service month 13');
+    }
+  });
+
+  it('distinguishes both subscription phases without stacking recurring rates', () => {
     const content = renderAgreementMarkdown();
-    expect(content).toContain(
-      '20% of collected subscription fees for each credited customer’s first 12 service months',
-    );
-    expect(content).toContain(
-      'then 5% of collected recurring fees from service month 13',
-    );
-    expect(content).toContain(
-      'The 5% rate replaces 20%; the rates are not added together.',
-    );
+    for (const [id, rate] of [
+      ['hire-first', 15],
+      ['client-first', 20],
+    ] as const) {
+      const section = agreementSections.find((section) => section.id === id);
+      const terms = section?.paragraphs.join(' ');
+      expect(terms).toContain(`${rate}% of collected build fees`);
+      expect(terms).toContain(
+        `${rate}% of collected subscription fees for each credited customer’s first 12 service months`,
+      );
+      expect(terms).toContain(
+        'then 5% of collected recurring fees from service month 13',
+      );
+    }
+    expect(content).toContain('the rates are not added together');
     expect(content).toContain(
       'This structure applies to the triggering client and all future credited sales',
     );
     expect(collectionComparison.recurring).toContain(
-      'hire first earns $100 (5%) from the start',
+      'hire first earns $300 (15%)',
     );
     expect(collectionComparison.recurring).toContain(
-      'Client first earns $400 (20%) for service months 1–12, then $100 (5%) from service month 13',
+      'client first earns $400 (20%)',
+    );
+    expect(collectionComparison.recurring).toContain('service months 1–12');
+    expect(collectionComparison.recurring).toContain(
+      'From service month 13, either path earns $100 (5%)',
     );
   });
 

@@ -8,7 +8,7 @@ An interactive business proposal from Brent Showalter to Handrail. A three-dimen
 
 A practical way to begin a partnership and help Handrail grow. New business is the starting point, with room for Brent’s contribution to evolve as the company’s needs develop.
 
-No base salary. Commission is paid as customer revenue is collected. Hiring first proposes **15% of collected build fees plus 5% recurring from the start**. Bringing the qualifying client first proposes **20% of build fees and the first 12 contracted subscription months, then 5% recurring from service month 13**, applying to that client and all future credited sales under the relationship. The client-first 5% does not stack on top of the initial 20%.
+No base salary. Commission is paid as customer revenue is collected. Both paths use the same basis: **build fees plus the first 12 contracted subscription months, then 5% recurring from service month 13**. Hiring first proposes **15% initially**; bringing the qualifying client first proposes **20% initially**. The structure covers all credited sales, including the triggering client under client first. The recurring rate replaces the initial rate; the rates do not stack.
 
 The higher rate rewards originating the business that makes hiring possible. Benefits are requested separately, and the cash illustration explicitly leaves delivery, benefits and other costs to be covered. This is a negotiable business proposal; Handrail prepares the final contract after the parties align.
 

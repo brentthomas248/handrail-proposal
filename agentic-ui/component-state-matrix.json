@@ -10,7 +10,7 @@
     ],
     "notes": [
       "The redesigned flyer uses one presentational React component. Camera and reading-mode behavior are owned by the full document and require product-level proof.",
-      "Storybook build and live endpoint readiness passed. Three local browser checks passed with zero axe violations and zero uncaught browser errors; desktop and 320px screenshots were visually inspected."
+      "Live Storybook endpoint readiness and four local browser checks passed, with zero axe violations and zero uncaught errors. Both 320px variants were visually inspected."
     ]
   },
   "components": [
@@ -24,13 +24,15 @@
         "default",
         "employment-first",
         "client-first",
-        "narrow-layout"
+        "narrow-layout",
+        "narrow-employment"
       ],
       "coveredStates": [
         "default",
         "employment-first",
         "client-first",
-        "narrow-layout"
+        "narrow-layout",
+        "narrow-employment"
       ],
       "coverageArtifacts": [
         "src/components/DealPath.stories.tsx",
@@ -39,7 +41,8 @@
       "notes": [
         "Presentational article with documented variant and optional showScope props. Contextual flyer groups supply their own scope; ordinary component stories retain it.",
         "Verify both proposed rates, collection-based compensation, future-sales language, and readable content without horizontal overflow at 320px.",
-        "The default presentational state is exercised by EmploymentFirst with its required variant prop explicitly supplied; the component does not invent a default prop value."
+        "The default presentational state is exercised by EmploymentFirst with its required variant prop explicitly supplied; the component does not invent a default prop value.",
+        "Both pathways share the same initial commission basis and month-13 recurring labels. NarrowEmployment and NarrowLayout cover both rate values at 320px."
       ]
     },
     {

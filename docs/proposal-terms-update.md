@@ -1,5 +1,7 @@
 # Proposal presentation update
 
+Historical release. The subsequent [equal-path correction](equal-path-update.md) supersedes the preserved hire-first basis after the user clarified that only the initial percentages should differ.
+
 ## Scope and intent
 
 Update the approved trifold's commercial explanation without redesigning its paper or motion. This is a negotiable presentation, not an accepted agreement. Customer collections precede commission, no base salary is proposed, benefits are requested separately, and the relationship can develop as Handrail grows.

@@ -89,7 +89,7 @@
   },
   "acceptanceCriteria": [
     "Actual scrolling changes both independent hinge angles, reverses them and coordinates uniform 3D camera movement on the same semantic HTML trifold.",
-    "Client first shows 20% of build and first 12 contracted subscription months, paid as collected, then 5% from service month 13; no stacking. Hire first retains 15% build plus 5% recurring from the start. Both include future credited sales, no base salary, requested benefits and a proposed 90-day window.",
+    "Both paths show the same build plus first 12 subscription months basis, paid as collected, then 5% from service month 13. Only the initial rate differs: 15% hire first, 20% client first. Both retain future credited sales, no base salary, requested benefits and the proposed 90-day window.",
     "The flyer and notes remain readable through normal flow, reduced motion and disabled JavaScript.",
     "Opening wings fit between header and controls. Every reading hold makes the active face flat and fully framed; captured body text remains readable at 320px and wider.",
     "All seven note sections and the complete PDF match the canonical proposal source.",
@@ -106,7 +106,7 @@
     "Current Lighthouse scores describe a local production-preview lab run, not physical-device or field performance."
   ],
   "generatedAt": "2026-09-27T20:57:52.457997+00:00",
-  "scope": "Scoped proposal copy update: commission basis and phase timing, cash-flow explanation, complete reading compositions, notes/PDF and existing portfolio links. Approved paper and camera implementation unchanged.",
+  "scope": "Narrow equal-path correction: shared commission basis and phase wording, matching phone rate layout, canonical notes/PDF, preserved tour and portfolio navigation.",
   "localEvidence": {
     "browserChecks": 185,
     "unitChecks": 29,

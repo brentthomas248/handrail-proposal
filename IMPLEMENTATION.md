@@ -2,6 +2,10 @@
 
 ## Current state
 
+The user clarified that both commission pathways must have identical bases and phase wording, differing only in the initial 15%/20% rate. The [equal-path correction](docs/equal-path-update.md) shares canonical labels and notes definitions, corrects subscription illustrations, and applies the same phone layout to both options. Independent rendered review accepts the corrected candidate. Typecheck, all 36 unit checks, 4 Storybook checks, 27 affected Chromium checks, 12 WebKit checks, formatting, canonical Markdown, build and two-page PDF verification pass. Publication is pending.
+
+## Published initial terms update
+
 The [proposal presentation update](docs/proposal-terms-update.md) is implemented and independently accepted locally. Client first now uses 20% of build and first 12 subscription service months, then 5% recurring from month 13, paid as collected. Hire-first economics remain unchanged. The build-only illustration, notes and two-page PDF agree; mobile phase wording has a full-width line. Approved motion/material and prominent résumé/GitHub links remain. Typecheck, all 35 unit tests, 3 component checks, 45 initial and 15 final affected Chromium checks, 12 WebKit checks, 2 route accessibility scans, formatting, Markdown and both PDF checks pass. Published source `7b46389`, static `5e30398`; [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36374185473) succeeded. All 28 hosted files match the reviewed candidate and all 17 live browser checks pass. See [the release receipt](agentic-ui/proposal-terms-verification.json).
 
 ## Published bottom-sweep release

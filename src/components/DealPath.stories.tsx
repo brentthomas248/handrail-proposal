@@ -25,7 +25,7 @@ const meta = {
       control: 'radio',
       options: ['employment', 'client'],
       description:
-        'Hire first proposes 15% of collected build fees plus 5% of collected recurring fees from the start. Client first proposes 20% of collected build fees and the first 12 subscription months, then 5% recurring from service month 13.',
+        'Hire first proposes 15%; client first proposes 20%. Both rates apply to collected build fees and the first 12 subscription months, then 5% recurring from service month 13.',
     },
   },
   decorators: [
@@ -48,9 +48,14 @@ export const EmploymentFirst: Story = {
       canvas.getByRole('heading', { name: 'Hire first' }),
     ).toBeVisible();
     await expect(canvas.getByText('15', { exact: true })).toBeVisible();
-    await expect(canvas.getByText('+ 5%', { exact: true })).toBeVisible();
-    await expect(canvas.getByText('of collected build fees')).toBeVisible();
-    await expect(canvas.getByText('of collected recurring fees')).toBeVisible();
+    await expect(canvas.getByText('then 5%', { exact: true })).toBeVisible();
+    await expect(
+      canvas.getByText('build + first 12 subscription months'),
+    ).toBeVisible();
+    await expect(
+      canvas.getByText('recurring from service month 13'),
+    ).toBeVisible();
+    await expect(canvas.queryByText('+ 5%', { exact: true })).toBeNull();
     await expect(
       canvas.getByText(dealPathCopy.employment.description),
     ).toBeVisible();
@@ -104,6 +109,25 @@ export const NarrowLayout: Story = {
     await expect(
       canvas.getByText('On that client and all my future credited sales.'),
     ).toBeVisible();
+    const article = canvas.getByRole('article');
+    await expect(article.scrollWidth).toBeLessThanOrEqual(article.clientWidth);
+  },
+};
+
+export const NarrowEmployment: Story = {
+  ...NarrowLayout,
+  args: { variant: 'employment' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText('15', { exact: true })).toBeVisible();
+    await expect(canvas.getByText('then 5%', { exact: true })).toBeVisible();
+    await expect(
+      canvas.getByText('build + first 12 subscription months'),
+    ).toBeVisible();
+    await expect(
+      canvas.getByText('recurring from service month 13'),
+    ).toBeVisible();
+    await expect(canvas.getByText(dealPathCopy.employment.note)).toBeVisible();
     const article = canvas.getByRole('article');
     await expect(article.scrollWidth).toBeLessThanOrEqual(article.clientWidth);
   },
