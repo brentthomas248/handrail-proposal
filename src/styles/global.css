@@ -770,75 +770,190 @@ html[data-presentation='tour'] .paper-shadow {
   width: 100%;
   height: 100%;
   overflow: visible;
-  fill: #58412bb3;
-  opacity: 0.14;
+  opacity: 0.25;
   pointer-events: none;
 }
+html[data-presentation='tour'] .paper-shadow > i {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  transform-origin: 0 0;
+  background: radial-gradient(
+    ellipse,
+    #443320b3 0,
+    #44332052 55%,
+    #44332000 70.71%
+  );
+  will-change: transform, opacity;
+}
 
-/* Material is painted into each face, without extra composited surfaces. */
+/* Fiber and folded-stock relief are static paint beneath the printed ink. */
 html[data-presentation='tour'] .panel-face,
 html[data-presentation='tour'] .panel-back {
-  --face-shade: var(--front-shade, 0);
-  --left-crease: 0;
-  --right-crease: 0;
+  --crease-left: linear-gradient(90deg, transparent, transparent);
+  --crease-right: linear-gradient(270deg, transparent, transparent);
+  --recess-left: linear-gradient(
+    90deg,
+    #61422635,
+    #61422620 calc(2 * var(--paper-unit)),
+    #80644013 calc(10 * var(--paper-unit)),
+    #ac907107 calc(25 * var(--paper-unit)),
+    transparent calc(42 * var(--paper-unit))
+  );
+  --recess-right: linear-gradient(
+    270deg,
+    #61422635,
+    #61422620 calc(2 * var(--paper-unit)),
+    #80644013 calc(10 * var(--paper-unit)),
+    #ac907107 calc(25 * var(--paper-unit)),
+    transparent calc(42 * var(--paper-unit))
+  );
+  --ridge-left: linear-gradient(
+    90deg,
+    #785c431c,
+    #fffdf746 calc(2 * var(--paper-unit)),
+    #fffdf71c calc(9 * var(--paper-unit)),
+    #8d715b08 calc(22 * var(--paper-unit)),
+    transparent calc(40 * var(--paper-unit))
+  );
+  --ridge-right: linear-gradient(
+    270deg,
+    #785c431c,
+    #fffdf746 calc(2 * var(--paper-unit)),
+    #fffdf71c calc(9 * var(--paper-unit)),
+    #8d715b08 calc(22 * var(--paper-unit)),
+    transparent calc(40 * var(--paper-unit))
+  );
   background-image:
-    linear-gradient(
-      108deg,
-      rgb(55 37 17 / calc(var(--face-shade) * 0.44)),
-      rgb(55 37 17 / var(--face-shade))
-    ),
-    linear-gradient(
-      90deg,
-      rgb(53 34 16 / var(--left-crease)),
-      rgb(53 34 16 / calc(var(--left-crease) * 0.28))
-        calc(3 * var(--paper-unit)),
-      rgb(255 251 241 / calc(var(--left-crease) * 0.7))
-        calc(4 * var(--paper-unit)),
-      transparent calc(18 * var(--paper-unit))
-    ),
-    linear-gradient(
-      270deg,
-      rgb(53 34 16 / var(--right-crease)),
-      rgb(53 34 16 / calc(var(--right-crease) * 0.28))
-        calc(3 * var(--paper-unit)),
-      rgb(255 251 241 / calc(var(--right-crease) * 0.7))
-        calc(4 * var(--paper-unit)),
-      transparent calc(18 * var(--paper-unit))
-    ),
-    url('/paper-grain.svg'),
-    radial-gradient(ellipse at 18% 5%, #ffffff0a 0, transparent 65%),
-    linear-gradient(106deg, #fffdf90d, transparent 46%, #56351b05);
+    var(--crease-left), var(--crease-right), url('/paper-grain.svg'),
+    radial-gradient(ellipse at 24% 14%, #fffdf72b, transparent 64%),
+    linear-gradient(108deg, #54412a0b, #fffdf704 33%, #54412a09 69%, #fffdf709);
   background-size:
     100% 100%,
     100% 100%,
-    100% 100%,
-    calc(96 * var(--paper-unit)) calc(96 * var(--paper-unit)),
+    calc(384 * var(--paper-unit)) calc(384 * var(--paper-unit)),
     100% 100%,
     100% 100%;
-  background-repeat:
-    no-repeat, no-repeat, no-repeat, repeat, no-repeat, no-repeat;
+  background-position:
+    0 0,
+    0 0,
+    var(--fiber-origin, 0 0),
+    0 0,
+    0 0;
+  background-repeat: no-repeat, no-repeat, repeat, no-repeat, no-repeat;
+  border-inline-color: transparent;
   box-shadow:
-    inset 0 calc(1 * var(--paper-unit)) 0 #fffdf9a6,
-    inset 0 calc(-1 * var(--paper-unit)) 0 #8f76574d,
-    0 calc(1 * var(--paper-unit)) 0 #eee4d4,
-    0 calc(2 * var(--paper-unit)) 0 #ad9778,
-    0 calc(3 * var(--paper-unit)) 0 #e5d8c5;
+    inset 0 calc(1 * var(--paper-unit)) 0 #fffdf972,
+    inset 0 calc(-1 * var(--paper-unit)) 0 #806a4429;
 }
-html[data-presentation='tour'] .panel-back {
-  --face-shade: var(--back-shade, 0);
+html[data-presentation='tour'] .fold-panel[data-panel='left'] > .panel-face {
+  --crease-right: var(--recess-right);
 }
-html[data-presentation='tour'] .fold-panel[data-panel='left'] > .panel-face,
 html[data-presentation='tour'] .fold-panel[data-panel='right'] > .panel-back {
-  --right-crease: var(--crease-opacity, 0.08);
+  --crease-right: var(--recess-right);
 }
-html[data-presentation='tour'] .fold-panel[data-panel='right'] > .panel-face,
+html[data-presentation='tour'] .fold-panel[data-panel='right'] > .panel-face {
+  --crease-left: var(--ridge-left);
+}
 html[data-presentation='tour'] .fold-panel[data-panel='left'] > .panel-back {
-  --left-crease: var(--crease-opacity, 0.08);
+  --crease-left: var(--ridge-left);
 }
-html[data-presentation='tour'] .fold-panel[data-panel='center'] > .panel-face,
+html[data-presentation='tour'] .fold-panel[data-panel='center'] > .panel-face {
+  --crease-left: var(--recess-left);
+  --crease-right: var(--ridge-right);
+}
 html[data-presentation='tour'] .fold-panel[data-panel='center'] > .panel-back {
-  --left-crease: var(--crease-opacity, 0.08);
-  --right-crease: var(--crease-opacity, 0.08);
+  --crease-left: var(--recess-left);
+  --crease-right: var(--ridge-right);
+}
+html[data-presentation='tour'] .fold-panel[data-panel='center'] {
+  --fiber-origin: calc(-127 * var(--paper-unit)) calc(-71 * var(--paper-unit));
+}
+html[data-presentation='tour'] .fold-panel[data-panel='right'] {
+  --fiber-origin: calc(-251 * var(--paper-unit)) calc(-193 * var(--paper-unit));
+}
+
+.paper-light,
+.paper-crease {
+  display: none;
+}
+html[data-presentation='tour'] .paper-light {
+  display: block;
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 16px;
+  height: 16px;
+  z-index: 2;
+  pointer-events: none;
+  transform-origin: 0 0;
+  background: linear-gradient(108deg, #37251170, #372511);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+html[data-presentation='tour'] .paper-crease {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: calc(10 * var(--paper-unit));
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  will-change: opacity;
+}
+html[data-presentation='tour'] .paper-crease-left {
+  left: 0;
+  background: linear-gradient(90deg, #38210ec2, #56351d35 35%, #56351d00);
+}
+html[data-presentation='tour'] .paper-crease-right {
+  right: 0;
+  background: linear-gradient(270deg, #38210ec2, #56351d35 35%, #56351d00);
+}
+
+.paper-edge {
+  display: none;
+}
+html[data-presentation='tour'] .paper-edge {
+  display: block;
+  position: absolute;
+  pointer-events: none;
+}
+html[data-presentation='tour'] .paper-edge-top,
+html[data-presentation='tour'] .paper-edge-bottom {
+  left: 0;
+  width: 100%;
+  height: calc(2 * var(--paper-unit));
+  transform-origin: 50% 0;
+}
+html[data-presentation='tour'] .paper-edge-top {
+  top: 0;
+  background: linear-gradient(#d0c2ac, #f7f0e2 50%, #e3d7c4);
+  transform: rotateX(90deg) translateY(calc(-1 * var(--paper-unit)));
+}
+html[data-presentation='tour'] .paper-edge-bottom {
+  top: 100%;
+  background: linear-gradient(#b9a58b, #e0d1ba 60%, #c2ae91);
+  transform: rotateX(-90deg) translateY(calc(-1 * var(--paper-unit)));
+}
+html[data-presentation='tour'] .paper-edge-outer {
+  top: 0;
+  width: calc(2 * var(--paper-unit));
+  height: 100%;
+  transform-origin: 0 50%;
+}
+html[data-presentation='tour']
+  .fold-panel[data-panel='left']
+  > .paper-edge-outer {
+  left: 0;
+  background: linear-gradient(90deg, #c9baa3, #eee3cf 55%, #dacbb3);
+  transform: rotateY(-90deg) translateX(calc(-1 * var(--paper-unit)));
+}
+html[data-presentation='tour']
+  .fold-panel[data-panel='right']
+  > .paper-edge-outer {
+  left: 100%;
+  background: linear-gradient(90deg, #bfad92, #e3d4bc 55%, #b9a78b);
+  transform: rotateY(90deg) translateX(calc(-1 * var(--paper-unit)));
 }
 .tour-controls {
   display: none;

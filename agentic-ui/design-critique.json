@@ -74,5 +74,11 @@
       ],
       "score": 99
     }
-  ]
+  ],
+  "isCurrentRevision": false,
+  "currentRevisionNote": "Original six-category scores and full release remain historical. Current bounded renderer/material follow-up is accepted in docs/paper-depth-review.md; verification is in agentic-ui/local-verification.json.",
+  "paperRenderingFollowUp": {
+    "report": "docs/paper-depth-review.md",
+    "status": "accepted-within-inspected-local-scope"
+  }
 }

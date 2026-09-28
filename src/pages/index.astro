@@ -37,18 +37,11 @@ const base = import.meta.env.BASE_URL;
     </div>
     <div class="flyer-journey">
       <div class="flyer-stage">
-        <svg class="paper-shadow" aria-hidden="true" focusable="false">
-          <defs>
-            <radialGradient id="paper-shadow-falloff">
-              <stop offset="0" stop-color="#443320" stop-opacity="0.7" />
-              <stop offset="0.55" stop-color="#443320" stop-opacity="0.32" />
-              <stop offset="1" stop-color="#443320" stop-opacity="0" />
-            </radialGradient>
-          </defs>
-          <ellipse fill="url(#paper-shadow-falloff)" />
-          <ellipse fill="url(#paper-shadow-falloff)" />
-          <ellipse fill="url(#paper-shadow-falloff)" />
-        </svg>
+        <div class="paper-shadow" aria-hidden="true">
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
         <article
           class="proposal-sheet"
           aria-label="Growth partnership proposal"
@@ -169,7 +162,16 @@ const base = import.meta.env.BASE_URL;
             </section>
           </div>
           <div class="fold-panel" data-panel="left">
+            <i class="paper-edge paper-edge-top" aria-hidden="true"></i>
+            <i class="paper-edge paper-edge-bottom" aria-hidden="true"></i>
+            <i class="paper-edge paper-edge-outer" aria-hidden="true"></i>
             <div class="panel-face">
+              <i class="paper-light" aria-hidden="true"></i>
+              <i
+                class="paper-crease paper-crease-right"
+                data-crease="right"
+                aria-hidden="true"
+              ></i>
               <div class="panel-masthead">
                 <img
                   class="sheet-logo"
@@ -185,6 +187,12 @@ const base = import.meta.env.BASE_URL;
               </div>
             </div>
             <div class="panel-back brochure-cover" aria-hidden="true">
+              <i class="paper-light" aria-hidden="true"></i>
+              <i
+                class="paper-crease paper-crease-left"
+                data-crease="left"
+                aria-hidden="true"
+              ></i>
               <img
                 class="sheet-logo"
                 src={`${base}handrail-logo.png`}
@@ -215,7 +223,20 @@ const base = import.meta.env.BASE_URL;
             </div>
           </div>
           <div class="fold-panel" data-panel="center">
+            <i class="paper-edge paper-edge-top" aria-hidden="true"></i>
+            <i class="paper-edge paper-edge-bottom" aria-hidden="true"></i>
             <div class="panel-face cash-face">
+              <i class="paper-light" aria-hidden="true"></i>
+              <i
+                class="paper-crease paper-crease-left"
+                data-crease="left"
+                aria-hidden="true"
+              ></i>
+              <i
+                class="paper-crease paper-crease-right"
+                data-crease="right"
+                aria-hidden="true"
+              ></i>
               <div class="panel-masthead">
                 <span>Collections before commission</span>
                 <span>Handrail / Brent Showalter</span>
@@ -225,6 +246,17 @@ const base = import.meta.env.BASE_URL;
               </div>
             </div>
             <div class="panel-back plain-back" aria-hidden="true">
+              <i class="paper-light" aria-hidden="true"></i>
+              <i
+                class="paper-crease paper-crease-left"
+                data-crease="left"
+                aria-hidden="true"
+              ></i>
+              <i
+                class="paper-crease paper-crease-right"
+                data-crease="right"
+                aria-hidden="true"
+              ></i>
               <div>
                 Handrail
                 <br />
@@ -236,7 +268,16 @@ const base = import.meta.env.BASE_URL;
             </div>
           </div>
           <div class="fold-panel" data-panel="right">
+            <i class="paper-edge paper-edge-top" aria-hidden="true"></i>
+            <i class="paper-edge paper-edge-bottom" aria-hidden="true"></i>
+            <i class="paper-edge paper-edge-outer" aria-hidden="true"></i>
             <div class="panel-face">
+              <i class="paper-light" aria-hidden="true"></i>
+              <i
+                class="paper-crease paper-crease-left"
+                data-crease="left"
+                aria-hidden="true"
+              ></i>
               <div class="panel-masthead">
                 <span>The proposed terms</span>
                 <span>Handrail / Brent Showalter</span>
@@ -246,6 +287,12 @@ const base = import.meta.env.BASE_URL;
               </div>
             </div>
             <div class="panel-back rust-back" aria-hidden="true">
+              <i class="paper-light" aria-hidden="true"></i>
+              <i
+                class="paper-crease paper-crease-right"
+                data-crease="right"
+                aria-hidden="true"
+              ></i>
               <div>
                 Start here.
                 <br />

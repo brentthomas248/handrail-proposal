@@ -74,7 +74,7 @@ components:
 
 ## Complete proposal revision
 
-The approved Telescope, Igloo, Exat and Stripe Press references inform material, typography and camera direction; Handrail supplies the logo and cream/rust/ink identity. The full proposal now uses the same print and camera rules from opening through closing. Essential front ink and authored spacing remain stable; decorative reverse ink resolves softly at grazing angles to limit aliasing. Local hinge travel connects reading scenes without repeatedly retreating to a distant overview.
+The approved Telescope, Igloo, Exat and Stripe Press references inform material, typography and camera direction; Handrail supplies the logo and cream/rust/ink identity. The full proposal now uses the same print and camera rules from opening through closing. Front and reverse ink stay in static printed surfaces; light changes independently while authored spacing remains stable. Local hinge travel connects reading scenes without repeatedly retreating to a distant overview.
 
 The semantic narrative is beginning → cash flow → proposed rates → 90-day window → growing together. That is also the no-JavaScript and ordinary reading order. The same section nodes mount into physical panel slots only for the tour; decorative backs never carry essential terms. Desktop has five reading scenes plus overview; phone separates the two rate choices, producing six plus overview. Each phone rate scene owns its heading, rationale and common terms. Short window and closing compositions align toward the top of the safe stage rather than exposing unrelated paragraph fragments above them.
 
@@ -111,6 +111,10 @@ The material should read as printed matte paper. Use subtle local grain at a bel
 Directional light responds coherently to face orientation. Folded and open panels receive different diffuse light, and crease/contact shadows change with the fold. Cast shadows belong to the surrounding surface and should soften with separation. Their purpose is to establish depth and weight, not add a dark halo around every panel.
 
 Preserve sharp typography and contrast. Keep grain and illumination treatments from blurring, washing out or flickering over text. Use a matte finish: no glossy streak, metallic reflection, shiny card effect, bloom or continuously drifting decorative light. Verify front, back, edge and crease treatment across multiple orientations, not just the opening screenshot.
+
+Static irregular fibers and low-contrast formation belong below the ink. No visible tiled clouds or pale spots on the rust face. Thin edge surfaces connect the existing front/back offsets, with distinct concave and convex fold relief. Keep the lighting texture intrinsically 16×16 pixels and scale it over a face; animate its opacity instead of repainting the face. Narrow crease strips respond to the adjoining hinge, including both seams of the center panel. Floor shadows use fixed 32×32 gradient tiles and transform/opacity updates. Preserve printed layout during face culling.
+
+The 64 MiB conservative DPR3 surface-area budget now includes face backings, light tiles, crease strips, stock edges and floor shadows. Keep the 4096-device-pixel edge limit and prohibit full-size promoted face overlays. This is a checkable engineering bound, not a measurement of GPU residency or an iPhone certification.
 
 ## Handrail identity
 
@@ -160,7 +164,7 @@ Current evidence and independent review belong in [the final remediation record]
 
 ## Resume, portfolio and spatial introduction
 
-The opening starts with a compact folded packet. Both wings unfold while the camera keeps the entire three-panel object in view; only after establishing the opened spread does it approach the cover. Natural self-occlusion while folded is expected. A paired viewpoint orbit at each later crossed crease reveals the physical object; same-panel paragraphs retain quieter reading travel. Keep the approved reading poses, native interruption/reversal and renderer budgets.
+The opening starts with a compact folded packet. Both wings unfold while the camera keeps the entire three-panel object in view; only after establishing the opened spread does it approach the cover. The final overview preserves an oblique pitch and distinct center/wing orientations so both creases remain visible in the outer silhouette; a nearly coplanar projection defeats the depth even when the hinge math is correct. Natural self-occlusion while folded is expected. A paired viewpoint orbit at each later crossed crease reveals the physical object; same-panel paragraphs retain quieter reading travel. Keep the approved reading poses, native interruption/reversal and renderer budgets.
 
 A second header group makes the Handrail resume and wider GitHub immediately discoverable. On phones the header uses two rows; the existing total reading-space reservation is redistributed between header and chapter controls. Tablet navigation stays on one line. Chapter focus outlines sit inside their controls. Browser Back restores the proposal history entry after its scroll geometry mounts. Fresh visits and explicit reading URLs keep their normal behavior.
 

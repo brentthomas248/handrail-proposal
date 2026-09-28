@@ -104,28 +104,31 @@ async function expectReadingFrame(
   label: string | null,
   mobile = false,
 ) {
-  await expect
-    .poll(async () => (await readingFrame(target)).clippedText, {
-      message: `${label}: every text line must clear the actual header and controls by 24px`,
-    })
-    .toEqual([]);
-  await expect
-    .poll(async () => (await readingFrame(target)).boxFits, {
-      message: `${label}: the complete reading group needs space on all four sides`,
-    })
-    .toBeTruthy();
-  const frame = await readingFrame(target);
-  expect(frame.textCount, `${label} must contain real text`).toBeGreaterThan(0);
-  await expect
-    .poll(async () => (await readingFrame(target)).minimumTextPx, {
-      message: `${label}: all text, including links and labels, must remain readable`,
-    })
-    .toBeGreaterThanOrEqual(12);
-  if (mobile)
+  await expect(async () => {
+    // Culled faces retain geometry. Require visible ink and every framing
+    // condition in the same snapshot, so hidden bounds cannot pass readiness.
+    const frame = await readingFrame(target);
+    expect(frame.textCount, `${label} must contain real text`).toBeGreaterThan(
+      0,
+    );
     expect(
-      frame.widthFraction,
-      `${label}: preserve peripheral context rather than a screen-filling crop`,
-    ).toBeLessThanOrEqual(0.78);
+      frame.clippedText,
+      `${label}: every text line must clear the actual header and controls by 24px`,
+    ).toEqual([]);
+    expect(
+      frame.boxFits,
+      `${label}: the complete reading group needs space on all four sides`,
+    ).toBeTruthy();
+    expect(
+      frame.minimumTextPx,
+      `${label}: all text, including links and labels, must remain readable`,
+    ).toBeGreaterThanOrEqual(12);
+    if (mobile)
+      expect(
+        frame.widthFraction,
+        `${label}: preserve peripheral context rather than a screen-filling crop`,
+      ).toBeLessThanOrEqual(0.78);
+  }).toPass({ timeout: 5000 });
 }
 
 async function expectMobileReadingGroup(target: Locator, label: string | null) {
@@ -557,9 +560,14 @@ test('high-density mobile paper stays within its compositing budget through zoom
   const session = await context.newCDPSession(page);
   const paperIds = new Set<number>();
   const decorationIds = new Set<number>();
+  const materialIds = new Set<number>();
+  const floorIds = new Set<number>();
   const samples: {
     faces: number;
     decorations: number;
+    materialSurfaces: number;
+    materialMiB: number;
+    floorMiB: number;
     paperMiB: number;
     largestDeviceEdge: number;
   }[] = [];
@@ -576,6 +584,26 @@ test('high-density mobile paper stays within its compositing budget through zoom
       for (const pseudo of node.pseudoElements || [])
         decorationIds.add(pseudo.backendNodeId);
     }
+    if (
+      ['paper-edge', 'paper-crease', 'paper-light'].some((material) =>
+        classes.includes(material),
+      )
+    ) {
+      const identifyMaterial = (material: CompositingNode) => {
+        materialIds.add(material.backendNodeId);
+        material.children?.forEach(identifyMaterial);
+        material.pseudoElements?.forEach(identifyMaterial);
+      };
+      identifyMaterial(node);
+    }
+    if (classes.includes('paper-shadow')) {
+      const identifyFloor = (floor: CompositingNode) => {
+        floorIds.add(floor.backendNodeId);
+        floor.children?.forEach(identifyFloor);
+        floor.pseudoElements?.forEach(identifyFloor);
+      };
+      identifyFloor(node);
+    }
     for (const child of node.children || []) identifyPaper(child);
   }
   identifyPaper(documentNode);
@@ -588,19 +616,30 @@ test('high-density mobile paper stays within its compositing budget through zoom
     const decorations = drawn.filter((layer) =>
       decorationIds.has(layer.backendNodeId ?? -1),
     );
+    const materials = drawn.filter((layer) =>
+      materialIds.has(layer.backendNodeId ?? -1),
+    );
+    const floor = drawn.filter((layer) =>
+      floorIds.has(layer.backendNodeId ?? -1),
+    );
     if (!paper.length) return;
+    const stock = [...paper, ...materials, ...floor];
+    const surfaceMiB = (layers: CompositingLayer[]) =>
+      layers.reduce(
+        (total, layer) => total + layer.width * layer.height * 3 * 3 * 4,
+        0,
+      ) /
+      1024 /
+      1024;
     samples.push({
       faces: paper.length,
       decorations: decorations.length,
-      paperMiB:
-        paper.reduce(
-          (total, layer) => total + layer.width * layer.height * 3 * 3 * 4,
-          0,
-        ) /
-        1024 /
-        1024,
+      materialSurfaces: materials.length,
+      materialMiB: surfaceMiB(materials),
+      floorMiB: surfaceMiB(floor),
+      paperMiB: surfaceMiB(stock),
       largestDeviceEdge: Math.max(
-        ...paper.map((layer) => Math.max(layer.width, layer.height) * 3),
+        ...stock.map((layer) => Math.max(layer.width, layer.height) * 3),
       ),
     });
   };
@@ -633,7 +672,7 @@ test('high-density mobile paper stays within its compositing budget through zoom
     body: Buffer.from(
       JSON.stringify(
         {
-          note: 'Project surface-area budget, not measured GPU memory or physical iOS stability proof. Retained drawn layers are counted even if invisible.',
+          note: 'Project surface-area budget, not measured GPU memory or physical iOS stability proof. Faces, stock edges, crease strips, lighting tiles and floor shadows share one 64 MiB budget. Retained drawn layers are counted even if invisible; face pseudo-element backings remain disallowed.',
           viewport: { width: 390, height: 844, deviceScaleFactor: 3 },
           samples,
         },

@@ -56,7 +56,7 @@
     "These page-load laboratory results do not establish motion continuity, field INP or physical-device performance; continuous-input evidence is recorded separately."
   ],
   "isCurrentRevision": false,
-  "currentRevisionNote": "Earlier Lighthouse and motion results remain historical. Current measured-motion evidence compares camera pacing and local browser callback delivery; physical iPhone and field performance remain unverified.",
+  "currentRevisionNote": "Earlier Lighthouse and camera-pacing evidence is historical. Current cached-paper rendering and camera-depth evidence is recorded in paperRenderingFollowUp; no physical iPhone or field performance certification.",
   "motionEvidence": "docs/final-design-review/r8-rendering.md",
   "openingFollowUp": {
     "scope": "Cold first-opening pacing, separately measured from historical Lighthouse scores",
@@ -119,13 +119,14 @@
       "Sixfold CPU-throttled initialization before camera-ready still has long tasks.",
       "Primary correction is deliberate camera-scale pacing, not a demonstrated general renderer throughput increase."
     ],
-    "isCurrentRevision": true,
+    "isCurrentRevision": false,
     "sourceCommit": "9cb065782302c80027bb8a2bb0d54de3b76f9426"
   },
   "magneticFollowUp": {
     "report": "docs/magnetic-scroll-remediation.md",
     "review": "docs/magnetic-scroll-review.md",
-    "scope": "Released gesture completion; unchanged fold/camera/material curves and rendering budgets."
+    "scope": "Released gesture completion; unchanged fold/camera/material curves and rendering budgets.",
+    "isCurrentRevision": false
   },
   "quickGestureFollowUp": {
     "report": "docs/quick-gesture-review.md",
@@ -136,7 +137,8 @@
       "baselineMeaningfulMotionMs": 1800,
       "baselineLastCameraChangeMs": 3180
     },
-    "scope": "Isolated actual wheel and emulated native touch; unchanged rendering surface budgets."
+    "scope": "Isolated actual wheel and emulated native touch; unchanged rendering surface budgets.",
+    "isCurrentRevision": false
   },
   "measuredMotionFollowUp": {
     "report": "docs/measured-motion-remediation.md",
@@ -151,6 +153,209 @@
       "candidateDurationMs": 1683.2,
       "candidateMaxActualCallbackGapMs": 60.1
     },
-    "scope": "Isolated Chromium phone DPR3, desktop and CPU-throttled phone captures. No long animation task observed; cold scheduling delay remains. Unchanged material and surface budgets."
+    "scope": "Isolated Chromium phone DPR3, desktop and CPU-throttled phone captures. No long animation task observed; cold scheduling delay remains. Unchanged material and surface budgets.",
+    "isCurrentRevision": false
+  },
+  "paperRenderingFollowUp": {
+    "isCurrentRevision": true,
+    "report": "docs/paper-rendering-remediation.md",
+    "review": "docs/paper-depth-review.md",
+    "measurement": "qa-artifacts/paper-rendering/final-profile-v4/summary.json",
+    "htmlSha256": "f535e8d92e6da628817a099d53c842e62f06be6095b63f4cb736c97aaad463ed",
+    "textureSha256": "db5cc6197e90a427b102935630b6f57075e980a198ae908b7b3b1516f5f1a620",
+    "chromium": [
+      {
+        "trial": "cold",
+        "duration": 1681.5,
+        "frames": 102,
+        "maxAngleJump": 1.785899999999998,
+        "maxActualGap": 33.09999996423721,
+        "metricDelta": {
+          "LayoutCount": 2,
+          "RecalcStyleCount": 103,
+          "LayoutDuration": 0.00023699999999999936,
+          "RecalcStyleDuration": 0.006470000000000001,
+          "DevToolsCommandDuration": 0.02095,
+          "ScriptDuration": 0.01581,
+          "V8CompileDuration": 0,
+          "TaskDuration": 0.073269,
+          "TaskOtherDuration": 0.029802000000000002
+        },
+        "traceStats": {
+          "FireAnimationFrame": {
+            "count": 278,
+            "totalMs": 22.861000000000015,
+            "maxMs": 0.413
+          },
+          "FunctionCall": {
+            "count": 596,
+            "totalMs": 23.72300000000003,
+            "maxMs": 0.375
+          },
+          "PrePaint": {
+            "count": 152,
+            "totalMs": 2.5769999999999955,
+            "maxMs": 0.148
+          },
+          "Paint": {
+            "count": 34,
+            "totalMs": 10.842999999999996,
+            "maxMs": 1.955
+          },
+          "RasterTask": {
+            "count": 222,
+            "totalMs": 89.07900000000012,
+            "maxMs": 3.922
+          },
+          "UpdateLayoutTree": {
+            "count": 103,
+            "totalMs": 6.463000000000002,
+            "maxMs": 0.363
+          },
+          "Layout": {
+            "count": 2,
+            "totalMs": 0.22999999999999998,
+            "maxMs": 0.124
+          }
+        }
+      },
+      {
+        "trial": "warm",
+        "duration": 1678.8999999761581,
+        "frames": 102,
+        "maxAngleJump": 1.785899999999998,
+        "maxActualGap": 21.100000023841858,
+        "metricDelta": {
+          "LayoutCount": 2,
+          "RecalcStyleCount": 103,
+          "LayoutDuration": 0.00020899999999999912,
+          "RecalcStyleDuration": 0.006257000000000002,
+          "DevToolsCommandDuration": 0.017841000000000003,
+          "ScriptDuration": 0.013233999999999996,
+          "V8CompileDuration": 0,
+          "TaskDuration": 0.066192,
+          "TaskOtherDuration": 0.02865100000000001
+        },
+        "traceStats": {
+          "FireAnimationFrame": {
+            "count": 261,
+            "totalMs": 13.839999999999995,
+            "maxMs": 0.676
+          },
+          "FunctionCall": {
+            "count": 579,
+            "totalMs": 14.103999999999989,
+            "maxMs": 0.536
+          },
+          "PrePaint": {
+            "count": 247,
+            "totalMs": 2.4679999999999933,
+            "maxMs": 0.151
+          },
+          "UpdateLayoutTree": {
+            "count": 103,
+            "totalMs": 6.2479999999999976,
+            "maxMs": 0.44
+          },
+          "RasterTask": {
+            "count": 136,
+            "totalMs": 36.37200000000002,
+            "maxMs": 3.004
+          },
+          "Layout": {
+            "count": 2,
+            "totalMs": 0.202,
+            "maxMs": 0.104
+          },
+          "Paint": {
+            "count": 10,
+            "totalMs": 1.497,
+            "maxMs": 0.34
+          }
+        }
+      }
+    ],
+    "webkit": [
+      {
+        "engine": "webkit",
+        "mode": "normal",
+        "repeat": 0,
+        "trial": "cold",
+        "start": 23,
+        "end": 1691,
+        "duration": 1668,
+        "frames": 101,
+        "changedFrames": 101,
+        "maxAngleJump": 2.1656909999999954,
+        "maxActualGap": 21,
+        "actualOver25ms": 0,
+        "actualOver40ms": 0,
+        "inputs": [
+          {
+            "type": "wheel",
+            "now": 1
+          }
+        ],
+        "metricDelta": {},
+        "traceStats": {},
+        "longtasks": [],
+        "layerPaintCount": 0,
+        "baselineLayerCount": 0,
+        "finalLayerCount": 0
+      },
+      {
+        "engine": "webkit",
+        "mode": "normal",
+        "repeat": 1,
+        "trial": "cold",
+        "start": 33,
+        "end": 1698,
+        "duration": 1665,
+        "frames": 101,
+        "changedFrames": 101,
+        "maxAngleJump": 1.9682260000000014,
+        "maxActualGap": 20,
+        "actualOver25ms": 0,
+        "actualOver40ms": 0,
+        "inputs": [
+          {
+            "type": "wheel",
+            "now": 1
+          }
+        ],
+        "metricDelta": {},
+        "traceStats": {},
+        "longtasks": [],
+        "layerPaintCount": 0,
+        "baselineLayerCount": 0,
+        "finalLayerCount": 0
+      }
+    ],
+    "surfaceBudget": {
+      "estimatedMiB": 63.87677764892578,
+      "groups": {
+        "floor-shadow": 0.10546875,
+        "paper-edge": 0.19136810302734375,
+        "paper": 62.826416015625,
+        "paper-light": 0.0263671875,
+        "paper-crease": 0.7271575927734375
+      },
+      "counts": {
+        "floor-shadow": 3,
+        "paper-edge": 8,
+        "paper": 3,
+        "paper-light": 3,
+        "paper-crease": 4
+      },
+      "largestDeviceEdge": 3177
+    },
+    "bounds": {
+      "budgetIsEstimateNotGPUMemory": true,
+      "profileIsOpeningOnly": true,
+      "physicalIPhoneVerified": false,
+      "webkitSyntheticWheel": true,
+      "chromiumNativeCDPTouch": true,
+      "rasterTotalsAreParallelWorkerCPUNotWallTime": true
+    }
   }
 }

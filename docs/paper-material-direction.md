@@ -1,0 +1,46 @@
+# Paper material direction
+
+Research and source review: September 27, 2026. Scope: the current CSS 3D trifold; no copy, reading layout or approved transition-duration redesign. These are implementation recommendations, not rendered acceptance of a new candidate.
+
+## Diagnosis from the current object
+
+The saved phone unfold and desktop crease-transfer renders show connected geometry, but the blank areas read as uniform digital fills. The visible physical information is mostly a diffuse ground shadow. The paper needs coordinated surface, crease and cut-edge cues; increasing generic noise will not establish thickness.
+
+- `public/paper-grain.svg` contains 1,900 tiny square specks and only 34 short fibers in a 128-unit tile. CSS reduces that tile to 96 paper units; the high-density intrinsic scale reduces it again. Most variation disappears at overview distance. A 56.7 KB texture is not evidence of perceptible paper.
+- `motion.ts` calculates both center crease shades using `angle = 0`. Those shadows remain constant while the adjacent wings fold. A real Z-fold has different concave and convex sides; uniform paired dark seams look like dividers.
+- Front and back sit one paper unit away from the hinge plane, but no narrow surface joins them at the exposed cut edge. The bottom-only three-step box shadow imitates a bevel without providing a side that turns with the stock.
+- Current directional shading changes CSS background paint on the large printed surfaces. Material enrichment must not multiply that repaint work. Rendering traces, not aesthetic preference, decide the update mechanism.
+
+Evidence inspected: the existing `measured-motion/review` phone unfold contact sheet, phone full-proposal arrival and desktop crease-transfer frame. No new browser session was launched for this research task.
+
+## Recommended implementation order
+
+1. **Make the fold physically legible.** Drive the center's left crease from the left hinge and its right crease from the right hinge. Pair each center seam with its adjoining wing. With the current positive hinge angles, the front left junction is concave and the front right junction is convex; the reverse faces swap those roles. The concave junction gets a narrow contact shadow and a broader, low-amplitude falloff. The convex side gets a softer compression line and a thin warm light ridge, not an equally dark groove. Both cues relax continuously as the hinge opens. An angular closure such as `sin(abs(angle) / 2)` is a starting point for monotonic contact strength, not a claim of physical simulation.
+2. **Give the exposed perimeter a stock edge.** Prefer a very narrow opaque strip joining the existing front and back offsets at the two free vertical edges and visible top/bottom cuts. Its transform belongs to its panel, so it appears naturally at grazing angles. Start at the existing two-paper-unit total stock thickness; judge the projected edge, aiming for roughly half to one screen pixel in close oblique views. Use a pale fiber-colored face and a slightly darker underside. A folded leaflet must not become a thick wooden card. Do not add dark cut edges at the two internal hinge seams.
+3. **Replace microscopic speckle with restrained paper formation.** Keep texture fixed in paper coordinates, beneath the ink. Combine sparse irregular fibers at several lengths/orientations with low-contrast cloudy formation; avoid a regular directional hatch. At normal reading scale the larger fibers should resolve as occasional one-to-three-screen-pixel fragments, with fine grain near the device-pixel scale. Mid-scale formation should be a few local luminance levels, not obvious stains. A fixed, inexpensive vector tile can achieve this; a texture import is optional. Give panels offset sample origins so identical clusters do not repeat at each hinge. Keep the rust panel's stock texture perceptible but quieter than the cream surfaces.
+4. **Make light and ground shadow agree.** Preserve the existing upper-left diffuse source and matte finish. The broad paper light response should establish a clear but modest difference between opposing orientations; crease contact should carry the stronger local depth cue. Replace an all-purpose blurred halo only if current captures show it detaching from the object: a tight, low-opacity contact region with softer displaced ambient falloff is preferable. No glossy moving highlight or continuously drifting illumination.
+
+Suggested crease paint starting scale: a one-to-two-paper-unit contact line, a 6–12-unit compressed ridge and a 24–40-unit low-opacity falloff. These are authored-scale trial values; accept them only in the actual phone and desktop camera views. The effect must disappear into the quiet reading composition without erasing the seam entirely.
+
+## Performance and geometry boundary
+
+Static paper texture belongs in the existing face paint. Do not add full-size textured overlays, runtime SVG turbulence, blur filters, duplicated text or a blanket `will-change` declaration. If profiling identifies face repaint as the opening bottleneck, decouple changing illumination from printed surfaces: narrow crease/edge strips can change opacity or transform independently while static ink and texture remain rasterized. This is a conditional rendering choice, not permission to replace the existing budget with an unbounded compositor stack.
+
+Preserve the project limits of 64 MiB estimated drawn paper surfaces and a 4096-device-pixel maximum surface edge. The current test counts `.panel-face` and `.panel-back` and requires zero composited face pseudo-elements. Any added edge or crease surfaces must enter the accounting explicitly, including retained hidden layers. Maintain the existing front/back culling invariant and document any intentional count change; do not pass by excluding decorations from the estimate. Chromium layer-area estimates remain distinct from measured GPU memory and physical iPhone stability.
+
+Do not apply `opacity < 1`, filters, blend modes, masks, paint containment or clipping to the shared `preserve-3d` hinge ancestors. The CSS transform specification explains that grouping properties can flatten descendants. Apply any necessary visual treatment to a leaf plane, never the structural fold container. CSS 3D transforms alone do not make a flat element a solid object. [W3C CSS Transforms Level 2](https://www.w3.org/TR/css-transforms-2/#grouping-property-values)
+
+## Research basis and optional asset
+
+- The approved [Stripe Press](https://press.stripe.com/) reference supplies the object-first material direction already documented in [redesign research](redesign-research.md). Telescope, Igloo and Exat remain camera/composition references; do not copy their assets or add unrelated effects.
+- Rough diffuse material models account for microscopic occlusion, masking and light exchange. This supports broad matte response with restrained relief cues rather than a plastic specular streak; the CSS treatment remains an approximation, not an Oren–Nayar renderer. [Physically Based Rendering, microfacet and rough diffuse models](https://pbr-book.org/3ed-2018/Reflection_Models/Microfacet_Models)
+- [ambientCG Paper 001](https://ambientcg.com/view?id=Paper001) offers a white paper material under [CC0](https://docs.ambientcg.com/license/). Its source explicitly calls the creation method **Approximation**; do not describe it as a photograph or scan. It is an optional study/source asset, not yet adopted or visually accepted here. Do not ship the multi-megabyte PBR archive or unused normal/displacement maps into a CSS site. If adopted, record the selected file, modification and hash in the asset manifest and assess the small derived texture at actual reading scale.
+- Chrome's animation guidance distinguishes transform/opacity compositing from expensive paint work. Use an isolated trace to decide whether the material updates satisfy that distinction; merely using GSAP does not prove compositor-only execution. [web.dev animation performance guidance](https://web.dev/articles/animations-guide)
+
+## Acceptance evidence
+
+- Capture identical before/after poses: folded packet, both intermediate crossing angles, full spread, cream reading view, rust reading view and reverse-side transfer. Keep crop, DPR, camera scale and lighting identical.
+- At normal phone reading size, a reviewer can identify a matte fibrous surface and a thin physical edge without enlarging the screenshot. At overview, the folds remain the primary depth cue and grain does not become crawling noise.
+- Concave and convex seam cues differ correctly, track their corresponding hinges and return without a pop. Exposed stock edges remain joined to the printed faces throughout both-direction travel.
+- Typography stays sharp and unchanged. No shadow lies over primary copy; no content, context or navigation is clipped. No visible repeated tile, broad bevel, dirty-paper vignette, shimmer or glossy card effect.
+- Repeat isolated cold opening and warm reverse traces with texture/light enabled. Record presented-frame evidence separately from animation callbacks and retain the high-density budget. Aesthetic improvement does not excuse dropped opening frames; passing timing tests does not establish smooth presentation on an iPhone.

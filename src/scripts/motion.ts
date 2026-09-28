@@ -48,14 +48,28 @@ function mountTour(
   const wings = { left, right };
   const panels = [...sheet.querySelectorAll<HTMLElement>('.fold-panel')];
   const shadowPads = [
-    ...stage.querySelectorAll<SVGEllipseElement>('.paper-shadow ellipse'),
+    ...stage.querySelectorAll<HTMLElement>('.paper-shadow > i'),
   ];
   const faces = panels.map((panel) => ({
     front: panel.querySelector<HTMLElement>('.panel-face')!,
     back: panel.querySelector<HTMLElement>('.panel-back')!,
   }));
-  const lighting = panels.map(() => new Map<string, string>());
-  const shadow = stage.querySelector<SVGSVGElement>('.paper-shadow');
+  const lights = faces.map(({ front, back }) => ({
+    front: front.querySelector<HTMLElement>('.paper-light')!,
+    back: back.querySelector<HTMLElement>('.paper-light')!,
+  }));
+  const creases = faces.map(({ front, back }) =>
+    [front, back].flatMap((face) =>
+      [...face.querySelectorAll<HTMLElement>('.paper-crease')].map(
+        (element) => ({
+          element,
+          back: face === back,
+          side: element.dataset.crease,
+        }),
+      ),
+    ),
+  );
+  const shadow = stage.querySelector<HTMLElement>('.paper-shadow');
   const nav = document.querySelector<HTMLElement>('.chapter-nav');
   const caption = document.querySelector<HTMLElement>('#tour-caption');
   const current = document.querySelector<HTMLElement>('#current-stop');
@@ -402,21 +416,26 @@ function mountTour(
         pose,
       );
       const incidence = normal.x * -0.38 + normal.y * -0.48 + normal.z * 0.79;
-      // Lighting is baked into the paper paint, so avoid invalidating it for
-      // imperceptible changes or stationary camera frames.
-      const shades: Record<string, number> = {
-        '--front-shade': 0.035 + 0.2 * (1 - Math.max(0, incidence)),
-        '--back-shade': 0.035 + 0.2 * (1 - Math.max(0, -incidence)),
-        '--crease-opacity':
+      // Reuse tiny lighting textures instead of repainting the printed faces.
+      // Their intrinsic 16px size stays independent of the paper's dimensions.
+      lights[i].front.style.opacity = (
+        0.035 +
+        0.24 * (1 - Math.max(0, incidence))
+      ).toFixed(4);
+      lights[i].back.style.opacity = (
+        0.035 +
+        0.24 * (1 - Math.max(0, -incidence))
+      ).toFixed(4);
+      for (const { element, side, back } of creases[i]) {
+        const leftHinge =
+          i === 0 || (i === 1 && (back ? side === 'right' : side === 'left'));
+        const hinge = leftHinge ? pose.left : pose.right;
+        const concave = leftHinge !== back;
+        element.style.opacity = (
           0.06 +
-          0.15 * Math.sin((Math.min(90, Math.abs(angle)) * Math.PI) / 180),
-      };
-      for (const [property, value] of Object.entries(shades)) {
-        const paintedValue = value.toFixed(2);
-        if (lighting[i].get(property) !== paintedValue) {
-          panels[i].style.setProperty(property, paintedValue);
-          lighting[i].set(property, paintedValue);
-        }
+          (concave ? 0.42 : 0.18) *
+            Math.sin((Math.min(150, Math.abs(hinge)) * Math.PI) / 360)
+        ).toFixed(4);
       }
       // Release the opposite backing texture. Use the actual perspective
       // viewpoint, since a screen-space normal alone can cull too early.
@@ -438,25 +457,14 @@ function mountTour(
         normal.x * -center.x +
         normal.y * (height / 2 - cameraY - center.y) +
         normal.z * (perspective - center.z);
-      // Decorative reverse ink resolves gently at grazing angles instead of
-      // aliasing into dark bars. Essential front text always stays fully inked.
-      const viewLength = Math.hypot(
-        center.x,
-        height / 2 - cameraY - center.y,
-        perspective - center.z,
-      );
-      const grazing = Math.min(1, Math.abs(facing) / (viewLength * 0.2));
-      const ink = (grazing * grazing * (3 - 2 * grazing)).toFixed(2);
-      if (lighting[i].get('--back-ink-alpha') !== ink) {
-        panels[i].style.setProperty('--back-ink-alpha', ink);
-        lighting[i].set('--back-ink-alpha', ink);
-      }
-      const frontDisplay = facing < -1 ? 'none' : '';
-      const backDisplay = facing > 1 ? 'none' : '';
-      if (faces[i].front.style.display !== frontDisplay)
-        faces[i].front.style.display = frontDisplay;
-      if (faces[i].back.style.display !== backDisplay)
-        faces[i].back.style.display = backDisplay;
+      // Keep printed layout intact when a face turns into view. Hidden faces
+      // release their painted backing without rebuilding the text mid-unfold.
+      const frontVisibility = facing < 0 ? 'hidden' : '';
+      const backVisibility = facing >= 0 ? 'hidden' : '';
+      if (faces[i].front.style.visibility !== frontVisibility)
+        faces[i].front.style.visibility = frontVisibility;
+      if (faces[i].back.style.visibility !== backVisibility)
+        faces[i].back.style.visibility = backVisibility;
     }
     if (shadow) {
       const shadowFaces = foldedCorners(pose);
@@ -479,13 +487,11 @@ function mountTour(
           Math.min(1, (radiusY / Math.max(radiusX, 1) - 3) / 4),
         );
         const diffusion = elongation * elongation * (3 - 2 * elongation);
-        pad.setAttribute('cx', String((minX + maxX) / 2 + 12));
-        pad.setAttribute('cy', String((minY + maxY) / 2 + 22));
-        pad.setAttribute('rx', String(radiusX + radiusY * 0.075 * diffusion));
-        pad.setAttribute('ry', String(radiusY * (1 - 0.35 * diffusion)));
-        pad.setAttribute('opacity', String(1 - 0.45 * diffusion));
+        const rx = radiusX + radiusY * 0.075 * diffusion;
+        const ry = radiusY * (1 - 0.35 * diffusion);
+        pad.style.transform = `translate3d(${(minX + maxX) / 2 + 12 - rx}px,${(minY + maxY) / 2 + 22 - ry}px,0) scale(${rx / 16},${ry / 16})`;
+        pad.style.opacity = String(1 - 0.45 * diffusion);
       });
-      shadow.style.opacity = '0.25';
     }
     const { index, caption: sceneLabel } = sceneAt(
       stops,
@@ -729,17 +735,9 @@ function mountTour(
     sheet.style.removeProperty('--panel-height');
     stage.style.removeProperty('--stage-height');
     panels.forEach((panel, i) => {
-      faces[i].front.style.removeProperty('display');
-      faces[i].back.style.removeProperty('display');
-      lighting[i].clear();
+      for (const face of [faces[i].front, faces[i].back])
+        face.style.removeProperty('visibility');
       panel.style.removeProperty('transform');
-      for (const property of [
-        '--front-shade',
-        '--back-shade',
-        '--back-ink-alpha',
-        '--crease-opacity',
-      ])
-        panel.style.removeProperty(property);
     });
     journey.style.removeProperty('height');
     root.classList.remove('camera-ready');
@@ -777,7 +775,8 @@ function mountTour(
       const children = [...face.children].filter(
         (child): child is HTMLElement =>
           child instanceof HTMLElement &&
-          getComputedStyle(child).display !== 'none',
+          getComputedStyle(child).display !== 'none' &&
+          getComputedStyle(child).position !== 'absolute',
       );
       const contentHeight = children.reduce((sum, child) => {
         const childStyle = getComputedStyle(child);
@@ -799,6 +798,9 @@ function mountTour(
     });
     paperHeight = Math.max(sheet.offsetHeight, ...faceHeights);
     sheet.style.setProperty('--panel-height', `${paperHeight}px`);
+    for (const pair of lights)
+      for (const light of [pair.front, pair.back])
+        light.style.transform = `scale(${panelWidth / 16},${paperHeight / 16})`;
     sheet.style.transformOrigin = '0 0';
     const top =
       width < 760 ? (header?.getBoundingClientRect().bottom ?? 80) + 24 : 112;
@@ -814,7 +816,6 @@ function mountTour(
       { x: (i + 1) * panelWidth, y: paperHeight, z: 0 },
       { x: i * panelWidth, y: paperHeight, z: 0 },
     ]);
-    shadow?.setAttribute('viewBox', `0 0 ${width} ${height}`);
     stops = collectStops();
     // Finish opening the whole object before transferring focus to the cover.
     // Each fit includes both free edges, so expansion never unfolds offscreen.
@@ -823,9 +824,9 @@ function mountTour(
       [128, 0, 15, -5],
       [110, -8, 17, -5],
       [92, -16, 18, -4],
-      [74, -24, 16, -4],
-      [56, -28, 13, -3],
-      [38, -24, 10, -2],
+      [74, -14, 20, -4],
+      [56, -10, 21, -3],
+      [38, -6, 22, -2],
     ];
     const frames: Keyframe[] = openingViews.map(
       ([angle, yaw, pitch, roll], index) => ({

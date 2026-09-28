@@ -24,6 +24,8 @@
     "test:components": "node .storybook/verify-components.mjs",
     "pdf:check": "node scripts/verify-pdf.ts",
     "social:generate": "node scripts/generate-social.mjs",
+    "texture:generate": "node scripts/generate-paper-grain.mjs",
+    "texture:check": "node scripts/generate-paper-grain.mjs --check",
     "format": "prettier --write src scripts tests *.ts .storybook docs/github-actions",
     "format:check": "prettier --check src scripts tests *.ts .storybook docs/github-actions",
     "performance": "node scripts/performance.mjs",

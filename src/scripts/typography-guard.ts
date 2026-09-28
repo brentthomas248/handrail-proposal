@@ -93,7 +93,7 @@ export function watchTypography(
   const nonCameraStyle = (value: string | null) =>
     (value ?? '')
       .replace(
-        /(?:^|;)\s*(?:display|transform(?:-origin)?|--(?:panel-height|stage-height|front-shade|back-shade|back-ink-alpha|crease-opacity|tour-progress))\s*:[^;]*/g,
+        /(?:^|;)\s*(?:display|visibility|opacity|transform(?:-origin)?|--(?:panel-height|stage-height|tour-progress))\s*:[^;]*/g,
         '',
       )
       .replace(/[;\s]/g, '');

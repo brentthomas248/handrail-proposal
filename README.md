@@ -29,6 +29,8 @@ The opening starts folded, unfolds all three connected panels within the frame, 
 | Brand assets   | The official Handrail PNG wordmark, locally served Inter and Playfair Display.                                                                                                           |
 | Verification   | Vitest geometry/motion/content checks, Playwright continuous scrolling and interruption regressions, axe scans and Storybook states.                                                     |
 
+Printed ink and paper fibers stay in cached face textures during motion. Small fixed lighting tiles change opacity, narrow crease shadows follow the hinges, and thin edge surfaces join the two sides of the stock. Fixed shadow tiles move through transforms. Cold-opening checks measure actual face paint counters and layout passes; the shared surface-area budget includes the paper and every material decoration.
+
 The tailored resume has conventional experience and education plus four evidence-backed ways to contribute to Handrail. Its two-page PDF and responsive HTML use `src/content/resume.ts`; the official watermark is decorative. Public contributions link to exact merged pull requests.
 
 The proposal PDF is printed from the proposal-notes route. Regenerate it when the content changes; a previously generated PDF does not update itself. The existing `agreement/` URL and PDF filename are retained for link compatibility, while the visible content is proposal notes.
@@ -58,6 +60,7 @@ The `/handrail-proposal/` base path is intentional. Preserve it when checking di
 ```sh
 pnpm check
 pnpm test
+pnpm texture:check
 pnpm build:release
 pnpm pdf:check
 pnpm resume:check

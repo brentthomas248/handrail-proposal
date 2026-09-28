@@ -2,6 +2,14 @@
 
 ## Current state
 
+The [paper rendering and material correction](docs/paper-rendering-remediation.md) separates static printed ink/grain from small opacity-driven light tiles and transformed ground shadows, eliminating repeated full-face repaint and per-frame shadow layout. The paper has restrained fibers, thin stock edges and hinge-driven crease relief. A higher oblique overview exposes both creases in the silhouette while retaining the accepted immediate input response, 1.7-second unfold and 1.1–2-second transfers.
+
+[Independent rendered review](docs/paper-depth-review.md) accepts the final candidate after rejecting an initially mottled texture and a flat-looking overview. Four sizes retain the complete unfold, visible Z silhouette, cover approach and reversal with no observed face flash or clipped primary copy. Typecheck (50 files), all 34 unit checks, formatting, texture reproducibility, canonical Markdown, both PDFs and build pass. Chromium compatibility is 68/70 initially, with two observation-fixture failures resolved by 10 passing atomic visible-text/framing rechecks. All 23 WebKit checks pass. The final isolated profile cuts aggregate cold raster work about 92%, retains two layout passes and records 21/20 ms maximum gaps in two fresh WebKit openings. The inclusive material estimate is 63.8768 MiB. Physical iPhone playback remains unverified.
+
+Publication pending for the reviewed paper-rendering candidate.
+
+## Published deliberate-motion release
+
 The [deliberate-motion correction](docs/measured-motion-remediation.md) keeps immediate gesture commitment while giving the unfold about 1.7 seconds and full reading transfers about 1.1–2 seconds. A single sine easing drives continuous floating camera coordinates; native scroll mirrors position. Approved geometry, materials, text and framing remain unchanged. [Independent rendered review](docs/measured-motion-review.md) accepts 42 correct held arrivals across four sizes with 487 primary text-line rectangles and no clipping.
 
 Typecheck (48 files), all 34 unit tests, formatting and build pass. The isolated timing/gesture/geometry run passed 18/20, followed by two passing arrival-fixture rechecks. The broader compatibility run passed 42/44, followed by two passing reversal-fixture rechecks. All 23 supplementary WebKit checks pass. Original failures remain documented; application bytes did not change for the fixture corrections. Phone profiling reduces the largest sampled cold hinge step from 30.01° to 1.89° while preserving prompt response. A cold scheduling delay remains; physical iPhone playback and field performance remain unverified.

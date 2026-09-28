@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "handoffKind": "ui-redesign",
-  "surface": "Deliberately paced Handrail trifold with immediate short-gesture navigation",
-  "generatedAt": "2026-09-28T00:09:04.813133+00:00",
+  "surface": "Handrail matte-paper Z-fold with cached lighting and immediate gesture navigation",
+  "generatedAt": "2026-09-28T00:52:13.062454+00:00",
   "designSources": [
     "DESIGN.md",
     "docs/redesign-research.md",
@@ -59,7 +59,7 @@
       "agentic-ui/component-state-matrix.json",
       "tests/e2e/proposal.spec.ts"
     ],
-    "camera": "Immediate gesture commitment with a roughly 1.7-second full reveal and 1.1–2-second full reading transfers. One sine easing owner drives continuous floating camera progress; native scroll mirrors position for restoration. Geometry, materials and input latching remain unchanged."
+    "camera": "Immediate gesture commitment and accepted 1.7-second reveal / 1.1–2-second transfers remain. Late opening pitch/yaw makes both creases visible in the overview silhouette; all reading poses are unchanged. Static ink/grain use bounded independent opacity lighting, crease strips and transformed floor tiles."
   },
   "tokenExports": {
     "dtcg": "agentic-ui/tokens.dtcg.json",
@@ -111,6 +111,10 @@
       "report": "docs/measured-motion-review.md",
       "status": "accepted-within-inspected-local-scope",
       "sourceCommit": "bd3147ca6b95577129270aa746af9684e14fc60c"
+    },
+    "paperRenderingFollowUp": {
+      "report": "docs/paper-depth-review.md",
+      "status": "accepted-within-inspected-local-scope"
     }
   },
   "userAssumptions": [
@@ -135,7 +139,7 @@
     ]
   },
   "openDesignQuestions": [
-    "Physical iPhone playback remains unverified; local cold scheduling delay is documented."
+    "Physical iPhone playback, field performance and actual GPU memory remain unverified."
   ],
   "qaIntentPath": "agentic-ui/qa-intent.json",
   "notes": [
@@ -145,19 +149,20 @@
     "Opening pacing follow-up: see docs/opening-smoothness-remediation.md and current local-verification.json; prior six-category scores are historical.",
     "Magnetic follow-up: docs/magnetic-scroll-remediation.md and docs/magnetic-scroll-review.md; final 27 Chromium and 11 WebKit checks pass.",
     "Prompt gesture follow-up: docs/quick-gesture-remediation.md and docs/quick-gesture-review.md supersede the prior input-timing acceptance.",
-    "Deliberate-motion follow-up: docs/measured-motion-remediation.md and docs/measured-motion-review.md supersede the prior fast-travel timing acceptance."
+    "Deliberate-motion follow-up: docs/measured-motion-remediation.md and docs/measured-motion-review.md supersede the prior fast-travel timing acceptance.",
+    "Paper rendering/material follow-up: docs/paper-rendering-remediation.md and docs/paper-depth-review.md. Historical six-category grades are not current certification."
   ],
   "userReview": {
     "date": "2026-09-27",
-    "status": "requested-smoother-opening-and-slower-travel",
+    "status": "requested-root-rendering-fix-and-real-paper-depth",
     "researchPath": "docs/design-director-review.md",
     "implementationPaused": false,
-    "reason": "User reports choppy opening and excessively fast transitions; immediate gesture commitment remains desired."
+    "reason": "User accepts pacing but reports a choppy opening and flat digital material."
   },
   "publication": {
-    "status": "published-and-verified",
+    "status": "locally-verified-awaiting-publication",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidencePath": "agentic-ui/deployment-verification.json",
-    "note": "Source bd3147c; static 93deb13; all 28 hosted files and 32 focused browser checks verified."
+    "note": "Cached paper rendering and depth candidate verified locally; previous release still live."
   }
 }
