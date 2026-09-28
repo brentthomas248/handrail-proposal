@@ -62,7 +62,7 @@
       "agentic-ui/component-state-matrix.json",
       "tests/e2e/proposal.spec.ts"
     ],
-    "camera": "Opening and final closure retain their folding paths. Between reading scenes the paper stays at38degrees, roll stayslevel, and the camera pulls back8–10percent before returning to the complete reading composition. Matte lighting stays fixed in paper coordinates."
+    "camera": "Opening and final closure retain their folding paths. Between reading scenes the paper stays at38degrees, roll stayslevel, and the camera pulls back8–10percent before returning to the complete reading composition. Matte lighting stays fixed in paper coordinates. The bottom right-to-left return uses one level sweep with one pullback rather than turning at the two creases."
   },
   "tokenExports": {
     "dtcg": "agentic-ui/tokens.dtcg.json",
@@ -172,7 +172,7 @@
   "publication": {
     "status": "published-and-verified",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "evidencePath": "agentic-ui/camera-glide-verification.json",
-    "note": "Source0b97d56;staticbc5cf66. Stationary reading folds and subtle camera pullback;28exactfiles and bothhosted glide checks pass."
+    "evidencePath": "agentic-ui/bottom-sweep-verification.json",
+    "note": "Source9392326; static7f06513. Single level bottom return verified locally and hosted; all28files match."
   }
 }

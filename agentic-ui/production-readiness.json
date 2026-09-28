@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "generatedAt": "2026-09-28T02:07:47.789961+00:00",
   "ok": true,
-  "status": "camera-glide-published-and-verified",
+  "status": "bottom-sweep-published-and-verified",
   "localRelease": {
     "passed": true,
     "evidence": [
@@ -15,9 +15,9 @@
     "deployed": true,
     "hostedSmokeTestPassed": true,
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "evidence": "agentic-ui/camera-glide-verification.json",
+    "evidence": "agentic-ui/bottom-sweep-verification.json",
     "notes": [
-      "Current camera glide passes independent desktop/phone review,16localbrowserchecks,28exacthostedassets and2hostedglidechecks."
+      "Single bottom sweep independently reviewed at three sizes;7localbrowserchecks,28exacthostedassets and hostedforward/reverse check pass."
     ]
   },
   "strictCertification": {

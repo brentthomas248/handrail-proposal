@@ -2,6 +2,10 @@
 
 ## Current state
 
+The bottom right-to-left transfer now crosses in one level sweep with a single gentle pullback and return. [Independent desktop/phone review](docs/bottom-sweep-review.md), all 34 unit tests and seven focused browser checks pass. Source `9392326`, static `7f06513`; [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36370346932) succeeded. All 28 hosted files match and the live forward/reverse sweep check passes. See [the scoped receipt](agentic-ui/bottom-sweep-verification.json).
+
+## Published camera-glide release
+
 The [camera-glide correction](docs/camera-glide-implementation.md) is published and independently accepted. Reading transfers hold the paper’s folds steady, remove rocking and add an 8–10% pullback/return. All 34 unit and 16 focused browser checks pass, with a clean typecheck/build. Source `0b97d56`, static `bc5cf66`; [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36369756326) succeeded. All 28 hosted files match and both live forward/reverse glide checks pass. See [the scoped receipt](agentic-ui/camera-glide-verification.json).
 
 ## Published full-strength logo correction

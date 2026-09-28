@@ -9,3 +9,7 @@ Validation before implementation: three updated unit assertions fail the old hin
 The existing approved local lifecycle applies: narrow motion remediation, deterministic Playwright evidence and an independent rendered review. No new service, runtime, image asset or promoted material layer is added. Evidence lives under ignored `qa-artifacts/camera-glide/`.
 
 Current rendering evidence retains the inclusive63.8768MiB estimated material budget,3177-device-pixel maximum edge, no separately promoted watermark and two cold-opening layouts. Newly exposed front faces paint once. These are bounded laboratory observations, not measured GPU memory or physical-device certification.
+
+## Single bottom return
+
+The later bottom-sweep refinement replaces the five intermediate crease poses with one level midpoint. The window → Grow together transfer retains its timing and10%pullback but holds yaw−38° and pitch/roll0° throughout; reversing follows the same path. The new unit and browser assertions fail the former path. All34unit, sixChromium and oneWebKit checks pass, including existing timing, closing ink and surface-budget regressions. Independent review at1440/390/320passes. Published source9392326/static7f06513; all28hostedfiles match and the live forward/reverse check passes. Current evidence: `agentic-ui/bottom-sweep-verification.json`.

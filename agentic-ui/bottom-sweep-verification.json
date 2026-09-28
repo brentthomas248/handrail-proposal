@@ -1,57 +1,36 @@
 {
-  "scope": "Reading camera glide over stationary paper",
-  "generatedAt": "2026-09-28T02:27:26.195581+00:00",
+  "scope": "One continuous bottom right-to-left camera sweep",
+  "generatedAt": "2026-09-28T02:36:12.471740+00:00",
   "passed": true,
-  "isCurrentRevision": false,
-  "sourceCommit": "0b97d561b27b175010d853e04b327771b208c433",
-  "staticCommit": "bc5cf66b1bf7ee3f6b03564701d97a00bcd15430",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36369756326",
+  "isCurrentRevision": true,
+  "sourceCommit": "93923264a084a7d0b6c8d1d8941c1c34824f7c04",
+  "staticCommit": "7f0651387f84b1250a3f912e2b9ab8ecdd392e00",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36370346932",
   "deploymentConclusion": "success",
-  "changes": [
-    "Hold both reading folds at38degrees; remove rocking and bearing overshoot.",
-    "8percent same-panel and10percent crease pullback, returning to existing reading distance.",
-    "Fix matte diffuse light in paper coordinates; keep view-dependent face culling."
-  ],
-  "independentReview": {
-    "report": "docs/camera-glide-review.md",
-    "verdict": "accepted-within-bounded-scope",
+  "change": "Replace the five crease-turn bridge poses with one level midpoint, preserving the 10% pullback, timing, reading endpoints and reversal.",
+  "review": {
+    "report": "docs/bottom-sweep-review.md",
+    "verdict": "accepted",
     "viewports": [
       1440,
       390,
       320
     ],
-    "heldReadingCompositions": 17,
-    "stationaryFoldFrames": 2582
+    "constantOrientationFrames": 853,
+    "safeTextLines": 115
   },
   "checks": {
-    "typecheck": "52files;zeroissues",
     "unitTests": 34,
-    "build": "3routes",
+    "typecheck": "52 files; zero issues",
+    "build": "3 routes",
     "formatAndDiff": "passed",
-    "chromium": {
-      "passed": 14,
-      "failed": 0,
-      "flaky": 0
-    },
-    "webkit": {
-      "passed": 2,
-      "failed": 0,
-      "flaky": 0
-    },
-    "hosted": {
-      "passed": 2,
-      "failed": 0,
-      "flaky": 0
-    },
-    "priorBaseline": "Both browser regressions and three revised unit assertions failed oldbehavior; originals retained."
-  },
-  "rendering": {
-    "estimatedMaterialMiB": 63.87677764892578,
-    "largestDeviceEdgePx": 3177,
-    "independentWatermarkLayers": 0,
-    "coldOpeningLayouts": 2,
-    "newlyExposedFrontPaintCount": 1,
-    "budgetIsNotMeasuredGPUMemory": true
+    "chromium": 6,
+    "webkit": 1,
+    "hosted": 1,
+    "failed": 0,
+    "flaky": 0,
+    "materialBudget": "Existing inclusive64MiB and4096device-pixel checks pass",
+    "baseline": "New unit and rendered bottom-sweep assertions failed the former two-turn path; evidence retained."
   },
   "staticAssetChecks": [
     {
@@ -61,9 +40,9 @@
       "matched": true
     },
     {
-      "path": "_astro/index.astro_astro_type_script_index_0_lang.CvsF1evD.js",
+      "path": "_astro/index.astro_astro_type_script_index_0_lang.CUQ7shVQ.js",
       "http": 200,
-      "sha256": "b48a54fab8401cd8d349a4ae18f400b1f5858f161e0ae3d8c8e4003f0e76af79",
+      "sha256": "043f5dec22a59414cb6ed1f820ce95df4d29d4c40e3c3fb4877cdced0e8ee83f",
       "matched": true
     },
     {
@@ -183,7 +162,7 @@
     {
       "path": "index.html",
       "http": 200,
-      "sha256": "da305d989bbff61ddbef45fd512a35187113be2f7b3bf67d48092756674f6e10",
+      "sha256": "1f34a9b978a115023e68d08312676bb490796f47c228f1ff403d33018d6ea2b3",
       "matched": true
     },
     {
@@ -223,10 +202,8 @@
       "matched": true
     }
   ],
-  "route": "agentic-ui-lifecycle narrow-ui-change; approved local remediation and independent rendered review; route ready with no blockers.",
   "limitations": [
-    "Physical iPhone playback and field performance remain unverified.",
-    "Earlier whole-site grades and detailed raster profiles are historical."
-  ],
-  "supersededBy": "agentic-ui/bottom-sweep-verification.json"
+    "Physical iPhone playback remains unverified.",
+    "Earlier broader journey/profile results remain historical."
+  ]
 }
