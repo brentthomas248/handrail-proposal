@@ -338,7 +338,6 @@ main {
   max-width: 100%;
   height: auto;
   margin-top: calc(110 * var(--paper-unit));
-  opacity: 0.3;
 }
 .plain-back > div {
   font-size: calc(128 * var(--paper-unit));
