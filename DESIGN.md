@@ -177,3 +177,7 @@ The reference research is recorded in [round-three design research](docs/design-
 After Grow together, the same paper pulls back, folds through flat into a negative accordion and settles on its right reverse. “Let’s do this!” and the official Handrail watermark are printed on that actual face. The final stop is the exact path endpoint; a reverse gesture reopens it through the same camera path. Keep the middle sweep at a stable fitted scale, then approach the packet as it closes. Ordinary reading retains the invitation last. The opening cover, complete reading groups and paper material remain unchanged.
 
 The two-sided print shares each leaf's fold midsurface with backface culling. Separate outward-facing cut-edge quads supply the thin stock silhouette. This is a thin-paper CSS approximation: separating the print planes by ±1 paper unit causes neighboring planes to intersect at the crease and can clip otherwise visible print. Camera focus uses the same midsurface; no reading-angle offset masks that geometry.
+
+## Camera travel over stationary paper
+
+Once opened, the reading tour holds both folds at 38°; only the opening and final closure change the paper's shape. Camera transfers keep a level roll and follow the actual face bearings, with an 8–10% pullback before returning to the complete reading composition. The longer return follows the reading positions rather than detouring to the paper's center. Matte diffuse light stays fixed in paper coordinates so an orbit does not make the sheet appear to turn under a camera-mounted light.

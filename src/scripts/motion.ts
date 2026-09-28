@@ -415,7 +415,9 @@ function mountTour(
         { x: Math.sin(theta), y: 0, z: Math.cos(theta) },
         pose,
       );
-      const incidence = normal.x * -0.38 + normal.y * -0.48 + normal.z * 0.79;
+      // Diffuse light belongs to the paper's world, not the moving viewpoint.
+      // A camera orbit must not relight a stationary leaf like a turntable.
+      const incidence = Math.sin(theta) * -0.103 + Math.cos(theta) * 0.871;
       // Reuse tiny lighting textures instead of repainting the printed faces.
       // Their intrinsic 16px size stays independent of the paper's dimensions.
       lights[i].front.style.opacity = (
@@ -925,7 +927,7 @@ function mountTour(
         });
       }
       const enteringCash = stop.element?.matches('.flyer-cash');
-      if (previousPanel && previousPanel !== stop.panel) {
+      if (previousPanel) {
         const bridges = hingeTravel(
           previousPose,
           pose,
@@ -934,13 +936,13 @@ function mountTour(
           panelWidth,
         );
         const extra =
-          (previousPanel !== 'center' && stop.panel !== 'center' ? 1 : 0) *
-          (width < 760 ? 3.2 : 3.7);
+          (previousPanel !== stop.panel &&
+          previousPanel !== 'center' &&
+          stop.panel !== 'center'
+            ? 1
+            : 0) * (width < 760 ? 3.2 : 3.7);
         cursor += extra;
         additionalTravel += extra;
-        if (bridges.length > 2)
-          for (const bridge of bridges)
-            bridge.focusY = bridge.focusY * 0.15 + paperHeight * 0.5 * 0.85;
         const departure = stops[i - 1].at + readingRadius;
         const travel = cursor - readingRadius - departure;
         bridges.forEach((bridge, index) => {

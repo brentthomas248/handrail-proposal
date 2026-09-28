@@ -227,7 +227,7 @@ export function sceneAt(
   return { index, caption: stops[stops.length - 1].name };
 }
 
-/** Orbit each physical hinge from its departing face to its arriving face. */
+/** Move the viewpoint across stationary folds, with a modest reading-distance pullback. */
 export function hingeTravel(
   from: Pose,
   to: Pose,
@@ -235,7 +235,16 @@ export function hingeTravel(
   toPanel: Panel,
   panelWidth: number,
 ): Pose[] {
-  if (fromPanel === toPanel) return [];
+  if (fromPanel === toPanel)
+    return [
+      {
+        ...from,
+        focusX: (from.focusX + to.focusX) / 2,
+        focusY: (from.focusY + to.focusY) / 2,
+        focusZ: (from.focusZ + to.focusZ) / 2,
+        scale: Math.min(from.scale, to.scale) * 0.92,
+      },
+    ];
   const columns: Record<Panel, number> = { left: 0, center: 1, right: 2 };
   const start = columns[fromPanel];
   const end = columns[toPanel];
@@ -255,27 +264,26 @@ export function hingeTravel(
         focusY: from.focusY + (to.focusY - from.focusY) * fraction,
         focusZ: 0,
         scale: Math.min(from.scale, to.scale) * 0.9,
-        left: hinge === 1 ? 62 : 38,
-        right: hinge === 2 ? 62 : 38,
-        yaw: column === 1 ? 6 : -62,
-        pitch: 12,
-        roll: direction * (side === 0 ? -1.5 : 1.5),
+        left: from.left,
+        right: from.right,
+        yaw: column === 1 ? 0 : column === 0 ? -from.left : -from.right,
+        pitch: 6,
+        roll: 0,
       };
     });
   }).flat();
   if (count === 2) {
-    // Relax the departing wing before folding the arriving one. The middle
-    // plane gives the transfer a physical sequence in either direction.
+    // Pass across the center plane without changing the paper's shape.
     bridges.splice(2, 0, {
       ...to,
       focusX: panelWidth * 1.5,
       focusY: (from.focusY + to.focusY) / 2,
       focusZ: 0,
       scale: Math.min(from.scale, to.scale) * 0.9,
-      left: 38,
-      right: 38,
-      yaw: 6,
-      pitch: 12,
+      left: from.left,
+      right: from.right,
+      yaw: 0,
+      pitch: 6,
       roll: 0,
     });
   }

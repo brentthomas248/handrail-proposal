@@ -2,6 +2,10 @@
 
 ## Current state
 
+The [camera-glide correction](docs/camera-glide-implementation.md) is independently accepted and locally verified. Reading transfers hold the paper’s folds steady, remove rocking and add a modest pullback/return. All 34 unit and 16 focused browser checks pass, with a clean typecheck/build. Publication and hosted verification are next.
+
+## Published full-strength logo correction
+
 The closing Handrail logo now renders at full strength: its 30% opacity rule was removed. Source `a5b923d`, static `0746314`; [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36368854412) succeeded. Desktop and phone previews and hosted checks confirm full opacity, complete logo visibility and no browser errors. Typecheck/build/style checks pass; all 28 hosted files match. See [the scoped receipt](agentic-ui/watermark-opacity-verification.json).
 
 ## Published closing-fold release
