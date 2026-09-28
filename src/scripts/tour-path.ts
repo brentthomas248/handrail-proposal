@@ -235,14 +235,17 @@ export function hingeTravel(
   toPanel: Panel,
   panelWidth: number,
 ): Pose[] {
-  if (fromPanel === toPanel)
+  const samePanel = fromPanel === toPanel;
+  // The bottom return crosses the spread in one level camera sweep, without
+  // stopping to turn toward the center face at each crease.
+  if (samePanel || (fromPanel !== 'center' && toPanel !== 'center'))
     return [
       {
         ...from,
         focusX: (from.focusX + to.focusX) / 2,
         focusY: (from.focusY + to.focusY) / 2,
         focusZ: (from.focusZ + to.focusZ) / 2,
-        scale: Math.min(from.scale, to.scale) * 0.92,
+        scale: Math.min(from.scale, to.scale) * (samePanel ? 0.92 : 0.9),
       },
     ];
   const columns: Record<Panel, number> = { left: 0, center: 1, right: 2 };
@@ -272,20 +275,5 @@ export function hingeTravel(
       };
     });
   }).flat();
-  if (count === 2) {
-    // Pass across the center plane without changing the paper's shape.
-    bridges.splice(2, 0, {
-      ...to,
-      focusX: panelWidth * 1.5,
-      focusY: (from.focusY + to.focusY) / 2,
-      focusZ: 0,
-      scale: Math.min(from.scale, to.scale) * 0.9,
-      left: from.left,
-      right: from.right,
-      yaw: 0,
-      pitch: 6,
-      roll: 0,
-    });
-  }
   return bridges;
 }

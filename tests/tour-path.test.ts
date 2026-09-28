@@ -229,25 +229,42 @@ describe('local paper travel', () => {
     }
   });
 
-  it('returns across both hinges without an overview zoom-out', () => {
-    const from = { ...reading, focusX: 3000, focusY: 600, scale: 0.5 };
-    const to = { ...reading, focusX: 600, focusY: 1400, scale: 0.4 };
+  it('crosses the bottom in one level sweep with a single pullback', () => {
+    const from = {
+      ...reading,
+      focusX: 3000,
+      focusY: 1400,
+      focusZ: -400,
+      yaw: -38,
+      scale: 0.5,
+    };
+    const to = { ...from, focusX: 600, focusY: 1500, focusZ: 400, scale: 0.4 };
     const bridges = hingeTravel(from, to, 'right', 'left', 1200);
-    expect(bridges.map((bridge) => bridge.focusX)).toEqual([
-      2400, 2400, 1800, 1200, 1200,
+    const path = createPath([
+      { at: 0, pose: from },
+      ...bridges.map((pose, index) => ({
+        at: (index + 1) / (bridges.length + 1),
+        pose,
+      })),
+      { at: 1, pose: to },
     ]);
-    expect(bridges.map((bridge) => bridge.yaw)).toEqual([-38, 0, 0, 0, -38]);
-    for (const bridge of bridges) {
-      expect(bridge.scale).toBeGreaterThanOrEqual(0.36);
-      expect(bridge.pitch).toBeGreaterThan(0);
-      expect(bridge.pitch).toBeLessThanOrEqual(6);
+    let previousX = from.focusX;
+    let minimumScale = from.scale;
+    for (let time = 0; time <= 1; time += 0.01) {
+      const sample = path.sample(time);
+      expect(sample.yaw).toBeCloseTo(-38);
+      expect(sample.pitch).toBeCloseTo(0);
+      expect(sample.roll).toBeCloseTo(0);
+      expect(sample.focusX).toBeLessThanOrEqual(previousX);
+      previousX = sample.focusX;
+      minimumScale = Math.min(minimumScale, sample.scale);
     }
+    expect(minimumScale).toBeCloseTo(0.36);
     const samePanel = hingeTravel(from, to, 'right', 'right', 1200);
     expect(samePanel).toHaveLength(1);
     expect(samePanel[0].scale).toBeLessThan(
       Math.min(from.scale, to.scale) * 0.95,
     );
-    expect(samePanel[0].focusY).toBe((from.focusY + to.focusY) / 2);
   });
 
   it('keeps the paper stationary throughout travel across both creases', () => {

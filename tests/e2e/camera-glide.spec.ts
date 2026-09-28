@@ -21,6 +21,8 @@ async function recordCamera(page: Page) {
       left: number(left.style.transform, 'rotateY'),
       right: number(right.style.transform, 'rotateY'),
       roll: number(sheet.style.transform, 'rotateZ'),
+      yaw: number(sheet.style.transform, 'rotateY'),
+      pitch: number(sheet.style.transform, 'rotateX'),
       scale: number(sheet.style.transform, 'scale3d'),
       light: lights.map((element) => Number(element.style.opacity)),
       transform: sheet.style.transform,
@@ -85,6 +87,7 @@ function expectGlide(result: Awaited<ReturnType<typeof transfer>>) {
 for (const journey of [
   { kind: 'same panel', from: 'Hire first', to: 'Client first' },
   { kind: 'across a fold', from: 'Cash flow', to: 'Hire first' },
+  { kind: 'across the bottom', from: 'The window', to: 'Grow together' },
 ]) {
   test(`the camera glides ${journey.kind} over stationary folds and reverses exactly`, async ({
     page,
@@ -106,6 +109,16 @@ for (const journey of [
     expect(reverse.final.transform).toBe(forward.initial.transform);
     expectGlide(forward);
     expectGlide(reverse);
+    if (journey.kind === 'across the bottom') {
+      for (const travel of [forward, reverse])
+        for (const frame of travel.frames) {
+          expect(
+            frame.yaw,
+            'One sweep does not turn at either crease',
+          ).toBeCloseTo(-38, 5);
+          expect(frame.pitch, 'The bottom sweep stays level').toBeCloseTo(0, 5);
+        }
+    }
     await expect(
       page.getByRole('button', { name: journey.from, exact: true }),
     ).toHaveAttribute('aria-current', 'step');

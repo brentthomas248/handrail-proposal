@@ -181,3 +181,5 @@ The two-sided print shares each leaf's fold midsurface with backface culling. Se
 ## Camera travel over stationary paper
 
 Once opened, the reading tour holds both folds at 38°; only the opening and final closure change the paper's shape. Camera transfers keep a level roll and follow the actual face bearings, with an 8–10% pullback before returning to the complete reading composition. The longer return follows the reading positions rather than detouring to the paper's center. Matte diffuse light stays fixed in paper coordinates so an orbit does not make the sheet appear to turn under a camera-mounted light.
+
+The bottom transfer from The window on the right to Grow together on the left is one level sweep. It keeps the reading bearing and a single pullback/return, without intermediate turns toward either crease. Reversing follows the same continuous path.
