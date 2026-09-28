@@ -1,16 +1,16 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-28T00:03:15.288068+00:00",
+  "generatedAt": "2026-09-28T00:09:04.813133+00:00",
   "scope": "Deliberate opening and camera travel with immediate gesture commitment",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": false,
+  "deployed": true,
   "evidenceNotes": [
     "All five new timing regressions fail the fast published baseline and pass the candidate. Response latency and travel duration are verified separately.",
     "The initial isolated run passes 18/20. Two arrival-observation fixtures are corrected and pass 2/2 with unchanged application bytes. Original failures remain retained.",
     "Independent isolated cold profiles show a largest phone hinge step of 1.89 degrees versus 30.01 previously. A cold callback delay remains; no general renderer-throughput or physical-device guarantee is inferred.",
     "The camera now advances through floating tween coordinates while native position mirrors it. Exact arrivals, input latching, reversal and ordinary reading are retained.",
-    "26 of 28 assets, including both PDFs, remain byte-identical. Publication and hosted verification pending."
+    "All 28 hosted assets match the reviewed candidate; 26 including both PDFs are unchanged. All 32 focused hosted Chromium checks pass without retries."
   ],
   "limitations": [
     "agentic-ui/blockers.json",
@@ -377,6 +377,11 @@
     {
       "command": "Independent headed motion review",
       "result": "See docs/measured-motion-review.md for current rendered verdict and evidence",
+      "exitCode": 0
+    },
+    {
+      "command": "Hosted exact assets and focused Chromium",
+      "result": "28 exact files; 32 browser checks passed",
       "exitCode": 0
     }
   ],

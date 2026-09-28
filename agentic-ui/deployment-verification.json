@@ -1,13 +1,13 @@
 {
   "schemaVersion": "1.0",
-  "scope": "Immediate short-gesture navigation through the reviewed Handrail trifold",
+  "scope": "Deliberate opening and camera travel with immediate gesture commitment",
   "url": "https://brentthomas248.github.io/handrail-proposal/",
-  "checkedAt": "2026-09-27T22:45:35.648980+00:00",
+  "checkedAt": "2026-09-28T00:07:29.343678+00:00",
   "passed": true,
-  "isCurrentRevision": false,
-  "sourceCommit": "98a6867debcf80b4c13d9268324eff09983ab23f",
-  "staticCommit": "5b4e2ded8a9dec1445c864344abc3542193059cf",
-  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36356349551",
+  "isCurrentRevision": true,
+  "sourceCommit": "bd3147ca6b95577129270aa746af9684e14fc60c",
+  "staticCommit": "93deb1377e88c4f2f0427a33ab839a653a905121",
+  "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36360950695",
   "publishingSource": {
     "branch": "gh-pages",
     "path": "/",
@@ -17,8 +17,8 @@
   "deploymentConclusion": "success",
   "browserSuite": {
     "status": "passed",
-    "command": "Hosted focused Chromium checks; qa-artifacts/quick-gesture/hosted-chromium.log",
-    "passed": 25,
+    "command": "Hosted focused Chromium checks; qa-artifacts/measured-motion/hosted-chromium.log",
+    "passed": 32,
     "failed": 0,
     "skipped": 0,
     "flaky": 0
@@ -31,10 +31,10 @@
       "sha256": "4907db89a5bc4160920b577b51facb283e0e376ee1b4d5acab82c2e4d5654811"
     },
     {
-      "path": "_astro/index.astro_astro_type_script_index_0_lang.BEuDiNcr.js",
+      "path": "_astro/index.astro_astro_type_script_index_0_lang.C5eTyZ5l.js",
       "http": 200,
-      "bytes": 97359,
-      "sha256": "1554442c1db68e86c9b612131b71da73ea665ca97169045289407367a67c480d"
+      "bytes": 97402,
+      "sha256": "5d7417daf164e76b5d9d3a8228b6a52c9e6857857044150928c069d1076b1b15"
     },
     {
       "path": "_astro/inter-cyrillic-ext-wght-normal.BOeWTOD4.woff2",
@@ -154,7 +154,7 @@
       "path": "index.html",
       "http": 200,
       "bytes": 50536,
-      "sha256": "f9494650aaf9a794820bd615ed4dcd44a86c25c149566ca7f579dbfa365ca35a"
+      "sha256": "1bc85f8205206d7adbcbedcb244aad96e249553f1be9ecaee049969a231b7126"
     },
     {
       "path": "licenses/Inter-OFL.txt",
@@ -195,20 +195,19 @@
   ],
   "checks": [
     "All 28 hosted files match the independently reviewed candidate byte for byte.",
-    "26 files including notes, resume and both PDFs remain byte-identical to the prior release.",
-    "All 25 focused hosted browser checks pass without retries, including immediate wheel/touch commitment and canceled phone chapter shortcuts.",
-    "Independent desktop and two phone viewport review accepts the short-gesture interaction; fresh phone review accepts final navigation reconciliation."
+    "26 files including both PDFs remain unchanged from the prior release.",
+    "All 32 focused hosted checks pass without retries, including deliberate timing, prompt gestures, reversal and navigation.",
+    "Independent rendered review accepts the paced opening and complete forward/reverse journey. Cold scheduling and physical-device limits remain documented."
   ],
   "limitations": [
     "Physical iPhone stability, true hidden-tab recovery, manual VoiceOver, actual GPU memory and field INP remain unverified.",
     "Minor PDF continuation and DPR1 ink finish observations remain documented; scores are internal assessments, not external certification."
   ],
   "previousRelease": {
-    "sourceCommit": "73cf7e72e3fad3b95b79e7155154302437aafb1a",
-    "staticCommit": "b2d197bcf348f46d9ae3007d56f93744928d8194",
-    "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36354053318"
+    "sourceCommit": "98a6867debcf80b4c13d9268324eff09983ab23f",
+    "staticCommit": "5b4e2ded8a9dec1445c864344abc3542193059cf",
+    "deploymentRun": "https://github.com/brentthomas248/handrail-proposal/actions/runs/36356349551"
   },
-  "generatedAt": "2026-09-27T22:46:46.224736+00:00",
-  "publishedAt": "2026-09-27T22:46:46.224736+00:00",
-  "currentRevisionNote": "Previous fast prompt-gesture release remains live; deliberately paced candidate is locally verified and awaiting publication."
+  "generatedAt": "2026-09-28T00:09:04.813133+00:00",
+  "publishedAt": "2026-09-28T00:09:04.813133+00:00"
 }

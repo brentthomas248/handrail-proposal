@@ -1,12 +1,12 @@
 # Deliberate motion with immediate input
 
-Status: locally verified; publication pending.
+Status: published and verified.
 
 ## Findings and scope
 
 MOTION-01: the user reports that the first opening is still choppy. MOTION-02: the latest transitions are too fast. This supersedes the previous review's timing acceptance. The single-gesture commitment and concrete stops remain the intended interaction; reducing input effort does not require fast camera travel.
 
-The current opening traverses 108 degrees of hinge rotation in 0.48 seconds. Its cubic ease-out covers approximately half the opening in the first 100ms. Rendering also feeds rounded native scroll coordinates back into the camera and updates painted paper lighting during motion. Isolated profiling will distinguish abrupt path velocity from measured rendering stalls.
+The previous opening traversed 108 degrees of hinge rotation in 0.48 seconds. Its cubic ease-out covered approximately half the opening in the first 100ms. Rendering also fed rounded native scroll coordinates back into the camera and updated painted paper lighting during motion. Isolated profiling below distinguishes abrupt path velocity from measured rendering stalls.
 
 Scope: controlled travel timing and opening rendering in `src/scripts/motion.ts`, focused behavior regressions and release evidence. Preserve approved content, paper proportions, complete three-panel opening, crease orbits, readable stops, materials, input latching, reversal, reduced motion and ordinary reading. No new dependency or PDF changes are planned.
 
@@ -35,3 +35,5 @@ The isolated timing/gesture/geometry run initially passed 18/20. Sparse default 
 The wider compatibility run passed 42/44, including rendering budgets, complete forward/reverse tours, ink, framing, native touch, resize, accessibility and reading fallbacks. Its remaining tests assumed fixed distances exceeding the actual outward excursion under the slower launch. Both now measure prompt proportional reversal, retain exact destinations and speed limits, and additionally prohibit overshoot or verify exact camera/hinge restoration. Both rechecks pass. All 23 supplementary WebKit checks pass without retries. These are bounded runs plus explicit rechecks, not a claim of clean initial suites or a newly executed whole-site suite.
 
 Independent current motion review accepts 42 correct held arrivals and 487 primary text-line rectangles across four sizes, with no clipping. Original video resolves two contradictory header screenshots as capture anomalies; those originals remain retained. No remaining material visual-motion finding was identified within the local inspected scope. Raw failures, before/after captures and traces remain ignored under `qa-artifacts/measured-motion/`.
+
+Source `bd3147ca6b95577129270aa746af9684e14fc60c`; static `93deb1377e88c4f2f0427a33ab839a653a905121`. [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36360950695) succeeded. All 28 hosted files match the reviewed candidate and all 32 focused hosted checks pass without retries.

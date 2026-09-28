@@ -6,7 +6,7 @@ The [deliberate-motion correction](docs/measured-motion-remediation.md) keeps im
 
 Typecheck (48 files), all 34 unit tests, formatting and build pass. The isolated timing/gesture/geometry run passed 18/20, followed by two passing arrival-fixture rechecks. The broader compatibility run passed 42/44, followed by two passing reversal-fixture rechecks. All 23 supplementary WebKit checks pass. Original failures remain documented; application bytes did not change for the fixture corrections. Phone profiling reduces the largest sampled cold hinge step from 30.01° to 1.89° while preserving prompt response. A cold scheduling delay remains; physical iPhone playback and field performance remain unverified.
 
-Publication pending for the reviewed deliberate-motion candidate.
+Source `bd3147ca6b95577129270aa746af9684e14fc60c`; static `93deb1377e88c4f2f0427a33ab839a653a905121`. [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36360950695) succeeded. All 28 hosted files match the reviewed candidate and all 32 focused hosted checks pass without retries.
 
 ## Published prompt-gesture release
 

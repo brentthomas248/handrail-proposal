@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-28T00:03:15.288068+00:00",
+  "generatedAt": "2026-09-28T00:09:04.813133+00:00",
   "ok": true,
-  "status": "deliberate-motion-locally-verified-awaiting-publication",
+  "status": "deliberate-motion-published-and-verified",
   "localRelease": {
     "passed": true,
     "evidence": [
@@ -12,12 +12,12 @@
     ]
   },
   "publication": {
-    "deployed": false,
-    "hostedSmokeTestPassed": false,
+    "deployed": true,
+    "hostedSmokeTestPassed": true,
     "url": "https://brentthomas248.github.io/handrail-proposal/",
     "evidence": "agentic-ui/deployment-verification.json",
     "notes": [
-      "Deliberate-motion candidate verified locally; publication pending."
+      "Deliberate motion published; all 28 hosted files match and all 32 focused hosted checks pass."
     ]
   },
   "strictCertification": {
