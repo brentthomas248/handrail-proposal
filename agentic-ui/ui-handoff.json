@@ -62,7 +62,7 @@
       "agentic-ui/component-state-matrix.json",
       "tests/e2e/proposal.spec.ts"
     ],
-    "camera": "Accepted 1.7-second opening and 1.1–2-second reading transfers remain. Final 2.8-second closing follows the same reversible path through flat into a negative accordion. Backface-culled two-sided midsurface print avoids crease-plane intersections; outward thin stock edges, cached lighting and grain remain."
+    "camera": "Opening and final closure retain their folding paths. Between reading scenes the paper stays at38degrees, roll stayslevel, and the camera pulls back8–10percent before returning to the complete reading composition. Matte lighting stays fixed in paper coordinates."
   },
   "tokenExports": {
     "dtcg": "agentic-ui/tokens.dtcg.json",
@@ -172,7 +172,7 @@
   "publication": {
     "status": "published-and-verified",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "evidencePath": "agentic-ui/watermark-opacity-verification.json",
-    "note": "Source a5b923d; static0746314. Closing logo at full opacity; all28hosted files match and desktop/mobile rendered checks pass."
+    "evidencePath": "agentic-ui/camera-glide-verification.json",
+    "note": "Source0b97d56;staticbc5cf66. Stationary reading folds and subtle camera pullback;28exactfiles and bothhosted glide checks pass."
   }
 }

@@ -2,7 +2,7 @@
 
 ## Current state
 
-The [camera-glide correction](docs/camera-glide-implementation.md) is independently accepted and locally verified. Reading transfers hold the paper’s folds steady, remove rocking and add a modest pullback/return. All 34 unit and 16 focused browser checks pass, with a clean typecheck/build. Publication and hosted verification are next.
+The [camera-glide correction](docs/camera-glide-implementation.md) is published and independently accepted. Reading transfers hold the paper’s folds steady, remove rocking and add an 8–10% pullback/return. All 34 unit and 16 focused browser checks pass, with a clean typecheck/build. Source `0b97d56`, static `bc5cf66`; [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36369756326) succeeded. All 28 hosted files match and both live forward/reverse glide checks pass. See [the scoped receipt](agentic-ui/camera-glide-verification.json).
 
 ## Published full-strength logo correction
 
