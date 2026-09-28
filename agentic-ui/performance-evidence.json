@@ -367,6 +367,7 @@
     "htmlSha256": "aca0ea5656b652b603c76395f917484f43820372586bf31fc8772d1644b7bc70",
     "verification": "agentic-ui/local-verification.json",
     "physicalIPhoneVerified": false,
-    "surfaceBudgetIsEstimateNotGPUMemory": true
+    "surfaceBudgetIsEstimateNotGPUMemory": true,
+    "sourceCommit": "4443b6b38a8377f9a62a846a4c1411d9714ab1c0"
   }
 }

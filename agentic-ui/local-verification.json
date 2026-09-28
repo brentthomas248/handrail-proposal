@@ -1,16 +1,17 @@
 {
   "schemaVersion": "1.0",
-  "generatedAt": "2026-09-28T02:04:26.376898+00:00",
+  "generatedAt": "2026-09-28T02:07:47.789961+00:00",
   "scope": "Final folded back-cover invitation and nonintersecting printed paper geometry",
   "localReleasePassed": true,
   "fullLifecycleCertified": false,
-  "deployed": false,
+  "deployed": true,
   "evidenceNotes": [
     "The final scroll folds the same paper through flat into a negative accordion and reveals the actual right reverse with Let’s do this! and the official watermark.",
     "Independent review rejected v2 and v3 for visible desktop print occlusion. V4 shares each leaf’s printed midsurface and culls inward stock edges; the pixel regression proves both primary ink and adjacent rust survive closure and reversal.",
     "The initial compatibility run passed 106/118; all original failures and rejected candidates remain preserved. Scoped fixture corrections and the real final-section reading-recovery fix are documented separately.",
     "Opening and prior reading timings remain; the added adjacent closure lasts approximately 2.8 seconds. Ordinary reading, reduced motion and no-JavaScript paths preserve the invitation.",
-    "Current surface budget and paint-count evidence is recorded in closingFoldFollowUp. Prior detailed performance profiles and numerical design grades are historical."
+    "Current surface budget and paint-count evidence is recorded in closingFoldFollowUp. Prior detailed performance profiles and numerical design grades are historical.",
+    "Published current candidate; all 28 hosted files match and all 14 hosted checks pass without retries."
   ],
   "limitations": [
     "agentic-ui/blockers.json",
@@ -664,6 +665,11 @@
         ]
       },
       "exitCode": 0
+    },
+    {
+      "command": "Hosted exact-asset and closing verification",
+      "result": "28 exact static files; 14 browser checks passed without retries",
+      "exitCode": 0
     }
   ],
   "previousRelease": {
@@ -671,5 +677,5 @@
     "staticCommit": "7f8a88e8579c131649177480322e388b07d18e26",
     "report": "docs/paper-depth-review.md"
   },
-  "sourceCommit": null
+  "sourceCommit": "4443b6b38a8377f9a62a846a4c1411d9714ab1c0"
 }

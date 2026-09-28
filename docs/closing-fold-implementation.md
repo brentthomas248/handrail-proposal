@@ -1,6 +1,6 @@
 # Closing the proposal
 
-Status: candidate v4 independently accepted and all final local checks pass. Publication and live verification are next; the prior release remains hosted until then.
+Status: published and verified. Candidate v4 passed independent rendered review and final local/hosted checks; all earlier failures remain recorded below.
 
 ## Requested addition
 
@@ -36,7 +36,7 @@ The initial compatibility run passed 106/118. Two full out-and-back journeys exc
 
 Candidate v3 main HTML: `f0da3afb17a9d4180a99c58429d7d6c923918f98634f3d9b22ad645d9984c192`. Outward-only edges restored the primary paragraph, but the reviewer found the adjacent center rust surface still clipped. The expanded pixel regression confirms this: body ink passes at 12.039%, while the center patch contains zero rust instead of the required majority. Both rejections and their evidence remain preserved.
 
-Further controlled ablations isolated intersecting printed planes: removing all edges, backs, lighting and shadows did not restore the center; hiding or flattening the left front did, even though a transparent left front still clipped it. The ±1-unit front/back offsets overlap neighboring print about 0.344 paper units beyond the 38° crease. Half-depth still failed. Sharing each leaf's fold midsurface restored both visible panels and retained the closing reverse; inset faces also worked but unnecessarily rescaled print. V4 therefore uses two-sided, backface-culled print at z=0 with the separate outward-facing stock edges and existing hinge hierarchy retained. Camera focus matches the same midsurface. This changes the unstable geometry rather than hiding it with a camera offset. Publication awaits fresh rendered review and targeted rechecks.
+Further controlled ablations isolated intersecting printed planes: removing all edges, backs, lighting and shadows did not restore the center; hiding or flattening the left front did, even though a transparent left front still clipped it. The ±1-unit front/back offsets overlap neighboring print about 0.344 paper units beyond the 38° crease. Half-depth still failed. Sharing each leaf's fold midsurface restored both visible panels and retained the closing reverse; inset faces also worked but unnecessarily rescaled print. V4 therefore uses two-sided, backface-culled print at z=0 with the separate outward-facing stock edges and existing hinge hierarchy retained. Camera focus matches the same midsurface. This changes the unstable geometry rather than hiding it with a camera offset. The fresh rendered review and targeted rechecks below validate this correction.
 
 ## Final candidate identity and static checks
 
@@ -49,3 +49,7 @@ The final independent rendered review accepts v4 at 1440×1000, 390×844, 320×5
 ## Final local browser verification
 
 The current v4 runs pass without retries: 14 closing cases, 21 affected compatibility cases, 17 isolated opening/rendering cases, 22 supplementary WebKit cases and one inclusive DPR3 material-budget case. The pixel regression records 12.039% paragraph ink and 100% rust in the adjoining center patch, both before and after closing. The exposed closing back paints once. The original 106/118 compatibility result and all rejected-candidate failures remain historical evidence; these targeted current passes do not relabel that earlier run.
+
+## Publication
+
+Source `4443b6b38a8377f9a62a846a4c1411d9714ab1c0`; static `1c2c9816f93920b2cc266c1ce9913180c18b4c3b`. [GitHub Pages run](https://github.com/brentthomas248/handrail-proposal/actions/runs/36368465198) succeeded. All 28 hosted files match the frozen reviewed candidate byte for byte; all 14 hosted closing checks pass without retries. Both PDFs remain unchanged. Physical iPhone playback, manual assistive-technology review and actual GPU memory remain unverified.
