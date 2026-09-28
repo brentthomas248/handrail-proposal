@@ -172,7 +172,7 @@
   "publication": {
     "status": "published-and-verified",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "evidencePath": "agentic-ui/deployment-verification.json",
-    "note": "Source 4443b6b; static 1c2c981; all 28 hosted files and 14 focused checks verified."
+    "evidencePath": "agentic-ui/watermark-opacity-verification.json",
+    "note": "Source a5b923d; static0746314. Closing logo at full opacity; all28hosted files match and desktop/mobile rendered checks pass."
   }
 }

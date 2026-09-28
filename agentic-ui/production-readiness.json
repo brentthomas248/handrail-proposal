@@ -15,9 +15,9 @@
     "deployed": true,
     "hostedSmokeTestPassed": true,
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "evidence": "agentic-ui/deployment-verification.json",
+    "evidence": "agentic-ui/watermark-opacity-verification.json",
     "notes": [
-      "Closing fold published; all 28 exact files and 14 hosted checks pass."
+      "Closing-fold release followed by verified full-opacity logo correction;28exact assets and desktop/mobile hosted checks pass."
     ]
   },
   "strictCertification": {

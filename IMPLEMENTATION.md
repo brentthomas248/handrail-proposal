@@ -2,6 +2,10 @@
 
 ## Current state
 
+The closing Handrail logo now renders at full strength: its 30% opacity rule was removed. Source `a5b923d`, static `0746314`; [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36368854412) succeeded. Desktop and phone previews and hosted checks confirm full opacity, complete logo visibility and no browser errors. Typecheck/build/style checks pass; all 28 hosted files match. See [the scoped receipt](agentic-ui/watermark-opacity-verification.json).
+
+## Published closing-fold release
+
 The [closing fold scene](docs/closing-fold-implementation.md) is published. The last gesture pulls back, folds the actual flyer into a packet and reveals “Let’s do this!” above the official Handrail watermark on its right reverse. Backward input reopens the same paper. The existing opening, terms, links and ordinary-reading access remain.
 
 [Independent review](docs/closing-fold-review.md) accepts the final candidate at four sizes after rejecting two printed-plane occlusion defects. Final local checks pass: 14 closing, 21 affected compatibility, 17 opening/rendering, 22 supplementary WebKit and one inclusive mobile material-budget test. Typecheck, 34 unit tests, formatting, build, canonical Markdown, deterministic texture and both PDF checks pass. Original failures and corrections remain documented; physical iPhone playback remains unverified.
