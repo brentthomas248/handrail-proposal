@@ -89,16 +89,16 @@
   },
   "acceptanceCriteria": [
     "Actual scrolling changes both independent hinge angles, reverses them and coordinates uniform 3D camera movement on the same semantic HTML trifold.",
-    "The beginning-of-partnership framing is clear without promising specific future roles; no base salary, commissions after collections, 15/5 versus 20/5, future credited sales and the 90-day proposal remain explicit.",
+    "Client first shows 20% of build and first 12 contracted subscription months, paid as collected, then 5% from service month 13; no stacking. Hire first retains 15% build plus 5% recurring from the start. Both include future credited sales, no base salary, requested benefits and a proposed 90-day window.",
     "The flyer and notes remain readable through normal flow, reduced motion and disabled JavaScript.",
     "Opening wings fit between header and controls. Every reading hold makes the active face flat and fully framed; captured body text remains readable at 320px and wider.",
     "All seven note sections and the complete PDF match the canonical proposal source.",
     "No uncaught page errors, failed critical requests, broken navigation or axe violations occur in the checked local flows.",
     "No form submission, billing, authentication or destructive operation occurs during QA.",
     "At desktop 1440px, cover/cash body text reads around 20\u201324 CSS pixels with visible edge or hinge context.",
-    "All six independent specialties meet at least95/100; all material findings corrected or evidence-dispositioned.",
     "Equal collected dollars compare both rates; retained cash is before costs and commission follows collections.",
-    "Actual opening, crease travel and reversal remain independently inspected; all three panels stay framed during unfold."
+    "Actual opening, crease travel and reversal remain independently inspected; all three panels stay framed during unfold.",
+    "Independent commercial and rendered design reviews accept the changed content; historical six-category scores are not current certification."
   ],
   "knownTradeoffs": [
     "Stitch, Magic, Stagehand and Browserbase are omitted under docs/local-workflow.md; no cloud or full global lifecycle certification is claimed.",
@@ -106,7 +106,7 @@
     "Current Lighthouse scores describe a local production-preview lab run, not physical-device or field performance."
   ],
   "generatedAt": "2026-09-27T20:57:52.457997+00:00",
-  "scope": "Full proposal tour, reading, notes, resume and PDFs; six independent specialties",
+  "scope": "Scoped proposal copy update: commission basis and phase timing, cash-flow explanation, complete reading compositions, notes/PDF and existing portfolio links. Approved paper and camera implementation unchanged.",
   "localEvidence": {
     "browserChecks": 185,
     "unitChecks": 29,

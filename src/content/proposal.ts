@@ -7,6 +7,7 @@ export const proposal = {
   version: '2026-09-27',
   parties: { company: 'Handrail', representative: 'Brent Showalter' },
   rates: { employmentFirst: 15, clientFirst: 20, recurring: 5 },
+  clientFirstSubscriptionMonths: 12,
   activationDays: 90,
   paths: { agreement: 'agreement/', pdf: 'handrail-proposed-agreement.pdf' },
 } as const;
@@ -16,7 +17,7 @@ export const flyerCopy = {
     eyebrow: 'A proposal for working together.',
     headlineLines: ['Let’s grow', 'Handrail.'],
     statement: 'No base salary. Commission follows collected revenue.',
-    description: 'Begin with new business. Build the relationship from there.',
+    description: 'Grow through new business, with no upfront commission.',
   },
   cash: {
     headline: 'Commission follows collections.',
@@ -25,7 +26,7 @@ export const flyerCopy = {
     sharedTerms: 'Both paths: no base salary and a requested benefits package.',
     scope: 'These rates cover all my future credited sales.',
     clientReason:
-      'Both rates apply to this client and all my future credited sales.',
+      'The higher rates apply to this client and all my future credited sales.',
   },
   closing: {
     eyebrow: 'The contribution.',
@@ -47,11 +48,17 @@ export const flyerCopy = {
 export const dealPathCopy = {
   employment: {
     label: 'Hire first',
+    rateLabel: 'of collected build fees',
+    recurringPrefix: '+',
+    recurringLabel: 'of collected recurring fees',
     description: 'Bring me on before I land the qualifying client.',
     note: 'On my credited sales from the start.',
   },
   client: {
     label: 'Client first',
+    rateLabel: `build + first ${proposal.clientFirstSubscriptionMonths} subscription months`,
+    recurringPrefix: 'then',
+    recurringLabel: `recurring from service month ${proposal.clientFirstSubscriptionMonths + 1}`,
     description: 'I bring the qualifying client that enables the hire.',
     note: 'On that client and all my future credited sales.',
   },
@@ -93,9 +100,18 @@ export const collectionIllustration = {
   commissionDifference: clientFirst.commission - hireFirst.commission,
   totalCommissionDifference:
     clientFirst.totalCommission - hireFirst.totalCommission,
-  recurringCommission:
-    (illustrationAssumptions.recurringCollection * proposal.rates.recurring) /
-    100,
+  subscriptionCommissions: {
+    hireFirst:
+      (illustrationAssumptions.recurringCollection * proposal.rates.recurring) /
+      100,
+    clientFirstInitial:
+      (illustrationAssumptions.recurringCollection *
+        proposal.rates.clientFirst) /
+      100,
+    clientFirstOngoing:
+      (illustrationAssumptions.recurringCollection * proposal.rates.recurring) /
+      100,
+  },
 } as const;
 
 const dollars = new Intl.NumberFormat('en-US', {
@@ -107,7 +123,7 @@ const money = (amount: number): string => dollars.format(amount);
 
 /** Visible comparison copy shared by the flyer, notes and portable documents. */
 export const collectionComparison = {
-  assumption: `Illustration: ${money(collectionIllustration.buildTotal)} build in ${collectionIllustration.installments} equal monthly payments.`,
+  assumption: `Build-only illustration: ${money(collectionIllustration.buildTotal)} in ${collectionIllustration.installments} equal monthly payments.`,
   collectedLabel: 'Collected per installment',
   collectedAmount: money(collectedPerInstallment),
   tableLabel: 'Build commission per collected installment',
@@ -139,12 +155,12 @@ export const collectionComparison = {
       ],
     },
   ],
-  difference: `Client first: ${money(collectionIllustration.commissionDifference)} more commission per installment.`,
+  difference: `Client first: ${money(collectionIllustration.commissionDifference)} more build commission per installment.`,
   rule: 'Collect first. Pay commission second.',
   qualifier:
-    'Before all company costs. Illustration only; not Handrail pricing.',
-  total: `If all ${collectionIllustration.installments} illustrated installments are collected, total build commission is ${money(hireFirst.totalCommission)} under hire first or ${money(clientFirst.totalCommission)} under client first—a ${money(collectionIllustration.totalCommissionDifference)} difference.`,
-  recurring: `At either path’s ${proposal.rates.recurring}% recurring rate, a ${money(collectionIllustration.recurringCollection)} recurring collection produces ${money(collectionIllustration.recurringCommission)} of commission.`,
+    'Illustration only. Cash before delivery, benefits and other costs—not profit.',
+  total: `If all ${collectionIllustration.installments} illustrated installments are collected, total build commission is ${money(hireFirst.totalCommission)} under hire first or ${money(clientFirst.totalCommission)} under client first—a ${money(collectionIllustration.totalCommissionDifference)} build-only difference. Subscription commissions are separate.`,
+  recurring: `On a ${money(collectionIllustration.recurringCollection)} subscription collection, hire first earns ${money(collectionIllustration.subscriptionCommissions.hireFirst)} (${proposal.rates.recurring}%) from the start. Client first earns ${money(collectionIllustration.subscriptionCommissions.clientFirstInitial)} (${proposal.rates.clientFirst}%) for service months 1–${proposal.clientFirstSubscriptionMonths}, then ${money(collectionIllustration.subscriptionCommissions.clientFirstOngoing)} (${proposal.rates.recurring}%) from service month ${proposal.clientFirstSubscriptionMonths + 1}. The ${proposal.rates.recurring}% rate replaces ${proposal.rates.clientFirst}%; the rates are not added together.`,
 } as const;
 
 export interface AgreementSection {
@@ -174,16 +190,16 @@ export const agreementSections: AgreementSection[] = [
     id: 'hire-first',
     title: `Hire first: ${proposal.rates.employmentFirst}% build + ${proposal.rates.recurring}% recurring`,
     paragraphs: [
-      `If Handrail brings me on before I originate the qualifying client, the proposed rate is ${proposal.rates.employmentFirst}% of collected build fees and ${proposal.rates.recurring}% of collected recurring fees on my credited sales.`,
+      `If Handrail brings me on before I originate the qualifying client, the proposed rate is ${proposal.rates.employmentFirst}% of collected build fees and ${proposal.rates.recurring}% of collected recurring fees from the start on my credited sales.`,
       'This is the lower build rate in exchange for Handrail making the commitment first.',
     ],
   },
   {
     id: 'client-first',
-    title: `Client first: ${proposal.rates.clientFirst}% build + ${proposal.rates.recurring}% recurring`,
+    title: `Client first: ${proposal.rates.clientFirst}% initially, then ${proposal.rates.recurring}% recurring`,
     paragraphs: [
-      `If I bring the qualifying client first, Handrail brings me on at ${proposal.rates.clientFirst}% of collected build fees and ${proposal.rates.recurring}% of collected recurring fees. Those rates apply to the triggering client and all future credited sales under our relationship.`,
-      `The additional ${proposal.rates.clientFirst - proposal.rates.employmentFirst} percentage points recognize bringing in the qualifying client before the hire. That revenue enables Handrail to bring me on and creates the starting point for our partnership. The higher rate still follows collections.`,
+      `If I bring the qualifying client first, the proposed rate is ${proposal.rates.clientFirst}% of collected build fees and ${proposal.rates.clientFirst}% of collected subscription fees for each credited customer’s first ${proposal.clientFirstSubscriptionMonths} service months, then ${proposal.rates.recurring}% of collected recurring fees from service month ${proposal.clientFirstSubscriptionMonths + 1}. This structure applies to the triggering client and all future credited sales under our relationship.`,
+      'Bringing in the client first enables Handrail to hire me. The higher rates on credited sales recognize that commitment and the risk I take before joining. Customer payments still arrive before the corresponding commission.',
     ],
   },
   {

@@ -19,10 +19,12 @@ export default function DealPath({ variant, showScope = true }: DealPathProps) {
         <span>{rate}</span>
         <span>%</span>
       </p>
-      <p className="deal-rate-label">of collected build fees</p>
+      <p className="deal-rate-label">{copy.rateLabel}</p>
       <p className="deal-recurring">
-        <strong>+ {proposal.rates.recurring}%</strong>
-        <span>of collected recurring fees</span>
+        <strong>
+          {copy.recurringPrefix} {proposal.rates.recurring}%
+        </strong>
+        <span>{copy.recurringLabel}</span>
       </p>
       <p className="deal-description">{copy.description}</p>
       {showScope && <p className="deal-path-note">{copy.note}</p>}

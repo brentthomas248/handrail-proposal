@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
+import { dealPathCopy } from '../content/proposal';
 import DealPath from './DealPath';
 
 const meta = {
@@ -24,7 +25,7 @@ const meta = {
       control: 'radio',
       options: ['employment', 'client'],
       description:
-        'Employment before the qualifying client proposes 15% build commission; bringing that client first proposes 20%. Both include 5% recurring commission.',
+        'Hire first proposes 15% of collected build fees plus 5% of collected recurring fees from the start. Client first proposes 20% of collected build fees and the first 12 subscription months, then 5% recurring from service month 13.',
     },
   },
   decorators: [
@@ -51,7 +52,7 @@ export const EmploymentFirst: Story = {
     await expect(canvas.getByText('of collected build fees')).toBeVisible();
     await expect(canvas.getByText('of collected recurring fees')).toBeVisible();
     await expect(
-      canvas.getByText('Bring me on before I land the qualifying client.'),
+      canvas.getByText(dealPathCopy.employment.description),
     ).toBeVisible();
   },
 };
@@ -64,9 +65,16 @@ export const ClientFirst: Story = {
       canvas.getByRole('heading', { name: 'Client first' }),
     ).toBeVisible();
     await expect(canvas.getByText('20', { exact: true })).toBeVisible();
-    await expect(canvas.getByText('+ 5%', { exact: true })).toBeVisible();
+    await expect(canvas.getByText('then 5%', { exact: true })).toBeVisible();
     await expect(
-      canvas.getByText('I bring the paying client that makes hiring possible.'),
+      canvas.getByText('build + first 12 subscription months'),
+    ).toBeVisible();
+    await expect(
+      canvas.getByText('recurring from service month 13'),
+    ).toBeVisible();
+    await expect(canvas.queryByText('+ 5%', { exact: true })).toBeNull();
+    await expect(
+      canvas.getByText(dealPathCopy.client.description),
     ).toBeVisible();
     await expect(
       canvas.getByText('On that client and all my future credited sales.'),
@@ -86,6 +94,13 @@ export const NarrowLayout: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await expect(canvas.getByText('20', { exact: true })).toBeVisible();
+    await expect(canvas.getByText('then 5%', { exact: true })).toBeVisible();
+    await expect(
+      canvas.getByText('build + first 12 subscription months'),
+    ).toBeVisible();
+    await expect(
+      canvas.getByText('recurring from service month 13'),
+    ).toBeVisible();
     await expect(
       canvas.getByText('On that client and all my future credited sales.'),
     ).toBeVisible();

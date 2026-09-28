@@ -14,19 +14,19 @@ A benefits package is part of my request and a separate company cost. Delivery, 
 
 ## 2. Hire first: 15% build + 5% recurring
 
-If Handrail brings me on before I originate the qualifying client, the proposed rate is 15% of collected build fees and 5% of collected recurring fees on my credited sales.
+If Handrail brings me on before I originate the qualifying client, the proposed rate is 15% of collected build fees and 5% of collected recurring fees from the start on my credited sales.
 
 This is the lower build rate in exchange for Handrail making the commitment first.
 
-## 3. Client first: 20% build + 5% recurring
+## 3. Client first: 20% initially, then 5% recurring
 
-If I bring the qualifying client first, Handrail brings me on at 20% of collected build fees and 5% of collected recurring fees. Those rates apply to the triggering client and all future credited sales under our relationship.
+If I bring the qualifying client first, the proposed rate is 20% of collected build fees and 20% of collected subscription fees for each credited customer’s first 12 service months, then 5% of collected recurring fees from service month 13. This structure applies to the triggering client and all future credited sales under our relationship.
 
-The additional 5 percentage points recognize bringing in the qualifying client before the hire. That revenue enables Handrail to bring me on and creates the starting point for our partnership. The higher rate still follows collections.
+Bringing in the client first enables Handrail to hire me. The higher rates on credited sales recognize that commitment and the risk I take before joining. Customer payments still arrive before the corresponding commission.
 
 ## 4. Illustrative collections and commission
 
-Illustration: $120,000 build in 12 equal monthly payments.
+Build-only illustration: $120,000 in 12 equal monthly payments.
 
 **Collected per installment: $10,000**
 
@@ -35,15 +35,15 @@ Illustration: $120,000 build in 12 equal monthly payments.
 | Build commission | $1,500 | $2,000 |
 | Handrail keeps, before costs | $8,500 | $8,000 |
 
-Client first: $500 more commission per installment.
+Client first: $500 more build commission per installment.
 
 Collect first. Pay commission second.
 
-Before all company costs. Illustration only; not Handrail pricing.
+Illustration only. Cash before delivery, benefits and other costs—not profit.
 
-If all 12 illustrated installments are collected, total build commission is $18,000 under hire first or $24,000 under client first—a $6,000 difference.
+If all 12 illustrated installments are collected, total build commission is $18,000 under hire first or $24,000 under client first—a $6,000 build-only difference. Subscription commissions are separate.
 
-At either path’s 5% recurring rate, a $2,000 recurring collection produces $100 of commission.
+On a $2,000 subscription collection, hire first earns $100 (5%) from the start. Client first earns $400 (20%) for service months 1–12, then $100 (5%) from service month 13. The 5% rate replaces 20%; the rates are not added together.
 
 ## 5. A 90-day window to begin
 

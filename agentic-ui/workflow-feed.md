@@ -79,3 +79,14 @@ The procedural texture generator also maintains its asset digest/dimensions, and
 ## 2026-09-28T02:07:47.789961+00:00 — folded back-cover ending published
 
 Source 4443b6b, static 1c2c981, Pages run 36368465198 succeeded. A real reverse-side invitation follows the accordion closing animation. Independent four-size review rejected two occlusion defects before accepting nonintersecting printed geometry. Final current local verification: 14 closing, 21 affected compatibility, 17 opening/rendering, 22 WebKit and one inclusive surface-budget check; all pass. All 28 public files match and all 14 hosted closing checks pass. Earlier failures remain documented in docs/closing-fold-implementation.md. No broad historical design grade or physical-device claim is reused.
+
+## Proposal terms presentation update — September 27, 2026
+
+- Scope: correct the client-first commission base and service-month transition; strengthen the collections-first pitch; retain the approved visual system, motion and portfolio navigation.
+- Hire-first basis remains unchanged pending confirmation. The comparison is explicitly build-only.
+- Preparation and runtime-safety validation pass. The approved local workflow applies; no credentialed generation or cloud QA tools are needed for this scoped update.
+- Independent commercial review identified the former first-year subscription omission and misleading additive rate treatment. Implementation and rendered verification are in progress; see `docs/proposal-terms-update.md`.
+
+- Final candidate accepted independently after fixing a cramped mobile month-13 descriptor. Four-size rendered evidence covers 27 groups and 360 text-line rectangles without clipping or browser errors.
+- Local checks pass: 53-file typecheck, 35 unit, 3 Storybook, 45 initial Chromium plus 15 final affected, 12 WebKit, 2 route axe scans, formatting, canonical Markdown and complete notes/résumé PDF checks. Publication pending.
+- The broad global generation gate still reports existing policy/schema/token gaps; the explicit local workflow remains the delivery authority and full global certification is not claimed.

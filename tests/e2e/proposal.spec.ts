@@ -231,7 +231,7 @@ async function expectPrintedCashComparison(page: Page) {
     '$500',
   );
   await expect(comparison.locator('.collection-difference')).toContainText(
-    /client first.*\$500 more commission per installment/i,
+    /client first.*\$500 more build commission per installment/i,
   );
   await expect(comparison.locator('.collection-rule')).toHaveText(
     collectionComparison.rule,
@@ -243,7 +243,7 @@ async function expectPrintedCashComparison(page: Page) {
     collectionComparison.qualifier,
   );
   await expect(comparison.locator('.collection-qualifier')).toContainText(
-    /before all company costs.*illustration only.*not Handrail pricing/i,
+    /illustration only.*cash before delivery, benefits and other costs.*not profit/i,
   );
   for (const part of await comparison
     .locator('figcaption, p, th, td:not([aria-hidden])')

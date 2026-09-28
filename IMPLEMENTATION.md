@@ -2,6 +2,10 @@
 
 ## Current state
 
+The [proposal presentation update](docs/proposal-terms-update.md) is implemented and independently accepted locally. Client first now uses 20% of build and first 12 subscription service months, then 5% recurring from month 13, paid as collected. Hire-first economics remain unchanged. The build-only illustration, notes and two-page PDF agree; mobile phase wording has a full-width line. Approved motion/material and prominent résumé/GitHub links remain. Typecheck, all 35 unit tests, 3 component checks, 45 initial and 15 final affected Chromium checks, 12 WebKit checks, 2 route accessibility scans, formatting, Markdown and both PDF checks pass. Publication remains pending.
+
+## Published bottom-sweep release
+
 The bottom right-to-left transfer now crosses in one level sweep with a single gentle pullback and return. [Independent desktop/phone review](docs/bottom-sweep-review.md), all 34 unit tests and seven focused browser checks pass. Source `9392326`, static `7f06513`; [Pages deployment](https://github.com/brentthomas248/handrail-proposal/actions/runs/36370346932) succeeded. All 28 hosted files match and the live forward/reverse sweep check passes. See [the scoped receipt](agentic-ui/bottom-sweep-verification.json).
 
 ## Published camera-glide release

@@ -17,7 +17,9 @@
     {
       "name": "DealPath",
       "category": "other",
-      "sourceFiles": ["src/components/DealPath.tsx"],
+      "sourceFiles": [
+        "src/components/DealPath.tsx"
+      ],
       "requiredStates": [
         "default",
         "employment-first",
@@ -43,16 +45,31 @@
     {
       "name": "CollectionComparison",
       "category": "other",
-      "sourceFiles": ["src/components/CollectionComparison.astro"],
-      "requiredStates": ["flyer", "notes", "narrow-layout", "no-javascript"],
-      "coveredStates": ["flyer", "notes", "narrow-layout", "no-javascript"],
+      "sourceFiles": [
+        "src/components/CollectionComparison.astro"
+      ],
+      "requiredStates": [
+        "default",
+        "flyer",
+        "notes",
+        "narrow-layout",
+        "no-javascript"
+      ],
+      "coveredStates": [
+        "default",
+        "flyer",
+        "notes",
+        "narrow-layout",
+        "no-javascript"
+      ],
       "coverageArtifacts": [
         "tests/e2e/proposal.spec.ts",
         "tests/agreement.test.ts",
         "scripts/verify-pdf.ts"
       ],
       "notes": [
-        "Static Astro component, verified on product routes and PDF rather than inventing a React Storybook duplicate. Both paths, collection units and cost qualification stay visible."
+        "Static Astro component, verified on product routes and PDF rather than inventing a React Storybook duplicate. Both paths, collection units and cost qualification stay visible.",
+        "The default variant is flyer, exercised by the main proposal route and its complete comparison checks. This records existing default-state coverage rather than adding a new UI state."
       ]
     }
   ],

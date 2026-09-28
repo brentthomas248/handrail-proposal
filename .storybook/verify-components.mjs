@@ -69,7 +69,13 @@ try {
         page.getByRole('heading', { name: 'Client first' }),
       ).toBeVisible();
       await expect(page.getByText('20', { exact: true })).toBeVisible();
-      await expect(page.getByText('+ 5%', { exact: true })).toBeVisible();
+      await expect(page.getByText('then 5%', { exact: true })).toBeVisible();
+      await expect(
+        page.getByText('build + first 12 subscription months', { exact: true }),
+      ).toBeVisible();
+      await expect(
+        page.getByText('recurring from service month 13', { exact: true }),
+      ).toBeVisible();
       await expect(
         page.getByText(dealPathCopy.client.description),
       ).toBeVisible();
@@ -85,7 +91,13 @@ try {
       await page.setViewportSize({ width: 320, height: 900 });
       await openStory('proposal-deal-path--narrow-layout');
       await expect(page.getByText('20', { exact: true })).toBeVisible();
-      await expect(page.getByText('+ 5%', { exact: true })).toBeVisible();
+      await expect(page.getByText('then 5%', { exact: true })).toBeVisible();
+      await expect(
+        page.getByText('build + first 12 subscription months', { exact: true }),
+      ).toBeVisible();
+      await expect(
+        page.getByText('recurring from service month 13', { exact: true }),
+      ).toBeVisible();
       await expect(
         page.getByText('On that client and all my future credited sales.'),
       ).toBeVisible();

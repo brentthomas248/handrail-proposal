@@ -65,7 +65,34 @@ describe('one public proposal source', () => {
     });
     expect(illustration.commissionDifference).toBe(500);
     expect(illustration.totalCommissionDifference).toBe(6_000);
-    expect(illustration.recurringCommission).toBe(100);
+    expect(illustration.subscriptionCommissions).toEqual({
+      hireFirst: 100,
+      clientFirstInitial: 400,
+      clientFirstOngoing: 100,
+    });
+  });
+
+  it('distinguishes the subscription phases without stacking recurring rates', () => {
+    expect(proposal.clientFirstSubscriptionMonths).toBe(12);
+    const content = renderAgreementMarkdown();
+    expect(content).toContain(
+      '20% of collected subscription fees for each credited customer’s first 12 service months',
+    );
+    expect(content).toContain(
+      'then 5% of collected recurring fees from service month 13',
+    );
+    expect(content).toContain(
+      'The 5% rate replaces 20%; the rates are not added together.',
+    );
+    expect(content).toContain(
+      'This structure applies to the triggering client and all future credited sales',
+    );
+    expect(collectionComparison.recurring).toContain(
+      'hire first earns $100 (5%) from the start',
+    );
+    expect(collectionComparison.recurring).toContain(
+      'Client first earns $400 (20%) for service months 1–12, then $100 (5%) from service month 13',
+    );
   });
 
   it('preserves comparison labels, amounts and qualification in the portable document', () => {
@@ -86,6 +113,14 @@ describe('one public proposal source', () => {
     expect(content).toContain(collectionComparison.qualifier);
     expect(content).toContain(collectionComparison.total);
     expect(content).toContain(collectionComparison.recurring);
+    expect(collectionComparison.assumption).toMatch(
+      /^Build-only illustration:/,
+    );
+    expect(collectionComparison.total).toContain(
+      'Subscription commissions are separate.',
+    );
+    expect(collectionComparison.qualifier).toContain('benefits');
+    expect(collectionComparison.qualifier).toContain('not profit');
   });
 
   it('keeps the unresolved discussion points as canonical list items', () => {

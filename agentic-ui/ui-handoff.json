@@ -14,9 +14,9 @@
     "Telescope scale changes, Igloo camera continuity, Exat typography and Stripe Press document presentation remain approved references.",
     "Preserve the official Handrail wordmark, warm paper/rust palette and locally served Inter/Playfair typography.",
     "Remove decorative Unicode arrows, emojis and ornamental symbols; no paperclip or separate decorative sculpture.",
-    "Lead with the beginning of a partnership and growing Handrail; new business is a starting point and Brent’s contribution can grow with company needs.",
+    "Lead with the beginning of a partnership and growing Handrail; new business is a starting point and Brent\u2019s contribution can grow with company needs.",
     "Keep no base salary and commission paid after customer collections, with matching installments.",
-    "Keep 15/5 if hired first and 20/5 if the qualifying client comes first, including that client and all future credited sales.",
+    "Hire first: 15% collected build plus 5% recurring from the start. Client first: 20% collected build and first 12 contracted subscription months, then 5% from service month 13, covering that client and future credited sales.",
     "Keep the 90-day proposal and benefits request. Handrail writes the final contract; no named future roles or private financial problems appear.",
     "Continue the approved local design, Storybook and Playwright workflow.",
     "Use mobile ink hierarchy rather than extra opacity/filter layers; active text stays full strength.",
@@ -27,7 +27,8 @@
     "Evidence-backed resume with2025degree, proposed contribution areas and decorative Handrail watermark.",
     "Prominent resume/GitHub links, responsive navigation and exact history-entry return position.",
     "A short vertical gesture immediately commits to the adjacent concrete scene. Same-gesture momentum stays latched; touch release rearms the next swipe; ordinary reading remains native.",
-    "The last gesture folds the existing flyer into its right back cover, printing Let’s do this! above the official Handrail watermark."
+    "The last gesture folds the existing flyer into its right back cover, printing Let\u2019s do this! above the official Handrail watermark.",
+    "The dollar comparison is build-only because the two proposed subscription commission bases differ. Preserve the approved animation and prominent portfolio navigation."
   ],
   "rejectedDecisions": [
     "Neon/glow design direction",
@@ -62,7 +63,7 @@
       "agentic-ui/component-state-matrix.json",
       "tests/e2e/proposal.spec.ts"
     ],
-    "camera": "Opening and final closure retain their folding paths. Between reading scenes the paper stays at38degrees, roll stayslevel, and the camera pulls back8–10percent before returning to the complete reading composition. Matte lighting stays fixed in paper coordinates. The bottom right-to-left return uses one level sweep with one pullback rather than turning at the two creases."
+    "camera": "Opening and final closure retain their folding paths. Between reading scenes the paper stays at38degrees, roll stayslevel, and the camera pulls back8\u201310percent before returning to the complete reading composition. Matte lighting stays fixed in paper coordinates. The bottom right-to-left return uses one level sweep with one pullback rather than turning at the two creases."
   },
   "tokenExports": {
     "dtcg": "agentic-ui/tokens.dtcg.json",
@@ -125,6 +126,10 @@
     "closingFoldFollowUp": {
       "report": "docs/closing-fold-review.md",
       "status": "accepted-within-inspected-local-scope"
+    },
+    "proposalTermsFollowUp": {
+      "report": "docs/proposal-terms-design-review.md",
+      "status": "accepted-within-inspected-local-scope"
     }
   },
   "userAssumptions": [
@@ -134,7 +139,7 @@
   "taskModel": {
     "targetUsers": [
       "Josh and Handrail decision makers",
-      "Engineering reviewers visiting Brent’s GitHub"
+      "Engineering reviewers visiting Brent\u2019s GitHub"
     ],
     "jobs": [
       "Understand and discuss the beginning of the proposed partnership",
@@ -164,15 +169,14 @@
   ],
   "userReview": {
     "date": "2026-09-27",
-    "status": "requested-final-folded-back-cover",
-    "researchPath": "docs/design-director-review.md",
+    "status": "requested-proposal-presentation-update",
     "implementationPaused": false,
-    "reason": "User accepted the paper/material revision and requested a final folding animation with Let’s do this! and the Handrail watermark."
+    "reason": "Clarify the corrected client-first commission structure and cash-flow pitch; keep the presentation negotiable and verify the r\u00e9sum\u00e9 and GitHub links."
   },
   "publication": {
-    "status": "published-and-verified",
+    "status": "local-verified-publication-pending",
     "url": "https://brentthomas248.github.io/handrail-proposal/",
-    "evidencePath": "agentic-ui/bottom-sweep-verification.json",
-    "note": "Source9392326; static7f06513. Single level bottom return verified locally and hosted; all28files match."
+    "evidencePath": "docs/proposal-terms-update.md",
+    "note": "Independent commercial/rendered review and scoped deterministic verification pass. Prior published bottom-sweep receipt remains historical."
   }
 }
